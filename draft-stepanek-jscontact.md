@@ -29,6 +29,20 @@ organization = "FastMail"
   code = "VIC 8007"
   country = "Australia"
   region = " "
+
+[[author]]
+initials="M."
+surname="Loffredo"
+fullname="Mario Loffredo"
+organization = "IIT-CNR"
+  [author.address]
+  email = "mario.loffredo@iit.cnr.it"
+  [author.address.postal]
+  street = "Via Moruzzi,1"
+  city = "Pisa"
+  code = "56124"
+  country = "Italy"
+  region = " "
 %%%
 
 .# Abstract
