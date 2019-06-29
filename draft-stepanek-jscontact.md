@@ -145,8 +145,7 @@ A JSCard object stores information about a person, organization or company. It h
   - `work` The address is for emailing in a professional context.
   - `other` The address is for some other purpose. A label property MAY be included to display next to the address to help the user identify its purpose.
 - phones: ContactMethod[] (optional).
-  An array of ContactMethod objects where the values are URIs in the [@RFC3966] `tel` scheme
-  or free-text phone numbers. Types are:
+  An array of ContactMethod objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
