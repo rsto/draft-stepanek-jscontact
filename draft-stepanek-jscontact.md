@@ -138,7 +138,8 @@ A JSContact object stores contact information about a person, organization or co
   The role(s), function(s) or part(s) played in a particular situation by the contact. In contrast
   to a job title, the roles might differ for example in project contexts.
 - emails: ContactMethod[] (optional).
-  An array of ContactMethod objects where the values are email addresses. Types are:
+  An array of ContactMethod objects where the values are URLs in the [@RFC2368] `mailto` scheme
+  or free-text email addresses. Types are:
   - `personal` The address is for emailing the contact in a personal context.
   - `work` The address is for emailing the contact in a professional context.
   - `other` The address is for some other purpose. A label property MAY be included to display next to the address to help the user identify its purpose.
