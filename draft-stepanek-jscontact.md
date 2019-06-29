@@ -118,16 +118,19 @@ A JSCard object stores information about a person, organization or company. It h
       The honorific suffix(es), e.g. `B.A.`, `Esq.`.
 - nickname: String[] (optional).
   The nickname(s) of the person represented by this card.
-- birthday: String (optional).
-  The birth date in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a [@RFC3339] timestamp.
-- birthPlace: String (optional).
-  The birth place.
-- deathDate: String (optional).
-  The death date in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a [@RFC3339] timestamp.
-- deathPlace: String (optional).
-  The death place.
-- anniversary: String (optional).
-  The anniversary date in the form "YYYY-MM-DD" (any part may be all 0s for unknown).
+- anniversaries: Anniversary[] (optional).
+  Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:
+     - type: String (mandatory).
+       Specifies the type of the anniversary. This RFC predefines the following types, but implementations MAY use additional values:
+          - `birth`: a birth day anniversary
+          - `death`: a death day anniversary
+          - `other`: an anniversary not covered by any of the known types.
+
+    - date: String (mandatory).
+      The date of this anniversary, in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a [@RFC3339] timestamp.
+    - place: Address (optional).
+      An address associated with this anniversary, e.g. the place of birth or death.
+
 - organization: String[] (optional).
   The company or organization name and units associated with this card.
   The first entry in the list names the organization, and any following
