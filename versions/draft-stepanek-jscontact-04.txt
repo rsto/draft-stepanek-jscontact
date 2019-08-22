@@ -69,8 +69,8 @@ Table of Contents
      1.2.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  JSCard  . . . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  JSCardGroup . . . . . . . . . . . . . . . . . . . . . . . . .   9
-   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
      6.2.  Informative References  . . . . . . . . . . . . . . . . .  11
@@ -207,16 +207,16 @@ Internet-Draft                  JSContact                      June 2019
       *  language: String (optional) The [RFC5646] language tag of this
          value, if any.
 
+      *  altid: String (optional) An opaque string used to tag property
+         instances as being alternative representations of the same
+         logical property.
+
       *  isPreferred: Boolean (optional, default: false).  Whether this
          value is the preferred value.
 
    o  anniversaries: Anniversary[] (optional).  Memorable dates and
       events for the entity represented by this card.  An Anniversary
       object has the following properties:
-
-      *  type: String (mandatory).  Specifies the type of the
-         anniversary.  This RFC predefines the following types, but
-         implementations MAY use additional values:
 
 
 
@@ -225,6 +225,10 @@ Stepanek & Loffredo     Expires December 31, 2019               [Page 4]
 
 Internet-Draft                  JSContact                      June 2019
 
+
+      *  type: String (mandatory).  Specifies the type of the
+         anniversary.  This RFC predefines the following types, but
+         implementations MAY use additional values:
 
          +  "birth": a birth day anniversary
 
@@ -269,10 +273,6 @@ Internet-Draft                  JSContact                      June 2019
    o  phones: OnlineInformation[] (optional).  An array of
       OnlineInformation objects where the values are URIs scheme or
       free-text phone numbers.  Typical URI schemes are the [RFC3966]
-      "tel" or [RFC3261] "sip" schemes, but any URI scheme is allowed.
-      Contact method types are:
-
-      *  "voice" The number is for calling by voice.
 
 
 
@@ -281,6 +281,11 @@ Stepanek & Loffredo     Expires December 31, 2019               [Page 5]
 
 Internet-Draft                  JSContact                      June 2019
 
+
+      "tel" or [RFC3261] "sip" schemes, but any URI scheme is allowed.
+      Contact method types are:
+
+      *  "voice" The number is for calling by voice.
 
       *  "fax" The number is for sending faxes.
 
@@ -325,11 +330,6 @@ Internet-Draft                  JSContact                      June 2019
       personal information about the entity represented by this card.  A
       PersonalInformation object has the following properties:
 
-      *  type: String (mandatory).  Specifies the type for this personal
-         information.  Allowed values are:
-
-         +  "expertise": a field of expertise or credential
-
 
 
 
@@ -337,6 +337,11 @@ Stepanek & Loffredo     Expires December 31, 2019               [Page 6]
 
 Internet-Draft                  JSContact                      June 2019
 
+
+      *  type: String (mandatory).  Specifies the type for this personal
+         information.  Allowed values are:
+
+         +  "expertise": a field of expertise or credential
 
          +  "hobby": a hobby
 
@@ -366,6 +371,10 @@ Internet-Draft                  JSContact                      June 2019
    o  language: String (optional) The [RFC5646] language tag of this
       value, if any.
 
+   o  altid: String (optional) An opaque string used to tag property
+      instances as being alternative representations of the same logical
+      property.
+
    o  isPreferred: Boolean (optional, default: false).  Whether this
       value is the preferred value.
 
@@ -375,6 +384,15 @@ Internet-Draft                  JSContact                      June 2019
       method.  This MUST be taken from the set of values allowed
       depending on whether this is part of the phones, emails or online
       property (see above).
+
+
+
+
+
+Stepanek & Loffredo     Expires December 31, 2019               [Page 7]
+
+Internet-Draft                  JSContact                      June 2019
+
 
    o  label: String (optional).  A label describing the value in more
       detail, especially if the type property has value "other" (but MAY
@@ -386,13 +404,6 @@ Internet-Draft                  JSContact                      June 2019
    o  mediaType: String (optional).  It is used with properties whose
       value is a URI.  It provides the media type [RFC2046] of the
       resource identified by the URI.
-
-
-
-Stepanek & Loffredo     Expires December 31, 2019               [Page 7]
-
-Internet-Draft                  JSContact                      June 2019
-
 
    o  isPreferred: Boolean (optional, default: false).  Whether this
       OnlineInformation is the preferred for its type.  This SHOULD only
@@ -431,6 +442,14 @@ Internet-Draft                  JSContact                      June 2019
       *  extension: String (optional) The extended address, such as an
          apartment or suite number, or care-of address.
 
+
+
+
+Stepanek & Loffredo     Expires December 31, 2019               [Page 8]
+
+Internet-Draft                  JSContact                      June 2019
+
+
       *  locality: String (optional).  The city, town, village, post
          town, or other locality within which the street address may be
          found.
@@ -443,12 +462,9 @@ Internet-Draft                  JSContact                      June 2019
       *  language: String (optional) The [RFC5646] language tag of this
          value, if any.
 
-
-
-Stepanek & Loffredo     Expires December 31, 2019               [Page 8]
-
-Internet-Draft                  JSContact                      June 2019
-
+      *  altid: String (optional) An opaque string used to tag property
+         instances as being alternative representations of the same
+         logical property.
 
    o  postOfficeBox: String (optional) The post office box.
 
@@ -482,6 +498,14 @@ Internet-Draft                  JSContact                      June 2019
 
    o  name: String (optional).  The user-visible name for the group,
       e.g.  "Friends".  This may be any UTF-8 string of at least 1
+
+
+
+Stepanek & Loffredo     Expires December 31, 2019               [Page 9]
+
+Internet-Draft                  JSContact                      June 2019
+
+
       character in length and maximum 255 octets in size.  The same name
       may be used by two different groups.
 
@@ -495,16 +519,6 @@ Internet-Draft                  JSContact                      June 2019
 5.  Security Considerations
 
    TBD
-
-
-
-
-
-
-Stepanek & Loffredo     Expires December 31, 2019               [Page 9]
-
-Internet-Draft                  JSContact                      June 2019
-
 
 6.  References
 
@@ -538,6 +552,16 @@ Internet-Draft                  JSContact                      June 2019
               RFC 6351, DOI 10.17487/RFC6351, August 2011,
               <https://www.rfc-editor.org/info/rfc6351>.
 
+
+
+
+
+
+Stepanek & Loffredo     Expires December 31, 2019              [Page 10]
+
+Internet-Draft                  JSContact                      June 2019
+
+
    [RFC7095]  Kewisch, P., "jCard: The JSON Format for vCard", RFC 7095,
               DOI 10.17487/RFC7095, January 2014,
               <https://www.rfc-editor.org/info/rfc7095>.
@@ -554,13 +578,6 @@ Internet-Draft                  JSContact                      June 2019
               Interchange Format", STD 90, RFC 8259,
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
-
-
-
-Stepanek & Loffredo     Expires December 31, 2019              [Page 10]
-
-Internet-Draft                  JSContact                      June 2019
-
 
 6.2.  Informative References
 
@@ -590,6 +607,17 @@ Internet-Draft                  JSContact                      June 2019
               DOI 10.17487/RFC6473, December 2011,
               <https://www.rfc-editor.org/info/rfc6473>.
 
+
+
+
+
+
+
+Stepanek & Loffredo     Expires December 31, 2019              [Page 11]
+
+Internet-Draft                  JSContact                      June 2019
+
+
    [RFC6474]  Li, K. and B. Leiba, "vCard Format Extensions: Place of
               Birth, Place and Date of Death", RFC 6474,
               DOI 10.17487/RFC6474, December 2011,
@@ -609,14 +637,6 @@ Internet-Draft                  JSContact                      June 2019
               ICANN Extensions for the Registration Data Access Protocol
               (RDAP)", RFC 8605, DOI 10.17487/RFC8605, May 2019,
               <https://www.rfc-editor.org/info/rfc8605>.
-
-
-
-
-Stepanek & Loffredo     Expires December 31, 2019              [Page 11]
-
-Internet-Draft                  JSContact                      June 2019
-
 
 6.3.  URIs
 
@@ -640,26 +660,6 @@ Authors' Addresses
    Italy
 
    Email: mario.loffredo@iit.cnr.it
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

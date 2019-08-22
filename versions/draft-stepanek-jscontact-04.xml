@@ -97,6 +97,8 @@ The honorific suffix(es), e.g. <spanx style="verb">B.A.</spanx>, <spanx style="v
 The nickname(s) of the person represented by this card.</t>
 <t>language: String (optional)
 The <xref target="RFC5646"></xref> language tag of this value, if any.</t>
+<t>altid: String (optional)
+An opaque string used to tag property instances as being alternative representations of the same logical property.</t>
 <t>isPreferred: Boolean (optional, default: false).
 Whether this value is the preferred value.</t>
 </list></t>
@@ -184,6 +186,8 @@ A list of free-text or URI categories that relate to the card.</t>
             The property value.</t>
         <t>language: String (optional)
             The <xref target="RFC5646"></xref> language tag of this value, if any.</t>
+        <t>altid: String (optional)
+            An opaque string used to tag property instances as being alternative representations of the same logical property.</t>
         <t>isPreferred: Boolean (optional, default: false).
             Whether this value is the preferred value.</t>
     </list>
@@ -235,6 +239,8 @@ The province, such as a state, county, or canton within which the locality may b
 The country name.</t>
 <t>language: String (optional)
 The <xref target="RFC5646"></xref> language tag of this value, if any.</t>
+<t>altid: String (optional)
+An opaque string used to tag property instances as being alternative representations of the same logical property.</t>
 </list></t>
 <t>postOfficeBox: String (optional)
 The post office box.</t>
