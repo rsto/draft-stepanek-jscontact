@@ -8,11 +8,11 @@ workgroup = "TBD"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2019-06-29T16:02:00Z
+date = 2019-09-05T09:00:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-stepanek-jscontact-03"
+value = "draft-stepanek-jscontact-04"
 stream = "IETF"
 status = "standard"
 
@@ -95,17 +95,12 @@ A JSCard object stores information about a person, organization or company. It h
     - `location`: a named location
     - `device`: a device, such as appliances, computers, or network elements
     - `application`: a software application
-- fullName: FullName[] (mandatory).
-  The full name(s) of the entity represented by this card.
-  A FullName object has the following properties:
-    - name: String (mandatory)
-      The full name (e.g. the personal name and surname of an individual, the name of an organization).
+- nameVariants: NameVariant[] (mandatory). 
+      An array of name variants. A NameVariant object has the following properties:
+    - fullName: String (mandatory).
+      The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
     - language: String (optional)
       The [@RFC5646] language tag of this name, if any.
-    - isPreferred: Boolean (optional, default: `false`).
-      Whether this FullName is the preferred name.
-- structuredName: StructuredName (optional).
-  The name of the person represented by this card, structured by its constituents. A StructuredName object has the following properties:
     - prefix: String[] (optional).
       The honorific title(s), e.g. `Mr`, `Ms`, `Dr`.
     - personalName: String[] (optional).
@@ -116,8 +111,14 @@ A JSCard object stores information about a person, organization or company. It h
       The additional name(s), also known as "middle name".
     - suffix: String[] (optional).
       The honorific suffix(es), e.g. `B.A.`, `Esq.`.
-- nickname: String[] (optional).
-  The nickname(s) of the person represented by this card.
+    - nickname: String[] (optional).
+      The nickname(s) of the person represented by this card.
+    - language: String (optional).
+      The [RFC5646] language tag of this value, if any.
+    - altid: String (optional).
+      An opaque string used to tag property instances as being alternative representations of the same logical property.
+    - isPreferred: Boolean (optional, default: false). 
+      Whether this value is the preferred value.
 - anniversaries: Anniversary[] (optional).
   Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:
      - type: String (mandatory).
@@ -131,21 +132,21 @@ A JSCard object stores information about a person, organization or company. It h
     - place: Address (optional).
       An address associated with this anniversary, e.g. the place of birth or death.
 
-- organization: String[] (optional).
+- organization: ValueVariant[] (optional).
   The company or organization name and units associated with this card.
   The first entry in the list names the organization, and any following
   entries name organizational units.
-- jobTitle[]: String (optional).
+- jobTitle: ValueVariant[] (optional).
   The job title(s) or functional position(s) of the entity represented by this card.
-- role[]: String (optional).
+- role: ValueVariant[] (optional).
   The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
-- emails: ContactMethod[] (optional).
-  An array of ContactMethod objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
+- emails: OnlineInformation[] (optional).
+  An array of OnlineInformation objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
   - `personal` The address is for emailing in a personal context.
   - `work` The address is for emailing in a professional context.
   - `other` The address is for some other purpose. A label property MAY be included to display next to the address to help the user identify its purpose.
-- phones: ContactMethod[] (optional).
-  An array of ContactMethod objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
+- phones: OnlineInformation[] (optional).
+  An array of OnlineInformation objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
@@ -156,15 +157,15 @@ A JSCard object stores information about a person, organization or company. It h
        - `private` The phone number should be used in a private context.
        - `work` The phone number should be used in a professional context
 
-- online: ContactMethod[] (optional).
-  An array of ContactMethod objects where the values are URIs or usernames associated with the card for online services.
+- online: OnlineInformation[] (optional).
+  An array of OnlineInformation objects where the values are URIs or usernames associated with the card for online services.
   Types are:
   - `uri` The value is a URI, e.g. a website link.
   - `username` The value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). A label property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`.
 
   - `other` The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.
 - preferredContactMethod: String (optional)
-  Defines the preferred contact method. The value MUST be the property name of one of the ContactMethod lists: `emails`, `phones`, `online`, `other`.
+  Defines the preferred contact method. The value MUST be the property name of one of the OnlineInformation lists: `emails`, `phones`, `online`, `other`.
 - addresses: Address[] (optional).
   An array of Address objects, containing physical locations.
 - personalInfo: PersonalInformation[] (optional).
@@ -179,12 +180,23 @@ A JSCard object stores information about a person, organization or company. It h
        The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.
      - level: String (optional)
        Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: `high`, `medium` and `low`.
-- notes: String (optional).
+- notes: ValueVariant[] (optional).
   Arbitrary notes about the entity represented by this card.
 - categories: String[] (optional).
   A list of free-text or URI categories that relate to the card.
 
-A ContactMethod object has the following properties:
+A ValueVariant object has the following properties:
+
+- value: String (mandatory).
+  The property value.
+- language: String (optional).
+  The [RFC5646] language tag of this value, if any.
+- altid: String (optional).
+  An opaque string used to tag property instances as being alternative representations of the same logical property.
+- isPreferred: Boolean (optional, default: false).
+  Whether this value is the preferred value.
+      
+An OnlineInformation object has the following properties:
 
 - type: String (mandatory).
   Specifies the context of the contact method. This MUST be taken from the set of values allowed depending on whether this is part of the phones, emails or online property (see above).
@@ -192,8 +204,10 @@ A ContactMethod object has the following properties:
   A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
 - value: String (mandatory).
   The actual contact method, e.g. the email address or phone number.
-- isPreferred: Boolean (optional, default: `false`).
-  Whether this ContactMethod is the preferred for its type. This SHOULD only be one per type.
+- mediaType: String (optional).
+  It is used with properties whose value is a URI.  It provides the media type [RFC2046] of the resource identified by the URI.
+- isPreferred: Boolean (optional, default: false).
+  Whether this OnlineInformation is the preferred for its type. This SHOULD only be one per type.
 
 An Address object has the following properties:
 
@@ -208,26 +222,32 @@ An Address object has the following properties:
   - `other` An address not covered by the above categories.
 - label: String (optional).
   A label describing the value in more detail.
-- fullAddress: String (optional). The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown.
-- street: String (optional).
-  The street address. This MAY be multiple lines; newlines MUST be preserved.
-- extension: String (optional)
-  The extended address, such as an apartment or suite number, or care-of address.
+- addressVariants: AddressVariant[] (optional).
+  An array of address variants.  An AddressVariant object has the following properties:
+     - fullAddress: String (optional). The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown.
+     - street: String (optional).
+       The street address. This MAY be multiple lines; newlines MUST be preserved.
+     - extension: String (optional)
+       The extended address, such as an apartment or suite number, or care-of address.
+     - locality: String (optional).
+       The city, town, village, post town, or other locality within which the street address may be found.
+     - region: String (optional).
+       The province, such as a state, county, or canton within which the locality may be found.
+     - country: String (optional).
+       The country name.
+     - language: String (optional).
+       The [RFC5646] language tag of this value, if any.
+     - altid: String (optional).
+       An opaque string used to tag property instances as being alternative representations of the same logical property.       
 - postOfficeBox: String (optional)
   The post office box.
-- locality: String (optional).
-  The city, town, village, post town, or other locality within which the street address may be found.
-- region: String (optional).
-  The province, such as a state, county, or canton within which the locality may be found.
 - postcode: String (optional).
   The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.
-- country: String (optional).
-  The country name.
 - countryCode: String (optional).
   The ISO-3166-1 country code.
 - coordinates: String (optional) A [@!RFC5870] "geo:" URI for the address.
 - timeZone: String (optional) Identifies the time zone this address is located in. This SHOULD be a time zone name registered in the [IANA Time Zone Database](https://www.iana.org/time-zones). Unknown time zone identifiers MAY be ignored by implementations.
-- isPreferred: Boolean (optional, default: `false`).
+- isPreferred: Boolean (optional, default: false).
   Whether this Address is the preferred for its type. This SHOULD only be one per type.
 
 # JSCardGroup
