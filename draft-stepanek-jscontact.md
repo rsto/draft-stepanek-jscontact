@@ -131,13 +131,13 @@ A JSCard object stores information about a person, organization or company. It h
   The job title(s) or functional position(s) of the entity represented by this card.
 - role: LocalizedString[] (optional).
   The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
-- emails: OnlineInformation[] (optional).
-  An array of OnlineInformation objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
+- emails: Resource[] (optional).
+  An array of Resource objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
   - `personal` The address is for emailing in a personal context.
   - `work` The address is for emailing in a professional context.
   - `other` The address is for some other purpose. A label property MAY be included to display next to the address to help the user identify its purpose.
-- phones: OnlineInformation[] (optional).
-  An array of OnlineInformation objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
+- phones: Resource[] (optional).
+  An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
@@ -148,15 +148,15 @@ A JSCard object stores information about a person, organization or company. It h
        - `private` The phone number should be used in a private context.
        - `work` The phone number should be used in a professional context
 
-- online: OnlineInformation[] (optional).
-  An array of OnlineInformation objects where the values are URIs or usernames associated with the card for online services.
+- online: Resource[] (optional).
+  An array of Resource objects where the values are URIs or usernames associated with the card for online services.
   Types are:
   - `uri` The value is a URI, e.g. a website link.
   - `username` The value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). A label property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`.
 
   - `other` The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.
 - preferredContactMethod: String (optional)
-  Defines the preferred contact method. The value MUST be the property name of one of the OnlineInformation lists: `emails`, `phones`, `online`, `other`.
+  Defines the preferred contact method. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`, `other`.
 - addresses: Address[] (optional).
   An array of Address objects, containing physical locations.
 - personalInfo: PersonalInformation[] (optional).
@@ -176,7 +176,7 @@ A JSCard object stores information about a person, organization or company. It h
 - categories: String[] (optional).
   A list of free-text or URI categories that relate to the card.
 
-An OnlineInformation object has the following properties:
+An Resource object has the following properties:
 
 - type: String (mandatory).
   Specifies the context of the contact method. This MUST be taken from the set of values allowed depending on whether this is part of the phones, emails or online property (see above).
@@ -187,7 +187,7 @@ An OnlineInformation object has the following properties:
 - mediaType: String (optional).
   It is used with properties whose value is a URI.  It provides the media type [RFC2046] of the resource identified by the URI.
 - isPreferred: Boolean (optional, default: false).
-  Whether this OnlineInformation is the preferred for its type. This SHOULD only be one per type.
+  Whether this resource is the preferred for its type. This SHOULD only be one per type.
 
 An Address object has the following properties:
 
