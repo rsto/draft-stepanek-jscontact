@@ -8,7 +8,7 @@ workgroup = "TBD"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2019-09-05T09:00:00Z
+date = 2019-09-12T13:52:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
@@ -153,7 +153,7 @@ The role(s), function(s) or part(s) played in a particular situation by the enti
 ### emails
 Type: `Resource[]` (optional).
 
-An array of Resource objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
+An array of Resource objects where the values are URLs in the [@RFC6068] `mailto` scheme or free-text email addresses. Types are:
 
   - `personal` The address is for emailing in a personal context.
   - `work` The address is for emailing in a professional context.
@@ -283,9 +283,9 @@ A LocalizedString object has the following properties:
 - value: `String` (mandatory).
   The property value.
 - language: `String` (optional).
-  The [RFC5646] language tag of this value, if any.
+  The [@!RFC5646] language tag of this value, if any.
 - localizations: `String[String]` (optional).
-  A map from [RFC5646] language tags to the value localized in that language.
+  A map from [@!RFC5646] language tags to the value localized in that language.
 
 ### Resource {#resource-type}
 
@@ -298,7 +298,7 @@ A Resource object has the following properties:
 - value: `String` (mandatory).
   The actual resource value, e.g. an email address or phone number.
 - mediaType: `String` (optional).
-  Used for properties with URI values. Provides the media type [RFC2046] of the resource identified by the URI.
+  Used for properties with URI values. Provides the media type [@!RFC2046] of the resource identified by the URI.
 - isPreferred: Boolean (optional, default: false).
   Whether this resource is the preferred for its type. This SHOULD only be one per type.
 
