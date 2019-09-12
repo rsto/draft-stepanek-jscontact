@@ -162,14 +162,14 @@ An array of Resource objects where the values are URLs in the [@RFC2368] `mailto
 ### phones
 Type: `Resource[]` (optional).
 
-An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
+An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Resource types are:
 
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
   - `other` The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.
      
-The following labels are pre-defined for phone contact methods:
+The following labels are pre-defined for phone resources:
 
  - `private` The phone number should be used in a private context.
  - `work` The phone number should be used in a professional context
@@ -187,7 +187,7 @@ Types are:
 ### preferredContactMethod
 Type : `String` (optional)
 
-Defines the preferred contact method. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`, `other`.
+Defines the preferred contact method or resource with additional information about this card. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`, `other`.
 
 ## Address and Location properties
 
