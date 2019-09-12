@@ -97,7 +97,7 @@ A JSCard object stores information about a person, organization or company. It h
     - `application`: a software application
 - name: Name (mandatory). 
   A Name object has the following properties:
-  - fullName: String (mandatory).
+  - fullName: LocalizedString (mandatory).
     The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
   - prefix: String[] (optional).
     The honorific title(s), e.g. `Mr`, `Ms`, `Dr`.
@@ -111,10 +111,6 @@ A JSCard object stores information about a person, organization or company. It h
     The honorific suffix(es), e.g. `B.A.`, `Esq.`.
   - nickname: String[] (optional).
     The nickname(s) of the person represented by this card.
-  - language: String (optional).
-    The [RFC5646] language tag of this value, if any.   
-  - fullNameTranslations: ValueTranslation[] (optional).
-    An array of full name translations.      
 - anniversaries: Anniversary[] (optional).
   Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:
      - type: String (mandatory).
@@ -127,13 +123,13 @@ A JSCard object stores information about a person, organization or company. It h
     - place: Address (optional).
       An address associated with this anniversary, e.g. the place of birth or death.
 
-- organization: Value[] (optional).
+- organization: LocalizedString[] (optional).
   The company or organization name and units associated with this card.
   The first entry in the list names the organization, and any following
   entries name organizational units.
-- jobTitle: Value[] (optional).
+- jobTitle: LocalizedString[] (optional).
   The job title(s) or functional position(s) of the entity represented by this card.
-- role: Value[] (optional).
+- role: LocalizedString[] (optional).
   The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
 - emails: OnlineInformation[] (optional).
   An array of OnlineInformation objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
@@ -175,7 +171,7 @@ A JSCard object stores information about a person, organization or company. It h
        The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.
      - level: String (optional)
        Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: `high`, `medium` and `low`.
-- notes: Value (optional).
+- notes: LocalizedString (optional).
   Arbitrary notes about the entity represented by this card.
 - categories: String[] (optional).
   A list of free-text or URI categories that relate to the card.
@@ -206,8 +202,8 @@ An Address object has the following properties:
   - `other` An address not covered by the above categories.
 - label: String (optional).
   A label describing the value in more detail.
-- fullAddress: String (optional). 
-  The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown.
+- fullAddress: LocalizedString (optional).
+  The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.
 - street: String (optional).
   The street address. This MAY be multiple lines; newlines MUST be preserved.
 - extension: String (optional)
@@ -228,27 +224,16 @@ An Address object has the following properties:
 - timeZone: String (optional) Identifies the time zone this address is located in. This SHOULD be a time zone name registered in the [IANA Time Zone Database](https://www.iana.org/time-zones). Unknown time zone identifiers MAY be ignored by implementations.
 - isPreferred: Boolean (optional, default: false).
   Whether this Address is the preferred for its type. This SHOULD only be one per type.
-- language: String (optional).
-  The [RFC5646] language tag of this value, if any.
-- fullAddressTranslations: ValueTranslation[] (optional).
-  An array of full address translations. 
 
-A Value object has the following properties:
+A LocalizedString object has the following properties:
 
 - value: String (mandatory).
   The property value.
 - language: String (optional).
   The [RFC5646] language tag of this value, if any.
-- valueTranslations: ValueTranslation[] (optional).
-  An array of value translations.  
+- localizations: String[String] (optional).
+  A map from [RFC5646] language tags to the value localized in that language.
  
-A ValueTranslation object has the following properties:
-
-- value: String (mandatory).
-  A value translation.
-- language: String (mandatory).
-  The [RFC5646] language tag of this translation.
-
 # JSCardGroup
 
 MIME type: `application/jscontact+json;type=jscardgroup`
