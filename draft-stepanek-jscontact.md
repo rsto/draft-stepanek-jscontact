@@ -79,119 +79,124 @@ they appear in all capitals, as shown here.
 
 MIME type: `application/jscontact+json;type=jscard`
 
-A JSCard object stores information about a person, organization or company. It has the following properties:
+A JSCard object stores information about a person, organization or company.
 
-- uid: String (mandatory).
-  An identifier, used to associate the object as the same across different systems, addressbooks and views.  [@!RFC4122] describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with [@!RFC6350] UIDs, implementations MUST accept both URI and free-form text.
-- prodId: String (optional).
-  The identifier for the product that created the JSCard object.
-- updated: String (mandatory).
-  The date and time when the data in this JSCard object was last modified. The timestamp MUST be formatted as specified in [@RFC3339].
-- kind: String (optional). The kind of the entity the Card represents.
-  The value MUST be either one of the following values, registered in a future
-  RFC, or a vendor-specific value:
-    - `individual`: a single person
-    - `org`: an organization
-    - `location`: a named location
-    - `device`: a device, such as appliances, computers, or network elements
-    - `application`: a software application
-- name: Name (mandatory). 
-  A Name object has the following properties:
-  - fullName: LocalizedString (mandatory).
-    The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
-  - prefix: String[] (optional).
-    The honorific title(s), e.g. `Mr`, `Ms`, `Dr`.
-  - personalName: String[] (optional).
-    The personal name(s), also known as "first name", "give name".
-  - surname: String[] (optional).
-    The surname(s) (also known as "last name", "family name").
-  - additionalName: String[] (optional).
-    The additional name(s), also known as "middle name".
-  - suffix: String[] (optional).
-    The honorific suffix(es), e.g. `B.A.`, `Esq.`.
-  - nickname: String[] (optional).
-    The nickname(s) of the person represented by this card.
-- anniversaries: Anniversary[] (optional).
-  Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:
-     - type: String (mandatory).
-       Specifies the type of the anniversary. This RFC predefines the following types, but implementations MAY use additional values:
-          - `birth`: a birth day anniversary
-          - `death`: a death day anniversary
-          - `other`: an anniversary not covered by any of the known types.
-    - date: String (mandatory).
-      The date of this anniversary, in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a [@RFC3339] timestamp.
-    - place: Address (optional).
-      An address associated with this anniversary, e.g. the place of birth or death.
+## Metadata properties
 
-- organization: LocalizedString[] (optional).
-  The company or organization name and units associated with this card.
-  The first entry in the list names the organization, and any following
-  entries name organizational units.
-- jobTitle: LocalizedString[] (optional).
-  The job title(s) or functional position(s) of the entity represented by this card.
-- role: LocalizedString[] (optional).
-  The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
-- emails: Resource[] (optional).
-  An array of Resource objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
+### uid
+Type: `String` (mandatory).
+
+An identifier, used to associate the object as the same across different systems, addressbooks and views.  [@!RFC4122] describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with [@!RFC6350] UIDs, implementations MUST accept both URI and free-form text.
+
+### prodId
+Type: `String` (optional).
+
+The identifier for the product that created the JSCard object.
+
+### updated
+Type: `String` (mandatory).
+
+The date and time when the data in this JSCard object was last modified. The timestamp MUST be formatted as specified in [@RFC3339].
+
+### kind
+Type: `String` (optional). The kind of the entity the Card represents.
+
+The value MUST be either one of the following values, registered in a future RFC, or a vendor-specific value:
+
+- `individual`: a single person
+- `org`: an organization
+- `location`: a named location
+- `device`: a device, such as appliances, computers, or network elements
+- `application`: a software application
+
+## Name and Organization properties
+
+### name
+Type: Name (mandatory).
+
+The name of the entity represented by this JSCard.  A Name object has the following properties:
+
+- fullName: `LocalizedString` (mandatory).
+  The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
+- prefix: `String[]` (optional).
+  The honorific title(s), e.g. `Mr`, `Ms`, `Dr`.
+- personalName: `String[]` (optional).
+  The personal name(s), also known as "first name", "give name".
+- surname: `String[]` (optional).
+  The surname(s) (also known as "last name", "family name").
+- additionalName: `String[]` (optional).
+  The additional name(s), also known as "middle name".
+- suffix: `String[]` (optional).
+  The honorific suffix(es), e.g. `B.A.`, `Esq.`.
+- nickname: `String[]` (optional).
+  The nickname(s) of the person represented by this card.
+
+### organization
+Type: `LocalizedString[]` (optional).
+
+The company or organization name and units associated with this card.
+The first entry in the list names the organization, and any following
+entries name organizational units.
+
+### jobTitle
+Type : `LocalizedString[]` (optional).
+
+The job title(s) or functional position(s) of the entity represented by this card.
+
+### role
+Type : `LocalizedString[]` (optional).
+
+The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
+
+## Contact and Resource properties
+
+### emails
+Type: `Resource[]` (optional).
+
+An array of Resource objects where the values are URLs in the [@RFC2368] `mailto` scheme or free-text email addresses. Types are:
+
   - `personal` The address is for emailing in a personal context.
   - `work` The address is for emailing in a professional context.
   - `other` The address is for some other purpose. A label property MAY be included to display next to the address to help the user identify its purpose.
-- phones: Resource[] (optional).
-  An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
+
+### phones
+Type: `Resource[]` (optional).
+
+An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Contact method types are:
+
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
   - `other` The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.
      
-     The following labels are pre-defined for phone contact methods:
+The following labels are pre-defined for phone contact methods:
 
-       - `private` The phone number should be used in a private context.
-       - `work` The phone number should be used in a professional context
+ - `private` The phone number should be used in a private context.
+ - `work` The phone number should be used in a professional context
 
-- online: Resource[] (optional).
-  An array of Resource objects where the values are URIs or usernames associated with the card for online services.
-  Types are:
+### online
+Type: `Resource[]` (optional).
+
+An array of Resource objects where the values are URIs or usernames associated with the card for online services.
+Types are:
+
   - `uri` The value is a URI, e.g. a website link.
   - `username` The value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). A label property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`.
-
   - `other` The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.
-- preferredContactMethod: String (optional)
-  Defines the preferred contact method. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`, `other`.
-- addresses: Address[] (optional).
-  An array of Address objects, containing physical locations.
-- personalInfo: PersonalInformation[] (optional).
-  A list of personal information about the entity represented by this card. A PersonalInformation object has the following properties:
-     - type: String (mandatory).
-       Specifies the type for this personal information. Allowed values are:
-          - `expertise`: a field of expertise or credential
-          - `hobby`: a hobby
-          - `interest`: an interest
-          - `other`: an information not covered by the above categories
-     - value: String (mandatory).
-       The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.
-     - level: String (optional)
-       Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: `high`, `medium` and `low`.
-- notes: LocalizedString (optional).
-  Arbitrary notes about the entity represented by this card.
-- categories: String[] (optional).
-  A list of free-text or URI categories that relate to the card.
 
-An Resource object has the following properties:
+### preferredContactMethod
+Type : `String` (optional)
 
-- type: String (mandatory).
-  Specifies the context of the contact method. This MUST be taken from the set of values allowed depending on whether this is part of the phones, emails or online property (see above).
-- label: String (optional).
-  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
-- value: String (mandatory).
-  The actual contact method, e.g. the email address or phone number.
-- mediaType: String (optional).
-  It is used with properties whose value is a URI.  It provides the media type [RFC2046] of the resource identified by the URI.
-- isPreferred: Boolean (optional, default: false).
-  Whether this resource is the preferred for its type. This SHOULD only be one per type.
+Defines the preferred contact method. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`, `other`.
 
-An Address object has the following properties:
+## Address and Location properties
 
-- type: String (mandatory).
+### addresses
+Type: Address[] (optional).
+
+An array of Address objects, containing physical locations. An Address object has the following properties:
+
+- type: `String` (mandatory).
   Specifies the context of the address information.
   The value MUST be either one of the following values, registered in a future
   RFC, or a vendor-specific value:
@@ -200,53 +205,124 @@ An Address object has the following properties:
   - `billing` An address to be used for billing.
   - `postal` An address to be used for delivering physical items.
   - `other` An address not covered by the above categories.
-- label: String (optional).
+- label: `String` (optional).
   A label describing the value in more detail.
-- fullAddress: LocalizedString (optional).
+- fullAddress: `LocalizedString` (optional).
   The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.
-- street: String (optional).
+- street: `String` (optional).
   The street address. This MAY be multiple lines; newlines MUST be preserved.
-- extension: String (optional)
+- extension: `String` (optional)
   The extended address, such as an apartment or suite number, or care-of address.
-- locality: String (optional).
+- locality: `String` (optional).
   The city, town, village, post town, or other locality within which the street address may be found.
-- region: String (optional).
+- region: `String` (optional).
   The province, such as a state, county, or canton within which the locality may be found.
-- country: String (optional).
+- country: `String` (optional).
   The country name.
-- postOfficeBox: String (optional)
+- postOfficeBox: `String` (optional)
   The post office box.
-- postcode: String (optional).
+- postcode: `String` (optional).
   The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.
-- countryCode: String (optional).
+- countryCode: `String` (optional).
   The ISO-3166-1 country code.
-- coordinates: String (optional) A [@!RFC5870] "geo:" URI for the address.
-- timeZone: String (optional) Identifies the time zone this address is located in. This SHOULD be a time zone name registered in the [IANA Time Zone Database](https://www.iana.org/time-zones). Unknown time zone identifiers MAY be ignored by implementations.
+- coordinates: `String` (optional) A [@!RFC5870] "geo:" URI for the address.
+- timeZone: `String` (optional) Identifies the time zone this address is located in. This SHOULD be a time zone name registered in the [IANA Time Zone Database](https://www.iana.org/time-zones). Unknown time zone identifiers MAY be ignored by implementations.
 - isPreferred: Boolean (optional, default: false).
   Whether this Address is the preferred for its type. This SHOULD only be one per type.
 
+
+## Additional properties
+
+### anniversaries
+Type : Anniversary[] (optional).
+
+Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:
+
+- type: `String` (mandatory).
+  Specifies the type of the anniversary. This RFC predefines the following types, but implementations MAY use additional values:
+  - `birth`: a birth day anniversary
+  - `death`: a death day anniversary
+  - `other`: an anniversary not covered by any of the known types.
+- date: `String` (mandatory).
+  The date of this anniversary, in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a [@RFC3339] timestamp.
+- place: Address (optional).
+  An address associated with this anniversary, e.g. the place of birth or death.
+
+### personalInfo
+Type: PersonalInformation[] (optional).
+
+A list of personal information about the entity represented by this card.
+A PersonalInformation object has the following properties:
+
+- type: `String` (mandatory).
+  Specifies the type for this personal information. Allowed values are:
+      - `expertise`: a field of expertise or credential
+      - `hobby`: a hobby
+      - `interest`: an interest
+      - `other`: an information not covered by the above categories
+- value: `String` (mandatory).
+  The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.
+- level: `String` (optional)
+  Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: `high`, `medium` and `low`.
+
+### notes
+Type: `LocalizedString[]` (optional).
+
+Arbitrary notes about the entity represented by this card.
+
+### categories
+Type: `String[]` (optional).
+A list of free-text or URI categories that relate to the card.
+
+## Common JSCard types
+
+### LocalizedString {#localized-string-type}
+
 A LocalizedString object has the following properties:
 
-- value: String (mandatory).
+- value: `String` (mandatory).
   The property value.
-- language: String (optional).
+- language: `String` (optional).
   The [RFC5646] language tag of this value, if any.
-- localizations: String[String] (optional).
+- localizations: `String[String]` (optional).
   A map from [RFC5646] language tags to the value localized in that language.
- 
+
+### Resource {#resource-type}
+
+A Resource object has the following properties:
+
+- type: `String` (mandatory).
+  Specifies the context of the resource. This MUST be taken from the set of values specified for the respective property.
+- label: `String` (optional).
+  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
+- value: `String` (mandatory).
+  The actual resource value, e.g. an email address or phone number.
+- mediaType: `String` (optional).
+  Used for properties with URI values. Provides the media type [RFC2046] of the resource identified by the URI.
+- isPreferred: Boolean (optional, default: false).
+  Whether this resource is the preferred for its type. This SHOULD only be one per type.
+
 # JSCardGroup
 
 MIME type: `application/jscontact+json;type=jscardgroup`
 
-A JSCardGroup object represents a named set of JSCards. It has the following properties:
+A JSCardGroup object represents a named set of JSCards.
 
-- uid: String (mandatory).
-  A globally unique identifier. The same requirements as for the JSCard uid property apply.
-- name: String (optional).
-  The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.
-- cardIds: String[] (mandatory).
-  The ids of the cards in the group. Implementations MUST preserve the order of list entries.
+## Properties
 
+### uid
+Type : `String` (mandatory).
+
+A globally unique identifier. The same requirements as for the JSCard uid property apply.
+
+### name
+Type: `String` (optional).
+
+The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.
+
+### cardIds
+Type : `String[]` (mandatory).
+The ids of the cards in the group. Implementations MUST preserve the order of list entries.
 
 # IANA Considerations
 
