@@ -1,5 +1,5 @@
 %%%
-title = "JSContact: A JSON representation of addressbook data"
+title = "JSContact: A JSON representation of contact data"
 abbrev = "JSContact"
 category = "std"
 ipr= "trust200902"
