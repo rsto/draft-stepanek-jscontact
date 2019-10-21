@@ -109,6 +109,20 @@ The value MUST be either one of the following values, registered in a future RFC
 - `device`: a device, such as appliances, computers, or network elements
 - `application`: a software application
 
+### relatedTo
+
+Type: `String[Relation]` (optional).
+
+Relates the object to other JSCard objects.  This is represented as a map of the URI (or single text value) of the related objects to a possibly empty set of relation types. The Relation object has the following properties:
+
+- relation: `String[Boolean]` (optional, default: empty Object)
+  Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
+  Keys in the set MUST be one of the RELATED property [@RFC6350] type parameter values, or an IANA-registered value, or a vendor-specific value.
+  The value for each key in the set MUST be true.
+
+Note, the Relation object only has one property; it is specified as an object with a single property to allow for extension in the future.
+
+
 ## Name and Organization properties
 
 ### name
