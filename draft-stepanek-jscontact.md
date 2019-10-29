@@ -8,11 +8,11 @@ workgroup = "TBD"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2019-09-12T13:52:00Z
+date = 2019-10-29T10:09:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-stepanek-jscontact-04"
+value = "draft-stepanek-jscontact-05"
 stream = "IETF"
 status = "standard"
 
