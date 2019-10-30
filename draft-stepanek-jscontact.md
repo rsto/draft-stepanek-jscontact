@@ -334,7 +334,7 @@ Type: `String` (optional).
 
 The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.
 
-### cardIds
+### cards
 Type : `JSCard[]` (mandatory).
 The cards in the group. Implementations MUST preserve the order of list entries.
 
