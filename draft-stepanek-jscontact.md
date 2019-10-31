@@ -75,6 +75,14 @@ The key words "**MUST**", "**MUST NOT**", "**REQUIRED**", "**SHALL**", "**SHALL 
 document are to be interpreted as described in BCP 14 [@!RFC2119] [@!RFC8174] when, and only when,
 they appear in all capitals, as shown here.
 
+## Vendor-specific Property Extensions and Values
+
+Vendors MAY add additional properties to JSContact objects to support their custom features. The names of these properties MUST be prefixed with a domain name controlled by the vendor to avoid conflict, e.g. "example.com/customprop".
+
+Some JSContact properties allow vendor-specific value extensions. If so, vendor-specific values MUST be prefixed with a domain name controlled by the vendor, e.g. "example.com/customrel".
+
+Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems as well, rather than using a vendor-specific prefix.
+
 # JSCard
 
 MIME type: `application/jscontact+json;type=jscard`
