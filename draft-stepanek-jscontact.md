@@ -271,6 +271,8 @@ Memorable dates and events for the entity represented by this card. An Anniversa
   - `birth`: a birth day anniversary
   - `death`: a death day anniversary
   - `other`: an anniversary not covered by any of the known types.
+- label: `String` (optional).
+  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
 - date: `String` (mandatory).
   The date of this anniversary, in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a [@RFC3339] timestamp.
 - place: Address (optional).
