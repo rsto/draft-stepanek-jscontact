@@ -133,25 +133,28 @@ Note, the Relation object only has one property; it is specified as an object wi
 
 ## Name and Organization properties
 
+### fullName
+Type: `LocalizedString` (mandatory).
+
+The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
+
 ### name
-Type: Name (mandatory).
+Type: `NameComponent[]` (optional).
 
-The name of the entity represented by this JSCard.  A Name object has the following properties:
+The name components of the name of the entity represented by this JSCard. Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.
 
-- fullName: `LocalizedString` (mandatory).
-  The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
-- prefix: `String[]` (optional).
-  The honorific title(s), e.g. `Mr`, `Ms`, `Dr`.
-- personalName: `String[]` (optional).
-  The personal name(s), also known as "first name", "give name".
-- surname: `String[]` (optional).
-  The surname(s) (also known as "last name", "family name").
-- additionalName: `String[]` (optional).
-  The additional name(s), also known as "middle name".
-- suffix: `String[]` (optional).
-  The honorific suffix(es), e.g. `B.A.`, `Esq.`.
-- nickname: `String[]` (optional).
-  The nickname(s) of the person represented by this card.
+A NameComponent has the following properties:
+
+- value: `String` (mandatory).
+  The value of this name component.
+- type: `String` (mandatory).
+  The type of this name component. Valid name component types are:
+  - `prefix`. The value is a honorific title(s), e.g. "Mr", "Ms", "Dr".
+  - `personal`. The value is a personal name(s), also known as "first name", "given name".
+  - `surname`. The value is a surname, also known as "last name", "family name".
+  - `additional`. The value is an additional name, also known as "middle name".
+  - `suffix`. The value is a honorific suffix, e.g. "B.A.", "Esq.".
+  - `nickname`. The value is a nickname.
 
 ### organization
 Type: `LocalizedString[]` (optional).
