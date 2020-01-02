@@ -134,7 +134,7 @@ Note, the Relation object only has one property; it is specified as an object wi
 ## Name and Organization properties
 
 ### fullName
-Type: `LocalizedString` (mandatory).
+Type: `LocalizedString` (optional).
 
 The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
 
