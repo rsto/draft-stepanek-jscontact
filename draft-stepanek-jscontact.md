@@ -235,7 +235,7 @@ Type: Address[] (optional).
 
 An array of Address objects, containing physical locations. An Address object has the following properties:
 
-- type: `String` (mandatory).
+- type: `String` (optional, default `other`).
   Specifies the context of the address information.
   The value MUST be either one of the following values, registered in a future
   RFC, or a vendor-specific value:
