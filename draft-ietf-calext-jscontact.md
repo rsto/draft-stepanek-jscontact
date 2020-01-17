@@ -4,15 +4,15 @@ abbrev = "JSContact"
 category = "std"
 ipr= "trust200902"
 area = "Applications"
-workgroup = "TBD"
+workgroup = "Calendaring extensions"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2020-01-02T16:09:00Z
+date = 2020-01-17T14:00:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-stepanek-jscontact-06"
+value = "draft-ietf-calext-jscontact-00"
 stream = "IETF"
 status = "standard"
 
