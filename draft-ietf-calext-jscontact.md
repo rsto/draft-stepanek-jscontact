@@ -8,7 +8,7 @@ workgroup = "Calendaring extensions"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2020-01-17T14:00:00Z
+date = 2020-01-21T12:00:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
@@ -102,7 +102,7 @@ Type: `String` (optional).
 The identifier for the product that created the JSCard object.
 
 ### updated
-Type: `String` (mandatory).
+Type: `String` (optional).
 
 The date and time when the data in this JSCard object was last modified. The timestamp MUST be formatted as specified in [@RFC3339].
 
