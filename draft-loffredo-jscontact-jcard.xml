@@ -1271,7 +1271,7 @@
       </section>
 
         <section title="JSCard's Required Properties">
-            <t>While converting a jCard into a JSCard, three JSCard topmost properties are required, namely, &quot;uid&quot;, &quot;updated&quot; and &quot;name&quot;.</t>
+            <t>While converting a jCard into a JSCard, only the JSCard topmost &quot;uid&quot; property is required.</t>
         </section>
 
         <section title="JSCard's Unmatched Properties">
@@ -1303,7 +1303,7 @@
     </references>
     
     <references title="Informative References">
-      <reference anchor="draft-stepanek-jscontact" target="https://datatracker.ietf.org/doc/draft-stepanek-jscontact/">
+      <reference anchor="draft-ietf-calext-jscontact" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscontact/">
         <front><title>JSContact: A JSON representation of contact data</title>
           <author/>
           <date/>
