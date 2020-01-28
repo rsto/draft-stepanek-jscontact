@@ -82,7 +82,7 @@
 
     <section title="Motivation">
 
-      <t>The JSContact specification <xref target="draft-stepanek-jscontact"/> has been defined to represent contact card information as a more efficient alternative to jCard <xref target="RFC7095"/>.</t>
+      <t>The JSContact specification <xref target="draft-ietf-calext-jscontact"/> has been defined to represent contact card information as a more efficient alternative to jCard <xref target="RFC7095"/>.</t>
       <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support jCard. Similarly, existing contact data providers and consumers already using jCard might want to represent their data also according to the JSContact specification.</t>
       <t>To facilitate this use cases, this document provides an informational guide about how to convert the card defined in JSContact, namely JSCard,  from and to jCard.</t>
     </section>
