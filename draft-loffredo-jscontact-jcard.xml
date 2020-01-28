@@ -1266,7 +1266,7 @@
       </section>
 
       <section title="Extended Properties">
-        <t>If an extended property is a resource, JScard already allows to represent it by setting the &quot;type&quot; property to &quot;other&quot; and specifying a value for the &quot;label&quot; property.</t>
+        <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; property to &quot;other&quot; and specifying a value for the &quot;label&quot; property.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
       </section>
 
