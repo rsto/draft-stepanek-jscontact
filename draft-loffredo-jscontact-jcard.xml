@@ -65,7 +65,7 @@
 
     <date/>
     <area>Applications</area>
-    <workgroup>TBD</workgroup>
+    <workgroup>calext</workgroup>
     <keyword>JSON</keyword>
     <keyword>contacts</keyword>
     <keyword>cards</keyword>
@@ -87,7 +87,7 @@
       <t>To facilitate this use cases, this document provides an informational guide about how to convert the card defined in JSContact, namely JSCard,  from and to jCard.</t>
     </section>
 
-    <section title="Scope and caveats">
+    <section title="Scope and Caveats">
       <t>Since the jCard specification includes merely the rules to translate a vCard <xref target="RFC6350"/> content in JSON, in the following of this document, the authors will refer to the vCard elements when mapping from jCard to JSCard.</t>
 
       <t>JSContact and vCard have a lot of semantics in common, however some differences must be outlined:
@@ -168,7 +168,7 @@
       <section title="Identification Properties">
 
           <section title="FN">
-              <t>FN is converted into the &quot;fullName&quot; property. The presence of more than one name is implicitly associated with the translation of the full name in various languages. Each translation corresponds to a different entry of the &quot;localizations&quot; map that is an optional member of the &quot;fullName&quot; object(<xref target="fn_n_nickname_mapping"/>):</t>
+              <t>FN is converted into the &quot;fullName&quot; property. The presence of more than one name is implicitly associated with the translation of the full name in various languages. Each translation corresponds to a different entry of the &quot;localizations&quot; map that is an optional member of the &quot;fullName&quot; object (<xref target="fn_n_nickname_mapping"/>).</t>
           </section>
 
           <section title="N and NICKNAME">
@@ -780,9 +780,9 @@
               <t>The vCard EXPERTISE element defined by RFC6715 <xref target="RFC6715"/> is represented in JSCard as a &quot;PersonalInformation&quot; item of the &quot;personalInfo&quot; array (<xref target="expertise_mapping"/>). The &quot;type&quot; property is set to &quot;expertise&quot;.</t>
               <t>The LEVEL parameter can be represented by the &quot;level&quot; property with following mapping:</t>
               <t><list style="symbols">
-                  <t>&quot;beginner&quot; is translated into &quot;low&quot;;</t>
-                  <t>&quot;average&quot; is translated into &quot;medium&quot;;</t>
-                  <t>&quot;expert&quot; is translated into &quot;high&quot;.</t>
+                  <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
+                  <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
+                  <t>&quot;expert&quot; is converted into &quot;high&quot;.</t>
               </list></t>
               <t>The INDEX parameter is represented by the position of the expertise among the declared expertises.</t>
 
