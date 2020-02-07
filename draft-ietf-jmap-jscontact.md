@@ -4,15 +4,15 @@ abbrev = "JSContact"
 category = "std"
 ipr= "trust200902"
 area = "Applications"
-workgroup = "Calendaring extensions"
+workgroup = "JMAP"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2020-01-21T12:00:00Z
+date = 2020-02-07T10:00:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-calext-jscontact-00"
+value = "draft-ietf-jmap-jscontact-00"
 stream = "IETF"
 status = "standard"
 
