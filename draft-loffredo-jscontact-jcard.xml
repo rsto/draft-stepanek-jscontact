@@ -65,7 +65,7 @@
 
     <date/>
     <area>Applications</area>
-    <workgroup>calext</workgroup>
+    <workgroup>jmap</workgroup>
     <keyword>JSON</keyword>
     <keyword>contacts</keyword>
     <keyword>cards</keyword>
@@ -82,7 +82,7 @@
 
     <section title="Motivation">
 
-      <t>The JSContact specification <xref target="draft-ietf-calext-jscontact"/> has been defined to represent contact card information as a more efficient alternative to jCard <xref target="RFC7095"/>.</t>
+      <t>The JSContact specification <xref target="draft-ietf-jmap-jscontact"/> has been defined to represent contact card information as a more efficient alternative to jCard <xref target="RFC7095"/>.</t>
       <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support jCard. Similarly, existing contact data providers and consumers already using jCard might want to represent their data also according to the JSContact specification.</t>
       <t>To facilitate this use cases, this document provides an informational guide about how to convert the card defined in JSContact, namely JSCard,  from and to jCard.</t>
     </section>
@@ -1303,7 +1303,7 @@
     </references>
     
     <references title="Informative References">
-      <reference anchor="draft-ietf-calext-jscontact" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscontact/">
+      <reference anchor="draft-ietf-jmap-jscontact" target="https://datatracker.ietf.org/doc/draft-ietf-jmap-jscontact/">
         <front><title>JSContact: A JSON representation of contact data</title>
           <author/>
           <date/>
