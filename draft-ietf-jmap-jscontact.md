@@ -226,11 +226,11 @@ Type: Address[] (optional).
 
 An array of Address objects, containing physical locations. An Address object has the following properties:
 
-- type: `String` (optional, default `other`).
+- context: `String` (optional, default `other`).
   Specifies the context of the address information.
   The value MUST be either one of the following values, registered in a future
   RFC, or a vendor-specific value:
-  - `home` An address of a residence.
+  - `private` An address of a residence.
   - `work` An address of a workplace.
   - `billing` An address to be used for billing.
   - `postal` An address to be used for delivering physical items.
