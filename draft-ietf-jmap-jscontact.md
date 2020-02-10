@@ -178,27 +178,18 @@ The role(s), function(s) or part(s) played in a particular situation by the enti
 ### emails
 Type: `Resource[]` (optional).
 
-An array of Resource objects where the values are URLs in the [@RFC6068] `mailto` scheme or free-text email addresses. Types are:
-
-  - `personal` The address is for emailing in a personal context.
-  - `work` The address is for emailing in a professional context.
-  - `other` The address is for some other purpose. A label property MAY be included to display next to the address to help the user identify its purpose.
+An array of Resource objects where the values are URLs in the `mailto` scheme [@RFC6068] or free-text email addresses. The default value of the `type` property is `email`. If set, the type MUST be `email` or `other`.
 
 ### phones
 Type: `Resource[]` (optional).
 
-An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed. Resource types are:
+An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed.  Types are:
 
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
   - `other` The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.
      
-The following labels are pre-defined for phone resources:
-
- - `private` The phone number should be used in a private context.
- - `work` The phone number should be used in a professional context
-
 ### online
 Type: `Resource[]` (optional).
 
@@ -332,8 +323,13 @@ A LocalizedString object has the following properties:
 
 A Resource object has the following properties:
 
-- type: `String` (mandatory).
-  Specifies the context of the resource. This MUST be taken from the set of values specified for the respective property.
+- context: `String` (optional)
+  Specifies the context in which to use this resource. Pre-defined values are:
+  - `private`: The resource may be used to contact the card holder in a private context.
+  - `work`: The resource may be used to contact the card holder in a professional context.
+  - `other`: The resource may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
+- type: `String` (optional).
+  Specifies the property-specific variant of the resource. This MUST be taken from the set of allowed types specified in the respective contact method property.
 - label: `String` (optional).
   A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
 - value: `String` (mandatory).
