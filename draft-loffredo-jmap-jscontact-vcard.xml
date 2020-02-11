@@ -31,9 +31,9 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-loffredo-jscontact-jcard-00" ipr="trust200902">
+<rfc category="info" docName="draft-loffredo-jmap-jscontact-vcard-00" ipr="trust200902">
   <front>
-    <title abbrev="JSContact-jCard">JSContact: Converting from and to jCard</title>
+    <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
     <author fullname="Mario Loffredo" initials="M." surname="Loffredo">
       <organization>IIT-CNR/Registro.it</organization>
@@ -68,12 +68,11 @@
     <workgroup>jmap</workgroup>
     <keyword>JSON</keyword>
     <keyword>contacts</keyword>
-    <keyword>cards</keyword>
-    <keyword>VCARD</keyword>
+    <keyword>vCard</keyword>
     <keyword>jCard</keyword>
     
     <abstract>
-      <t>This document provides an informational guideline for converting the contact card defined by JSContact specification, namely JSCard, from and to jCard.</t>
+      <t>This document provides an informational guideline for converting the contact card defined by JSContact specification, namely JSCard, from and to vCard.</t>
     </abstract>
   </front>
 
@@ -82,18 +81,17 @@
 
     <section title="Motivation">
 
-      <t>The JSContact specification <xref target="draft-ietf-jmap-jscontact"/> has been defined to represent contact card information as a more efficient alternative to jCard <xref target="RFC7095"/>.</t>
-      <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support jCard. Similarly, existing contact data providers and consumers already using jCard might want to represent their data also according to the JSContact specification.</t>
-      <t>To facilitate this use cases, this document provides an informational guide about how to convert the card defined in JSContact, namely JSCard,  from and to jCard.</t>
+      <t>The JSContact specification <xref target="draft-ietf-jmap-jscontact"/> has been defined to represent contact card information as a more efficient alternative to vCard <xref target="RFC6350"/> and its JSON format named jCard <xref target="RFC7095"/>.</t>
+      <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support vCard/jCard. Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification.</t>
+      <t>To facilitate this use cases, this document provides an informational guide about how to convert the card defined in JSContact, namely JSCard,  from and to vCard.</t>
     </section>
 
     <section title="Scope and Caveats">
-      <t>Since the jCard specification includes merely the rules to translate a vCard <xref target="RFC6350"/> content in JSON, in the following of this document, the authors will refer to the vCard elements when mapping from jCard to JSCard.</t>
 
       <t>JSContact and vCard have a lot of semantics in common, however some differences must be outlined:
        <list style="symbols">
       <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements.<vspace blankLines='1' /></t>
-      <t>The vCard specification includes some features (like parameters) that have been formally removed from JSCard due to a complete refactoring of jCard content. Anyway, the vCard parameters may appear as JSCard properties.<vspace blankLines='1' /></t>
+      <t>The vCard specification includes some features (like parameters) that have been formally removed from JSCard due to a complete refactoring of vCard content. Anyway, the vCard parameters may appear as JSCard properties.<vspace blankLines='1' /></t>
       <t>Some vCard elements represented individually have been modeled as members of JSCard elements.<vspace blankLines='1' /></t>
       <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart in the JSContact specification.</t>
       </list></t>
@@ -1270,7 +1268,7 @@
       </section>
 
         <section title="JSCard's Required Properties">
-            <t>While converting a jCard into a JSCard, only the JSCard topmost &quot;uid&quot; property is required.</t>
+            <t>While converting a vCard into a JSCard, only the JSCard topmost &quot;uid&quot; property is required.</t>
         </section>
 
         <section title="JSCard's Unmatched Properties">
