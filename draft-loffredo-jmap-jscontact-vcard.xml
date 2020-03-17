@@ -31,7 +31,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-loffredo-jmap-jscontact-vcard-00" ipr="trust200902">
+<rfc category="info" docName="draft-loffredo-jmap-jscontact-vcard-01" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -110,7 +110,7 @@
       <section title="General Properties">
 
         <section title="SOURCE">
-          <t>The vCard SOURCE element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="source_mapping"/>). The &quot;type&quot; and &quot;label&quot; members of the &quot;Resource&quot; object are set to &quot;uri&quot; and &quot;source&quot; respectively.</t>
+          <t>The vCard SOURCE element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="source_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members of the &quot;Resource&quot; object are set to &quot;uri&quot; and &quot;source&quot; respectively.</t>
             <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
             <figure anchor="source_mapping" title="SOURCE mapping example">
@@ -128,7 +128,7 @@
               ...
               {
                "type": "uri",
-               "label": "source",
+               "labels": { "source" : true },
                "value": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
               },
               ...
@@ -217,7 +217,7 @@
           </section>
 
           <section title="PHOTO">
-              <t>The vCard PHOTO element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="photo_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;photo&quot; respectively.</t>
+              <t>The vCard PHOTO element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="photo_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;photo&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="photo_mapping" title="PHOTO mapping example">
@@ -235,7 +235,7 @@
               ...
               {
                "type": "uri",
-               "label": "photo",
+               "labels": { "photo" : true },
                "value": "http://www.example.com/pub/photos/jqpublic.gif"
               },
               ...
@@ -456,7 +456,7 @@
           </section>
 
           <section title="IMPP">
-              <t>The vCard IMPP element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="impp_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;username&quot; and &quot;XMPP&quot; respectively.</t>
+              <t>The vCard IMPP element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="impp_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;username&quot; and &quot;XMPP&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="impp_mapping" title="IMPP mapping example">
@@ -474,7 +474,7 @@
               ...
               {
                "type": "username",
-               "label": "XMPP",
+               "labels": { "XMPP" : true },
                "value": "alice@example.com"
               },
               ...
@@ -586,7 +586,7 @@
           </section>
 
           <section title="LOGO">
-              <t>The vCard LOGO element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="logo_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;logo&quot; respectively.</t>
+              <t>The vCard LOGO element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="logo_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;logo&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="logo_mapping" title="LOGO mapping example">
@@ -604,7 +604,7 @@
               ...
               {
                "type": "uri",
-               "label": "logo",
+               "labels": { "logo" : true },
                "value": "http://www.example.com/pub/logos/abccorp.jpg"
               },
               ...
@@ -740,7 +740,7 @@
           </section>
 
           <section title="CONTACT-URI">
-              <t>The vCard CONTACT-URI element defined by RFC8605 <xref target="RFC8605"/> is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="contact_uri_mapping"/>). The &quot;type&quot; and &quot;label&quot; members of the &quot;Resource&quot; object are set to &quot;uri&quot; and &quot;contact-uri&quot; respectively.</t>
+              <t>The vCard CONTACT-URI element defined by RFC8605 <xref target="RFC8605"/> is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="contact_uri_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members of the &quot;Resource&quot; object are set to &quot;uri&quot; and &quot;contact-uri&quot; respectively.</t>
               <t>The PREF parameter can be represented by the &quot;isPreferred&quot; property.</t>
 
               <figure anchor="contact_uri_mapping" title="CONTACT-URI mapping example">
@@ -758,7 +758,7 @@
               ...
               {
                "type": "uri",
-               "label": "contact-uri",
+               "labels": { "contact-uri" : true },
                "value": "mailto:contact@example.com",
                "isPreferred": true
               },
@@ -890,9 +890,9 @@
           </section>
 
           <section title="ORG-DIRECTORY">
-              <t>The vCard ORG-DIRECTORY element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="org_directory_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;org-directory&quot; respectively.</t>
+              <t>The vCard ORG-DIRECTORY element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="org_directory_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;org-directory&quot; respectively.</t>
               <t>The PREF parameter can be represented by the &quot;isPreferred&quot; property.</t>
-              <t>The INDEX parameter is represented by the position of the directory among the online resources with the &quot;label&quot; property set to &quot;org-directory&quot;.</t>
+              <t>The INDEX parameter is represented by the position of the directory among the online resources with the &quot;labels&quot; property set to &quot;org-directory&quot;.</t>
 
               <figure anchor="org_directory_mapping" title="ORG-DIRECTORY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -910,12 +910,12 @@
               ...
               {
                "type": "uri",
-               "label": "org-directory",
+               "labels": { "org-directory" : true },
                "value": "http://directory.mycompany.example.com"
               },
               {
                "type": "uri",
-               "label": "org-directory",
+               "labels": { "org-directory" : true },
                "value": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
                "isPreferred": true
               },
@@ -1027,7 +1027,7 @@
           </section>
 
           <section title="SOUND">
-              <t>The vCard SOUND element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="sound_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;sound&quot; respectively.</t>
+              <t>The vCard SOUND element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="sound_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;sound&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="sound_mapping" title="SOUND mapping example">
@@ -1045,7 +1045,7 @@
               ...
               {
                "type": "uri",
-               "label": "sound",
+               "labels": { "sound" : true },
                "value": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
               },
               ...
@@ -1082,7 +1082,7 @@
           </section>
 
           <section title="URL">
-              <t>The vCard URL element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="url_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;url&quot; respectively.</t>
+              <t>The vCard URL element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="url_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;url&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="url_mapping" title="URL mapping example">
@@ -1100,7 +1100,7 @@
               ...
               {
                "type": "uri",
-               "label": "url",
+               "labels": { "url" : true },
                "value": "http://example.org/restaurant.french/~chezchic.html"
               },
               ...
@@ -1115,7 +1115,7 @@
 
       <section title="Security Properties">
           <section title="KEY">
-              <t>The vCard KEY element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="key_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;key&quot; respectively.</t>
+              <t>The vCard KEY element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="key_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;key&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="key_mapping" title="KEY mapping example">
@@ -1133,7 +1133,7 @@
               ...
               {
                "type": "uri",
-               "label": "key",
+               "labels": { "key" : true },
                "value": "http://www.example.com/keys/jdoe.cer"
               },
               ...
@@ -1149,7 +1149,7 @@
       <section title="Calendar Properties">
 
           <section title="FBURL">
-              <t>The vCard FBURL element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="fburl_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;fburl&quot; respectively.</t>
+              <t>The vCard FBURL element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="fburl_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;fburl&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="fburl_mapping" title="FBURL mapping example">
@@ -1168,13 +1168,13 @@
               ...
               {
                "type": "uri",
-               "label": "fburl",
+               "labels": { "fburl" : true },
                "value": "http://www.example.com/busy/janedoe",
                "isPreferred": true
               },
               {
                "type": "uri",
-               "label": "fburl",
+               "labels": { "fburl" : true },
                "value": "ftp://example.com/busy/project-a.ifb",
                "mediaType": "text/calendar"
               },
@@ -1187,7 +1187,7 @@
           </section>
 
           <section title="CALADRURI">
-              <t>The vCard CALADRURI element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="caladruri_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;caladruri&quot; respectively.</t>
+              <t>The vCard CALADRURI element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="caladruri_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;caladruri&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="caladruri_mapping" title="CALADRURI mapping example">
@@ -1206,13 +1206,13 @@
               ...
               {
                "type": "uri",
-               "label": "caladruri",
+               "labels": { "caladruri" : true },
                "value": "mailto:janedoe@example.com",
                "isPreferred": true
               },
               {
                "type": "uri",
-               "label": "caladruri",
+               "labels": { "caladruri" : true },
                "value": "http://example.com/calendar/jdoe"
               },
               ...
@@ -1224,7 +1224,7 @@
           </section>
 
           <section title="CALURI">
-              <t>The vCard CALURI element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="caluri_mapping"/>). The &quot;type&quot; and &quot;label&quot; members are set to &quot;uri&quot; and &quot;caluri&quot; respectively.</t>
+              <t>The vCard CALURI element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="caluri_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;caluri&quot; respectively.</t>
               <t>The PREF and MEDIATYPE parameters can be represented by the &quot;isPreferred&quot; and &quot;mediaType&quot; properties respectively.</t>
 
               <figure anchor="caluri_mapping" title="CALURI mapping example">
@@ -1243,13 +1243,13 @@
               ...
               {
                "type": "uri",
-               "label": "caluri",
+               "labels": { "caluri" : true },
                "value": "http://cal.example.com/calA",
                "isPreferred": true
               },
               {
                "type": "uri",
-               "label": "caluri",
+               "labels": { "caluri" : true },
                "value": "ftp://ftp.example.com/calA.ics",
                "mediaType": "text/calendar"
               },
@@ -1263,7 +1263,7 @@
       </section>
 
       <section title="Extended Properties">
-        <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; property to &quot;other&quot; and specifying a value for the &quot;label&quot; property.</t>
+        <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; property to &quot;other&quot; and specifying a value for the &quot;labels&quot; map.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
       </section>
 
