@@ -892,7 +892,7 @@
           <section title="ORG-DIRECTORY">
               <t>The vCard ORG-DIRECTORY element is represented in JSCard as a &quot;Resource&quot; item of the &quot;online&quot; array (<xref target="org_directory_mapping"/>). The &quot;type&quot; and &quot;labels&quot; members are set to &quot;uri&quot; and &quot;org-directory&quot; respectively.</t>
               <t>The PREF parameter can be represented by the &quot;isPreferred&quot; property.</t>
-              <t>The INDEX parameter is represented by the position of the directory among the online resources with the &quot;labels&quot; property set to &quot;org-directory&quot;.</t>
+              <t>The INDEX parameter is represented by the position of the directory among the online resources with the &quot;org-directory&quot; key added to the &quot;labels&quot; map.</t>
 
               <figure anchor="org_directory_mapping" title="ORG-DIRECTORY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
