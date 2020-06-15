@@ -8,11 +8,11 @@ workgroup = "JMAP"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2020-02-07T10:00:00Z
+date = 2020-06-15T10:00:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-jmap-jscontact-00"
+value = "draft-ietf-jmap-jscontact-02"
 stream = "IETF"
 status = "standard"
 
