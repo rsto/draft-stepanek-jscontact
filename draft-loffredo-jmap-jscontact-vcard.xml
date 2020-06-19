@@ -31,7 +31,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-loffredo-jmap-jscontact-vcard-02" ipr="trust200902">
+<rfc category="info" docName="draft-loffredo-jmap-jscontact-vcard-03" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -72,7 +72,7 @@
     <keyword>jCard</keyword>
     
     <abstract>
-      <t>This document provides an informational guidance for converting the contact card defined by JSContact specification, namely JSCard, from and to vCard.</t>
+      <t>This document provides informational guidance for converting the contact card defined by JSContact specification, namely JSCard, from and to vCard.</t>
     </abstract>
   </front>
 
@@ -173,7 +173,7 @@
       <section title="Identification Properties">
 
           <section title="FN">
-              <t>FN is converted into the &quot;fullName&quot; property. The presence of more than one name is implicitly associated with the translation of the full name in various languages. Each translation corresponds to a different entry of the &quot;localizations&quot; map that is an optional member of the &quot;fullName&quot; object (<xref target="fn_n_nickname_mapping"/>).</t>
+              <t>FN is converted into the &quot;fullName&quot; property. The presence of more than one name is implicitly associated with the translation of the full name in various languages regardless of the presence of the ALTID parameter. Each translation corresponds to a different entry of the &quot;localizations&quot; map that is an optional member of the &quot;fullName&quot; object (<xref target="fn_n_nickname_mapping"/>).</t>
           </section>
 
           <section title="N and NICKNAME">
@@ -362,7 +362,7 @@
            "context": "work",
            "fullAddress":
                         {
-                         "value": "54321 Oak St\nReston\nVA\n20190\USA"
+                         "value": "54321 Oak St\nReston\nVA\n20190\nUSA"
                         },
            "street": "54321 Oak St",
            "locality": "Reston",
@@ -375,7 +375,7 @@
            "context": "private",
            "fullAddress":
                         {
-                         "value": "12345 Elm St\nReston\nVA\n20190\USA"
+                         "value": "12345 Elm St\nReston\nVA\n20190\nUSA"
                         },
            "street": "12345 Elm St",
            "locality": "Reston",
@@ -395,7 +395,7 @@
       <section title="Communications Properties">
 
           <section title="TEL">
-              <t>The vCard TEL element is represented in JSCard as a &quot;Resource&quot; item of the &quot;phones&quot; array (<xref target="tel_mapping"/>). The vCard &quot;type-param-tel&quot; values are represented by the &quot;type&quot; member. Those vCard &quot;type-param-tel&quot; values which don't have a counterpart in the &quot;type&quot; member values are represented as keys of the &quot;labels&quot; map. The &quot;type-param&quot; values are represented by the &quot;context&quot; member. The &quot;home&quot; value is replaced by the &quot;private&quot; value.</t>
+              <t>The vCard TEL element is represented in JSCard as a &quot;Resource&quot; item of the &quot;phones&quot; array (<xref target="tel_mapping"/>). The vCard &quot;type-param-tel&quot; values are represented by the &quot;type&quot; member. Those vCard &quot;type-param-tel&quot; values that don't have a counterpart in the &quot;type&quot; member values are represented as keys of the &quot;labels&quot; map. The &quot;type-param&quot; values are represented by the &quot;context&quot; member. The &quot;home&quot; value is replaced by the &quot;private&quot; value.</t>
               <t>The PREF parameter can be represented by the &quot;isPreferred&quot; member.</t>
 
               <figure anchor="tel_mapping" title="TEL mapping example">
@@ -535,13 +535,15 @@
 
       <section title="Geographical Properties">
         <t>The GEO and TZ elements are not directly mapped into equivalent topmost JSCard elements because the same information is represented through equivalent &quot;Address&quot; properties.</t>
+          <t>The ALTID parameter is used for associating both GEO and TZ elements with the related address information.</t>
       </section>
 
       <section title="Organizational Properties">
 
           <section title="TITLE">
               <t>The vCard TITLE element is mapped onto the JSCard &quot;jobTitle&quot; array; an item for each title (<xref target="title_mapping"/>).</t>
-              <t>The LANGUAGE parameter values can be expressed as corresponding entries of the &quot;localizations&quot; map included in each &quot;Resource&quot; item.</t>
+              <t>The ALTID parameter is used to distinguish between a new element and a new language-dependent alternative of a fixed element.</t>
+              <t>The LANGUAGE parameter values can be expressed as corresponding entries of the &quot;localizations&quot; map included in each &quot;LocalizedString&quot; item.</t>
 
               <figure anchor="title_mapping" title="TITLE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -554,7 +556,7 @@
 
     {
     ...
-    "jobTilte":[
+    "jobTitle":[
                 {
                  "value": "Research Scientist"
                 }
@@ -623,7 +625,8 @@
 
           <section title="ORG">
               <t>The vCard ORG element is mapped onto the JSCard &quot;organization&quot; array; an item for each organization (<xref target="org_mapping"/>). The organization name includes the organizational units if any.</t>
-              <t>The LANGUAGE parameter values can be expressed as corresponding entries of the &quot;localizations&quot; map included in each &quot;Resource&quot; item.</t>
+              <t>The ALTID parameter is used to distinguish between a new element and a new language-dependent alternative of a fixed element.</t>
+              <t>The LANGUAGE parameter values can be expressed as corresponding entries of the &quot;localizations&quot; map included in each &quot;LocalizedString&quot; item.</t>
 
               <figure anchor="org_mapping" title="ORG mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -965,7 +968,8 @@
 
           <section title="NOTE">
               <t>The vCard NOTE element is mapped onto the JSCard &quot;notes&quot; array (<xref target="notes_mapping"/>); an item for each note.</t>
-              <t>The LANGUAGE parameter values can be expressed as corresponding entries of the &quot;localizations&quot; map included in each &quot;Resource&quot; item.</t>
+              <t>The ALTID parameter is used to distinguish between a new element and a new language-dependent alternative of a fixed element.</t>
+              <t>The LANGUAGE parameter values can be expressed as corresponding entries of the &quot;localizations&quot; map included in each &quot;LocalizedString&quot; item.</t>
 
               <figure anchor="notes_mapping" title="NOTE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
