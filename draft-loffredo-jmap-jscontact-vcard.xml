@@ -256,12 +256,12 @@
           <section title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY">
               <t>The BDAY and ANNIVERSARY elements and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6350"/> are represented as &quot;Anniversary&quot; objects included in the &quot;anniversaries&quot; array (<xref target="anniversary_mapping"/>):</t>
               <t><list style="symbols">
-                  <t>BDAY and BIRTHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;<vspace blankLines='1' /></t>
-                  <t>DEATHDATE and DEATHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;<vspace blankLines='1' /></t>
+                  <t>BDAY and BIRTHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;;<vspace blankLines='1' /></t>
+                  <t>DEATHDATE and DEATHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;;<vspace blankLines='1' /></t>
                   <t>ANNIVERSARY is mapped onto &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
               </list></t>
 
-              <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.  The LANGUAGE parameter values of both BIRTHPLACE and DEATHPLACE elements are represented as corresponding entries of the &quot;fullAddress.localizations&quot; map.</t>
+              <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.  BIRTHPLACE and DEATHPLACE that are represented as geo URIs are converted into &quot;Address&quot; instances including only the &quot;coordinates&quot; member. If the URI value is not a geo URI, the place is ignored.  The LANGUAGE parameter values of both BIRTHPLACE and DEATHPLACE elements are represented as corresponding entries of the &quot;fullAddress.localizations&quot; map.</t>
 
               <figure anchor="anniversary_mapping" title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1277,7 +1277,22 @@
           </section>
       </section>
 
-      <section title="Extended Properties">
+        <section title="Additional Clarifications about Mapping">
+            <section title="Media type">
+                <t>As described in section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.</t>
+            </section>
+
+            <section title="Timezone">
+                <t>As specified in section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as an UTC offset or as an URI.
+                <list style="symbols">
+                <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
+                <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to map it to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
+                <t>Since there is no URI scheme defined for timezones <xref target="uri-schemes"/>, any implementation that does use some custom URI for timezones is not interoperable anyway.  In this case, if the URI corresponds to an a IANA timezone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into the string value.</t>
+                </list></t>
+            </section>
+        </section>
+
+        <section title="Extended Properties">
         <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying a value for the &quot;labels&quot; map.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
       </section>
@@ -1320,7 +1335,18 @@
           <date/>
         </front>
       </reference>
+        <reference anchor="time-zones" target="https://www.iana.org/time-zones">
+            <front><title>Time Zone Database</title>
+                <author/>
+                <date/>
+            </front>
+        </reference>
+        <reference anchor="uri-schemes" target="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">
+            <front><title>Uniform Resource Identifier (URI) Schemes</title>
+                <author/>
+                <date/>
+            </front>
+        </reference>
     </references>
-
   </back>
 </rfc>
