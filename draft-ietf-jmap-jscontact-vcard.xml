@@ -29,7 +29,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-loffredo-jmap-jscontact-vcard-03" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-00" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -91,7 +91,7 @@
       <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements. In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
       <t>The vCard specification includes some features (like parameters) that have been formally removed from JSCard due to a complete refactoring of vCard content.  Anyway, the vCard parameters may appear as JSCard features.<vspace blankLines='1' /></t>
       <t>Some vCard elements represented individually have been mapped onto members of JSCard objects.<vspace blankLines='1' /></t>
-      <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart among the JSContact specification.</t>
+      <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart in the JSContact specification.</t>
       </list></t>
 
     </section>
@@ -1287,7 +1287,7 @@
                 <list style="symbols">
                 <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
                 <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to map it to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
-                <t>Since there is no URI scheme defined for timezones <xref target="uri-schemes"/>, any implementation that does use some custom URI for timezones is not interoperable anyway.  In this case, if the URI corresponds to an a IANA timezone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into the string value.</t>
+                <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an a IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
                 </list></t>
             </section>
         </section>
@@ -1296,6 +1296,16 @@
         <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying a value for the &quot;labels&quot; map.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
       </section>
+
+        <section title="vCard Unmatched Properties">
+            <t>Any vCard property or parameter that doesn't have a direct counterpart in JSContact is treated as an extended property. The following mapping rules MUST be applied:
+                <list style="symbols">
+                    <t>an unmatched property is converted into an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&quot;<vspace blankLines='1'/></t>
+                    <t>an unmatched parameter is converted into an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&lt;vCard property&gt;/&quot;</t>
+                </list>
+            </t>
+            <t>In both cases, the resulting names MUST be in lowercase.</t>
+        </section>
 
         <section title="JSCard Required Properties">
             <t>While converting a vCard into a JSCard, only the topmost &quot;uid&quot; member is required.</t>
