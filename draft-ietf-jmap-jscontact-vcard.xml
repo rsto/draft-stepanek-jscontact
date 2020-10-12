@@ -14,7 +14,9 @@
   <!ENTITY RFC6869 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6869.xml'>
   <!ENTITY RFC7095 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7095.xml'>  
+   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7095.xml'>
+  <!ENTITY RFC7942 PUBLIC ''
+   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7942.xml'>
   <!ENTITY RFC8605 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.8605.xml'>
 ]>
@@ -29,7 +31,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-00" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-01" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -88,7 +90,7 @@
 
       <t>JSContact and vCard have a lot of semantics in common, however some differences must be outlined:
        <list style="symbols">
-      <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements. In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
+      <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
       <t>The vCard specification includes some features (like parameters) that have been formally removed from JSCard due to a complete refactoring of vCard content.  Anyway, the vCard parameters may appear as JSCard features.<vspace blankLines='1' /></t>
       <t>Some vCard elements represented individually have been mapped onto members of JSCard objects.<vspace blankLines='1' /></t>
       <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart in the JSContact specification.</t>
@@ -179,7 +181,7 @@
           <section title="N and NICKNAME">
               <t>Both the N and NICKNAME elements are converted into equivalent items of the &quot;name&quot; array (<xref target="fn_n_nickname_mapping"/>):</t>
               <t><list style="symbols">
-                  <t>the N components are transformed into related &quot;NameComponent&quot; objects as reported in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity;<vspace blankLines='1' /></t>
+                  <t>the N components are transformed into related &quot;NameComponent&quot; objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity;<vspace blankLines='1' /></t>
                   <t>Each NICKNAME element is mapped onto an object whose &quot;type&quot; member is set to &quot;nickname&quot;</t>
               </list></t>
 
@@ -261,7 +263,7 @@
                   <t>ANNIVERSARY is mapped onto &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
               </list></t>
 
-              <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.  BIRTHPLACE and DEATHPLACE that are represented as geo URIs are converted into &quot;Address&quot; instances including only the &quot;coordinates&quot; member. If the URI value is not a geo URI, the place is ignored.  The LANGUAGE parameter values of both BIRTHPLACE and DEATHPLACE elements are represented as corresponding entries of the &quot;fullAddress.localizations&quot; map.</t>
+              <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.  BIRTHPLACE and DEATHPLACE that are represented as geo URIs are converted into &quot;Address&quot; instances including only the &quot;coordinates&quot; member.  If the URI value is not a geo URI, the place is ignored.  The LANGUAGE parameter values of both BIRTHPLACE and DEATHPLACE elements are represented as corresponding entries of the &quot;fullAddress.localizations&quot; map.</t>
 
               <figure anchor="anniversary_mapping" title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -323,7 +325,7 @@
 
           <section title="ADR">
               <t>An ADR element is represented as an &quot;Address&quot; object in the &quot;addresses&quot; array (<xref target="adr_mapping"/>).</t>
-              <t>The ADR components are transformed into the &quot;Address&quot; members as reported in <xref target="adr_components"/>.</t>
+              <t>The ADR components are transformed into the &quot;Address&quot; members as presented in <xref target="adr_components"/>.</t>
 
               <texttable anchor="adr_components" title="ADR components mapping">
                   <ttcol align="left">ADR component</ttcol>
@@ -535,7 +537,7 @@
 
       <section title="Geographical Properties">
         <t>The GEO and TZ elements are not directly mapped into equivalent topmost JSCard members because the same information is represented through equivalent &quot;Address&quot; members.</t>
-          <t>The ALTID parameter is used for associating both GEO and TZ elements with the related address information. When the ALTID parameter is missing, the element should be associated with the first contact address.</t>
+          <t>The ALTID parameter is used for associating both GEO and TZ elements with the related address information.  When the ALTID parameter is missing, the element should be associated with the first contact address.</t>
       </section>
 
       <section title="Organizational Properties">
@@ -1293,18 +1295,13 @@
         </section>
 
         <section title="Extended Properties">
-        <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying a value for the &quot;labels&quot; map.</t>
+          <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying a value for the &quot;labels&quot; map.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
-      </section>
+        </section>
 
         <section title="vCard Unmatched Properties">
-            <t>Any vCard property or parameter that doesn't have a direct counterpart in JSContact is treated as an extended property. The following mapping rules MUST be applied:
-                <list style="symbols">
-                    <t>an unmatched property is converted into an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&quot;<vspace blankLines='1'/></t>
-                    <t>an unmatched parameter is converted into an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&lt;vCard property&gt;/&quot;</t>
-                </list>
-            </t>
-            <t>In both cases, the resulting names MUST be in lowercase.</t>
+            <t>Any vCard property that doesn't have a direct counterpart in JSContact is treated as an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&quot;.</t>
+            <t>The resulting name MUST be in lowercase.</t>
         </section>
 
         <section title="JSCard Required Properties">
@@ -1321,8 +1318,28 @@
        <t>This document has no actions for IANA.</t>
    </section>
 
-   <section anchor="security-considerations" title="Security Considerations">
-       <t>This document doesn't report any security consideration.</t>
+      <section anchor="impl-status" title="Implementation Status">
+          <t>NOTE: Please remove this section and the reference to RFC 7942 prior to publication as an RFC.</t>
+
+          <t>This section records the status of known implementations of the protocol defined by this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <xref target="RFC7942"/>.  The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.  Please note that the listing of any individual implementation here does not imply endorsement by the IETF.  Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.  This is not intended as, and must not be construed to be, a catalog of available implementations or their features.  Readers are advised to note that other implementations may exist.</t>
+
+          <t>According to RFC 7942, &quot;this will allow reviewers and working groups to assign due consideration to documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.  It is up to the individual working groups to use this information as they see fit&quot;.</t>
+
+          <section anchor="it-cnr-iit" title="CNR">
+              <t><list style="none">
+                  <t>Responsible Organization: National Research Council (CNR) of Italy</t>
+                  <t>Location: https://github.com/consiglionazionaledellericerche/jscontact-tools</t>
+                  <t>Description: This implementation includes tools for JSContact creation, validation, serialization/deserialization and conversion from vCard, xCard and jCard.</t>
+                  <t>Level of Maturity: This is an "alpha" test implementation.</t>
+                  <t>Coverage: This implementation includes all of the features described in this specification.</t>
+                  <t>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</t>
+              </list></t>
+          </section>
+
+      </section>
+
+      <section anchor="security-considerations" title="Security Considerations">
+       <t>This document doesn't present any security consideration.</t>
    </section>
 
   </middle>
@@ -1335,6 +1352,7 @@
       &RFC6715;
       &RFC6869;
       &RFC7095;
+      &RFC7942;
       &RFC8605;
     </references>
     
