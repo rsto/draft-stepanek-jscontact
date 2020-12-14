@@ -239,27 +239,27 @@ An array of Address objects, containing physical locations. An Address object ha
   A label describing the value in more detail.
 - fullAddress: `LocalizedString` (optional).
   The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.
-- street: `String` (optional).
-  The street address. This MAY be multiple lines; newlines MUST be preserved.
-- extension: `String` (optional)
-  The extended address, such as an apartment or suite number, or care-of address.
-- locality: `String` (optional).
-  The city, town, village, post town, or other locality within which the street address may be found.
-- region: `String` (optional).
-  The province, such as a state, county, or canton within which the locality may be found.
-- country: `String` (optional).
-  The country name.
-- postOfficeBox: `String` (optional)
-  The post office box.
-- postcode: `String` (optional).
-  The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.
-- countryCode: `String` (optional).
-  The ISO-3166-1 country code.
+- address: `AddressComponent[]` (optional).
+  The components of this address. Address components SHOULD be ordered such that their values joined by whitespace produce an address as usually formatted in its country or region.
 - coordinates: `String` (optional) A [@!RFC5870] "geo:" URI for the address.
 - timeZone: `String` (optional) Identifies the time zone this address is located in. This SHOULD be a time zone name registered in the [IANA Time Zone Database](https://www.iana.org/time-zones). Unknown time zone identifiers MAY be ignored by implementations.
 - isPreferred: Boolean (optional, default: false).
   Whether this Address is the preferred for its type. This SHOULD only be one per type.
 
+An AddressComponent has the following properties:
+
+- value: `String` (mandatory).
+  The value of this address component.
+- type: `String` (mandatory).
+  The type of this address component. The value MUST be either one of the following values, registered in a future RFC, or a vendor-specific value:
+  - `street`. The street address. This MAY be multiple lines; newlines MUST be preserved.
+  - `extension`. The extended address, such as an apartment or suite number, or care-of address.
+  - `locality`. The city, town, village, post town, or other locality within which the street address may be found.
+  - `region`. The province, such as a state, county, or canton within which the locality may be found.
+  - `country`. The country name.
+  - `postOfficeBox`. The post office box.
+  - `postcode`. The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.
+  - `countryCode`. The ISO-3166-1 country code.
 
 ## Additional properties
 
