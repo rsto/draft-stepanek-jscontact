@@ -148,7 +148,7 @@ A NameComponent has the following properties:
 - value: `String` (mandatory).
   The value of this name component.
 - type: `String` (mandatory).
-  The type of this name component. Valid name component types are:
+  The type of this name component. The value MUST be either one of the following values, registered in a future RFC, or a vendor-specific value:
   - `prefix`. The value is a honorific title(s), e.g. "Mr", "Ms", "Dr".
   - `personal`. The value is a personal name(s), also known as "first name", "given name".
   - `surname`. The value is a surname, also known as "last name", "family name".
