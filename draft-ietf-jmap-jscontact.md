@@ -303,8 +303,8 @@ Type: `LocalizedString[]` (optional).
 Arbitrary notes about the entity represented by this card.
 
 ### categories
-Type: `String[]` (optional).
-A list of free-text or URI categories that relate to the card.
+Type: `String[Boolean]` (optional).
+The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object MUST be `true`.
 
 ## Common JSCard types
 
