@@ -156,19 +156,19 @@ A NameComponent has the following properties:
   - `suffix`. The value is a honorific suffix, e.g. "B.A.", "Esq.".
   - `nickname`. The value is a nickname.
 
-### organization
+### organizations
 Type: `LocalizedString[]` (optional).
 
 The company or organization name and units associated with this card.
 The first entry in the list names the organization, and any following
 entries name organizational units.
 
-### jobTitle
+### jobTitles
 Type : `LocalizedString[]` (optional).
 
 The job title(s) or functional position(s) of the entity represented by this card.
 
-### role
+### roles
 Type : `LocalizedString[]` (optional).
 
 The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
