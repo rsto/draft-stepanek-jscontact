@@ -203,7 +203,7 @@ Types are:
 ### preferredContactMethod
 Type : `String` (optional)
 
-Defines the preferred contact method or resource with additional information about this card. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`, `other`.
+Defines the preferred contact method or resource with additional information about this card. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`.
 
 ### preferredContactLanguages
 Type : `String[ContactLanguage[]]` (optional)
