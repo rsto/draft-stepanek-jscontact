@@ -31,7 +31,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-01" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-02" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -543,7 +543,7 @@
       <section title="Organizational Properties">
 
           <section title="TITLE">
-              <t>A TITLE element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;jobTitle&quot; array (<xref target="title_mapping"/>).</t>
+              <t>A TITLE element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;jobTitles&quot; array (<xref target="title_mapping"/>).</t>
               <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
               <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
 
@@ -558,7 +558,7 @@
 
     {
     ...
-    "jobTitle":[
+    "jobTitles":[
                 {
                  "value": "Research Scientist"
                 }
@@ -570,7 +570,7 @@
           </section>
 
           <section title="ROLE">
-              <t>A ROLE element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;role&quot; array (<xref target="role_mapping"/>).</t>
+              <t>A ROLE element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;roles&quot; array (<xref target="role_mapping"/>).</t>
               <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
               <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
 
@@ -585,7 +585,7 @@
 
     {
     ...
-    "role":[
+    "roles":[
             {
              "value": "Project Leader"
             }
@@ -627,7 +627,7 @@
           </section>
 
           <section title="ORG">
-              <t>An ORG element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;organization&quot; array (<xref target="org_mapping"/>).  The organization name includes the organizational units if any.</t>
+              <t>An ORG element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;organizations&quot; array (<xref target="org_mapping"/>).  The organization name includes the organizational units if any.</t>
               <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
               <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
 
@@ -642,7 +642,7 @@
 
     {
     ...
-    "organization":[
+    "organizations":[
                 {
                  "value": "ABC, Inc.;North American Division;Marketing"
                  }
@@ -943,7 +943,7 @@
       <section title="Explanatory Properties">
 
           <section title="CATEGORIES">
-              <t>A CATEGORIES element is converted into an object in the &quot;categories&quot; array (<xref target="categories_mapping"/>).</t>
+              <t>A CATEGORIES element is converted into a set of entries of the &quot;categories&quot; map (<xref target="categories_mapping"/>). The keys are the comma separated text values of the CATEGORIES element, the value is always true for each entry.</t>
 
               <figure anchor="categories_mapping" title="CATEGORIES mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -956,12 +956,12 @@
 
     {
     ...
-    "categories":[
-                  "INTERNET",
-                  "IETF",
-                  "INDUSTRY",
-                  "INFORMATION TECHNOLOGY"
-                 ]
+    "categories":{
+                  "INTERNET": true,
+                  "IETF": true,
+                  "INDUSTRY": true,
+                  "INFORMATION TECHNOLOGY": true
+                 }
     ...
     }
         ]]></artwork>
