@@ -655,6 +655,7 @@
 
           <section title="MEMBER">
               <t>According to the JSContact specification, a group of contact cards is represented through a JSCardGroup (<xref target="group_example"/>).  The contact cards composing the group are included in the &quot;cards&quot; array.  Therefore, the MEMBER element doesn't have a direct match with a JSCard feature.</t>
+              <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the JSCard instances in the "cards" array by order of preference.</t>
 
               <figure anchor="group_example" title="Group example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -944,6 +945,7 @@
 
           <section title="CATEGORIES">
               <t>A CATEGORIES element is converted into a set of entries of the &quot;categories&quot; map (<xref target="categories_mapping"/>). The keys are the comma separated text values of the CATEGORIES element, the value is always true for each entry.</t>
+              <t>In this case, the PREF parameter has not a JSContact counterpart; however, implementers MAY use a map preserving the order of insertion and the map entries can be inserted by order of preference.</t>
 
               <figure anchor="categories_mapping" title="CATEGORIES mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1167,7 +1169,7 @@
 
           <section title="FBURL">
               <t>A FBURL element is represented as a &quot;Resource&quot; object of the &quot;online&quot; array (<xref target="fburl_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;fburl&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped ontoy the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
 
               <figure anchor="fburl_mapping" title="FBURL mapping example">
                   <artwork xml:space="preserve"><![CDATA[
