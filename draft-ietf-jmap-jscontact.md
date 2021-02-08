@@ -116,6 +116,12 @@ The value MUST be either one of the following values, registered in a future RFC
 - `location`: a named location
 - `device`: a device, such as appliances, computers, or network elements
 - `application`: a software application
+- `group`: a group of persons or entities. Its members are defined in the `members` property.
+
+### members
+Type: `String[Boolean]` (optional). The members of a group.
+
+The set is represented as an object, with each key being the uid of another JSCard. The value for each key in the object MUST be `true`. If this property is set, then the `kind` property value MUST be `group`.
 
 ### relatedTo
 
@@ -338,29 +344,6 @@ A Resource object has the following properties:
   Used for properties with URI values. Provides the media type [@!RFC2046] of the resource identified by the URI.
 - isPreferred: Boolean (optional, default: false).
   Whether this resource is the preferred for its type. This SHOULD only be one per type.
-
-# JSCardGroup
-
-MIME type: `application/jscontact+json;type=jscardgroup`
-
-A JSCardGroup object represents a named set of JSCards.
-
-## Properties
-
-### uid
-Type : `String` (mandatory).
-
-A globally unique identifier. The same requirements as for the JSCard uid property apply.
-
-### name
-Type: `String` (optional).
-
-The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.
-
-### cards
-Type : `JSCard[]` (mandatory).
-The cards in the group. Implementations MUST preserve the order of list entries.
-
 
 # Implementation Status
 
