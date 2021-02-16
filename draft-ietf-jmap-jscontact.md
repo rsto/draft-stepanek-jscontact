@@ -195,7 +195,7 @@ An array of Resource objects where the values are URIs scheme or free-text phone
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
   - `other` The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.
-     
+
 ### online
 Type: `Resource[]` (optional).
 
@@ -205,6 +205,20 @@ Types are:
   - `uri` The value is a URI, e.g. a website link.
   - `username` The value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). A label property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`.
   - `other` The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.
+
+### photos
+Type: `File[]` (optional).
+
+An array of File objects that contain photographs or images associated with this card. A typical use case is to include an avatar for display along the contact name.
+
+A File object has the following properties:
+
+- href: `String` (mandatory). A URI where to fetch the data of this file.
+- mediaType: `String` (optional). The content-type of the file, if known.
+- size: `UnsignedInt` (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.
+- isPreferred: Boolean (optional, default: false).
+  Whether this file is preferred as photo for this card. This SHOULD only be one.
+
 
 ### preferredContactMethod
 Type : `String` (optional)
