@@ -1,5 +1,5 @@
 
-MMARK := mmark
+MMARK := ./mmark
 
 %.xml: %.md
 	cat $< | $(MMARK) -2 > $@

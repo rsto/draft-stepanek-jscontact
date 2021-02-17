@@ -116,12 +116,6 @@ The value MUST be either one of the following values, registered in a future RFC
 - `location`: a named location
 - `device`: a device, such as appliances, computers, or network elements
 - `application`: a software application
-- `group`: a group of persons or entities. Its members are defined in the `members` property.
-
-### members
-Type: `String[Boolean]` (optional). The members of a group.
-
-The set is represented as an object, with each key being the uid of another JSCard. The value for each key in the object MUST be `true`. If this property is set, then the `kind` property value MUST be `group`.
 
 ### relatedTo
 
@@ -326,9 +320,24 @@ Arbitrary notes about the entity represented by this card.
 Type: `String[Boolean]` (optional).
 The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object MUST be `true`.
 
-## Common JSCard types
+# JSGroupCard
 
-### LocalizedString {#localized-string-type}
+MIME type: `application/jscontact+json;type=jsgroupcard`
+
+A JSGroupCard object represents a group of cards. Its members may be JSCards or JSGroupCards.
+
+Both JSGroupCard and JSCard share the same namespace for the `uid` property. All properties for a JSCard are also defined for JSGroupCard, with the exception that the `kind` property MUST be set to `group`.
+
+## Group properties
+
+### members
+Type: `String[Boolean]` (mandatory). The members of this group.
+
+The set is represented as an object, with each key being the uid of another JSCard or JSGroupCard. The value for each key in the object MUST be `true`.
+
+# Common types
+
+## LocalizedString {#localized-string-type}
 
 A LocalizedString object has the following properties:
 
@@ -339,7 +348,7 @@ A LocalizedString object has the following properties:
 - localizations: `String[String]` (optional).
   A map from [@!RFC5646] language tags to the value localized in that language.
 
-### Resource {#resource-type}
+## Resource {#resource-type}
 
 A Resource object has the following properties:
 
