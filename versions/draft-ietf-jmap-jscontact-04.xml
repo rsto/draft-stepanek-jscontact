@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
+<!DOCTYPE rfc SYSTEM 'rfc2629.dtd' []>
+<rfc ipr="trust200902" submissionType="IETF" category="std" xml:lang="en" consensus="yes" docName="draft-ietf-jmap-jscontact-04">
+<?rfc toc="yes"?><?rfc symrefs="yes"?><?rfc sortrefs="yes"?><?rfc compact="yes"?><?rfc subcompact="no"?><?rfc comments="no"?>
+<front>
+<title abbrev="JSContact">JSContact: A JSON representation of contact data</title><author initials="R." surname="Stepanek" fullname="Robert Stepanek"><organization>FastMail</organization><address><postal><street>PO Box 234, Collins St West</street>
+<city>Melbourne</city>
+<code>VIC 8007</code>
+<country>Australia</country>
+<region> </region>
+</postal><email>rsto@fastmailteam.com</email>
+</address></author>
+<author initials="M." surname="Loffredo" fullname="Mario Loffredo"><organization>IIT-CNR</organization><address><postal><street>Via Moruzzi,1</street>
+<city>Pisa</city>
+<code>56124</code>
+<country>Italy</country>
+<region> </region>
+</postal><email>mario.loffredo@iit.cnr.it</email>
+</address></author>
+<date year="2021" month="February" day="19"></date>
+<area>Applications</area><workgroup>JMAP</workgroup><keyword>JSON</keyword>
+<keyword>addressbook</keyword>
+<keyword>contacts</keyword>
+<keyword>cards</keyword>
+<keyword>VCARD</keyword>
+
+<abstract><t>This specification defines a data model and JSON representation of contact card information that can be used for data storage and exchange in address book or directory applications. It aims to be an alternative to the vCard data format and to be unambiguous, extendable and simple to process. In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.</t>
+</abstract>
+
+</front>
+
+<middle>
+
+<section anchor="introduction" title="Introduction">
+<t>This document defines a data model for contact card data normally used in address book or directory applications and services. It aims to be an alternative to the vCard data format <xref target="RFC6350"></xref> and to provide a JSON-based standard representation of contact card data.</t>
+<t>The key design considerations for this data model are as follows:</t>
+<t>
+<list style="symbols">
+<t>Most of the initial set of attributes should be taken from the vCard data format <xref target="RFC6350"></xref> and extensions (<xref target="RFC6473"></xref>, <xref target="RFC6474"></xref>, <xref target="RFC6715"></xref>, <xref target="RFC6869"></xref>, <xref target="RFC8605"></xref>). The specification should add new attributes or value types, or not support existing ones, where appropriate. Conversion between the data formats need not fully preserve semantic meaning.</t>
+<t>The attributes of the cards data represented must be described as a simple key-value pair, reducing complexity of its representation.</t>
+<t>The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.</t>
+<t>Extensions, such as new properties and components, MUST NOT lead to requiring an update to this document.</t>
+</list>
+</t>
+<t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493"></xref>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259"></xref>. Using JSON is mostly a pragmatic choice: its widespread use makes JSCard easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
+
+<section anchor="relation-to-the-xcard-and-jcard-formats" title="Relation to the xCard and jCard formats">
+<t>The xCard <xref target="RFC6351"></xref> and jCard <xref target="RFC7095"></xref> specifications define alternative representations for vCard data, in XML and JSON format respectively. Both explicitly aim to not change the underlying data model. Accordingly, they are regarded as equal to vCard in the context of this document.</t>
+</section>
+
+<section anchor="terminology" title="Terminology">
+<t>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;NOT RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+document are to be interpreted as described in BCP 14 <xref target="RFC2119"></xref> <xref target="RFC8174"></xref> when, and only when,
+they appear in all capitals, as shown here.</t>
+</section>
+
+<section anchor="vendor-specific-property-extensions-and-values" title="Vendor-specific Property Extensions and Values">
+<t>Vendors MAY add additional properties to JSContact objects to support their custom features. The names of these properties MUST be prefixed with a domain name controlled by the vendor to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
+<t>Some JSContact properties allow vendor-specific value extensions. If so, vendor-specific values MUST be prefixed with a domain name controlled by the vendor, e.g. &quot;example.com/customrel&quot;.</t>
+<t>Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems as well, rather than using a vendor-specific prefix.</t>
+</section>
+</section>
+
+<section anchor="jscard" title="JSCard">
+<t>MIME type: <spanx style="verb">application/jscontact+json;type=jscard</spanx></t>
+<t>A JSCard object stores information about a person, organization or company.</t>
+
+<section anchor="metadata-properties" title="Metadata properties">
+
+<section anchor="uid" title="uid">
+<t>Type: <spanx style="verb">String</spanx> (mandatory).</t>
+<t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  <xref target="RFC4122"></xref> describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with <xref target="RFC6350"></xref> UIDs, implementations MUST accept both URI and free-form text.</t>
+</section>
+
+<section anchor="prodid" title="prodId">
+<t>Type: <spanx style="verb">String</spanx> (optional).</t>
+<t>The identifier for the product that created the JSCard object.</t>
+</section>
+
+<section anchor="updated" title="updated">
+<t>Type: <spanx style="verb">String</spanx> (optional).</t>
+<t>The date and time when the data in this JSCard object was last modified. The timestamp MUST be formatted as specified in <xref target="RFC3339"></xref>.</t>
+</section>
+
+<section anchor="kind" title="kind">
+<t>Type: <spanx style="verb">String</spanx> (optional). The kind of the entity the Card represents.</t>
+<t>The value MUST be either one of the following values, registered in a future RFC, or a vendor-specific value:</t>
+<t>
+<list style="symbols">
+<t><spanx style="verb">individual</spanx>: a single person</t>
+<t><spanx style="verb">org</spanx>: an organization</t>
+<t><spanx style="verb">location</spanx>: a named location</t>
+<t><spanx style="verb">device</spanx>: a device, such as appliances, computers, or network elements</t>
+<t><spanx style="verb">application</spanx>: a software application</t>
+</list>
+</t>
+</section>
+
+<section anchor="relatedto" title="relatedTo">
+<t>Type: <spanx style="verb">String[Relation]</spanx> (optional).</t>
+<t>Relates the object to other JSCard objects.  This is represented as a map of the URI (or single text value) of the related objects to a possibly empty set of relation types. The Relation object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>relation: <spanx style="verb">String[Boolean]</spanx> (optional, default: empty Object)
+Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
+Keys in the set MUST be one of the RELATED property <xref target="RFC6350"></xref> type parameter values, or an IANA-registered value, or a vendor-specific value.
+The value for each key in the set MUST be true.</t>
+</list>
+</t>
+<t>Note, the Relation object only has one property; it is specified as an object with a single property to allow for extension in the future.</t>
+</section>
+</section>
+
+<section anchor="name-and-organization-properties" title="Name and Organization properties">
+
+<section anchor="fullname" title="fullName">
+<t>Type: <spanx style="verb">LocalizedString</spanx> (optional).</t>
+<t>The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.</t>
+</section>
+
+<section anchor="name" title="name">
+<t>Type: <spanx style="verb">NameComponent[]</spanx> (optional).</t>
+<t>The name components of the name of the entity represented by this JSCard. Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+<t>A NameComponent has the following properties:</t>
+<t>
+<list style="symbols">
+<t>value: <spanx style="verb">String</spanx> (mandatory).
+The value of this name component.</t>
+<t>type: <spanx style="verb">String</spanx> (mandatory).
+The type of this name component. The value MUST be either one of the following values, registered in a future RFC, or a vendor-specific value:
+<list style="symbols">
+<t><spanx style="verb">prefix</spanx>. The value is a honorific title(s), e.g. &quot;Mr&quot;, &quot;Ms&quot;, &quot;Dr&quot;.</t>
+<t><spanx style="verb">personal</spanx>. The value is a personal name(s), also known as &quot;first name&quot;, &quot;given name&quot;.</t>
+<t><spanx style="verb">surname</spanx>. The value is a surname, also known as &quot;last name&quot;, &quot;family name&quot;.</t>
+<t><spanx style="verb">additional</spanx>. The value is an additional name, also known as &quot;middle name&quot;.</t>
+<t><spanx style="verb">suffix</spanx>. The value is a honorific suffix, e.g. &quot;B.A.&quot;, &quot;Esq.&quot;.</t>
+<t><spanx style="verb">nickname</spanx>. The value is a nickname.</t>
+</list></t>
+</list>
+</t>
+</section>
+
+<section anchor="organizations" title="organizations">
+<t>Type: <spanx style="verb">LocalizedString[]</spanx> (optional).</t>
+<t>The company or organization name and units associated with this card.
+The first entry in the list names the organization, and any following
+entries name organizational units.</t>
+</section>
+
+<section anchor="jobtitles" title="jobTitles">
+<t>Type : <spanx style="verb">LocalizedString[]</spanx> (optional).</t>
+<t>The job title(s) or functional position(s) of the entity represented by this card.</t>
+</section>
+
+<section anchor="roles" title="roles">
+<t>Type : <spanx style="verb">LocalizedString[]</spanx> (optional).</t>
+<t>The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.</t>
+</section>
+</section>
+
+<section anchor="contact-and-resource-properties" title="Contact and Resource properties">
+
+<section anchor="emails" title="emails">
+<t>Type: <spanx style="verb">Resource[]</spanx> (optional).</t>
+<t>An array of Resource objects where the values are URLs in the <spanx style="verb">mailto</spanx> scheme <xref target="RFC6068"></xref> or free-text email addresses. The default value of the <spanx style="verb">type</spanx> property is <spanx style="verb">email</spanx>. If set, the type MUST be <spanx style="verb">email</spanx> or <spanx style="verb">other</spanx>.</t>
+</section>
+
+<section anchor="phones" title="phones">
+<t>Type: <spanx style="verb">Resource[]</spanx> (optional).</t>
+<t>An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the <xref target="RFC3966"></xref> <spanx style="verb">tel</spanx> or <xref target="RFC3261"></xref> <spanx style="verb">sip</spanx> schemes, but any URI scheme is allowed.  Types are:</t>
+<t>
+<list style="symbols">
+<t><spanx style="verb">voice</spanx> The number is for calling by voice.</t>
+<t><spanx style="verb">fax</spanx> The number is for sending faxes.</t>
+<t><spanx style="verb">pager</spanx> The number is for a pager or beeper.</t>
+<t><spanx style="verb">other</spanx> The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.</t>
+</list>
+</t>
+</section>
+
+<section anchor="online" title="online">
+<t>Type: <spanx style="verb">Resource[]</spanx> (optional).</t>
+<t>An array of Resource objects where the values are URIs or usernames associated with the card for online services.
+Types are:</t>
+<t>
+<list style="symbols">
+<t><spanx style="verb">uri</spanx> The value is a URI, e.g. a website link.</t>
+<t><spanx style="verb">username</spanx> The value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). A label property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. <spanx style="verb">Twitter</spanx>, <spanx style="verb">Facebook</spanx>, <spanx style="verb">Skype</spanx>, <spanx style="verb">GitHub</spanx>, <spanx style="verb">XMPP</spanx>.</t>
+<t><spanx style="verb">other</spanx> The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.</t>
+</list>
+</t>
+</section>
+
+<section anchor="photos" title="photos">
+<t>Type: <spanx style="verb">File[]</spanx> (optional).</t>
+<t>An array of File objects that contain photographs or images associated with this card. A typical use case is to include an avatar for display along the contact name.</t>
+<t>A File object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>href: <spanx style="verb">String</spanx> (mandatory). A URI where to fetch the data of this file.</t>
+<t>mediaType: <spanx style="verb">String</spanx> (optional). The content-type of the file, if known.</t>
+<t>size: <spanx style="verb">UnsignedInt</spanx> (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.</t>
+<t>isPreferred: Boolean (optional, default: false).
+Whether this file is preferred as photo for this card. This SHOULD only be one.</t>
+</list>
+</t>
+</section>
+
+<section anchor="preferredcontactmethod" title="preferredContactMethod">
+<t>Type : <spanx style="verb">String</spanx> (optional)</t>
+<t>Defines the preferred contact method or resource with additional information about this card. The value MUST be the property name of one of the Resource lists: <spanx style="verb">emails</spanx>, <spanx style="verb">phones</spanx>, <spanx style="verb">online</spanx>.</t>
+</section>
+
+<section anchor="preferredcontactlanguages" title="preferredContactLanguages">
+<t>Type : <spanx style="verb">String[ContactLanguage[]]</spanx> (optional)</t>
+<t>Defines the preferred languages for contacting the entity associated with this card. The keys in the object MUST be <xref target="RFC5646"></xref> language tags. The values are a (possibly empty) list of contact language preferences for this language.  Also see the definition of the VCARD LANG property (Section 6.4.4., <xref target="RFC6350"></xref>).</t>
+<t>A ContactLanguage object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>type: <spanx style="verb">String</spanx> (optional).
+Defines the context of this preference. This could be <spanx style="verb">work</spanx>, <spanx style="verb">home</spanx> or another value.</t>
+<t>preference: <spanx style="verb">Number</spanx> (optional).
+Defines the preference order of this language for the context defined in the type property. If set, the property value MUST be between 1 and 100 (inclusive). Lower values correspond to a higher level of preference, with 1 being most preferred. If not set, the default MUST be to interpret the language as the least preferred in its context. Preference orders SHOULD be unique across language for a specific type.</t>
+</list>
+</t>
+<t>A valid ContactLanguage object MUST have at least one of its properties set.</t>
+</section>
+</section>
+
+<section anchor="address-and-location-properties" title="Address and Location properties">
+
+<section anchor="addresses" title="addresses">
+<t>Type: Address[] (optional).</t>
+<t>An array of Address objects, containing physical locations. An Address object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>context: <spanx style="verb">String</spanx> (optional, default <spanx style="verb">other</spanx>).
+Specifies the context of the address information.
+The value MUST be either one of the following values, registered in a future
+RFC, or a vendor-specific value:
+<list style="symbols">
+<t><spanx style="verb">private</spanx> An address of a residence.</t>
+<t><spanx style="verb">work</spanx> An address of a workplace.</t>
+<t><spanx style="verb">billing</spanx> An address to be used for billing.</t>
+<t><spanx style="verb">postal</spanx> An address to be used for delivering physical items.</t>
+<t><spanx style="verb">other</spanx> An address not covered by the above categories.</t>
+</list></t>
+<t>label: <spanx style="verb">String</spanx> (optional).
+A label describing the value in more detail.</t>
+<t>fullAddress: <spanx style="verb">LocalizedString</spanx> (optional).
+The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</t>
+<t>street: <spanx style="verb">String</spanx> (optional).
+The street address. This MAY be multiple lines; newlines MUST be preserved.</t>
+<t>extension: <spanx style="verb">String</spanx> (optional)
+The extended address, such as an apartment or suite number, or care-of address.</t>
+<t>locality: <spanx style="verb">String</spanx> (optional).
+The city, town, village, post town, or other locality within which the street address may be found.</t>
+<t>region: <spanx style="verb">String</spanx> (optional).
+The province, such as a state, county, or canton within which the locality may be found.</t>
+<t>country: <spanx style="verb">String</spanx> (optional).
+The country name.</t>
+<t>postOfficeBox: <spanx style="verb">String</spanx> (optional)
+The post office box.</t>
+<t>postcode: <spanx style="verb">String</spanx> (optional).
+The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</t>
+<t>countryCode: <spanx style="verb">String</spanx> (optional).
+The ISO-3166-1 country code.</t>
+<t>coordinates: <spanx style="verb">String</spanx> (optional) A <xref target="RFC5870"></xref> &quot;geo:&quot; URI for the address.</t>
+<t>timeZone: <spanx style="verb">String</spanx> (optional) Identifies the time zone this address is located in. This SHOULD be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref>. Unknown time zone identifiers MAY be ignored by implementations.</t>
+<t>isPreferred: Boolean (optional, default: false).
+Whether this Address is the preferred for its type. This SHOULD only be one per type.</t>
+</list>
+</t>
+</section>
+</section>
+
+<section anchor="additional-properties" title="Additional properties">
+
+<section anchor="anniversaries" title="anniversaries">
+<t>Type : Anniversary[] (optional).</t>
+<t>Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>type: <spanx style="verb">String</spanx> (mandatory).
+Specifies the type of the anniversary. This RFC predefines the following types, but implementations MAY use additional values:
+<list style="symbols">
+<t><spanx style="verb">birth</spanx>: a birth day anniversary</t>
+<t><spanx style="verb">death</spanx>: a death day anniversary</t>
+<t><spanx style="verb">other</spanx>: an anniversary not covered by any of the known types.</t>
+</list></t>
+<t>label: <spanx style="verb">String</spanx> (optional).
+A label describing the value in more detail, especially if the type property has value <spanx style="verb">other</spanx> (but MAY be included with any type).</t>
+<t>date: <spanx style="verb">String</spanx> (mandatory).
+The date of this anniversary, in the form &quot;YYYY-MM-DD&quot; (any part may be all 0s for unknown) or a <xref target="RFC3339"></xref> timestamp.</t>
+<t>place: Address (optional).
+An address associated with this anniversary, e.g. the place of birth or death.</t>
+</list>
+</t>
+</section>
+
+<section anchor="personalinfo" title="personalInfo">
+<t>Type: PersonalInformation[] (optional).</t>
+<t>A list of personal information about the entity represented by this card.
+A PersonalInformation object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>type: <spanx style="verb">String</spanx> (mandatory).
+Specifies the type for this personal information. Allowed values are:
+<list style="symbols">
+<t><spanx style="verb">expertise</spanx>: a field of expertise or credential</t>
+<t><spanx style="verb">hobby</spanx>: a hobby</t>
+<t><spanx style="verb">interest</spanx>: an interest</t>
+<t><spanx style="verb">other</spanx>: an information not covered by the above categories</t>
+</list></t>
+<t>value: <spanx style="verb">String</spanx> (mandatory).
+The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</t>
+<t>level: <spanx style="verb">String</spanx> (optional)
+Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: <spanx style="verb">high</spanx>, <spanx style="verb">medium</spanx> and <spanx style="verb">low</spanx>.</t>
+</list>
+</t>
+</section>
+
+<section anchor="notes" title="notes">
+<t>Type: <spanx style="verb">LocalizedString[]</spanx> (optional).</t>
+<t>Arbitrary notes about the entity represented by this card.</t>
+</section>
+
+<section anchor="categories" title="categories">
+<t>Type: <spanx style="verb">String[Boolean]</spanx> (optional).
+The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object MUST be <spanx style="verb">true</spanx>.</t>
+</section>
+</section>
+</section>
+
+<section anchor="jsgroupcard" title="JSGroupCard">
+<t>MIME type: <spanx style="verb">application/jscontact+json;type=jsgroupcard</spanx></t>
+<t>A JSGroupCard object represents a group of cards. Its members may be JSCards or JSGroupCards.</t>
+<t>Both JSGroupCard and JSCard share the same namespace for the <spanx style="verb">uid</spanx> property. All properties for a JSCard are also defined for JSGroupCard, with the exception that the <spanx style="verb">kind</spanx> property MUST be set to <spanx style="verb">group</spanx>.</t>
+
+<section anchor="group-properties" title="Group properties">
+
+<section anchor="members" title="members">
+<t>Type: <spanx style="verb">String[Boolean]</spanx> (mandatory). The members of this group.</t>
+<t>The set is represented as an object, with each key being the uid of another JSCard or JSGroupCard. The value for each key in the object MUST be <spanx style="verb">true</spanx>.</t>
+</section>
+</section>
+</section>
+
+<section anchor="common-types" title="Common types">
+
+<section anchor="localized-string-type" title="LocalizedString">
+<t>A LocalizedString object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>value: <spanx style="verb">String</spanx> (mandatory).
+The property value.</t>
+<t>language: <spanx style="verb">String</spanx> (optional).
+The <xref target="RFC5646"></xref> language tag of this value, if any.</t>
+<t>localizations: <spanx style="verb">String[String]</spanx> (optional).
+A map from <xref target="RFC5646"></xref> language tags to the value localized in that language.</t>
+</list>
+</t>
+</section>
+
+<section anchor="resource-type" title="Resource">
+<t>A Resource object has the following properties:</t>
+<t>
+<list style="symbols">
+<t>context: <spanx style="verb">String</spanx> (optional)
+Specifies the context in which to use this resource. Pre-defined values are:
+<list style="symbols">
+<t><spanx style="verb">private</spanx>: The resource may be used to contact the card holder in a private context.</t>
+<t><spanx style="verb">work</spanx>: The resource may be used to contact the card holder in a professional context.</t>
+<t><spanx style="verb">other</spanx>: The resource may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.</t>
+</list></t>
+<t>type: <spanx style="verb">String</spanx> (optional).
+Specifies the property-specific variant of the resource. This MUST be taken from the set of allowed types specified in the respective contact method property.</t>
+<t>labels: <spanx style="verb">String[Boolean]</spanx> (optional).
+A set of labels that describe the value in more detail, especially if the type property has value <spanx style="verb">other</spanx> (but MAY be included with any type). The keys in the map define the label, the values MUST be <spanx style="verb">true</spanx>.</t>
+<t>value: <spanx style="verb">String</spanx> (mandatory).
+The actual resource value, e.g. an email address or phone number.</t>
+<t>mediaType: <spanx style="verb">String</spanx> (optional).
+Used for properties with URI values. Provides the media type <xref target="RFC2046"></xref> of the resource identified by the URI.</t>
+<t>isPreferred: Boolean (optional, default: false).
+Whether this resource is the preferred for its type. This SHOULD only be one per type.</t>
+</list>
+</t>
+</section>
+</section>
+
+<section anchor="implementation-status" title="Implementation Status">
+<t>NOTE: Please remove this section and the reference to <xref target="RFC7942"></xref> prior
+to publication as an RFC.
+This section records the status of known implementations of the
+protocol defined by this specification at the time of posting of this
+Internet-Draft, and is based on a proposal described in
+<xref target="RFC7942"></xref>. The description of implementations in this section is
+intended to assist the IETF in its decision processes in progressing
+drafts to RFCs. Please note that the listing of any individual
+implementation here does not imply endorsement by the IETF.
+Furthermore, no effort has been spent to verify the information
+presented here that was supplied by IETF contributors. This is not
+intended as, and must not be construed to be, a catalog of available
+implementations or their features. Readers are advised to note that
+other implementations may exist.
+According to <xref target="RFC7942"></xref>, &quot;this will allow reviewers and working groups
+to assign due consideration to documents that have the benefit of
+running code, which may serve as evidence of valuable experimentation
+and feedback that have made the implemented protocols more mature.
+It is up to the individual working groups to use this information as
+they see fit&quot;.</t>
+
+<section anchor="iit-cnr-registro-it" title="IIT-CNR/Registro.it">
+<t>
+<list style="symbols">
+<t>Responsible Organization: Institute of Informatics and Telematics
+of National Research Council (IIT-CNR)/Registro.it</t>
+<t>Location: <eref target="https://rdap.pubtest.nic.it/">https://rdap.pubtest.nic.it/</eref></t>
+<t>Description: This implementation includes support for RDAP queries
+using data from the public test environment of .it ccTLD. The
+RDAP server does not implement any security policy because data
+returned by this server are only for experimental testing
+purposes. The RDAP server returns responses including JSCard in place of jCard when queries contain the parameter jscard=1.</t>
+<t>Level of Maturity: This is a &quot;proof of concept&quot; research implementation.</t>
+<t>Coverage: This implementation includes all of the features described in this specification.</t>
+<t>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</t>
+</list>
+</t>
+</section>
+</section>
+
+<section anchor="iana-considerations" title="IANA Considerations">
+<t>TBD</t>
+</section>
+
+<section anchor="security-considerations" title="Security Considerations">
+<t>TBD</t>
+</section>
+
+</middle>
+
+<back>
+<references title="Normative References">
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2046.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6350.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6351.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7942.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7493.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7095.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"?>
+</references>
+<references title="Informative References">
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6474.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6715.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6068.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3966.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3339.xml"?>
+<?rfc include="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6869.xml"?>
+</references>
+
+</back>
+
+</rfc>

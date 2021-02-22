@@ -8,11 +8,11 @@ workgroup = "JMAP"
 submissiontype = "IETF"
 keyword = ["JSON", "addressbook", "contacts", "cards", "VCARD"]
 
-date = 2020-12-14T10:00:00Z
+date = 2021-02-19T10:00:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-jmap-jscontact-03"
+value = "draft-ietf-jmap-jscontact-04"
 stream = "IETF"
 status = "standard"
 
@@ -156,19 +156,19 @@ A NameComponent has the following properties:
   - `suffix`. The value is a honorific suffix, e.g. "B.A.", "Esq.".
   - `nickname`. The value is a nickname.
 
-### organization
+### organizations
 Type: `LocalizedString[]` (optional).
 
 The company or organization name and units associated with this card.
 The first entry in the list names the organization, and any following
 entries name organizational units.
 
-### jobTitle
+### jobTitles
 Type : `LocalizedString[]` (optional).
 
 The job title(s) or functional position(s) of the entity represented by this card.
 
-### role
+### roles
 Type : `LocalizedString[]` (optional).
 
 The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
@@ -189,7 +189,7 @@ An array of Resource objects where the values are URIs scheme or free-text phone
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
   - `other` The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.
-     
+
 ### online
 Type: `Resource[]` (optional).
 
@@ -200,10 +200,24 @@ Types are:
   - `username` The value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). A label property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`.
   - `other` The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.
 
+### photos
+Type: `File[]` (optional).
+
+An array of File objects that contain photographs or images associated with this card. A typical use case is to include an avatar for display along the contact name.
+
+A File object has the following properties:
+
+- href: `String` (mandatory). A URI where to fetch the data of this file.
+- mediaType: `String` (optional). The content-type of the file, if known.
+- size: `UnsignedInt` (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.
+- isPreferred: Boolean (optional, default: false).
+  Whether this file is preferred as photo for this card. This SHOULD only be one.
+
+
 ### preferredContactMethod
 Type : `String` (optional)
 
-Defines the preferred contact method or resource with additional information about this card. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`, `other`.
+Defines the preferred contact method or resource with additional information about this card. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`.
 
 ### preferredContactLanguages
 Type : `String[ContactLanguage[]]` (optional)
@@ -303,12 +317,27 @@ Type: `LocalizedString[]` (optional).
 Arbitrary notes about the entity represented by this card.
 
 ### categories
-Type: `String[]` (optional).
-A list of free-text or URI categories that relate to the card.
+Type: `String[Boolean]` (optional).
+The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object MUST be `true`.
 
-## Common JSCard types
+# JSGroupCard
 
-### LocalizedString {#localized-string-type}
+MIME type: `application/jscontact+json;type=jsgroupcard`
+
+A JSGroupCard object represents a group of cards. Its members may be JSCards or JSGroupCards.
+
+Both JSGroupCard and JSCard share the same namespace for the `uid` property. All properties for a JSCard are also defined for JSGroupCard, with the exception that the `kind` property MUST be set to `group`.
+
+## Group properties
+
+### members
+Type: `String[Boolean]` (mandatory). The members of this group.
+
+The set is represented as an object, with each key being the uid of another JSCard or JSGroupCard. The value for each key in the object MUST be `true`.
+
+# Common types
+
+## LocalizedString {#localized-string-type}
 
 A LocalizedString object has the following properties:
 
@@ -319,7 +348,7 @@ A LocalizedString object has the following properties:
 - localizations: `String[String]` (optional).
   A map from [@!RFC5646] language tags to the value localized in that language.
 
-### Resource {#resource-type}
+## Resource {#resource-type}
 
 A Resource object has the following properties:
 
@@ -338,29 +367,6 @@ A Resource object has the following properties:
   Used for properties with URI values. Provides the media type [@!RFC2046] of the resource identified by the URI.
 - isPreferred: Boolean (optional, default: false).
   Whether this resource is the preferred for its type. This SHOULD only be one per type.
-
-# JSCardGroup
-
-MIME type: `application/jscontact+json;type=jscardgroup`
-
-A JSCardGroup object represents a named set of JSCards.
-
-## Properties
-
-### uid
-Type : `String` (mandatory).
-
-A globally unique identifier. The same requirements as for the JSCard uid property apply.
-
-### name
-Type: `String` (optional).
-
-The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.
-
-### cards
-Type : `JSCard[]` (mandatory).
-The cards in the group. Implementations MUST preserve the order of list entries.
-
 
 # Implementation Status
 
