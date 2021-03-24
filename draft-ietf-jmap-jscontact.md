@@ -95,6 +95,14 @@ Type signatures are given for all JSON values in this document. The following co
 - `A[]` - An array of values of type `A`.
 - `A|B` - The value is either of type `A` or of type `B`.
 
+## Data types
+
+### UTCDateTime
+
+This is a string in [@RFC3339] `date-time` format, with the further restrictions that any letters MUST be in uppercase, and the time offset MUST be the character `Z`.  Fractional second values MUST NOT be included unless non-zero and MUST NOT have trailing zeros, to ensure there is only a single representation for each date-time.
+
+For example, `2010-10-10T10:10:10.003Z` is conformant, but `2010-10-10T10:10:10.000Z` is invalid and is correctly encoded as `2010-10-10T10:10:10Z`.
+
 # JSCard
 
 MIME type: `application/jscontact+json;type=jscard`
@@ -114,14 +122,14 @@ Type: `String` (optional).
 The identifier for the product that created the JSCard object.
 
 ### created
-Type: `String` (optional).
+Type: `UTCDateTime` (optional).
 
-The date and time when this JSCard object was created. The timestamp MUST be formatted as specified in [@RFC3339].
+The date and time when this JSCard object was created.
 
 ### updated
-Type: `String` (optional).
+Type: `UTCDateTime` (optional).
 
-The date and time when the data in this JSCard object was last modified. The timestamp MUST be formatted as specified in [@RFC3339].
+The date and time when the data in this JSCard object was last modified.
 
 ### kind
 Type: `String` (optional). The kind of the entity the Card represents.
