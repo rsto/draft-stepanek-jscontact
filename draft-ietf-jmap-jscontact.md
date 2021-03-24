@@ -138,6 +138,11 @@ Type: `LocalizedString` (optional).
 
 The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
 
+### nickNames
+Type: `LocalizedString[]` (optional).
+
+The nick names of the entity represented by this card.
+
 ### name
 Type: `NameComponent[]` (optional).
 
@@ -154,7 +159,6 @@ A NameComponent has the following properties:
   - `surname`. The value is a surname, also known as "last name", "family name".
   - `additional`. The value is an additional name, also known as "middle name".
   - `suffix`. The value is a honorific suffix, e.g. "B.A.", "Esq.".
-  - `nickname`. The value is a nickname.
 
 ### organizations
 Type: `LocalizedString[]` (optional).
