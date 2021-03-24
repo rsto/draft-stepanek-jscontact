@@ -83,6 +83,18 @@ Some JSContact properties allow vendor-specific value extensions. If so, vendor-
 
 Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems as well, rather than using a vendor-specific prefix.
 
+## Type Signatures
+
+Type signatures are given for all JSON values in this document. The following conventions are used:
+
+- `*` - The type is undefined (the value could be any type, although permitted values may be constrained by the context of this value).
+- `String` - The JSON string type.
+- `Number` - The JSON number type.
+- `Boolean` - The JSON boolean type.
+- `A[B]` - A JSON object where the keys are all of type `A`, and the values are all of type `B`.
+- `A[]` - An array of values of type `A`.
+- `A|B` - The value is either of type `A` or of type `B`.
+
 # JSCard
 
 MIME type: `application/jscontact+json;type=jscard`
