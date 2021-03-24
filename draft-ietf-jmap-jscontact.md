@@ -383,8 +383,8 @@ A Resource object has the following properties:
   - `other`: The resource may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
 - type: `String` (optional).
   Specifies the property-specific variant of the resource. This MUST be taken from the set of allowed types specified in the respective contact method property.
-- labels: `String[Boolean]` (optional).
-  A set of labels that describe the value in more detail, especially if the type property has value `other` (but MAY be included with any type). The keys in the map define the label, the values MUST be `true`.
+- label: `String` (optional).
+  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
 - value: `String` (mandatory).
   The actual resource value, e.g. an email address or phone number.
 - mediaType: `String` (optional).
