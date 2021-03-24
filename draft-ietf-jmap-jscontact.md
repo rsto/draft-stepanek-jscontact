@@ -101,6 +101,11 @@ Type: `String` (optional).
 
 The identifier for the product that created the JSCard object.
 
+### created
+Type: `String` (optional).
+
+The date and time when this JSCard object was created. The timestamp MUST be formatted as specified in [@RFC3339].
+
 ### updated
 Type: `String` (optional).
 
