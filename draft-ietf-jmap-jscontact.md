@@ -62,7 +62,7 @@ The key design considerations for this data model are as follows:
 - The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.
 - Extensions, such as new properties and components, MUST NOT lead to requiring an update to this document.
 
-The representation of this data model is defined in the I-JSON format [@!RFC7493], which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format [@!RFC8259]. Using JSON is mostly a pragmatic choice: its widespread use makes JSCard easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.
+The representation of this data model is defined in the I-JSON format [@!RFC7493], which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format [@!RFC8259]. Using JSON is mostly a pragmatic choice: its widespread use makes Card easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.
 
 ## Relation to the xCard and jCard formats
 
@@ -103,7 +103,7 @@ Where `Id` is given as a data type, it means a `String` of at least 1 and a maxi
 
 In many places in JSContact a JSON map is used where the map keys are of type Id and the map values are all the same type of object.  This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key).  This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSContact object.
 
-Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two JSCard objects might use the same Ids in their respective `photos` properties.  Or within the same JSCard object the same Id could appear in the `emails` and `phones` properties.  These situations do not imply any semantic connections among the objects.
+Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two Card objects might use the same Ids in their respective `photos` properties.  Or within the same Card object the same Id could appear in the `emails` and `phones` properties.  These situations do not imply any semantic connections among the objects.
 
 ### UTCDateTime
 
@@ -111,11 +111,11 @@ This is a string in [@RFC3339] `date-time` format, with the further restrictions
 
 For example, `2010-10-10T10:10:10.003Z` is conformant, but `2010-10-10T10:10:10.000Z` is invalid and is correctly encoded as `2010-10-10T10:10:10Z`.
 
-# JSCard
+# Card
 
-MIME type: `application/jscontact+json;type=jscard`
+MIME type: `application/jscontact+json;type=card`
 
-A JSCard object stores information about a person, organization or company.
+A Card object stores information about a person, organization or company.
 
 ## Metadata properties
 
@@ -127,17 +127,17 @@ An identifier, used to associate the object as the same across different systems
 ### prodId
 Type: `String` (optional).
 
-The identifier for the product that created the JSCard object.
+The identifier for the product that created the Card object.
 
 ### created
 Type: `UTCDateTime` (optional).
 
-The date and time when this JSCard object was created.
+The date and time when this Card object was created.
 
 ### updated
 Type: `UTCDateTime` (optional).
 
-The date and time when the data in this JSCard object was last modified.
+The date and time when the data in this Card object was last modified.
 
 ### kind
 Type: `String` (optional). The kind of the entity the Card represents.
@@ -154,7 +154,7 @@ The value MUST be either one of the following values, registered in a future RFC
 
 Type: `String[Relation]` (optional).
 
-Relates the object to other JSCard objects.  This is represented as a map of the URI (or single text value) of the related objects to a possibly empty set of relation types. The Relation object has the following properties:
+Relates the object to other Card objects.  This is represented as a map of the URI (or single text value) of the related objects to a possibly empty set of relation types. The Relation object has the following properties:
 
 - relation: `String[Boolean]` (optional, default: empty Object)
   Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
@@ -179,7 +179,7 @@ The nick names of the entity represented by this card.
 ### name
 Type: `NameComponent[]` (optional).
 
-The name components of the name of the entity represented by this JSCard. Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.
+The name components of the name of the entity represented by this Card. Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.
 
 A NameComponent has the following properties:
 
@@ -352,20 +352,20 @@ Arbitrary notes about the entity represented by this card.
 Type: `String[Boolean]` (optional).
 The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object MUST be `true`.
 
-# JSGroupCard
+# GroupCard
 
-MIME type: `application/jscontact+json;type=jsgroupcard`
+MIME type: `application/jscontact+json;type=groupcard`
 
-A JSGroupCard object represents a group of cards. Its members may be JSCards or JSGroupCards.
+A GroupCard object represents a group of cards. Its members may be Cards or GroupCards.
 
-Both JSGroupCard and JSCard share the same namespace for the `uid` property. All properties for a JSCard are also defined for JSGroupCard, with the exception that the `kind` property MUST be set to `group`.
+Both GroupCard and Card share the same namespace for the `uid` property. All properties for a Card are also defined for GroupCard, with the exception that the `kind` property MUST be set to `group`.
 
 ## Group properties
 
 ### members
 Type: `String[Boolean]` (mandatory). The members of this group.
 
-The set is represented as an object, with each key being the uid of another JSCard or JSGroupCard. The value for each key in the object MUST be `true`.
+The set is represented as an object, with each key being the uid of another Card or GroupCard. The value for each key in the object MUST be `true`.
 
 # Common types
 
@@ -432,7 +432,7 @@ of National Research Council (IIT-CNR)/Registro.it
 using data from the public test environment of .it ccTLD. The
 RDAP server does not implement any security policy because data
 returned by this server are only for experimental testing
-purposes. The RDAP server returns responses including JSCard in place of jCard when queries contain the parameter jscard=1.
+purposes. The RDAP server returns responses including Card in place of jCard when queries contain the parameter jscard=1.
 - Level of Maturity: This is a "proof of concept" research implementation.
 - Coverage: This implementation includes all of the features described in this specification.
 - Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it
