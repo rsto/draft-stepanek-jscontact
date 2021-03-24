@@ -197,11 +197,6 @@ Type : `LocalizedString[]` (optional).
 
 The job title(s) or functional position(s) of the entity represented by this card.
 
-### roles
-Type : `LocalizedString[]` (optional).
-
-The role(s), function(s) or part(s) played in a particular situation by the entity represented by this card. In contrast to a job title, the roles might differ for example in project contexts.
-
 ## Contact and Resource properties
 
 ### emails
