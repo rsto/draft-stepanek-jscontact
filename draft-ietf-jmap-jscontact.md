@@ -336,7 +336,7 @@ A PersonalInformation object has the following properties:
   Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: `high`, `medium` and `low`.
 
 ### notes
-Type: `LocalizedString[]` (optional).
+Type: `LocalizedString` (optional).
 
 Arbitrary notes about the entity represented by this card.
 
