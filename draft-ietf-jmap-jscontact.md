@@ -97,6 +97,14 @@ Type signatures are given for all JSON values in this document. The following co
 
 ## Data types
 
+### Id
+
+Where `Id` is given as a data type, it means a `String` of at least 1 and a maximum of 255 octets in size, and it MUST only contain characters from the `URL and Filename Safe` base64url alphabet, as defined in Section 5 of [@RFC4648], excluding the pad character (`=`).  This means the allowed characters are the ASCII alphanumeric characters (`A-Za-z0-9`), hyphen (`-`), and underscore (`_`).
+
+In many places in JSContact a JSON map is used where the map keys are of type Id and the map values are all the same type of object.  This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key).  This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSContact object.
+
+Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two JSCard objects might use the same Ids in their respective `photos` properties.  Or within the same JSCard object the same Id could appear in the `emails` and `phones` properties.  These situations do not imply any semantic connections among the objects.
+
 ### UTCDateTime
 
 This is a string in [@RFC3339] `date-time` format, with the further restrictions that any letters MUST be in uppercase, and the time offset MUST be the character `Z`.  Fractional second values MUST NOT be included unless non-zero and MUST NOT have trailing zeros, to ensure there is only a single representation for each date-time.
@@ -200,14 +208,14 @@ The job title(s) or functional position(s) of the entity represented by this car
 ## Contact and Resource properties
 
 ### emails
-Type: `Resource[]` (optional).
+Type: `Id[Resource]` (optional).
 
-An array of Resource objects where the values are URLs in the `mailto` scheme [@RFC6068] or free-text email addresses. The default value of the `type` property is `email`. If set, the type MUST be `email` or `other`.
+A map of resource ids to Resource objects, where the values MUST be *addr-spec* values as defined in Section 3.4.1 of [@RFC5322]. The default value of the `type` property is `email`. If set, the type MUST be `email` or `other`.
 
 ### phones
-Type: `Resource[]` (optional).
+Type: `Id[Resource]` (optional).
 
-An array of Resource objects where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed.  Types are:
+A map of resource ids to Resource objects, where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed.  Types are:
 
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
@@ -215,9 +223,9 @@ An array of Resource objects where the values are URIs scheme or free-text phone
   - `other` The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.
 
 ### online
-Type: `Resource[]` (optional).
+Type: `Id[Resource]` (optional).
 
-An array of Resource objects where the values are URIs or usernames associated with the card for online services.
+A map of resource ids to Resource objects, where the values are URIs or usernames associated with the card for online services.
 Types are:
 
   - `uri` The value is a URI, e.g. a website link.
@@ -225,9 +233,9 @@ Types are:
   - `other` The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.
 
 ### photos
-Type: `File[]` (optional).
+Type: `Id[File]` (optional).
 
-An array of File objects that contain photographs or images associated with this card. A typical use case is to include an avatar for display along the contact name.
+A map of photo ids to File objects that contain photographs or images associated with this card. A typical use case is to include an avatar for display along the contact name.
 
 A File object has the following properties:
 
@@ -260,9 +268,9 @@ A valid ContactLanguage object MUST have at least one of its properties set.
 ## Address and Location properties
 
 ### addresses
-Type: Address[] (optional).
+Type: `Id[Address]` (optional).
 
-An array of Address objects, containing physical locations. An Address object has the following properties:
+A map of address ids to Address objects, containing physical locations. An Address object has the following properties:
 
 - context: `String` (optional, default `other`).
   Specifies the context of the address information.
