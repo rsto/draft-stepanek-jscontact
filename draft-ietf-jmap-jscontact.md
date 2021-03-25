@@ -119,7 +119,7 @@ In many places in JSContact a JSON map is used where the map keys are of type Id
 
 Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two Card objects might use the same Ids in their respective `photos` properties.  Or within the same Card object the same Id could appear in the `emails` and `phones` properties.  These situations do not imply any semantic connections among the objects.
 
-### LocalizedString {#localized-string-type}
+### LocalizedString
 
 The purpose of LocalizedString is to allow for internationalisation of string values. In its simplest form it is just a string value. Optionally, the human language of this value may be specified, as well as localized variants in additional languages. A LocalizedString has the following properties:
 
@@ -129,6 +129,14 @@ The purpose of LocalizedString is to allow for internationalisation of string va
   The [@!RFC5646] language tag of this value, if any.
 - localizations: `String[String]` (optional).
   A map from [@!RFC5646] language tags to the value localized in that language.
+
+### Preference
+
+This data type allows to define a preference order on same-typed contact information. For example, a card holder may have two email addresses and prefer to be contacted with one of them.
+
+A preference value MUST be an integer number in the range 1 and 100. Lower values correspond to a higher level of preference, with 1 being most preferred. If no preference is set, then the contact information MUST be interpreted as being least preferred.
+
+Note that the preference only is defined in relation to contact information of the same type. For example, the preference orders within emails and phone numbers are indendepent of each other. Also note that the *preferredContactMethod* property allows to define a preferred contact method across method types.
 
 ### UTCDateTime
 
@@ -242,8 +250,8 @@ The email addresses to contact the entity represented by this card. An EmailAddr
   The email address. This MUST be an *addr-spec* value as defined in Section 3.4.1 of [@RFC5322].
 - contexts: `Context[Boolean]` (optional)
   The contexts in which to use this email address. The value for each key in the object MUST be `true`.
-- isPreferred: Boolean (optional, default: false).
-  Whether this email address is the preferred for its type. This SHOULD only be one per type.
+- pref: Preference (optional)
+  The preference of this email address in relation to other email addresses.
 
 ### phones
 Type: `Id[Phone]` (optional).
@@ -262,8 +270,8 @@ The phone numbers to contact the entity represented by this card. A phone object
   The contexts in which to use this number. The value for each key in the object MUST be `true`.
 - label: `String` (optional).
   A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
-- isPreferred: Boolean (optional, default: false).
-  Whether this number is the preferred for its type. This SHOULD only be one per type.
+- pref: Preference (optional)
+  The preference of this number in relation to other numbers.
 
 ### online
 Type: `Id[Resource]` (optional).
@@ -283,8 +291,8 @@ The online resources and services that are associated with the entity represente
   The contexts in which to use this resource. The value for each key in the object MUST be `true`.
 - label: `String` (optional).
   A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
-- isPreferred: Boolean (optional, default: false).
-  Whether this resource is the preferred for its type. This SHOULD only be one per type.
+- pref: Preference (optional)
+  The preference of this resource in relation to other resources.
 
 ### photos
 Type: `Id[File]` (optional).
@@ -296,14 +304,14 @@ A File object has the following properties:
 - href: `String` (mandatory). A URI where to fetch the data of this file.
 - mediaType: `String` (optional). The content-type of the file, if known.
 - size: `UnsignedInt` (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.
-- isPreferred: Boolean (optional, default: false).
-  Whether this file is preferred as photo for this card. This SHOULD only be one.
+- pref: Preference (optional)
+  The preference of this photo in relation to other photos.
 
 
-### preferredContactMethod
+### preferredContactMethod {#prop-preferredContactMethod}
 Type : `String` (optional)
 
-Defines the preferred contact method or resource with additional information about this card. The value MUST be the property name of one of the Resource lists: `emails`, `phones`, `online`.
+Defines the preferred method to contact the holder of this card. The value MUST be the property names: `emails`, `phones`, `online`.
 
 ### preferredContactLanguages
 Type : `String[ContactLanguage[]]` (optional)
@@ -353,8 +361,8 @@ A map of address ids to Address objects, containing physical locations. An Addre
   The value for each key in the object MUST be `true`.
 - label: `String` (optional).
   A label describing the value in more detail.
-- isPreferred: Boolean (optional, default: false).
-  Whether this Address is the preferred for its type. This SHOULD only be one per type.
+- pref: Preference (optional)
+  The preference of this address in relation to other addresses.
 
 
 ## Additional properties
