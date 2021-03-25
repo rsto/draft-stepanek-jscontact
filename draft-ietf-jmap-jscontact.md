@@ -97,6 +97,8 @@ Type signatures are given for all JSON values in this document. The following co
 
 ## Data types
 
+In addition to the standard JSON data types, a couple of additional data types are common to the definitions of JSContact objects and properties.
+
 ### Id
 
 Where `Id` is given as a data type, it means a `String` of at least 1 and a maximum of 255 octets in size, and it MUST only contain characters from the `URL and Filename Safe` base64url alphabet, as defined in Section 5 of [@RFC4648], excluding the pad character (`=`).  This means the allowed characters are the ASCII alphanumeric characters (`A-Za-z0-9`), hyphen (`-`), and underscore (`_`).
@@ -110,6 +112,17 @@ Unless otherwise specified for a particular property, there are no uniqueness co
 This is a string in [@RFC3339] `date-time` format, with the further restrictions that any letters MUST be in uppercase, and the time offset MUST be the character `Z`.  Fractional second values MUST NOT be included unless non-zero and MUST NOT have trailing zeros, to ensure there is only a single representation for each date-time.
 
 For example, `2010-10-10T10:10:10.003Z` is conformant, but `2010-10-10T10:10:10.000Z` is invalid and is correctly encoded as `2010-10-10T10:10:10Z`.
+
+### LocalizedString {#localized-string-type}
+
+The purpose of LocalizedString is to allow for internationalisation of string values. In its simplest form it is just a string value. Optionally, the human language of this value may be specified, as well as localized variants in additional languages. A LocalizedString has the following properties:
+
+- value: `String` (mandatory).
+  The property value.
+- language: `String` (optional).
+  The [@!RFC5646] language tag of this value, if any.
+- localizations: `String[String]` (optional).
+  A map from [@!RFC5646] language tags to the value localized in that language.
 
 # Card
 
@@ -403,19 +416,6 @@ Both GroupCard and Card share the same namespace for the `uid` property. All pro
 Type: `String[Boolean]` (mandatory). The members of this group.
 
 The set is represented as an object, with each key being the uid of another Card or GroupCard. The value for each key in the object MUST be `true`.
-
-# Common types
-
-## LocalizedString {#localized-string-type}
-
-A LocalizedString object has the following properties:
-
-- value: `String` (mandatory).
-  The property value.
-- language: `String` (optional).
-  The [@!RFC5646] language tag of this value, if any.
-- localizations: `String[String]` (optional).
-  A map from [@!RFC5646] language tags to the value localized in that language.
 
 # Implementation Status
 
