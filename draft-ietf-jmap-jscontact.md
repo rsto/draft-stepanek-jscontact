@@ -316,16 +316,16 @@ Defines the preferred method to contact the holder of this card. The value MUST 
 ### preferredContactLanguages
 Type : `String[ContactLanguage[]]` (optional)
 
-Defines the preferred languages for contacting the entity associated with this card. The keys in the object MUST be [@!RFC5646] language tags. The values are a (possibly empty) list of contact language preferences for this language.  Also see the definition of the VCARD LANG property (Section 6.4.4., [@!RFC6350]).
+Defines the preferred languages for contacting the entity associated with this card. The keys in the object MUST be [@!RFC5646] language tags. The values are a (possibly empty) list of contact language preferences for this language. A valid ContactLanguage object MUST have at least one of its properties set.
 
 A ContactLanguage object has the following properties:
 
-- type: `String` (optional).
-  Defines the context of this preference. This could be `work`, `home` or another value.
-- preference: `Number` (optional).
-  Defines the preference order of this language for the context defined in the type property. If set, the property value MUST be between 1 and 100 (inclusive). Lower values correspond to a higher level of preference, with 1 being most preferred. If not set, the default MUST be to interpret the language as the least preferred in its context. Preference orders SHOULD be unique across language for a specific type.
+- context: `Context` (optional).
+  Defines the context in which to use this language.
+- pref: `Preference` (optional).
+  Defines the preference of this language in relation to other languages of the same context.
 
-A valid ContactLanguage object MUST have at least one of its properties set.
+Also see the definition of the VCARD LANG property (Section 6.4.4., [@!RFC6350]).
 
 ## Address and Location properties
 
