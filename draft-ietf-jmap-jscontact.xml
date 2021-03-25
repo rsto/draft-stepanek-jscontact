@@ -235,15 +235,29 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
         </section>
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
-          <t>Type: <tt>LocalizedString[]</tt> (optional).</t>
-          <t>The company or organization name and units associated with this card.
-The first entry in the list names the organization, and any following
-entries name organizational units.</t>
+          <t>Type: <tt>Id[Organization]</tt> (optional).</t>
+          <t>The companies or organization names and units associated with this card. An Organization object has the following properties:</t>
+          <ul spacing="normal">
+            <li>name: <tt>LocalizedString</tt> (mandatory).
+                The name of this organization.
+            </li>
+            <li>units: <tt>LocalizedString[]</tt> (optional).
+                Additional levels of organizational unit names.
+            </li>
+          </ul>
         </section>
-        <section anchor="jobtitles" numbered="true" toc="default">
-          <name>jobTitles</name>
-          <t>Type : <tt>LocalizedString[]</tt> (optional).</t>
-          <t>The job title(s) or functional position(s) of the entity represented by this card.</t>
+        <section anchor="titles" numbered="true" toc="default">
+          <name>titles</name>
+          <t>Type : <tt>Id[Title]</tt> (optional).</t>
+          <t>The job title(s) or functional position(s) of the entity represented by this card. A Title has object the following properties:</t>
+          <ul spacing="normal">
+            <li>title: <tt>LocalizedString</tt> (mandatory).
+                The title of the entity represented by this card.
+            </li>
+            <li>organization: <tt>Id</tt> (optional).
+                The id of the organization in which this title is held.
+            </li>
+          </ul>
         </section>
       </section>
       <section anchor="contact-and-resource-properties" numbered="true" toc="default">
