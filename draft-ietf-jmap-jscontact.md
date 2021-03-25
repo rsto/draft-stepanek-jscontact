@@ -208,9 +208,19 @@ The job title(s) or functional position(s) of the entity represented by this car
 ## Contact and Resource properties
 
 ### emails
-Type: `Id[Resource]` (optional).
+Type: `Id[Email]` (optional).
 
-A map of resource ids to Resource objects, where the values MUST be *addr-spec* values as defined in Section 3.4.1 of [@RFC5322]. The default value of the `type` property is `email`. If set, the type MUST be `email` or `other`.
+The email addresses to contact the entity represented by this card. An Email object has the following properties:
+
+- email: `String` (mandatory).
+  The email address. This MUST be an *addr-spec* value as defined in Section 3.4.1 of [@RFC5322].
+- context: `String` (optional)
+  Specifies the context in which to use this email. Pre-defined values are:
+  - `private`: The email may be used to contact the card holder in a private context.
+  - `work`: The email may be used to contact the card holder in a professional context.
+  - `other`: The email may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
+- isPreferred: Boolean (optional, default: false).
+  Whether this email is the preferred for its type. This SHOULD only be one per type.
 
 ### phones
 Type: `Id[Resource]` (optional).
