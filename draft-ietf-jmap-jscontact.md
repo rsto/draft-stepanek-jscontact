@@ -234,16 +234,16 @@ The job title(s) or functional position(s) of the entity represented by this car
 ## Contact and Resource properties
 
 ### emails
-Type: `Id[Email]` (optional).
+Type: `Id[EmailAddress]` (optional).
 
-The email addresses to contact the entity represented by this card. An Email object has the following properties:
+The email addresses to contact the entity represented by this card. An EmailAddress object has the following properties:
 
 - email: `String` (mandatory).
   The email address. This MUST be an *addr-spec* value as defined in Section 3.4.1 of [@RFC5322].
 - contexts: `Context[Boolean]` (optional)
   The contexts in which to use this email address. The value for each key in the object MUST be `true`.
 - isPreferred: Boolean (optional, default: false).
-  Whether this email is the preferred for its type. This SHOULD only be one per type.
+  Whether this email address is the preferred for its type. This SHOULD only be one per type.
 
 ### phones
 Type: `Id[Phone]` (optional).
