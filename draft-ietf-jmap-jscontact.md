@@ -166,16 +166,6 @@ Note, the Relation object only has one property; it is specified as an object wi
 
 ## Name and Organization properties
 
-### fullName
-Type: `LocalizedString` (optional).
-
-The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.
-
-### nickNames
-Type: `LocalizedString[]` (optional).
-
-The nick names of the entity represented by this card.
-
 ### name
 Type: `NameComponent[]` (optional).
 
@@ -192,6 +182,16 @@ A NameComponent has the following properties:
   - `surname`. The value is a surname, also known as "last name", "family name".
   - `additional`. The value is an additional name, also known as "middle name".
   - `suffix`. The value is a honorific suffix, e.g. "B.A.", "Esq.".
+
+### fullName
+Type: `LocalizedString` (optional).
+
+The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card. The purpose of this property is to define a name, even if the individual name components are not known. In addition, it is meant to provide alternative versions of the name for internationalisation. Implementations SHOULD prefer using the *name* property over this one and SHOULD NOT store the concatenated name component values in this property.
+
+### nickNames
+Type: `LocalizedString[]` (optional).
+
+The nick names of the entity represented by this card.
 
 ### organizations
 Type: `LocalizedString[]` (optional).
