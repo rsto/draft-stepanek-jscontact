@@ -223,14 +223,27 @@ The email addresses to contact the entity represented by this card. An Email obj
   Whether this email is the preferred for its type. This SHOULD only be one per type.
 
 ### phones
-Type: `Id[Resource]` (optional).
+Type: `Id[Phone]` (optional).
 
-A map of resource ids to Resource objects, where the values are URIs scheme or free-text phone numbers. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed.  Types are:
+The phone numbers to contact the entity represented by this card. A phone object has the following properties:
 
+- phone: `String` (mandatory).
+  The phone value, as either a URI or a free-text phone number. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed.
+- context: `String` (optional)
+  Specifies the context in which to use this number. Pre-defined values are:
+  - `private`: The number may be used to contact the card holder in a private context.
+  - `work`: The number may be used to contact the card holder in a professional context.
+  - `other`: The number may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
+- features: `String[Boolean]` (optional).
+  The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The value for each key in the object MUST be `true`. The allowed methods are:
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
-  - `other` The number is for some other purpose. A label property MAY be included to display next to the number to help the user identify its purpose.
+  - `other` The number is for some other purpose. The label property MAY be included to display next to the number to help the user identify its purpose.
+- label: `String` (optional).
+  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
+- isPreferred: Boolean (optional, default: false).
+  Whether this number is the preferred for its type. This SHOULD only be one per type.
 
 ### online
 Type: `Id[Resource]` (optional).
