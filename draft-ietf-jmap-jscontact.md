@@ -99,6 +99,18 @@ Type signatures are given for all JSON values in this document. The following co
 
 In addition to the standard JSON data types, a couple of additional data types are common to the definitions of JSContact objects and properties.
 
+### Context
+
+Contact information typically is associated with a context in which it should be used. For example, someone might have distinct phone numbers for work and private contexts. The Context data type enumerates common contexts.
+
+Common context values are:
+
+- `private`: The contact information may be used to contact the card holder in a private context.
+- `work`: The contact information may be used to contact the card holder in a professional context.
+- `other`: The contact information may be used to contact the card holder in some other context. A label property MAY be defined to identify its purpose.
+
+Additional allowed values may be defined in the properties or data types that make use of the Context data type, registered in a future RFC, or a vendor-specific value.
+
 ### Id
 
 Where `Id` is given as a data type, it means a `String` of at least 1 and a maximum of 255 octets in size, and it MUST only contain characters from the `URL and Filename Safe` base64url alphabet, as defined in Section 5 of [@RFC4648], excluding the pad character (`=`).  This means the allowed characters are the ASCII alphanumeric characters (`A-Za-z0-9`), hyphen (`-`), and underscore (`_`).
@@ -106,12 +118,6 @@ Where `Id` is given as a data type, it means a `String` of at least 1 and a maxi
 In many places in JSContact a JSON map is used where the map keys are of type Id and the map values are all the same type of object.  This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key).  This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSContact object.
 
 Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two Card objects might use the same Ids in their respective `photos` properties.  Or within the same Card object the same Id could appear in the `emails` and `phones` properties.  These situations do not imply any semantic connections among the objects.
-
-### UTCDateTime
-
-This is a string in [@RFC3339] `date-time` format, with the further restrictions that any letters MUST be in uppercase, and the time offset MUST be the character `Z`.  Fractional second values MUST NOT be included unless non-zero and MUST NOT have trailing zeros, to ensure there is only a single representation for each date-time.
-
-For example, `2010-10-10T10:10:10.003Z` is conformant, but `2010-10-10T10:10:10.000Z` is invalid and is correctly encoded as `2010-10-10T10:10:10Z`.
 
 ### LocalizedString {#localized-string-type}
 
@@ -123,6 +129,13 @@ The purpose of LocalizedString is to allow for internationalisation of string va
   The [@!RFC5646] language tag of this value, if any.
 - localizations: `String[String]` (optional).
   A map from [@!RFC5646] language tags to the value localized in that language.
+
+### UTCDateTime
+
+This is a string in [@RFC3339] `date-time` format, with the further restrictions that any letters MUST be in uppercase, and the time offset MUST be the character `Z`.  Fractional second values MUST NOT be included unless non-zero and MUST NOT have trailing zeros, to ensure there is only a single representation for each date-time.
+
+For example, `2010-10-10T10:10:10.003Z` is conformant, but `2010-10-10T10:10:10.000Z` is invalid and is correctly encoded as `2010-10-10T10:10:10Z`.
+
 
 # Card
 
@@ -227,11 +240,8 @@ The email addresses to contact the entity represented by this card. An Email obj
 
 - email: `String` (mandatory).
   The email address. This MUST be an *addr-spec* value as defined in Section 3.4.1 of [@RFC5322].
-- context: `String` (optional)
-  Specifies the context in which to use this email. Pre-defined values are:
-  - `private`: The email may be used to contact the card holder in a private context.
-  - `work`: The email may be used to contact the card holder in a professional context.
-  - `other`: The email may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
+- contexts: `Context[Boolean]` (optional)
+  The contexts in which to use this email address. The value for each key in the object MUST be `true`.
 - isPreferred: Boolean (optional, default: false).
   Whether this email is the preferred for its type. This SHOULD only be one per type.
 
@@ -242,17 +252,14 @@ The phone numbers to contact the entity represented by this card. A phone object
 
 - phone: `String` (mandatory).
   The phone value, as either a URI or a free-text phone number. Typical URI schemes are the [@RFC3966] `tel` or [@RFC3261] `sip` schemes, but any URI scheme is allowed.
-- context: `String` (optional)
-  Specifies the context in which to use this number. Pre-defined values are:
-  - `private`: The number may be used to contact the card holder in a private context.
-  - `work`: The number may be used to contact the card holder in a professional context.
-  - `other`: The number may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
 - features: `String[Boolean]` (optional).
   The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The value for each key in the object MUST be `true`. The allowed methods are:
   - `voice` The number is for calling by voice.
   - `fax` The number is for sending faxes.
   - `pager` The number is for a pager or beeper.
   - `other` The number is for some other purpose. The label property MAY be included to display next to the number to help the user identify its purpose.
+- contexts: `Context[Boolean]` (optional)
+  The contexts in which to use this number. The value for each key in the object MUST be `true`.
 - label: `String` (optional).
   A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
 - isPreferred: Boolean (optional, default: false).
@@ -270,15 +277,12 @@ The online resources and services that are associated with the entity represente
   - `uri` The resource value is a URI, e.g. a website link. This MUST be a valid *URI* as defined in Section 3 of [@RFC3986] and updates.
   - `username` The resource value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). The *label* property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`. The resource value may be any non-empty free text.
   - `other` The resource value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose. The resource value may be any non-empty free text.
-- context: `String` (optional)
-  Specifies the context in which to use this resource. Pre-defined values are:
-  - `private`: The resource may be used to contact the card holder in a private context.
-  - `work`: The resource may be used to contact the card holder in a professional context.
-  - `other`: The resource may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
-- label: `String` (optional).
-  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
 - mediaType: `String` (optional).
   Used for URI resource values. Provides the media type [@!RFC2046] of the resource identified by the URI.
+- contexts: `Context[Boolean]` (optional)
+  The contexts in which to use this resource. The value for each key in the object MUST be `true`.
+- label: `String` (optional).
+  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
 - isPreferred: Boolean (optional, default: false).
   Whether this resource is the preferred for its type. This SHOULD only be one per type.
 
@@ -322,17 +326,6 @@ Type: `Id[Address]` (optional).
 
 A map of address ids to Address objects, containing physical locations. An Address object has the following properties:
 
-- context: `String` (optional, default `other`).
-  Specifies the context of the address information.
-  The value MUST be either one of the following values, registered in a future
-  RFC, or a vendor-specific value:
-  - `private` An address of a residence.
-  - `work` An address of a workplace.
-  - `billing` An address to be used for billing.
-  - `postal` An address to be used for delivering physical items.
-  - `other` An address not covered by the above categories.
-- label: `String` (optional).
-  A label describing the value in more detail.
 - fullAddress: `LocalizedString` (optional).
   The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.
 - street: `String` (optional).
@@ -353,6 +346,13 @@ A map of address ids to Address objects, containing physical locations. An Addre
   The ISO-3166-1 country code.
 - coordinates: `String` (optional) A [@!RFC5870] "geo:" URI for the address.
 - timeZone: `String` (optional) Identifies the time zone this address is located in. This SHOULD be a time zone name registered in the [IANA Time Zone Database](https://www.iana.org/time-zones). Unknown time zone identifiers MAY be ignored by implementations.
+- contexts: `Context[Boolean]` (optional).
+  The contexts of the address information. In addition to the common contexts, allowed values are:
+  - `billing` An address to be used for billing.
+  - `postal` An address to be used for delivering physical items.
+  The value for each key in the object MUST be `true`.
+- label: `String` (optional).
+  A label describing the value in more detail.
 - isPreferred: Boolean (optional, default: false).
   Whether this Address is the preferred for its type. This SHOULD only be one per type.
 
