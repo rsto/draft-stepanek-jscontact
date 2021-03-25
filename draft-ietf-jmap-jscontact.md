@@ -248,12 +248,26 @@ The phone numbers to contact the entity represented by this card. A phone object
 ### online
 Type: `Id[Resource]` (optional).
 
-A map of resource ids to Resource objects, where the values are URIs or usernames associated with the card for online services.
-Types are:
+The online resources and services that are associated with the entity represented by this card. A Resource object has the following properties:
 
-  - `uri` The value is a URI, e.g. a website link.
-  - `username` The value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). A label property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`.
-  - `other` The value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose.
+- resource: `String` (mandatory).
+  The resource value, where the allowed value form is defined by the the *type* property. In any case the value MUST NOT be empty.
+- type: `String` (optional, default: `other`).
+  The type of the resource value. Allowed values are:
+  - `uri` The resource value is a URI, e.g. a website link. This MUST be a valid *URI* as defined in Section 3 of [@RFC3986] and updates.
+  - `username` The resource value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). The *label* property SHOULD be included to identify what service this is for. For compatibility between clients, this label SHOULD be the canonical service name, including capitalisation. e.g. `Twitter`, `Facebook`, `Skype`, `GitHub`, `XMPP`. The resource value may be any non-empty free text.
+  - `other` The resource value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose. The resource value may be any non-empty free text.
+- context: `String` (optional)
+  Specifies the context in which to use this resource. Pre-defined values are:
+  - `private`: The resource may be used to contact the card holder in a private context.
+  - `work`: The resource may be used to contact the card holder in a professional context.
+  - `other`: The resource may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
+- label: `String` (optional).
+  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
+- mediaType: `String` (optional).
+  Used for URI resource values. Provides the media type [@!RFC2046] of the resource identified by the URI.
+- isPreferred: Boolean (optional, default: false).
+  Whether this resource is the preferred for its type. This SHOULD only be one per type.
 
 ### photos
 Type: `Id[File]` (optional).
@@ -402,26 +416,6 @@ A LocalizedString object has the following properties:
   The [@!RFC5646] language tag of this value, if any.
 - localizations: `String[String]` (optional).
   A map from [@!RFC5646] language tags to the value localized in that language.
-
-## Resource {#resource-type}
-
-A Resource object has the following properties:
-
-- context: `String` (optional)
-  Specifies the context in which to use this resource. Pre-defined values are:
-  - `private`: The resource may be used to contact the card holder in a private context.
-  - `work`: The resource may be used to contact the card holder in a professional context.
-  - `other`: The resource may be used to contact the card holder in some other context. A label property MAY be help to identify its purpose.
-- type: `String` (optional).
-  Specifies the property-specific variant of the resource. This MUST be taken from the set of allowed types specified in the respective contact method property.
-- label: `String` (optional).
-  A label describing the value in more detail, especially if the type property has value `other` (but MAY be included with any type).
-- value: `String` (mandatory).
-  The actual resource value, e.g. an email address or phone number.
-- mediaType: `String` (optional).
-  Used for properties with URI values. Provides the media type [@!RFC2046] of the resource identified by the URI.
-- isPreferred: Boolean (optional, default: false).
-  Whether this resource is the preferred for its type. This SHOULD only be one per type.
 
 # Implementation Status
 
