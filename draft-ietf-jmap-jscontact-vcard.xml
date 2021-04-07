@@ -31,7 +31,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-02" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-03" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -72,7 +72,7 @@
     <keyword>jCard</keyword>
     
     <abstract>
-      <t>This document provides informational guidance for converting the contact card defined by JSContact specification, namely JSCard, from and to vCard.</t>
+      <t>This document provides informational guidance for converting the contact card as defined in JSContact specification, namely JSCard, from and to vCard.</t>
     </abstract>
   </front>
 
@@ -83,7 +83,7 @@
 
       <t>The JSContact specification <xref target="draft-ietf-jmap-jscontact"/> has been defined to represent contact card information as a more efficient alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
       <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification.</t>
-      <t>To facilitate this use cases, this document provides informational guidance about how to convert the card defined in JSContact, namely JSCard, from and to vCard.</t>
+      <t>To facilitate this use cases, this document provides informational guidance about how to convert the card as defined in JSContact, namely JSCard, from and to vCard.</t>
     </section>
 
     <section title="Scope and Caveats">
@@ -92,7 +92,7 @@
        <list style="symbols">
       <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
       <t>The vCard specification includes some features (like parameters) that have been formally removed from JSCard due to a complete refactoring of vCard content.  Anyway, the vCard parameters may appear as JSCard features.<vspace blankLines='1' /></t>
-      <t>Some vCard elements represented individually have been mapped onto members of JSCard objects.<vspace blankLines='1' /></t>
+      <t>The vCard elements that can be present multiple times are represented differently in JSContact; they are mainly represented as maps, sometimes as lists, in some cases, they are compressed in a single value.<vspace blankLines='1' /></t>
       <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart in the JSContact specification.</t>
       </list></t>
 
@@ -105,19 +105,47 @@
 
     <section title="Mapping">
 
-      <t>This section contains the mapping between vCard and JSCard.  The vCard properties are grouped according to the categories defined by <xref target="RFC6350"/>.</t>
+      <t>This section contains the mapping between vCard and JSCard.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
       <t>Where it is needed, the JCardGroup is taken into account.</t>
       <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard features are written in camel case.</t>
+
+        <section  title="JSContact Id Values" anchor="jscontact-id-values">
+            <t>The values of the Id data type as defined in section 1.5.2 of <xref target="draft-ietf-jmap-jscontact"/> are out of the scope of this specification.</t>
+        </section>
+
+        <section title="Timezone">
+            <t>As specified in section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as an UTC offset or as an URI.
+                <list style="symbols">
+                    <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
+                    <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to map it to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
+                    <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an a IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
+                </list></t>
+        </section>
+
+        <section  title="vCard Common Parameters" anchor="vcard-common-parameters">
+          <t>The following mapping rules apply to commonly used vCard parameters:</t>
+          <t><list style="symbols">
+          <t>The vCard "type-param" values of the TYPE parameter are mapped onto the values of JSContact &quot;Context&quot; type as defined in section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.</t>
+          <t>The PREF parameter is mapped onto the &quot;pref&quot; property.</t>
+          <t>The MEDIATYPE parameter is mapped onto the &quot;mediaType&quot; property.  As described in section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.</t>
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is mapped onto the &quot;level&quot; property with a direct mapping except for the values such parameter can have in the EXPERTISE element; in this case, the values are mapped as in the following:</t>
+              <t><list style="symbols">
+                  <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
+                  <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
+                  <t>&quot;expert&quot; is converted into &quot;high&quot;.</t>
+              </list></t>
+          </list></t>
+      </section>
 
       <section title="General Properties">
 
           <section title="BEGIN and END">
-              <t>The BEGIN and END properties don't have a direct match with a JSCard feature.</t>
+              <t>The BEGIN and END elements don't have a direct match with a JSCard feature.</t>
           </section>
 
           <section title="SOURCE">
-          <t>A SOURCE element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="source_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;source&quot;,true&gt;.</t>
-            <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+          <t>A SOURCE element is represented as an entry of the &quot;online&quot; map (<xref target="source_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;source&quot; and the &quot;resource&quot; member is the SOURCE value.</t>
+          <t>The PREF and MEDIATYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
             <figure anchor="source_mapping" title="SOURCE mapping example">
                 <artwork xml:space="preserve"><![CDATA[
@@ -130,15 +158,15 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
-               "type": "uri",
-               "labels": { "source": true },
-               "value": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
+              "a-source":{
+                        "type": "uri",
+                        "label": "source",
+                        "resource": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
               },
               ...
-            ],
+    },
     ...
     }
         ]]></artwork>
@@ -146,7 +174,7 @@
         </section>
 
         <section title="KIND">
-          <t>The KIND element is mapped onto the &quot;kind&quot; member (<xref target="kind_mapping"/>).  Allowed values are those, except &quot;group&quot;, described in section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  A group of cards is represented through a JSCardGroup.</t>
+          <t>The KIND element is mapped onto the &quot;kind&quot; member (<xref target="kind_mapping"/>).  Allowed values are those described in section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value &quot;group&quot; is reserved to a JSCardGroup instance.</t>
 
             <figure anchor="kind_mapping" title="KIND mapping example">
                 <artwork xml:space="preserve"><![CDATA[
@@ -167,7 +195,7 @@
         </section>
 
           <section title="XML">
-              <t>The XML property doesn't have a direct match with a JSCard feature.</t>
+              <t>The XML element doesn't have a direct match with a JSCard feature.</t>
           </section>
 
       </section>
@@ -179,11 +207,8 @@
           </section>
 
           <section title="N and NICKNAME">
-              <t>Both the N and NICKNAME elements are converted into equivalent items of the &quot;name&quot; array (<xref target="fn_n_nickname_mapping"/>):</t>
-              <t><list style="symbols">
-                  <t>the N components are transformed into related &quot;NameComponent&quot; objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity;<vspace blankLines='1' /></t>
-                  <t>Each NICKNAME element is mapped onto an object whose &quot;type&quot; member is set to &quot;nickname&quot;</t>
-              </list></t>
+              <t>The N elements are converted into equivalent items of the &quot;name&quot; array (<xref target="fn_n_nickname_mapping"/>): the N components are transformed into related &quot;NameComponent&quot; objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+              <t>Each NICKNAME element is mapped onto an item of &quot;nickNames&quot; array.</t>
 
               <texttable anchor="n_components" title="N components mapping">
                   <ttcol align="left">N component</ttcol>
@@ -208,17 +233,17 @@
 
     {
     ...
-    "fullName":{
-               "value": "Mr. John Q. Public, Esq."
-               },
+    "fullName":{ "value": "Mr. John Q. Public, Esq." },
     "name":[
              { "value":"Mr.", "type": "prefix" },
              { "value":"John", "type": "personal" },
              { "value":"Public", "type": "surname" },
              { "value":"Quinlan", "type": "additional" },
              { "value":"Esq.", "type": "suffix" },
-             { "value":"Johnny", "type": "nickname" }
-           ],
+    ],
+    "nickNames":[
+                  { "value": "Johnny" }
+    ],
     ...
     }
         ]]></artwork>
@@ -226,8 +251,8 @@
           </section>
 
           <section title="PHOTO">
-              <t>A PHOTO element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="photo_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;photo&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>A PHOTO element is represented as an entry of the &quot;photos&quot; map (<xref target="photo_mapping"/>).  The entry value is a &quot;File&quot; object whose &quot;href&quot; member is the PHOTO value.</t>
+              <t>The PREF and MEDIATYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="photo_mapping" title="PHOTO mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -240,15 +265,13 @@
 
     {
     ...
-    "online":[
+    "photos":{
               ...
-              {
-               "type": "uri",
-               "labels": { "photo": true },
-               "value": "http://www.example.com/pub/photos/jqpublic.gif"
+              "a-photo":{
+                       "href": "http://www.example.com/pub/photos/jqpublic.gif"
               },
               ...
-            ],
+    },
     ...
     }
         ]]></artwork>
@@ -283,7 +306,7 @@
     "anniversaries":[
               {
                "type": "birth",
-               "date": "19531015T231000Z",
+               "date": "1953-10-15T23:10:00Z",
                "place":
                       {
                       "fullAddress":
@@ -294,7 +317,7 @@
               },
               {
                "type": "birth",
-               "date": "19531015T231000Z",
+               "date": "1953-10-15T23:10:00Z",
                "place":
                       {
                       "fullAddress":
@@ -306,7 +329,7 @@
               {
                "type": "other",
                "label": "marriage date",
-               "date": "19860201"
+               "date": "1986-02-01"
               }
             ],
     ...
@@ -316,7 +339,7 @@
           </section>
 
           <section title="GENDER">
-                <t>TBD</t>
+                <t>The GENDER element doesn't have a direct match with a JSCard feature.</t>
           </section>
 
       </section>
@@ -324,7 +347,7 @@
       <section title="Delivery Addressing Properties">
 
           <section title="ADR">
-              <t>An ADR element is represented as an &quot;Address&quot; object in the &quot;addresses&quot; array (<xref target="adr_mapping"/>).</t>
+              <t>An ADR element is represented as an entry of the &quot;addresses&quot; map (<xref target="adr_mapping"/>).  The entry value is an &quot;Address&quot; object.</t>
               <t>The ADR components are transformed into the &quot;Address&quot; members as presented in <xref target="adr_components"/>.</t>
 
               <texttable anchor="adr_components" title="ADR components mapping">
@@ -340,12 +363,11 @@
               </texttable>
 
               <t>The LABEL parameter is converted into the &quot;fullAddress&quot; member.</t>
-              <t>The PREF parameter is converted into the &quot;isPreferred&quot; member.</t>
               <t>The GEO parameter is converted into the &quot;coordinates&quot; member.</t>
               <t>The TZ parameter is converted into by the &quot;timeZone&quot; member.</t>
-              <t>The TYPE parameter is converted into the &quot;context&quot; member.  The &quot;home&quot; value is replaced with the &quot;private&quot; value.</t>
               <t>The LANGUAGE parameter values are represented as different entries of the &quot;fullAddress.localizations&quot; map.</t>
-              <t>The CC parameter defined by <xref target="RFC8605"/> is converted into the &quot;countryCode&quot; member.</t>
+              <t>The CC parameter as defined in <xref target="RFC8605"/> is converted into the &quot;countryCode&quot; member.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="adr_mapping" title="ADR mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -359,9 +381,9 @@
 
     {
     ...
-    "addresses": [
-          {
-           "context": "work",
+    "addresses": {
+          "work-address" : {
+           "contexts": { "work": true },
            "fullAddress":
                         {
                          "value": "54321 Oak St\nReston\nVA\n20190\nUSA"
@@ -373,8 +395,8 @@
            "postcode": "20190",
            "countryCode": "US"
           },
-          {
-           "context": "private",
+          "private-address": {
+           "contexts": { "private": true },
            "fullAddress":
                         {
                          "value": "12345 Elm St\nReston\nVA\n20190\nUSA"
@@ -386,7 +408,7 @@
            "postcode": "20190",
            "countryCode": "US"
           }
-    ]
+    }
     ...
     }
         ]]></artwork>
@@ -397,8 +419,8 @@
       <section title="Communications Properties">
 
           <section title="TEL">
-              <t>A TEL element is represented as a &quot;Resource&quot; object in the &quot;phones&quot; array (<xref target="tel_mapping"/>).  The vCard &quot;type-param-tel&quot; values are mapped onto the &quot;type&quot; member values.  Those vCard &quot;type-param-tel&quot; values that don't have a counterpart among the &quot;type&quot; member values are represented as entry keys of the &quot;labels&quot; map with the corresponding entry value set to true.  The &quot;type-param&quot; values are are mapped onto the &quot;context&quot; member values.  The &quot;home&quot; value is replaced with the &quot;private&quot; value.</t>
-              <t>The PREF parameter is mapped onto the &quot;isPreferred&quot; member.</t>
+              <t>A TEL element is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The vCard &quot;type-param-tel&quot; values are mapped onto the &quot;features&quot; map keys.  Those vCard &quot;type-param-tel&quot; values that don't have a counterpart among those keys are represented as comma separated values of the &quot;label&quot; member.  If the features map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="tel_mapping" title="TEL mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -412,16 +434,16 @@
 
     {
     ...
-    "phones":[
-              {
-               "context": "private",
-               "type": "voice",
-               "value": "tel:+1-555-555-5555;ext=5555",
-               "isPreferred": true
+    "phones":{
+              "a-phone": {
+               "contexts": { "private": true },
+               "features": { "voice": true },
+               "phone": "tel:+1-555-555-5555;ext=5555",
+               "pref": 1
               },
-              {
-               "context": "private",
-               "value": "tel:+33-01-23-45-67"
+              "another-phone": {
+               "contexts": { "private": true },
+               "phone": "tel:+33-01-23-45-67"
               }
             ],
     ...
@@ -431,8 +453,8 @@
           </section>
 
           <section title="EMAIL">
-              <t>An EMAIL element is represented as a &quot;Resource&quot; object in the &quot;emails&quot; array (<xref target="email_mapping"/>).  The vCard &quot;type-param&quot; values are mapped onto the &quot;context&quot; member values.  The &quot;home&quot; value is replaced with the &quot;private&quot; value.</t>
-              <t>The PREF parameter is mapped onto the &quot;isPreferred&quot; member.</t>
+              <t>An EMAIL element is represented as an entry of the &quot;emails&quot; map (<xref target="email_mapping"/>).  The entry value is an &quot;EmailAddress&quot; object.  The &quot;email&quot; member is set to the EMAIL value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="email_mapping" title="EMAIL mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -446,17 +468,17 @@
 
     {
     ...
-    "emails":[
-              {
-               "context": "work",
-               "value": "jqpublic@xyz.example.com",
+    "emails":{
+              "work-email": {
+               "contexts": { "work": true },
+               "email": "jqpublic@xyz.example.com",
               },
-              {
-               "context": "private",
-               "value": "jane_doe@example.com"
-               "isPreferred": true
+              "private-email": {
+               "contexts": { "private", true },
+               "email": "jane_doe@example.com"
+               "pref": 1
               }
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -464,9 +486,8 @@
           </section>
 
           <section title="IMPP">
-              <t>An IMPP element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="impp_mapping"/>) whose &quot;type&quot; member is set to &quot;username&quot; and &quot;labels&quot; map contains the entry &lt;&quot;XMPP&quot;,true&gt;.</t>
-              <t>In case of a contact card related to an acconunt on another online service, the entry key SHOULD be the canonical service name, including capitalisation (e.g. &quot;Twitter&quot;, &quot;Facebook&quot;, &quot;Skype&quot;, &quot;GitHub&quot;)</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>An IMPP element is represented as an entry of the &quot;online&quot; map (<xref target="impp_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;username&quot;, the &quot;label&quot; member is set to &quot;XMPP&quot; and the &quot;resource&quot; member is the IMPP value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
               <figure anchor="impp_mapping" title="IMPP mapping example">
                   <artwork xml:space="preserve"><![CDATA[
     BEGIN:VCARD
@@ -478,15 +499,15 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
               {
                "type": "username",
-               "labels": { "XMPP": true },
+               "label": "XMPP",
                "value": "alice@example.com"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -494,7 +515,7 @@
           </section>
 
           <section title="LANG">
-              <t>A LANG element is represented through the &quot;preferredContactLanguages&quot; map (<xref target="lang_mapping"/>): an entry for each language that may be used for contacting the entity associated with the JSCard.  The entry keys correspond to the language tags, the corresponding entry values are arrays of &quot;ContactLanguage&quot; objects.</t>
+              <t>A LANG element is represented as an entry of the &quot;preferredContactLanguages&quot; map (<xref target="lang_mapping"/>).  The entry keys correspond to the language tags, the corresponding entry values are arrays of &quot;ContactLanguage&quot; objects.</t>
               <t>The TYPE and PREF parameters are mapped onto the &quot;ContactLanguage&quot; members &quot;type&quot; and &quot;preference&quot; respectively.</t>
               <t>If both PREF and TYPE parameters are missing, the array of &quot;ContactLanguage&quot; objects MUST be empty.</t>
 
@@ -514,17 +535,17 @@
     "preferredContactLanguages" : {
                                    "en": [
                                           {
-                                           "type": "work",
-                                           "preference": 1
+                                           "context": "work",
+                                           "pref": 1
                                           }
                                          ],
                                    "fr": [
                                           {
-                                           "type": "work",
-                                           "preference": 2
+                                           "context": "work",
+                                           "pref": 2
                                           },
                                           {
-                                           "type": "home",
+                                           "context": "private",
                                           }
                                          ]
                                   },
@@ -543,7 +564,7 @@
       <section title="Organizational Properties">
 
           <section title="TITLE">
-              <t>A TITLE element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;jobTitles&quot; array (<xref target="title_mapping"/>).</t>
+              <t>A TITLE element is represented as an entry of the &quot;titles&quot; map (<xref target="title_mapping"/>).  The entry value is a &quot;Title&quot; object whose &quot;title&quot; member includes information about the language.</t>
               <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
               <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
 
@@ -558,11 +579,11 @@
 
     {
     ...
-    "jobTitles":[
-                {
-                 "value": "Research Scientist"
+    "titles":{
+                "a-title": {
+                  "title": { "value" : "Research Scientist" }
                 }
-               ],
+             },
     ...
     }
         ]]></artwork>
@@ -597,8 +618,8 @@
           </section>
 
           <section title="LOGO">
-              <t>A LOGO element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="logo_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;logo&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>A LOGO element is represented as an entry of the &quot;online&quot; map (<xref target="logo_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;logo&quot; and the &quot;resource&quot; member is the LOGO value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="logo_mapping" title="LOGO mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -611,15 +632,15 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "a-logo": {
                "type": "uri",
-               "labels": { "logo": true },
-               "value": "http://www.example.com/pub/logos/abccorp.jpg"
+               "label": "logo",
+               "resource": "http://www.example.com/pub/logos/abccorp.jpg"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -627,7 +648,7 @@
           </section>
 
           <section title="ORG">
-              <t>An ORG element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;organizations&quot; array (<xref target="org_mapping"/>).  The organization name includes the organizational units if any.</t>
+              <t>An ORG element is represented as an entry of the &quot;organizations&quot; map (<xref target="org_mapping"/>).  The entry value is an &quot;Organization&quot; object whose &quot;name&quot; member contains the organizational name and the &quot;units&quot; member contains the organizational units.</t>
               <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
               <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
 
@@ -642,11 +663,14 @@
 
     {
     ...
-    "organizations":[
-                {
-                 "value": "ABC, Inc.;North American Division;Marketing"
-                 }
-                ],
+    "organizations":{
+                "an-organization": {
+                  "name": { "value": "ABC, Inc." },
+                  "units": [
+                    { "value": "North American Division" },
+                    { "value": "Marketing" }
+                  ]
+                },
     ...
     }
         ]]></artwork>
@@ -654,8 +678,8 @@
           </section>
 
           <section title="MEMBER">
-              <t>According to the JSContact specification, a group of contact cards is represented through a JSCardGroup (<xref target="group_example"/>).  The contact cards composing the group are included in the &quot;cards&quot; array.  Therefore, the MEMBER element doesn't have a direct match with a JSCard feature.</t>
-              <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the JSCard instances in the "cards" array by order of preference.</t>
+              <t>According to the JSContact specification, a group of contact cards is represented through a JSCardGroup (<xref target="group_example"/>).  The uids of the contact cards composing the group are included in the &quot;members&quot; map.</t>
+              <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
 
               <figure anchor="group_example" title="Group example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -677,28 +701,25 @@
     UID:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
     END:VCARD
 
-    {
-    "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
-    "name": "The Doe family",
-    "cards": [
-              {
-               "name": {
-                        "fullName": {
-                                     "value": "John Doe"
-                                    }
-                       },
-               "uid": "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af"
-              },
-              {
-               "name": {
-                        "fullName": {
-                                     "value": "Jane Doe"
-                                    }
-                       },
-               "uid": "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519f"
-              }
-             ]
-    }
+    [
+      {
+       "kind": "group",
+       "fullName": { "value": "The Doe family" },
+       "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+       "members": {
+          "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
+          "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
+       }
+      },
+      {
+       "fullName": { "value": "John Doe" },
+       "uid": "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af"
+      },
+      {
+       "fullName": { "value": "Jane Doe" },
+       "uid": "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519"
+      }
+    ]
         ]]></artwork>
               </figure>
           </section>
@@ -706,7 +727,7 @@
 
           <section title="RELATED">
               <t>All the RELATED elements are globally converted into the &quot;relatedTo&quot; map (<xref target="related_mapping"/>): an entry for each entity the entity described by the JSCard is associated with.  The map keys are the &quot;uid&quot; values of the associated cards.</t>
-              <t>Each map value is a &quot;Relation&quot; object including only the &quot;relation&quot; member represented as a set of relation types described in section 6.6.6 of <xref target="RFC6350"/>.</t>
+              <t>Each map value is a &quot;Relation&quot; object including only the &quot;relation&quot; member represented as a set of &quot;type-param-related&quot; values as defined in section 6.6.6 of <xref target="RFC6350"/>.</t>
               <t>If the relation type is unspecified, the &quot;relation&quot; is empty.</t>
 
               <figure anchor="related_mapping" title="RELATED mapping example">
@@ -753,8 +774,8 @@
           </section>
 
           <section title="CONTACT-URI">
-              <t>A CONTACT-URI element defined by <xref target="RFC8605"/> is represented as a &quot;Resource&quot; object of the &quot;online&quot; array (<xref target="contact_uri_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;contact-uri&quot;,true&gt;.</t>
-              <t>The PREF parameter is mapped onto the &quot;isPreferred&quot; member.</t>
+              <t>A CONTACT-URI element as defined in <xref target="RFC8605"/> is represented as an entry of the &quot;online&quot; map (<xref target="contact_uri_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;contact-uri&quot; and the &quot;resource&quot; member is the CONTACT-URI value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="contact_uri_mapping" title="CONTACT-URI mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -767,16 +788,16 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "a-contact-uri": {
                "type": "uri",
-               "labels": { "contact-uri": true },
-               "value": "mailto:contact@example.com",
-               "isPreferred": true
+               "label": "contact-uri",
+               "resource": "mailto:contact@example.com",
+               "pref": 1
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -787,14 +808,9 @@
       <section title="Personal Information Properties">
 
           <section title="EXPERTISE">
-              <t>An EXPERTISE element defined by <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="expertise_mapping"/>).  The &quot;type&quot; member is set to &quot;expertise&quot;.</t>
-              <t>The LEVEL parameter is mapped onto the &quot;level&quot; member with following mapping:</t>
-              <t><list style="symbols">
-                  <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
-                  <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
-                  <t>&quot;expert&quot; is converted into &quot;high&quot;.</t>
-              </list></t>
+              <t>An EXPERTISE element as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="expertise_mapping"/>).  The &quot;type&quot; member is set to &quot;expertise&quot;.</t>
               <t>The INDEX parameter is represented as the index of the expertise among the declared expertises.</t>
+              <t>The LEVEL parameter is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="expertise_mapping" title="EXPERTISE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -829,9 +845,9 @@
           </section>
 
           <section title="HOBBY">
-              <t>An HOBBY element defined by <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
-              <t>The LEVEL parameter is mapped onto the &quot;level&quot; member with a direct mapping.</t>
+              <t>An HOBBY element as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
               <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
+              <t>The LEVEL parameter is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="hobby_mapping" title="HOBBY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -866,9 +882,9 @@
           </section>
 
           <section title="INTEREST">
-              <t>An INTEREST element defined by <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="interest_mapping"/>).  The &quot;type&quot; member is set to &quot;interest&quot;.</t>
-              <t>The LEVEL parameter is mapped onto the &quot;level&quot; member with a direct mapping.</t>
+              <t>An INTEREST element as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="interest_mapping"/>).  The &quot;type&quot; member is set to &quot;interest&quot;.</t>
               <t>The INDEX parameter is represented as the index of the interest among the declared interests.</t>
+              <t>The LEVEL parameter is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="interest_mapping" title="INTEREST mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -903,9 +919,9 @@
           </section>
 
           <section title="ORG-DIRECTORY">
-              <t>An ORG-DIRECTORY element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="org_directory_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;org-directory&quot;,true&gt;.</t>
-              <t>The PREF parameter is mapped onto the &quot;isPreferred&quot; member.</t>
-              <t>The INDEX parameter is represented as the index of the directory among the online resources with the &quot;org-directory&quot; key in the &quot;labels&quot; map.</t>
+              <t>An ORG-DIRECTORY element is represented as an entry of the &quot;online&quot; map (<xref target="org_directory_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;org-directory&quot; and the &quot;resource&quot; member is the ORG-DIRECTORY value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
+              <t>The INDEX parameter is represented as the index of the directory among the online resources with the &quot;org-directory&quot; label.</t>
 
               <figure anchor="org_directory_mapping" title="ORG-DIRECTORY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -919,21 +935,21 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "an-org-directory": {
                "type": "uri",
-               "labels": { "org-directory": true },
-               "value": "http://directory.mycompany.example.com"
+               "label": "org-directory",
+               "resource": "http://directory.mycompany.example.com"
               },
-              {
+              "another-org-directory": {
                "type": "uri",
-               "labels": { "org-directory": true },
-               "value": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
-               "isPreferred": true
+               "label": "org-directory",
+               "resource": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
+               "pref": 1
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -972,7 +988,7 @@
 
 
           <section title="NOTE">
-              <t>A NOTE element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;notes&quot; array (<xref target="notes_mapping"/>).</t>
+              <t>A NOTE element is mapped onto the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE elements are condensed in a single note and separated by newline.</t>
               <t>The ALTID parameter is used for associating the language-dependent alternatives with a given element.</t>
               <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
 
@@ -1034,7 +1050,7 @@
 
     {
     ...
-    "updated": "19951031T222710Z"
+    "updated": "1995-10-31T22:27:10Z"
     ...
     }
         ]]></artwork>
@@ -1042,8 +1058,8 @@
           </section>
 
           <section title="SOUND">
-              <t>A SOUND element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="sound_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;sound&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>A SOUND element is represented as an entry of the &quot;online&quot; map (<xref target="sound_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;sound&quot; and the &quot;resource&quot; member is the SOUND value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="sound_mapping" title="SOUND mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1056,15 +1072,15 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "a-sound": {
                "type": "uri",
-               "labels": { "sound": true },
-               "value": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
+               "label": "sound",
+               "resource": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -1072,7 +1088,7 @@
           </section>
 
           <section title="UID">
-              <t>The UID element corresponds to the &quot;uid&quot; member (<xref target="uid_mapping"/>).</t>
+              <t>The UID element corresponds to the &quot;uid&quot; property (<xref target="uid_mapping"/>).</t>
 
               <figure anchor="uid_mapping" title="UID mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1093,12 +1109,12 @@
           </section>
 
           <section title="CLIENTPIDMAP and PID Parameter">
-            <t>TBD</t>
+              <t>The CLIENTPIDMAP element and the PDI parameter don't have a direct match with a JSCard feature.</t>
           </section>
 
           <section title="URL">
-              <t>An URL element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="url_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;url&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>An URL element is represented as an entry of the &quot;online&quot; map (<xref target="url_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;url&quot; and the &quot;resource&quot; member is the URL value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="url_mapping" title="URL mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1111,15 +1127,15 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "an-url": {
                "type": "uri",
-               "labels": { "url": true },
-               "value": "http://example.org/restaurant.french/~chezchic.html"
+               "label": "url",
+               "resource": "http://example.org/restaurant.french/~chezchic.html"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -1127,15 +1143,15 @@
           </section>
 
           <section title="VERSION">
-              <t>The VERSION property doesn't have a direct match with a JSCard feature.</t>
+              <t>The VERSION element doesn't have a direct match with a JSCard feature.</t>
           </section>
 
       </section>
 
       <section title="Security Properties">
           <section title="KEY">
-              <t>A KEY element is represented as a &quot;Resource&quot; object in the &quot;online&quot; array (<xref target="key_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;key&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>A KEY element is represented as an entry of the &quot;online&quot; map (<xref target="key_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;key&quot; and the &quot;resource&quot; member is the KEY value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="key_mapping" title="KEY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1148,15 +1164,15 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "a-key": {
                "type": "uri",
-               "labels": { "key": true },
-               "value": "http://www.example.com/keys/jdoe.cer"
+               "label": "key",
+               "resource": "http://www.example.com/keys/jdoe.cer"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -1168,8 +1184,8 @@
       <section title="Calendar Properties">
 
           <section title="FBURL">
-              <t>A FBURL element is represented as a &quot;Resource&quot; object of the &quot;online&quot; array (<xref target="fburl_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;fburl&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>A FBURL element is represented as an entry of the &quot;online&quot; map (<xref target="fburl_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;fburl&quot; and the &quot;resource&quot; member is the FBURL value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="fburl_mapping" title="FBURL mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1183,22 +1199,22 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "an-fburl": {
                "type": "uri",
-               "labels": { "fburl": true },
-               "value": "http://www.example.com/busy/janedoe",
-               "isPreferred": true
+               "label": "fburl",
+               "resource": "http://www.example.com/busy/janedoe",
+               "pref": 1
               },
-              {
+              "another-fburl": {
                "type": "uri",
-               "labels": { "fburl": true },
-               "value": "ftp://example.com/busy/project-a.ifb",
+               "label": "fburl",
+               "resource": "ftp://example.com/busy/project-a.ifb",
                "mediaType": "text/calendar"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -1206,8 +1222,8 @@
           </section>
 
           <section title="CALADRURI">
-              <t>A CALADRURI element is represented as a &quot;Resource&quot; object of the &quot;online&quot; array (<xref target="caladruri_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;caladruri&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>A CALADRURI element is represented as an entry of the &quot;online&quot; map (<xref target="caladruri_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;caladruri&quot; and the &quot;resource&quot; member is the CALADRURI value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="caladruri_mapping" title="CALADRURI mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1221,21 +1237,21 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "a-caladruri": {
                "type": "uri",
-               "labels": { "caladruri": true },
-               "value": "mailto:janedoe@example.com",
-               "isPreferred": true
+               "label": "caladruri",
+               "resource": "mailto:janedoe@example.com",
+               "pref": 1
               },
-              {
+              "another-caladruri": {
                "type": "uri",
-               "labels": { "caladruri": true },
-               "value": "http://example.com/calendar/jdoe"
+               "label": "caladruri",
+               "resource": "http://example.com/calendar/jdoe"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -1243,8 +1259,8 @@
           </section>
 
           <section title="CALURI">
-              <t>A CALURI element is represented as a &quot;Resource&quot; object of the &quot;online&quot; array (<xref target="caluri_mapping"/>) whose &quot;type&quot; member is set to &quot;uri&quot; and &quot;labels&quot; map contains the entry &lt;&quot;caluri&quot;,true&gt;.</t>
-              <t>The PREF and MEDIATYPE parameters are mapped onto the &quot;isPreferred&quot; and &quot;mediaType&quot; members respectively.</t>
+              <t>A CALURI element is represented as an entry of the &quot;online&quot; map (<xref target="caluri_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;caluri&quot; and the &quot;resource&quot; member is the CALURI value.</t>
+              <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="caluri_mapping" title="CALURI mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1258,22 +1274,22 @@
 
     {
     ...
-    "online":[
+    "online":{
               ...
-              {
+              "a-caluri": {
                "type": "uri",
-               "labels": { "caluri": true },
-               "value": "http://cal.example.com/calA",
-               "isPreferred": true
+               "label": "caluri",
+               "resource": "http://cal.example.com/calA",
+               "pref": 1
               },
-              {
+              "another-caluri": {
                "type": "uri",
-               "labels": { "caluri": true },
-               "value": "ftp://ftp.example.com/calA.ics",
+               "label": "caluri",
+               "resource": "ftp://ftp.example.com/calA.ics",
                "mediaType": "text/calendar"
               },
               ...
-            ],
+            },
     ...
     }
         ]]></artwork>
@@ -1281,29 +1297,14 @@
           </section>
       </section>
 
-        <section title="Additional Clarifications about Mapping">
-            <section title="Media type">
-                <t>As described in section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.</t>
-            </section>
-
-            <section title="Timezone">
-                <t>As specified in section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as an UTC offset or as an URI.
-                <list style="symbols">
-                <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
-                <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to map it to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
-                <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an a IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
-                </list></t>
-            </section>
-        </section>
-
         <section title="Extended Properties">
-          <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying a value for the &quot;labels&quot; map.</t>
+          <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying comma separated values for the &quot;label&quot; property.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
         </section>
 
         <section title="vCard Unmatched Properties">
-            <t>Any vCard property that doesn't have a direct counterpart in JSContact is treated as an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&quot;.</t>
-            <t>The resulting name MUST be in lowercase.</t>
+            <t>Any vCard element that doesn't have a direct counterpart in JSContact is treated as an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&quot;.</t>
+            <t>The resulting name MUST be in uppercase (e.g. "ietf.org/rfc6350/GENDER").</t>
         </section>
 
         <section title="JSCard Required Properties">
@@ -1311,7 +1312,7 @@
         </section>
 
         <section title="JSCard Unmatched Properties">
-            <t>The &quot;preferredContactMethod&quot; member doesn't match any vCard element.</t>
+            <t>Both the &quot;preferredContactMethod&quot; and &quot;created&quot; member don't match any vCard element.</t>
         </section>
 
     </section>
@@ -1323,7 +1324,7 @@
       <section anchor="impl-status" title="Implementation Status">
           <t>NOTE: Please remove this section and the reference to RFC 7942 prior to publication as an RFC.</t>
 
-          <t>This section records the status of known implementations of the protocol defined by this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <xref target="RFC7942"/>.  The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.  Please note that the listing of any individual implementation here does not imply endorsement by the IETF.  Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.  This is not intended as, and must not be construed to be, a catalog of available implementations or their features.  Readers are advised to note that other implementations may exist.</t>
+          <t>This section records the status of known implementations of the protocol as defined in this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <xref target="RFC7942"/>.  The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.  Please note that the listing of any individual implementation here does not imply endorsement by the IETF.  Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.  This is not intended as, and must not be construed to be, a catalog of available implementations or their features.  Readers are advised to note that other implementations may exist.</t>
 
           <t>According to RFC 7942, &quot;this will allow reviewers and working groups to assign due consideration to documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.  It is up to the individual working groups to use this information as they see fit&quot;.</t>
 
