@@ -92,7 +92,7 @@
        <list style="symbols">
       <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
       <t>The vCard specification includes some features (like parameters) that have been formally removed from JSCard due to a complete refactoring of vCard content.  Anyway, the vCard parameters may appear as JSCard features.<vspace blankLines='1' /></t>
-      <t>The vCard elements that can be present multiple times are represented differently in JSContact; they are mainly represented as maps, sometimes as lists, in some cases, they are compressed in a single value.<vspace blankLines='1' /></t>
+      <t>The elements that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as lists, in some cases condensed in a single value.<vspace blankLines='1' /></t>
       <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart in the JSContact specification.</t>
       </list></t>
 
@@ -106,11 +106,11 @@
     <section title="Mapping">
 
       <t>This section contains the mapping between vCard and JSCard.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
-      <t>Where it is needed, the JCardGroup is taken into account.</t>
+      <t>Where it is needed, the JSCardGroup is taken into account.</t>
       <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard features are written in camel case.</t>
 
         <section  title="JSContact Id Values" anchor="jscontact-id-values">
-            <t>The values of the Id data type as defined in section 1.5.2 of <xref target="draft-ietf-jmap-jscontact"/> are out of the scope of this specification.</t>
+            <t>The values of the &quot;Id&quot; data type as defined in section 1.5.2 of <xref target="draft-ietf-jmap-jscontact"/> are out of the scope of this specification.</t>
         </section>
 
         <section title="Timezone">
@@ -125,7 +125,7 @@
         <section  title="vCard Common Parameters" anchor="vcard-common-parameters">
           <t>The following mapping rules apply to commonly used vCard parameters:</t>
           <t><list style="symbols">
-          <t>The vCard "type-param" values of the TYPE parameter are mapped onto the values of JSContact &quot;Context&quot; type as defined in section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.</t>
+          <t>The "type-param" values of the TYPE parameter are mapped onto the values of the &quot;Context&quot; type as defined in section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.</t>
           <t>The PREF parameter is mapped onto the &quot;pref&quot; property.</t>
           <t>The MEDIATYPE parameter is mapped onto the &quot;mediaType&quot; property.  As described in section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.</t>
           <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is mapped onto the &quot;level&quot; property with a direct mapping except for the values such parameter can have in the EXPERTISE element; in this case, the values are mapped as in the following:</t>
@@ -419,7 +419,7 @@
       <section title="Communications Properties">
 
           <section title="TEL">
-              <t>A TEL element is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The vCard &quot;type-param-tel&quot; values are mapped onto the &quot;features&quot; map keys.  Those vCard &quot;type-param-tel&quot; values that don't have a counterpart among those keys are represented as comma separated values of the &quot;label&quot; member.  If the features map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
+              <t>A TEL element is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The &quot;type-param-tel&quot; values are mapped onto the &quot;features&quot; map keys.  Those vCard &quot;type-param-tel&quot; values that don't have a counterpart among those keys are represented as comma separated values of the &quot;label&quot; member.  If the features map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="tel_mapping" title="TEL mapping example">
