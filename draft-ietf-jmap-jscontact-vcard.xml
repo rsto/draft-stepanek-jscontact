@@ -109,11 +109,11 @@
       <t>Where it is needed, the JSCardGroup is taken into account.</t>
       <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard features are written in camel case.</t>
 
-        <section  title="JSContact Id Values" anchor="jscontact-id-values">
-            <t>The values of the &quot;Id&quot; data type as defined in section 1.5.2 of <xref target="draft-ietf-jmap-jscontact"/> are out of the scope of this specification.</t>
+        <section  title="JSContact Id Value" anchor="jscontact-id-values">
+            <t>The value of the &quot;Id&quot; type as defined in section 1.5.2 of <xref target="draft-ietf-jmap-jscontact"/> are out of the scope of this specification.</t>
         </section>
 
-        <section title="Timezone">
+        <section title="vCard Timezone">
             <t>As specified in section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as an UTC offset or as an URI.
                 <list style="symbols">
                     <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
@@ -123,12 +123,13 @@
         </section>
 
         <section  title="vCard Common Parameters" anchor="vcard-common-parameters">
-          <t>The following mapping rules apply to commonly used vCard parameters:</t>
+          <t>The following mapping rules apply to common vCard parameters:</t>
           <t><list style="symbols">
-          <t>The "type-param" values of the TYPE parameter are mapped onto the values of the &quot;Context&quot; type as defined in section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.</t>
-          <t>The PREF parameter is mapped onto the &quot;pref&quot; property.</t>
-          <t>The MEDIATYPE parameter is mapped onto the &quot;mediaType&quot; property.  As described in section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.</t>
-          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is mapped onto the &quot;level&quot; property with a direct mapping except for the values such parameter can have in the EXPERTISE element; in this case, the values are mapped as in the following:</t>
+          <t>The "type-param" values of the TYPE parameter are mapped onto the values of the &quot;Context&quot; type as defined in section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.<vspace blankLines='1'/></t>
+          <t>The PREF parameter is mapped onto the &quot;pref&quot; property.<vspace blankLines='1'/></t>
+          <t>The MEDIATYPE parameter is mapped onto the &quot;mediaType&quot; property.  As described in section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
+          <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given element.  Such alternatives are represented by using the &quot;localizations&quot; map of a &quot;LocalizedString&quot; member inside the matching JSContact object.<vspace blankLines='1'/></t>
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped onto the &quot;level&quot; property of the &quot;PersonalInfo&quot; type except for the values of such parameter when it is used in the EXPERTISE element; in this case, the values are converted as in the following:</t>
               <t><list style="symbols">
                   <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
                   <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
@@ -286,7 +287,9 @@
                   <t>ANNIVERSARY is mapped onto &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
               </list></t>
 
-              <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.  BIRTHPLACE and DEATHPLACE that are represented as geo URIs are converted into &quot;Address&quot; instances including only the &quot;coordinates&quot; member.  If the URI value is not a geo URI, the place is ignored.  The LANGUAGE parameter values of both BIRTHPLACE and DEATHPLACE elements are represented as corresponding entries of the &quot;fullAddress.localizations&quot; map.</t>
+              <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.</t>
+              <t>The BIRTHPLACE and DEATHPLACE elements that are represented as geo URIs are converted into &quot;Address&quot; instances including only the &quot;coordinates&quot; member.  If the URI value is not a geo URI, the place is ignored.</t>
+              <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE elements are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). The &quot;fullAddress.localizations&quot; may include language dependent alternatives.</t>
 
               <figure anchor="anniversary_mapping" title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -365,9 +368,9 @@
               <t>The LABEL parameter is converted into the &quot;fullAddress&quot; member.</t>
               <t>The GEO parameter is converted into the &quot;coordinates&quot; member.</t>
               <t>The TZ parameter is converted into by the &quot;timeZone&quot; member.</t>
-              <t>The LANGUAGE parameter values are represented as different entries of the &quot;fullAddress.localizations&quot; map.</t>
               <t>The CC parameter as defined in <xref target="RFC8605"/> is converted into the &quot;countryCode&quot; member.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). The &quot;fullAddress.localizations&quot; may include language dependent alternatives.</t>
 
               <figure anchor="adr_mapping" title="ADR mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -563,17 +566,17 @@
 
       <section title="Organizational Properties">
 
-          <section title="TITLE">
-              <t>A TITLE element is represented as an entry of the &quot;titles&quot; map (<xref target="title_mapping"/>).  The entry value is a &quot;Title&quot; object whose &quot;title&quot; member includes information about the language.</t>
-              <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
-              <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
+          <section title="TITLE and ROLE">
+              <t>Both TITLE and ROLE elements are represented as entries of the &quot;titles&quot; map (<xref target="title_role_mapping"/>).  The entry value is a &quot;Title&quot; object whose &quot;title&quot; member includes information about the language.</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). The &quot;title.localizations&quot; may include language dependent alternatives.</t>
 
-              <figure anchor="title_mapping" title="TITLE mapping example">
+              <figure anchor="title_role_mapping" title="TITLE and ROLE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
     TITLE:Research Scientist
+    ROLE:Project Leader
     ...
     END:VCARD
 
@@ -581,36 +584,12 @@
     ...
     "titles":{
                 "a-title": {
+                  "title": { "value" : "Project Leader" }
+                },
+                "another-title": {
                   "title": { "value" : "Research Scientist" }
                 }
              },
-    ...
-    }
-        ]]></artwork>
-              </figure>
-          </section>
-
-          <section title="ROLE">
-              <t>A ROLE element is mapped onto a &quot;LocalizedString&quot; object included in the &quot;roles&quot; array (<xref target="role_mapping"/>).</t>
-              <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
-              <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
-
-              <figure anchor="role_mapping" title="ROLE mapping example">
-                  <artwork xml:space="preserve"><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    ROLE:Project Leader
-    ...
-    END:VCARD
-
-    {
-    ...
-    "roles":[
-            {
-             "value": "Project Leader"
-            }
-           ],
     ...
     }
         ]]></artwork>
@@ -649,8 +628,7 @@
 
           <section title="ORG">
               <t>An ORG element is represented as an entry of the &quot;organizations&quot; map (<xref target="org_mapping"/>).  The entry value is an &quot;Organization&quot; object whose &quot;name&quot; member contains the organizational name and the &quot;units&quot; member contains the organizational units.</t>
-              <t>The ALTID parameter is used for for associating the language-dependent alternatives with a given element.</t>
-              <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).  The &quot;localizations&quot; maps for both &quot;name&quot; and &quot;units&quot; may include language dependent alternatives.</t>
 
               <figure anchor="org_mapping" title="ORG mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -989,8 +967,7 @@
 
           <section title="NOTE">
               <t>A NOTE element is mapped onto the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE elements are condensed in a single note and separated by newline.</t>
-              <t>The ALTID parameter is used for associating the language-dependent alternatives with a given element.</t>
-              <t>The LANGUAGE parameter values are represented as corresponding entries of the &quot;localizations&quot; map.</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).  The &quot;localizations&quot; map may include language dependent alternatives.</t>
 
               <figure anchor="notes_mapping" title="NOTE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
