@@ -100,20 +100,20 @@
 
       <section title="Conventions Used in This Document">
       	<t>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
+
+          <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard/JSCardGroup features are written in camel case.</t>
       </section>
    </section>
 
-    <section title="Mapping">
+    <section title="Translating vCard properties to JSContact">
 
-      <t>This section contains the mapping between vCard and JSCard.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
-      <t>Where it is needed, the JSCardGroup is taken into account.</t>
-      <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard features are written in camel case.</t>
+      <t>This section contains the translation rules from vCard to JSCard/JSCardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
 
-        <section  title="JSContact Id Value" anchor="jscontact-id-values">
-            <t>The value of the &quot;Id&quot; type as defined in section 1.5.2 of <xref target="draft-ietf-jmap-jscontact"/> are out of the scope of this specification.</t>
+        <section  title="JSContact Id" anchor="jscontact-id">
+            <t>The rules to generate a map key of type Id where it is needed is out of the scope of this document.</t>
         </section>
 
-        <section title="vCard Timezone">
+        <section title="vCard TZ">
             <t>As specified in section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as an UTC offset or as an URI.
                 <list style="symbols">
                     <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
@@ -123,7 +123,7 @@
         </section>
 
         <section  title="vCard Common Parameters" anchor="vcard-common-parameters">
-          <t>The following mapping rules apply to common vCard parameters:</t>
+          <t>The following mapping rules apply to vCard parameters that are common to most of elements:</t>
           <t><list style="symbols">
           <t>The "type-param" values of the TYPE parameter are mapped onto the values of the &quot;Context&quot; type as defined in section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.<vspace blankLines='1'/></t>
           <t>The PREF parameter is mapped onto the &quot;pref&quot; property.<vspace blankLines='1'/></t>
@@ -1293,6 +1293,76 @@
         </section>
 
     </section>
+
+  <section title="Translating JSContact properties to vCard">
+      <t>This section contains the translation rules from JSCard/JSCardGroup to vCard.  The JSCard properties are grouped according to the categories as defined in <xref target="draft-ietf-jmap-jscontact"/>.</t>
+
+      <section  title="JSContact Data Types">
+           <section title="Context">
+
+           </section>
+          <section title="Id">
+              <t>The value of the &quot;Id&quot; type as defined in section 1.5.2 of <xref target="draft-ietf-jmap-jscontact"/> are ignored.  Only </t>
+          </section>
+          <section title="LocalizedString">
+
+          </section>
+          <section title="Preference">
+
+          </section>
+          <section title="UTCdateTime">
+
+          </section>
+
+      </section>
+
+      <section  title="JSContact Id">
+          <t>Where a map key is of type Id, it is ignored.</t>
+      </section>
+
+      <section title="JSContact timeZones">
+          <t>As specified in section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as an UTC offset or as an URI.
+              <list style="symbols">
+                  <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
+                  <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to map it to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
+                  <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an a IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
+              </list></t>
+      </section>
+
+      <section title="Card">
+
+          <section title="Metadata properties">
+
+
+
+          </section>
+
+          <section title="Name and Organization properties">
+
+
+          </section>
+
+          <section title="Contact and Resource properties">
+
+
+          </section>
+
+          <section title="Address and Location properties">
+
+
+          </section>
+
+          <section title="Additional properties">
+
+
+          </section>
+
+      </section>
+
+      <section title="GroupCard">
+
+      </section>
+  </section>
 
    <section anchor="IANA-considerations" title="IANA Considerations">
        <t>This document has no actions for IANA.</t>
