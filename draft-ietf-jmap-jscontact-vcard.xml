@@ -1289,7 +1289,7 @@
       </section>
 
       <section title="Localizations">
-         <t>A LocalizedString object is converted in multiple vCard elements of the same type having different values of the LANGUAGE parameter.  Implementers MAY set the ALTID parameter to couple language-based alternatives of the same value.  Note also that the components of some vCard values and their related alternatives are splitted into different JSContact values . For example, the &quot;name&quot; and &quot;units&quot; values for a given language must be grouped to make a single ORG value where components are separated by &quot;;&quot;.</t>
+         <t>A LocalizedString object is converted in multiple vCard elements of the same type having different values of the LANGUAGE parameter.  Implementers MAY set the ALTID parameter to couple language-based alternatives of the same value.  Note also that the components of some vCard values and their related alternatives are splitted in different JSContact values . For example, the &quot;name&quot; and &quot;units&quot; values for a given language must be grouped to make a single ORG value where components are separated by &quot;;&quot;.</t>
       </section>
 
       <section title="Date and Time Representations">
@@ -1299,6 +1299,11 @@
       <section title="Time Zone">
           <t>The time zone name as represented by the &quot;timeZone&quot; property is mapped on to the TZ parameter.</t>
           <t>Implementers MAY map an &quot;Etc/GMT&quot; time zone either preserving the time zone name or converting it into an UTC offset.</t>
+      </section>
+
+      <section title="JSContact Properties Grouping vCard Properties">
+          <t>The &quot;titles&quot; property contains information about job, position or role of the entity the card represents.  In vCard, such information is splitted in the TITLE and ROLE properties.  This specification defines TITLE as the default target property when converting the &quot;titles&quot; property.</t>
+          <t>The &quot;online&quot; property includes resources that are usually represented though different vCard elements.  The matched vCard element of a &quot;Resource&quot; object can be derived from the value of its &quot;label&quot; member.</t>
       </section>
 
       <section title="Extended Properties">
