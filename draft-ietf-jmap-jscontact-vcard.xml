@@ -103,7 +103,7 @@
       <section title="Conventions Used in This Document">
       	<t>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
 
-          <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard/JSCardGroup features are written in camel case.</t>
+          <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard/JSCardGroup features are written in camel case wrapped in double quotes.</t>
       </section>
    </section>
 
@@ -123,7 +123,7 @@
         <section  title="Common Parameters" anchor="vcard-common-parameters">
           <t>The following mapping rules apply to parameters that are common to most of vCard elements:</t>
           <t><list style="symbols">
-          <t>The "type-param" values of the TYPE parameter are mapped on to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.<vspace blankLines='1'/></t>
+          <t>The generic values of the TYPE parameter are mapped on to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED elements is defined in the following of the document.<vspace blankLines='1'/></t>
           <t>The PREF parameter is mapped on to the &quot;pref&quot; property.<vspace blankLines='1'/></t>
           <t>The MEDIATYPE parameter is mapped on to the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
           <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given element.  Such alternatives are represented by using the &quot;localizations&quot; map of a &quot;LocalizedString&quot; member inside the matching JSContact object.<vspace blankLines='1'/></t>
@@ -419,7 +419,7 @@
       <section title="Communications Properties">
 
           <section title="TEL">
-              <t>A TEL element is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The &quot;type-param-tel&quot; values are mapped on to the &quot;features&quot; map keys.  Those vCard &quot;type-param-tel&quot; values that don't have a counterpart among those keys are represented as comma separated values of the &quot;label&quot; member.  If the features map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
+              <t>A TEL element is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The TEL specific values or TYPE parameter are mapped on to the &quot;features&quot; map keys.  The values that don't match a key are represented as comma separated values of the &quot;label&quot; member.  If the features map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="tel_mapping" title="TEL mapping example">
@@ -703,7 +703,7 @@
 
           <section title="RELATED">
               <t>All the RELATED elements are globally converted into the &quot;relatedTo&quot; map (<xref target="related_mapping"/>): an entry for each entity the entity described by the JSCard is associated with.  The map keys are the &quot;uid&quot; values of the associated cards.</t>
-              <t>Each map value is a &quot;Relation&quot; object including only the &quot;relation&quot; member represented as a set of &quot;type-param-related&quot; values as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
+              <t>Each map value is a &quot;Relation&quot; object including only the &quot;relation&quot; member represented as a set of the RELATED specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
               <t>If the relation type is unspecified, the &quot;relation&quot; member MUST be empty.</t>
 
               <figure anchor="related_mapping" title="RELATED mapping example">
