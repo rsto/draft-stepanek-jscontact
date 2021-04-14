@@ -93,7 +93,7 @@
       <t>JSContact and vCard have a lot of semantics in common, however some differences must be outlined:
        <list style="symbols">
       <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
-      <t>The vCard specification includes some features (like parameters) that have been formally removed from JSCard due to a complete refactoring of vCard content.  Anyway, the vCard parameters may appear as JSCard features.<vspace blankLines='1' /></t>
+      <t>The vCard specification includes some features (like parameters) that have been formally removed from JSContact due to a complete refactoring of vCard content.  Anyway, the vCard parameters may appear as JSContact features.<vspace blankLines='1' /></t>
       <t>The elements that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as lists, in some cases condensed in a single value.<vspace blankLines='1' /></t>
       <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart in the JSContact specification.</t>
       </list></t>
@@ -144,7 +144,7 @@
         <section title="General Properties">
 
           <section title="BEGIN and END">
-              <t>The BEGIN and END elements don't have a direct match with a JSCard feature.</t>
+              <t>The BEGIN and END elements don't have a direct match with a JSContact feature.</t>
           </section>
 
           <section title="SOURCE">
@@ -199,7 +199,7 @@
         </section>
 
           <section title="XML">
-              <t>The XML element doesn't have a direct match with a JSCard feature.</t>
+              <t>The XML element doesn't have a direct match with a JSContact feature.</t>
           </section>
 
       </section>
@@ -341,7 +341,7 @@
           </section>
 
           <section title="GENDER">
-                <t>The GENDER element doesn't have a direct match with a JSCard feature.</t>
+                <t>The GENDER element doesn't have a direct match with a JSContact feature.</t>
           </section>
 
       </section>
@@ -557,7 +557,7 @@
       </section>
 
       <section title="Geographical Properties">
-        <t>The GEO and TZ elements are not directly mapped into equivalent topmost JSCard members because the same information is represented through equivalent &quot;Address&quot; members.</t>
+        <t>The GEO and TZ elements are not directly mapped into equivalent topmost JSCard/JSCardGroup members because the same information is represented through equivalent &quot;Address&quot; members.</t>
           <t>The ALTID parameter is used for associating both GEO and TZ elements with the related address information.  When the ALTID parameter is missing, the element SHOULD be associated with the first contact address.</t>
       </section>
 
@@ -1111,7 +1111,7 @@
           </section>
 
           <section title="VERSION">
-              <t>The VERSION element doesn't have a direct match with a JSCard feature.</t>
+              <t>The VERSION element doesn't have a direct match with a JSContact feature.</t>
           </section>
 
       </section>
@@ -1266,7 +1266,7 @@
       </section>
 
         <section title="Extended Properties">
-          <t>If an extended property is a resource, JSCard already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying comma separated values for the &quot;label&quot; property.</t>
+          <t>If an extended property is a resource, JSContact already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying comma separated values for the &quot;label&quot; property.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
         </section>
 
@@ -1276,7 +1276,7 @@
         </section>
 
         <section title="JSCard Required Properties">
-            <t>While converting a vCard into a JSCard, only the topmost &quot;uid&quot; member is required.</t>
+            <t>While converting a vCard into a JSCard/JSCardGroup, only the topmost &quot;uid&quot; member is required.</t>
         </section>
 
     </section>
@@ -1316,7 +1316,7 @@
       </section>
 
       <section title="vCard Required Properties">
-          <t>While converting a JSCard into a vCard, only the FN element is required.  Since the &quot;fullName&quot; property is optional, implementers are REQUIRED to generate a FN value when it is missing.</t>
+          <t>While converting a JSCard/JSCardGroup into a vCard, only the FN element is required.  Since the &quot;fullName&quot; property is optional, implementers are REQUIRED to generate a FN value when it is missing.</t>
       </section>
 
   </section>
