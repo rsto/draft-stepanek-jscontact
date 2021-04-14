@@ -85,7 +85,7 @@
 
       <t>The JSContact specification <xref target="draft-ietf-jmap-jscontact"/> has been defined to represent contact card information as a more efficient alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
       <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification.</t>
-      <t>To facilitate this use cases, this document provides informational guidance about how to convert the cards as defined in JSContact, namely JSCard and JSCardGroup, from and to vCard.</t>
+      <t>To facilitate these use cases, this document provides informational guidance about how to convert the cards as defined in JSContact, namely JSCard and JSCardGroup, from and to vCard.</t>
     </section>
 
     <section title="Scope and Caveats">
@@ -112,22 +112,22 @@
       <t>This section contains the translation rules from vCard to JSCard/JSCardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
 
         <section title="Time Zone">
-            <t>As specified in Section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as an UTC offset or as an URI.
+            <t>As specified in Section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as a UTC offset or as a URI.
                 <list style="symbols">
                     <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
                     <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
-                    <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an a IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
+                    <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
                 </list></t>
         </section>
 
         <section  title="Common Parameters" anchor="vcard-common-parameters">
-          <t>The following mapping rules apply to parameters that are common to most of vCard elements:</t>
+          <t>The following mapping rules apply to parameters that are commonto most of the vCard elements:</t>
           <t><list style="symbols">
-          <t>The generic values of the TYPE parameter are mapped on to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED elements is defined in the following of the document.<vspace blankLines='1'/></t>
-          <t>The PREF parameter is mapped on to the &quot;pref&quot; property.<vspace blankLines='1'/></t>
-          <t>The MEDIATYPE parameter is mapped on to the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
+          <t>The generic values of the TYPE parameter are mapped onto the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED elements are defined in the following of the document.<vspace blankLines='1'/></t>
+          <t>The PREF parameter is mapped onto the &quot;pref&quot; property.<vspace blankLines='1'/></t>
+          <t>The MEDIATYPE parameter is mapped onto the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
           <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given element.  Such alternatives are represented by using the &quot;localizations&quot; map of a &quot;LocalizedString&quot; member inside the matching JSContact object.<vspace blankLines='1'/></t>
-          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped on to the &quot;level&quot; property of the &quot;PersonalInformation&quot; type apart from when LEVEL is used in the EXPERTISE element; in this case, the values are converted as in the following:
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped onto the &quot;level&quot; property of the &quot;PersonalInformation&quot; type apart from when LEVEL is used in the EXPERTISE element; in this case, the values are converted as in the following:
               <list style="symbols">
                   <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
                   <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
@@ -178,7 +178,7 @@
         </section>
 
         <section title="KIND">
-          <t>The KIND element is mapped on to the &quot;kind&quot; member (<xref target="kind_mapping"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value &quot;group&quot; is reserved to a JSCardGroup instance.</t>
+          <t>The KIND element is mapped onto the &quot;kind&quot; member (<xref target="kind_mapping"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value &quot;group&quot; is reserved for a JSCardGroup instance.</t>
 
             <figure anchor="kind_mapping" title="KIND mapping example">
                 <artwork xml:space="preserve"><![CDATA[
@@ -212,7 +212,7 @@
 
           <section title="N and NICKNAME">
               <t>The N elements are converted into equivalent items of the &quot;name&quot; array (<xref target="fn_n_nickname_mapping"/>): the N components are transformed into related &quot;NameComponent&quot; objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
-              <t>Each NICKNAME element is mapped on to an item of &quot;nickNames&quot; array.</t>
+              <t>Each NICKNAME element is mapped onto an item of &quot;nickNames&quot; array.</t>
 
               <texttable anchor="n_components" title="N components mapping">
                   <ttcol align="left">N component</ttcol>
@@ -285,9 +285,9 @@
           <section title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY">
               <t>The BDAY and ANNIVERSARY elements and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6350"/> are represented as &quot;Anniversary&quot; objects included in the &quot;anniversaries&quot; array (<xref target="anniversary_mapping"/>):</t>
               <t><list style="symbols">
-                  <t>BDAY and BIRTHPLACE are mapped on to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;;<vspace blankLines='1' /></t>
-                  <t>DEATHDATE and DEATHPLACE are mapped on to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;;<vspace blankLines='1' /></t>
-                  <t>ANNIVERSARY is mapped on to &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
+                  <t>BDAY and BIRTHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;;<vspace blankLines='1' /></t>
+                  <t>DEATHDATE and DEATHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;;<vspace blankLines='1' /></t>
+                  <t>ANNIVERSARY is mapped onto &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
               </list></t>
 
               <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.</t>
@@ -366,7 +366,7 @@
 
               <t>The LABEL parameter is converted into the &quot;fullAddress&quot; member.</t>
               <t>The GEO parameter is converted into the &quot;coordinates&quot; member.</t>
-              <t>The TZ parameter is converted into by the &quot;timeZone&quot; member.</t>
+              <t>The TZ parameter is converted into the &quot;timeZone&quot; member.</t>
               <t>The CC parameter as defined in <xref target="RFC8605"/> is converted into the &quot;countryCode&quot; member.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
               <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). The &quot;fullAddress.localizations&quot; includes possible language-dependent alternatives.</t>
@@ -419,7 +419,7 @@
       <section title="Communications Properties">
 
           <section title="TEL">
-              <t>A TEL element is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The TEL specific values or TYPE parameter are mapped on to the &quot;features&quot; map keys.  The values that don't match a key are represented as comma separated values of the &quot;label&quot; member.  If the features map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
+              <t>A TEL element is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The TEL-specific values or TYPE parameter are mapped onto the &quot;features&quot; map keys.  The values that don't match a key are represented as comma-separated values of the &quot;label&quot; member.  If the features map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="tel_mapping" title="TEL mapping example">
@@ -703,7 +703,7 @@
 
           <section title="RELATED">
               <t>All the RELATED elements are globally converted into the &quot;relatedTo&quot; map (<xref target="related_mapping"/>): an entry for each entity the entity described by the JSCard is associated with.  The map keys are the &quot;uid&quot; values of the associated cards.</t>
-              <t>Each map value is a &quot;Relation&quot; object including only the &quot;relation&quot; member represented as a set of the RELATED specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
+              <t>Each map value is a &quot;Relation&quot; object including only the &quot;relation&quot; member represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
               <t>If the relation type is unspecified, the &quot;relation&quot; member MUST be empty.</t>
 
               <figure anchor="related_mapping" title="RELATED mapping example">
@@ -814,7 +814,7 @@
           </section>
 
           <section title="HOBBY">
-              <t>An HOBBY element as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
+              <t>A HOBBY element as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
               <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
               <t>The LEVEL parameter is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
@@ -929,7 +929,7 @@
       <section title="Explanatory Properties">
 
           <section title="CATEGORIES">
-              <t>A CATEGORIES element is converted into a set of entries of the &quot;categories&quot; map (<xref target="categories_mapping"/>). The keys are the comma separated text values of the CATEGORIES element, the value is always true for each entry.</t>
+              <t>A CATEGORIES element is converted into a set of entries of the &quot;categories&quot; map (<xref target="categories_mapping"/>). The keys are the comma-separated text values of the CATEGORIES element, the value is always true for each entry.</t>
               <t>In this case, the PREF parameter has not a JSContact counterpart; however, implementers MAY use a map preserving the order of insertion and the map entries can be inserted by order of preference.</t>
 
               <figure anchor="categories_mapping" title="CATEGORIES mapping example">
@@ -957,7 +957,7 @@
 
 
           <section title="NOTE">
-              <t>A NOTE element is mapped on to the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE elements are condensed in a single note and separated by newline.</t>
+              <t>A NOTE element is mapped onto the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE elements are condensed in a single note and separated by newline.</t>
               <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).  The &quot;localizations&quot; map includes possible language-dependent alternatives.</t>
 
               <figure anchor="notes_mapping" title="NOTE mapping example">
@@ -1152,7 +1152,7 @@
       <section title="Calendar Properties">
 
           <section title="FBURL">
-              <t>A FBURL element is represented as an entry of the &quot;online&quot; map (<xref target="fburl_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;fburl&quot; and the &quot;resource&quot; member is the FBURL value.</t>
+              <t>An FBURL element is represented as an entry of the &quot;online&quot; map (<xref target="fburl_mapping"/>).  The entry value is a &quot;Resource&quot; object whose &quot;type&quot; member is set to &quot;uri&quot;, the &quot;label&quot; member is set to &quot;fburl&quot; and the &quot;resource&quot; member is the FBURL value.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="fburl_mapping" title="FBURL mapping example">
@@ -1266,7 +1266,7 @@
       </section>
 
         <section title="Extended Properties">
-          <t>If an extended property is a resource, JSContact already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying comma separated values for the &quot;label&quot; property.</t>
+          <t>If an extended property is a resource, JSContact already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying comma-separated values for the &quot;label&quot; property.</t>
           <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
         </section>
 
@@ -1282,28 +1282,28 @@
     </section>
 
   <section title="Translating JSContact properties to vCard">
-      <t>In most of cases, the rules about the translation from JSCard/JSCardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
+      <t>In most of the cases, the rules about the translation from JSCard/JSCardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
 
       <section title="Id">
           <t>Where a map key is of type Id, it SHOULD be ignored.</t>
       </section>
 
       <section title="Localizations">
-         <t>A LocalizedString object is converted in multiple vCard elements of the same type having different values of the LANGUAGE parameter.  Implementers MAY set the ALTID parameter to couple language-based alternatives of the same value.  Note also that the components of some vCard values and their related alternatives are splitted in different JSContact values . For example, the &quot;name&quot; and &quot;units&quot; values for a given language must be grouped to make a single ORG value where components are separated by &quot;;&quot;.</t>
+         <t>A LocalizedString object is converted in multiple vCard elements of the same type having different values of the LANGUAGE parameter.  Implementers MAY set the ALTID parameter to couple language-based alternatives of the same value.  Note also that the components of some vCard values and their related alternatives are split into different JSContact values.  For example, the &quot;name&quot; and &quot;units&quot; values for a given language must be grouped to make a single ORG value where components are separated by &quot;;&quot;.</t>
       </section>
 
       <section title="Date and Time Representations">
-          <t>The JSContact spec defines the &quot;UTCDateTime&quot; type to represent <xref target="RFC3339"/> &quot;date-time&quot; format with some limitations.  This means that the matched vCard format for a &quot;UTCDateTime&quot; value MUST be one of the formats shown in Section 4.3.5 of <xref target="RFC6350"/> (i.e. &quot;19961022T140000Z&quot;).  In addition to such format, the &quot;date&quot; member of the &quot;Anniversary&quot; type allows to specify both a date without time and a partial date.  In this case, the corresponding vCard format is that defined in Section 4.3.1.</t>
+          <t>The JSContact spec defines the &quot;UTCDateTime&quot; type to represent <xref target="RFC3339"/> &quot;date-time&quot; format with some limitations.  This means that the matched vCard format for a &quot;UTCDateTime&quot; value MUST be one of the formats shown in Section 4.3.5 of <xref target="RFC6350"/> (i.e. &quot;19961022T140000Z&quot;).  In additionto such format, the &quot;date&quot; member of the &quot;Anniversary&quot; type allows specifying both a date without the time and a partial date.  In this case, the corresponding vCard format is that defined in Section 4.3.1.</t>
       </section>
 
       <section title="Time Zone">
-          <t>The time zone name as represented by the &quot;timeZone&quot; property is mapped on to the TZ parameter.</t>
-          <t>Implementers MAY map an &quot;Etc/GMT&quot; time zone either preserving the time zone name or converting it into an UTC offset.</t>
+          <t>The time zone name as represented by the &quot;timeZone&quot; property is mapped onto the TZ parameter.</t>
+          <t>Implementers MAY map an &quot;Etc/GMT&quot; time zone either preserving the time zone name or converting it into a UTC offset.</t>
       </section>
 
       <section title="JSContact Properties Grouping vCard Properties">
-          <t>The &quot;titles&quot; property contains information about job, position or role of the entity the card represents.  In vCard, such information is splitted in the TITLE and ROLE properties.  This specification defines TITLE as the default target property when converting the &quot;titles&quot; property.</t>
-          <t>The &quot;online&quot; property includes resources that are usually represented though different vCard elements.  The matched vCard element of a &quot;Resource&quot; object can be derived from the value of its &quot;label&quot; member.</t>
+          <t>The &quot;titles&quot; property contains information about the job, the position or the role of the entity the card represents.  In vCard, such information is split into the TITLE and ROLE properties.  This specification defines TITLE as the default target property when converting the &quot;titles&quot; property.</t>
+          <t>The &quot;online&quot; property includes resources that are usually represented through different vCard elements.  The matched vCard element of a &quot;Resource&quot; object can be derived from the value of its &quot;label&quot; member.</t>
       </section>
 
       <section title="Extended Properties">
@@ -1312,11 +1312,11 @@
       </section>
 
       <section title="JSCard Unmatched Properties">
-          <t>Both the &quot;preferredContactMethod&quot; and &quot;created&quot; member don't match any vCard element.  Implementers MAY represent them as vCard extended properties.</t>
+          <t>Both the &quot;preferredContactMethod&quot; and &quot;created&quot; members don't match any vCard element.  Implementers MAY represent them as vCard extended properties.</t>
       </section>
 
       <section title="vCard Required Properties">
-          <t>While converting a JSCard/JSCardGroup into a vCard, only the FN element is required.  Since the &quot;fullName&quot; property is optional, implementers are REQUIRED to generate a FN value when it is missing.</t>
+          <t>While converting a JSCard/JSCardGroup into a vCard, only the FN element is required.  Since the &quot;fullName&quot; property is optional, implementers are REQUIRED to generate an FN value when it is missing.</t>
       </section>
 
   </section>
@@ -1330,13 +1330,13 @@
 
           <t>This section records the status of known implementations of the protocol as defined in this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <xref target="RFC7942"/>.  The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.  Please note that the listing of any individual implementation here does not imply endorsement by the IETF.  Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.  This is not intended as, and must not be construed to be, a catalog of available implementations or their features.  Readers are advised to note that other implementations may exist.</t>
 
-          <t>According to RFC 7942, &quot;this will allow reviewers and working groups to assign due consideration to documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.  It is up to the individual working groups to use this information as they see fit&quot;.</t>
+          <t>According to RFC 7942, &quot;this will allow reviewers and working groups to assign due considerationto documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.  It is up to the individual working groups to use this information as they see fit&quot;.</t>
 
           <section anchor="it-cnr-iit" title="CNR">
               <t><list style="none">
                   <t>Responsible Organization: National Research Council (CNR) of Italy</t>
                   <t>Location: https://github.com/consiglionazionaledellericerche/jscontact-tools</t>
-                  <t>Description: This implementation includes tools for JSContact creation, validation, serialization/deserialization and conversion from vCard, xCard and jCard.</t>
+                  <t>Description: This implementation includes tools for JSContact creation, validation, serialization/deserialization, and conversion from vCard, xCard and jCard.</t>
                   <t>Level of Maturity: This is an "alpha" test implementation.</t>
                   <t>Coverage: This implementation includes all of the features described in this specification.</t>
                   <t>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</t>
