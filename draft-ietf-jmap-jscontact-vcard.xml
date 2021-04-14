@@ -127,7 +127,7 @@
           <t>The PREF parameter is mapped on to the &quot;pref&quot; property.<vspace blankLines='1'/></t>
           <t>The MEDIATYPE parameter is mapped on to the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
           <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given element.  Such alternatives are represented by using the &quot;localizations&quot; map of a &quot;LocalizedString&quot; member inside the matching JSContact object.<vspace blankLines='1'/></t>
-          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped on to the &quot;level&quot; property of the &quot;PersonalInfo&quot; type apart from when LEVEL is used in the EXPERTISE element; in this case, the values are converted as in the following:
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped on to the &quot;level&quot; property of the &quot;PersonalInformation&quot; type apart from when LEVEL is used in the EXPERTISE element; in this case, the values are converted as in the following:
               <list style="symbols">
                   <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
                   <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
