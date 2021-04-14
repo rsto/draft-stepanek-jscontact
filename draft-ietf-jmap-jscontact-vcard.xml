@@ -408,7 +408,7 @@
         "postcode": "20190",
         "countryCode": "US"
       }
-    }
+    },
     ...
     }
         ]]></artwork>
@@ -804,9 +804,9 @@
         "type": "expertise",
         "value": "chinese literature",
          "level": "low"
-      }
+      },
       ...
-    ]
+    ],
     ...
     }
         ]]></artwork>
@@ -841,9 +841,9 @@
         "type": "hobby",
         "value": "sewing",
         "level": "high"
-      }
+      },
       ...
-    ]
+    ],
     ...
     }
         ]]></artwork>
@@ -878,9 +878,9 @@
         "type": "interest",
         "value": "rock ’n’ roll music",
         "level": "high"
-      }
+      },
       ...
-    ]
+    ],
     ...
     }
         ]]></artwork>
@@ -948,7 +948,7 @@
       "IETF": true,
       "INDUSTRY": true,
       "INFORMATION TECHNOLOGY": true
-    }
+    },
     ...
     }
         ]]></artwork>
@@ -975,7 +975,7 @@
       {
         "value": "This fax number is operational 0800 to 1715 EST, Mon-Fri."
       }
-    ]
+    ],
     ...
     }
         ]]></artwork>
@@ -996,7 +996,7 @@
 
     {
     ...
-    "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN"
+    "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
     ...
     }
         ]]></artwork>
@@ -1018,7 +1018,7 @@
 
     {
     ...
-    "updated": "1995-10-31T22:27:10Z"
+    "updated": "1995-10-31T22:27:10Z",
     ...
     }
         ]]></artwork>
@@ -1069,7 +1069,7 @@
 
     {
     ...
-    "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
+    "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
     ...
     }
         ]]></artwork>
