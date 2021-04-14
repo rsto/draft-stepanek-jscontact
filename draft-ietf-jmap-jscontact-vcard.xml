@@ -33,7 +33,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="info" docName="draft-ietf-jmap-jscontact-vcard-03" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-03" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -74,7 +74,7 @@
     <keyword>jCard</keyword>
     
     <abstract>
-      <t>This document provides informational guidance for converting the contact card as defined in JSContact specification, namely JSCard, from and to vCard.</t>
+      <t>This document defines how to convert contact information as defined in the JSContact <xref target="draft-ietf-jmap-jscontact"/> specification from and to vCard.</t>
     </abstract>
   </front>
 
@@ -85,7 +85,7 @@
 
       <t>The JSContact specification <xref target="draft-ietf-jmap-jscontact"/> has been defined to represent contact card information as a more efficient alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
       <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification.</t>
-      <t>To facilitate these use cases, this document provides informational guidance about how to convert the cards as defined in JSContact, namely JSCard and JSCardGroup, from and to vCard.</t>
+      <t>To facilitate this, this document defines how to convert contact information as defined in the JSContact <xref target="draft-ietf-jmap-jscontact"/> specification from and to vCard.</t>
     </section>
 
     <section title="Scope and Caveats">
@@ -93,10 +93,13 @@
       <t>JSContact and vCard have a lot of semantics in common, however some differences must be outlined:
        <list style="symbols">
       <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard elements.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
-      <t>The vCard specification includes some features (like parameters) that have been formally removed from JSContact due to a complete refactoring of vCard content.  Anyway, the vCard parameters may appear as JSContact features.<vspace blankLines='1' /></t>
-      <t>The elements that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as lists, in some cases condensed in a single value.<vspace blankLines='1' /></t>
-      <t>The vCard custom elements, identified by the prefix &quot;x-&quot;, don't have a direct counterpart in the JSContact specification.</t>
-      </list></t>
+      <t>The elements that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as lists, in some cases condensed in a single value.</t>
+       </list></t>
+
+        <section title="Extensions">
+            <t>While translating vCard to JSContact, any custom extension MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
+            <t>While translating JSContact to vCard, any extension whose name is prefixed by &quot;ietf.org/&lt;RFC defining the extension&gt;/&quot; MUST be converted into the corresponding vCard element.  Any other extension MAY be converted into vCard extended properties.</t>
+        </section>
 
     </section>
 
@@ -110,15 +113,6 @@
     <section title="Translating vCard properties to JSContact" anchor="vcard-jscontact-translation">
 
       <t>This section contains the translation rules from vCard to JSCard/JSCardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
-
-        <section title="Time Zone">
-            <t>As specified in Section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as a UTC offset or as a URI.
-                <list style="symbols">
-                    <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
-                    <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
-                    <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
-                </list></t>
-        </section>
 
         <section  title="Common Parameters" anchor="vcard-common-parameters">
           <t>The following mapping rules apply to parameters that are commonto most of the vCard elements:</t>
@@ -559,6 +553,16 @@
       <section title="Geographical Properties">
         <t>The GEO and TZ elements are not directly mapped into equivalent topmost JSCard/JSCardGroup members because the same information is represented through equivalent &quot;Address&quot; members.</t>
           <t>The ALTID parameter is used for associating both GEO and TZ elements with the related address information.  When the ALTID parameter is missing, the element SHOULD be associated with the first contact address.</t>
+
+          <section title="Time Zone Representation">
+              <t>As specified in Section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as a UTC offset or as a URI.
+                  <list style="symbols">
+                      <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
+                      <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
+                      <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
+                  </list></t>
+          </section>
+
       </section>
 
       <section title="Organizational Properties">
@@ -971,11 +975,9 @@
 
     {
     ...
-    "notes":[
-      {
+    "notes": {
         "value": "This fax number is operational 0800 to 1715 EST, Mon-Fri."
-      }
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -1265,18 +1267,13 @@
           </section>
       </section>
 
-        <section title="Extended Properties">
-          <t>If an extended property is a resource, JSContact already allows to represent it by setting the &quot;type&quot; member to &quot;other&quot; and specifying comma-separated values for the &quot;label&quot; property.</t>
-          <t>Any other property supporting a custom feature MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. &quot;example.com/customprop&quot;.</t>
-        </section>
-
         <section title="vCard Unmatched Properties">
-            <t>Any vCard element that doesn't have a direct counterpart in JSContact is treated as an extended property whose name is prefixed by &quot;ietf.org/rfc6350/&quot;.</t>
+            <t>Any vCard element that doesn't have a direct counterpart in JSContact is treated as an extended property whose name is prefixed by &quot;ietf.org/RFC6350&gt;/&quot;.</t>
             <t>The resulting name MUST be in uppercase (e.g. "ietf.org/rfc6350/GENDER").</t>
         </section>
 
         <section title="JSCard Required Properties">
-            <t>While converting a vCard into a JSCard/JSCardGroup, only the topmost &quot;uid&quot; member is required.</t>
+            <t>While converting a vCard into a JSCard/JSCardGroup, only the topmost &quot;uid&quot; member is mandatory.  Implementers are REQUIRED to set it when it is missing.</t>
         </section>
 
     </section>
@@ -1285,7 +1282,7 @@
       <t>In most of the cases, the rules about the translation from JSCard/JSCardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
 
       <section title="Id">
-          <t>Where a map key is of type Id, it SHOULD be ignored.</t>
+          <t>Where a map key is of type Id, implementers are free to either ignore it or preserve it as a vCard information (e.g. a vCard parameter).</t>
       </section>
 
       <section title="Localizations">
@@ -1293,7 +1290,7 @@
       </section>
 
       <section title="Date and Time Representations">
-          <t>The JSContact spec defines the &quot;UTCDateTime&quot; type to represent <xref target="RFC3339"/> &quot;date-time&quot; format with some limitations.  This means that the matched vCard format for a &quot;UTCDateTime&quot; value MUST be one of the formats shown in Section 4.3.5 of <xref target="RFC6350"/> (i.e. &quot;19961022T140000Z&quot;).  In additionto such format, the &quot;date&quot; member of the &quot;Anniversary&quot; type allows specifying both a date without the time and a partial date.  In this case, the corresponding vCard format is that defined in Section 4.3.1.</t>
+          <t>The JSContact spec defines the &quot;UTCDateTime&quot; type to represent <xref target="RFC3339"/> &quot;date-time&quot; format with further restrictions.  This means that the matched vCard format for a &quot;UTCDateTime&quot; value MUST be one of the formats shown in Section 4.3.5 of <xref target="RFC6350"/> (i.e. &quot;19961022T140000Z&quot;).  In additionto such format, the &quot;date&quot; member of the &quot;Anniversary&quot; type allows specifying both a date without the time and a partial date.  In this case, the corresponding vCard format is that defined in Section 4.3.1.</t>
       </section>
 
       <section title="Time Zone">
@@ -1301,14 +1298,14 @@
           <t>Implementers MAY map an &quot;Etc/GMT&quot; time zone either preserving the time zone name or converting it into a UTC offset.</t>
       </section>
 
-      <section title="JSContact Properties Grouping vCard Properties">
-          <t>The &quot;titles&quot; property contains information about the job, the position or the role of the entity the card represents.  In vCard, such information is split into the TITLE and ROLE properties.  This specification defines TITLE as the default target property when converting the &quot;titles&quot; property.</t>
-          <t>The &quot;online&quot; property includes resources that are usually represented through different vCard elements.  The matched vCard element of a &quot;Resource&quot; object can be derived from the value of its &quot;label&quot; member.</t>
-      </section>
-
-      <section title="Extended Properties">
-          <t>Any property whose name is prefixed by &quot;ietf.org/rfc6350/&quot; MUST be converted into the corresponding vCard element.</t>
-          <t>Any property supporting a custom feature as well as any resource included in the &quot;online&quot; map that doesn't match a vCard element MAY be converted into vCard extended properties.</t>
+      <section title="JSContact Types Matching Multiple vCard Properties">
+          <section title="Title">
+              <t>The &quot;titles&quot; property contains information about the job, the position or the role of the entity the card represents.  In vCard, such information is split into the TITLE and ROLE properties.  This specification defines TITLE as the default target property when converting the &quot;titles&quot; property.</t>
+          </section>
+          <section title="Resource">
+              <t>The &quot;online&quot; property includes resources that are usually represented through different vCard elements.  The matched vCard element of a &quot;Resource&quot; object can be derived from the value of its &quot;label&quot; member.</t>
+              <t>Any resource included in the &quot;online&quot; map that doesn't match a vCard element MAY be converted into vCard extended properties.</t>
+          </section>
       </section>
 
       <section title="JSCard Unmatched Properties">
