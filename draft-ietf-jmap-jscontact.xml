@@ -443,8 +443,8 @@ An address associated with this anniversary, e.g. the place of birth or death.</
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
           <name>personalInfo</name>
-          <t>Type: PersonalInformation[] (optional).</t>
-          <t>A list of personal information about the entity represented by this card.
+          <t>Type: Id[PersonalInformation] (optional).</t>
+          <t>Defines personal information about the entity represented by this card.
 A PersonalInformation object has the following properties:</t>
           <ul spacing="normal">
             <li>
