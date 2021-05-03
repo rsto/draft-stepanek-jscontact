@@ -375,19 +375,18 @@ Defines the preference of this language in relation to other languages of the sa
           <t>A map of address ids to Address objects, containing physical locations. An Address object has the following properties:</t>
           <ul spacing="normal">
             <li>fullAddress: <tt>LocalizedString</tt> (optional).
-The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
-            <li>street: <tt>String</tt> (optional).
-The street address. This MAY be multiple lines; newlines <bcp14>MUST</bcp14> be preserved.</li>
-            <li>extension: <tt>String</tt> (optional)
-The extended address, such as an apartment or suite number, or care-of address.</li>
+                The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
+            <li>
+              <t>street: <tt>StreetComponent[]</tt> (optional).
+                  The street address. The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale. The StreetComponent object type is defined in the paragraph below.
+              </t>
+            </li>
             <li>locality: <tt>String</tt> (optional).
 The city, town, village, post town, or other locality within which the street address may be found.</li>
             <li>region: <tt>String</tt> (optional).
 The province, such as a state, county, or canton within which the locality may be found.</li>
             <li>country: <tt>String</tt> (optional).
 The country name.</li>
-            <li>postOfficeBox: <tt>String</tt> (optional)
-The post office box.</li>
             <li>postcode: <tt>String</tt> (optional).
 The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
             <li>countryCode: <tt>String</tt> (optional).
@@ -409,7 +408,52 @@ The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>label: <tt>String</tt> (optional).
 A label describing the value in more detail.</li>
             <li>pref: Preference (optional)
-The preference of this address in relation to other addresses.</li>
+                The preference of this address in relation to other addresses.</li>
+        </ul>
+          <t>A StreetComponent object has the following properties:</t>
+          <ul spacing="normal">
+            <li>
+              <t>type: <tt>String</tt> (mandatory).
+The type of this street component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:
+</t>
+              <ul spacing="normal">
+                <li>
+                    <tt>name</tt>. The street name.
+                </li>
+                <li>
+                    <tt>number</tt>. The street number.
+                </li>
+                <li>
+                    <tt>apartment</tt>. The apartment number or identifier.
+                </li>
+                <li>
+                    <tt>room</tt>. The room number or identifier.
+                </li>
+                <li>
+                    <tt>extension</tt>. The extension designation or box number.
+                </li>
+                <li>
+                    <tt>direction</tt>. The cardinal direction, e.g. "North".
+                </li>
+                <li>
+                    <tt>building</tt>. The building or building part this address is located in.
+                </li>
+                <li>
+                    <tt>floor</tt>. The floor this address is located on.
+                </li>
+                <li>
+                    <tt>postOfficeBox</tt>. The post office box number or identifier.
+                </li>
+                <li>
+                    <tt>separator</tt>. A separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                </li>
+                <li>
+                    <tt>unknown</tt>. A name component value for which no type is known.
+                </li>
+              </ul>
+            </li>
+            <li>value: <tt>String</tt> (mandatory).
+The value of this street component.</li>
           </ul>
         </section>
       </section>
