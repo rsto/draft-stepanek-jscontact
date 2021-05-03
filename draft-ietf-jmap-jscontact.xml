@@ -417,8 +417,8 @@ The preference of this address in relation to other addresses.</li>
         <name>Additional properties</name>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
-          <t>Type : Anniversary[] (optional).</t>
-          <t>Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
+          <t>Type : Id[Anniversary] (optional).</t>
+          <t>These are memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
           <ul spacing="normal">
             <li>
               <t>type: <tt>String</tt> (mandatory).
