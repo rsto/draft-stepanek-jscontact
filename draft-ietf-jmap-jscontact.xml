@@ -525,16 +525,27 @@ The set of free-text or URI categories that relate to the card. The set is repre
       </section>
     </section>
     <section anchor="groupcard" numbered="true" toc="default">
-      <name>GroupCard</name>
-      <t>MIME type: <tt>application/jscontact+json;type=groupcard</tt></t>
-      <t>A GroupCard object represents a group of cards. Its members may be Cards or GroupCards.</t>
-      <t>Both GroupCard and Card share the same namespace for the <tt>uid</tt> property. All properties for a Card are also defined for GroupCard, with the exception that the <tt>kind</tt> property <bcp14>MUST</bcp14> be set to <tt>group</tt>.</t>
+      <name>CardGroup</name>
+      <t>MIME type: <tt>application/jscontact+json;type=cardgroup</tt></t>
+      <t>A CardGroup object represents a group of cards. Its members may be Cards or CardGroups.</t>
       <section anchor="group-properties" numbered="true" toc="default">
         <name>Group properties</name>
+        <section anchor="group-uid" numbered="true" toc="default">
+          <name>uid</name>
+          <t>Type: <tt>String</tt> (mandatory). The uid of this group. Both CardGroup and Card share the same namespace for the <tt>uid</tt> property.</t>
+        </section>
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (mandatory). The members of this group.</t>
-          <t>The set is represented as an object, with each key being the uid of another Card or GroupCard. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+          <t>The set is represented as an object, with each key being the uid of another Card or CardGroup. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+        </section>
+        <section anchor="group-name" numbered="true" toc="default">
+          <name>name</name>
+          <t>Type: <tt>String</tt> (optional). The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.</t>
+        </section>
+        <section anchor="group-card" numbered="true" toc="default">
+          <name>card</name>
+          <t>Type: <tt>Card</tt> (optional). The card that represents this group.</t>
         </section>
       </section>
     </section>
