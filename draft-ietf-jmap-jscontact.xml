@@ -199,7 +199,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="name" numbered="true" toc="default">
           <name>name</name>
           <t>Type: <tt>NameComponent[]</tt> (optional).</t>
-          <t>The name components of the name of the entity represented by this Card. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+          <t>The name components of the name of the entity represented by this Card. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.</t>
           <t>A NameComponent has the following properties:</t>
           <ul spacing="normal">
             <li>value: <tt>String</tt> (mandatory).
@@ -218,7 +218,10 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
                 <li>
                   <tt>additional</tt>. The value is an additional name, also known as "middle name".</li>
                 <li>
-                  <tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
+                    <tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
+                <li>
+                    <tt>separator</tt>. A separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                </li>
               </ul>
             </li>
           </ul>
@@ -378,7 +381,7 @@ Defines the preference of this language in relation to other languages of the sa
                 The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
-                  The street address. The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale. The StreetComponent object type is defined in the paragraph below.
+                  The street address. The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components. The StreetComponent object type is defined in the paragraph below.
               </t>
             </li>
             <li>locality: <tt>String</tt> (optional).
@@ -445,7 +448,7 @@ The type of this street component. The value <bcp14>MUST</bcp14> be either one o
                     <tt>postOfficeBox</tt>. The post office box number or identifier.
                 </li>
                 <li>
-                    <tt>separator</tt>. A separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                    <tt>separator</tt>. A separator for two street components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
                 </li>
                 <li>
                     <tt>unknown</tt>. A name component value for which no type is known.
