@@ -297,6 +297,14 @@ The phone value, as either a URI or a free-text phone number. Typical URI scheme
                 <li>
                   <tt>pager</tt> The number is for a pager or beeper.</li>
                 <li>
+                  <tt>text</tt> The number supports text messages (SMS).</li>
+                <li>
+                  <tt>cell</tt> The number is for a cell phone.</li>
+                <li>
+                  <tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
+                <li>
+                  <tt>video</tt> The number supports video conferencing.</li>
+                <li>
                   <tt>other</tt> The number is for some other purpose. The label property MAY be included to display next to the number to help the user identify its purpose.</li>
               </ul>
             </li>
