@@ -274,7 +274,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
 The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this email address. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this email address in relation to other email addresses.</li>
           </ul>
         </section>
@@ -304,7 +304,7 @@ The set of contact features that this phone number may be used for. The set is r
 The contexts in which to use this number. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>label: <tt>String</tt> (optional).
 A label describing the value in more detail, especially if the type property has value <tt>other</tt> (but MAY be included with any type).</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this number in relation to other numbers.</li>
           </ul>
         </section>
@@ -334,7 +334,7 @@ Used for URI resource values. Provides the media type <xref target="RFC2046" for
 The contexts in which to use this resource. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>label: <tt>String</tt> (optional).
 A label describing the value in more detail, especially if the type property has value <tt>other</tt> (but MAY be included with any type).</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this resource in relation to other resources.</li>
           </ul>
         </section>
@@ -347,7 +347,7 @@ The preference of this resource in relation to other resources.</li>
             <li>href: <tt>String</tt> (mandatory). A URI where to fetch the data of this file.</li>
             <li>mediaType: <tt>String</tt> (optional). The content-type of the file, if known.</li>
             <li>size: <tt>UnsignedInt</tt> (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this photo in relation to other photos.</li>
           </ul>
         </section>
@@ -410,7 +410,7 @@ The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             </li>
             <li>label: <tt>String</tt> (optional).
 A label describing the value in more detail.</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
                 The preference of this address in relation to other addresses.</li>
         </ul>
           <t>A StreetComponent object has the following properties:</t>
@@ -490,7 +490,7 @@ An address associated with this anniversary, e.g. the place of birth or death.</
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
           <name>personalInfo</name>
-          <t>Type: Id[PersonalInformation] (optional).</t>
+          <t>Type: <tt>Id[PersonalInformation]</tt> (optional).</t>
           <t>Defines personal information about the entity represented by this card.
 A PersonalInformation object has the following properties:</t>
           <ul spacing="normal">
