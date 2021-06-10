@@ -33,7 +33,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-04" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-05" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -274,7 +274,7 @@
           </section>
 
           <section title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY">
-              <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6350"/> are represented as &quot;Anniversary&quot; objects included in the &quot;anniversaries&quot; array (<xref target="anniversary_mapping"/>):</t>
+              <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6350"/> are represented as &quot;Anniversary&quot; objects included in the &quot;anniversaries&quot; map (<xref target="anniversary_mapping"/>):</t>
               <t><list style="symbols">
                   <t>BDAY and BIRTHPLACE are mapped to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;;<vspace blankLines='1' /></t>
                   <t>DEATHDATE and DEATHPLACE are mapped to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;;<vspace blankLines='1' /></t>
@@ -300,8 +300,8 @@
 
     {
     ...
-    "anniversaries":[
-      {
+    "anniversaries": {
+      "ANNIVERSARY-1" : {
         "type": "birth",
         "date": "1953-10-15T23:10:00Z",
         "place":{
@@ -310,7 +310,7 @@
           }
         }
       },
-      {
+      "ANNIVERSARY-2" : {
         "type": "birth",
         "date": "1953-10-15T23:10:00Z",
         "place":{
@@ -319,12 +319,12 @@
           }
         }
       },
-      {
+      "ANNIVERSARY-3" : {
         "type": "other",
         "label": "marriage date",
         "date": "1986-02-01"
       }
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -804,7 +804,7 @@
           </t>
 
           <section title="EXPERTISE">
-              <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="expertise_mapping"/>).  The &quot;type&quot; member is set to &quot;expertise&quot;.</t>
+              <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; map (<xref target="expertise_mapping"/>).  The &quot;type&quot; member is set to &quot;expertise&quot;.</t>
               <t>The INDEX parameter is represented as the index of the expertise among the declared expertises.</t>
 
               <figure anchor="expertise_mapping" title="EXPERTISE mapping example">
@@ -819,20 +819,20 @@
 
     {
     ...
-    "personalInfo":[
+    "personalInfo":{
       ...
-      {
+      "PERSINFO-1" : {
         "type": "expertise",
         "value": "chemistry",
         "level": "high"
       },
-      {
+      "PERSINFO-2" : {
         "type": "expertise",
         "value": "chinese literature",
          "level": "low"
       },
       ...
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -840,7 +840,7 @@
           </section>
 
           <section title="HOBBY">
-              <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
+              <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; map (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
               <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
 
               <figure anchor="hobby_mapping" title="HOBBY mapping example">
@@ -855,20 +855,20 @@
 
     {
     ...
-    "personalInfo":[
+    "personalInfo":{
       ...
-      {
+      "PERSINFO-1" : {
         "type": "hobby",
         "value": "reading",
         "level": "high"
       },
-      {
+      "PERSINFO-2" : {
         "type": "hobby",
         "value": "sewing",
         "level": "high"
       },
       ...
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -876,7 +876,7 @@
           </section>
 
           <section title="INTEREST">
-              <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="interest_mapping"/>).  The &quot;type&quot; member is set to &quot;interest&quot;.</t>
+              <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; map (<xref target="interest_mapping"/>).  The &quot;type&quot; member is set to &quot;interest&quot;.</t>
               <t>The INDEX parameter is represented as the index of the interest among the declared interests.</t>
 
               <figure anchor="interest_mapping" title="INTEREST mapping example">
@@ -891,20 +891,20 @@
 
     {
     ...
-    "personalInfo":[
+    "personalInfo":{
       ...
-      {
+      "PERSINFO-1" : {
         "type": "interest",
         "value": "r&b music",
         "level": "medium"
       },
-      {
+      "PERSINFO-2" : {
         "type": "interest",
         "value": "rock ’n’ roll music",
         "level": "high"
       },
       ...
-    ],
+    },
     ...
     }
         ]]></artwork>
