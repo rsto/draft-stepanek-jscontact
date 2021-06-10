@@ -33,7 +33,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-03" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-05" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -92,7 +92,7 @@
 
       <t>JSContact and vCard have a lot of semantics in common, however some differences must be outlined:
        <list style="symbols">
-      <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard properties.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named JSCard, and a group of contact cards, named JSCardGroup.<vspace blankLines='1' /></t>
+      <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard properties.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named Card, and a group of contact cards, named CardGroup.<vspace blankLines='1' /></t>
       <t>The properties that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as lists, in some cases condensed in a single value.</t>
        </list></t>
 
@@ -107,28 +107,23 @@
       <section title="Conventions Used in This Document">
       	<t>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
 
-          <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the JSCard/JSCardGroup features are written in camel case wrapped in double quotes.</t>
+          <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the Card/CardGroup features are written in camel case wrapped in double quotes.</t>
       </section>
    </section>
 
     <section title="Translating vCard properties to JSContact" anchor="vcard-jscontact-translation">
 
-      <t>This section contains the translation rules from vCard to JSCard/JSCardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
+        <t>This section contains the translation rules from vCard to Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
+
+        <t>If a vCard represents a group of contacts, those vCard properties which don't have a counterpart in CardGroup are converted into related properties of the &quot;CardGroup.card&quot; object.  In this case, the &quot;uid&quot; member of both the resulting CardGroup object and its &quot;card&quot; member MUST have the same value.</t>
 
         <section  title="Common Parameters" anchor="vcard-common-parameters">
           <t>The following mapping rules apply to parameters that are common to most of the vCard properties:</t>
           <t><list style="symbols">
-          <t>The generic values of the TYPE parameter are mapped onto the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED properties are defined in the following of the document.<vspace blankLines='1'/></t>
-          <t>The PREF parameter is mapped onto the &quot;pref&quot; property.<vspace blankLines='1'/></t>
-          <t>The MEDIATYPE parameter is mapped onto the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
+          <t>The generic values of the TYPE parameter are mapped to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.<vspace blankLines='1'/></t>
+          <t>The PREF parameter is mapped to the &quot;pref&quot; property.<vspace blankLines='1'/></t>
+          <t>The MEDIATYPE parameter is mapped to the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
           <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the &quot;localizations&quot; map of a &quot;LocalizedString&quot; member inside the matching JSContact object.<vspace blankLines='1'/></t>
-          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped onto the &quot;level&quot; property of the &quot;PersonalInformation&quot; type apart from when LEVEL is used in the EXPERTISE property; in this case, the values are converted as in the following:
-              <list style="symbols">
-                  <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
-                  <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
-                  <t>&quot;expert&quot; is converted into &quot;high&quot;.</t>
-              </list>
-          </t>
           </list></t>
       </section>
 
@@ -173,7 +168,7 @@
         </section>
 
         <section title="KIND">
-          <t>The KIND property is mapped onto the &quot;kind&quot; member (<xref target="kind_mapping"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value &quot;group&quot; is reserved for a JSCardGroup instance.</t>
+          <t>The KIND property is mapped to the &quot;kind&quot; member (<xref target="kind_mapping"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value &quot;group&quot; is reserved for a CardGroup instance.</t>
 
             <figure anchor="kind_mapping" title="KIND mapping example">
                 <artwork xml:space="preserve"><![CDATA[
@@ -202,12 +197,13 @@
       <section title="Identification Properties">
 
           <section title="FN">
-              <t>All the FN instances are globally represented through the &quot;fullName&quot; member.  The presence of multiple instances is implicitly associated with the full name translations in various languages regardless of the presence of the ALTID parameter.  Each translation corresponds to a different entry of the &quot;localizations&quot; map (<xref target="fn_n_nickname_mapping"/>).</t>
+              <t>All the FN instances are represented through the &quot;fullName&quot; member.  The presence of multiple instances is implicitly associated with the full name translations in various languages regardless of the presence of the ALTID parameter.  Each translation corresponds to a different entry of the &quot;localizations&quot; map (<xref target="fn_n_nickname_mapping"/>).</t>
+              <t>If the vCard represents a group of contacts, implementers MAY convert the FN property into either &quot;CardGroup.card.fullName&quot; or &quot;CardGroup.name&quot; or both properties.</t>
           </section>
 
           <section title="N and NICKNAME">
               <t>The N instances are converted into equivalent items of the &quot;name&quot; array (<xref target="fn_n_nickname_mapping"/>): the N components are transformed into related &quot;NameComponent&quot; objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
-              <t>Each NICKNAME instance is mapped onto an item of &quot;nickNames&quot; array.</t>
+              <t>Each NICKNAME instance is mapped to an item of &quot;nickNames&quot; array.</t>
 
               <texttable anchor="n_components" title="N components mapping">
                   <ttcol align="left">N component</ttcol>
@@ -278,11 +274,11 @@
           </section>
 
           <section title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY">
-              <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6350"/> are represented as &quot;Anniversary&quot; objects included in the &quot;anniversaries&quot; array (<xref target="anniversary_mapping"/>):</t>
+              <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6350"/> are represented as &quot;Anniversary&quot; objects included in the &quot;anniversaries&quot; map (<xref target="anniversary_mapping"/>):</t>
               <t><list style="symbols">
-                  <t>BDAY and BIRTHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;;<vspace blankLines='1' /></t>
-                  <t>DEATHDATE and DEATHPLACE are mapped onto &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;;<vspace blankLines='1' /></t>
-                  <t>ANNIVERSARY is mapped onto &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
+                  <t>BDAY and BIRTHPLACE are mapped to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;;<vspace blankLines='1' /></t>
+                  <t>DEATHDATE and DEATHPLACE are mapped to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;;<vspace blankLines='1' /></t>
+                  <t>ANNIVERSARY is mapped to &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
               </list></t>
 
               <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.</t>
@@ -304,8 +300,8 @@
 
     {
     ...
-    "anniversaries":[
-      {
+    "anniversaries": {
+      "ANNIVERSARY-1" : {
         "type": "birth",
         "date": "1953-10-15T23:10:00Z",
         "place":{
@@ -314,7 +310,7 @@
           }
         }
       },
-      {
+      "ANNIVERSARY-2" : {
         "type": "birth",
         "date": "1953-10-15T23:10:00Z",
         "place":{
@@ -323,12 +319,12 @@
           }
         }
       },
-      {
+      "ANNIVERSARY-3" : {
         "type": "other",
         "label": "marriage date",
         "date": "1986-02-01"
       }
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -345,18 +341,26 @@
 
           <section title="ADR">
               <t>An ADR property is represented as an entry of the &quot;addresses&quot; map (<xref target="adr_mapping"/>).  The entry value is an &quot;Address&quot; object.</t>
-              <t>The ADR components are transformed into the &quot;Address&quot; members as presented in <xref target="adr_components"/>.</t>
+              <t>The ADR components are transformed into the &quot;Address&quot; members as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
+              <t>The &quot;street address&quot; and &quot;extended address&quot; ADR components MAY be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
 
-              <texttable anchor="adr_components" title="ADR components mapping">
+              <texttable anchor="adr_components_vs_address_members" title="ADR components vs. Address members mapping">
                   <ttcol align="left">ADR component</ttcol>
                   <ttcol align="left">Address member</ttcol>
-                  <c>p.o. box</c><c>postOfficeBox</c>
-                  <c>extended address</c><c>extension</c>
-                  <c>street address</c><c>street</c>
                   <c>locality</c><c>locality</c>
                   <c>region</c><c>region</c>
                   <c>postal code</c><c>postcode</c>
                   <c>country name</c><c>country</c>
+              </texttable>
+
+
+              <texttable anchor="adr_components_vs_street_component_items" title="ADR components vs. StreetComponent items mapping">
+                  <ttcol align="left">ADR component</ttcol>
+                  <ttcol align="left">Single StreetComponent item</ttcol>
+                  <ttcol align="left">Combination of StreetComponent items</ttcol>
+                  <c>post office box</c><c>postOfficeBox</c><c></c>
+                  <c>extended address</c><c>extension</c><c>extension, building, floor, room, apartment</c>
+                  <c>street address</c><c>name</c><c>name, number, direction</c>
               </texttable>
 
               <t>The LABEL parameter is converted into the &quot;fullAddress&quot; member.</t>
@@ -384,7 +388,10 @@
         "fullAddress":{
           "value": "54321 Oak St\nReston\nVA\n20190\nUSA"
         },
-        "street": "54321 Oak St",
+        "street": [
+           { "name": "Oak St" },
+           { "number" : "54321" }
+        ],
         "locality": "Reston",
         "region": "VA",
         "country": "USA",
@@ -396,7 +403,10 @@
         "fullAddress":{
           "value": "12345 Elm St\nReston\nVA\n20190\nUSA"
         },
-        "street": "12345 Elm St",
+        "street": [
+           { "name": "Elm St" },
+           { "number" : "12345" }
+        ],
         "locality": "Reston",
         "region": "VA",
         "country": "USA",
@@ -413,8 +423,8 @@
 
       <section title="Communications Properties">
 
-          <section title="TEL">
-              <t>A TEL property is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The TEL-specific values of the TYPE parameter are mapped onto the &quot;features&quot; map keys.  The values that don't match a key are represented as comma-separated values of the &quot;label&quot; member.  If the &quot;features&quot; map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
+          <section title="TEL" anchor="vCard-TEL">
+              <t>A TEL property is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The TEL-specific values of the TYPE parameter are mapped to the &quot;features&quot; map keys.  The values that don't match a key are represented as comma-separated values of the &quot;label&quot; member.  If the &quot;features&quot; map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="tel_mapping" title="TEL mapping example">
@@ -552,14 +562,14 @@
       </section>
 
       <section title="Geographical Properties">
-        <t>The GEO and TZ properties are not directly mapped onto topmost JSCard/JSCardGroup members because the same information is represented through equivalent &quot;Address&quot; members.</t>
+        <t>The GEO and TZ properties are not directly mapped to topmost Card members because the same information is represented through equivalent &quot;Address&quot; members.</t>
           <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first &quot;Address&quot; object.</t>
 
           <section title="Time Zone Representation">
               <t>As specified in Section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented in three ways: as a time zone name, as a UTC offset or as a URI.
                   <list style="symbols">
-                      <t>The time zone name is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
-                      <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information, it MUST be mapped to the zone &quot;Etc/GMT&lt;sign&gt;&lt;hour&gt;:&lt;minute&gt;&quot;.<vspace blankLines='1'/></t>
+                      <t>If the TZ value is defined in the IANA timezone database, it is directly matched by the &quot;timeZone&quot; member in JSContact.<vspace blankLines='1'/></t>
+                      <t>An UTC offset MUST be converted into the related &quot;Etc/GMT&quot; time zone (e.g. the value &quot;-0500&quot; converts to &quot;Etc/GMT+5&quot;).  If the UTC offset value contains minutes information or is not an IANA timezone name, it requires special handling.<vspace blankLines='1'/></t>
                       <t>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</t>
                   </list></t>
           </section>
@@ -659,7 +669,7 @@
           </section>
 
           <section title="MEMBER">
-              <t>According to the JSContact specification, a group of contact cards is represented through a JSCardGroup (<xref target="group_example"/>).  The uids of the contact cards composing the group are included in the &quot;members&quot; map.</t>
+              <t>According to the JSContact specification, a group of contact cards is represented through a CardGroup (<xref target="group_example"/>).  The uids of the contact cards composing the group are included in the &quot;members&quot; map.</t>
               <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
 
               <figure anchor="group_example" title="Group example">
@@ -671,18 +681,7 @@
     MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
     MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
     END:VCARD
-    BEGIN:VCARD
-    VERSION:4.0
-    FN:John Doe
-    UID:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
-    END:VCARD
-    BEGIN:VCARD
-    VERSION:4.0
-    FN:Jane Doe
-    UID:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
-    END:VCARD
 
-    [
       {
         "kind": "group",
         "fullName":{ "value": "The Doe family" },
@@ -691,23 +690,38 @@
           "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
           "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
         }
-      },
-      {
-        "fullName":{ "value": "John Doe" },
-        "uid": "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af"
-      },
-      {
-        "fullName":{ "value": "Jane Doe" },
-        "uid": "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519"
       }
-    ]
         ]]></artwork>
               </figure>
-          </section>
+
+        <t>Only if the GROUP contains properties that don't have a mapping to CardGroup properties, then the CardGroup.card property MAY contain the optional Card object of this group.</t>
+
+      <figure anchor="card_member_of_cardgroup_object" title="card member of CardGroup object">
+          <artwork xml:space="preserve"><![CDATA[
+    {
+      "name": "The Doe family",
+      "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+      "members":{
+         "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
+         "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
+      },
+      "card": {
+         "fullName":{ "value": "The Doe family" },
+         "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+         "photos":{
+           "a-photo":{
+             "href": "http://www.example.com/pub/photos/jqpublic.gif"
+           }
+         }
+      }
+    }
+    ]]></artwork>
+    </figure>
+    </section>
 
 
-          <section title="RELATED">
-              <t>All the RELATED instances are globally converted into the &quot;relatedTo&quot; map (<xref target="related_mapping"/>): an entry for each entity the entity described by the JSCard is associated with.  The map keys are the &quot;uid&quot; values of the associated cards.</t>
+          <section title="RELATED" anchor="vCard-RELATED">
+              <t>All the RELATED instances are converted into the &quot;relatedTo&quot; map (<xref target="related_mapping"/>): an entry for each entity the entity described by the Card is associated with.  The map keys are the &quot;uid&quot; values of the associated cards.</t>
               <t>Each map value is a &quot;Relation&quot; object including only the &quot;relation&quot; member represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
               <t>If the relation type is unspecified, the &quot;relation&quot; member MUST be empty.</t>
 
@@ -781,10 +795,17 @@
 
       <section title="Personal Information Properties">
 
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped to the &quot;level&quot; property of the &quot;PersonalInformation&quot; type apart from when LEVEL is used in the EXPERTISE property; in this case, the values are converted as in the following:
+              <list style="symbols">
+                  <t>&quot;beginner&quot; is converted into &quot;low&quot;;</t>
+                  <t>&quot;average&quot; is converted into &quot;medium&quot;;</t>
+                  <t>&quot;expert&quot; is converted into &quot;high&quot;.</t>
+              </list>
+          </t>
+
           <section title="EXPERTISE">
-              <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="expertise_mapping"/>).  The &quot;type&quot; member is set to &quot;expertise&quot;.</t>
+              <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; map (<xref target="expertise_mapping"/>).  The &quot;type&quot; member is set to &quot;expertise&quot;.</t>
               <t>The INDEX parameter is represented as the index of the expertise among the declared expertises.</t>
-              <t>The LEVEL parameter is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="expertise_mapping" title="EXPERTISE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -798,20 +819,20 @@
 
     {
     ...
-    "personalInfo":[
+    "personalInfo":{
       ...
-      {
+      "PERSINFO-1" : {
         "type": "expertise",
         "value": "chemistry",
         "level": "high"
       },
-      {
+      "PERSINFO-2" : {
         "type": "expertise",
         "value": "chinese literature",
          "level": "low"
       },
       ...
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -819,9 +840,8 @@
           </section>
 
           <section title="HOBBY">
-              <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
+              <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; map (<xref target="hobby_mapping"/>).  The &quot;type&quot; member is set to &quot;hobby&quot;.</t>
               <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
-              <t>The LEVEL parameter is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="hobby_mapping" title="HOBBY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -835,20 +855,20 @@
 
     {
     ...
-    "personalInfo":[
+    "personalInfo":{
       ...
-      {
+      "PERSINFO-1" : {
         "type": "hobby",
         "value": "reading",
         "level": "high"
       },
-      {
+      "PERSINFO-2" : {
         "type": "hobby",
         "value": "sewing",
         "level": "high"
       },
       ...
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -856,9 +876,8 @@
           </section>
 
           <section title="INTEREST">
-              <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; array (<xref target="interest_mapping"/>).  The &quot;type&quot; member is set to &quot;interest&quot;.</t>
+              <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a &quot;PersonalInformation&quot; object in the &quot;personalInfo&quot; map (<xref target="interest_mapping"/>).  The &quot;type&quot; member is set to &quot;interest&quot;.</t>
               <t>The INDEX parameter is represented as the index of the interest among the declared interests.</t>
-              <t>The LEVEL parameter is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="interest_mapping" title="INTEREST mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -872,20 +891,20 @@
 
     {
     ...
-    "personalInfo":[
+    "personalInfo":{
       ...
-      {
+      "PERSINFO-1" : {
         "type": "interest",
         "value": "r&b music",
         "level": "medium"
       },
-      {
+      "PERSINFO-2" : {
         "type": "interest",
         "value": "rock ’n’ roll music",
         "level": "high"
       },
       ...
-    ],
+    },
     ...
     }
         ]]></artwork>
@@ -962,7 +981,7 @@
 
 
           <section title="NOTE">
-              <t>A NOTE property is mapped onto the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE instances are condensed in a single note and separated by newline.</t>
+              <t>A NOTE property is mapped to the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE instances are condensed into a single note and separated by newline.</t>
               <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).  The &quot;localizations&quot; map includes possible language-dependent alternatives.</t>
 
               <figure anchor="notes_mapping" title="NOTE mapping example">
@@ -1059,7 +1078,7 @@
           </section>
 
           <section title="UID">
-              <t>The UID property corresponds to the &quot;uid&quot; property (<xref target="uid_mapping"/>).</t>
+              <t>The UID property corresponds to the &quot;uid&quot; property (<xref target="uid_mapping"/>) in both Card and CardGroup.</t>
 
               <figure anchor="uid_mapping" title="UID mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1080,7 +1099,7 @@
           </section>
 
           <section title="CLIENTPIDMAP and PID Parameter">
-              <t>The CLIENTPIDMAP property and the PDI parameter don't have a direct match with a JSCard feature.</t>
+              <t>The CLIENTPIDMAP property and the PDI parameter don't have a direct match with a Card feature.</t>
           </section>
 
           <section title="URL">
@@ -1272,14 +1291,14 @@
             <t>The unmatched vCard properties MAY be converted into JSContact properties whose name contains the prefix &quot;ietf.org/RFC6350/&quot; followed by property name in uppercase (i.e. ietf.org/RFC6350/GENDER&quot;).</t>
         </section>
 
-        <section title="JSCard Required Properties">
-            <t>While converting a vCard into a JSCard/JSCardGroup, only the topmost &quot;uid&quot; member is mandatory.  Implementers are REQUIRED to set it when it is missing.</t>
+        <section title="Card Required Properties">
+            <t>While converting a vCard into a Card/CardGroup, only the topmost &quot;uid&quot; member is mandatory.  Implementers are REQUIRED to set it when it is missing.</t>
         </section>
 
     </section>
 
   <section title="Translating JSContact properties to vCard">
-      <t>In most of the cases, the rules about the translation from JSCard/JSCardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
+      <t>In most of the cases, the rules about the translation from Card/CardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
 
       <section title="Id">
           <t>Where a map key is of type Id, implementers are free to either ignore it or preserve it as a vCard information (e.g. a vCard parameter).</t>
@@ -1296,7 +1315,7 @@
       </section>
 
       <section title="Time Zone">
-          <t>The time zone name as represented by the &quot;timeZone&quot; property is mapped onto the TZ parameter.</t>
+          <t>The time zone name as represented by the &quot;timeZone&quot; property is mapped to the TZ parameter.</t>
           <t>Implementers MAY map an &quot;Etc/GMT&quot; time zone either preserving the time zone name or converting it into a UTC offset.</t>
       </section>
 
@@ -1310,12 +1329,16 @@
           </section>
       </section>
 
-      <section title="JSCard Unmatched Properties">
+      <section title="CardGroup">
+          <t>A CardGroup object is converted into a vCard by merging its properties with the properties of &quot;CardGroup.card&quot; object.  If the &quot;CardGroup.card.fullName&quot; property exists, it MUST be used to set the FN value.</t>
+      </section>
+
+      <section title="Card Unmatched Properties">
           <t>Both the &quot;preferredContactMethod&quot; and &quot;created&quot; members don't match any vCard property.  Implementers MAY represent them as vCard extended properties.</t>
       </section>
 
       <section title="vCard Required Properties">
-          <t>While converting a JSCard/JSCardGroup into a vCard, only the FN property is required.  Since the &quot;fullName&quot; property is optional, implementers are REQUIRED to generate an FN value when it is missing.</t>
+          <t>While converting a Card/CardGroup into a vCard, only the FN property is required.  Since both the &quot;Card.fullName&quot; and &quot;CardGroup.name&quot; properties are optional, implementers are REQUIRED to generate an FN value when it is missing.</t>
       </section>
 
   </section>

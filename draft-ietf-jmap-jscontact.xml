@@ -199,7 +199,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="name" numbered="true" toc="default">
           <name>name</name>
           <t>Type: <tt>NameComponent[]</tt> (optional).</t>
-          <t>The name components of the name of the entity represented by this Card. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+          <t>The name components of the name of the entity represented by this Card. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.</t>
           <t>A NameComponent has the following properties:</t>
           <ul spacing="normal">
             <li>value: <tt>String</tt> (mandatory).
@@ -218,7 +218,10 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
                 <li>
                   <tt>additional</tt>. The value is an additional name, also known as "middle name".</li>
                 <li>
-                  <tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
+                    <tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
+                <li>
+                    <tt>separator</tt>. A separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                </li>
               </ul>
             </li>
           </ul>
@@ -271,7 +274,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
 The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this email address. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this email address in relation to other email addresses.</li>
           </ul>
         </section>
@@ -284,7 +287,7 @@ The preference of this email address in relation to other email addresses.</li>
 The phone value, as either a URI or a free-text phone number. Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
-The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>. The allowed methods are:
+                  The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>. The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:
 </t>
               <ul spacing="normal">
                 <li>
@@ -294,6 +297,14 @@ The set of contact features that this phone number may be used for. The set is r
                 <li>
                   <tt>pager</tt> The number is for a pager or beeper.</li>
                 <li>
+                  <tt>text</tt> The number supports text messages (SMS).</li>
+                <li>
+                  <tt>cell</tt> The number is for a cell phone.</li>
+                <li>
+                  <tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
+                <li>
+                  <tt>video</tt> The number supports video conferencing.</li>
+                <li>
                   <tt>other</tt> The number is for some other purpose. The label property MAY be included to display next to the number to help the user identify its purpose.</li>
               </ul>
             </li>
@@ -301,7 +312,7 @@ The set of contact features that this phone number may be used for. The set is r
 The contexts in which to use this number. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>label: <tt>String</tt> (optional).
 A label describing the value in more detail, especially if the type property has value <tt>other</tt> (but MAY be included with any type).</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this number in relation to other numbers.</li>
           </ul>
         </section>
@@ -331,7 +342,7 @@ Used for URI resource values. Provides the media type <xref target="RFC2046" for
 The contexts in which to use this resource. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>label: <tt>String</tt> (optional).
 A label describing the value in more detail, especially if the type property has value <tt>other</tt> (but MAY be included with any type).</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this resource in relation to other resources.</li>
           </ul>
         </section>
@@ -344,7 +355,7 @@ The preference of this resource in relation to other resources.</li>
             <li>href: <tt>String</tt> (mandatory). A URI where to fetch the data of this file.</li>
             <li>mediaType: <tt>String</tt> (optional). The content-type of the file, if known.</li>
             <li>size: <tt>UnsignedInt</tt> (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.</li>
-            <li>pref: Preference (optional)
+            <li>pref: <tt>Preference</tt> (optional)
 The preference of this photo in relation to other photos.</li>
           </ul>
         </section>
@@ -375,25 +386,24 @@ Defines the preference of this language in relation to other languages of the sa
           <t>A map of address ids to Address objects, containing physical locations. An Address object has the following properties:</t>
           <ul spacing="normal">
             <li>fullAddress: <tt>LocalizedString</tt> (optional).
-The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
-            <li>street: <tt>String</tt> (optional).
-The street address. This MAY be multiple lines; newlines <bcp14>MUST</bcp14> be preserved.</li>
-            <li>extension: <tt>String</tt> (optional)
-The extended address, such as an apartment or suite number, or care-of address.</li>
+                The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
+            <li>
+              <t>street: <tt>StreetComponent[]</tt> (optional).
+                  The street address. The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components. The StreetComponent object type is defined in the paragraph below.
+              </t>
+            </li>
             <li>locality: <tt>String</tt> (optional).
 The city, town, village, post town, or other locality within which the street address may be found.</li>
             <li>region: <tt>String</tt> (optional).
 The province, such as a state, county, or canton within which the locality may be found.</li>
             <li>country: <tt>String</tt> (optional).
 The country name.</li>
-            <li>postOfficeBox: <tt>String</tt> (optional)
-The post office box.</li>
             <li>postcode: <tt>String</tt> (optional).
 The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
             <li>countryCode: <tt>String</tt> (optional).
 The ISO-3166-1 country code.</li>
             <li>coordinates: <tt>String</tt> (optional) A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
-            <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in. This <bcp14>SHOULD</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref>. Unknown time zone identifiers MAY be ignored by implementations.</li>
+            <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in. This either <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref>, or it <bcp14>MUST</bcp14> be a valid TimeZoneId as defined in FIXME <!-- xref target="RFC8984" format="default"/-->. For the latter, a corresponding time zone <bcp14>MUST</bcp14> be defined in the <tt>timeZones</tt> property.</li>
             <li>
               <t>contexts: <tt>Context[Boolean]</tt> (optional).
 The contexts of the address information. In addition to the common contexts, allowed values are:
@@ -408,8 +418,53 @@ The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             </li>
             <li>label: <tt>String</tt> (optional).
 A label describing the value in more detail.</li>
-            <li>pref: Preference (optional)
-The preference of this address in relation to other addresses.</li>
+            <li>pref: <tt>Preference</tt> (optional)
+                The preference of this address in relation to other addresses.</li>
+        </ul>
+          <t>A StreetComponent object has the following properties:</t>
+          <ul spacing="normal">
+            <li>
+              <t>type: <tt>String</tt> (mandatory).
+The type of this street component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:
+</t>
+              <ul spacing="normal">
+                <li>
+                    <tt>name</tt>. The street name.
+                </li>
+                <li>
+                    <tt>number</tt>. The street number.
+                </li>
+                <li>
+                    <tt>apartment</tt>. The apartment number or identifier.
+                </li>
+                <li>
+                    <tt>room</tt>. The room number or identifier.
+                </li>
+                <li>
+                    <tt>extension</tt>. The extension designation or box number.
+                </li>
+                <li>
+                    <tt>direction</tt>. The cardinal direction, e.g. "North".
+                </li>
+                <li>
+                    <tt>building</tt>. The building or building part this address is located in.
+                </li>
+                <li>
+                    <tt>floor</tt>. The floor this address is located on.
+                </li>
+                <li>
+                    <tt>postOfficeBox</tt>. The post office box number or identifier.
+                </li>
+                <li>
+                    <tt>separator</tt>. A separator for two street components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                </li>
+                <li>
+                    <tt>unknown</tt>. A name component value for which no type is known.
+                </li>
+              </ul>
+            </li>
+            <li>value: <tt>String</tt> (mandatory).
+The value of this street component.</li>
           </ul>
         </section>
       </section>
@@ -417,8 +472,8 @@ The preference of this address in relation to other addresses.</li>
         <name>Additional properties</name>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
-          <t>Type : Anniversary[] (optional).</t>
-          <t>Memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
+          <t>Type : Id[Anniversary] (optional).</t>
+          <t>These are memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
           <ul spacing="normal">
             <li>
               <t>type: <tt>String</tt> (mandatory).
@@ -443,8 +498,8 @@ An address associated with this anniversary, e.g. the place of birth or death.</
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
           <name>personalInfo</name>
-          <t>Type: PersonalInformation[] (optional).</t>
-          <t>A list of personal information about the entity represented by this card.
+          <t>Type: <tt>Id[PersonalInformation]</tt> (optional).</t>
+          <t>Defines personal information about the entity represented by this card.
 A PersonalInformation object has the following properties:</t>
           <ul spacing="normal">
             <li>
@@ -478,19 +533,35 @@ Indicates the level of expertise, or engagement in hobby or interest. Allowed va
           <t>Type: <tt>String[Boolean]</tt> (optional).
 The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
         </section>
+        <section anchor="timeZones" numbered="true" toc="default">
+          <name>timeZones</name>
+          <t>Type: <tt>String[TimeZone]</tt> (optional).
+              Maps identifiers of custom time zones to their time zone definitions. For a description of this property see the <tt>timeZones</tt> property definition in FIXME <!--xref target="RFC8984" format="default"/-->.</t>
+        </section>
       </section>
     </section>
     <section anchor="groupcard" numbered="true" toc="default">
-      <name>GroupCard</name>
-      <t>MIME type: <tt>application/jscontact+json;type=groupcard</tt></t>
-      <t>A GroupCard object represents a group of cards. Its members may be Cards or GroupCards.</t>
-      <t>Both GroupCard and Card share the same namespace for the <tt>uid</tt> property. All properties for a Card are also defined for GroupCard, with the exception that the <tt>kind</tt> property <bcp14>MUST</bcp14> be set to <tt>group</tt>.</t>
+      <name>CardGroup</name>
+      <t>MIME type: <tt>application/jscontact+json;type=cardgroup</tt></t>
+      <t>A CardGroup object represents a group of cards. Its members may be Cards or CardGroups.</t>
       <section anchor="group-properties" numbered="true" toc="default">
         <name>Group properties</name>
+        <section anchor="group-uid" numbered="true" toc="default">
+          <name>uid</name>
+          <t>Type: <tt>String</tt> (mandatory). The uid of this group. Both CardGroup and Card share the same namespace for the <tt>uid</tt> property.</t>
+        </section>
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (mandatory). The members of this group.</t>
-          <t>The set is represented as an object, with each key being the uid of another Card or GroupCard. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+          <t>The set is represented as an object, with each key being the uid of another Card or CardGroup. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+        </section>
+        <section anchor="group-name" numbered="true" toc="default">
+          <name>name</name>
+          <t>Type: <tt>String</tt> (optional). The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.</t>
+        </section>
+        <section anchor="group-card" numbered="true" toc="default">
+          <name>card</name>
+          <t>Type: <tt>Card</tt> (optional). The card that represents this group.</t>
         </section>
       </section>
     </section>
