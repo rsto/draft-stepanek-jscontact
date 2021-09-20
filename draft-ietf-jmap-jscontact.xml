@@ -113,17 +113,25 @@ they appear in all capitals, as shown here.</t>
           <t>In many places in JSContact a JSON map is used where the map keys are of type Id and the map values are all the same type of object.  This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key).  This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSContact object.</t>
           <t>Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two Card objects might use the same Ids in their respective <tt>photos</tt> properties.  Or within the same Card object the same Id could appear in the <tt>emails</tt> and <tt>phones</tt> properties.  These situations do not imply any semantic connections among the objects.</t>
         </section>
-        <section anchor="localizedstring" numbered="true" toc="default">
-          <name>LocalizedString</name>
-          <t>The purpose of LocalizedString is to allow for internationalisation of string values. In its simplest form it is just a string value. Optionally, the human language of this value may be specified, as well as localized variants in additional languages. A LocalizedString has the following properties:</t>
-          <ul spacing="normal">
-            <li>value: <tt>String</tt> (mandatory).
-The property value.</li>
-            <li>language: <tt>String</tt> (optional).
-The <xref target="RFC5646" format="default"/> language tag of this value, if any.</li>
-            <li>localizations: <tt>String[String]</tt> (optional).
-A map from <xref target="RFC5646" format="default"/> language tags to the value localized in that language.</li>
-          </ul>
+        <section anchor="patchobject" numbered="true" toc="default">
+          <name>PatchObject</name>
+          <t>A PatchObject is of type <tt>String[*]</tt>, and represents an unordered set of patches on a JSON object.
+          Each key is a path represented in a subset of JSON pointer format <xref target="RFC6901" />. The paths have an implicit leading <tt>/</tt>, so each key is prefixed with <tt>/</tt> before applying the JSON pointer evaluation algorithm.</t>
+          <t>A patch within a PatchObject is only valid if all of the following conditions apply:</t>
+          <ol>
+            <li>The pointer MUST NOT reference inside an array (i.e., you MUST NOT insert/delete from an array; the array MUST be replaced in its entirety instead).</li>
+            <li>All parts prior to the last (i.e., the value after the final slash) MUST already exist on the object being patched.</li>
+            <li>There MUST NOT be two patches in the PatchObject where the pointer of one is the prefix of the pointer of the other, e.g., <tt>addresses/1/city</tt> and <tt>addresses</tt>.</li>
+            <li>The value for the patch MUST be valid for the property being set (of the correct type and obeying any other applicable restrictions), or if null the property MUST be optional.</li>
+          </ol>
+          <t>The value associated with each pointer determines how to apply that patch:</t>
+            <ul>
+              <li>If null, remove the property from the patched object. If the key is not present in the parent, this a no-op.</li>
+              <li>If non-null, set the value given as the value for this property (this may be a replacement or addition to the object being patched).</li>
+            </ul>
+          <t>A PatchObject does not define its own <tt>@type</tt> property. Instead, a <tt>@type</tt> property in a patch MUST be handled as any other patched property value.</t>
+
+          <t>Implementations MUST reject in its entirety a PatchObject if any of its patches is invalid.  Implementations MUST NOT apply partial patches.</t>
         </section>
         <section anchor="preference" numbered="true" toc="default">
           <name>Preference</name>
@@ -231,12 +239,12 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
         </section>
         <section anchor="fullname" numbered="true" toc="default">
           <name>fullName</name>
-          <t>Type: <tt>LocalizedString</tt> (optional).</t>
+          <t>Type: <tt>String</tt> (optional).</t>
           <t>The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card. The purpose of this property is to define a name, even if the individual name components are not known. In addition, it is meant to provide alternative versions of the name for internationalisation. Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
         </section>
         <section anchor="nicknames" numbered="true" toc="default">
           <name>nickNames</name>
-          <t>Type: <tt>LocalizedString[]</tt> (optional).</t>
+          <t>Type: <tt>String[]</tt> (optional).</t>
           <t>The nick names of the entity represented by this card.</t>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
@@ -247,10 +255,10 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
               <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This MUST be <tt>Organization</tt>.
               </li>
-            <li>name: <tt>LocalizedString</tt> (mandatory).
+            <li>name: <tt>String</tt> (mandatory).
                 The name of this organization.
             </li>
-            <li>units: <tt>LocalizedString[]</tt> (optional).
+            <li>units: <tt>String[]</tt> (optional).
                 Additional levels of organizational unit names.
             </li>
           </ul>
@@ -263,7 +271,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
               <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This MUST be <tt>Title</tt>.
               </li>
-            <li>title: <tt>LocalizedString</tt> (mandatory).
+            <li>title: <tt>String</tt> (mandatory).
                 The title of the entity represented by this card.
             </li>
             <li>organization: <tt>Id</tt> (optional).
@@ -412,7 +420,7 @@ Defines the preference of this language in relation to other languages of the sa
               <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This MUST be <tt>Address</tt>.
               </li>
-            <li>fullAddress: <tt>LocalizedString</tt> (optional).
+            <li>fullAddress: <tt>String</tt> (optional).
                 The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
@@ -498,6 +506,31 @@ The value of this street component.</li>
           </ul>
         </section>
       </section>
+
+      <section anchor="multilingual-properties" numbered="true" toc="default">
+        <name>Multilingual properties</name>
+        <section anchor="localizations" numbered="true" toc="default">
+          <name>localizations</name>
+          <t>Type: String[PatchObject] (optional).</t>
+          <t>A map of language tags <xref target="RFC5646" /> to patches, which localize a property value into the locale of the respective language tag. The following example shows an Address object where the value <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale</t>
+         <figure>
+             <artwork><![CDATA[
+  "addresses": {
+    "addr1": {
+      "@type": "Address",
+      "city": "Tokyo",
+     }
+   },
+   "localizations": {
+     "jp": {
+        "addresses/addr1/city":"東京"
+     }
+   }]]>
+            </artwork>
+          </figure>
+          <t>A patch MUST NOT target the <tt>localizations</tt> property.</t>
+        </section>
+      </section>
       <section anchor="additional-properties" numbered="true" toc="default">
         <name>Additional properties</name>
         <section anchor="anniversaries" numbered="true" toc="default">
@@ -561,7 +594,7 @@ Indicates the level of expertise, or engagement in hobby or interest. Allowed va
         </section>
         <section anchor="notes" numbered="true" toc="default">
           <name>notes</name>
-          <t>Type: <tt>LocalizedString</tt> (optional).</t>
+          <t>Type: <tt>String</tt> (optional).</t>
           <t>Arbitrary notes about the entity represented by this card.</t>
         </section>
         <section anchor="categories" numbered="true" toc="default">
@@ -667,6 +700,7 @@ purposes. The RDAP server returns responses including Card in place of jCard whe
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
       </references>
       <references>
         <name>Informative References</name>
