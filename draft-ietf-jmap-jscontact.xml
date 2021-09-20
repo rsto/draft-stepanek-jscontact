@@ -202,6 +202,9 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>The name components of the name of the entity represented by this Card. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.</t>
           <t>A NameComponent has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>NameComponent</tt>.
+              </li>
             <li>value: <tt>String</tt> (mandatory).
 The value of this name component.</li>
             <li>
@@ -241,6 +244,9 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
           <t>Type: <tt>Id[Organization]</tt> (optional).</t>
           <t>The companies or organization names and units associated with this card. An Organization object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>Organization</tt>.
+              </li>
             <li>name: <tt>LocalizedString</tt> (mandatory).
                 The name of this organization.
             </li>
@@ -254,6 +260,9 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
           <t>Type : <tt>Id[Title]</tt> (optional).</t>
           <t>The job titles or functional positions of the entity represented by this card. A Title has object the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>Title</tt>.
+              </li>
             <li>title: <tt>LocalizedString</tt> (mandatory).
                 The title of the entity represented by this card.
             </li>
@@ -270,6 +279,9 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
           <t>Type: <tt>Id[EmailAddress]</tt> (optional).</t>
           <t>The email addresses to contact the entity represented by this card. An EmailAddress object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>EmailAddress</tt>.
+              </li>
             <li>email: <tt>String</tt> (mandatory).
 The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
@@ -281,8 +293,11 @@ The preference of this email address in relation to other email addresses.</li>
         <section anchor="phones" numbered="true" toc="default">
           <name>phones</name>
           <t>Type: <tt>Id[Phone]</tt> (optional).</t>
-          <t>The phone numbers to contact the entity represented by this card. A phone object has the following properties:</t>
+          <t>The phone numbers to contact the entity represented by this card. A Phone object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>Phone</tt>.
+              </li>
             <li>phone: <tt>String</tt> (mandatory).
 The phone value, as either a URI or a free-text phone number. Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
@@ -321,6 +336,9 @@ The preference of this number in relation to other numbers.</li>
           <t>Type: <tt>Id[Resource]</tt> (optional).</t>
           <t>The online resources and services that are associated with the entity represented by this card. A Resource object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>Resource</tt>.
+              </li>
             <li>resource: <tt>String</tt> (mandatory).
 The resource value, where the allowed value form is defined by the the <em>type</em> property. In any case the value <bcp14>MUST NOT</bcp14> be empty.</li>
             <li>
@@ -352,6 +370,9 @@ The preference of this resource in relation to other resources.</li>
           <t>A map of photo ids to File objects that contain photographs or images associated with this card. A typical use case is to include an avatar for display along the contact name.</t>
           <t>A File object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>File</tt>.
+              </li>
             <li>href: <tt>String</tt> (mandatory). A URI where to fetch the data of this file.</li>
             <li>mediaType: <tt>String</tt> (optional). The content-type of the file, if known.</li>
             <li>size: <tt>UnsignedInt</tt> (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.</li>
@@ -370,6 +391,9 @@ The preference of this photo in relation to other photos.</li>
           <t>Defines the preferred languages for contacting the entity associated with this card. The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags. The values are a (possibly empty) list of contact language preferences for this language. A valid ContactLanguage object <bcp14>MUST</bcp14> have at least one of its properties set.</t>
           <t>A ContactLanguage object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>ContactLanguage</tt>.
+              </li>
             <li>context: <tt>Context</tt> (optional).
 Defines the context in which to use this language.</li>
             <li>pref: <tt>Preference</tt> (optional).
@@ -385,6 +409,9 @@ Defines the preference of this language in relation to other languages of the sa
           <t>Type: <tt>Id[Address]</tt> (optional).</t>
           <t>A map of address ids to Address objects, containing physical locations. An Address object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>Address</tt>.
+              </li>
             <li>fullAddress: <tt>LocalizedString</tt> (optional).
                 The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
             <li>
@@ -423,6 +450,9 @@ A label describing the value in more detail.</li>
         </ul>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>StreetComponent</tt>.
+              </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
 The type of this street component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:
@@ -475,6 +505,9 @@ The value of this street component.</li>
           <t>Type : Id[Anniversary] (optional).</t>
           <t>These are memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>Anniversary</tt>.
+              </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
 Specifies the type of the anniversary. This RFC predefines the following types, but implementations MAY use additional values:
@@ -502,6 +535,9 @@ An address associated with this anniversary, e.g. the place of birth or death.</
           <t>Defines personal information about the entity represented by this card.
 A PersonalInformation object has the following properties:</t>
           <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This MUST be <tt>PersonalInformation</tt>.
+              </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
 Specifies the type for this personal information. Allowed values are:
