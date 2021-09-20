@@ -65,10 +65,10 @@
 they appear in all capitals, as shown here.</t>
       </section>
       <section anchor="vendor-specific-property-extensions-and-values" numbered="true" toc="default">
-        <name>Vendor-specific Property Extensions and Values</name>
-        <t>Vendors MAY add additional properties to JSContact objects to support their custom features. The names of these properties <bcp14>MUST</bcp14> be prefixed with a domain name controlled by the vendor to avoid conflict, e.g. "example.com/customprop".</t>
-        <t>Some JSContact properties allow vendor-specific value extensions. If so, vendor-specific values <bcp14>MUST</bcp14> be prefixed with a domain name controlled by the vendor, e.g. "example.com/customrel".</t>
-        <t>Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems as well, rather than using a vendor-specific prefix.</t>
+          <name>Vendor-specific Property Extensions and Values</name>
+          <t>Vendors MAY add additional properties to the contact object to support their custom features.  To avoid conflict, the names of these properties MUST be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customprop".  If the value is a new JSContact object, it either MUST include an "@type" property, or it MUST explicitly be specified to not require a type designator.  The type name MUST be prefixed with a domain name controlled by the vendor.</t>
+          <t>Some JSContact properties allow vendor-specific value extensions. Such vendor-specific values MUST be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customrel".</t>
+          <t>Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems as well, rather than use a vendor-specific prefix.</t>
       </section>
       <section anchor="type-signatures" numbered="true" toc="default">
         <name>Type Signatures</name>
