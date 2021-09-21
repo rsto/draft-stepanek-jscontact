@@ -201,6 +201,11 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </ul>
           <t>Note, the Relation object only has one property; it is specified as an object with a single property to allow for extension in the future.</t>
         </section>
+        <section anchor="language" numbered="true" toc="default">
+          <name>language</name>
+          <t>Type: <tt>String</tt> (optional).</t>
+          <t>This defines the locale in which free-text property values can be assumed to be written in. The value <bcp14>MUST</bcp14> be a language tag as defined in <xref target="RFC5646" />. Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> <xref target="localizations"/> property.</t>
+        </section>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
         <name>Name and Organization properties</name>
