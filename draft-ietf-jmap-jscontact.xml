@@ -152,6 +152,11 @@ they appear in all capitals, as shown here.</t>
       <t>A Card object stores information about a person, organization or company.</t>
       <section anchor="metadata-properties" numbered="true" toc="default">
         <name>Metadata properties</name>
+        <section anchor="cardtype" numbered="true" toc="default">
+          <name>@type</name>
+          <t>Type: <tt>String</tt> (mandatory).</t>
+          <t>Specifies the type of this object. This MUST be <tt>Card</tt>.</t>
+        </section>
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
@@ -620,6 +625,11 @@ The set of free-text or URI categories that relate to the card. The set is repre
       <t>A CardGroup object represents a group of cards. Its members may be Cards or CardGroups.</t>
       <section anchor="group-properties" numbered="true" toc="default">
         <name>Group properties</name>
+        <section anchor="cardgrouptype" numbered="true" toc="default">
+          <name>@type</name>
+          <t>Type: <tt>String</tt> (mandatory).</t>
+          <t>Specifies the type of this object. This MUST be <tt>CardGroup</tt>.</t>
+        </section>
         <section anchor="group-uid" numbered="true" toc="default">
           <name>uid</name>
           <t>Type: <tt>String</tt> (mandatory). The uid of this group. Both CardGroup and Card share the same namespace for the <tt>uid</tt> property.</t>
