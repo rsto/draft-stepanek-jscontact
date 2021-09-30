@@ -33,7 +33,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-05" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-06" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -123,12 +123,12 @@
           <t>The generic values of the TYPE parameter are mapped to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.<vspace blankLines='1'/></t>
           <t>The PREF parameter is mapped to the &quot;pref&quot; property.<vspace blankLines='1'/></t>
           <t>The MEDIATYPE parameter is mapped to the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
-          <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the &quot;localizations&quot; map of a &quot;LocalizedString&quot; member inside the matching JSContact object.<vspace blankLines='1'/></t>
+          <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the &quot;localizations&quot; map: the &quot;localizations&quot; key is the LANGUAGE value, the key of the related PatchObject map is the JSON pointer of the JSContact member matching the vCard property while the value is the JSContact member itself.<vspace blankLines='1'/></t>
           </list></t>
       </section>
 
-        <section  title="JSContact Id" anchor="jscontact-id">
-            <t>The rules to generate a map key of type Id are out of the scope of this document.</t>
+        <section  title="Unmapped JSContact Information" anchor="unmapped-jscontact-information">
+            <t>The rules to generate a map key of type Id as well as a value for &quot;created&quot;, &quot;language&quot; and &quot;preferredContactMethod&quot; properties are out of the scope of this document.</t>
         </section>
 
         <section title="General Properties">
@@ -197,7 +197,7 @@
       <section title="Identification Properties">
 
           <section title="FN">
-              <t>All the FN instances are represented through the &quot;fullName&quot; member.  The presence of multiple instances is implicitly associated with the full name translations in various languages regardless of the presence of the ALTID parameter.  Each translation corresponds to a different entry of the &quot;localizations&quot; map (<xref target="fn_n_nickname_mapping"/>).</t>
+              <t>All the FN instances are represented through the &quot;fullName&quot; member (<xref target="fn_n_nickname_mapping"/>).  The presence of multiple instances is implicitly associated with the full name translations in various languages regardless of the presence of the ALTID parameter.  Each translation is mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
               <t>If the vCard represents a group of contacts, implementers MAY convert the FN property into either &quot;CardGroup.card.fullName&quot; or &quot;CardGroup.name&quot; or both properties.</t>
           </section>
 
@@ -283,7 +283,7 @@
 
               <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.</t>
               <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs are converted into &quot;Address&quot; instances including only the &quot;coordinates&quot; member.  If the URI value is not a geo URI, the place is ignored.</t>
-              <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE properties are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). The &quot;fullAddress.localizations&quot; includes possible language-dependent alternatives.</t>
+              <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE properties are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="anniversary_mapping" title="BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -368,7 +368,7 @@
               <t>The TZ parameter is converted into the &quot;timeZone&quot; member.</t>
               <t>The CC parameter as defined in <xref target="RFC8605"/> is converted into the &quot;countryCode&quot; member.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
-              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). The &quot;fullAddress.localizations&quot; includes possible language-dependent alternatives.</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the &quot;fullAddress&quot; member.</t>
 
               <figure anchor="adr_mapping" title="ADR mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -579,8 +579,8 @@
       <section title="Organizational Properties">
 
           <section title="TITLE and ROLE">
-              <t>Both TITLE and ROLE properties are represented as entries of the &quot;titles&quot; map (<xref target="title_role_mapping"/>).  The entry value is a &quot;Title&quot; object whose &quot;title&quot; member includes information about the language.</t>
-              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>). The &quot;title.localizations&quot; includes possible language-dependent alternatives.</t>
+              <t>Both TITLE and ROLE properties are represented as entries of the &quot;titles&quot; map (<xref target="title_role_mapping"/>).  The entry value is a &quot;Title&quot; object whose &quot;title&quot; member includes information about the title or role.  The rules to set the &quot;organization&quot; member are out of the scope of this document.</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="title_role_mapping" title="TITLE and ROLE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -640,7 +640,7 @@
 
           <section title="ORG">
               <t>An ORG property is represented as an entry of the &quot;organizations&quot; map (<xref target="org_mapping"/>).  The entry value is an &quot;Organization&quot; object whose &quot;name&quot; member contains the organizational name and the &quot;units&quot; member contains the organizational units.</t>
-              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).  The &quot;localizations&quot; maps for both &quot;name&quot; and &quot;units&quot; include possible language-dependent alternatives.</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="org_mapping" title="ORG mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -982,7 +982,7 @@
 
           <section title="NOTE">
               <t>A NOTE property is mapped to the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE instances are condensed into a single note and separated by newline.</t>
-              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).  The &quot;localizations&quot; map includes possible language-dependent alternatives.</t>
+              <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="notes_mapping" title="NOTE mapping example">
                   <artwork xml:space="preserve"><![CDATA[
@@ -1305,8 +1305,8 @@
       </section>
 
       <section title="Localizations">
-         <t>A LocalizedString object is converted in multiple instances of the same vCard property having different values of the LANGUAGE parameter.  Implementers MAY set the ALTID parameter to couple language-based alternatives of the same value.</t>
-         <t>Note also that the components of some vCard values and their related alternatives are split into different JSContact values.  For example, the &quot;name&quot; and &quot;units&quot; values for a given language must be grouped to make a single ORG value where components are separated by &quot;;&quot;.</t>
+         <t>Each PatchObject entry value of each &quot;localizations&quot; entry is converted into a instance of the vCard property matching the JSContact member referenced by the PatchObject entry key.  The LANGUAGE parameter of such alternative MUST be set to the value of the given &quot;localizations&quot; entry.  The LANGUAGE parameter of a vCard property presenting, at least, a language-dependent alternative MUST be set to the value of the JSContact &quot;language&quot; property if it is valued.  Implementers MAY set the ALTID parameter to couple language-based alternatives of the same value.</t>
+         <t>Note also that the components of some vCard values and their language-dependent alternatives are split into different JSContact values.  For example, the &quot;name&quot; and &quot;units&quot; values for a given language must be grouped to make a single ORG value where components are separated by &quot;;&quot;.</t>
       </section>
 
       <section title="Date and Time Representations">
