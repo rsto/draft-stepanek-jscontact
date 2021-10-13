@@ -530,12 +530,12 @@ The value of this street component.</li>
   "addresses": {
     "addr1": {
       "@type": "Address",
-      "city": "Tokyo",
+      "locality": "Tokyo",
      }
    },
    "localizations": {
      "jp": {
-        "addresses/addr1/city":"東京"
+        "addresses/addr1/locality":"東京"
      }
    }]]>
             </artwork>
