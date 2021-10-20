@@ -197,7 +197,7 @@ they appear in all capitals, as shown here.</t>
         <section anchor="relatedto" numbered="true" toc="default">
           <name>relatedTo</name>
           <t>Type: <tt>String[Relation]</tt> (optional).</t>
-          <t>Relates the object to other Card objects.  This is represented as a map of the URI (or single text value) of the related objects to a possibly empty set of relation types. The Relation object has the following properties:</t>
+          <t>Relates the object to other Card and CardGroup objects.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card or CardGroup and the value defines the relation. The Relation object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
                 Specifies the type of this object. This MUST be <tt>Relation</tt>.
