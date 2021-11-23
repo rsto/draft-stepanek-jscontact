@@ -139,6 +139,10 @@ they appear in all capitals, as shown here.</t>
           <t>A preference value <bcp14>MUST</bcp14> be an integer number in the range 1 and 100. Lower values correspond to a higher level of preference, with 1 being most preferred. If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type. For example, the preference orders within emails and phone numbers are indendepent of each other. Also note that the <em>preferredContactMethod</em> property allows to define a preferred contact method across method types.</t>
         </section>
+        <section anchor="unsignedint" numbered="true" toc="default">
+          <name>UnsignedInt</name>
+          <t>Where <tt>UnsignedInt</tt> is given as a data type, it means an integer in the range 0 &lt;= value &lt;= 2<sup>53</sup>-1, represented as a JSON <tt>Number</tt>.</t>
+        </section>
         <section anchor="utcdatetime" numbered="true" toc="default">
           <name>UTCDateTime</name>
           <t>This is a string in <xref target="RFC3339" format="default"/> <tt>date-time</tt> format, with the further restrictions that any letters <bcp14>MUST</bcp14> be in uppercase, and the time offset <bcp14>MUST</bcp14> be the character <tt>Z</tt>.  Fractional second values <bcp14>MUST NOT</bcp14> be included unless non-zero and <bcp14>MUST NOT</bcp14> have trailing zeros, to ensure there is only a single representation for each date-time.</t>
@@ -235,17 +239,24 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
                 <li>
                   <tt>prefix</tt>. The value is a honorific title(s), e.g. "Mr", "Ms", "Dr".</li>
                 <li>
-                  <tt>personal</tt>. The value is a personal name(s), also known as "first name", "given name".</li>
+                  <tt>given</tt>. The value is a given name, also known as "fist name", "personal name".</li>
                 <li>
                   <tt>surname</tt>. The value is a surname, also known as "last name", "family name".</li>
                 <li>
-                  <tt>additional</tt>. The value is an additional name, also known as "middle name".</li>
+                  <tt>middle</tt>. The value is a middle name, also known as "additional name".</li>
                 <li>
-                    <tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
+                  <tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
                 <li>
-                    <tt>separator</tt>. A separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                  <tt>separator</tt>. A separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
                 </li>
               </ul>
+            </li>
+            <li>
+                <t>nth: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
+                    Defines the rank of this name components to other name components of the same type. If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
+                <t>For example, two name components of type <tt>surname</tt> may have their <tt>nth</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively. In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
+                <t>The property value does not indicate the order in which to print name components.
+                    Handling multiple name components with the same type and rank is application-specific.</t>
             </li>
           </ul>
         </section>
