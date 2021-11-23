@@ -524,9 +524,12 @@ The value of this street component.</li>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
-          <t>A map of language tags <xref target="RFC5646" /> to patches, which localize a property value into the locale of the respective language tag. The following example shows an Address object where the value <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale</t>
+          <t>A map of language tags <xref target="RFC5646" /> to patches, which localize a property value into the locale of the respective language tag. The paths in the PatchObject keys are relative to the Card object that includes the localizations property. A patch MUST NOT target the <tt>localizations</tt> property.</t>
+              <t> The following example shows a Card object, where one of its addresses <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale.</t>
          <figure>
              <artwork><![CDATA[
+  "@type": "Card",
+  ...
   "addresses": {
     "addr1": {
       "@type": "Address",
@@ -538,9 +541,8 @@ The value of this street component.</li>
         "addresses/addr1/locality":"東京"
      }
    }]]>
-            </artwork>
+             </artwork>
           </figure>
-          <t>A patch MUST NOT target the <tt>localizations</tt> property.</t>
         </section>
       </section>
       <section anchor="additional-properties" numbered="true" toc="default">
