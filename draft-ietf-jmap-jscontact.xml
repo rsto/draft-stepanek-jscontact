@@ -66,8 +66,8 @@ they appear in all capitals, as shown here.</t>
       </section>
       <section anchor="vendor-specific-property-extensions-and-values" numbered="true" toc="default">
           <name>Vendor-specific Property Extensions and Values</name>
-          <t>Vendors MAY add additional properties to the contact object to support their custom features.  To avoid conflict, the names of these properties MUST be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customprop".  If the value is a new JSContact object, it either MUST include an "@type" property, or it MUST explicitly be specified to not require a type designator.  The type name MUST be prefixed with a domain name controlled by the vendor.</t>
-          <t>Some JSContact properties allow vendor-specific value extensions. Such vendor-specific values MUST be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customrel".</t>
+          <t>Vendors MAY add additional properties to the contact object to support their custom features.  To avoid conflict, the names of these properties <bcp14>MUST</bcp14> be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customprop".  If the value is a new JSContact object, it either <bcp14>MUST</bcp14> include an "@type" property, or it <bcp14>MUST</bcp14> explicitly be specified to not require a type designator.  The type name <bcp14>MUST</bcp14> be prefixed with a domain name controlled by the vendor.</t>
+          <t>Some JSContact properties allow vendor-specific value extensions. Such vendor-specific values <bcp14>MUST</bcp14> be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customrel".</t>
           <t>Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems as well, rather than use a vendor-specific prefix.</t>
       </section>
       <section anchor="type-signatures" numbered="true" toc="default">
@@ -119,19 +119,19 @@ they appear in all capitals, as shown here.</t>
           Each key is a path represented in a subset of JSON pointer format <xref target="RFC6901" />. The paths have an implicit leading <tt>/</tt>, so each key is prefixed with <tt>/</tt> before applying the JSON pointer evaluation algorithm.</t>
           <t>A patch within a PatchObject is only valid if all of the following conditions apply:</t>
           <ol>
-            <li>The pointer MUST NOT reference inside an array (i.e., you MUST NOT insert/delete from an array; the array MUST be replaced in its entirety instead).</li>
-            <li>All parts prior to the last (i.e., the value after the final slash) MUST already exist on the object being patched.</li>
-            <li>There MUST NOT be two patches in the PatchObject where the pointer of one is the prefix of the pointer of the other, e.g., <tt>addresses/1/city</tt> and <tt>addresses</tt>.</li>
-            <li>The value for the patch MUST be valid for the property being set (of the correct type and obeying any other applicable restrictions), or if null the property MUST be optional.</li>
+            <li>The pointer <bcp14>MUST NOT</bcp14> reference inside an array (i.e., you <bcp14>MUST NOT</bcp14> insert/delete from an array; the array <bcp14>MUST</bcp14> be replaced in its entirety instead).</li>
+            <li>All parts prior to the last (i.e., the value after the final slash) <bcp14>MUST</bcp14> already exist on the object being patched.</li>
+            <li>There <bcp14>MUST NOT</bcp14> be two patches in the PatchObject where the pointer of one is the prefix of the pointer of the other, e.g., <tt>addresses/1/city</tt> and <tt>addresses</tt>.</li>
+            <li>The value for the patch <bcp14>MUST</bcp14> be valid for the property being set (of the correct type and obeying any other applicable restrictions), or if null the property <bcp14>MUST</bcp14> be optional.</li>
           </ol>
           <t>The value associated with each pointer determines how to apply that patch:</t>
             <ul>
               <li>If null, remove the property from the patched object. If the key is not present in the parent, this a no-op.</li>
               <li>If non-null, set the value given as the value for this property (this may be a replacement or addition to the object being patched).</li>
             </ul>
-          <t>A PatchObject does not define its own <tt>@type</tt> property. Instead, a <tt>@type</tt> property in a patch MUST be handled as any other patched property value.</t>
+          <t>A PatchObject does not define its own <tt>@type</tt> property. Instead, a <tt>@type</tt> property in a patch <bcp14>MUST</bcp14> be handled as any other patched property value.</t>
 
-          <t>Implementations MUST reject in its entirety a PatchObject if any of its patches is invalid.  Implementations MUST NOT apply partial patches.</t>
+          <t>Implementations <bcp14>MUST</bcp14> reject in its entirety a PatchObject if any of its patches is invalid.  Implementations <bcp14>MUST NOT</bcp14> apply partial patches.</t>
         </section>
         <section anchor="preference" numbered="true" toc="default">
           <name>Preference</name>
@@ -155,7 +155,7 @@ they appear in all capitals, as shown here.</t>
         <section anchor="cardtype" numbered="true" toc="default">
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the type of this object. This MUST be <tt>Card</tt>.</t>
+          <t>Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Card</tt>.</t>
         </section>
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
@@ -200,7 +200,7 @@ they appear in all capitals, as shown here.</t>
           <t>Relates the object to other Card and CardGroup objects.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card or CardGroup and the value defines the relation. The Relation object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                Specifies the type of this object. This MUST be <tt>Relation</tt>.
+                Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Relation</tt>.
              </li>
             <li>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
 Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
@@ -223,7 +223,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>A NameComponent has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>NameComponent</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>.
               </li>
             <li>value: <tt>String</tt> (mandatory).
 The value of this name component.</li>
@@ -265,7 +265,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
           <t>The companies or organization names and units associated with this card. An Organization object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>Organization</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
               </li>
             <li>name: <tt>String</tt> (mandatory).
                 The name of this organization.
@@ -281,7 +281,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
           <t>The job titles or functional positions of the entity represented by this card. A Title has object the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>Title</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Title</tt>.
               </li>
             <li>title: <tt>String</tt> (mandatory).
                 The title of the entity represented by this card.
@@ -300,7 +300,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
           <t>The email addresses to contact the entity represented by this card. An EmailAddress object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>EmailAddress</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt>.
               </li>
             <li>email: <tt>String</tt> (mandatory).
 The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
@@ -316,7 +316,7 @@ The preference of this email address in relation to other email addresses.</li>
           <t>The phone numbers to contact the entity represented by this card. A Phone object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>Phone</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
               </li>
             <li>phone: <tt>String</tt> (mandatory).
 The phone value, as either a URI or a free-text phone number. Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
@@ -357,7 +357,7 @@ The preference of this number in relation to other numbers.</li>
           <t>The online resources and services that are associated with the entity represented by this card. A Resource object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>Resource</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Resource</tt>.
               </li>
             <li>resource: <tt>String</tt> (mandatory).
 The resource value, where the allowed value form is defined by the the <em>type</em> property. In any case the value <bcp14>MUST NOT</bcp14> be empty.</li>
@@ -391,7 +391,7 @@ The preference of this resource in relation to other resources.</li>
           <t>A File object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>File</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>File</tt>.
               </li>
             <li>href: <tt>String</tt> (mandatory). A URI where to fetch the data of this file.</li>
             <li>mediaType: <tt>String</tt> (optional). The content-type of the file, if known.</li>
@@ -412,7 +412,7 @@ The preference of this photo in relation to other photos.</li>
           <t>A ContactLanguage object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>ContactLanguage</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>ContactLanguage</tt>.
               </li>
             <li>context: <tt>Context</tt> (optional).
 Defines the context in which to use this language.</li>
@@ -430,7 +430,7 @@ Defines the preference of this language in relation to other languages of the sa
           <t>A map of address ids to Address objects, containing physical locations. An Address object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>Address</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Address</tt>.
               </li>
             <li>fullAddress: <tt>String</tt> (optional).
                 The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
@@ -471,7 +471,7 @@ A label describing the value in more detail.</li>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>StreetComponent</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt>.
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
@@ -524,7 +524,7 @@ The value of this street component.</li>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
-          <t>A map of language tags <xref target="RFC5646" /> to patches, which localize a property value into the locale of the respective language tag. The paths in the PatchObject keys are relative to the Card object that includes the localizations property. A patch MUST NOT target the <tt>localizations</tt> property.</t>
+          <t>A map of language tags <xref target="RFC5646" /> to patches, which localize a property value into the locale of the respective language tag. The paths in the PatchObject keys are relative to the Card object that includes the localizations property. A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
               <t> The following example shows a Card object, where one of its addresses <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale.</t>
          <figure>
              <artwork><![CDATA[
@@ -553,7 +553,7 @@ The value of this street component.</li>
           <t>These are memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>Anniversary</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Anniversary</tt>.
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
@@ -583,7 +583,7 @@ An address associated with this anniversary, e.g. the place of birth or death.</
 A PersonalInformation object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This MUST be <tt>PersonalInformation</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>PersonalInformation</tt>.
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
@@ -632,7 +632,7 @@ The set of free-text or URI categories that relate to the card. The set is repre
         <section anchor="cardgrouptype" numbered="true" toc="default">
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the type of this object. This MUST be <tt>CardGroup</tt>.</t>
+          <t>Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>CardGroup</tt>.</t>
         </section>
         <section anchor="group-uid" numbered="true" toc="default">
           <name>uid</name>
