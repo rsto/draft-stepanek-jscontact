@@ -102,8 +102,6 @@ they appear in all capitals, as shown here.</t>
               <tt>private</tt>: The contact information may be used to contact the card holder in a private context.</li>
             <li>
               <tt>work</tt>: The contact information may be used to contact the card holder in a professional context.</li>
-            <li>
-              <tt>other</tt>: The contact information may be used to contact the card holder in some other context. A label property MAY be defined to identify its purpose.</li>
           </ul>
           <t>Additional allowed values may be defined in the properties or data types that make use of the Context data type, registered in a future RFC, or a vendor-specific value.</t>
         </section>
@@ -318,7 +316,9 @@ The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as de
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this email address. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>pref: <tt>Preference</tt> (optional)
-The preference of this email address in relation to other email addresses.</li>
+                The preference of this email address in relation to other email addresses.</li>
+            <li>label: <tt>String</tt> (optional).
+                A label describing the value in more detail.</li>
           </ul>
         </section>
         <section anchor="phones" numbered="true" toc="default">
@@ -350,16 +350,14 @@ The phone value, as either a URI or a free-text phone number. Typical URI scheme
                   <tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
                 <li>
                   <tt>video</tt> The number supports video conferencing.</li>
-                <li>
-                  <tt>other</tt> The number is for some other purpose. The label property MAY be included to display next to the number to help the user identify its purpose.</li>
               </ul>
             </li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this number. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>label: <tt>String</tt> (optional).
-A label describing the value in more detail, especially if the type property has value <tt>other</tt> (but MAY be included with any type).</li>
             <li>pref: <tt>Preference</tt> (optional)
-The preference of this number in relation to other numbers.</li>
+                The preference of this number in relation to other numbers.</li>
+            <li>label: <tt>String</tt> (optional).
+                A label describing the value in more detail.</li>
           </ul>
         </section>
         <section anchor="online" numbered="true" toc="default">
@@ -373,7 +371,7 @@ The preference of this number in relation to other numbers.</li>
             <li>resource: <tt>String</tt> (mandatory).
 The resource value, where the allowed value form is defined by the the <em>type</em> property. In any case the value <bcp14>MUST NOT</bcp14> be empty.</li>
             <li>
-              <t>type: <tt>String</tt> (optional, default: <tt>other</tt>).
+              <t>type: <tt>String</tt> (optional).
 The type of the resource value. Allowed values are:
 </t>
               <ul spacing="normal">
@@ -381,18 +379,16 @@ The type of the resource value. Allowed values are:
                   <tt>uri</tt> The resource value is a URI, e.g. a website link. This <bcp14>MUST</bcp14> be a valid <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
                 <li>
                   <tt>username</tt> The resource value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). The <em>label</em> property <bcp14>SHOULD</bcp14> be included to identify what service this is for. For compatibility between clients, this label <bcp14>SHOULD</bcp14> be the canonical service name, including capitalisation. e.g. <tt>Twitter</tt>, <tt>Facebook</tt>, <tt>Skype</tt>, <tt>GitHub</tt>, <tt>XMPP</tt>. The resource value may be any non-empty free text.</li>
-                <li>
-                  <tt>other</tt> The resource value is something else not covered by the above categories. A label property MAY be included to display next to the number to help the user identify its purpose. The resource value may be any non-empty free text.</li>
               </ul>
             </li>
             <li>mediaType: <tt>String</tt> (optional).
 Used for URI resource values. Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this resource. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>label: <tt>String</tt> (optional).
-A label describing the value in more detail, especially if the type property has value <tt>other</tt> (but MAY be included with any type).</li>
             <li>pref: <tt>Preference</tt> (optional)
-The preference of this resource in relation to other resources.</li>
+                The preference of this resource in relation to other resources.</li>
+            <li>label: <tt>String</tt> (optional).
+                A label describing the value in more detail. </li>
           </ul>
         </section>
         <section anchor="photos" numbered="true" toc="default">
@@ -408,7 +404,9 @@ The preference of this resource in relation to other resources.</li>
             <li>mediaType: <tt>String</tt> (optional). The content-type of the file, if known.</li>
             <li>size: <tt>UnsignedInt</tt> (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.</li>
             <li>pref: <tt>Preference</tt> (optional)
-The preference of this photo in relation to other photos.</li>
+                The preference of this photo in relation to other photos.</li>
+            <li>label: <tt>String</tt> (optional).
+                A label describing the value in more detail. </li>
           </ul>
         </section>
         <section anchor="prop-preferredContactMethod" numbered="true" toc="default">
@@ -474,10 +472,10 @@ The contexts of the address information. In addition to the common contexts, all
 The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
               </ul>
             </li>
-            <li>label: <tt>String</tt> (optional).
-A label describing the value in more detail.</li>
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this address in relation to other addresses.</li>
+            <li>label: <tt>String</tt> (optional).
+A label describing the value in more detail.</li>
         </ul>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
@@ -567,7 +565,7 @@ The value of this street component.</li>
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Anniversary</tt>.
               </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory).
+              <t>type: <tt>String</tt> (optional).
 Specifies the type of the anniversary. This RFC predefines the following types, but implementations MAY use additional values:
 </t>
               <ul spacing="normal">
@@ -575,16 +573,14 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
                   <tt>birth</tt>: a birth day anniversary</li>
                 <li>
                   <tt>death</tt>: a death day anniversary</li>
-                <li>
-                  <tt>other</tt>: an anniversary not covered by any of the known types.</li>
               </ul>
             </li>
-            <li>label: <tt>String</tt> (optional).
-A label describing the value in more detail, especially if the type property has value <tt>other</tt> (but MAY be included with any type).</li>
             <li>date: <tt>String</tt> (mandatory).
 The date of this anniversary, in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a <xref target="RFC3339" format="default"/> timestamp.</li>
             <li>place: Address (optional).
-An address associated with this anniversary, e.g. the place of birth or death.</li>
+                An address associated with this anniversary, e.g. the place of birth or death.</li>
+            <li>label: <tt>String</tt> (optional).
+                A label describing the value in more detail.</li>
           </ul>
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
@@ -607,14 +603,14 @@ Specifies the type for this personal information. Allowed values are:
                   <tt>hobby</tt>: a hobby</li>
                 <li>
                   <tt>interest</tt>: an interest</li>
-                <li>
-                  <tt>other</tt>: an information not covered by the above categories</li>
               </ul>
             </li>
             <li>value: <tt>String</tt> (mandatory).
 The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
             <li>level: <tt>String</tt> (optional)
-Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+                Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+            <li>label: <tt>String</tt> (optional).
+                A label describing the value in more detail.</li>
           </ul>
         </section>
         <section anchor="notes" numbered="true" toc="default">
