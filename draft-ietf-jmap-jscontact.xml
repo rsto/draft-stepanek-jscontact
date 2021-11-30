@@ -220,9 +220,22 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <name>Name and Organization properties</name>
         <section anchor="name" numbered="true" toc="default">
           <name>name</name>
-          <t>Type: <tt>NameComponent[]</tt> (optional).</t>
-          <t>The name components of the name of the entity represented by this Card. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.</t>
-          <t>A NameComponent has the following properties:</t>
+          <t>Type: <tt>Name</tt> (optional).</t>
+            <t>The name of the entity represented by this Card.</t>
+            <t>A Name object has the following properties</t>
+            <ul spacing="normal">
+              <li>@type: <tt>Name</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Name</tt>.
+              </li>
+              <li>components: <tt>NameComponent[]</tt> (mandatory).
+                The components making up the name. The component list <bcp14>MUST</bcp14> have at least one entry. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity. Doing so, implementations <bcp14>MAY</bcp14> ignore any components of type <tt>separator</tt>.
+            </li>
+            <li>
+          locale: <tt>String</tt> (optional).
+          The locale of the name. The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
+        </li>
+            </ul>
+          <t>A NameComponent object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>.
@@ -256,7 +269,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
                 <t>The property value does not indicate the order in which to print name components.
                     Handling multiple name components with the same type and rank is application-specific.</t>
             </li>
-          </ul>
+              </ul>
         </section>
         <section anchor="fullname" numbered="true" toc="default">
           <name>fullName</name>
