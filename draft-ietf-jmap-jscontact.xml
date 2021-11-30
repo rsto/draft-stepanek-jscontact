@@ -237,7 +237,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
                 <li>
                   <tt>prefix</tt>. The value is a honorific title(s), e.g. "Mr", "Ms", "Dr".</li>
                 <li>
-                  <tt>given</tt>. The value is a given name, also known as "fist name", "personal name".</li>
+                  <tt>given</tt>. The value is a given name, also known as "first name", "personal name".</li>
                 <li>
                   <tt>surname</tt>. The value is a surname, also known as "last name", "family name".</li>
                 <li>
@@ -245,7 +245,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
                 <li>
                   <tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
                 <li>
-                  <tt>separator</tt>. A separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                  <tt>separator</tt>. A formatting separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
                 </li>
               </ul>
             </li>
