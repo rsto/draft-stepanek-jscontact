@@ -695,18 +695,15 @@ running code, which may serve as evidence of valuable experimentation
 and feedback that have made the implemented protocols more mature.
 It is up to the individual working groups to use this information as
 they see fit".</t>
-      <section anchor="iit-cnr-registro-it" numbered="true" toc="default">
+      <section anchor="iit-cnr-registro-it-rdap-server" numbered="true" toc="default">
         <name>IIT-CNR/Registro.it</name>
         <ul spacing="normal">
           <li>Responsible Organization: Institute of Informatics and Telematics
 of National Research Council (IIT-CNR)/Registro.it</li>
           <li>Location: <eref target="https://rdap.pubtest.nic.it/">https://rdap.pubtest.nic.it/</eref></li>
           <li>Description: This implementation includes support for RDAP queries
-using data from the public test environment of .it ccTLD. The
-RDAP server does not implement any security policy because data
-returned by this server are only for experimental testing
-purposes. The RDAP server returns responses including Card in place of jCard when queries contain the parameter jscard=1.</li>
-          <li>Level of Maturity: This is a "proof of concept" research implementation.</li>
+using data from the public test environment of .it ccTLD.  The RDAP server returns responses including Card in place of jCard when queries contain the parameter jscard=1.</li>
+          <li>Level of Maturity: This is an "alpha" test implementation.</li>
           <li>Coverage: This implementation includes all of the features described in this specification.</li>
           <li>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</li>
         </ul>
