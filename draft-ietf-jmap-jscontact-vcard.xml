@@ -33,7 +33,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-06" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-08" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -202,7 +202,7 @@
           </section>
 
           <section title="N and NICKNAME">
-              <t>The N instances are converted into equivalent items of the &quot;name&quot; array (<xref target="fn_n_nickname_mapping"/>): the N components are transformed into related &quot;NameComponent&quot; objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+              <t>The N instances are converted into equivalent items of the &quot;components&quot; array of the &quot;name&quot; property (<xref target="fn_n_nickname_mapping"/>): the N components are transformed into related &quot;NameComponent&quot; objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
               <t>Each NICKNAME instance is mapped to an item of &quot;nickNames&quot; array.</t>
 
               <texttable anchor="n_components" title="N components mapping">
@@ -229,13 +229,15 @@
     {
     ...
     "fullName":{ "value": "Mr. John Q. Public, Esq." },
-    "name":[
-      { "value":"Mr.", "type": "prefix" },
-      { "value":"John", "type": "personal" },
-      { "value":"Public", "type": "surname" },
-      { "value":"Quinlan", "type": "additional" },
-      { "value":"Esq.", "type": "suffix" }
-    ],
+    "name":{
+        "components":[
+          { "value":"Mr.", "type": "prefix" },
+          { "value":"John", "type": "personal" },
+          { "value":"Public", "type": "surname" },
+          { "value":"Quinlan", "type": "additional" },
+          { "value":"Esq.", "type": "suffix" }
+        ]
+    },
     "nickNames":[
       { "value": "Johnny" }
     ],
@@ -278,7 +280,7 @@
               <t><list style="symbols">
                   <t>BDAY and BIRTHPLACE are mapped to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;birth&quot;;<vspace blankLines='1' /></t>
                   <t>DEATHDATE and DEATHPLACE are mapped to &quot;date&quot; and &quot;place&quot; where &quot;type&quot; is set to &quot;death&quot;;<vspace blankLines='1' /></t>
-                  <t>ANNIVERSARY is mapped to &quot;date&quot; where &quot;type&quot; is set to &quot;other&quot; and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
+                  <t>ANNIVERSARY is mapped to &quot;date&quot; where &quot;type&quot; is empty and &quot;label&quot; is set to a value describing in detail the kind of anniversary (e.g. &quot;marriage date&quot; for the wedding anniversary).</t>
               </list></t>
 
               <t>Both birth and death places are represented as instances of the &quot;Address&quot; object.</t>
@@ -320,7 +322,6 @@
         }
       },
       "ANNIVERSARY-3" : {
-        "type": "other",
         "label": "marriage date",
         "date": "1986-02-01"
       }
@@ -424,7 +425,7 @@
       <section title="Communications Properties">
 
           <section title="TEL" anchor="vCard-TEL">
-              <t>A TEL property is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The TEL-specific values of the TYPE parameter are mapped to the &quot;features&quot; map keys.  The values that don't match a key are represented as comma-separated values of the &quot;label&quot; member.  If the &quot;features&quot; map is empty and the &quot;label&quot; member is not empty, the &quot;other&quot; feature is added.  The &quot;phone&quot; member is set to the TEL value.</t>
+              <t>A TEL property is represented as an entry of the &quot;phones&quot; map (<xref target="tel_mapping"/>).  The entry value is a &quot;Phone&quot; object.  The TEL-specific values of the TYPE parameter are mapped to the &quot;features&quot; map keys.  The values that don't match a key are represented as comma-separated values of the &quot;label&quot; member.  The &quot;phone&quot; member is set to the TEL value.</t>
               <t>The PREF and TYPE parameters are mapped according to the rules as defined in (<xref target="vcard-common-parameters"/>).</t>
 
               <figure anchor="tel_mapping" title="TEL mapping example">
