@@ -312,6 +312,31 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
             </li>
           </ul>
         </section>
+        <section anchor="grammaticalGender" numbered="true" toc="default">
+          <name>grammaticalGender</name>
+          <t>Type: <tt>String</tt> (optional).
+            Defines the grammatical gender to use when addressing or referring to that contact. Several human language require a grammatical gender for use in salutations and other grammatical constructs. Allowed values are: </t>
+          <ul spacing="normal">
+            <li>
+              <tt>animate</tt>
+            </li>
+            <li>
+              <tt>female</tt>
+            </li>
+            <li>
+              <tt>inanimate</tt>
+            </li>
+            <li>
+              <tt>male</tt>
+            </li>
+            <li>
+              <tt>neuter</tt>
+            </li>
+          </ul>
+
+          <t>Note that the grammatical gender does not allow to infer the gender identities or biological sex of the contact. The <tt>localizations</tt> property (<xref target="localizations"/>) <bcp14>MAY</bcp14> override the grammatical gender by language.</t>
+
+        </section>
       </section>
       <section anchor="contact-and-resource-properties" numbered="true" toc="default">
         <name>Contact and Resource properties</name>
