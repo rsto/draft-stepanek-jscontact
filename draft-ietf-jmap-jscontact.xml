@@ -312,31 +312,44 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
             </li>
           </ul>
         </section>
-        <section anchor="grammaticalGender" numbered="true" toc="default">
-          <name>grammaticalGender</name>
-          <t>Type: <tt>String</tt> (optional).
-            Defines the grammatical gender to use when addressing or referring to that contact. Several human language require a grammatical gender for use in salutations and other grammatical constructs. Allowed values are: </t>
+
+        <section anchor="speakToAs" numbered="true" toc="default">
+          <name>speakToAs</name>
+          <t>Type: <tt>SpeakToAs</tt> (optional).</t>
+          <t>Provides information how to address, speak to or refer to the entity that is represented by this card. A SpeakToAs object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
-            <li>
-              <tt>animate</tt>
-            </li>
-            <li>
-              <tt>female</tt>
-            </li>
-            <li>
-              <tt>inanimate</tt>
-            </li>
-            <li>
-              <tt>male</tt>
-            </li>
-            <li>
-              <tt>neuter</tt>
-            </li>
-          </ul>
-
-          <t>Note that the grammatical gender does not allow to infer the gender identities or biological sex of the contact. The <tt>localizations</tt> property (<xref target="localizations"/>) <bcp14>MAY</bcp14> override the grammatical gender by language.</t>
-
-        </section>
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>SpeakToAs</tt>.
+              </li>
+              <li>
+                <t>grammaticalGender: <tt>String</tt> (optional).
+                  Defines which grammatical gender to use in salutations and other grammatical constructs. Allowed values are:</t>
+                <ul spacing="normal">
+                  <li>
+                    <tt>animate</tt>
+                  </li>
+                  <li>
+                    <tt>female</tt>
+                  </li>
+                  <li>
+                    <tt>inanimate</tt>
+                  </li>
+                  <li>
+                    <tt>male</tt>
+                  </li>
+                  <li>
+                    <tt>neuter</tt>
+                  </li>
+                </ul>
+                <t>Note that the grammatical gender does not allow to infer the gender identities or biological sex of the contact.</t>
+              </li>
+              <li>
+                <t>pronouns: <tt>String</tt> (optional).
+                  Defines the gender pronouns that the contact chooses to use for themselves. Any value or form is allowed. Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>.</t>
+              </li>
+            </ul>
+            <t>The property values <bcp14>SHOULD</bcp14> be localized in the language defined in the <tt>language</tt> property. They <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</t>
+          </section>
       </section>
       <section anchor="contact-and-resource-properties" numbered="true" toc="default">
         <name>Contact and Resource properties</name>
