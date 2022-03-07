@@ -33,7 +33,7 @@
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
 
-<rfc category="std" docName="draft-ietf-jmap-jscontact-vcard-09" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-calext-jscontact-vcard-00" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
        
@@ -67,14 +67,14 @@
 
     <date/>
     <area>Applications</area>
-    <workgroup>jmap</workgroup>
+    <workgroup>CalExt</workgroup>
     <keyword>JSON</keyword>
     <keyword>contacts</keyword>
     <keyword>vCard</keyword>
     <keyword>jCard</keyword>
     
     <abstract>
-      <t>This document defines how to convert contact information as defined in the JSContact <xref target="draft-ietf-jmap-jscontact"/> specification from and to vCard.</t>
+      <t>This document defines how to convert contact information as defined in the JSContact <xref target="draft-ietf-calext-jscontact"/> specification from and to vCard.</t>
     </abstract>
   </front>
 
@@ -83,9 +83,9 @@
 
     <section title="Motivation">
 
-      <t>The JSContact specification <xref target="draft-ietf-jmap-jscontact"/> has been defined to represent contact card information as a more efficient alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
+      <t>The JSContact specification <xref target="draft-ietf-calext-jscontact"/> has been defined to represent contact card information as a more efficient alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
       <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification.</t>
-      <t>To facilitate this, this document defines how to convert contact information as defined in the JSContact <xref target="draft-ietf-jmap-jscontact"/> specification from and to vCard.</t>
+      <t>To facilitate this, this document defines how to convert contact information as defined in the JSContact <xref target="draft-ietf-calext-jscontact"/> specification from and to vCard.</t>
     </section>
 
     <section title="Scope and Caveats">
@@ -121,7 +121,7 @@
         <section  title="Common Parameters" anchor="vcard-common-parameters">
           <t>The following mapping rules apply to parameters that are common to most of the vCard properties:</t>
           <t><list style="symbols">
-          <t>The generic values of the TYPE parameter are mapped to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-jmap-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.<vspace blankLines='1'/></t>
+          <t>The generic values of the TYPE parameter are mapped to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="draft-ietf-calext-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.<vspace blankLines='1'/></t>
           <t>The PREF parameter is mapped to the &quot;pref&quot; property.<vspace blankLines='1'/></t>
           <t>The MEDIATYPE parameter is mapped to the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
           <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the &quot;localizations&quot; map: the &quot;localizations&quot; key is the LANGUAGE value, the key of the related PatchObject map is the JSON pointer of the JSContact member matching the vCard property while the value is the JSContact member itself.<vspace blankLines='1'/></t>
@@ -1411,7 +1411,7 @@
     </references>
     
     <references title="Informative References">
-      <reference anchor="draft-ietf-jmap-jscontact" target="https://datatracker.ietf.org/doc/draft-ietf-jmap-jscontact/">
+      <reference anchor="draft-ietf-calext-jscontact" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscontact/">
         <front><title>JSContact: A JSON representation of contact data</title>
           <author/>
           <date/>
