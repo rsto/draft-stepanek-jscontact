@@ -419,14 +419,38 @@ The contexts in which to use this number. The value for each key in the object <
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Resource</tt>.
               </li>
             <li>resource: <tt>String</tt> (mandatory).
-The resource value, where the allowed value form is defined by the the <em>type</em> property. In any case the value <bcp14>MUST NOT</bcp14> be empty.</li>
+The resource value, where the allowed value form is defined by the the <em>type</em> property. If the value form is URI, then the property value <bcp14>MUST</bcp14> be a valid <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates. In any case the value <bcp14>MUST NOT</bcp14> be empty.</li>
             <li>
               <t>type: <tt>String</tt> (optional).
-The type of the resource value. Allowed values are:
+The type of the resource. Allowed values are:
 </t>
               <ul spacing="normal">
                 <li>
-                  <tt>uri</tt> The resource value is a URI, e.g. a website link. This <bcp14>MUST</bcp14> be a valid <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+                  <tt>audio</tt> The resource is a digital sound URI, such as a recording of proper pronunciation of the name of this card.
+                </li>
+                <li>
+                  <tt>calendar</tt> The resource is a calendar URI associated with the entity represented by this card.
+                </li>
+                <li>
+                   <tt>contact</tt> The resource is an alternative contact method URI to contact the entity represented by this card. This typically is a web contact form using the "https" URI scheme, but may be any other.
+                </li>
+                <li>
+                   <tt>directory</tt> The resource is a directory service URI where the entity represented by this card can be found in. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.
+                </li>
+                <li>
+                   <tt>directorySource</tt> The resource is a directory service entry URI of the entity represented by this card. In contrast to the "directory" type this resource only provides the means to access directory information for this entity.
+                </li>
+                <li>
+                   <tt>freeBusy</tt> The resource is a free-busy calendaring URI for the entity represented by this card.
+                </li>
+                <li>
+                   <tt>logo</tt> The resource is a graphic logo URI associated with the entity represented by this card.
+                </li>
+                <li>
+                   <tt>publicKey</tt> The resorce is a cryptograhic public key or certificate URI associated with the entity represented by this card.
+                </li>
+                <li>
+                  <tt>uri</tt> The resource value is any URI, e.g. a website link.</li>
                 <li>
                   <tt>username</tt> The resource value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). The <em>label</em> property <bcp14>SHOULD</bcp14> be included to identify what service this is for. For compatibility between clients, this label <bcp14>SHOULD</bcp14> be the canonical service name, including capitalisation. e.g. <tt>Twitter</tt>, <tt>Facebook</tt>, <tt>Skype</tt>, <tt>GitHub</tt>, <tt>XMPP</tt>. The resource value may be any non-empty free text.</li>
               </ul>
