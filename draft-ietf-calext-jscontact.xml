@@ -465,6 +465,22 @@ The contexts in which to use this resource. The value for each key in the object
                 A label describing the value in more detail. </li>
           </ul>
         </section>
+        <section anchor="scheduling" numbered="true" toc="default">
+          <name>scheduling</name>
+          <t>Type: <tt>Id[Scheduling]</tt> (optional).</t>
+          <t>The methods by which the entity receives calendar scheduling invitations and updates. A Scheduling object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Scheduling</tt>.
+            </li>
+            <li>sendTo: <tt>String[String]</tt> (mandatory).
+                The keys in the property value are the available methods for scheduling. The value is a URI for the method specified in the key. This <bcp14>MUST</bcp14> be a valid "sendTo" property value as specified in <xref target="RFC8984" format="default" section="4.4.6"/> and updates.
+            </li>
+            <li>pref: <tt>Preference</tt> (optional)
+                The preference of this scheduling object in relation to other scheduling objects.
+            </li>
+          </ul>
+        </section>
         <section anchor="photos" numbered="true" toc="default">
           <name>photos</name>
           <t>Type: <tt>Id[File]</tt> (optional).</t>
