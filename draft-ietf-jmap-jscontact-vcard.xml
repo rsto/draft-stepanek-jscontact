@@ -152,10 +152,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
        ...
        "a-source":{
+         "@type": "Resource",
          "type": "directorySource",
          "resource": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
        },
@@ -180,6 +182,7 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "kind": "individual",
     ...
@@ -227,19 +230,21 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
-    "fullName":{ "value": "Mr. John Q. Public, Esq." },
+    "fullName": "Mr. John Q. Public, Esq.",
     "name":{
+        "@type": "Name",
         "components":[
-          { "value":"Mr.", "type": "prefix" },
-          { "value":"John", "type": "personal" },
-          { "value":"Public", "type": "surname" },
-          { "value":"Quinlan", "type": "additional" },
-          { "value":"Esq.", "type": "suffix" }
+          { "@type": "NameComponent", "value":"Mr.", "type": "prefix" },
+          { "@type": "NameComponent", "value":"John", "type": "personal" },
+          { "@type": "NameComponent", "value":"Public", "type": "surname" },
+          { "@type": "NameComponent", "value":"Quinlan", "type": "additional" },
+          { "@type": "NameComponent", "value":"Esq.", "type": "suffix" }
         ]
     },
     "nickNames":[
-      { "value": "Johnny" }
+      "Johnny"
     ],
     ...
     }
@@ -261,10 +266,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "photos":{
        ...
        "a-photo":{
+         "@type": "File",
          "href": "http://www.example.com/pub/photos/jqpublic.gif"
        },
        ...
@@ -301,27 +308,29 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "anniversaries": {
       "ANNIVERSARY-1" : {
+        "@type": "Anniversary",
         "type": "birth",
         "date": "1953-10-15T23:10:00Z",
         "place":{
-          "fullAddress":{
-            "value": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
-          }
+          "@type": "Address",
+          "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
         }
       },
       "ANNIVERSARY-2" : {
+        "@type": "Anniversary",
         "type": "birth",
         "date": "1953-10-15T23:10:00Z",
         "place":{
-          "fullAddress":{
-            "value": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
-          }
+          "@type": "Address",
+          "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
         }
       },
       "ANNIVERSARY-3" : {
+        "@type": "Anniversary",
         "label": "marriage date",
         "date": "1986-02-01"
       }
@@ -404,16 +413,16 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "addresses":{
       "work-address" :{
+        "@type": "Address",
         "contexts":{ "work": true },
-        "fullAddress":{
-          "value": "54321 Oak St\nReston\nVA\n20190\nUSA"
-        },
+        "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
         "street": [
-           { "name": "Oak St" },
-           { "number" : "54321" }
+           { "@type": "StreetComponent", "type": "name", "value": "Oak St" },
+           { "@type": "StreetComponent", "type": "number", "value": "54321" }
         ],
         "locality": "Reston",
         "region": "VA",
@@ -422,13 +431,12 @@
         "countryCode": "US"
       },
       "private-address":{
+        "@type": "Address",
         "contexts":{ "private": true },
-        "fullAddress":{
-          "value": "12345 Elm St\nReston\nVA\n20190\nUSA"
-        },
+        "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
         "street": [
-           { "name": "Elm St" },
-           { "number" : "12345" }
+           { "@type": "StreetComponent", "type": "name", "value": "Elm St" },
+           { "@type": "StreetComponent", "type": "number", "value": "12345" }
         ],
         "locality": "Reston",
         "region": "VA",
@@ -461,15 +469,18 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "phones":{
       "a-phone":{
+        "@type": "Phone",
         "contexts":{ "private": true },
         "features":{ "voice": true },
         "phone": "tel:+1-555-555-5555;ext=5555",
         "pref": 1
       },
       "another-phone":{
+        "@type": "Phone",
         "contexts":{ "private": true },
         "phone": "tel:+33-01-23-45-67"
       }
@@ -495,13 +506,16 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "emails":{
       "work-email":{
+        "@type": "EmailAddress",
         "contexts":{ "work": true },
         "email": "jqpublic@xyz.example.com"
       },
       "private-email":{
+        "@type": "EmailAddress",
         "contexts":{ "private", true },
         "email": "jane_doe@example.com",
         "pref": 1
@@ -526,10 +540,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       {
+        "@type": "Resource",
         "type": "username",
         "label": "XMPP",
         "value": "alice@example.com"
@@ -559,20 +575,24 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "preferredContactLanguages":{
       "en":[
         {
+          "@type": "ContactLanguage",
           "context": "work",
           "pref": 1
         }
       ],
       "fr":[
         {
+          "@type": "ContactLanguage",
           "context": "work",
           "pref": 2
         },
         {
+          "@type": "ContactLanguage",
           "context": "private"
         }
       ]
@@ -616,13 +636,16 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "titles":{
       "a-title":{
-        "title":{ "value" : "Project Leader" }
+        "@type": "Title",
+        "title": "Project Leader"
       },
       "another-title":{
-        "title":{ "value" : "Research Scientist" }
+        "@type": "Title",
+        "title": "Research Scientist"
       }
     },
     ...
@@ -645,10 +668,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       "a-logo":{
+        "@type": "Resource",
         "type": "logo",
         "resource": "http://www.example.com/pub/logos/abccorp.jpg"
       },
@@ -674,13 +699,15 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "organizations":{
       "an-organization":{
-        "name":{ "value": "ABC, Inc." },
+        "@type": "Organization",
+        "name": "ABC, Inc.",
         "units":[
-          { "value": "North American Division" },
-          { "value": "Marketing" }
+          "North American Division",
+          "Marketing"
         ]
       }
     },
@@ -705,8 +732,9 @@
     END:VCARD
 
       {
+        "@type": "CardGroup",
         "kind": "group",
-        "fullName":{ "value": "The Doe family" },
+        "fullName": "The Doe family",
         "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
         "members":{
           "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
@@ -721,6 +749,7 @@
       <figure anchor="card_member_of_cardgroup_object" title="card member of CardGroup object">
           <artwork xml:space="preserve"><![CDATA[
     {
+      "@type": "CardGroup",
       "name": "The Doe family",
       "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
       "members":{
@@ -728,10 +757,12 @@
          "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
       },
       "card": {
-         "fullName":{ "value": "The Doe family" },
+         "@type": "Card",
+         "fullName": "The Doe family",
          "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
          "photos":{
            "a-photo":{
+             "@type": "File",
              "href": "http://www.example.com/pub/photos/jqpublic.gif"
            }
          }
@@ -759,19 +790,23 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "relatedTo":{
       {
+        "@type": "Relation",
         "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6":{
           "relation":{ "friend": true }
         }
       },
       {
+        "@type": "Relation",
         "http://example.com/directory/jdoe.vcf":{
           "relation":{ "contact": true }
         }
       },
       {
+        "@type": "Relation",
         "Please contact my assistant Jane Doe for any inquiries.":{
           "relation":{ }
         }
@@ -797,10 +832,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       "a-contact-uri":{
+        "@type": "Resource",
         "type": "contact",
         "resource": "mailto:contact@example.com",
         "pref": 1
@@ -839,15 +876,18 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "personalInfo":{
       ...
       "PERSINFO-1" : {
+        "@type": "PersonalInformation",
         "type": "expertise",
         "value": "chemistry",
         "level": "high"
       },
       "PERSINFO-2" : {
+        "@type": "PersonalInformation",
         "type": "expertise",
         "value": "chinese literature",
          "level": "low"
@@ -875,15 +915,18 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "personalInfo":{
       ...
       "PERSINFO-1" : {
+        "@type": "PersonalInformation",
         "type": "hobby",
         "value": "reading",
         "level": "high"
       },
       "PERSINFO-2" : {
+        "@type": "PersonalInformation",
         "type": "hobby",
         "value": "sewing",
         "level": "high"
@@ -911,15 +954,18 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "personalInfo":{
       ...
       "PERSINFO-1" : {
+        "@type": "PersonalInformation",
         "type": "interest",
         "value": "r&b music",
         "level": "medium"
       },
       "PERSINFO-2" : {
+        "@type": "PersonalInformation",
         "type": "interest",
         "value": "rock ’n’ roll music",
         "level": "high"
@@ -950,12 +996,15 @@
     {
     ...
     "online":{
+      "@type": "Card",
       ...
       "an-org-directory":{
+        "@type": "Resource",
         "type": "directory",
         "resource": "http://directory.mycompany.example.com"
       },
       "another-org-directory":{
+        "@type": "Resource",
         "type": "directory",
         "resource": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
         "pref": 1
@@ -985,6 +1034,7 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "categories":{
       "INTERNET": true,
@@ -1013,10 +1063,9 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
-    "notes": {
-        "value": "This fax number is operational 0800 to 1715 EST, Mon-Fri."
-    },
+    "notes": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
     ...
     }
         ]]></artwork>
@@ -1036,6 +1085,7 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
     ...
@@ -1058,6 +1108,7 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "updated": "1995-10-31T22:27:10Z",
     ...
@@ -1080,10 +1131,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       "a-sound":{
+        "@type": "Resource",
         "type": "audio",
         "resource": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
       },
@@ -1108,6 +1161,7 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
     ...
@@ -1134,10 +1188,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       "an-url":{
+        "@type": "Resource",
         "type": "uri",
         "resource": "http://example.org/restaurant.french/~chezchic.html"
       },
@@ -1170,10 +1226,12 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       "a-key":{
+        "@type": "Resource",
         "type": "publicKey",
         "resource": "http://www.example.com/keys/jdoe.cer"
       },
@@ -1204,15 +1262,18 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       "an-fburl":{
+        "@type": "Resource",
         "type": "freeBusy",
         "resource": "http://www.example.com/busy/janedoe",
         "pref": 1
       },
       "another-fburl":{
+        "@type": "Resource",
         "type": "freeBusy",
         "resource": "ftp://example.com/busy/project-a.ifb",
         "mediaType": "text/calendar"
@@ -1240,16 +1301,19 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "scheduling":{
       ...
       "a-caladruri":{
+        "@type": "Scheduling",
         "sendTo": {
           "imip": "mailto:janedoe@example.com"
         },
         "pref": 1
       },
       "another-caladruri":{
+        "@type": "Scheduling",
         "sendTo": {
             "imip": "http://example.com/calendar/jdoe"
         }
@@ -1277,15 +1341,18 @@
     END:VCARD
 
     {
+    "@type": "Card",
     ...
     "online":{
       ...
       "a-caluri":{
+        "@type": "Resource",
         "type": "calendar",
         "resource": "http://cal.example.com/calA",
         "pref": 1
       },
       "another-caluri":{
+        "@type": "Resource",
         "type": "calendar",
         "resource": "ftp://ftp.example.com/calA.ics",
         "mediaType": "text/calendar"
