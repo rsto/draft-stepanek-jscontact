@@ -608,7 +608,7 @@ The type of this street component. The value <bcp14>MUST</bcp14> be either one o
                     <tt>separator</tt>. A separator for two street components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
                 </li>
                 <li>
-                    <tt>unknown</tt>. A name component value for which no type is known.
+                    <tt>unknown</tt>. A street component value for which no type is known.
                 </li>
               </ul>
             </li>
