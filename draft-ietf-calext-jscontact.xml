@@ -410,10 +410,32 @@ The contexts in which to use this number. The value for each key in the object <
                 A label describing the value in more detail.</li>
           </ul>
         </section>
-        <section anchor="online" numbered="true" toc="default">
-          <name>online</name>
+        <section anchor="onlineservices" numbered="true" toc="default">
+          <name>onlineServices</name>
+          <t>Type: <tt>Id[OnlineService]</tt> (optional).</t>
+          <t>The online services that are associated with the entity represented by this card. This can be messaging services, social media profiles, and other. An OnlineService object has the following properties, of which at least either the <tt>uri</tt> property or both the <tt>username</tt> and <tt>service</tt> properties <bcp14>MUST</bcp14> be set:</t>
+          <ul spacing="normal">
+              <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
+              </li>
+            <li>service: <tt>String</tt> (optional).
+The name of the online service or protocol. This <bcp14>SHOULD</bcp14> be the canonical service name including capitalisation. Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Twitter</tt>, <tt>XMPP</tt>.</li>
+            <li>uri: <tt>String</tt> (optional).
+The service-specific URI of the entity represented by this card.</li>
+            <li>username: <tt>String</tt> (optional).
+The service-specific user name of the entity represented by this card. If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
+            <li>contexts: <tt>Context[Boolean]</tt> (optional)
+The contexts in which to use this service. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+            <li>pref: <tt>Preference</tt> (optional)
+                The preference of this service in relation to other services.</li>
+            <li>label: <tt>String</tt> (optional).
+                A label describing the value in more detail. </li>
+          </ul>
+        </section>
+        <section anchor="resources" numbered="true" toc="default">
+          <name>resources</name>
           <t>Type: <tt>Id[Resource]</tt> (optional).</t>
-          <t>The online resources and services that are associated with the entity represented by this card. A Resource object has the following properties:</t>
+          <t>The digital resources that are associated with the entity represented by this card. A Resource object has the following properties:</t>
           <ul spacing="normal">
               <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Resource</tt>.
@@ -451,8 +473,6 @@ The type of the resource. Allowed values are:
                 </li>
                 <li>
                   <tt>uri</tt> The resource value is any URI, e.g. a website link.</li>
-                <li>
-                  <tt>username</tt> The resource value is a username associated with the entity represented by this card (e.g. for social media, or an IM client). The <em>label</em> property <bcp14>SHOULD</bcp14> be included to identify what service this is for. For compatibility between clients, this label <bcp14>SHOULD</bcp14> be the canonical service name, including capitalisation. e.g. <tt>Twitter</tt>, <tt>Facebook</tt>, <tt>Skype</tt>, <tt>GitHub</tt>, <tt>XMPP</tt>. The resource value may be any non-empty free text.</li>
               </ul>
             </li>
             <li>mediaType: <tt>String</tt> (optional).
