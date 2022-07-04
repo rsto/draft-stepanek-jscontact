@@ -457,10 +457,10 @@ The type of the resource. Allowed values are:
                    <tt>contact</tt> The resource is an alternative contact method URI to contact the entity represented by this card. This typically is a web contact form using the "https" URI scheme, but may be any other.
                 </li>
                 <li>
-                   <tt>directory</tt> The resource is a directory service URI where the entity represented by this card can be found in. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.
+                   <tt>directory</tt> The resource is a directory service where the entity represented by this card is part of. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory. The resource value <bcp14>MUST</bcp14> be a URI.
                 </li>
                 <li>
-                   <tt>directorySource</tt> The resource is a directory service entry URI of the entity represented by this card. In contrast to the "directory" type this resource only provides the means to access directory information for this entity.
+                   <tt>directoryEntry</tt> The resource is a directory entry of the entity represented by this card. In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.
                 </li>
                 <li>
                    <tt>freeBusy</tt> The resource is a free-busy calendaring URI for the entity represented by this card.
