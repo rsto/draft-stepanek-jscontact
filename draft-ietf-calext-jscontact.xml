@@ -758,6 +758,7 @@ The set of free-text or URI categories that relate to the card. The set is repre
                   The set of property members of this property group. It <bcp14>MUST</bcp14> contain at least one member to be valid.
                   The keys are the path to a property, encoded as a JSON pointer <xref target="RFC6901"/>
                   where the leading <tt>/</tt> character is implicit (a pointer implicitly starts at the top-level of the Card or CardGroup).
+                  Any path that points at or into the <tt>propertyGroups</tt> property <bcp14>MUST</bcp14> be ignored.
                   The values of the set <bcp14>MUST</bcp14> be <tt>true</tt>.
               </li>
           </ul>
