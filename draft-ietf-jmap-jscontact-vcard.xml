@@ -5,6 +5,8 @@
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'>
   <!ENTITY RFC3339 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml'>
+  <!ENTITY RFC5646 PUBLIC ''
+   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5646.xml'>
   <!ENTITY RFC6350 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6350.xml'>
   <!ENTITY RFC6473 PUBLIC ''
@@ -38,7 +40,7 @@
 <rfc category="std" docName="draft-ietf-calext-jscontact-vcard-01" ipr="trust200902">
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
-       
+
     <author fullname="Mario Loffredo" initials="M." surname="Loffredo">
       <organization>IIT-CNR/Registro.it</organization>
       <address>
@@ -74,7 +76,7 @@
     <keyword>contacts</keyword>
     <keyword>vCard</keyword>
     <keyword>jCard</keyword>
-    
+
     <abstract>
       <t>This document defines how to convert contact information as defined in the JSContact <xref target="I-D.ietf-calext-jscontact"/> specification from and to vCard.</t>
     </abstract>
@@ -85,9 +87,9 @@
 
     <section title="Motivation">
 
-      <t>The JSContact specification <xref target="I-D.ietf-calext-jscontact"/> has been defined to represent contact card information as a more efficient alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
-      <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that just support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification.</t>
-      <t>To facilitate this, this document defines how to convert contact information as defined in the JSContact <xref target="I-D.ietf-calext-jscontact"/> specification from and to vCard.</t>
+      <t>The JSContact format <xref target="I-D.ietf-calext-jscontact"/> represents contact card information as an alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
+      <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that only support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification. For interoperability, this conversion needs to be standardized.</t>
+      <t>To facilitate this, this document defines a standard how to convert contact information between the JSContact <xref target="I-D.ietf-calext-jscontact"/> and vCard formats.</t>
     </section>
 
     <section title="Scope and Caveats">
@@ -116,22 +118,22 @@
 
     <section title="Translating vCard properties to JSContact" anchor="vcard-jscontact-translation">
 
-        <t>This section contains the translation rules from vCard to Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
+        <t>This section contains the translaiton rules from vCard to Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
 
         <t>If a vCard represents a group of contacts, those vCard properties which don't have a counterpart in CardGroup are converted into related properties of the &quot;CardGroup.card&quot; object.  In this case, the &quot;uid&quot; member of both the resulting CardGroup object and its &quot;card&quot; member MUST have the same value.</t>
 
-        <section  title="Common Parameters" anchor="vcard-common-parameters">
+        <section  title="Common vCard Parameters" anchor="vcard-common-parameters">
           <t>The following mapping rules apply to parameters that are common to most of the vCard properties:</t>
           <t><list style="symbols">
-          <t>The generic values of the TYPE parameter are mapped to the values of the &quot;Context&quot; type as defined in Section 1.5.1 of <xref target="I-D.ietf-calext-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key.  The mapping of those specific TYPE values used in the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.<vspace blankLines='1'/></t>
+          <t>The vCard specification defines the &quot;work&quot; and &quot;home&quot; values for the &quot;TYPE&quot; property, section 5.6. of <xref target="RFC6350"/> to indicate the context in which the respective property should be used. These map to the JSContact &quot;context&quot; property as defined in Section 1.5.1 of <xref target="I-D.ietf-calext-jscontact"/>.  The &quot;home&quot; value corresponds to the &quot;private&quot; key. Property-specific mappings of TYPE values for the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.<vspace blankLines='1'/></t>
           <t>The PREF parameter is mapped to the &quot;pref&quot; property.<vspace blankLines='1'/></t>
           <t>The MEDIATYPE parameter is mapped to the &quot;mediaType&quot; property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, &quot;image/gif&quot; can be derived from the &quot;.gif&quot; extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.<vspace blankLines='1'/></t>
-          <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the &quot;localizations&quot; map: the &quot;localizations&quot; key is the LANGUAGE value, the key of the related PatchObject map is the JSON pointer of the JSContact member matching the vCard property while the value is the JSContact member itself.<vspace blankLines='1'/></t>
+          <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the &quot;localizations&quot; map: the key in the &quot;localizations&quot; object is the LANGUAGE value, the key in the PatchObject points the JSContact property that corresponds to the vCard property. The value of the PatchObject entry contains the vCard property value.<vspace blankLines='1'/></t>
           </list></t>
       </section>
 
         <section  title="Unmapped JSContact Information" anchor="unmapped-jscontact-information">
-            <t>The rules to generate a map key of type Id as well as a value for &quot;created&quot;, &quot;language&quot; and &quot;preferredContactMethod&quot; properties are out of the scope of this document.</t>
+            <t>The rules to generate a map key of type Id as well as &quot;preferredContactMethod&quot; properties are out of the scope of this document.</t>
         </section>
 
         <section title="General Properties">
@@ -1050,6 +1052,50 @@
               </figure>
           </section>
 
+          <section title="CREATED">
+              <t>The CREATED property is transformed into the &quot;created&quot; member (<xref target="created_mapping"/>).</t>
+
+              <figure anchor="created_mapping" title="CREATED mapping example">
+                  <artwork xml:space="preserve"><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    CREATED:20210308T222710Z
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "created": "2021-03-08T22:27:10Z",
+    ...
+    }
+        ]]></artwork>
+              </figure>
+          </section>
+
+        <section title="LOCALE">
+              <t>A LOCALE property is mapped to the &quot;locale&quot; property (<xref target="locale_mapping"/>).</t>
+
+              <figure anchor="locale_mapping" title="LOCALE mapping example">
+                  <artwork xml:space="preserve"><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    LOCALE:de-AT
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "locale": "de-AT",
+    ...
+    }
+        ]]></artwork>
+              </figure>
+          </section>
+
 
           <section title="NOTE">
               <t>A NOTE property is mapped to the &quot;notes&quot; property (<xref target="notes_mapping"/>).  All the NOTE instances are condensed into a single note and separated by newline.</t>
@@ -1466,7 +1512,7 @@
       &RFC7942;
       &RFC8605;
     </references>
-    
+
     <references title="Informative References">
         &I-D.ietf-calext-jscontact;
         <reference anchor="time-zones" target="https://www.iana.org/time-zones">
