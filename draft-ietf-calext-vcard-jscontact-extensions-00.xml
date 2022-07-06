@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="rfc7991bis.rnc"?>
+
+<!DOCTYPE rfc [
+  <!ENTITY nbsp    "&#160;">
+  <!ENTITY zwsp   "&#8203;">
+  <!ENTITY nbhy   "&#8209;">
+  <!ENTITY wj     "&#8288;">
+]>
+
+<rfc
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  category="std"
+  docName="draft-ietf-calext-vcard-jscontact-extensions-0"
+  ipr="trust200902"
+  obsoletes=""
+  updates=""
+  submissionType="IETF"
+  xml:lang="en"
+  version="3">
+
+  <front>
+    <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
+
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-0"/>
+
+    <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
+      <organization>FastMail</organization>
+      <address>
+        <postal>
+          <street>PO Box 234, Collins St West</street>
+          <city>Melbourne</city>
+          <code>VIC 8007</code>
+          <country>Australia</country>
+          <region> </region>
+        </postal>
+        <email>rsto@fastmailteam.com</email>
+      </address>
+    </author>
+    <author initials="M." surname="Loffredo" fullname="Mario Loffredo">
+      <organization>IIT-CNR</organization>
+      <address>
+        <postal>
+          <street>Via Moruzzi,1</street>
+          <city>Pisa</city>
+          <code>56124</code>
+          <country>Italy</country>
+          <region> </region>
+        </postal>
+        <email>mario.loffredo@iit.cnr.it</email>
+      </address>
+    </author>
+    <date year="2022" month="July" day="5"/>
+    <area>Applications</area>
+    <workgroup>Calendaring Extensions</workgroup>
+    <keyword>addressbook</keyword>
+    <keyword>contacts</keyword>
+    <keyword>cards</keyword>
+    <keyword>VCARD</keyword>
+    <keyword>JSContact</keyword>
+
+    <abstract>
+      <t>
+        This document defines a set of new properties for vCard and extends the use of existing ones.
+        Their primary purpose is to align the same set of features between the JSContact and vCard formats,
+        but the new definitions also aim to be useful within just the vCard format.
+      </t>
+    </abstract>
+
+  </front>
+
+  <middle>
+
+    <section>
+      <name>Introduction</name>
+      <t>
+        The JSContact <xref target="ref-jscontact"/> format aims to be an alternative to the
+        vCard <xref target="RFC6350"/> format for representation of contact and addressbook
+        data. As such, it introduces new semantics that are not covered in the current
+        definition of vCard and its various extensions. Converting contact data between
+        the two formats is defined in <xref target="ref-jscontact-vcard"/> with the goal of
+        not loosing any semantics during conversion. In order to do so, this document
+        defines a new set of properties for vCard and extends existing definitions.
+      </t>
+
+      <section>
+        <name>Requirements Language</name>
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL",
+          "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT
+          RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+          interpreted as described in BCP 14 <xref target="RFC2119"/>
+          <xref target="RFC8174"/> when, and only when, they appear in
+          all capitals, as shown here.</t>
+      </section>
+
+    </section>
+
+    <section anchor="new-properties">
+      <name>New Properties</name>
+
+      <section anchor="prop-created">
+        <name>CREATED Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>CREATED</dd>
+
+          <dt>Purpose:</dt>
+          <dd>This property defines the date and time when the vCard was created</dd>
+
+          <dt>Value type:</dt>
+          <dd>A single timestamp value.</dd>
+
+          <dt>Cardinality:</dt>
+          <dd>*1</dd>
+
+          <dt>Property parameters:</dt>
+          <dd>VALUE</dd>
+
+          <dt>Description:</dt>
+          <dd>
+            This is the time stamp when the vCard was created. Copying the
+            vCard across systems does not count as a new creation, nor does
+            a new revision. Instead, the time stamp value typically
+            stays unchanged for the existence of the vCard.
+          </dd>
+
+          <dt>Format definition:</dt>
+          <dd><t>This property is defined by the following notation:</t>
+          <sourcecode name="" type="abnf"><![CDATA[
+created       = "CREATED" createdparam
+                ":" timestamp CRLF
+
+createdparam  = *(
+                 ;
+                 ; The following is OPTIONAL,
+                 ; but MUST NOT occur more than once.
+                 ;
+                 (";" "VALUE" "=" "TIMESTAMP") /
+                 ;
+                 ; The following is OPTIONAL,
+                 ; and MAY occur more than once.
+                 ;
+                 (";" anyparam)
+                 ;
+                 )
+]]></sourcecode>
+          </dd>
+
+          <dt>Example(s):</dt>
+          <dd>
+          <sourcecode name=""><![CDATA[
+CREATED:20220705093412Z
+CREATED;VALUE=TIMESTAMP:20211022T140000-05
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+
+      <section anchor="prop-grammatical-gender">
+        <name>GRAMMATICAL-GENDER Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>GRAMMATICAL-GENDER</dd>
+
+          <dt>Purpose:</dt>
+          <dd>
+            This property defines the grammatical gender that shall be used
+            to address the entity represented by this vCard.
+          </dd>
+
+          <dt>Value type:</dt>
+          <dd>A single text value, restricted to an enumerated list of allowed values.</dd>
+
+          <dt>Cardinality:</dt>
+          <dd>*</dd>
+
+          <dt>Property parameters:</dt>
+          <dd>LANG</dd>
+
+          <dt>Description:</dt>
+          <dd>
+            <t>
+              This property defines the grammatical gender that the contact prefers
+              to be addressed by or referred at. Many human languages use
+              grammatical genders in salutations and other language constructs. For
+              example, the German language typically distinguishes between the
+              gender of the recipient in both formal and informal salutations.
+              The allowed values for this property aim to cover grammatical genders
+              for the the majority of human languages. Future RFCs <bcp14>MAY</bcp14>
+              define additional values if the current selection is found to be inadequate.
+            </t>
+          </dd>
+
+          <dt>Format definition:</dt>
+          <dd><t>This property is defined by the following notation:</t>
+          <sourcecode name="" type="abnf"><![CDATA[
+gram-gender       = "GRAMMATICAL-GENDER" gram-gender-param
+                      ":" gram-gender-value CRLF
+
+gram-gender-param =
+                *(
+                 ;
+                 ; The following is OPTIONAL,
+                 ; but MUST NOT occur more than once.
+                 ;
+                 (";" language-param) /
+                 ;
+                 ; The following is OPTIONAL,
+                 ; and MAY occur more than once.
+                 ;
+                 (";" anyparam)
+                 ;
+                 )
+
+gram-gender-value = "ANIMATE" /
+                    "FEMALE" /
+                    "INANIMATE" /
+                    "MALE" /
+                    "NEUTER" /
+                    x-value
+]]></sourcecode>
+          </dd>
+
+          <dt>Example(s):</dt>
+          <dd>
+          <sourcecode name=""><![CDATA[
+GRAMMATICAL-GENDER:NEUTER
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+
+      <section anchor="prop-pronouns">
+        <name>PRONOUNS Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>PRONOUNS</dd>
+
+          <dt>Purpose:</dt>
+          <dd>
+            This property defines the gender pronouns that shall be used
+            to refer to the entity represented by this vCard.
+          </dd>
+
+          <dt>Value type:</dt>
+          <dd>A single text value.</dd>
+
+          <dt>Cardinality:</dt>
+          <dd>*</dd>
+
+          <dt>Property parameters:</dt>
+          <dd>LANG</dd>
+
+          <dt>Description:</dt>
+          <dd>
+            This property contains as a free-form text the gender pronouns that
+            the contact chooses to use for themselves. They shall be used when
+            addressing or referring to the contact. Multiple occurrences of
+            this property <bcp14>MAY</bcp14> define pronouns for multiple languages.
+          </dd>
+
+          <dt>Format definition:</dt>
+          <dd><t>This property is defined by the following notation:</t>
+          <sourcecode name="" type="abnf"><![CDATA[
+pronouns       = "PRONOUNS" pronouns-param
+                ":" text CRLF
+
+pronouns-param =
+                *(
+                 ;
+                 ; The following is OPTIONAL,
+                 ; but MUST NOT occur more than once.
+                 ;
+                 (";" language-param) /
+                 ;
+                 ; The following is OPTIONAL,
+                 ; and MAY occur more than once.
+                 ;
+                 (";" anyparam)
+                 ;
+                 )
+]]></sourcecode>
+          </dd>
+
+          <dt>Example(s):</dt>
+          <dd>
+          <sourcecode name=""><![CDATA[
+PRONOUNS=they/them
+PRONOUNS;LANG=de:sie
+PRONOUNS:xe/xir
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+
+    </section>
+
+    <section anchor="IANA">
+    <!-- All drafts are required to have an IANA considerations section. See RFC 8126 for a guide.-->
+      <name>IANA Considerations</name>
+      <t>This section will be filled at a later stage.</t>
+    </section>
+
+    <section anchor="Security">
+      <!-- All drafts are required to have a security considerations section. See RFC 3552 for a guide. -->
+      <name>Security Considerations</name>
+      <t>This section will be filled at a later stage.</t>
+    </section>
+
+  </middle>
+
+  <back>
+    <references>
+      <name>References</name>
+      <references>
+        <name>Normative References</name>
+
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
+        <!-- The recommended and simplest way to include a well known reference -->
+
+      </references>
+
+      <references>
+        <name>Informative References</name>
+
+        <reference anchor="ref-jscontact" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscontact/">
+          <front>
+            <title>JSContact: A JSON representation of contact data</title>
+            <author/>
+          </front>
+        </reference>
+
+        <reference anchor="ref-jscontact-vcard" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscontact-vcard/">
+          <front>
+            <title>JSContact: Converting from and to vCard</title>
+            <author/>
+          </front>
+        </reference>
+
+      </references>
+    </references>
+
+    <!--section anchor="Acknowledgements" numbered="false">
+      <name>Acknowledgements</name>
+      <t>This template uses extracts from templates written by Pekka Savola, Elwyn Davies and
+        Henrik Levkowetz. [REPLACE]</t>
+    </section-->
+
+    <!--section anchor="Contributors" numbered="false">
+      <name>Contributors</name>
+      <t>Thanks to all of the contributors. [REPLACE]</t>
+    </section-->
+
+ </back>
+</rfc>
