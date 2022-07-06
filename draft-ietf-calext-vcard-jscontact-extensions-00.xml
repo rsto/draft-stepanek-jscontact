@@ -230,6 +230,57 @@ GRAMMATICAL-GENDER:NEUTER
         </dl>
       </section>
 
+      <section anchor="prop-locale">
+        <name>LOCALE Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>LOCALE</dd>
+
+          <dt>Purpose:</dt>
+          <dd>This property defines the default locale that human-readable text values in this vCard should be assumed written in.</dd>
+
+          <dt>Value type:</dt>
+          <dd>A single text value, that <bcp14>MUST</bcp14> be a valid language-tag (see <xref target="RFC5646"/>.</dd>
+
+          <dt>Cardinality:</dt>
+          <dd>1</dd>
+
+          <dt>Property parameters:</dt>
+          <dd>The LANG parameter <bcp14>MUST NOT</bcp14> be assigned to this property.</dd>
+
+          <dt>Description:</dt>
+          <dd>
+            Properties with value type text often contain information that is
+            written in one of the many human languages. In order to indicate
+            which language it was written in, implementations can assign the
+            already-existing <tt>LANG</tt> parameter to the property. In absence
+            of this parameter, implementations need to attempt detecting the
+            language by text analysis. The <tt>LOCALE</tt> property allows
+            to define a default locale in which such property values can be
+            assumed to be written in.
+          </dd>
+
+          <dt>Format definition:</dt>
+          <dd><t>This property is defined by the following notation:</t>
+          <sourcecode name="" type="abnf"><![CDATA[
+locale       = "LOCALE" anyparam
+                ":" lang-tag CRLF
+
+lang-tag     = TEXT ; MUST be a valid Language-Tag value as
+                    ; specified in section 2.1 RFC5646
+]]></sourcecode>
+          </dd>
+
+          <dt>Example(s):</dt>
+          <dd>
+          <sourcecode name=""><![CDATA[
+CREATED:20220705093412Z
+CREATED;VALUE=TIMESTAMP:20211022T140000-05
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+
       <section anchor="prop-pronouns">
         <name>PRONOUNS Property</name>
         <dl>
@@ -316,6 +367,7 @@ PRONOUNS:xe/xir
         <name>Normative References</name>
 
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
         <!-- The recommended and simplest way to include a well known reference -->

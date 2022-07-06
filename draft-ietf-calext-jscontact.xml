@@ -210,10 +210,10 @@ Keys in the set <bcp14>MUST</bcp14> be one of the RELATED property <xref target=
 The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </ul>
         </section>
-        <section anchor="language" numbered="true" toc="default">
-          <name>language</name>
+        <section anchor="locale" numbered="true" toc="default">
+          <name>locale</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>This defines the locale in which free-text property values can be assumed to be written in. The value <bcp14>MUST</bcp14> be a language tag as defined in <xref target="RFC5646" />. Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> <xref target="localizations"/> property.</t>
+          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card or card group. Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt>property <xref target="localizations"/>.</t>
         </section>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
