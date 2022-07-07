@@ -243,7 +243,7 @@ GRAMMATICAL-GENDER:NEUTER
           <dd>A single text value, that <bcp14>MUST</bcp14> be a valid language-tag (see <xref target="RFC5646"/>.</dd>
 
           <dt>Cardinality:</dt>
-          <dd>1</dd>
+          <dd>*1</dd>
 
           <dt>Property parameters:</dt>
           <dd>The LANG parameter <bcp14>MUST NOT</bcp14> be assigned to this property.</dd>
