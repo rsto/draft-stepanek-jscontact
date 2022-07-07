@@ -11,7 +11,7 @@
 <rfc
   xmlns:xi="http://www.w3.org/2001/XInclude"
   category="std"
-  docName="draft-ietf-calext-vcard-jscontact-extensions-0"
+  docName="draft-ietf-calext-vcard-jscontact-extensions-00"
   ipr="trust200902"
   obsoletes=""
   updates=""
@@ -22,7 +22,7 @@
   <front>
     <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
 
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-0"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-00"/>
 
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>FastMail</organization>
