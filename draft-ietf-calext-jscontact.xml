@@ -738,31 +738,6 @@ The set of free-text or URI categories that relate to the card. The set is repre
           <t>Type: <tt>String[TimeZone]</tt> (optional).
               Maps identifiers of custom time zones to their time zone definitions. For a description of this property see the <tt>timeZones</tt> property definition in <xref target="RFC8984" format="default"/>.</t>
         </section>
-        <section anchor="propertyGroups" numbered="true" toc="default">
-          <name>propertyGroups</name>
-          <t>Type: String[PropertyGroup] (optional).</t>
-          <t>This combines properties of a JSContact object into named groups. A client implementation can then display these properties together,
-          such as group that combines an organization, address and photo property, shown together with a custom group label.</t>
-          <t>
-          The object keys <bcp14>MUST</bcp14> only contain ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>) and hyphen (<tt>-</tt>) and <bcp14>MUST NOT</bcp14> be an empty string.
-          A key identifies a group within a JSContact object but does not have any additional purpose. Specifically, the key is not meant to provide a human-readable
-          name of the group. For this, use the PropertyGroup <tt>label</tt> property. A PropertyGroup object has the following properties:</t>
-          <ul spacing="normal">
-              <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>PropertyGroup</tt>.
-              </li>
-              <li>label: <tt>String</tt> (optional).
-                  A human-readable label or name of this property group.
-              </li>
-              <li>members: <tt>String[Boolean]</tt> (optional).
-                  The set of property members of this property group. It <bcp14>MUST</bcp14> contain at least one member to be valid.
-                  The keys are the path to a property, encoded as a JSON pointer <xref target="RFC6901"/>
-                  where the leading <tt>/</tt> character is implicit (a pointer implicitly starts at the top-level of the Card or CardGroup).
-                  Any path that points at or into the <tt>propertyGroups</tt> property <bcp14>MUST</bcp14> be ignored.
-                  The values of the set <bcp14>MUST</bcp14> be <tt>true</tt>.
-              </li>
-          </ul>
-        </section>
       </section>
     </section>
     <section anchor="groupcard" numbered="true" toc="default">
