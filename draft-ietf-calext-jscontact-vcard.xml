@@ -127,7 +127,7 @@
         </section>
         <section>
           <name>SOURCE</name>
-          <t>A SOURCE property is represented as an entry of the "online" map (<xref target="source_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "directorySource" and the "resource" member is the SOURCE value.</t>
+          <t>A SOURCE property is represented as an entry of the "resources" map (<xref target="source_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "directorySource" and the "resource" member is the SOURCE value.</t>
           <t>The PREF and MEDIATYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="source_mapping">
             <name>SOURCE mapping example</name>
@@ -142,7 +142,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
        ...
        "a-source":{
          "@type": "Resource",
@@ -614,7 +614,7 @@
         </section>
         <section>
           <name>IMPP</name>
-          <t>An IMPP property is represented as an entry of the "online" map (<xref target="impp_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "username", the "label" member is set to "XMPP" and the "resource" member is the IMPP value.</t>
+          <t>An IMPP property is represented as an entry of the "onlineServices" map (<xref target="impp_mapping"/>).  The entry value is a "OnlineService" object and the "uri" member is the IMPP value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="impp_mapping">
             <name>IMPP mapping example</name>
@@ -629,13 +629,11 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "onlineServices":{
       ...
       {
-        "@type": "Resource",
-        "type": "username",
-        "label": "XMPP",
-        "value": "alice@example.com",
+        "@type": "OnlineService",
+        "uri": "xmpp:alice@example.com",
         "pref": 1
       },
       ...
@@ -749,7 +747,7 @@
         </section>
         <section>
           <name>LOGO</name>
-          <t>A LOGO property is represented as an entry of the "online" map (<xref target="logo_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "logo" and the "resource" member is the LOGO value.</t>
+          <t>A LOGO property is represented as an entry of the "resources" map (<xref target="logo_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "logo" and the "resource" member is the LOGO value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="logo_mapping">
             <name>LOGO mapping example</name>
@@ -764,7 +762,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
       ...
       "a-logo":{
         "@type": "Resource",
@@ -911,7 +909,7 @@
         </section>
         <section>
           <name>CONTACT-URI</name>
-          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the "online" map (<xref target="contact_uri_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "contact" and the "resource" member is the CONTACT-URI value.</t>
+          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the "resources" map (<xref target="contact_uri_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "contact" and the "resource" member is the CONTACT-URI value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="contact_uri_mapping">
             <name>CONTACT-URI mapping example</name>
@@ -926,7 +924,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
       ...
       "a-contact-uri":{
         "@type": "Resource",
@@ -1070,7 +1068,7 @@
         </section>
         <section>
           <name>ORG-DIRECTORY</name>
-          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the "online" map (<xref target="org_directory_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "directory" and the "resource" member is the ORG-DIRECTORY value.</t>
+          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the "resources" map (<xref target="org_directory_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "directory" and the "resource" member is the ORG-DIRECTORY value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <t>The INDEX parameter is represented as the index of the directory among the online resources with the "directory" type.</t>
           <figure anchor="org_directory_mapping">
@@ -1086,7 +1084,7 @@
 
     {
     ...
-    "online":{
+    "resources":{
       "@type": "Card",
       ...
       "an-org-directory":{
@@ -1251,7 +1249,7 @@
         </section>
         <section>
           <name>SOUND</name>
-          <t>A SOUND property is represented as an entry of the "online" map (<xref target="sound_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "audio" and the "resource" member is the SOUND value.</t>
+          <t>A SOUND property is represented as an entry of the "resources" map (<xref target="sound_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "audio" and the "resource" member is the SOUND value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="sound_mapping">
             <name>SOUND mapping example</name>
@@ -1266,7 +1264,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
       ...
       "a-sound":{
         "@type": "Resource",
@@ -1308,7 +1306,7 @@
         </section>
         <section>
           <name>URL</name>
-          <t>An URL property is represented as an entry of the "online" map (<xref target="url_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "uri" and the "resource" member is the URL value.</t>
+          <t>An URL property is represented as an entry of the "resources" map (<xref target="url_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "uri" and the "resource" member is the URL value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="url_mapping">
             <name>URL mapping example</name>
@@ -1323,7 +1321,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
       ...
       "an-url":{
         "@type": "Resource",
@@ -1346,7 +1344,7 @@
         <name>Security Properties</name>
         <section>
           <name>KEY</name>
-          <t>A KEY property is represented as an entry of the "online" map (<xref target="key_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "publicKey" and the "resource" member is the KEY value.</t>
+          <t>A KEY property is represented as an entry of the "resources" map (<xref target="key_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "publicKey" and the "resource" member is the KEY value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="key_mapping">
             <name>KEY mapping example</name>
@@ -1361,7 +1359,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
       ...
       "a-key":{
         "@type": "Resource",
@@ -1380,7 +1378,7 @@
         <name>Calendar Properties</name>
         <section>
           <name>FBURL</name>
-          <t>An FBURL property is represented as an entry of the "online" map (<xref target="fburl_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "freeBusy" and the "resource" member is the FBURL value.</t>
+          <t>An FBURL property is represented as an entry of the "resources" map (<xref target="fburl_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "freeBusy" and the "resource" member is the FBURL value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="fburl_mapping">
             <name>FBURL mapping example</name>
@@ -1396,7 +1394,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
       ...
       "an-fburl":{
         "@type": "Resource",
@@ -1459,7 +1457,7 @@
         </section>
         <section>
           <name>CALURI</name>
-          <t>A CALURI property is represented as an entry of the "online" map (<xref target="caluri_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "calendar" and the "resource" member is the CALURI value.</t>
+          <t>A CALURI property is represented as an entry of the "resources" map (<xref target="caluri_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "calendar" and the "resource" member is the CALURI value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="caluri_mapping">
             <name>CALURI mapping example</name>
@@ -1475,7 +1473,7 @@
     {
     "@type": "Card",
     ...
-    "online":{
+    "resources":{
       ...
       "a-caluri":{
         "@type": "Resource",
@@ -1536,8 +1534,8 @@
         </section>
         <section>
           <name>Resource</name>
-          <t>The "online" property includes resources that are usually represented through different vCard properties.  The matched vCard property of a "Resource" object can be derived from the value of its "type" member.</t>
-          <t>Any resource included in the "online" map that doesn't match a vCard property MAY be converted into a vCard extended property.</t>
+          <t>The "resources" property includes resources that are usually represented through different vCard properties.  The matched vCard property of a "Resource" object can be derived from the value of its "type" member.</t>
+          <t>Any resource included in the "resources" map that doesn't match a vCard property MAY be converted into a vCard extended property.</t>
         </section>
       </section>
       <section>
