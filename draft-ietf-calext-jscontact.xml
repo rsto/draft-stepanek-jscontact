@@ -64,12 +64,6 @@
         <t>The key words <bcp14>MUST</bcp14>, <bcp14>MUST NOT</bcp14>, <bcp14>REQUIRED</bcp14>, <bcp14>SHALL</bcp14>, <bcp14>SHALL NOT</bcp14>, <bcp14>SHOULD</bcp14>, <bcp14>SHOULD NOT</bcp14>, <bcp14>RECOMMENDED</bcp14>, <bcp14>NOT RECOMMENDED</bcp14>, <bcp14>MAY</bcp14>, and <bcp14>OPTIONAL</bcp14> in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default"/> <xref target="RFC8174" format="default"/> when, and only when,
 they appear in all capitals, as shown here.</t>
       </section>
-      <section anchor="vendor-specific-property-extensions-and-values" numbered="true" toc="default">
-          <name>Vendor-specific Property Extensions and Values</name>
-          <t>Vendors MAY add additional properties to the contact object to support their custom features.  To avoid conflict, the names of these properties <bcp14>MUST</bcp14> be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customprop".  If the value is a new JSContact object, it either <bcp14>MUST</bcp14> include an "@type" property, or it <bcp14>MUST</bcp14> explicitly be specified to not require a type designator.  The type name <bcp14>MUST</bcp14> be prefixed with a domain name controlled by the vendor.</t>
-          <t>Some JSContact properties allow vendor-specific value extensions. Such vendor-specific values <bcp14>MUST</bcp14> be prefixed by a domain name controlled by the vendor followed by a colon, e.g., "example.com:customrel".</t>
-          <t>Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems as well, rather than use a vendor-specific prefix.</t>
-      </section>
       <section anchor="type-signatures" numbered="true" toc="default">
         <name>Type Signatures</name>
         <t>Type signatures are given for all JSON values in this document. The following conventions are used:</t>
@@ -103,7 +97,7 @@ they appear in all capitals, as shown here.</t>
             <li>
               <tt>work</tt>: The contact information may be used to contact the card holder in a professional context.</li>
           </ul>
-          <t>Additional allowed values may be defined in the properties or data types that make use of the Context data type, registered in a future RFC, or a vendor-specific value.</t>
+          <t>Additional allowed values may be defined in the properties or data types that make use of the Context data type, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-property-extensions-and-values"/>).</t>
         </section>
         <section anchor="id" numbered="true" toc="default">
           <name>Id</name>
@@ -147,6 +141,46 @@ they appear in all capitals, as shown here.</t>
           <t>For example, <tt>2010-10-10T10:10:10.003Z</tt> is conformant, but <tt>2010-10-10T10:10:10.000Z</tt> is invalid and is correctly encoded as <tt>2010-10-10T10:10:10Z</tt>.</t>
         </section>
       </section>
+      <section anchor="vendor-specific-property-extensions-and-values" numbered="true" toc="default">
+          <name>Vendor-specific Property Extensions and Values</name>
+          <t>
+            Vendors MAY add additional properties to the contact object to support their custom features. The names of such vendor extension properties <bcp14>MUST</bcp14> be either a URL in the <tt>https</tt> scheme or a URI in the <tt>urn</tt> scheme. The contents at the <tt>https</tt> URL <bcp14>MUST</bcp14> be under control of the vendor and <bcp14>SHOULD</bcp14> resolve to documentation for the property. The <tt>urn</tt> namespace <bcp14>MUST</bcp14> be <tt>ietf</tt> and <bcp14>MUST</bcp14> only be used in combination with an RFC that defines the semantics of the property.
+          </t>
+          <t>
+            If the property value contains JSON objects, then the keys of such objects need not be named as vendor extension properties. The following all are valid examples of vendor extension properties.
+          </t>
+          <figure>
+             <artwork><![CDATA[
+{
+  "@type": "Card",
+  "https://example.com/jscontact#prop1": "foo",
+  "https://example.com/jscontact": {
+    "prop1": "foo"
+  },
+  "urn:ietf:rfcXXXX#prop/x-foo": "bar"
+  ...
+}
+]]>
+             </artwork>
+          </figure>
+          <t>
+            NOTE: The verbatim <tt>XXXX</tt> values in this section will be replaced with the RFC number of the draft-ietf-calext-jscalendar-icalendar document before publication.
+          </t>
+          <t>
+            Similarly, some JSContact properties allow vendor-specific value extensions. Such vendor-specific values <bcp14>MUST</bcp14> also be named using the <tt>https</tt> or <tt>urn</tt> scheme as outlined for properties. This is an example for a vendor-extension value.
+          </t>
+                    <figure>
+             <artwork><![CDATA[
+{
+  "@type": "Card",
+  "kind": "https://example.com/jscontact#kind-foo",
+  ...
+}
+]]>
+             </artwork>
+          </figure>
+          <t>Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems in the IANA registries defined in <xref target="iana-considerations"/>, rather than use a vendor-specific prefix.</t>
+      </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
       <name>Card</name>
@@ -182,7 +216,7 @@ they appear in all capitals, as shown here.</t>
         <section anchor="kind" numbered="true" toc="default">
           <name>kind</name>
           <t>Type: <tt>String</tt> (optional). The kind of the entity the Card represents.</t>
-          <t>The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:</t>
+          <t>The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-property-extensions-and-values"/>):</t>
           <ul spacing="normal">
             <li>
               <tt>individual</tt>: a single person</li>
@@ -206,7 +240,7 @@ they appear in all capitals, as shown here.</t>
              </li>
             <li>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
 Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
-Keys in the set <bcp14>MUST</bcp14> be one of the RELATED property <xref target="RFC6350" format="default"/> type parameter values, or an IANA-registered value, or a vendor-specific value.
+Keys in the set <bcp14>MUST</bcp14> be one of the RELATED property <xref target="RFC6350" format="default"/> type parameter values, or an IANA-registered value, or a vendor-specific value (<xref target="vendor-specific-property-extensions-and-values"/>).
 The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </ul>
         </section>
@@ -244,7 +278,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
 The value of this name component.</li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this name component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:
+The type of this name component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-property-extensions-and-values"/>):
 </t>
               <ul spacing="normal">
                 <li>
@@ -383,7 +417,7 @@ The contexts in which to use this email address. The value for each key in the o
 The phone value, as either a URI or a free-text phone number. Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
-                  The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>. The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:
+                  The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>. The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-property-extensions-and-values"/>):
 </t>
               <ul spacing="normal">
                 <li>
@@ -594,7 +628,7 @@ A label describing the value in more detail.</li>
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this street component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value:
+The type of this street component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-property-extensions-and-values"/>):
 </t>
               <ul spacing="normal">
                 <li>
