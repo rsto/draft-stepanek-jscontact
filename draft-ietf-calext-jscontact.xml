@@ -141,45 +141,72 @@ they appear in all capitals, as shown here.</t>
           <t>For example, <tt>2010-10-10T10:10:10.003Z</tt> is conformant, but <tt>2010-10-10T10:10:10.000Z</tt> is invalid and is correctly encoded as <tt>2010-10-10T10:10:10Z</tt>.</t>
         </section>
       </section>
-      <section anchor="vendor-specific-property-extensions-and-values" numbered="true" toc="default">
-          <name>Vendor-specific Property Extensions and Values</name>
+      <section anchor="properties" numbered="true" toc="default">
+        <name>Properties</name>
+        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties. Like all other content of I-JSON objects, property names <bcp14>MUST</bcp14> be encoded in UTF-8. This specification distinguishes between three kinds of properties: standard properties, vendor extension properties and unknown properties. The following sections define each kind.</t>
+        <section anchor="standard-properties" numbered="true" toc="default">
+          <name>Standard properties</name>
           <t>
-            Vendors MAY add additional properties to the contact object to support their custom features. The names of such vendor extension properties <bcp14>MUST</bcp14> be either a URL in the <tt>https</tt> scheme or a URI in the <tt>urn</tt> scheme. The contents at the <tt>https</tt> URL <bcp14>MUST</bcp14> be under control of the vendor and <bcp14>SHOULD</bcp14> resolve to documentation for the property. The <tt>urn</tt> namespace <bcp14>MUST</bcp14> be <tt>ietf</tt> and <bcp14>MUST</bcp14> only be used in combination with an RFC that defines the semantics of the property.
+            Standard properties either are defined in this RFC document, or in any of its standard extensions. A property becomes standard only if its name and value type got registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.
           </t>
           <t>
-            If the property value contains JSON objects, then the keys of such objects need not be named as vendor extension properties. The following all are valid examples of vendor extension properties.
+            Implementations <bcp14>MUST</bcp14> validate and preserve standard properties in JSContact data, and <bcp14>MUST</bcp14> reject invalid standard properties. A property is invalid if its name matches the name of a standard property but either the value violates the type definition of this standard property, or the property is not defined for the respective JSContact object type. This rule applies to all standard properties defined in this document. If an implementation supports a JSContact extension, this rule also applies to the standard properties defined in that extension. It does not apply to standard properties that are unknown to the implementation (see <xref target="unknown-properties"/>).
+          </t>
+          <t>
+        Standard property names <bcp14>MUST NOT</bcp14> contain the <tt>COLON</tt> character (U+003A). They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but a notable exception of this rule is the <tt>@type</tt> property defined in later sections of this document. Standard property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
+    </t>
+        </section>
+        <section anchor="vendor-specific-property-extensions-and-values" numbered="true" toc="default">
+          <name>Vendor-Extension Properties and Values</name>
+          <t>
+            Vendor-extension properties <bcp14>MAY</bcp14> be stored in JSContact data. These properties allow for experimentation or to store data that only is useful for one particular service or application. Implementations <bcp14>MUST</bcp14> preserve vendor extension properties in JSContact data, irrespective if they know their use.
+          </t>
+          <t>
+            Vendor extension property names <bcp14>MUST</bcp14> start with a valid domain name in common display format, followed by the <tt>COLON</tt> character (U+003A), followed by any other characters. See <xref target="RFC8499" section="2"/> for a definition of the common display format. The domain name <bcp14>SHOULD</bcp14> be under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>. The domain name <tt>ietf.org</tt> and of its sub-domains are reserved for IETF specifications that define JSContact vendor extension properties.
+          </t>
+          <t>
+            The value of vendor extension properties can be any valid JSON value, and naming restrictions do not apply to such values. Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor extension properties.
+          </t>
+          <t>
+            The following all are valid examples of vendor extension properties.
           </t>
           <figure>
              <artwork><![CDATA[
 {
   "@type": "Card",
-  "https://example.com/jscontact#prop1": "foo",
-  "https://example.com/jscontact": {
-    "prop1": "foo"
+  "example.com:foo": "bar",
+  "example.com:foo2": {
+    "bar": "baz"
   },
-  "urn:ietf:rfcXXXX#prop/x-foo": "bar"
+  "ietf.org:rfcXXXX/x-foo": "bar"
   ...
 }
 ]]>
              </artwork>
           </figure>
           <t>
-            NOTE: The verbatim <tt>XXXX</tt> values in this section will be replaced with the RFC number of the draft-ietf-calext-jscalendar-icalendar document before publication.
-          </t>
-          <t>
-            Similarly, some JSContact properties allow vendor-specific value extensions. Such vendor-specific values <bcp14>MUST</bcp14> also be named using the <tt>https</tt> or <tt>urn</tt> scheme as outlined for properties. This is an example for a vendor-extension value.
+            In addition, some JSContact standard properties allow their <em>values</em> to be vendor-specific extensions. Such vendor-extension values <bcp14>MUST</bcp14> follow the same naming conventions as vendor-extension properties. This is an example for a vendor-extension value:
           </t>
                     <figure>
              <artwork><![CDATA[
 {
   "@type": "Card",
-  "kind": "https://example.com/jscontact#kind-foo",
+  "kind": "example.com:kind:foo",
   ...
 }
 ]]>
              </artwork>
           </figure>
-          <t>Vendors are strongly encouraged to register any new property values or extensions that are useful to other systems in the IANA registries defined in <xref target="iana-considerations"/>, rather than use a vendor-specific prefix.</t>
+          <t>
+          Vendors are strongly encouraged to specify new standard property or values once a vendor-extension turns out to be useful also for other systems.
+          </t>
+      </section>
+      <section anchor="unknown-properties" numbered="true" toc="default">
+        <name>Unknown properties</name>
+        <t>
+          Implementations may encounter JSContact data, where a JSON object key neither matches the name of a standard property known to that implementation nor does the name follow the naming convention of vendor extensions. Implementations <bcp14>MUST</bcp14> preserve such unknown properties and their values, also if they update some of the JSContact data. This is to allow implementations and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions. When setting properties, implementations <bcp14>MUST</bcp14> only set standard properties or vendor-extension properties. 
+        </t>
+      </section>
       </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
@@ -868,6 +895,10 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2234.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml"/>
       </references>
       <references>
         <name>Informative References</name>
@@ -882,6 +913,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3966.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml"/>
       </references>
     </references>
   </back>
