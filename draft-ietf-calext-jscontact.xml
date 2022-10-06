@@ -209,7 +209,7 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
         </t>
       </section>
       </section>
-                    <section anchor="vendor-extension-values" numbered="true" toc="default">
+      <section anchor="vendor-extension-values" numbered="true" toc="default">
           <name>Vendor-Extension Values</name>
           <t>
             Some JSContact standard properties allow their values to be vendor-specific. One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-extension values. Such vendor-extension values <bcp14>MUST</bcp14> be valid <tt>v-extensions</tt> as defined in <xref target="vendor-extension-properties"/> . This is an example for a vendor-extension value:
@@ -228,6 +228,11 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
           Vendors are strongly encouraged to specify new standard values once a vendor-extension turns out to be useful also for other systems.
           </t>
       </section>
+      <section anchor="prop-label" numbered="true" toc="default">
+          <name>The label property</name>
+          <t>Several addressbook applications allow to associate contact data with user-defined labels. Such labels may be set for phone numbers and email addresses, to name a few. Typically these labels are displayed along with their associated contact data in graphical user interfaces.</t>
+          <t>For this, several object types in this specification define a <tt>label</tt> property. Its property value <bcp14>MUST</bcp14> be a <tt>String</tt>. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on graphical user interfaces with low resolution or devices with small screens.</t>
+        </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
       <name>Card</name>
@@ -449,7 +454,7 @@ The contexts in which to use this email address. The value for each key in the o
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this email address in relation to other email addresses.</li>
             <li>label: <tt>String</tt> (optional).
-                A label describing the value in more detail.</li>
+                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="phones" numbered="true" toc="default">
@@ -488,7 +493,7 @@ The contexts in which to use this number. The value for each key in the object <
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this number in relation to other numbers.</li>
             <li>label: <tt>String</tt> (optional).
-                A label describing the value in more detail.</li>
+                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="onlineservices" numbered="true" toc="default">
@@ -510,7 +515,7 @@ The contexts in which to use this service. The value for each key in the object 
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this service in relation to other services.</li>
             <li>label: <tt>String</tt> (optional).
-                A label describing the value in more detail. </li>
+                A custom label for the value, see <xref target="prop-label"/>. </li>
           </ul>
         </section>
         <section anchor="resources" numbered="true" toc="default">
@@ -563,7 +568,7 @@ The contexts in which to use this resource. The value for each key in the object
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this resource in relation to other resources.</li>
             <li>label: <tt>String</tt> (optional).
-                A label describing the value in more detail. </li>
+                A custom label for the value, see <xref target="prop-label"/>. </li>
           </ul>
         </section>
         <section anchor="scheduling" numbered="true" toc="default">
@@ -597,7 +602,7 @@ The contexts in which to use this resource. The value for each key in the object
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this photo in relation to other photos.</li>
             <li>label: <tt>String</tt> (optional).
-                A label describing the value in more detail. </li>
+                A custom label for the value, see <xref target="prop-label"/>. </li>
           </ul>
         </section>
         <section anchor="prop-preferredContactMethod" numbered="true" toc="default">
@@ -666,7 +671,7 @@ The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this address in relation to other addresses.</li>
             <li>label: <tt>String</tt> (optional).
-A label describing the value in more detail.</li>
+A custom label for the value, see <xref target="prop-label"/>.</li>
         </ul>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
@@ -771,7 +776,7 @@ The date of this anniversary, in the form "YYYY-MM-DD" (any part may be all 0s f
             <li>place: Address (optional).
                 An address associated with this anniversary, e.g. the place of birth or death.</li>
             <li>label: <tt>String</tt> (optional).
-                A label describing the value in more detail.</li>
+                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
@@ -801,7 +806,7 @@ The actual information. This generally is free-text, but future specifications M
             <li>level: <tt>String</tt> (optional)
                 Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>label: <tt>String</tt> (optional).
-                A label describing the value in more detail.</li>
+                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="notes" numbered="true" toc="default">
@@ -915,7 +920,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml"/>
