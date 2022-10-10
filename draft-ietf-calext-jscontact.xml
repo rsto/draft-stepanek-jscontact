@@ -205,7 +205,7 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
       <section anchor="unknown-properties" numbered="true" toc="default">
         <name>Unknown properties</name>
         <t>
-          Implementations may encounter JSContact data, where a JSON object key neither matches the name of a standard property known to that implementation nor does the name follow the naming convention of vendor extensions. Implementations <bcp14>MUST</bcp14> preserve such unknown properties and their values, also if they update some of the JSContact data. This is to allow implementations and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions. When setting properties, implementations <bcp14>MUST</bcp14> only set standard properties or vendor-extension properties.
+          Implementations may encounter JSContact data where a JSON object key does not match the name of a property known to that implementation. They <bcp14>MUST NOT</bcp14> treat such properties as invalid, instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object. Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set standard properties or vendor-extension properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties. This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
         </t>
       </section>
       </section>
