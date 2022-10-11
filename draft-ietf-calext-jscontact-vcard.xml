@@ -1,9 +1,9 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc [
-  <!ENTITY nbsp    "&#160;">
-  <!ENTITY zwsp   "&#8203;">
-  <!ENTITY nbhy   "&#8209;">
-  <!ENTITY wj     "&#8288;">
+<!ENTITY nbsp "&#160;">
+<!ENTITY zwsp "&#8203;">
+<!ENTITY nbhy "&#8209;">
+<!ENTITY wj "&#8288;">
 ]>
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
 <?rfc toc="yes"?>
@@ -1495,9 +1495,131 @@
           </figure>
         </section>
       </section>
-      <section>
-        <name>vCard Unmatched Properties</name>
-        <t>The unmatched vCard properties MAY be converted into JSContact properties whose name contains the prefix "ietf.org:rfc6350:" followed by property name in uppercase (i.e. ietf.org:rfc6350:CLIENTPIDMAP").</t>
+      <section anchor="convert-nonstandard-vcard">
+        <name>Non-standard properties and parameters</name>
+        <t>vCards may contain properties or parameters for which no standard JSContact property is defined. For example, a vCard may contain extended properties and parameters  (<xref target="RFC6350" section="6.10"/>) of which the semantics or purpose is unknown.</t>
+        <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact. Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+        <section>
+          <name>Property <tt>props</tt></name>
+          <dl>
+            <dt>Name:</dt>
+            <dd>
+              <tt>ietf.org:rfc0000:props</tt>
+            </dd>
+            <dt>Type:</dt>
+            <dd><tt>JCardProp[]</tt>, where <tt>JCardProp</tt> denotes a jCard-encoded vCard property as defined in <xref target="RFC7095" section="3.3"/>.
+		</dd>
+            <dt>Definition:</dt>
+            <dd>This property is set on a JSContact object that represents a vCard. It contains properties that are set in the vCard represented by this JSContact object. Each entry in this list typically represents a vCard property for which no conversion to a standard JSContact property is defined. It <bcp14>MAY</bcp14> contain vCard standard properties which also got converted to a standard property in the same JSContact object. In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
+            <dt>Example:</dt>
+            <dd>
+              <t>This illustrates how to map a vCard extension property:</t>
+              <figure anchor="props_mapping">
+                <name>JSContact <tt>props</tt> example</name>
+                <sourcecode name=""><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    item1.X-FOO;X-BAR=Hello:World!
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "ietf:rfc0000:props": [
+      ["x-foo", {
+        "x-bar": "Hello",
+        "group": "item1"
+      }, "unknown", "World!"]
+    ]
+    ...
+    }
+        ]]></sourcecode>
+              </figure>
+            </dd>
+          </dl>
+        </section>
+        <section>
+          <name>Property <tt>prop</tt></name>
+          <dl>
+            <dt>Name:</dt>
+            <dd><tt>ietf.org:rfc0000:prop:<em>name</em></tt>, where <tt><em>name</em></tt> denotes the lowercase name of a vCard property defined as array element 1 in <xref target="RFC7095" section="3.3"/>.
+            </dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>String</tt>
+            </dd>
+            <dt>Definition:</dt>
+            <dd>This property is set on a JSContact object that represents a vCard. It represents a vCard property without parameters where the value is singled-valued or the value type is unknown. This property <bcp14>MAY</bcp14> be set multiple times for differing vCard property names.</dd>
+            <dt>Example:</dt>
+            <dd>
+              <t>This illustrates how the <tt>prop</tt> property is a short-form variant of the <tt>props</tt> property.</t>
+              <figure anchor="prop_mapping">
+                <name>JSContact <tt>prop</tt> example</name>
+                <sourcecode name=""><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    X-FOO:Bar
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "ietf:rfc0000:prop:x-foo": "Bar"
+    ...
+    }
+
+    is the short-form variant of
+
+    {
+    "@type": "Card",
+    ...
+    "ietf:rfc0000:props": [
+      ["x-foo", {}, "unknown", "Bar"]
+    ]
+    ...
+    }
+        ]]></sourcecode>
+              </figure>
+            </dd>
+          </dl>
+        </section>
+        <section>
+          <name>Property <tt>params</tt></name>
+          <dl>
+            <dt>Name:</dt>
+            <dd>
+              <tt>ietf.org:rfc0000:params</tt>
+            </dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>String[String|String[]]</tt>
+            </dd>
+            <dt>Definition:</dt>
+            <dd>This property is set on a JSContact object that represents a vCard property. Its value <bcp14>MUST</bcp14> be a JSON object containing vCard property parameters, defined as array element 2 in <xref target="RFC7095" section="3.3"/>. Each entry represents a parameter of the vCard property that converts to the JSContact object. Typically, these are parameters for which no standard property is defined in the JSContact object. It <bcp14>MAY</bcp14> contain vCard standard parameters which also got converted to a standard property in the same JSContact object. In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
+            <dt>Example:</dt>
+            <dd>
+              <sourcecode><![CDATA[
+EMAIL;X-FOO=Bar:jane_doe@example.com
+]]></sourcecode>
+              <t>maps to</t>
+              <sourcecode><![CDATA[
+"emails": {
+  "email1": {
+    "@type": "EmailAddress",
+    "email": "jane_doe@example.com",
+    "ietf.org:rfc0000:params": {
+      "x-foo": "Bar"
+    }
+  }
+}
+]]></sourcecode>
+            </dd>
+          </dl>
+        </section>
       </section>
       <section>
         <name>Card Required Properties</name>
@@ -1542,6 +1664,135 @@
         <name>CardGroup</name>
         <t>A CardGroup object is converted into a vCard by merging its properties with the properties of "CardGroup.card" object.  If the "CardGroup.card.fullName" property exists, it MUST be used to set the FN value.</t>
       </section>
+      <section anchor="convert-nonstandard-jscontact">
+        <name>Non-standard properties</name>
+        <t>JSContact objects and their embedded object types may contain properties for which no standard vCard property is defined. For example, a JSContact object may contain extended properties <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/> of which the semantics or purpose is unknown.</t>
+        <t>This section defines an vCard extension property and parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact. Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+        <section anchor="vcard-jsprop">
+          <name>Property <tt>JSPROP</tt></name>
+          <dl>
+            <dt>Property name:</dt>
+            <dd>X-RFC0000-JSPROP</dd>
+            <dt>Purpose:</dt>
+            <dd>This property represents a JSContact property.</dd>
+            <dt>Value type:</dt>
+            <dd>URI, also see Format Definition for value restrictions.</dd>
+            <dt>Conformance:</dt>
+            <dd>The property can be specified multiple times in a vCard.</dd>
+            <dt>Property parameters:</dt>
+            <dd>
+              The X-RFC0000-JSNAME parameter MUST be set exactly once for this property.
+              The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
+              <bcp14>MUST</bcp14> be URI. Other IANA and non-standard property parameters
+              can be specified on this property.
+            </dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>
+                This property maps a JSContact property to iCalendar. The property name
+                is defined using the X-RFC0000-JSNAME parameter (<xref target="vcard-jsname"/>). A JSContact property value is represented as a data URL using the <tt>data</tt> scheme <xref target="RFC2397"/>. The <tt>mediatype</tt> part of the URL <bcp14>MUST</bcp14> be <tt>application/json</tt> and <bcp14>MUST NOT</bcp14> define parameters. The <tt>data</tt> part of the URL contains the value of the JSContact property. The value <bcp14>MAY</bcp14>  base64-encoded, in which case the data URL <bcp14>MUST</bcp14> set the <tt>base64</tt> part accordingly.
+              </t>
+            </dd>
+            <dt>Format definition:</dt>
+            <dd>
+              <t>This property is defined by the following notation:</t>
+              <sourcecode name="" type="abnf"><![CDATA[
+  jsprop = "X-RFC0000-JSPROP" jsprop-param ":" jsprop-value CRLF
+
+  jsprop-value  = "data:application/json" [";base64"] "," data
+                  ; data is defined in RFC 2397, section 3
+
+  jsprop-param  = *(
+                  ; The following is MANDATORY and MUST NOT
+                  ; occur more than once
+                  jsname-param /
+                  ;
+                  ; The following is OPTIONAL,
+                  ; but MUST NOT occur more than once.
+                  ;
+                  (";" "VALUE" "=" "URI" ) /
+                  ;
+                  ; The following is OPTIONAL,
+                  ; and MAY occur more than once.
+                  ;
+                  (";" other-param)
+                  ;
+                  )
+  ]]></sourcecode>
+            </dd>
+            <dt>Example(s):</dt>
+            <dd>
+              <t>This illustrates how to convert both complex and simple typed JSContact properties.</t>
+              <figure anchor="jsprop-object">
+                <name>JSON object value mapping example</name>
+                <artwork><![CDATA[
+  {
+    "@type": "Card",
+     ...
+     "foo": {
+       "bar": 1234
+     }
+  }
+
+  BEGIN:VCARD
+  VERSION:4.0
+  ...
+  X-RFC0000-JSPROP;X-RFC0000-JSNAME="foo":
+   data:application/json;base64,eyJiYXIiOiAxMjM0fQo=
+  ...
+  END:VCARD
+]]></artwork>
+              </figure>
+              <figure anchor="jsprop-boolean">
+                <name>JSON boolean value mapping example</name>
+                <artwork><![CDATA[
+  {
+    "@type": "Card",
+     ...
+     "foo": true
+  }
+
+  BEGIN:VCARD
+  VERSION:4.0
+  ...
+  X-RFC0000-JSPROP;X-RFC0000-JSNAME="foo":
+   data:application/json;true
+  ...
+  END:VCARD
+]]></artwork>
+              </figure>
+            </dd>
+          </dl>
+        </section>
+        <section anchor="vcard-jsname">
+          <name>Parameter <tt>JSNAME</tt></name>
+          <dl>
+            <dt>Parameter name:</dt>
+            <dd>X-RFC0000-JSNAME</dd>
+            <dt>Purpose:</dt>
+            <dd>This parameter defines the name of a JSContact property that got converted to a vCard property.</dd>
+            <dt>Format definition:</dt>
+            <dd>
+              <sourcecode name="" type="abnf"><![CDATA[
+jsname-param  = "X-RFC0000-JSNAME" "=" DQUOTE *QSAFE-CHAR DQUOTE
+                 ; also see param-value in RFC 6350, section 3.3
+  ]]></sourcecode>
+            </dd>
+            <dt>Description:</dt>
+            <dd>
+            This parameter is set on a X-RFC0000-JSPROP or X-RFC0000-PROP property.
+            Its value defines the name of the JSContact property that got mapped to this vCard property. The parameter value contains the verbatim name of the JSContact
+            property. It <bcp14>MUST</bcp14> be quoted to preserve case.
+            </dd>
+            <dt>Example(s):</dt>
+            <dd>
+              <sourcecode name=""><![CDATA[
+  X-RFC0000-PROP;X-RFC0000-JSNAME="fooBar":baz
+  ]]></sourcecode>
+            </dd>
+          </dl>
+        </section>
+      </section>
       <section>
         <name>Card Unmatched Properties</name>
         <t>Both the "preferredContactMethod" and "created" members don't match any vCard property.  Implementers MAY represent them as vCard extended properties.</t>
@@ -1583,6 +1834,7 @@
       <references>
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2397.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3339.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"/>
@@ -1590,7 +1842,9 @@
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6715.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6869.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7095.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7493.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7942.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
       </references>
@@ -1613,7 +1867,6 @@
         </reference>
       </references>
     </references>
-
     <section anchor="appendix-property-groups">
       <name>Preserving vCard property groups</name>
       <t>
@@ -1635,13 +1888,13 @@
         A key identifies a group within a JSContact object but does not have any additional purpose. Specifically, the key is not meant to provide a human-readable
         name of the group. For this, use the PropertyGroup <tt>label</tt> property. A PropertyGroup object has the following properties:</t>
         <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+          <li>@type: <tt>String</tt> (mandatory).
                 Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>PropertyGroup</tt>.
             </li>
-            <li>label: <tt>String</tt> (optional).
+          <li>label: <tt>String</tt> (optional).
                 A human-readable label or name of this property group.
             </li>
-            <li>members: <tt>String[Boolean]</tt> (optional).
+          <li>members: <tt>String[Boolean]</tt> (optional).
                 The set of property members of this property group. It <bcp14>MUST</bcp14> contain at least one member to be valid.
                 The keys are the path to a property, encoded as a JSON pointer <xref target="RFC6901"/>
                 where the leading <tt>/</tt> character is implicit (a pointer implicitly starts at the top-level of the Card or CardGroup).
