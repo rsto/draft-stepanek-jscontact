@@ -82,15 +82,9 @@
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
         <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the Card/CardGroup features are written in camel case wrapped in double quotes.</t>
       </section>
-      <section>
-        <name>Extensions</name>
-        <t>While translating vCard to JSContact, any vCard property that doesn't have a direct counterpart in JSContact MUST be converted into a property whose name is prefixed by "ietf.org:&lt;RFC defining the extension&gt;:" (e.g. "ietf.org:rfc6350:").</t>
-        <t>Any custom extension MAY be added and its name MUST be prefixed with a specific domain name to avoid conflict, e.g. "example.com:customprop".</t>
-        <t>Likewise, while translating JSContact to vCard, a JSContact property that doesn't have a direct counterpart in vCard MUST be converted into a property whose name is prefixed with "X-" as specified in Section 6.10 of <xref target="RFC6350"/>.</t>
-      </section>
     </section>
     <section anchor="vcard-jscontact-translation">
-      <name>Translating vCard properties to JSContact</name>
+      <name>Translating vCard to JSContact</name>
       <t>This section contains the translaiton rules from vCard to Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
       <t>If a vCard represents a group of contacts, those vCard properties which don't have a counterpart in CardGroup are converted into related properties of the "CardGroup.card" object.  In this case, the "uid" member of both the resulting CardGroup object and its "card" member MUST have the same value.</t>
       <section anchor="vcard-common-parameters">
@@ -1620,6 +1614,18 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
           </dl>
         </section>
+        <section>
+          <name>Guideline</name>
+          <t>The following steps illustrate how to convert from JSContact to vCard using these properties.</t>
+          <ol>
+            <li>Create an empty vCard and set its <tt>VERSION</tt> to <tt>4.0</tt>.</li>
+            <li>Add all entries in the JSContact extension <tt>props</tt> and any <tt>prop</tt> property as vCard properties (see <xref target="convert-nonstandard-jscontact"/>).</li>
+            <li>
+              <t>Convert each standard JSContact property value to its vCard property. Replace any already existing vCard property which must not occur more than once.</t>
+            </li>
+            <li>If the JSContact property value is an object, add any vCard parameters that are encoded in the JSContact <tt>params</tt> extension property (see <xref target="convert-nonstandard-jscontact"/>). Ignore any parameters which must not be set more than once.</li>
+          </ol>
+        </section>
       </section>
       <section>
         <name>Card Required Properties</name>
@@ -1627,7 +1633,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
     </section>
     <section>
-      <name>Translating JSContact properties to vCard</name>
+      <name>Translating JSContact to vCard</name>
       <t>In most of the cases, the rules about the translation from Card/CardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
       <section>
         <name>Id</name>
@@ -1681,7 +1687,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>The property can be specified multiple times in a vCard.</dd>
             <dt>Property parameters:</dt>
             <dd>
-              The X-RFC0000-JSNAME parameter MUST be set exactly once for this property.
+              The X-RFC0000-JSPATH parameter MUST be set exactly once for this property.
               The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
               <bcp14>MUST</bcp14> be URI. Other IANA and non-standard property parameters
               can be specified on this property.
@@ -1690,7 +1696,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>
               <t>
                 This property maps a JSContact property to iCalendar. The property name
-                is defined using the X-RFC0000-JSNAME parameter (<xref target="vcard-jsname"/>). A JSContact property value is represented as a data URL using the <tt>data</tt> scheme <xref target="RFC2397"/>. The <tt>mediatype</tt> part of the URL <bcp14>MUST</bcp14> be <tt>application/json</tt> and <bcp14>MUST NOT</bcp14> define parameters. The <tt>data</tt> part of the URL contains the value of the JSContact property. The value <bcp14>MAY</bcp14>  base64-encoded, in which case the data URL <bcp14>MUST</bcp14> set the <tt>base64</tt> part accordingly.
+                is defined using the X-RFC0000-JSPATH parameter (<xref target="vcard-jsname"/>). A JSContact property value is represented as a data URL using the <tt>data</tt> scheme <xref target="RFC2397"/>. The <tt>mediatype</tt> part of the URL <bcp14>MUST</bcp14> be <tt>application/json</tt> and <bcp14>MUST NOT</bcp14> define parameters. The <tt>data</tt> part of the URL contains the value of the JSContact property. The value <bcp14>MAY</bcp14>  base64-encoded, in which case the data URL <bcp14>MUST</bcp14> set the <tt>base64</tt> part accordingly.
               </t>
             </dd>
             <dt>Format definition:</dt>
@@ -1705,7 +1711,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   jsprop-param  = *(
                   ; The following is MANDATORY and MUST NOT
                   ; occur more than once
-                  jsname-param /
+                  jspath-param /
                   ;
                   ; The following is OPTIONAL,
                   ; but MUST NOT occur more than once.
@@ -1737,7 +1743,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;X-RFC0000-JSNAME="foo":
+  X-RFC0000-JSPROP;X-RFC0000-JSPATH="foo":
    data:application/json;base64,eyJiYXIiOiAxMjM0fQo=
   ...
   END:VCARD
@@ -1755,7 +1761,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;X-RFC0000-JSNAME="foo":
+  X-RFC0000-JSPROP;X-RFC0000-JSPATH="foo":
    data:application/json;true
   ...
   END:VCARD
@@ -1765,32 +1771,43 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
           </dl>
         </section>
         <section anchor="vcard-jsname">
-          <name>Parameter <tt>JSNAME</tt></name>
+          <name>Parameter <tt>JSPATH</tt></name>
           <dl>
             <dt>Parameter name:</dt>
-            <dd>X-RFC0000-JSNAME</dd>
+            <dd>X-RFC0000-JSPATH</dd>
             <dt>Purpose:</dt>
-            <dd>This parameter defines the name of a JSContact property that got converted to a vCard property.</dd>
+            <dd>This parameter defines the name of a JSContact property that got converted to a vCard property. It is encoded as a PatchObject pointer as defined in <xref target="I-D.ietf-calext-jscontact" section="1.5.3"/></dd>
             <dt>Format definition:</dt>
             <dd>
               <sourcecode name="" type="abnf"><![CDATA[
-jsname-param  = "X-RFC0000-JSNAME" "=" DQUOTE *QSAFE-CHAR DQUOTE
+jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
                  ; also see param-value in RFC 6350, section 3.3
   ]]></sourcecode>
             </dd>
             <dt>Description:</dt>
             <dd>
             This parameter is set on a X-RFC0000-JSPROP or X-RFC0000-PROP property.
-            Its value defines the name of the JSContact property that got mapped to this vCard property. The parameter value contains the verbatim name of the JSContact
+            Its value defines the name of the JSContact property that got mapped to this vCard property. The parameter value contains the JSON pointer of the JSContact
             property. It <bcp14>MUST</bcp14> be quoted to preserve case.
             </dd>
             <dt>Example(s):</dt>
             <dd>
               <sourcecode name=""><![CDATA[
-  X-RFC0000-PROP;X-RFC0000-JSNAME="fooBar":baz
+  X-RFC0000-PROP;X-RFC0000-JSPATH="fooBar":baz
   ]]></sourcecode>
             </dd>
           </dl>
+        </section>
+        <section anchor="convert-nonstandard-jscontact-guideline">
+          <name>Guideline</name>
+          <t>The following steps illustrate how to to convert from vCard to JSContact using these properties:</t>
+          <ol>
+            <li>Create an empty JSContact object and set its <tt>@type</tt>.</li>
+            <li>Convert every vCard property for which a standard or implementation-specific conversion is defined. Ignore the <tt>JSPROPS</tt> and <tt>JSPROP</tt> properties (see <xref target="convert-nonstandard-jscontact"/>).</li>
+            <li>
+              <t>Convert each <tt>JSPROPS</tt> or <tt>JSPROP</tt> property ignored in the previous step. Ignore all pointers where any part but the last is missing, or where a property at the complete pointer path already exists in the JSContact object.</t>
+            </li>
+          </ol>
         </section>
       </section>
       <section>
