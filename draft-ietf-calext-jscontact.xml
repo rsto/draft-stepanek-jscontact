@@ -121,6 +121,28 @@ they appear in all capitals, as shown here.</t>
           <t>A preference value <bcp14>MUST</bcp14> be an integer number in the range 1 and 100. Lower values correspond to a higher level of preference, with 1 being most preferred. If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type. For example, the preference orders within emails and phone numbers are indendepent of each other. Also note that the <em>preferredContactMethod</em> property allows to define a preferred contact method across method types.</t>
         </section>
+        <section anchor="resource" numbered="true" toc="default">
+          <name>Resource</name>
+          <t>This data type defines a digital resource associated with the entity represented by this card. Several property definitions in <xref target="resource-properties"/> refer to the Resource data type either directly, or as the basis for their property-specific value types. A Resource object has the following properties:</t>
+          <ul spacing="normal">
+            <li>
+              <t>@type: <tt>String</tt> (mandatory). The allowed values are defined in the property definition that makes use of the Resource type.</t>
+              <t>type: <tt>String</tt> (optional).
+The type of the resource. The allowed values are defined in the property definition that makes use of the Resource type.
+</t>
+            </li>
+            <li>uri: <tt>String</tt> (mandatory).
+The resource value. This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+            <li>mediaType: <tt>String</tt> (optional).
+Used for URI resource values. Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
+            <li>contexts: <tt>Context[Boolean]</tt> (optional)
+The contexts in which to use this resource. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+            <li>pref: <tt>Preference</tt> (optional)
+                The preference of this resource in relation to other resources.</li>
+            <li>label: <tt>String</tt> (optional).
+                A custom label for the value, see <xref target="prop-label"/>. </li>
+          </ul>
+        </section>
         <section anchor="unsignedint" numbered="true" toc="default">
           <name>UnsignedInt</name>
           <t>Where <tt>UnsignedInt</tt> is given as a data type, it means an integer in the range 0 &lt;= value &lt;= 2<sup>53</sup>-1, represented as a JSON <tt>Number</tt>.</t>
@@ -413,8 +435,8 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
           <t>The property values <bcp14>SHOULD</bcp14> be localized in the language defined in the <tt>language</tt> property. They <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</t>
         </section>
       </section>
-      <section anchor="contact-and-resource-properties" numbered="true" toc="default">
-        <name>Contact and Resource properties</name>
+      <section anchor="contact-properties" numbered="true" toc="default">
+        <name>Contact properties</name>
         <section anchor="emails" numbered="true" toc="default">
           <name>emails</name>
           <t>Type: <tt>Id[EmailAddress]</tt> (optional).</t>
@@ -431,6 +453,28 @@ The contexts in which to use this email address. The value for each key in the o
                 The preference of this email address in relation to other email addresses.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
+          </ul>
+        </section>
+        <section anchor="onlineservices" numbered="true" toc="default">
+          <name>onlineServices</name>
+          <t>Type: <tt>Id[OnlineService]</tt> (optional).</t>
+          <t>The online services that are associated with the entity represented by this card. This can be messaging services, social media profiles, and other. An OnlineService object has the following properties, of which at least either the <tt>uri</tt> property or both the <tt>username</tt> and <tt>service</tt> properties <bcp14>MUST</bcp14> be set:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
+              </li>
+            <li>service: <tt>String</tt> (optional).
+The name of the online service or protocol. This <bcp14>SHOULD</bcp14> be the canonical service name including capitalisation. Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Twitter</tt>, <tt>XMPP</tt>.</li>
+            <li>uri: <tt>String</tt> (optional).
+The service-specific URI of the entity represented by this card.</li>
+            <li>username: <tt>String</tt> (optional).
+The service-specific user name of the entity represented by this card. If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
+            <li>contexts: <tt>Context[Boolean]</tt> (optional)
+The contexts in which to use this service. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+            <li>pref: <tt>Preference</tt> (optional)
+                The preference of this service in relation to other services.</li>
+            <li>label: <tt>String</tt> (optional).
+                A custom label for the value, see <xref target="prop-label"/>. </li>
           </ul>
         </section>
         <section anchor="phones" numbered="true" toc="default">
@@ -465,106 +509,6 @@ The contexts in which to use this number. The value for each key in the object <
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
-        <section anchor="onlineservices" numbered="true" toc="default">
-          <name>onlineServices</name>
-          <t>Type: <tt>Id[OnlineService]</tt> (optional).</t>
-          <t>The online services that are associated with the entity represented by this card. This can be messaging services, social media profiles, and other. An OnlineService object has the following properties, of which at least either the <tt>uri</tt> property or both the <tt>username</tt> and <tt>service</tt> properties <bcp14>MUST</bcp14> be set:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
-              </li>
-            <li>service: <tt>String</tt> (optional).
-The name of the online service or protocol. This <bcp14>SHOULD</bcp14> be the canonical service name including capitalisation. Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Twitter</tt>, <tt>XMPP</tt>.</li>
-            <li>uri: <tt>String</tt> (optional).
-The service-specific URI of the entity represented by this card.</li>
-            <li>username: <tt>String</tt> (optional).
-The service-specific user name of the entity represented by this card. If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
-            <li>contexts: <tt>Context[Boolean]</tt> (optional)
-The contexts in which to use this service. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this service in relation to other services.</li>
-            <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>. </li>
-          </ul>
-        </section>
-        <section anchor="resources" numbered="true" toc="default">
-          <name>resources</name>
-          <t>Type: <tt>Id[Resource]</tt> (optional).</t>
-          <t>The digital resources that are associated with the entity represented by this card. A Resource object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Resource</tt>.
-              </li>
-            <li>resource: <tt>String</tt> (mandatory).
-The resource value, where the allowed value form is defined by the the <em>type</em> property. If the value form is URI, then the property value <bcp14>MUST</bcp14> be a valid <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates. In any case the value <bcp14>MUST NOT</bcp14> be empty.</li>
-            <li>
-              <t>type: <tt>String</tt> (optional).
-The type of the resource. Allowed values are:
-</t>
-              <ul spacing="normal">
-                <li><tt>audio</tt> The resource is a digital sound URI, such as a recording of proper pronunciation of the name of this card.
-                </li>
-                <li><tt>calendar</tt> The resource is a calendar URI associated with the entity represented by this card.
-                </li>
-                <li><tt>contact</tt> The resource is an alternative contact method URI to contact the entity represented by this card. This typically is a web contact form using the "https" URI scheme, but may be any other.
-                </li>
-                <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory. The resource value <bcp14>MUST</bcp14> be a URI.
-                </li>
-                <li><tt>directoryEntry</tt> The resource is a directory entry of the entity represented by this card. In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.
-                </li>
-                <li><tt>freeBusy</tt> The resource is a free-busy calendaring URI for the entity represented by this card.
-                </li>
-                <li><tt>logo</tt> The resource is a graphic logo URI associated with the entity represented by this card.
-                </li>
-                <li><tt>publicKey</tt> The resorce is a cryptograhic public key or certificate URI associated with the entity represented by this card.
-                </li>
-                <li><tt>uri</tt> The resource value is any URI, e.g. a website link.</li>
-              </ul>
-            </li>
-            <li>mediaType: <tt>String</tt> (optional).
-Used for URI resource values. Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
-            <li>contexts: <tt>Context[Boolean]</tt> (optional)
-The contexts in which to use this resource. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this resource in relation to other resources.</li>
-            <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>. </li>
-          </ul>
-        </section>
-        <section anchor="scheduling" numbered="true" toc="default">
-          <name>scheduling</name>
-          <t>Type: <tt>Id[Scheduling]</tt> (optional).</t>
-          <t>The methods by which the entity receives calendar scheduling invitations and updates. A Scheduling object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-                Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Scheduling</tt>.
-            </li>
-            <li>sendTo: <tt>String[String]</tt> (mandatory).
-                The keys in the property value are the available methods for scheduling. The value is a URI for the method specified in the key. This <bcp14>MUST</bcp14> be a valid "sendTo" property value as specified in <xref target="RFC8984" format="default" section="4.4.6"/> and updates.
-            </li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this scheduling object in relation to other scheduling objects.
-            </li>
-          </ul>
-        </section>
-        <section anchor="photos" numbered="true" toc="default">
-          <name>photos</name>
-          <t>Type: <tt>Id[File]</tt> (optional).</t>
-          <t>A map of photo ids to File objects that contain photographs or images associated with this card. A typical use case is to include an avatar for display along the contact name.</t>
-          <t>A File object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>File</tt>.
-              </li>
-            <li>href: <tt>String</tt> (mandatory). A URI where to fetch the data of this file.</li>
-            <li>mediaType: <tt>String</tt> (optional). The content-type of the file, if known.</li>
-            <li>size: <tt>UnsignedInt</tt> (optional). The size, in octets, of the file when fully decoded (i.e., the number of octets in the file the user would download), if known.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this photo in relation to other photos.</li>
-            <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>. </li>
-          </ul>
-        </section>
         <section anchor="prop-preferredContactMethod" numbered="true" toc="default">
           <name>preferredContactMethod</name>
           <t>Type : <tt>String</tt> (optional)</t>
@@ -585,6 +529,89 @@ Defines the context in which to use this language.</li>
 Defines the preference of this language in relation to other languages of the same context.</li>
           </ul>
           <t>Also see the definition of the VCARD LANG property (Section 6.4.4., <xref target="RFC6350" format="default"/>).</t>
+        </section>
+      </section>
+      <section anchor="resource-properties" numbered="true" toc="default">
+        <name>Resource properties</name>
+        <section anchor="calendars" numbered="true" toc="default">
+          <name>calendars</name>
+          <t>Type: <tt>Id[CalendarResource]</tt> (optional).</t>
+          <t>These are resources for calendaring, such as calendars to lookup free-busy information for the entity represented by this card. A CalendarResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CalendarResource</tt>.</li>
+          </ul>
+          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <ul>
+            <li><tt>calendar</tt> The resource is a calendar that contains entries such as calendar events or tasks.</li>
+            <li><tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
+          </ul>
+        </section>
+        <section anchor="cryptokeys" numbered="true" toc="default">
+          <name>cryptoKeys</name>
+          <t>Type: <tt>Id[CryptoResource]</tt> (optional).</t>
+          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this card. A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>.</li>
+            <li>The <tt>type</tt> property value either is not set, is defined in a future RFC or vendor-specific.</li>
+          </ul>
+        </section>
+        <section anchor="directories" numbered="true" toc="default">
+          <name>directories</name>
+          <t>Type: <tt>Id[DirectoryResource]</tt> (optional).</t>
+          <t>These are directory service resources, such as entries in a directory or organizational directories for lookup. A DirectoryResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>DirectoryResource</tt>.</li>
+          </ul>
+          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <ul>
+            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.</li>
+            <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card. In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
+          </ul>
+        </section>
+        <section anchor="links" numbered="true" toc="default">
+          <name>links</name>
+          <t>Type: <tt>Id[Resource]</tt> (optional).</t>
+          <t>These are general links to other resources, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Resource</tt>.</li>
+          </ul>
+          <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <ul>
+            <li><tt>contact</tt> The resource is an URI by which the entity represented by this card may be contacted, including web forms or other media that require user interaction.</li>
+          </ul>
+        </section>
+        <section anchor="media" numbered="true" toc="default">
+          <name>media</name>
+          <t>Type: <tt>Id[MediaResource]</tt> (optional).</t>
+          <t>These are media resources such as photographs, avatars or sounds associated with the entity represented by this card. A MediaResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>MediaResource</tt>.</li>
+          </ul>
+          <t>The <tt>type</tt> property value must be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <ul>
+            <li><tt>photo</tt> The resource is a photograph or avatar.</li>
+            <li><tt>sound</tt> The resource is audio media, e.g. to specify the proper pronunciation of the name property contents.</li>
+            <li><tt>logo</tt> The resource is a graphic image or logo associated with entity represented by this card.</li>
+          </ul>
+        </section>
+      </section>
+      <section anchor="scheduling-and-sharing-properties" numbered="true" toc="default">
+        <name>Scheduling and Sharing properties</name>
+        <section anchor="scheduling" numbered="true" toc="default">
+          <name>scheduling</name>
+          <t>Type: <tt>Id[SchedulingAddress]</tt> (optional).</t>
+          <t>The scheduling addresses by which the entity receives calendar scheduling invitations and updates. A SchedulingAddress object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>.
+            </li>
+            <li>sendTo: <tt>String[String]</tt> (mandatory).
+                This maps scheduling methods to the scheduling URI. This <bcp14>MUST</bcp14> be a valid "sendTo" property value as specified in <xref target="RFC8984" format="default" section="4.4.6"/> and future RFCs.
+            </li>
+            <li>pref: <tt>Preference</tt> (optional)
+                The preference of this scheduling address in relation to other scheduling addresses.
+            </li>
+          </ul>
         </section>
       </section>
       <section anchor="address-and-location-properties" numbered="true" toc="default">
