@@ -786,10 +786,10 @@ The actual information. This generally is free-text, but future specifications M
             </li>
           </ul>
         </section>
-        <section anchor="categories" numbered="true" toc="default">
-          <name>categories</name>
+        <section anchor="keywords" numbered="true" toc="default">
+          <name>keywords</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).
-The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+A set of free-text keywords, also known as <em>tags</em>. The set is represented as an object, with each key being a keyword. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
         </section>
       </section>
     </section>
