@@ -778,8 +778,19 @@ The actual information. This generally is free-text, but future specifications M
         </section>
         <section anchor="notes" numbered="true" toc="default">
           <name>notes</name>
-          <t>Type: <tt>String</tt> (optional).</t>
-          <t>Arbitrary notes about the entity represented by this card.</t>
+          <t>Type: <tt>Note[]</tt> (optional).</t>
+          <t>Free-text notes associated with this card. A Note object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Note</tt>.
+            </li>
+            <li>
+              <t>note: <tt>String</tt> (mandatory). The free text value of this note.</t>
+            </li>
+            <li>
+              <t>language: <tt>String</tt> (optional). The human language in which the main content of this note is written in. The property value <bcp14>MUST</bcp14> be a valid language tag as defined <xref target="RFC5646"/>.</t>
+            </li>
+          </ul>
         </section>
         <section anchor="categories" numbered="true" toc="default">
           <name>categories</name>
