@@ -63,7 +63,7 @@
         <name>Motivation</name>
         <t>The JSContact format <xref target="I-D.ietf-calext-jscontact"/> represents contact card information as an alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
         <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that only support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification. For interoperability, this conversion needs to be standardized.</t>
-        <t>To facilitate this, this document defines a standard how to convert contact information between the JSContact <xref target="I-D.ietf-calext-jscontact"/> and vCard formats.</t>
+        <t>To facilitate this, this document defines a standard how to convert contact information between JSContact and vCard.</t>
       </section>
       <section>
         <name>Scope and Caveats</name>
@@ -74,7 +74,7 @@
             <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard properties.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named Card, and a group of contact cards, named CardGroup.</t>
             <t/>
           </li>
-          <li>The properties that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as lists, in some cases condensed in a single value.</li>
+          <li>The properties that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as arrays, in some cases condensed in a single value.</li>
         </ul>
       </section>
       <section>
@@ -85,7 +85,7 @@
     </section>
     <section anchor="vcard-jscontact-translation">
       <name>Translating vCard to JSContact</name>
-      <t>This section contains the translaiton rules from vCard to Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
+      <t>This section contains the translation rules from vCard to JSContact Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
       <t>If a vCard represents a group of contacts, those vCard properties which don't have a counterpart in CardGroup are converted into related properties of the "CardGroup.card" object.  In this case, the "uid" member of both the resulting CardGroup object and its "card" member MUST have the same value.</t>
       <section anchor="vcard-common-parameters">
         <name>Common vCard Parameters</name>
@@ -104,14 +104,14 @@
             <t/>
           </li>
           <li>
-            <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the "localizations" map: the key in the "localizations" object is the LANGUAGE value, the key in the PatchObject points the JSContact property that corresponds to the vCard property. The value of the PatchObject entry contains the vCard property value.</t>
+            <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the "localizations" map: the key in the "localizations" object is set to the LANGUAGE value, the key in the PatchObject points the JSContact property that corresponds to the vCard property. The value of the PatchObject entry contains the vCard property value.</t>
             <t/>
           </li>
         </ul>
       </section>
       <section anchor="unmapped-jscontact-information">
         <name>Unmapped JSContact Information</name>
-        <t>The rules to generate a map key of type Id as well as "preferredContactMethod" properties are out of the scope of this document.</t>
+        <t>The rule to generate the "preferredContactMethod" property is out of the scope of this document.</t>
       </section>
       <section>
         <name>General Properties</name>
@@ -121,7 +121,7 @@
         </section>
         <section>
           <name>SOURCE</name>
-          <t>A SOURCE property is represented as an entry of the "resources" map (<xref target="source_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "directorySource" and the "resource" member is the SOURCE value.</t>
+          <t>A SOURCE property is represented as an entry of the "directories" map (<xref target="source_mapping"/>).  The entry value is a "DirectoryResource" object whose "type" member is set to "entry" and "uri" member is set to the SOURCE value.</t>
           <t>The PREF and MEDIATYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="source_mapping">
             <name>SOURCE mapping example</name>
@@ -136,12 +136,12 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "directories":{
        ...
-       "a-source":{
-         "@type": "Resource",
-         "type": "directorySource",
-         "resource": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
+       "ENTRY-1":{
+         "@type": "DirectoryResource",
+         "type": "entry",
+         "uri": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
        },
        ...
     },
@@ -187,7 +187,7 @@
         <section>
           <name>N and NICKNAME</name>
           <t>The N instances are converted into equivalent items of the "components" array of the "name" property (<xref target="fn_n_nickname_mapping"/>): the N components are transformed into related "NameComponent" objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
-          <t>Each NICKNAME instance is mapped to an item of "nickNames" array.</t>
+
           <table anchor="n_components">
             <name>N components mapping</name>
             <thead>
@@ -219,6 +219,10 @@
               </tr>
             </tbody>
           </table>
+
+          <t>A NICKNAME property is represented as an entry of the "nickNames" map (<xref target="fn_n_nickname_mapping"/>).  The entry value is a "NickName" object.  The "name" member is set to the NICKNAME value.</t>
+          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+
           <figure anchor="fn_n_nickname_mapping">
             <name>FN, N, NICKNAME mapping example</name>
             <artwork><![CDATA[
@@ -245,9 +249,12 @@
           { "@type": "NameComponent", "type": "suffix", "value":"Esq." }
         ]
     },
-    "nickNames":[
-      "Johnny"
-    ],
+    "nickNames":{
+       "NICK-1":{
+          "@type": "NickName",
+          "name" : "Johnny"
+       }
+    },
     ...
     }
         ]]></artwork>
@@ -255,7 +262,7 @@
         </section>
         <section>
           <name>PHOTO</name>
-          <t>A PHOTO property is represented as an entry of the "photos" map (<xref target="photo_mapping"/>).  The entry value is a "File" object whose "href" member is the PHOTO value.</t>
+          <t>A PHOTO property is represented as an entry of the "media" map (<xref target="photo_mapping"/>).  The entry value is a "MediaResource" object whose "type" member is set to "photo" and "uri" member is set to the PHOTO value.</t>
           <t>The PREF and MEDIATYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="photo_mapping">
             <name>PHOTO mapping example</name>
@@ -270,11 +277,12 @@
     {
     "@type": "Card",
     ...
-    "photos":{
+    "media":{
        ...
-       "a-photo":{
-         "@type": "File",
-         "href": "http://www.example.com/pub/photos/jqpublic.gif"
+       "PHOTO-1":{
+         "@type": "MediaResource",
+         "type": "photo",
+         "uri": "http://www.example.com/pub/photos/jqpublic.gif"
        },
        ...
     },
@@ -350,13 +358,13 @@
         <section>
           <name>GENDER</name>
           <t>The GENDER property is a single structured value with two optional components: the biological sex and the gender information.  The former is represented as an enumerated value, while the latter as a free-form text.  As opposed to such a representation, the JSContact specification includes the "SpeakToAs" object just to represent how to address, speak to or refer to the contact.  In particular, some pre-defined values are allowed for the "grammaticalGender" member.</t>
-          <t>For the reasons stated above, the GENDER property doesn't have a direct match with the "SpeakToAs" object.  However, on the assumption that the GENDER property doesn't store the actual biological sex of the contact, implementations MAY use the conversion rules shown in <xref target="gender-vs-speaktoas"/> and <xref target="speaktoas-vs-gender"/>.</t>
+          <t>For the reasons stated above, the GENDER property doesn't have a direct match with the "SpeakToAs" object.  However, as long as the GRAMMATICAL-GENDER property (<xref target="grammatical-gender"/>) is missing and based on a mapping assumption that the GENDER property doesn't store the actual biological sex of the contact, implementations MAY use the conversion rules shown in <xref target="gender-vs-speaktoas"/> and <xref target="speaktoas-vs-gender"/>.</t>
           <table anchor="gender-vs-speaktoas">
-            <name>GENDER to SpeakToAs conversion</name>
+            <name>GENDER to speakToAs conversion</name>
             <thead>
               <tr>
                 <th align="left">GENDER value</th>
-                <th align="left">"SpeakToAs.grammaticalGender" value</th>
+                <th align="left">"speakToAs.grammaticalGender" value</th>
               </tr>
             </thead>
             <tbody>
@@ -383,10 +391,10 @@
             </tbody>
           </table>
           <table anchor="speaktoas-vs-gender">
-            <name>SpeakToAs to GENDER conversion</name>
+            <name>speakToAs to GENDER conversion</name>
             <thead>
               <tr>
-                <th align="left">"SpeakToAs.grammaticalGender" value</th>
+                <th align="left">"speakToAs.grammaticalGender" value</th>
                 <th align="left">GENDER value</th>
               </tr>
             </thead>
@@ -497,7 +505,7 @@
     "@type": "Card",
     ...
     "addresses":{
-      "work-address" :{
+      "ADDR-1" :{
         "@type": "Address",
         "contexts":{ "work": true },
         "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
@@ -511,7 +519,7 @@
         "postcode": "20190",
         "countryCode": "US"
       },
-      "private-address":{
+      "ADDR-2":{
         "@type": "Address",
         "contexts":{ "private": true },
         "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
@@ -553,14 +561,14 @@
     "@type": "Card",
     ...
     "phones":{
-      "a-phone":{
+      "PHONE-1":{
         "@type": "Phone",
         "contexts":{ "private": true },
         "features":{ "voice": true },
         "phone": "tel:+1-555-555-5555;ext=5555",
         "pref": 1
       },
-      "another-phone":{
+      "PHONE-2":{
         "@type": "Phone",
         "contexts":{ "private": true },
         "phone": "tel:+33-01-23-45-67"
@@ -590,12 +598,12 @@
     "@type": "Card",
     ...
     "emails":{
-      "work-email":{
+      "EMAIL-1":{
         "@type": "EmailAddress",
         "contexts":{ "work": true },
         "email": "jqpublic@xyz.example.com"
       },
-      "private-email":{
+      "EMAIL-2":{
         "@type": "EmailAddress",
         "email": "jane_doe@example.com",
         "pref": 1
@@ -608,7 +616,7 @@
         </section>
         <section>
           <name>IMPP</name>
-          <t>An IMPP property is represented as an entry of the "onlineServices" map (<xref target="impp_mapping"/>).  The entry value is a "OnlineService" object and the "uri" member is the IMPP value.</t>
+          <t>An IMPP property is represented as an entry of the "onlineServices" map (<xref target="impp_mapping"/>).  The entry value is a "OnlineService" object and the "uri" member is set to the IMPP value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="impp_mapping">
             <name>IMPP mapping example</name>
@@ -625,7 +633,7 @@
     ...
     "onlineServices":{
       ...
-      {
+      "OS-1": {
         "@type": "OnlineService",
         "uri": "xmpp:alice@example.com",
         "pref": 1
@@ -725,11 +733,11 @@
     "@type": "Card",
     ...
     "titles":{
-      "a-title":{
+      "TITLE-1":{
         "@type": "Title",
         "title": "Project Leader"
       },
-      "another-title":{
+      "TITLE-2":{
         "@type": "Title",
         "title": "Research Scientist"
       }
@@ -741,7 +749,7 @@
         </section>
         <section>
           <name>LOGO</name>
-          <t>A LOGO property is represented as an entry of the "resources" map (<xref target="logo_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "logo" and the "resource" member is the LOGO value.</t>
+          <t>A LOGO property is represented as an entry of the "media" map (<xref target="logo_mapping"/>).  The entry value is a "MediaResource" object whose "type" member is set to "logo" and "uri" member is set to the LOGO value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="logo_mapping">
             <name>LOGO mapping example</name>
@@ -756,12 +764,12 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "media":{
       ...
-      "a-logo":{
-        "@type": "Resource",
+      "LOGO-1":{
+        "@type": "MediaResource",
         "type": "logo",
-        "resource": "http://www.example.com/pub/logos/abccorp.jpg"
+        "uri": "http://www.example.com/pub/logos/abccorp.jpg"
       },
       ...
     },
@@ -788,7 +796,7 @@
     "@type": "Card",
     ...
     "organizations":{
-      "an-organization":{
+      "ORG-1":{
         "@type": "Organization",
         "name": "ABC, Inc.",
         "units":[
@@ -846,7 +854,7 @@
          "fullName": "The Doe family",
          "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
          "photos":{
-           "a-photo":{
+           "PHOTO-1":{
              "@type": "File",
              "href": "http://www.example.com/pub/photos/jqpublic.gif"
            }
@@ -903,7 +911,7 @@
         </section>
         <section>
           <name>CONTACT-URI</name>
-          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the "resources" map (<xref target="contact_uri_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "contact" and the "resource" member is the CONTACT-URI value.</t>
+          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the "links" map (<xref target="contact_uri_mapping"/>).  The entry value is a "LinkResource" object whose  "type" member is set to "contact" and "uri" member is set to the CONTACT-URI value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="contact_uri_mapping">
             <name>CONTACT-URI mapping example</name>
@@ -918,12 +926,12 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "links":{
       ...
-      "a-contact-uri":{
-        "@type": "Resource",
+      "CONTACT-1":{
+        "@type": "LinkResource",
         "type": "contact",
-        "resource": "mailto:contact@example.com",
+        "uri": "mailto:contact@example.com",
         "pref": 1
       },
       ...
@@ -1062,7 +1070,7 @@
         </section>
         <section>
           <name>ORG-DIRECTORY</name>
-          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the "resources" map (<xref target="org_directory_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "directory" and the "resource" member is the ORG-DIRECTORY value.</t>
+          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the "directories" map (<xref target="org_directory_mapping"/>).  The entry value is a "DirectoryResource" object whose "type" member is set to "directory" and "uri" member is set to the ORG-DIRECTORY value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <t>The INDEX parameter is represented as the index of the directory among the online resources with the "directory" type.</t>
           <figure anchor="org_directory_mapping">
@@ -1078,18 +1086,18 @@
 
     {
     ...
-    "resources":{
+    "directories":{
       "@type": "Card",
       ...
-      "an-org-directory":{
-        "@type": "Resource",
+      "DIRECTORY-1":{
+        "@type": "DirectoryResource",
         "type": "directory",
-        "resource": "http://directory.mycompany.example.com"
+        "uri": "http://directory.mycompany.example.com"
       },
-      "another-org-directory":{
-        "@type": "Resource",
+      "DIRECTORY-2":{
+        "@type": "DirectoryResource",
         "type": "directory",
-        "resource": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
+        "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
         "pref": 1
       },
       ...
@@ -1104,7 +1112,7 @@
         <name>Explanatory Properties</name>
         <section>
           <name>CATEGORIES</name>
-          <t>A CATEGORIES property is converted into a set of entries of the "categories" map (<xref target="categories_mapping"/>). The keys are the comma-separated text values of the CATEGORIES property.</t>
+          <t>A CATEGORIES property is converted into a set of entries of the "keywords" map (<xref target="categories_mapping"/>). The keys are the comma-separated text values of the CATEGORIES property.</t>
           <t>In this case, the PREF parameter has not a JSContact counterpart; however, implementers MAY use a map preserving the order of insertion and the map entries can be inserted by order of preference.</t>
           <figure anchor="categories_mapping">
             <name>CATEGORIES mapping example</name>
@@ -1119,7 +1127,7 @@
     {
     "@type": "Card",
     ...
-    "categories":{
+    "keywords":{
       "INTERNET": true,
       "IETF": true,
       "INDUSTRY": true,
@@ -1131,52 +1139,8 @@
           </figure>
         </section>
         <section>
-          <name>CREATED</name>
-          <t>The CREATED property is transformed into the "created" member (<xref target="created_mapping"/>).</t>
-          <figure anchor="created_mapping">
-            <name>CREATED mapping example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CREATED:20210308T222710Z
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "created": "2021-03-08T22:27:10Z",
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section>
-          <name>LOCALE</name>
-          <t>A LOCALE property is mapped to the "locale" property (<xref target="locale_mapping"/>).</t>
-          <figure anchor="locale_mapping">
-            <name>LOCALE mapping example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    LOCALE:de-AT
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "locale": "de-AT",
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section>
           <name>NOTE</name>
-          <t>A NOTE property is mapped to the "notes" property (<xref target="notes_mapping"/>).  All the NOTE instances are condensed into a single note and separated by newline.</t>
+          <t>A NOTE property is mapped to a "Note" object in the "notes" array (<xref target="notes_mapping"/>)</t>
           <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="notes_mapping">
             <name>NOTE mapping example</name>
@@ -1191,7 +1155,11 @@
     {
     "@type": "Card",
     ...
-    "notes": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
+    "notes": [
+        {
+           "note":"This fax number is operational 0800 to 1715 EST, Mon-Fri."
+        }
+    ],
     ...
     }
         ]]></artwork>
@@ -1243,7 +1211,7 @@
         </section>
         <section>
           <name>SOUND</name>
-          <t>A SOUND property is represented as an entry of the "resources" map (<xref target="sound_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "audio" and the "resource" member is the SOUND value.</t>
+          <t>A SOUND property is represented as an entry of the "media" map (<xref target="sound_mapping"/>).  The entry value is a "MediaResource" object whose "type" member is set to "sound" and "uri" member is set to the SOUND value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="sound_mapping">
             <name>SOUND mapping example</name>
@@ -1258,12 +1226,12 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "media":{
       ...
-      "a-sound":{
-        "@type": "Resource",
-        "type": "audio",
-        "resource": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
+      "SOUND-1":{
+        "@type": "MediaResource",
+        "type": "sound",
+        "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
       },
       ...
     },
@@ -1300,7 +1268,7 @@
         </section>
         <section>
           <name>URL</name>
-          <t>An URL property is represented as an entry of the "resources" map (<xref target="url_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "uri" and the "resource" member is the URL value.</t>
+          <t>An URL property is represented as an entry of the "links" map (<xref target="url_mapping"/>).  The entry value is a "LinkResource" object whose "uri" member is set to the URL value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="url_mapping">
             <name>URL mapping example</name>
@@ -1315,12 +1283,11 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "links":{
       ...
-      "an-url":{
-        "@type": "Resource",
-        "type": "uri",
-        "resource": "http://example.org/restaurant.french/~chezchic.html"
+      "LINK-1":{
+        "@type": "LinkResource",
+        "uri": "http://example.org/restaurant.french/~chezchic.html"
       },
       ...
     },
@@ -1338,7 +1305,7 @@
         <name>Security Properties</name>
         <section>
           <name>KEY</name>
-          <t>A KEY property is represented as an entry of the "resources" map (<xref target="key_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "publicKey" and the "resource" member is the KEY value.</t>
+          <t>A KEY property is represented as an entry of the "cryptoKeys" map (<xref target="key_mapping"/>).  The entry value is a "CryptoResource" object whose "uri" member is set to the KEY value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="key_mapping">
             <name>KEY mapping example</name>
@@ -1353,12 +1320,11 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "cryptoKeys":{
       ...
-      "a-key":{
-        "@type": "Resource",
-        "type": "publicKey",
-        "resource": "http://www.example.com/keys/jdoe.cer"
+      "KEY-1":{
+        "@type": "CryptoResource",
+        "uri": "http://www.example.com/keys/jdoe.cer"
       },
       ...
     },
@@ -1372,7 +1338,7 @@
         <name>Calendar Properties</name>
         <section>
           <name>FBURL</name>
-          <t>An FBURL property is represented as an entry of the "resources" map (<xref target="fburl_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "freeBusy" and the "resource" member is the FBURL value.</t>
+          <t>An FBURL property is represented as an entry of the "calendars" map (<xref target="fburl_mapping"/>).  The entry value is a "CalendarResource" object whose "type" member is set to "freeBusy" and "uri" member is set to the FBURL value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="fburl_mapping">
             <name>FBURL mapping example</name>
@@ -1388,18 +1354,18 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "calendars":{
       ...
-      "an-fburl":{
-        "@type": "Resource",
+      "FBURL-1":{
+        "@type": "CalendarResource",
         "type": "freeBusy",
-        "resource": "http://www.example.com/busy/janedoe",
+        "uri": "http://www.example.com/busy/janedoe",
         "pref": 1
       },
-      "another-fburl":{
-        "@type": "Resource",
+      "FBURL-2":{
+        "@type": "CalendarResource",
         "type": "freeBusy",
-        "resource": "ftp://example.com/busy/project-a.ifb",
+        "uri": "ftp://example.com/busy/project-a.ifb",
         "mediaType": "text/calendar"
       },
       ...
@@ -1429,14 +1395,14 @@
     ...
     "scheduling":{
       ...
-      "a-caladruri":{
+      "SCHEDULING-1":{
         "@type": "Scheduling",
         "sendTo": {
           "imip": "mailto:janedoe@example.com"
         },
         "pref": 1
       },
-      "another-caladruri":{
+      "SCHEDULING-2":{
         "@type": "Scheduling",
         "sendTo": {
             "imip": "http://example.com/calendar/jdoe"
@@ -1451,7 +1417,7 @@
         </section>
         <section>
           <name>CALURI</name>
-          <t>A CALURI property is represented as an entry of the "resources" map (<xref target="caluri_mapping"/>).  The entry value is a "Resource" object whose "type" member is set to "calendar" and the "resource" member is the CALURI value.</t>
+          <t>A CALURI property is represented as an entry of the "calendars" map (<xref target="caluri_mapping"/>).  The entry value is a "CalendarResource" object whose "type" member is set to "calendar" and "uri" member is set to the CALURI value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="caluri_mapping">
             <name>CALURI mapping example</name>
@@ -1467,18 +1433,18 @@
     {
     "@type": "Card",
     ...
-    "resources":{
+    "calendars":{
       ...
-      "a-caluri":{
-        "@type": "Resource",
+      "CAL-1":{
+        "@type": "CalendarResource",
         "type": "calendar",
-        "resource": "http://cal.example.com/calA",
+        "uri": "http://cal.example.com/calA",
         "pref": 1
       },
-      "another-caluri":{
-        "@type": "Resource",
+      "CAL-2":{
+        "@type": "CalendarResource",
         "type": "calendar",
-        "resource": "ftp://ftp.example.com/calA.ics",
+        "uri": "ftp://ftp.example.com/calA.ics",
         "mediaType": "text/calendar"
       },
       ...
@@ -1489,6 +1455,131 @@
           </figure>
         </section>
       </section>
+
+    <section anchor="convert-new-vcard">
+
+    <name>Translating new vCard properties and parameters</name>
+      <t>This section contains the translation rules about new vCard properties and parameters as defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+
+      <section>
+        <name>CREATED</name>
+        <t>The CREATED property is transformed into the "created" member (<xref target="created_mapping"/>).</t>
+        <figure anchor="created_mapping">
+          <name>CREATED mapping example</name>
+          <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    CREATED:19940930T143510Z
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "created": "1994-09-30T14:35:10Z",
+    ...
+    }
+        ]]></artwork>
+        </figure>
+      </section>
+
+      <section>
+        <name>LOCALE</name>
+        <t>The LOCALE property is transformed into the "locale" member (<xref target="locale_mapping"/>).</t>
+        <figure anchor="locale_mapping">
+          <name>LOCALE mapping example</name>
+          <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    LOCALE:de-AT
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "locale": "de-AT",
+    ...
+    }
+        ]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="grammatical-gender">
+        <name>GRAMMATICAL-GENDER and PRONOUNS</name>
+        <t>The GRAMMATICAL-GENDER property is transformed into the "speakToAs.grammaticalGender" member (<xref target="grammatical_gender_pronouns_mapping"/>).</t>
+        <t>The PRONOUNS property is transformed into the "speakToAs.pronouns" member (<xref target="grammatical_gender_pronouns_mapping"/>).</t>
+        <figure anchor="grammatical_gender_pronouns_mapping">
+          <name>GRAMMATICAL-GENDER and PRONOUNS mapping example</name>
+          <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+     GRAMMATICAL-GENDER:NEUTER
+     PRONOUNS=they/them
+     PRONOUNS:xe/xir
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "speakToAs": {
+      "grammaticalGender":"neuter",
+      "pronouns": [
+          "they/them",
+          "xe/xir"
+      ]
+    },
+    ...
+    }
+        ]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="prop_id_parameter">
+        <name>PROP-ID</name>
+        <t>The PROP-ID parameter is transformed into a map key is of type Id (<xref target="propid_mapping"/>).</t>
+        <t>When this parameter is missing, implementers MAY generate a map key as they see fit.</t>
+
+        <figure anchor="propid_mapping">
+          <name>PROP-ID mapping example</name>
+          <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
+    TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "phones":{
+      "PHONE-A":{
+        "@type": "Phone",
+        "contexts":{ "private": true },
+        "features":{ "voice": true },
+        "phone": "tel:+1-555-555-5555;ext=5555",
+        "pref": 1
+      },
+      "PHONE-B":{
+        "@type": "Phone",
+        "contexts":{ "private": true },
+        "phone": "tel:+33-01-23-45-67"
+      }
+    ],
+    ...
+    }
+        ]]></artwork>
+        </figure>
+      </section>
+
+    </section>
+
       <section anchor="convert-nonstandard-vcard">
         <name>Non-standard properties and parameters</name>
         <t>vCards may contain properties or parameters for which no standard JSContact property is defined. For example, a vCard may contain extended properties and parameters  (<xref target="RFC6350" section="6.10"/>) of which the semantics or purpose is unknown.</t>
@@ -1637,7 +1728,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <t>In most of the cases, the rules about the translation from Card/CardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
       <section>
         <name>Id</name>
-        <t>Where a map key is of type Id, implementers are free to either ignore it or preserve it as a vCard information (e.g. a vCard parameter).</t>
+        <t>Where a map key is of type Id, implementers are free to either ignore it or preserve it as a vCard information (<xref target="prop_id_parameter"/>).</t>
       </section>
       <section>
         <name>Localizations</name>
@@ -1659,11 +1750,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
         <section>
           <name>Title</name>
           <t>The "titles" property contains information about the job, the position or the role of the entity the card represents.  In vCard, such information is split into the TITLE and the ROLE properties.  This specification defines TITLE as the default target property when converting the "titles" property.</t>
-        </section>
-        <section>
-          <name>Resource</name>
-          <t>The "resources" property includes resources that are usually represented through different vCard properties.  The matched vCard property of a "Resource" object can be derived from the value of its "type" member.</t>
-          <t>Any resource included in the "resources" map that doesn't match a vCard property MAY be converted into a vCard extended property.</t>
         </section>
       </section>
       <section>
@@ -1812,7 +1898,7 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
       </section>
       <section>
         <name>Card Unmatched Properties</name>
-        <t>Both the "preferredContactMethod" and "created" members don't match any vCard property.  Implementers MAY represent them as vCard extended properties.</t>
+        <t>The "preferredContactMethod" member don't match any vCard property.  Implementers MAY represent it as vCard extended properties.</t>
       </section>
       <section>
         <name>vCard Required Properties</name>
@@ -1866,6 +1952,7 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
       <references>
         <name>Informative References</name>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-vcard-jscontact-extensions.xml"/>
         <reference anchor="time-zones" target="https://www.iana.org/time-zones">
           <front>
             <title>Time Zone Database</title>
