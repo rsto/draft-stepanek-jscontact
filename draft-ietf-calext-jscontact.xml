@@ -123,7 +123,8 @@ they appear in all capitals, as shown here.</t>
         </section>
         <section anchor="resource" numbered="true" toc="default">
           <name>Resource</name>
-          <t>This data type defines a digital resource associated with the entity represented by this card. Several property definitions in <xref target="resource-properties"/> refer to the Resource data type either directly, or as the basis for their property-specific value types. A Resource object has the following properties:</t>
+          <t>This data type defines a resource associated with the entity represented by this card, identified by a URI <xref target="RFC3986" format="default"/>. Several property definitions later in this document refer to the Resource data type as the basis for their property-specific value types. The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
+          <t>A Resource object has the following properties:</t>
           <ul spacing="normal">
             <li>
               <t>@type: <tt>String</tt> (mandatory). The allowed values are defined in the property definition that makes use of the Resource type.</t>
@@ -531,8 +532,8 @@ Defines the preference of this language in relation to other languages of the sa
           <t>Also see the definition of the VCARD LANG property (Section 6.4.4., <xref target="RFC6350" format="default"/>).</t>
         </section>
       </section>
-      <section anchor="resource-properties" numbered="true" toc="default">
-        <name>Resource properties</name>
+      <section anchor="calendaring-and-scheduling-properties" numbered="true" toc="default">
+        <name>Calendaring and Scheduling properties</name>
         <section anchor="calendars" numbered="true" toc="default">
           <name>calendars</name>
           <t>Type: <tt>Id[CalendarResource]</tt> (optional).</t>
@@ -546,71 +547,13 @@ Defines the preference of this language in relation to other languages of the sa
             <li><tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
           </ul>
         </section>
-        <section anchor="cryptokeys" numbered="true" toc="default">
-          <name>cryptoKeys</name>
-          <t>Type: <tt>Id[CryptoResource]</tt> (optional).</t>
-          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this card. A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
-          <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>.</li>
-            <li>The <tt>type</tt> property value either is not set, is defined in a future RFC or vendor-specific.</li>
-          </ul>
-        </section>
-        <section anchor="directories" numbered="true" toc="default">
-          <name>directories</name>
-          <t>Type: <tt>Id[DirectoryResource]</tt> (optional).</t>
-          <t>These are directory service resources, such as entries in a directory or organizational directories for lookup. A DirectoryResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
-          <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>DirectoryResource</tt>.</li>
-          </ul>
-          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
-          <ul>
-            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.</li>
-            <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card. In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
-          </ul>
-        </section>
-        <section anchor="links" numbered="true" toc="default">
-          <name>links</name>
-          <t>Type: <tt>Id[Resource]</tt> (optional).</t>
-          <t>These are general links to other resources, with the following additional definitions:</t>
-          <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Resource</tt>.</li>
-          </ul>
-          <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
-          <ul>
-            <li><tt>contact</tt> The resource is an URI by which the entity represented by this card may be contacted, including web forms or other media that require user interaction.</li>
-          </ul>
-        </section>
-        <section anchor="media" numbered="true" toc="default">
-          <name>media</name>
-          <t>Type: <tt>Id[MediaResource]</tt> (optional).</t>
-          <t>These are media resources such as photographs, avatars or sounds associated with the entity represented by this card. A MediaResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
-          <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>MediaResource</tt>.</li>
-          </ul>
-          <t>The <tt>type</tt> property value must be one of the following, or be defined in a future RFC or vendor-specific:</t>
-          <ul>
-            <li><tt>photo</tt> The resource is a photograph or avatar.</li>
-            <li><tt>sound</tt> The resource is audio media, e.g. to specify the proper pronunciation of the name property contents.</li>
-            <li><tt>logo</tt> The resource is a graphic image or logo associated with entity represented by this card.</li>
-          </ul>
-        </section>
-      </section>
-      <section anchor="scheduling-and-sharing-properties" numbered="true" toc="default">
-        <name>Scheduling and Sharing properties</name>
-        <section anchor="scheduling" numbered="true" toc="default">
-          <name>scheduling</name>
+        <section anchor="schedulingAddresses" numbered="true" toc="default">
+          <name>schedulingAddresses</name>
           <t>Type: <tt>Id[SchedulingAddress]</tt> (optional).</t>
-          <t>The scheduling addresses by which the entity receives calendar scheduling invitations and updates. A SchedulingAddress object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-                Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>.
-            </li>
-            <li>sendTo: <tt>String[String]</tt> (mandatory).
-                This maps scheduling methods to the scheduling URI. This <bcp14>MUST</bcp14> be a valid "sendTo" property value as specified in <xref target="RFC8984" format="default" section="4.4.6"/> and future RFCs.
-            </li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this scheduling address in relation to other scheduling addresses.
-            </li>
+          <t>The scheduling addresses by which the entity may receive calendar scheduling invitations. A SchedulingAddress object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>.</li>
+            <li>The <tt>type</tt> property value either is not set or it <bcp14>MUST</bcp14> be a valid object key of the JSCalendar <tt>sendTo</tt> property, as specified in <xref target="RFC8984" format="default" section="4.4.6"/> and future JSCalendar RFCs.</li>
           </ul>
         </section>
       </section>
@@ -694,6 +637,57 @@ The type of this street component. The value <bcp14>MUST</bcp14> be either one o
             </li>
             <li>value: <tt>String</tt> (mandatory).
 The value of this street component.</li>
+          </ul>
+        </section>
+      </section>
+      <section anchor="resource-properties" numbered="true" toc="default">
+        <name>Resource properties</name>
+        <section anchor="cryptokeys" numbered="true" toc="default">
+          <name>cryptoKeys</name>
+          <t>Type: <tt>Id[CryptoResource]</tt> (optional).</t>
+          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this card. A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>.</li>
+            <li>The <tt>type</tt> property value either is not set, is defined in a future RFC or vendor-specific.</li>
+          </ul>
+        </section>
+        <section anchor="directories" numbered="true" toc="default">
+          <name>directories</name>
+          <t>Type: <tt>Id[DirectoryResource]</tt> (optional).</t>
+          <t>These are directory service resources, such as entries in a directory or organizational directories for lookup. A DirectoryResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>DirectoryResource</tt>.</li>
+          </ul>
+          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <ul>
+            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.</li>
+            <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card. In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
+          </ul>
+        </section>
+        <section anchor="links" numbered="true" toc="default">
+          <name>links</name>
+          <t>Type: <tt>Id[Resource]</tt> (optional).</t>
+          <t>These are general links to other resources, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Resource</tt>.</li>
+          </ul>
+          <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <ul>
+            <li><tt>contact</tt> The resource is an URI by which the entity represented by this card may be contacted, including web forms or other media that require user interaction.</li>
+          </ul>
+        </section>
+        <section anchor="media" numbered="true" toc="default">
+          <name>media</name>
+          <t>Type: <tt>Id[MediaResource]</tt> (optional).</t>
+          <t>These are media resources such as photographs, avatars or sounds associated with the entity represented by this card. A MediaResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <ul>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>MediaResource</tt>.</li>
+          </ul>
+          <t>The <tt>type</tt> property value must be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <ul>
+            <li><tt>photo</tt> The resource is a photograph or avatar.</li>
+            <li><tt>sound</tt> The resource is audio media, e.g. to specify the proper pronunciation of the name property contents.</li>
+            <li><tt>logo</tt> The resource is a graphic image or logo associated with entity represented by this card.</li>
           </ul>
         </section>
       </section>
