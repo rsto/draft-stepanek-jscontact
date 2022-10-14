@@ -642,7 +642,7 @@ The postal code, post code, ZIP code or other short code associated with the add
             <li>countryCode: <tt>String</tt> (optional).
 The ISO-3166-1 country code.</li>
             <li>coordinates: <tt>String</tt> (optional) A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
-            <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in. This either <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref>, or it <bcp14>MUST</bcp14> be a valid TimeZoneId as defined in <xref target="RFC8984" format="default"/>. For the latter, a corresponding time zone <bcp14>MUST</bcp14> be defined in the <tt>timeZones</tt> property.</li>
+            <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in. This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
             <li>
               <t>contexts: <tt>Context[Boolean]</tt> (optional).
 The contexts of the address information. In addition to the common contexts, allowed values are:
@@ -785,11 +785,6 @@ The actual information. This generally is free-text, but future specifications M
           <name>categories</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).
 The set of free-text or URI categories that relate to the card. The set is represented as an object, with each key being a category. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
-        </section>
-        <section anchor="timeZones" numbered="true" toc="default">
-          <name>timeZones</name>
-          <t>Type: <tt>String[TimeZone]</tt> (optional).
-              Maps identifiers of custom time zones to their time zone definitions. For a description of this property see the <tt>timeZones</tt> property definition in <xref target="RFC8984" format="default"/>.</t>
         </section>
       </section>
     </section>
