@@ -219,6 +219,11 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
           Implementations may encounter JSContact data where a JSON object key does not match the name of a property known to that implementation. They <bcp14>MUST NOT</bcp14> treat such properties as invalid, instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object. Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set standard properties or vendor-extension properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties. This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
         </t>
         </section>
+        <section anchor="prop-label" numbered="true" toc="default">
+          <name>The <tt>label</tt> property</name>
+          <t>Several addressbook applications allow to associate contact data with user-defined labels. Such labels may be set for phone numbers and email addresses, to name a few. Typically these labels are displayed along with their associated contact data in graphical user interfaces.</t>
+          <t>For this, several object types in this specification define a <tt>label</tt> property. Its property value <bcp14>MUST</bcp14> be a <tt>String</tt>. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on graphical user interfaces with low resolution or devices with small screens.</t>
+        </section>
       </section>
       <section anchor="vendor-extension-values" numbered="true" toc="default">
         <name>Vendor-Extension Values</name>
@@ -237,11 +242,6 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
         <t>
           Vendors are strongly encouraged to specify new standard values once a vendor-extension turns out to be useful also for other systems.
           </t>
-      </section>
-      <section anchor="prop-label" numbered="true" toc="default">
-        <name>The label property</name>
-        <t>Several addressbook applications allow to associate contact data with user-defined labels. Such labels may be set for phone numbers and email addresses, to name a few. Typically these labels are displayed along with their associated contact data in graphical user interfaces.</t>
-        <t>For this, several object types in this specification define a <tt>label</tt> property. Its property value <bcp14>MUST</bcp14> be a <tt>String</tt>. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on graphical user interfaces with low resolution or devices with small screens.</t>
       </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
