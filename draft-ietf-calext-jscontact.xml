@@ -363,8 +363,22 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
         </section>
         <section anchor="nicknames" numbered="true" toc="default">
           <name>nickNames</name>
-          <t>Type: <tt>String[]</tt> (optional).</t>
-          <t>The nick names of the entity represented by this card.</t>
+          <t>Type: <tt>Id[NickName]</tt> (optional).</t>
+          <t>The nick names of the entity represented by this card. A NickName object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>NickName</tt>.
+              </li>
+            <li>name: <tt>String</tt> (mandatory).
+                The nick name.
+            </li>
+            <li>contexts: <tt>Context[Boolean]</tt> (optional)
+The contexts in which to use this nick name. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+            <li>pref: <tt>Preference</tt> (optional)
+                The preference of this nick name in relation to other nick names.</li>
+            <li>label: <tt>String</tt> (optional).
+                A custom label for the nick name, see <xref target="prop-label"/>.</li>
+          </ul>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
