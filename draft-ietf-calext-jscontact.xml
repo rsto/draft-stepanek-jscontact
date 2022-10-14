@@ -666,10 +666,10 @@ The value of this street component.</li>
         </section>
         <section anchor="links" numbered="true" toc="default">
           <name>links</name>
-          <t>Type: <tt>Id[Resource]</tt> (optional).</t>
-          <t>These are general links to other resources, with the following additional definitions:</t>
+          <t>Type: <tt>Id[LinkResource]</tt> (optional).</t>
+          <t>These are links to resources that do not fit any of the other use-case specific resource properties. A LinkResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Resource</tt>.</li>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>LinkResource</tt>.</li>
           </ul>
           <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
           <ul>
