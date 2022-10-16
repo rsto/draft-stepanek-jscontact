@@ -544,7 +544,7 @@
         <name>Communications Properties</name>
         <section anchor="vCard-TEL">
           <name>TEL</name>
-          <t>A TEL property is represented as an entry of the "phones" map (<xref target="tel_mapping"/>).  The entry value is a "Phone" object.  The TEL-specific values of the TYPE parameter are mapped to the "features" map keys.  The values that don't match a key are represented as comma-separated values of the "label" member.  The "phone" member is set to the TEL value.</t>
+          <t>A TEL property is represented as an entry of the "phones" map (<xref target="tel_mapping"/>).  The entry value is a "Phone" object.  The TEL-specific values of the TYPE parameter are mapped to the "features" map keys.  The "phone" member is set to the TEL value.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="tel_mapping">
             <name>TEL mapping example</name>
@@ -1113,7 +1113,7 @@
         <section>
           <name>CATEGORIES</name>
           <t>A CATEGORIES property is converted into a set of entries of the "keywords" map (<xref target="categories_mapping"/>). The keys are the comma-separated text values of the CATEGORIES property.</t>
-          <t>In this case, the PREF parameter has not a JSContact counterpart; however, implementers MAY use a map preserving the order of insertion and the map entries can be inserted by order of preference.</t>
+          <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
           <figure anchor="categories_mapping">
             <name>CATEGORIES mapping example</name>
             <artwork><![CDATA[
