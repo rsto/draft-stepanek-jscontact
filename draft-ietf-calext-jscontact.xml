@@ -538,10 +538,10 @@ The contexts in which to use this number. The value for each key in the object <
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>ContactLanguage</tt>.
               </li>
-            <li>context: <tt>Context</tt> (optional).
-Defines the context in which to use this language.</li>
+            <li>contexts: <tt>Context[Boolean]</tt> (optional).
+Defines the contexts in which to use this language. The value for each key in the object <bcp14>MUST</bcp14> be true.</li>
             <li>pref: <tt>Preference</tt> (optional).
-Defines the preference of this language in relation to other languages of the same context.</li>
+Defines the preference of this language in relation to other languages of the same contexts.</li>
           </ul>
           <t>Also see the definition of the VCARD LANG property (Section 6.4.4., <xref target="RFC6350" format="default"/>).</t>
         </section>
