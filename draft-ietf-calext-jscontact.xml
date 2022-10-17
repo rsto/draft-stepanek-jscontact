@@ -137,7 +137,7 @@ The resource value. This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Sec
             <li>mediaType: <tt>String</tt> (optional).
 Used for URI resource values. Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
-The contexts in which to use this resource. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+The contexts in which to use this resource. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this resource in relation to other resources.</li>
             <li>label: <tt>String</tt> (optional).
@@ -373,7 +373,7 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
                 The nick name.
             </li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
-The contexts in which to use this nick name. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+The contexts in which to use this nick name. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this nick name in relation to other nick names.</li>
             <li>label: <tt>String</tt> (optional).
@@ -463,7 +463,7 @@ The contexts in which to use this nick name. The value for each key in the objec
             <li>email: <tt>String</tt> (mandatory).
 The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
-The contexts in which to use this email address. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+The contexts in which to use this email address. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this email address in relation to other email addresses.</li>
             <li>label: <tt>String</tt> (optional).
@@ -485,7 +485,7 @@ The service-specific URI of the entity represented by this card.</li>
             <li>username: <tt>String</tt> (optional).
 The service-specific user name of the entity represented by this card. If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
-The contexts in which to use this service. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+The contexts in which to use this service. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this service in relation to other services.</li>
             <li>label: <tt>String</tt> (optional).
@@ -504,7 +504,7 @@ The contexts in which to use this service. The value for each key in the object 
 The phone value, as either a URI or a free-text phone number. Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
-                  The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>. The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
+                  The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>voice</tt> The number is for calling by voice.</li>
@@ -517,7 +517,7 @@ The phone value, as either a URI or a free-text phone number. Typical URI scheme
               </ul>
             </li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
-The contexts in which to use this number. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+The contexts in which to use this number. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
             <li>pref: <tt>Preference</tt> (optional)
                 The preference of this number in relation to other numbers.</li>
             <li>label: <tt>String</tt> (optional).
@@ -602,12 +602,11 @@ The ISO-3166-1 country code.</li>
             <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in. This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
             <li>
               <t>contexts: <tt>Context[Boolean]</tt> (optional).
-The contexts of the address information. In addition to the common contexts, allowed values are:
+The contexts of the address information. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. In addition to the common contexts, allowed key values are:
 </t>
               <ul spacing="normal">
                 <li><tt>billing</tt> An address to be used for billing.</li>
-                <li><tt>postal</tt> An address to be used for delivering physical items.
-The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
+                <li><tt>postal</tt> An address to be used for delivering physical items.</li>
               </ul>
             </li>
             <li>pref: <tt>Preference</tt> (optional)
@@ -803,7 +802,7 @@ The actual information. This generally is free-text, but future specifications M
         <section anchor="keywords" numbered="true" toc="default">
           <name>keywords</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).
-A set of free-text keywords, also known as <em>tags</em>. The set is represented as an object, with each key being a keyword. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+A set of free-text keywords, also known as <em>tags</em>. The set is represented as an object, with each key being a keyword. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
         </section>
       </section>
     </section>
@@ -825,7 +824,7 @@ A set of free-text keywords, also known as <em>tags</em>. The set is represented
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (mandatory). The members of this group.</t>
-          <t>The set is represented as an object, with each key being the uid of another Card or CardGroup. The value for each key in the object <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+          <t>The set is represented as an object, with each key being the uid of another Card or CardGroup. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
         </section>
         <section anchor="group-name" numbered="true" toc="default">
           <name>name</name>
