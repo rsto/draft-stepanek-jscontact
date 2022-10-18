@@ -669,19 +669,19 @@
       "en":[
         {
           "@type": "ContactLanguage",
-          "context": "work",
+          "contexts":{ "work": true },
           "pref": 1
         }
       ],
       "fr":[
         {
           "@type": "ContactLanguage",
-          "context": "work",
+          "contexts":{ "work": true },
           "pref": 2
         },
         {
           "@type": "ContactLanguage",
-          "context": "private"
+          "contexts":{ "private": true }
         }
       ]
     },
