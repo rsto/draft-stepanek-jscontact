@@ -536,7 +536,7 @@ The contexts in which to use this number. Also see <xref target="prop-contexts"/
               <ul spacing="normal">
                 <li><tt>addresses</tt>. The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
                 <li><tt>emails</tt>. The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
-                <li><tt>onlineServices</tt>. The prefers to be contacted by one of the entries in <xref target="onlineservices"><tt>onlineServices</tt></xref>.</li>
+                <li><tt>onlineServices</tt>. The entity prefers to be contacted by one of the entries in <xref target="onlineservices"><tt>onlineServices</tt></xref>.</li>
                 <li><tt>phones</tt>. The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
               </ul>
            <t>The values in the object are a (possibly empty) list of preferences for this contact channel. A valid ContactChannelPreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
