@@ -115,12 +115,6 @@ they appear in all capitals, as shown here.</t>
           <t>A PatchObject does not define its own <tt>@type</tt> property. Instead, a <tt>@type</tt> property in a patch <bcp14>MUST</bcp14> be handled as any other patched property value.</t>
           <t>Implementations <bcp14>MUST</bcp14> reject in its entirety a PatchObject if any of its patches is invalid.  Implementations <bcp14>MUST NOT</bcp14> apply partial patches.</t>
         </section>
-        <section anchor="preference" numbered="true" toc="default">
-          <name>Preference</name>
-          <t>This data type allows to define a preference order on same-typed contact information. For example, a card holder may have two email addresses and prefer to be contacted with one of them.</t>
-          <t>A preference value <bcp14>MUST</bcp14> be an integer number in the range 1 and 100. Lower values correspond to a higher level of preference, with 1 being most preferred. If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
-          <t>Note that the preference only is defined in relation to contact information of the same type. For example, the preference orders within emails and phone numbers are indendepent of each other. Also note that the <em>preferredContactMethod</em> property allows to define a preferred contact method across method types.</t>
-        </section>
         <section anchor="resource" numbered="true" toc="default">
           <name>Resource</name>
           <t>This data type defines a resource associated with the entity represented by this card, identified by a URI <xref target="RFC3986" format="default"/>. Several property definitions later in this document refer to the Resource data type as the basis for their property-specific value types. The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
@@ -138,8 +132,8 @@ The resource value. This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Sec
 Used for URI resource values. Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this resource. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this resource in relation to other resources.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of this resource in relation to other resources. Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>. </li>
           </ul>
@@ -224,6 +218,12 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
           <name>The <tt>label</tt> property</name>
           <t>Several addressbook applications allow to associate contact data with user-defined labels. Such labels may be set for phone numbers and email addresses, to name a few. Typically these labels are displayed along with their associated contact data in graphical user interfaces.</t>
           <t>For this, several object types in this specification define a <tt>label</tt> property. Its property value <bcp14>MUST</bcp14> be a <tt>String</tt>. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on graphical user interfaces with low resolution or devices with small screens.</t>
+        </section>
+        <section anchor="prop-pref" numbered="true" toc="default">
+          <name>The <tt>pref</tt> property</name>
+          <t>This property allows to define a preference order on same-typed contact information. For example, a card holder may have two email addresses and prefer to be contacted with one of them.</t>
+          <t>Its value <bcp14>MUST</bcp14> be an <tt>UnsignedInt</tt> in the range 1 and 100. Lower values correspond to a higher level of preference, with 1 being most preferred. If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
+          <t>Note that the preference only is defined in relation to contact information of the same type. For example, the preference orders within emails and phone numbers are indendepent of each other. Also note that the <em>preferredContactMethod</em> property allows to define a preferred contact method across method types.</t>
         </section>
       </section>
       <section anchor="vendor-extension-values" numbered="true" toc="default">
@@ -374,8 +374,8 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
             </li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this nick name. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this nick name in relation to other nick names.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of this nick name in relation to other nick names. Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the nick name, see <xref target="prop-label"/>.</li>
           </ul>
@@ -464,8 +464,8 @@ The contexts in which to use this nick name. The boolean value <bcp14>MUST</bcp1
 The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this email address. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this email address in relation to other email addresses.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of this email address in relation to other email addresses. Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
@@ -486,8 +486,8 @@ The service-specific URI of the entity represented by this card.</li>
 The service-specific user name of the entity represented by this card. If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this service. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this service in relation to other services.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of this service in relation to other services. Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>. </li>
           </ul>
@@ -518,8 +518,8 @@ The phone value, as either a URI or a free-text phone number. Typical URI scheme
             </li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional)
 The contexts in which to use this number. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this number in relation to other numbers.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of this number in relation to other numbers. Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
@@ -540,8 +540,8 @@ The contexts in which to use this number. The boolean value <bcp14>MUST</bcp14> 
               </li>
             <li>contexts: <tt>Context[Boolean]</tt> (optional).
 Defines the contexts in which to use this language. The value for each key in the object <bcp14>MUST</bcp14> be true.</li>
-            <li>pref: <tt>Preference</tt> (optional).
-Defines the preference of this language in relation to other languages of the same contexts.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional).
+Defines the preference of this language in relation to other languages of the same contexts. Also see <xref target="prop-pref"/>.</li>
           </ul>
           <t>Also see the definition of the VCARD LANG property (Section 6.4.4., <xref target="RFC6350" format="default"/>).</t>
         </section>
@@ -609,8 +609,8 @@ The contexts of the address information. The boolean value <bcp14>MUST</bcp14> b
                 <li><tt>postal</tt> An address to be used for delivering physical items.</li>
               </ul>
             </li>
-            <li>pref: <tt>Preference</tt> (optional)
-                The preference of this address in relation to other addresses.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of this address in relation to other addresses. Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
