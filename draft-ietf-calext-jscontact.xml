@@ -529,26 +529,42 @@ The contexts in which to use this number. Also see <xref target="prop-contexts"/
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
-        <section anchor="prop-preferredContactMethod" numbered="true" toc="default">
-          <name>preferredContactMethod</name>
-          <t>Type : <tt>String</tt> (optional)</t>
-          <t>Defines the preferred method to contact the holder of this card. The value <bcp14>MUST</bcp14> be the property names: <tt>emails</tt>, <tt>phones</tt>, <tt>online</tt>.</t>
-        </section>
-        <section anchor="preferredcontactlanguages" numbered="true" toc="default">
-          <name>preferredContactLanguages</name>
-          <t>Type : <tt>String[ContactLanguage[]]</tt> (optional)</t>
-          <t>Defines the preferred languages for contacting the entity associated with this card. The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags. The values are a (possibly empty) list of contact language preferences for this language. A valid ContactLanguage object <bcp14>MUST</bcp14> have at least one of its properties set.</t>
-          <t>A ContactLanguage object has the following properties:</t>
+        <section anchor="preferredcontactchannels" numbered="true" toc="default">
+          <name>preferredContactChannels</name>
+          <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional)</t>
+          <t>Defines which channel the entity represented by this card prefers to be contacted with. The keys in the object <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):</t>
+              <ul spacing="normal">
+                <li><tt>addresses</tt>. The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
+                <li><tt>emails</tt>. The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
+                <li><tt>onlineServices</tt>. The prefers to be contacted by one of the entries in <xref target="onlineservices"><tt>onlineServices</tt></xref>.</li>
+                <li><tt>phones</tt>. The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
+              </ul>
+           <t>The values in the object are a (possibly empty) list of preferences for this contact channel. A valid ContactChannelPreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>A ContactChannelPreference object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>ContactLanguage</tt>.
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>ContactChannelPreference</tt>.
               </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
-Defines the contexts in which to use this language. The value for each key in the object <bcp14>MUST</bcp14> be true. Also see <xref target="prop-contexts"/>.</li>
+Defines the contexts in which to use this contact channel. Also see <xref target="prop-contexts"/>.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional).
+Defines the preference of this contact channel in relation to other contact channels with the same contexts. Also see <xref target="prop-pref"/>.</li>
+          </ul>
+        </section>
+        <section anchor="preferredlanguages" numbered="true" toc="default">
+          <name>preferredLanguages</name>
+          <t>Type : <tt>String[LanguagePreference[]]</tt> (optional)</t>
+          <t>Defines the preferred languages for contacting the entity associated with this card. The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags. The values are a (possibly empty) list of contact language preferences for this language. A valid LanguagePreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>A LanguagePreference object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>LanguagePreference</tt>.
+              </li>
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
+Defines the contexts in which to use this language. Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
 Defines the preference of this language in relation to other languages of the same contexts. Also see <xref target="prop-pref"/>.</li>
           </ul>
-          <t>Also see the definition of the VCARD LANG property (Section 6.4.4., <xref target="RFC6350" format="default"/>).</t>
         </section>
       </section>
       <section anchor="calendaring-and-scheduling-properties" numbered="true" toc="default">
