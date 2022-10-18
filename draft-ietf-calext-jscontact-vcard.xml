@@ -109,10 +109,6 @@
           </li>
         </ul>
       </section>
-      <section anchor="unmapped-jscontact-information">
-        <name>Unmapped JSContact Information</name>
-        <t>The rule to generate the "preferredContactMethod" property is out of the scope of this document.</t>
-      </section>
       <section>
         <name>General Properties</name>
         <section>
@@ -647,7 +643,7 @@
         </section>
         <section>
           <name>LANG</name>
-          <t>A LANG property is represented as an entry of the "preferredContactLanguages" map (<xref target="lang_mapping"/>).  The entry keys correspond to the language tags, the corresponding entry values are arrays of "ContactLanguage" objects.</t>
+          <t>A LANG property is represented as an entry of the "preferredContactLanguages" map (<xref target="lang_mapping"/>).  The entry keys correspond to the language tags, the related entry values are arrays of "ContactLanguage" objects.</t>
           <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <t>If both PREF and TYPE parameters are missing, the array of "ContactLanguage" objects MUST be empty.</t>
           <figure anchor="lang_mapping">
@@ -1462,6 +1458,73 @@
       <t>This section contains the translation rules about new vCard properties and parameters as defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
 
       <section>
+        <name>CONTACT-CHANNEL-PREF</name>
+        <t>A CONTACT-CHANNEL-PRE property is represented as an entry of the "preferredContactChannels" map (<xref target="contact_channel_mapping"/>).  The entry key set is defined in <xref target="contact_channel_key_mapping"/>, the related entry values are arrays of "ContactChannelPreference" objects.</t>
+
+        <table anchor="contact_channel_key_mapping">
+          <name>CONTACT-CHANNEL-PREF values mapping</name>
+          <thead>
+            <tr>
+              <th align="left">CONTACT-CHANNEL-PREF value</th>
+              <th align="left">"preferredContactChannels" key</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left">ADR</td>
+              <td align="left">addresses</td>
+            </tr>
+            <tr>
+              <td align="left">EMAIL</td>
+              <td align="left">emails</td>
+            </tr>
+            <tr>
+              <td align="left">IMPP</td>
+              <td align="left">onlineServices</td>
+            </tr>
+            <tr>
+              <td align="left">TEL</td>
+              <td align="left">phones</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+        <t>If both PREF and TYPE parameters are missing, the array of "ContactChannelPreference" objects MUST be empty.</t>
+        <figure anchor="contact_channel_mapping">
+          <name>LANG mapping example</name>
+          <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    CONTACT-CHANNEL-PREF;PREF=1:EMAIL
+    CONTACT-CHANNEL-PREF;PREF=2:TEL
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "preferredContactChannels":{
+      "emails":[
+        {
+          "@type": "ContactChannelPreference",
+          "pref": 1
+        }
+      ],
+      "phones":[
+        {
+          "@type": "ContactChannelPreference",
+          "pref": 2
+        }
+      ]
+    },
+    ...
+    }
+        ]]></artwork>
+        </figure>
+      </section>
+      <section>
         <name>CREATED</name>
         <t>The CREATED property is transformed into the "created" member (<xref target="created_mapping"/>).</t>
         <figure anchor="created_mapping">
@@ -1895,10 +1958,6 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
             </li>
           </ol>
         </section>
-      </section>
-      <section>
-        <name>Card Unmatched Properties</name>
-        <t>The "preferredContactMethod" member don't match any vCard property.  Implementers MAY represent it as vCard extended properties.</t>
       </section>
       <section>
         <name>vCard Required Properties</name>
