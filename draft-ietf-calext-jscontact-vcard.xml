@@ -18,7 +18,7 @@
   <!-- xml2rfc v2v3 conversion 3.12.10 -->
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-vcard-02"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-vcard-03"/>
     <author fullname="Mario Loffredo" initials="M." surname="Loffredo">
       <organization>IIT-CNR/Registro.it</organization>
       <address>

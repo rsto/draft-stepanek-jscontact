@@ -4,7 +4,7 @@
   <!-- xml2rfc v2v3 conversion 3.6.0 -->
   <front>
     <title abbrev="JSContact">JSContact: A JSON representation of contact data</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-03"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-04"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>FastMail</organization>
       <address>
