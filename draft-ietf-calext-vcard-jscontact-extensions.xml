@@ -259,14 +259,11 @@ GRAMMATICAL-GENDER:NEUTER
 
           <dt>Description:</dt>
           <dd>
-            Properties with value type text often contain information that is
-            written in one of the many human languages. In order to indicate
-            which language it was written in, implementations can assign the
-            already-existing <tt>LANG</tt> parameter to the property. In absence
-            of this parameter, implementations need to attempt detecting the
-            language by text analysis. The <tt>LOCALE</tt> property allows
-            to define a default locale in which such property values can be
-            assumed to be written in.
+            This property defines the locale in which property values of type
+            <tt>TEXT</tt> shall be assumed to be written for this vCard.
+            If a vCard property includes the <tt>LANG</tt> parameter, then the
+            parameter value has higher precendence than the <tt>LOCALE</tt>
+            property value.
           </dd>
 
           <dt>Format definition:</dt>
