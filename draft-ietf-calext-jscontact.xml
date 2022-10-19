@@ -445,14 +445,27 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
                   <tt>neuter</tt>
                 </li>
               </ul>
-              <t>Note that the grammatical gender does not allow to infer the gender identities or biological sex of the contact.</t>
+              <t>Note that the grammatical gender does not allow to infer the gender identities or assigned sex of the contact.</t>
             </li>
             <li>
-              <t>pronouns: <tt>String</tt> (optional).
-                  Defines the gender pronouns that the contact chooses to use for themselves. Any value or form is allowed. Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>.</t>
+              <t>pronouns: <tt>Id[Pronouns]</tt> (optional).
+                 Defines the pronouns that the contact chooses to use for themselves.</t>
             </li>
           </ul>
-          <t>The property values <bcp14>SHOULD</bcp14> be localized in the language defined in the <tt>language</tt> property. They <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</t>
+          <t>A Pronouns object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Pronouns</tt>.
+              </li>
+            <li>pronouns: <tt>String</tt> (mandatory).
+                  Defines the pronouns. Any value or form is allowed. Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>. The value <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</li>
+            <li>contexts: <tt>String[Boolean]</tt> (optional)
+The contexts in which to use these pronouns. Also see <xref target="prop-contexts"/>.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of these pronouns in relation to other pronouns in the same context. Also see <xref target="prop-pref"/>.</li>
+            <li>label: <tt>String</tt> (optional).
+                A custom label for the value, see <xref target="prop-label"/>.</li>
+          </ul>
         </section>
       </section>
       <section anchor="contact-properties" numbered="true" toc="default">
