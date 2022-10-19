@@ -194,12 +194,16 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dd>
             <t>
               This property defines the grammatical gender that the contact prefers
-              to be addressed by or referred at. Many human languages use
-              grammatical genders in salutations and other language constructs. For
-              example, the German language typically distinguishes between the
-              grammatical gender of the recipient in both formal and informal salutations.
+              to be addressed by or referred at. Multiple occurrences of this property
+              are allowed, but <bcp14>SHOULD</bcp14> be distinguished by the LANG
+              parameter.
+            </t>
+            <t>
+              Many human languages use grammatical genders in salutations and other
+              language constructs. For example, the German language typically distinguishes
+              between the grammatical gender of the recipient in salutations.
               The allowed values for this property aim to cover grammatical genders
-              for the the majority of human languages. Future RFCs <bcp14>MAY</bcp14>
+              for the majority of human languages. Future RFCs <bcp14>MAY</bcp14>
               define additional values if the current selection is found to be inadequate.
             </t>
           </dd>
