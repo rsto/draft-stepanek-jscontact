@@ -194,12 +194,16 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dd>
             <t>
               This property defines the grammatical gender that the contact prefers
-              to be addressed by or referred at. Many human languages use
-              grammatical genders in salutations and other language constructs. For
-              example, the German language typically distinguishes between the
-              gender of the recipient in both formal and informal salutations.
+              to be addressed by or referred at. Multiple occurrences of this property
+              are allowed, but <bcp14>SHOULD</bcp14> be distinguished by the LANG
+              parameter.
+            </t>
+            <t>
+              Many human languages use grammatical genders in salutations and other
+              language constructs. For example, the German language typically distinguishes
+              between the grammatical gender of the recipient in salutations.
               The allowed values for this property aim to cover grammatical genders
-              for the the majority of human languages. Future RFCs <bcp14>MAY</bcp14>
+              for the majority of human languages. Future RFCs <bcp14>MAY</bcp14>
               define additional values if the current selection is found to be inadequate.
             </t>
           </dd>
@@ -285,7 +289,7 @@ LOCALE:de-AT
           <dd>PRONOUNS</dd>
           <dt>Purpose:</dt>
           <dd>
-            This property defines the gender pronouns that shall be used
+            This property defines the pronouns that shall be used
             to refer to the entity represented by this vCard.
           </dd>
           <dt>Value type:</dt>
@@ -293,13 +297,14 @@ LOCALE:de-AT
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>LANG</dd>
+          <dd>LANG, PREF, TYPE</dd>
           <dt>Description:</dt>
           <dd>
-            This property contains as a free-form text the gender pronouns that
-            the contact chooses to use for themselves. They shall be used when
-            addressing or referring to the contact. Multiple occurrences of
-            this property <bcp14>MAY</bcp14> define pronouns for multiple languages.
+            This property contains the pronouns that the contact chooses to use for themselves.
+            The value is free-form text. These pronouns shall be used
+            when addressing or referring to the contact. Multiple occurrences of
+            this property <bcp14>MAY</bcp14> define pronouns for multiple languages,
+            preferences and contexts.
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -314,7 +319,7 @@ pronouns-param =
                  ; The following is OPTIONAL,
                  ; but MUST NOT occur more than once.
                  ;
-                 (";" language-param) /
+                 (";" language-param / pref-param / type-param) /
                  ;
                  ; The following is OPTIONAL,
                  ; and MAY occur more than once.
@@ -328,8 +333,6 @@ pronouns-param =
           <dd>
             <sourcecode name=""><![CDATA[
 PRONOUNS;LANG=en:they/them
-PRONOUNS;LANG=de:sie
-PRONOUNS:xe/xir
 ]]></sourcecode>
           </dd>
         </dl>

@@ -388,16 +388,16 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
           <t>Type: <tt>Id[Organization]</tt> (optional).</t>
-          <t>The companies or organization names and units associated with this card. An Organization object has the following properties:</t>
+          <t>The companies or organization names and units associated with this card. An Organization object has the following properties, of which at least one of <tt>name</tt> and <tt>units</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
               </li>
-            <li>name: <tt>String</tt> (mandatory).
-                The name of this organization.
+            <li>name: <tt>String</tt> (optional).
+                The name of this organization. If set, the value <bcp14>MUST</bcp14> be a non-empty string.
             </li>
             <li>units: <tt>String[]</tt> (optional).
-                Additional levels of organizational unit names.
+                A list of organizational unit names. If set, the list <bcp14>MUST</bcp14> contain at least one entry.
             </li>
           </ul>
         </section>
@@ -445,14 +445,27 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
                   <tt>neuter</tt>
                 </li>
               </ul>
-              <t>Note that the grammatical gender does not allow to infer the gender identities or biological sex of the contact.</t>
+              <t>Note that the grammatical gender does not allow to infer the gender identities or assigned sex of the contact.</t>
             </li>
             <li>
-              <t>pronouns: <tt>String</tt> (optional).
-                  Defines the gender pronouns that the contact chooses to use for themselves. Any value or form is allowed. Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>.</t>
+              <t>pronouns: <tt>Id[Pronouns]</tt> (optional).
+                 Defines the pronouns that the contact chooses to use for themselves.</t>
             </li>
           </ul>
-          <t>The property values <bcp14>SHOULD</bcp14> be localized in the language defined in the <tt>language</tt> property. They <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</t>
+          <t>A Pronouns object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Pronouns</tt>.
+              </li>
+            <li>pronouns: <tt>String</tt> (mandatory).
+                  Defines the pronouns. Any value or form is allowed. Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>. The value <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</li>
+            <li>contexts: <tt>String[Boolean]</tt> (optional)
+The contexts in which to use these pronouns. Also see <xref target="prop-contexts"/>.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of these pronouns in relation to other pronouns in the same context. Also see <xref target="prop-pref"/>.</li>
+            <li>label: <tt>String</tt> (optional).
+                A custom label for the value, see <xref target="prop-label"/>.</li>
+          </ul>
         </section>
       </section>
       <section anchor="contact-properties" numbered="true" toc="default">
@@ -533,13 +546,13 @@ The contexts in which to use this number. Also see <xref target="prop-contexts"/
           <name>preferredContactChannels</name>
           <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional)</t>
           <t>Defines which channel the entity represented by this card prefers to be contacted with. The keys in the object <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):</t>
-              <ul spacing="normal">
-                <li><tt>addresses</tt>. The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
-                <li><tt>emails</tt>. The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
-                <li><tt>onlineServices</tt>. The entity prefers to be contacted by one of the entries in <xref target="onlineservices"><tt>onlineServices</tt></xref>.</li>
-                <li><tt>phones</tt>. The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
-              </ul>
-           <t>The values in the object are a (possibly empty) list of preferences for this contact channel. A valid ContactChannelPreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <ul spacing="normal">
+            <li><tt>addresses</tt>. The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
+            <li><tt>emails</tt>. The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
+            <li><tt>onlineServices</tt>. The entity prefers to be contacted by one of the entries in <xref target="onlineservices"><tt>onlineServices</tt></xref>.</li>
+            <li><tt>phones</tt>. The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
+          </ul>
+          <t>The values in the object are a (possibly empty) list of preferences for this contact channel. A valid ContactChannelPreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
           <t>A ContactChannelPreference object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
