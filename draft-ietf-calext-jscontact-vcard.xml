@@ -777,6 +777,7 @@
         <section>
           <name>ORG</name>
           <t>An ORG property is represented as an entry of the "organizations" map (<xref target="org_mapping"/>).  The entry value is an "Organization" object whose "name" member contains the organizational name and the "units" member contains the organizational units.</t>
+          <t>Implementations MAY allow to represent organizational untits without the organizational name.  In this case, the first component of the ORG value MUST be an empty string (e.g. ORG:;DepartmentA).</t>
           <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="org_mapping">
             <name>ORG mapping example</name>
