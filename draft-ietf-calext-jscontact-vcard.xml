@@ -61,9 +61,9 @@
       <name>Introduction</name>
       <section>
         <name>Motivation</name>
-        <t>The JSContact format <xref target="I-D.ietf-calext-jscontact"/> represents contact card information as an alternative to vCard <xref target="RFC6350"/> and its JSON-based version named jCard <xref target="RFC7095"/>.</t>
-        <t>While new applications might adopt JSContact as their main format to exchange contact card data, they are likely to interoperate with services and clients that only support vCard/jCard.  Similarly, existing contact data providers and consumers already using vCard/jCard might want to represent their data also according to the JSContact specification. For interoperability, this conversion needs to be standardized.</t>
-        <t>To facilitate this, this document defines a standard how to convert contact information between JSContact and vCard.</t>
+        <t>The JSContact data model and format <xref target="I-D.ietf-calext-jscontact"/> aims to be an alternative to the widely used vCard <xref target="RFC6350"/> standard and jCard <xref target="RFC7095"/>.</t>
+        <t>While applications might prefer JSContact to exchange contact card data with other systems, they are likely to interoperate with services and clients that only support vCard or jCard.  Similarly, existing contact data providers and consumers already using vCard or jCard might want to represent their contact data also in JSContact.</t>
+        <t>To achieve this, this document defines a standard how to convert contact data between JSContact and vCard (and consequently jCard). </t>
       </section>
       <section>
         <name>Scope and Caveats</name>
