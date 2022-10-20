@@ -253,7 +253,7 @@ GRAMMATICAL-GENDER:NEUTER
           <dt>Purpose:</dt>
           <dd>This property defines the default locale that human-readable text values in this vCard should be assumed written in.</dd>
           <dt>Value type:</dt>
-          <dd>A single text value that <bcp14>MUST</bcp14> be a valid Language-Tag (see <xref target="RFC6350" section="2.1"/>.</dd>
+          <dd>A single Language-Tag value as defined in <xref target="RFC6350" section="4"/>.</dd>
           <dt>Cardinality:</dt>
           <dd>*1</dd>
           <dt>Property parameters:</dt>
@@ -271,7 +271,7 @@ GRAMMATICAL-GENDER:NEUTER
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
 locale       = "LOCALE" any-param
-                ":" Language-Tag CRLF
+                ":" Language-Tag CRLF   ; defined in RFC6350, Section 4.
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
