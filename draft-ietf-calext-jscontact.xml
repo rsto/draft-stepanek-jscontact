@@ -412,6 +412,9 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
             <li>title: <tt>String</tt> (mandatory).
                 The title of the entity represented by this card.
             </li>
+            <li>type: <tt>String</tt> (optional).
+              Describes the organizational or situational type of this title. Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management. If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>).
+                                        </li>
             <li>organization: <tt>Id</tt> (optional).
                 The id of the organization in which this title is held.
             </li>
