@@ -53,7 +53,7 @@
     <keyword>vCard</keyword>
     <keyword>jCard</keyword>
     <abstract>
-      <t>This document defines how to convert contact information as defined in the JSContact <xref target="I-D.ietf-calext-jscontact"/> specification from and to vCard.</t>
+      <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.</t>
     </abstract>
   </front>
   <middle>
