@@ -1751,13 +1751,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
         <t>Implementers MAY convert an "Etc/GMT" time zone either preserving the time zone name or converting it into a UTC offset.</t>
       </section>
       <section>
-        <name>JSContact Types Matching Multiple vCard Properties</name>
-        <section>
-          <name>Title</name>
-          <t>The "titles" property contains information about the job, the position or the role of the entity the card represents.  In vCard, such information is split into the TITLE and the ROLE properties.  This specification defines TITLE as the default target property when converting the "titles" property.</t>
-        </section>
-      </section>
-      <section>
         <name>CardGroup</name>
         <t>A CardGroup object converts to a vCard by merging its properties with the properties of "CardGroup.card" object.  If the "CardGroup.card.fullName" property exists, it MUST be used to set the FN value.</t>
       </section>
