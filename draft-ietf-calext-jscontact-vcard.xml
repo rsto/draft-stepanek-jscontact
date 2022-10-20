@@ -1676,53 +1676,6 @@
           </dl>
         </section>
         <section>
-          <name>Property <tt>prop</tt></name>
-          <dl>
-            <dt>Name:</dt>
-            <dd><tt>ietf.org:rfc0000:prop:<em>name</em></tt>, where <tt><em>name</em></tt> denotes the lowercase name of a vCard property defined as array element 1 in <xref target="RFC7095" section="3.3"/>.
-            </dd>
-            <dt>Type:</dt>
-            <dd>
-              <tt>String</tt>
-            </dd>
-            <dt>Definition:</dt>
-            <dd>This property is set on a JSContact object that represents a vCard. It represents a vCard property without parameters where the value is singled-valued or the value type is unknown. This property <bcp14>MAY</bcp14> be set multiple times for differing vCard property names.</dd>
-            <dt>Example:</dt>
-            <dd>
-              <t>This illustrates how the <tt>prop</tt> property is a short-form variant of the <tt>props</tt> property.</t>
-              <figure anchor="prop_conversion">
-                <name>JSContact <tt>prop</tt> example</name>
-                <sourcecode name=""><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    X-FOO:Bar
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "ietf:rfc0000:prop:x-foo": "Bar"
-    ...
-    }
-
-    is the short-form variant of
-
-    {
-    "@type": "Card",
-    ...
-    "ietf:rfc0000:props": [
-      ["x-foo", {}, "unknown", "Bar"]
-    ]
-    ...
-    }
-        ]]></sourcecode>
-              </figure>
-            </dd>
-          </dl>
-        </section>
-        <section>
           <name>Property <tt>params</tt></name>
           <dl>
             <dt>Name:</dt>
@@ -1760,7 +1713,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
           <t>The following steps illustrate how to convert from JSContact to vCard using these properties.</t>
           <ol>
             <li>Create an empty vCard and set its <tt>VERSION</tt> to <tt>4.0</tt>.</li>
-            <li>Add all entries in the JSContact extension <tt>props</tt> and any <tt>prop</tt> property as vCard properties (see <xref target="convert-nonstandard-jscontact"/>).</li>
+            <li>Add all entries in the JSContact extension <tt>props</tt> property as vCard properties (see <xref target="convert-nonstandard-jscontact"/>).</li>
             <li>
               <t>Convert each standard JSContact property value to its vCard property. Replace any already existing vCard property which must not occur more than once.</t>
             </li>
