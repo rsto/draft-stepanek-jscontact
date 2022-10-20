@@ -71,7 +71,7 @@
         </t>
         <ul spacing="compact">
           <li>
-            <t>The JSContact data model defines some contact information that doesn't have a direct mapping with vCard properties.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named Card, and a group of contact cards, named CardGroup.</t>
+            <t>The JSContact data model defines some contact information that doesn't have a direct conversion with vCard properties.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named Card, and a group of contact cards, named CardGroup.</t>
             <t/>
           </li>
           <li>The properties that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as arrays, in some cases condensed in a single value.</li>
@@ -83,28 +83,28 @@
         <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the Card/CardGroup features are written in camel case wrapped in double quotes.</t>
       </section>
     </section>
-    <section anchor="vcard-jscontact-translation">
-      <name>Translating vCard to JSContact</name>
-      <t>This section contains the translation rules from vCard to JSContact Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
-      <t>If a vCard represents a group of contacts, those vCard properties which don't have a counterpart in CardGroup are converted into related properties of the "CardGroup.card" object.  In this case, the "uid" member of both the resulting CardGroup object and its "card" member MUST have the same value.</t>
+    <section anchor="vcard-jscontact-conversion">
+      <name>Converting vCard to JSContact</name>
+      <t>This section contains the conversion rules from vCard to JSContact Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
+      <t>If a vCard represents a group of contacts, those vCard properties which don't have a counterpart in CardGroup convert to related properties of the "CardGroup.card" object.  In this case, the "uid" member of both the resulting CardGroup object and its "card" member MUST have the same value.</t>
       <section anchor="vcard-common-parameters">
         <name>Common vCard Parameters</name>
-        <t>The following mapping rules apply to parameters that are common to most of the vCard properties:</t>
+        <t>The following conversion rules apply to parameters that are common to most of the vCard properties:</t>
         <ul spacing="compact">
           <li>
-            <t>The vCard specification defines the "work" and "home" values for the "TYPE" property, section 5.6. of <xref target="RFC6350"/> to indicate the context in which the respective property should be used. These map to the JSContact "context" property as defined in Section 1.5.1 of <xref target="I-D.ietf-calext-jscontact"/>.  The "home" value corresponds to the "private" key. Property-specific mappings of TYPE values for the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.</t>
+            <t>The vCard specification defines the "work" and "home" values for the "TYPE" property, section 5.6. of <xref target="RFC6350"/> to indicate the context in which the respective property should be used. These convert to the JSContact "context" property as defined in Section 1.5.1 of <xref target="I-D.ietf-calext-jscontact"/>.  The "home" value corresponds to the "private" key. Property-specific conversions of TYPE values for the TEL and RELATED properties are defined in <xref target="vCard-TEL"/> and <xref target="vCard-RELATED"/>.</t>
             <t/>
           </li>
           <li>
-            <t>The PREF parameter is mapped to the "pref" property.</t>
+            <t>The PREF parameter converts to the "pref" property.</t>
             <t/>
           </li>
           <li>
-            <t>The MEDIATYPE parameter is mapped to the "mediaType" property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, "image/gif" can be derived from the ".gif" extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.</t>
+            <t>The MEDIATYPE parameter converts to the "mediaType" property.  As described in Section 5.7 of <xref target="RFC6350"/>, the media type of a resource can be identified by its URI.  For example, "image/gif" can be derived from the ".gif" extension of a GIF image URI.  JSContact producers MAY provide the media type information even when it is not specified in the vCard.</t>
             <t/>
           </li>
           <li>
-            <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the "localizations" map: the key in the "localizations" object is set to the LANGUAGE value, the key in the PatchObject points the JSContact property that corresponds to the vCard property. The value of the PatchObject entry contains the vCard property value.</t>
+            <t>The ALTID and LANGUAGE parameters are used in combination for associating the language-dependent alternatives with a given property.  Such alternatives are represented by using the "localizations" property: the key in the "localizations" object is set to the LANGUAGE value, the key in the PatchObject points the JSContact property that corresponds to the vCard property. The value of the PatchObject entry contains the vCard property value.</t>
             <t/>
           </li>
         </ul>
@@ -117,10 +117,10 @@
         </section>
         <section>
           <name>SOURCE</name>
-          <t>A SOURCE property is represented as an entry of the "directories" map (<xref target="source_mapping"/>).  The entry value is a "DirectoryResource" object whose "type" member is set to "entry" and "uri" member is set to the SOURCE value.</t>
-          <t>The PREF and MEDIATYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="source_mapping">
-            <name>SOURCE mapping example</name>
+          <t>A SOURCE property is represented as an entry of the "directories" map (<xref target="source_conversion"/>).  The entry value is a "DirectoryResource" object whose "type" member is set to "entry" and "uri" member is set to the SOURCE value.</t>
+          <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="source_conversion">
+            <name>SOURCE conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -148,9 +148,9 @@
         </section>
         <section>
           <name>KIND</name>
-          <t>The KIND property is mapped to the "kind" member (<xref target="kind_mapping"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value "group" is reserved for a CardGroup instance.</t>
-          <figure anchor="kind_mapping">
-            <name>KIND mapping example</name>
+          <t>The KIND property converts to the "kind" member (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value "group" is reserved for a CardGroup instance.</t>
+          <figure anchor="kind_conversion">
+            <name>KIND conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -177,15 +177,15 @@
         <name>Identification Properties</name>
         <section>
           <name>FN</name>
-          <t>All the FN instances are represented through the "fullName" member (<xref target="fn_n_nickname_mapping"/>).  The presence of multiple instances is implicitly associated with the full name translations in various languages regardless of the presence of the ALTID parameter.  Each translation is mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <t>All the FN instances are represented through the "fullName" member (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <t>If the vCard represents a group of contacts, implementers MAY convert the FN property into either "CardGroup.card.fullName" or "CardGroup.name" or both properties.</t>
         </section>
         <section>
           <name>N and NICKNAME</name>
-          <t>The N instances are converted into equivalent items of the "components" array of the "name" property (<xref target="fn_n_nickname_mapping"/>): the N components are transformed into related "NameComponent" objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+          <t>The N instances convert to equivalent items of the "components" array of the "name" property (<xref target="fn_n_nickname_conversion"/>): the N components are transformed into related "NameComponent" objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
 
           <table anchor="n_components">
-            <name>N components mapping</name>
+            <name>N components conversion</name>
             <thead>
               <tr>
                 <th align="left">N component</th>
@@ -216,11 +216,11 @@
             </tbody>
           </table>
 
-          <t>A NICKNAME property is represented as an entry of the "nickNames" map (<xref target="fn_n_nickname_mapping"/>).  The entry value is a "NickName" object.  The "name" member is set to the NICKNAME value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <t>A NICKNAME property is represented as an entry of the "nickNames" map (<xref target="fn_n_nickname_conversion"/>).  The entry value is a "NickName" object.  The "name" member is set to the NICKNAME value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
 
-          <figure anchor="fn_n_nickname_mapping">
-            <name>FN, N, NICKNAME mapping example</name>
+          <figure anchor="fn_n_nickname_conversion">
+            <name>FN, N, NICKNAME conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -258,10 +258,10 @@
         </section>
         <section>
           <name>PHOTO</name>
-          <t>A PHOTO property is represented as an entry of the "media" map (<xref target="photo_mapping"/>).  The entry value is a "MediaResource" object whose "type" member is set to "photo" and "uri" member is set to the PHOTO value.</t>
-          <t>The PREF and MEDIATYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="photo_mapping">
-            <name>PHOTO mapping example</name>
+          <t>A PHOTO property is represented as an entry of the "media" map (<xref target="photo_conversion"/>).  The entry value is a "MediaResource" object whose "type" member is set to "photo" and "uri" member is set to the PHOTO value.</t>
+          <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="photo_conversion">
+            <name>PHOTO conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -289,23 +289,23 @@
         </section>
         <section>
           <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY</name>
-          <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6474"/> are represented as "Anniversary" objects included in the "anniversaries" map (<xref target="anniversary_mapping"/>):</t>
+          <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6474"/> are represented as "Anniversary" objects included in the "anniversaries" map (<xref target="anniversary_conversion"/>):</t>
           <ul spacing="compact">
             <li>
-              <t>BDAY and BIRTHPLACE are mapped to "date" and "place" where "type" is set to "birth";</t>
+              <t>BDAY and BIRTHPLACE convert to "date" and "place" where "type" is set to "birth";</t>
               <t/>
             </li>
             <li>
-              <t>DEATHDATE and DEATHPLACE are mapped to "date" and "place" where "type" is set to "death";</t>
+              <t>DEATHDATE and DEATHPLACE convert to "date" and "place" where "type" is set to "death";</t>
               <t/>
             </li>
-            <li>ANNIVERSARY is mapped to "date" where "type" is empty and "label" is set to a value describing in detail the kind of anniversary (e.g. "marriage date" for the wedding anniversary).</li>
+            <li>ANNIVERSARY converts to "date" where "type" is empty and "label" is set to a value describing in detail the kind of anniversary (e.g. "marriage date" for the wedding anniversary).</li>
           </ul>
           <t>Both birth and death places are represented as instances of the "Address" object.</t>
-          <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs are converted into "Address" instances including only the "coordinates" member.  If the URI value is not a geo URI, the place is ignored.</t>
-          <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE properties are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="anniversary_mapping">
-            <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY mapping example</name>
+          <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs convert to "Address" instances including only the "coordinates" member.  If the URI value is not a geo URI, the place is ignored.</t>
+          <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE properties convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="anniversary_conversion">
+            <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -354,7 +354,7 @@
         <section>
           <name>GENDER</name>
           <t>The GENDER property is a single structured value with two optional components: the biological sex and the gender information.  The former is represented as an enumerated value, while the latter as a free-form text.  As opposed to such a representation, the JSContact specification includes the "SpeakToAs" object just to represent how to address, speak to or refer to the contact.  In particular, some pre-defined values are allowed for the "grammaticalGender" member.</t>
-          <t>For the reasons stated above, the GENDER property doesn't have a direct match with the "SpeakToAs" object.  However, as long as the GRAMMATICAL-GENDER property (<xref target="grammatical-gender"/>) is missing and based on a mapping assumption that the GENDER property doesn't store the actual biological sex of the contact, implementations MAY use the conversion rules shown in <xref target="gender-vs-speaktoas"/> and <xref target="speaktoas-vs-gender"/>.</t>
+          <t>For the reasons stated above, the GENDER property doesn't have a direct match with the "SpeakToAs" object.  However, as long as the GRAMMATICAL-GENDER property (<xref target="grammatical-gender"/>) is missing and based on a conversion assumption that the GENDER property doesn't store the actual biological sex of the contact, implementations MAY use the conversion rules shown in <xref target="gender-vs-speaktoas"/> and <xref target="speaktoas-vs-gender"/>.</t>
           <table anchor="gender-vs-speaktoas">
             <name>GENDER to speakToAs conversion</name>
             <thead>
@@ -423,11 +423,11 @@
         <name>Delivery Addressing Properties</name>
         <section>
           <name>ADR</name>
-          <t>An ADR property is represented as an entry of the "addresses" map (<xref target="adr_mapping"/>).  The entry value is an "Address" object.</t>
+          <t>An ADR property is represented as an entry of the "addresses" map (<xref target="adr_conversion"/>).  The entry value is an "Address" object.</t>
           <t>The ADR components are transformed into the "Address" members as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
           <t>The "street address" and "extended address" ADR components MAY be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
           <table anchor="adr_components_vs_address_members">
-            <name>ADR components vs. Address members mapping</name>
+            <name>ADR components vs. Address members conversion</name>
             <thead>
               <tr>
                 <th align="left">ADR component</th>
@@ -454,7 +454,7 @@
             </tbody>
           </table>
           <table anchor="adr_components_vs_street_component_items">
-            <name>ADR components vs. StreetComponent items mapping</name>
+            <name>ADR components vs. StreetComponent items conversion</name>
             <thead>
               <tr>
                 <th align="left">ADR component</th>
@@ -480,14 +480,14 @@
               </tr>
             </tbody>
           </table>
-          <t>The LABEL parameter is converted into the "fullAddress" member.</t>
-          <t>The GEO parameter is converted into the "coordinates" member.</t>
-          <t>The TZ parameter is converted into the "timeZone" member.</t>
-          <t>The CC parameter as defined in <xref target="RFC8605"/> is converted into the "countryCode" member.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>. Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the "fullAddress" member.</t>
-          <figure anchor="adr_mapping">
-            <name>ADR mapping example</name>
+          <t>The LABEL parameter converts to the "fullAddress" member.</t>
+          <t>The GEO parameter converts to the "coordinates" member.</t>
+          <t>The TZ parameter converts to the "timeZone" member.</t>
+          <t>The CC parameter as defined in <xref target="RFC8605"/> converts to the "countryCode" member.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>. Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the "fullAddress" member.</t>
+          <figure anchor="adr_conversion">
+            <name>ADR conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -540,10 +540,10 @@
         <name>Communications Properties</name>
         <section anchor="vCard-TEL">
           <name>TEL</name>
-          <t>A TEL property is represented as an entry of the "phones" map (<xref target="tel_mapping"/>).  The entry value is a "Phone" object.  The TEL-specific values of the TYPE parameter are mapped to the "features" map keys.  The "phone" member is set to the TEL value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="tel_mapping">
-            <name>TEL mapping example</name>
+          <t>A TEL property is represented as an entry of the "phones" map (<xref target="tel_conversion"/>).  The entry value is a "Phone" object.  The TEL-specific values of the TYPE parameter convert to the "features" map keys.  The "phone" member is set to the TEL value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="tel_conversion">
+            <name>TEL conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -577,10 +577,10 @@
         </section>
         <section>
           <name>EMAIL</name>
-          <t>An EMAIL property is represented as an entry of the "emails" map (<xref target="email_mapping"/>).  The entry value is an "EmailAddress" object.  The "email" member is set to the EMAIL value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="email_mapping">
-            <name>EMAIL mapping example</name>
+          <t>An EMAIL property is represented as an entry of the "emails" map (<xref target="email_conversion"/>).  The entry value is an "EmailAddress" object.  The "email" member is set to the EMAIL value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="email_conversion">
+            <name>EMAIL conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -612,10 +612,10 @@
         </section>
         <section>
           <name>IMPP</name>
-          <t>An IMPP property is represented as an entry of the "onlineServices" map (<xref target="impp_mapping"/>).  The entry value is a "OnlineService" object and the "uri" member is set to the IMPP value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="impp_mapping">
-            <name>IMPP mapping example</name>
+          <t>An IMPP property is represented as an entry of the "onlineServices" map (<xref target="impp_conversion"/>).  The entry value is a "OnlineService" object and the "uri" member is set to the IMPP value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="impp_conversion">
+            <name>IMPP conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -643,11 +643,11 @@
         </section>
         <section>
           <name>LANG</name>
-          <t>A LANG property is represented as an entry of the "preferredContactLanguages" map (<xref target="lang_mapping"/>).  The entry keys correspond to the language tags, the related entry values are arrays of "ContactLanguage" objects.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <t>A LANG property is represented as an entry of the "preferredContactLanguages" map (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of "ContactLanguage" objects.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <t>If both PREF and TYPE parameters are missing, the array of "ContactLanguage" objects MUST be empty.</t>
-          <figure anchor="lang_mapping">
-            <name>LANG mapping example</name>
+          <figure anchor="lang_conversion">
+            <name>LANG conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -689,7 +689,7 @@
       </section>
       <section>
         <name>Geographical Properties</name>
-        <t>The GEO and TZ properties are not directly mapped to topmost Card members because the same information is represented through equivalent "Address" members.</t>
+        <t>The GEO and TZ properties are not directly converted to topmost Card members because the same information is represented through equivalent "Address" members.</t>
         <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first "Address" object.</t>
         <section>
           <name>Time Zone Representation</name>
@@ -712,10 +712,10 @@
         <name>Organizational Properties</name>
         <section>
           <name>TITLE and ROLE</name>
-          <t>Both TITLE and ROLE properties are represented as entries of the "titles" map (<xref target="title_role_mapping"/>).  The entry value is a "Title" object whose "title" member includes information about the title or role.  The rules to set the "organization" member are out of the scope of this document.</t>
-          <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="title_role_mapping">
-            <name>TITLE and ROLE mapping example</name>
+          <t>Both TITLE and ROLE properties are represented as entries of the "titles" map (<xref target="title_role_conversion"/>).  The entry value is a "Title" object whose "title" member includes information about the title or role.  The rules to set the "organization" member are out of the scope of this document.</t>
+          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="title_role_conversion">
+            <name>TITLE and ROLE conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -745,10 +745,10 @@
         </section>
         <section>
           <name>LOGO</name>
-          <t>A LOGO property is represented as an entry of the "media" map (<xref target="logo_mapping"/>).  The entry value is a "MediaResource" object whose "type" member is set to "logo" and "uri" member is set to the LOGO value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="logo_mapping">
-            <name>LOGO mapping example</name>
+          <t>A LOGO property is represented as an entry of the "media" map (<xref target="logo_conversion"/>).  The entry value is a "MediaResource" object whose "type" member is set to "logo" and "uri" member is set to the LOGO value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="logo_conversion">
+            <name>LOGO conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -776,11 +776,11 @@
         </section>
         <section>
           <name>ORG</name>
-          <t>An ORG property is represented as an entry of the "organizations" map (<xref target="org_mapping"/>).  The entry value is an "Organization" object whose "name" member contains the organizational name and the "units" member contains the organizational units.</t>
+          <t>An ORG property is represented as an entry of the "organizations" map (<xref target="org_conversion"/>).  The entry value is an "Organization" object whose "name" member contains the organizational name and the "units" member contains the organizational units.</t>
           <t>Implementations MAY allow to represent organizational untits without the organizational name.  In this case, the first component of the ORG value MUST be an empty string (e.g. ORG:;DepartmentA).</t>
-          <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="org_mapping">
-            <name>ORG mapping example</name>
+          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="org_conversion">
+            <name>ORG conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -834,7 +834,7 @@
       }
         ]]></artwork>
           </figure>
-          <t>Only if the GROUP contains properties that don't have a mapping to CardGroup properties, then the CardGroup.card property MAY contain the optional Card object of this group.</t>
+          <t>Only if the GROUP contains properties that don't have a conversion to CardGroup properties, then the CardGroup.card property MAY contain the optional Card object of this group.</t>
           <figure anchor="card_member_of_cardgroup_object">
             <name>card member of CardGroup object</name>
             <artwork><![CDATA[
@@ -863,11 +863,11 @@
         </section>
         <section anchor="vCard-RELATED">
           <name>RELATED</name>
-          <t>All the RELATED instances are converted into the "relatedTo" map (<xref target="related_mapping"/>): an entry for each entity the entity described by the Card is associated with.  The map keys are the "uid" values of the associated cards.</t>
+          <t>All the RELATED instances convert to the "relatedTo" map (<xref target="related_conversion"/>): an entry for each entity the entity described by the Card is associated with.  The map keys are the "uid" values of the associated cards.</t>
           <t>Each map value is a "Relation" object including only the "relation" member represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
           <t>If the relation type is unspecified, the "relation" member MUST be empty.</t>
-          <figure anchor="related_mapping">
-            <name>RELATED mapping example</name>
+          <figure anchor="related_conversion">
+            <name>RELATED conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -908,10 +908,10 @@
         </section>
         <section>
           <name>CONTACT-URI</name>
-          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the "links" map (<xref target="contact_uri_mapping"/>).  The entry value is a "LinkResource" object whose  "type" member is set to "contact" and "uri" member is set to the CONTACT-URI value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="contact_uri_mapping">
-            <name>CONTACT-URI mapping example</name>
+          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the "links" map (<xref target="contact_uri_conversion"/>).  The entry value is a "LinkResource" object whose  "type" member is set to "contact" and "uri" member is set to the CONTACT-URI value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="contact_uri_conversion">
+            <name>CONTACT-URI conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -941,19 +941,19 @@
       </section>
       <section>
         <name>Personal Information Properties</name>
-        <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly mapped to the "level" property of the "PersonalInformation" type apart from when LEVEL is used in the EXPERTISE property; in this case, the values are converted as in the following:
+        <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the "level" property of the "PersonalInformation" type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
         </t>
         <ul spacing="compact">
-          <li>"beginner" is converted into "low";</li>
-          <li>"average" is converted into "medium";</li>
-          <li>"expert" is converted into "high".</li>
+          <li>"beginner" converts to "low";</li>
+          <li>"average" converts to "medium";</li>
+          <li>"expert" converts to "high".</li>
         </ul>
         <section>
           <name>EXPERTISE</name>
-          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a "PersonalInformation" object in the "personalInfo" map (<xref target="expertise_mapping"/>).  The "type" member is set to "expertise".</t>
+          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a "PersonalInformation" object in the "personalInfo" map (<xref target="expertise_conversion"/>).  The "type" member is set to "expertise".</t>
           <t>The INDEX parameter is represented as the index of the expertise among the declared expertises.</t>
-          <figure anchor="expertise_mapping">
-            <name>EXPERTISE mapping example</name>
+          <figure anchor="expertise_conversion">
+            <name>EXPERTISE conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -989,10 +989,10 @@
         </section>
         <section>
           <name>HOBBY</name>
-          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a "PersonalInformation" object in the "personalInfo" map (<xref target="hobby_mapping"/>).  The "type" member is set to "hobby".</t>
+          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a "PersonalInformation" object in the "personalInfo" map (<xref target="hobby_conversion"/>).  The "type" member is set to "hobby".</t>
           <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
-          <figure anchor="hobby_mapping">
-            <name>HOBBY mapping example</name>
+          <figure anchor="hobby_conversion">
+            <name>HOBBY conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1028,10 +1028,10 @@
         </section>
         <section>
           <name>INTEREST</name>
-          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a "PersonalInformation" object in the "personalInfo" map (<xref target="interest_mapping"/>).  The "type" member is set to "interest".</t>
+          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a "PersonalInformation" object in the "personalInfo" map (<xref target="interest_conversion"/>).  The "type" member is set to "interest".</t>
           <t>The INDEX parameter is represented as the index of the interest among the declared interests.</t>
-          <figure anchor="interest_mapping">
-            <name>INTEREST mapping example</name>
+          <figure anchor="interest_conversion">
+            <name>INTEREST conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1067,11 +1067,11 @@
         </section>
         <section>
           <name>ORG-DIRECTORY</name>
-          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the "directories" map (<xref target="org_directory_mapping"/>).  The entry value is a "DirectoryResource" object whose "type" member is set to "directory" and "uri" member is set to the ORG-DIRECTORY value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the "directories" map (<xref target="org_directory_conversion"/>).  The entry value is a "DirectoryResource" object whose "type" member is set to "directory" and "uri" member is set to the ORG-DIRECTORY value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <t>The INDEX parameter is represented as the index of the directory among the online resources with the "directory" type.</t>
-          <figure anchor="org_directory_mapping">
-            <name>ORG-DIRECTORY mapping example</name>
+          <figure anchor="org_directory_conversion">
+            <name>ORG-DIRECTORY conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1109,10 +1109,10 @@
         <name>Explanatory Properties</name>
         <section>
           <name>CATEGORIES</name>
-          <t>A CATEGORIES property is converted into a set of entries of the "keywords" map (<xref target="categories_mapping"/>). The keys are the comma-separated text values of the CATEGORIES property.</t>
+          <t>A CATEGORIES property converts to a set of entries of the "keywords" map (<xref target="categories_conversion"/>). The keys are the comma-separated text values of the CATEGORIES property.</t>
           <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
-          <figure anchor="categories_mapping">
-            <name>CATEGORIES mapping example</name>
+          <figure anchor="categories_conversion">
+            <name>CATEGORIES conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1137,10 +1137,10 @@
         </section>
         <section>
           <name>NOTE</name>
-          <t>A NOTE property is mapped to a "Note" object in the "notes" array (<xref target="notes_mapping"/>)</t>
-          <t>The ALTID and LANGUAGE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="notes_mapping">
-            <name>NOTE mapping example</name>
+          <t>A NOTE property converts to a "Note" object in the "notes" array (<xref target="notes_conversion"/>)</t>
+          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="notes_conversion">
+            <name>NOTE conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1164,9 +1164,9 @@
         </section>
         <section>
           <name>PRODID</name>
-          <t>The PRODID property is converted into the "prodId" member (<xref target="prodid_mapping"/>).</t>
-          <figure anchor="prodid_mapping">
-            <name>PRODID mapping example</name>
+          <t>The PRODID property converts to the "prodId" member (<xref target="prodid_conversion"/>).</t>
+          <figure anchor="prodid_conversion">
+            <name>PRODID conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1186,9 +1186,9 @@
         </section>
         <section>
           <name>REV</name>
-          <t>The REV property is transformed into the "updated" member (<xref target="rev_mapping"/>).</t>
-          <figure anchor="rev_mapping">
-            <name>REV mapping example</name>
+          <t>The REV property is transformed into the "updated" member (<xref target="rev_conversion"/>).</t>
+          <figure anchor="rev_conversion">
+            <name>REV conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1208,10 +1208,10 @@
         </section>
         <section>
           <name>SOUND</name>
-          <t>A SOUND property is represented as an entry of the "media" map (<xref target="sound_mapping"/>).  The entry value is a "MediaResource" object whose "type" member is set to "sound" and "uri" member is set to the SOUND value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="sound_mapping">
-            <name>SOUND mapping example</name>
+          <t>A SOUND property is represented as an entry of the "media" map (<xref target="sound_conversion"/>).  The entry value is a "MediaResource" object whose "type" member is set to "sound" and "uri" member is set to the SOUND value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="sound_conversion">
+            <name>SOUND conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1239,9 +1239,9 @@
         </section>
         <section>
           <name>UID</name>
-          <t>The UID property corresponds to the "uid" property (<xref target="uid_mapping"/>) in both Card and CardGroup.</t>
-          <figure anchor="uid_mapping">
-            <name>UID mapping example</name>
+          <t>The UID property corresponds to the "uid" property (<xref target="uid_conversion"/>) in both Card and CardGroup.</t>
+          <figure anchor="uid_conversion">
+            <name>UID conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1265,10 +1265,10 @@
         </section>
         <section>
           <name>URL</name>
-          <t>An URL property is represented as an entry of the "links" map (<xref target="url_mapping"/>).  The entry value is a "LinkResource" object whose "uri" member is set to the URL value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="url_mapping">
-            <name>URL mapping example</name>
+          <t>An URL property is represented as an entry of the "links" map (<xref target="url_conversion"/>).  The entry value is a "LinkResource" object whose "uri" member is set to the URL value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="url_conversion">
+            <name>URL conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1302,10 +1302,10 @@
         <name>Security Properties</name>
         <section>
           <name>KEY</name>
-          <t>A KEY property is represented as an entry of the "cryptoKeys" map (<xref target="key_mapping"/>).  The entry value is a "CryptoResource" object whose "uri" member is set to the KEY value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="key_mapping">
-            <name>KEY mapping example</name>
+          <t>A KEY property is represented as an entry of the "cryptoKeys" map (<xref target="key_conversion"/>).  The entry value is a "CryptoResource" object whose "uri" member is set to the KEY value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="key_conversion">
+            <name>KEY conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1335,10 +1335,10 @@
         <name>Calendar Properties</name>
         <section>
           <name>FBURL</name>
-          <t>An FBURL property is represented as an entry of the "calendars" map (<xref target="fburl_mapping"/>).  The entry value is a "CalendarResource" object whose "type" member is set to "freeBusy" and "uri" member is set to the FBURL value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="fburl_mapping">
-            <name>FBURL mapping example</name>
+          <t>An FBURL property is represented as an entry of the "calendars" map (<xref target="fburl_conversion"/>).  The entry value is a "CalendarResource" object whose "type" member is set to "freeBusy" and "uri" member is set to the FBURL value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="fburl_conversion">
+            <name>FBURL conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1374,10 +1374,10 @@
         </section>
         <section>
           <name>CALADRURI</name>
-          <t>A CALADRURI property is represented as an entry of the "scheduling" map (<xref target="caladruri_mapping"/>).  The entry value is a "Scheduling" object whose "sendTo" map includes an entry whose key is set to "imip" and value is set to the CALADRURI value.</t>
-          <t>The PREF parameter is mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="caladruri_mapping">
-            <name>CALADRURI mapping example</name>
+          <t>A CALADRURI property is represented as an entry of the "scheduling" map (<xref target="caladruri_conversion"/>).  The entry value is a "Scheduling" object whose "sendTo" map includes an entry whose key is set to "imip" and value is set to the CALADRURI value.</t>
+          <t>The PREF parameter converts according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="caladruri_conversion">
+            <name>CALADRURI conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1414,10 +1414,10 @@
         </section>
         <section>
           <name>CALURI</name>
-          <t>A CALURI property is represented as an entry of the "calendars" map (<xref target="caluri_mapping"/>).  The entry value is a "CalendarResource" object whose "type" member is set to "calendar" and "uri" member is set to the CALURI value.</t>
-          <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-          <figure anchor="caluri_mapping">
-            <name>CALURI mapping example</name>
+          <t>A CALURI property is represented as an entry of the "calendars" map (<xref target="caluri_conversion"/>).  The entry value is a "CalendarResource" object whose "type" member is set to "calendar" and "uri" member is set to the CALURI value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <figure anchor="caluri_conversion">
+            <name>CALURI conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1455,15 +1455,15 @@
 
     <section anchor="convert-new-vcard">
 
-    <name>Translating new vCard properties and parameters</name>
-      <t>This section contains the translation rules about new vCard properties and parameters as defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+    <name>Converting new vCard properties and parameters</name>
+      <t>This section contains the conversion rules about new vCard properties and parameters as defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
 
       <section>
         <name>CONTACT-CHANNEL-PREF</name>
-        <t>A CONTACT-CHANNEL-PRE property is represented as an entry of the "preferredContactChannels" map (<xref target="contact_channel_mapping"/>).  The entry key set is defined in <xref target="contact_channel_key_mapping"/>, the related entry values are arrays of "ContactChannelPreference" objects.</t>
+        <t>A CONTACT-CHANNEL-PRE property is represented as an entry of the "preferredContactChannels" map (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of "ContactChannelPreference" objects.</t>
 
-        <table anchor="contact_channel_key_mapping">
-          <name>CONTACT-CHANNEL-PREF values mapping</name>
+        <table anchor="contact_channel_key_conversion">
+          <name>CONTACT-CHANNEL-PREF values conversion</name>
           <thead>
             <tr>
               <th align="left">CONTACT-CHANNEL-PREF value</th>
@@ -1490,10 +1490,10 @@
           </tbody>
         </table>
 
-        <t>The PREF and TYPE parameters are mapped according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+        <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
         <t>If both PREF and TYPE parameters are missing, the array of "ContactChannelPreference" objects MUST be empty.</t>
-        <figure anchor="contact_channel_mapping">
-          <name>LANG mapping example</name>
+        <figure anchor="contact_channel_conversion">
+          <name>LANG conversion example</name>
           <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1527,9 +1527,9 @@
       </section>
       <section>
         <name>CREATED</name>
-        <t>The CREATED property is transformed into the "created" member (<xref target="created_mapping"/>).</t>
-        <figure anchor="created_mapping">
-          <name>CREATED mapping example</name>
+        <t>The CREATED property is transformed into the "created" member (<xref target="created_conversion"/>).</t>
+        <figure anchor="created_conversion">
+          <name>CREATED conversion example</name>
           <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1550,9 +1550,9 @@
 
       <section>
         <name>LOCALE</name>
-        <t>The LOCALE property is transformed into the "locale" member (<xref target="locale_mapping"/>).</t>
-        <figure anchor="locale_mapping">
-          <name>LOCALE mapping example</name>
+        <t>The LOCALE property is transformed into the "locale" member (<xref target="locale_conversion"/>).</t>
+        <figure anchor="locale_conversion">
+          <name>LOCALE conversion example</name>
           <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1573,10 +1573,10 @@
 
       <section anchor="grammatical-gender">
         <name>GRAMMATICAL-GENDER and PRONOUNS</name>
-        <t>The GRAMMATICAL-GENDER property is transformed into the "speakToAs.grammaticalGender" member (<xref target="grammatical_gender_pronouns_mapping"/>).</t>
-        <t>The PRONOUNS property is transformed into the "speakToAs.pronouns" member (<xref target="grammatical_gender_pronouns_mapping"/>).</t>
-        <figure anchor="grammatical_gender_pronouns_mapping">
-          <name>GRAMMATICAL-GENDER and PRONOUNS mapping example</name>
+        <t>The GRAMMATICAL-GENDER property is transformed into the "speakToAs.grammaticalGender" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+        <t>The PRONOUNS property is transformed into the "speakToAs.pronouns" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+        <figure anchor="grammatical_gender_pronouns_conversion">
+          <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
           <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1605,11 +1605,11 @@
 
       <section anchor="prop_id_parameter">
         <name>PROP-ID</name>
-        <t>The PROP-ID parameter is transformed into a map key is of type Id (<xref target="propid_mapping"/>).</t>
+        <t>The PROP-ID parameter is transformed into a map key is of type Id (<xref target="propid_conversion"/>).</t>
         <t>When this parameter is missing, implementers MAY generate a map key as they see fit.</t>
 
-        <figure anchor="propid_mapping">
-          <name>PROP-ID mapping example</name>
+        <figure anchor="propid_conversion">
+          <name>PROP-ID conversion example</name>
           <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
@@ -1662,8 +1662,8 @@
             <dd>This property is set on a JSContact object that represents a vCard. It contains properties that are set in the vCard represented by this JSContact object. Each entry in this list typically represents a vCard property for which no conversion to a standard JSContact property is defined. It <bcp14>MAY</bcp14> contain vCard standard properties which also got converted to a standard property in the same JSContact object. In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
             <dt>Example:</dt>
             <dd>
-              <t>This illustrates how to map a vCard extension property:</t>
-              <figure anchor="props_mapping">
+              <t>This illustrates how to convert a vCard extension property:</t>
+              <figure anchor="props_conversion">
                 <name>JSContact <tt>props</tt> example</name>
                 <sourcecode name=""><![CDATA[
     BEGIN:VCARD
@@ -1704,7 +1704,7 @@
             <dt>Example:</dt>
             <dd>
               <t>This illustrates how the <tt>prop</tt> property is a short-form variant of the <tt>props</tt> property.</t>
-              <figure anchor="prop_mapping">
+              <figure anchor="prop_conversion">
                 <name>JSContact <tt>prop</tt> example</name>
                 <sourcecode name=""><![CDATA[
     BEGIN:VCARD
@@ -1754,7 +1754,7 @@
               <sourcecode><![CDATA[
 EMAIL;X-FOO=Bar:jane_doe@example.com
 ]]></sourcecode>
-              <t>maps to</t>
+              <t>converts to</t>
               <sourcecode><![CDATA[
 "emails": {
   "email1": {
@@ -1788,15 +1788,15 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
     </section>
     <section>
-      <name>Translating JSContact to vCard</name>
-      <t>In most of the cases, the rules about the translation from Card/CardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-translation"/>.  The remaining cases are treated in the following of this section.</t>
+      <name>Converting JSContact to vCard</name>
+      <t>In most of the cases, the rules about the conversion from Card/CardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-conversion"/>.  The remaining cases are treated in the following of this section.</t>
       <section>
         <name>Id</name>
         <t>Where a map key is of type Id, implementers are free to either ignore it or preserve it as a vCard information (<xref target="prop_id_parameter"/>).</t>
       </section>
       <section>
         <name>Localizations</name>
-        <t>Each PatchObject entry value of each "localizations" entry is converted into a instance of the vCard property matching the JSContact member referenced by the PatchObject entry key.  The LANGUAGE parameter of such alternative MUST be set to the value of the given "localizations" entry.  The LANGUAGE parameter of a vCard property presenting, at least, a language-dependent alternative MUST be set to the value of the JSContact "language" property if it is valued.  Implementers MAY set the ALTID parameter to group language-based alternatives of the same value.</t>
+        <t>Each PatchObject entry value of each "localizations" entry converts to a instance of the vCard property matching the JSContact member referenced by the PatchObject entry key.  The LANGUAGE parameter of such alternative MUST be set to the value of the given "localizations" entry.  The LANGUAGE parameter of a vCard property presenting, at least, a language-dependent alternative MUST be set to the value of the JSContact "language" property if it is valued.  Implementers MAY set the ALTID parameter to group language-based alternatives of the same value.</t>
         <t>Note also that the components of some vCard values and their language-dependent alternatives are split into different JSContact values.  For example, the "name" and "units" values for a given language must be grouped to make a single ORG value where components are separated by ";".</t>
       </section>
       <section>
@@ -1806,8 +1806,8 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
       <section>
         <name>Time Zone</name>
-        <t>The time zone name as represented by the "timeZone" property is mapped to the TZ parameter.</t>
-        <t>Implementers MAY map an "Etc/GMT" time zone either preserving the time zone name or converting it into a UTC offset.</t>
+        <t>The time zone name as represented by the "timeZone" property converts to the TZ parameter.</t>
+        <t>Implementers MAY convert an "Etc/GMT" time zone either preserving the time zone name or converting it into a UTC offset.</t>
       </section>
       <section>
         <name>JSContact Types Matching Multiple vCard Properties</name>
@@ -1818,7 +1818,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
       <section>
         <name>CardGroup</name>
-        <t>A CardGroup object is converted into a vCard by merging its properties with the properties of "CardGroup.card" object.  If the "CardGroup.card.fullName" property exists, it MUST be used to set the FN value.</t>
+        <t>A CardGroup object converts to a vCard by merging its properties with the properties of "CardGroup.card" object.  If the "CardGroup.card.fullName" property exists, it MUST be used to set the FN value.</t>
       </section>
       <section anchor="convert-nonstandard-jscontact">
         <name>Non-standard properties</name>
@@ -1845,7 +1845,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dt>Description:</dt>
             <dd>
               <t>
-                This property maps a JSContact property to iCalendar. The property name
+                This property converts a JSContact property to iCalendar. The property name
                 is defined using the X-RFC0000-JSPATH parameter (<xref target="vcard-jsname"/>). A JSContact property value is represented as a data URL using the <tt>data</tt> scheme <xref target="RFC2397"/>. The <tt>mediatype</tt> part of the URL <bcp14>MUST</bcp14> be <tt>application/json</tt> and <bcp14>MUST NOT</bcp14> define parameters. The <tt>data</tt> part of the URL contains the value of the JSContact property. The value <bcp14>MAY</bcp14>  base64-encoded, in which case the data URL <bcp14>MUST</bcp14> set the <tt>base64</tt> part accordingly.
               </t>
             </dd>
@@ -1880,7 +1880,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>
               <t>This illustrates how to convert both complex and simple typed JSContact properties.</t>
               <figure anchor="jsprop-object">
-                <name>JSON object value mapping example</name>
+                <name>JSON object value conversion example</name>
                 <artwork><![CDATA[
   {
     "@type": "Card",
@@ -1900,7 +1900,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
 ]]></artwork>
               </figure>
               <figure anchor="jsprop-boolean">
-                <name>JSON boolean value mapping example</name>
+                <name>JSON boolean value conversion example</name>
                 <artwork><![CDATA[
   {
     "@type": "Card",
@@ -1937,7 +1937,7 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
             <dt>Description:</dt>
             <dd>
             This parameter is set on a X-RFC0000-JSPROP or X-RFC0000-PROP property.
-            Its value defines the name of the JSContact property that got mapped to this vCard property. The parameter value contains the JSON pointer of the JSContact
+            Its value defines the name of the JSContact property that got converted to this vCard property. The parameter value contains the JSON pointer of the JSContact
             property. It <bcp14>MUST</bcp14> be quoted to preserve case.
             </dd>
             <dt>Example(s):</dt>
@@ -2037,7 +2037,7 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
         with a group identifier, as defined in <xref target="RFC6350" section="3.3"/>.
         There is no equivalent in JSContact, and it is up to further discussion in
         the working group if and how property groups should be defined. This section
-        contains one possible mapping of vCard property groups in order to
+        contains one possible conversion of vCard property groups in order to
         preserve them during conversion between the two formats.
       </t>
       <section anchor="propertyGroups" numbered="true" toc="default">
