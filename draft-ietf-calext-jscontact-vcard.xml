@@ -709,7 +709,7 @@
         <name>Organizational Properties</name>
         <section>
           <name>TITLE and ROLE</name>
-          <t>Both TITLE and ROLE properties are represented as entries of the "titles" map (<xref target="title_role_conversion"/>).  The entry value is a "Title" object whose "title" member includes information about the title or role.  The rules to set the "organization" member are out of the scope of this document.</t>
+          <t>Both TITLE and ROLE properties are represented as entries of the "titles" map (<xref target="title_role_conversion"/>).  The entry value is a "Title" object whose "type" member is set to "title"/"role" and "title" member is set to the TITLE/ROLE value.  The rules to set the "organization" member are out of the scope of this document.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
           <figure anchor="title_role_conversion">
             <name>TITLE and ROLE conversion example</name>
@@ -728,10 +728,12 @@
     "titles":{
       "TITLE-1":{
         "@type": "Title",
+        "type": "title",
         "title": "Project Leader"
       },
       "TITLE-2":{
         "@type": "Title",
+        "type": "role",
         "title": "Research Scientist"
       }
     },
