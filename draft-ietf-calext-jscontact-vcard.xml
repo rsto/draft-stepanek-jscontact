@@ -183,7 +183,6 @@
         <section>
           <name>N and NICKNAME</name>
           <t>The N instances convert to equivalent items of the "components" array of the "name" property (<xref target="fn_n_nickname_conversion"/>): the N components are transformed into related "NameComponent" objects as presented in <xref target="n_components"/>.  Name components SHOULD be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
-
           <table anchor="n_components">
             <name>N components conversion</name>
             <thead>
@@ -215,10 +214,8 @@
               </tr>
             </tbody>
           </table>
-
           <t>A NICKNAME property is represented as an entry of the "nickNames" map (<xref target="fn_n_nickname_conversion"/>).  The entry value is a "NickName" object.  The "name" member is set to the NICKNAME value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-
           <figure anchor="fn_n_nickname_conversion">
             <name>FN, N, NICKNAME conversion example</name>
             <artwork><![CDATA[
@@ -1452,49 +1449,44 @@
           </figure>
         </section>
       </section>
-
-    <section anchor="convert-new-vcard">
-
-    <name>Converting new vCard properties and parameters</name>
-      <t>This section contains the conversion rules about new vCard properties and parameters as defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-
-      <section>
-        <name>CONTACT-CHANNEL-PREF</name>
-        <t>A CONTACT-CHANNEL-PRE property is represented as an entry of the "preferredContactChannels" map (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of "ContactChannelPreference" objects.</t>
-
-        <table anchor="contact_channel_key_conversion">
-          <name>CONTACT-CHANNEL-PREF values conversion</name>
-          <thead>
-            <tr>
-              <th align="left">CONTACT-CHANNEL-PREF value</th>
-              <th align="left">"preferredContactChannels" key</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td align="left">ADR</td>
-              <td align="left">addresses</td>
-            </tr>
-            <tr>
-              <td align="left">EMAIL</td>
-              <td align="left">emails</td>
-            </tr>
-            <tr>
-              <td align="left">IMPP</td>
-              <td align="left">onlineServices</td>
-            </tr>
-            <tr>
-              <td align="left">TEL</td>
-              <td align="left">phones</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
-        <t>If both PREF and TYPE parameters are missing, the array of "ContactChannelPreference" objects MUST be empty.</t>
-        <figure anchor="contact_channel_conversion">
-          <name>LANG conversion example</name>
-          <artwork><![CDATA[
+      <section anchor="convert-new-vcard">
+        <name>Converting new vCard properties and parameters</name>
+        <t>This section contains the conversion rules about new vCard properties and parameters as defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        <section>
+          <name>CONTACT-CHANNEL-PREF</name>
+          <t>A CONTACT-CHANNEL-PRE property is represented as an entry of the "preferredContactChannels" map (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of "ContactChannelPreference" objects.</t>
+          <table anchor="contact_channel_key_conversion">
+            <name>CONTACT-CHANNEL-PREF values conversion</name>
+            <thead>
+              <tr>
+                <th align="left">CONTACT-CHANNEL-PREF value</th>
+                <th align="left">"preferredContactChannels" key</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">ADR</td>
+                <td align="left">addresses</td>
+              </tr>
+              <tr>
+                <td align="left">EMAIL</td>
+                <td align="left">emails</td>
+              </tr>
+              <tr>
+                <td align="left">IMPP</td>
+                <td align="left">onlineServices</td>
+              </tr>
+              <tr>
+                <td align="left">TEL</td>
+                <td align="left">phones</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-common-parameters"/>.</t>
+          <t>If both PREF and TYPE parameters are missing, the array of "ContactChannelPreference" objects MUST be empty.</t>
+          <figure anchor="contact_channel_conversion">
+            <name>LANG conversion example</name>
+            <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
@@ -1523,14 +1515,14 @@
     ...
     }
         ]]></artwork>
-        </figure>
-      </section>
-      <section>
-        <name>CREATED</name>
-        <t>The CREATED property is transformed into the "created" member (<xref target="created_conversion"/>).</t>
-        <figure anchor="created_conversion">
-          <name>CREATED conversion example</name>
-          <artwork><![CDATA[
+          </figure>
+        </section>
+        <section>
+          <name>CREATED</name>
+          <t>The CREATED property is transformed into the "created" member (<xref target="created_conversion"/>).</t>
+          <figure anchor="created_conversion">
+            <name>CREATED conversion example</name>
+            <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
@@ -1545,15 +1537,14 @@
     ...
     }
         ]]></artwork>
-        </figure>
-      </section>
-
-      <section>
-        <name>LOCALE</name>
-        <t>The LOCALE property is transformed into the "locale" member (<xref target="locale_conversion"/>).</t>
-        <figure anchor="locale_conversion">
-          <name>LOCALE conversion example</name>
-          <artwork><![CDATA[
+          </figure>
+        </section>
+        <section>
+          <name>LOCALE</name>
+          <t>The LOCALE property is transformed into the "locale" member (<xref target="locale_conversion"/>).</t>
+          <figure anchor="locale_conversion">
+            <name>LOCALE conversion example</name>
+            <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
@@ -1568,16 +1559,15 @@
     ...
     }
         ]]></artwork>
-        </figure>
-      </section>
-
-      <section anchor="grammatical-gender">
-        <name>GRAMMATICAL-GENDER and PRONOUNS</name>
-        <t>The GRAMMATICAL-GENDER property is transformed into the "speakToAs.grammaticalGender" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-        <t>The PRONOUNS property is transformed into the "speakToAs.pronouns" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-        <figure anchor="grammatical_gender_pronouns_conversion">
-          <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
-          <artwork><![CDATA[
+          </figure>
+        </section>
+        <section anchor="grammatical-gender">
+          <name>GRAMMATICAL-GENDER and PRONOUNS</name>
+          <t>The GRAMMATICAL-GENDER property is transformed into the "speakToAs.grammaticalGender" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <t>The PRONOUNS property is transformed into the "speakToAs.pronouns" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <figure anchor="grammatical_gender_pronouns_conversion">
+            <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
+            <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
@@ -1600,17 +1590,15 @@
     ...
     }
         ]]></artwork>
-        </figure>
-      </section>
-
-      <section anchor="prop_id_parameter">
-        <name>PROP-ID</name>
-        <t>The PROP-ID parameter is transformed into a map key is of type Id (<xref target="propid_conversion"/>).</t>
-        <t>When this parameter is missing, implementers MAY generate a map key as they see fit.</t>
-
-        <figure anchor="propid_conversion">
-          <name>PROP-ID conversion example</name>
-          <artwork><![CDATA[
+          </figure>
+        </section>
+        <section anchor="prop_id_parameter">
+          <name>PROP-ID</name>
+          <t>The PROP-ID parameter is transformed into a map key is of type Id (<xref target="propid_conversion"/>).</t>
+          <t>When this parameter is missing, implementers MAY generate a map key as they see fit.</t>
+          <figure anchor="propid_conversion">
+            <name>PROP-ID conversion example</name>
+            <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
@@ -1639,11 +1627,9 @@
     ...
     }
         ]]></artwork>
-        </figure>
+          </figure>
+        </section>
       </section>
-
-    </section>
-
       <section anchor="convert-nonstandard-vcard">
         <name>Non-standard properties and parameters</name>
         <t>vCards may contain properties or parameters for which no standard JSContact property is defined. For example, a vCard may contain extended properties and parameters  (<xref target="RFC6350" section="6.10"/>) of which the semantics or purpose is unknown.</t>
