@@ -804,7 +804,7 @@ A PersonalInformation object has the following properties:</t>
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-Specifies the type for this personal information. Allowed values are:
+Specifies the type for this personal information. The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-extension-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>expertise</tt>: a field of expertise or credential</li>
@@ -815,7 +815,7 @@ Specifies the type for this personal information. Allowed values are:
             <li>value: <tt>String</tt> (mandatory).
 The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
             <li>level: <tt>String</tt> (optional)
-                Indicates the level of expertise, or engagement in hobby or interest. Allowed values are: <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+                Indicates the level of expertise, or engagement in hobby or interest. The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-extension-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
