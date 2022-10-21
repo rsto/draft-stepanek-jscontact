@@ -86,6 +86,11 @@ they appear in all capitals, as shown here.</t>
           <t>In many places in JSContact a JSON map is used where the map keys are of type Id and the map values are all the same type of object.  This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key).  This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSContact object.  The map keys <bcp14>MUST</bcp14> be preserved across multiple versions of the JSContact object.</t>
           <t>Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two Card objects might use the same Ids in their respective <tt>photos</tt> properties.  Or within the same Card object the same Id could appear in the <tt>emails</tt> and <tt>phones</tt> properties.  These situations do not imply any semantic connections among the objects.</t>
         </section>
+        <section anchor="int-unsignedint" numbered="true" toc="default">
+          <name>Int and UnsignedInt</name>
+          <t>Where <tt>Int</tt> is given as a data type, it means an integer in the range -2<sup>53</sup>+1 &lt;= value &lt;= 2^<sup>53</sup>-1, the safe range for integers stored in a floating-point double, represented as a JSON <tt>Number</tt>.</t>
+          <t>Where <tt>UnsignedInt</tt> is given as a data type, it means an integer in the range 0 &lt;= value &lt;= 2<sup>53</sup>-1, represented as a JSON <tt>Number</tt>.</t>
+        </section>
         <section anchor="patchobject" numbered="true" toc="default">
           <name>PatchObject</name>
           <t>A PatchObject is of type <tt>String[*]</tt>, and represents an unordered set of patches on a JSON object.
@@ -127,10 +132,6 @@ The contexts in which to use this resource. Also see <xref target="prop-contexts
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>. </li>
           </ul>
-        </section>
-        <section anchor="unsignedint" numbered="true" toc="default">
-          <name>UnsignedInt</name>
-          <t>Where <tt>UnsignedInt</tt> is given as a data type, it means an integer in the range 0 &lt;= value &lt;= 2<sup>53</sup>-1, represented as a JSON <tt>Number</tt>.</t>
         </section>
         <section anchor="utcdatetime" numbered="true" toc="default">
           <name>UTCDateTime</name>
@@ -785,12 +786,32 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
                 <li><tt>death</tt>: a death day anniversary</li>
               </ul>
             </li>
-            <li>date: <tt>String</tt> (mandatory).
-The date of this anniversary, in the form "YYYY-MM-DD" (any part may be all 0s for unknown) or a <xref target="RFC3339" format="default"/> timestamp.</li>
+            <li>
+              <t>date: <tt>Timestamp|PartialDate</tt> (mandatory).</t>
+              <t>The date of this anniversary in the Gregorian calendar. This <bcp14>MUST</bcp14> either be a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
+            </li>
             <li>place: Address (optional).
                 An address associated with this anniversary, e.g. the place of birth or death.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
+          </ul>
+          <t>A Timestamp object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Timestamp</tt>.
+              </li>
+            <li>utc: <tt>UTCDateTime</tt> (mandatory). Specifies the point in time in UTC time.
+          </li>
+          </ul>
+          <t>A PartialDate object represents a complete or partial calendar date in the Gregorian calendar. It represents either a complete date, or a year, or a month in a year, or a day in a month. It has the following properties, of which at least <tt>year</tt> or <tt>month</tt> and <tt>day</tt> <bcp14>MUST</bcp14> be set:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>PartialDate</tt>.
+              </li>
+            <li>year: <tt>Int</tt> (optional). This is the calendar year.</li>
+            <li>month: <tt>Int</tt> (optional). This is the calendar month, represented as the integers 1 &lt;= month &lt;= 12. If this property is set then either <tt>year</tt> or <tt>day</tt> <bcp14>MUST</bcp14> be set.</li>
+            <li>day: <tt>Int</tt> (optional). This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year. If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
+            <li>calendarScale: <tt>String</tt> (optional). This is the calendar system in which this date occurs, in lowercase. This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="CLDR" format="default"/> or a vendor-specific value). Note that the year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.</li>
           </ul>
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
@@ -951,6 +972,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3966.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml"/>
+        <reference anchor="CLDR" target="http://cldr.unicode.org/">
+          <front>
+            <title>Unicode Common Locale Data Repository</title>
+            <author/>
+            <date/>
+          </front>
+        </reference>
       </references>
     </references>
   </back>
