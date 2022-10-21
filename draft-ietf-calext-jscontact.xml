@@ -863,10 +863,6 @@ A set of free-text keywords, also known as <em>tags</em>. The set is represented
           <t>Type: <tt>String[Boolean]</tt> (mandatory). The members of this group.</t>
           <t>The set is represented as an object, with each key being the uid of another Card or CardGroup. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
         </section>
-        <section anchor="group-name" numbered="true" toc="default">
-          <name>name</name>
-          <t>Type: <tt>String</tt> (optional). The user-visible name for the group, e.g. "Friends". This may be any UTF-8 string of at least 1 character in length and maximum 255 octets in size. The same name may be used by two different groups.</t>
-        </section>
         <section anchor="group-card" numbered="true" toc="default">
           <name>card</name>
           <t>Type: <tt>Card</tt> (optional). The card that represents this group.</t>
