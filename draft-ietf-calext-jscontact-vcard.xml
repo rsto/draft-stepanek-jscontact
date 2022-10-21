@@ -87,12 +87,12 @@
       <name>Converting vCard to JSContact</name>
       <t>This section contains the conversion rules from vCard to JSContact Card/CardGroup.  The vCard properties are grouped according to the categories as defined in <xref target="RFC6350"/>.</t>
       <section anchor="vcard-card-or-cardgroup">
-      <name>Card or CardGroup</name>
-      <t>The vCard format represents a contact and a <em>group</em> of contacts both as a vCard object. In contrast, JSContact defines two distinct object types: <tt>Card</tt> for a contact representing a single entity, <tt>CardGroup</tt> for a group of contacts. The following rules define which JSContact object type to choose:</t>
-      <ul>
-        <li>If the vCard does not contain the <tt>KIND</tt> property, or the value of this property is anything but <tt>group</tt> then convert it to a <tt>Card</tt> object.</li>
-        <li>If the <tt>KIND</tt> property value is <tt>group</tt> then choose a <tt>CardGroup</tt> object. If the vCard contains any standard properties that do not convert to a standard <tt>CardGroup</tt> property, convert the vCard <em>also</em> to a <tt>Card</tt> and use that as the value of the <tt>card</tt> property in the <tt>CardGroup</tt>.</li>
-      </ul>
+        <name>Card or CardGroup</name>
+        <t>The vCard format represents a contact and a <em>group</em> of contacts both as a vCard object. In contrast, JSContact defines two distinct object types: <tt>Card</tt> for a contact representing a single entity, <tt>CardGroup</tt> for a group of contacts. The following rules define which JSContact object type to choose:</t>
+        <ul>
+          <li>If the vCard does not contain the <tt>KIND</tt> property, or the value of this property is anything but <tt>group</tt> then convert it to a <tt>Card</tt> object.</li>
+          <li>If the <tt>KIND</tt> property value is <tt>group</tt> then choose a <tt>CardGroup</tt> object. If the vCard contains any standard properties that do not convert to a standard <tt>CardGroup</tt> property, convert the vCard <em>also</em> to a <tt>Card</tt> and use that as the value of the <tt>card</tt> property in the <tt>CardGroup</tt>.</li>
+        </ul>
       </section>
       <section anchor="vcard-common-parameters">
         <name>Common vCard Parameters</name>
@@ -1652,7 +1652,7 @@
             </dd>
             <dt>Type:</dt>
             <dd><tt>JCardProp[]</tt>, where <tt>JCardProp</tt> denotes a jCard-encoded vCard property as defined in <xref target="RFC7095" section="3.3"/>.
-		</dd>
+    </dd>
             <dt>Definition:</dt>
             <dd>This property is set on a JSContact object that represents a vCard. It contains properties that are set in the vCard represented by this JSContact object. Each entry in this list typically represents a vCard property for which no conversion to a standard JSContact property is defined. It <bcp14>MAY</bcp14> contain vCard standard properties which also got converted to a standard property in the same JSContact object. In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
             <dt>Example:</dt>
