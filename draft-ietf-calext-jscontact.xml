@@ -264,7 +264,7 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  <xref target="RFC4122" format="default"/> describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with <xref target="RFC6350" format="default"/> UIDs, implementations <bcp14>MUST</bcp14> accept both URI and free-form text.</t>
+          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views. <xref target="RFC4122" format="default"/> describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with <xref target="RFC6350" format="default"/> UIDs, implementations <bcp14>MUST</bcp14> accept both URI and free-form text.</t>
         </section>
         <section anchor="prodid" numbered="true" toc="default">
           <name>prodId</name>
@@ -856,7 +856,7 @@ A set of free-text keywords, also known as <em>tags</em>. The set is represented
         </section>
         <section anchor="group-uid" numbered="true" toc="default">
           <name>uid</name>
-          <t>Type: <tt>String</tt> (mandatory). The uid of this group. Both CardGroup and Card share the same namespace for the <tt>uid</tt> property.</t>
+          <t>Type: <tt>String</tt> (mandatory). The uid of this group, an identifier globally unique within both CardGroup and Card uid values. Also see <xref target="uid"/>.</t>
         </section>
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
@@ -865,7 +865,7 @@ A set of free-text keywords, also known as <em>tags</em>. The set is represented
         </section>
         <section anchor="group-card" numbered="true" toc="default">
           <name>card</name>
-          <t>Type: <tt>Card</tt> (optional). The card that represents this group.</t>
+          <t>Type: <tt>Card</tt> (optional). The card that represents this group. The <tt>uid</tt> property of the card <bcp14>MUST</bcp14> match the value of the card group <tt>uid</tt> property.</t>
         </section>
       </section>
     </section>
