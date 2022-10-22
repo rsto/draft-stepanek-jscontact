@@ -149,7 +149,7 @@
           <name>ALTID</name>
           <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="convert-other-vcard-param"/>.</t>
         </section>
-    	<section>
+        <section>
           <name>PID</name>
           <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="convert-other-vcard-param"/>.</t>
         </section>
@@ -186,7 +186,7 @@
         </section>
         <section>
           <name>SOURCE</name>
-          <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> member is set to <tt>entry</tt> and <tt>uri</tt> member is set to the SOURCE value.</t>
+          <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
@@ -217,7 +217,7 @@
         </section>
         <section>
           <name>KIND</name>
-          <t>The KIND property converts to the <tt>kind</tt> member (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value <tt>group</tt> is reserved for a CardGroup instance.</t>
+          <t>The KIND property converts to the <tt>kind</tt> property (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value <tt>group</tt> is reserved for a CardGroup instance.</t>
           <figure anchor="kind_conversion">
             <name>KIND conversion example</name>
             <artwork><![CDATA[
@@ -246,7 +246,7 @@
         <name>Identification Properties</name>
         <section>
           <name>FN</name>
-          <t>All the FN instances are represented through the <tt>fullName</tt> member (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>All the FN instances are represented through the <tt>fullName</tt> property (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <t>If the vCard represents a group of contacts, implementers MAY convert the FN property into either "CardGroup.card.fullName" or "CardGroup.name" or both properties.</t>
         </section>
         <section>
@@ -283,7 +283,7 @@
               </tr>
             </tbody>
           </table>
-          <t>A NICKNAME property converts to an entry in the <tt>nickNames</tt> property (<xref target="fn_n_nickname_conversion"/>).  The entry value is a <tt>NickName</tt> object.  The <tt>name</tt> member is set to the NICKNAME value.</t>
+          <t>A NICKNAME property converts to an entry in the <tt>nickNames</tt> property (<xref target="fn_n_nickname_conversion"/>).  The entry value is a <tt>NickName</tt> object.  The <tt>name</tt> property is set to the NICKNAME value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="fn_n_nickname_conversion">
             <name>FN, N, NICKNAME conversion example</name>
@@ -324,7 +324,7 @@
         </section>
         <section>
           <name>PHOTO</name>
-          <t>A PHOTO property converts to an entry in the <tt>media</tt> property (<xref target="photo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> member is set to <tt>photo</tt> and <tt>uri</tt> member is set to the PHOTO value.</t>
+          <t>A PHOTO property converts to an entry in the <tt>media</tt> property (<xref target="photo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>photo</tt> and <tt>uri</tt> property is set to the PHOTO value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="photo_conversion">
             <name>PHOTO conversion example</name>
@@ -368,7 +368,7 @@
             <li>ANNIVERSARY converts to <tt>date</tt> where <tt>type</tt> is empty and <tt>label</tt> is set to a value describing in detail the kind of anniversary (e.g. "marriage date" for the wedding anniversary).</li>
           </ul>
           <t>Both birth and death places are represented as instances of the <tt>Address</tt> object.</t>
-          <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs convert to <tt>Address</tt> instances including only the <tt>coordinates</tt> member.  If the URI value is not a geo URI, the place is ignored.</t>
+          <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs convert to <tt>Address</tt> instances including only the <tt>coordinates</tt> property.  If the URI value is not a geo URI, the place is ignored.</t>
           <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE properties convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="anniversary_conversion">
             <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY conversion example</name>
@@ -427,7 +427,7 @@
         <section>
           <name>ADR</name>
           <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.</t>
-          <t>The ADR components are transformed into the <tt>Address</tt> members as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
+          <t>The ADR components are transformed into the <tt>Address</tt> properties as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
           <t>The "street address" and "extended address" ADR components MAY be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
           <table anchor="adr_components_vs_address_members">
             <name>ADR components vs. Address members conversion</name>
@@ -483,12 +483,12 @@
               </tr>
             </tbody>
           </table>
-          <t>The LABEL parameter converts to the <tt>fullAddress</tt> member.</t>
-          <t>The GEO parameter converts to the <tt>coordinates</tt> member.</t>
-          <t>The TZ parameter converts to the <tt>timeZone</tt> member.</t>
-          <t>The CC parameter as defined in <xref target="RFC8605"/> converts to the <tt>countryCode</tt> member.</t>
+          <t>The LABEL parameter converts to the <tt>fullAddress</tt> property.</t>
+          <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
+          <t>The TZ parameter converts to the <tt>timeZone</tt> property.</t>
+          <t>The CC parameter as defined in <xref target="RFC8605"/> converts to the <tt>countryCode</tt> property.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>. Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the <tt>fullAddress</tt> member.</t>
+          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>. Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the <tt>fullAddress</tt> property.</t>
           <figure anchor="adr_conversion">
             <name>ADR conversion example</name>
             <artwork><![CDATA[
@@ -543,7 +543,7 @@
         <name>Communications Properties</name>
         <section anchor="vCard-TEL">
           <name>TEL</name>
-          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>phone</tt> member is set to the TEL value.</t>
+          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>phone</tt> property is set to the TEL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="tel_conversion">
             <name>TEL conversion example</name>
@@ -580,7 +580,7 @@
         </section>
         <section>
           <name>EMAIL</name>
-          <t>An EMAIL property converts to an entry in the <tt>emails</tt> property (<xref target="email_conversion"/>).  The entry value is an <tt>EmailAddress</tt> object.  The <tt>email</tt> member is set to the EMAIL value.</t>
+          <t>An EMAIL property converts to an entry in the <tt>emails</tt> property (<xref target="email_conversion"/>).  The entry value is an <tt>EmailAddress</tt> object.  The <tt>email</tt> property is set to the EMAIL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="email_conversion">
             <name>EMAIL conversion example</name>
@@ -615,7 +615,7 @@
         </section>
         <section>
           <name>IMPP</name>
-          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The entry value is a <tt>OnlineService</tt> object and the <tt>uri</tt> member is set to the IMPP value.</t>
+          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The entry value is a <tt>OnlineService</tt> object and the <tt>uri</tt> property is set to the IMPP value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
@@ -694,17 +694,16 @@
         <name>Geographical Properties</name>
         <section anchor="prop-geo">
           <name>GEO</name>
-            <t>The GEO and TZ properties are not directly converted to topmost Card members because the same information is represented through equivalent <tt>Address</tt> members.</t>
-        <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first <tt>Address</tt> object.</t>
+          <t>The GEO and TZ properties are not directly converted to topmost Card members because the same information is represented through equivalent <tt>Address</tt> properties.</t>
+          <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first <tt>Address</tt> object.</t>
         </section>
-
         <section anchor="prop-tz">
           <name>TZ</name>
           <t>As specified in Section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented as a time zone name, as a UTC offset or as a URI.
           </t>
           <ul spacing="compact">
             <li>
-              <t>If the TZ value is defined in the IANA timezone database, it is directly matched by the <tt>timeZone</tt> member in JSContact.</t>
+              <t>If the TZ value is defined in the IANA timezone database, it is directly matched by the <tt>timeZone</tt> property in JSContact.</t>
               <t/>
             </li>
             <li>
@@ -712,16 +711,16 @@
               <t/>
             </li>
             <li>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</li>
-                      </ul>
-            <t>The GEO and TZ properties are not directly converted to topmost Card members because the same information is represented through equivalent <tt>Address</tt> members.</t>
-        <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first <tt>Address</tt> object.</t>
+          </ul>
+          <t>The GEO and TZ properties are not directly converted to topmost Card members because the same information is represented through equivalent <tt>Address</tt> properties.</t>
+          <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first <tt>Address</tt> object.</t>
         </section>
       </section>
       <section>
         <name>Organizational Properties</name>
         <section>
           <name>TITLE and ROLE</name>
-          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> member is set to "title"/"role" and <tt>title</tt> member is set to the TITLE/ROLE value.  The rules to set the <tt>organization</tt> member are out of the scope of this document.</t>
+          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> property is set to "title"/"role" and <tt>title</tt> property is set to the TITLE/ROLE value.  The rules to set the <tt>organization</tt> property are out of the scope of this document.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="title_role_conversion">
             <name>TITLE and ROLE conversion example</name>
@@ -756,7 +755,7 @@
         </section>
         <section>
           <name>LOGO</name>
-          <t>A LOGO property converts to an entry in the <tt>media</tt> property (<xref target="logo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> member is set to <tt>logo</tt> and <tt>uri</tt> member is set to the LOGO value.</t>
+          <t>A LOGO property converts to an entry in the <tt>media</tt> property (<xref target="logo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>logo</tt> and <tt>uri</tt> property is set to the LOGO value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="logo_conversion">
             <name>LOGO conversion example</name>
@@ -787,7 +786,7 @@
         </section>
         <section>
           <name>ORG</name>
-          <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> member contains the organizational name and the <tt>units</tt> member contains the organizational units.</t>
+          <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name and the <tt>units</tt> property contains the organizational units.</t>
           <t>Implementations MAY allow to represent organizational untits without the organizational name.  In this case, the first component of the ORG value MUST be an empty string (e.g. ORG:;DepartmentA).</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_conversion">
@@ -875,8 +874,8 @@
         <section anchor="vCard-RELATED">
           <name>RELATED</name>
           <t>All the RELATED instances convert to the <tt>relatedTo</tt> property (<xref target="related_conversion"/>): an entry for each entity the entity described by the Card is associated with.  The map keys are the <tt>uid</tt> values of the associated cards.</t>
-          <t>Each map value is a <tt>Relation</tt> object including only the <tt>relation</tt> member represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
-          <t>If the relation type is unspecified, the <tt>relation</tt> member MUST be empty.</t>
+          <t>Each map value is a <tt>Relation</tt> object including only the <tt>relation</tt> property represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
+          <t>If the relation type is unspecified, the <tt>relation</tt> property MUST be empty.</t>
           <figure anchor="related_conversion">
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
@@ -919,7 +918,7 @@
         </section>
         <section>
           <name>CONTACT-URI</name>
-          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>type</tt> member is set to <tt>contact</tt> and <tt>uri</tt> member is set to the CONTACT-URI value.</t>
+          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>type</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="contact_uri_conversion">
             <name>CONTACT-URI conversion example</name>
@@ -961,7 +960,7 @@
         </ul>
         <section>
           <name>EXPERTISE</name>
-          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> member is set to "expertise".</t>
+          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> property is set to "expertise".</t>
           <t>The INDEX parameter is represented as the index of the expertise among the declared expertises.</t>
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
@@ -1000,7 +999,7 @@
         </section>
         <section>
           <name>HOBBY</name>
-          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> member is set to "hobby".</t>
+          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> property is set to "hobby".</t>
           <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
           <figure anchor="hobby_conversion">
             <name>HOBBY conversion example</name>
@@ -1039,7 +1038,7 @@
         </section>
         <section>
           <name>INTEREST</name>
-          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> member is set to "interest".</t>
+          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> property is set to "interest".</t>
           <t>The INDEX parameter is represented as the index of the interest among the declared interests.</t>
           <figure anchor="interest_conversion">
             <name>INTEREST conversion example</name>
@@ -1078,7 +1077,7 @@
         </section>
         <section>
           <name>ORG-DIRECTORY</name>
-          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> member is set to <tt>directory</tt> and <tt>uri</tt> member is set to the ORG-DIRECTORY value.</t>
+          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <t>The INDEX parameter is represented as the index of the directory among the online resources with the <tt>directory</tt> type.</t>
           <figure anchor="org_directory_conversion">
@@ -1175,7 +1174,7 @@
         </section>
         <section>
           <name>PRODID</name>
-          <t>The PRODID property converts to the <tt>prodId</tt> member (<xref target="prodid_conversion"/>).</t>
+          <t>The PRODID property converts to the <tt>prodId</tt> property (<xref target="prodid_conversion"/>).</t>
           <figure anchor="prodid_conversion">
             <name>PRODID conversion example</name>
             <artwork><![CDATA[
@@ -1197,7 +1196,7 @@
         </section>
         <section>
           <name>REV</name>
-          <t>The REV property is transformed into the <tt>updated</tt> member (<xref target="rev_conversion"/>).</t>
+          <t>The REV property is transformed into the <tt>updated</tt> property (<xref target="rev_conversion"/>).</t>
           <figure anchor="rev_conversion">
             <name>REV conversion example</name>
             <artwork><![CDATA[
@@ -1219,7 +1218,7 @@
         </section>
         <section>
           <name>SOUND</name>
-          <t>A SOUND property converts to an entry in the <tt>media</tt> property (<xref target="sound_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> member is set to <tt>sound</tt> and <tt>uri</tt> member is set to the SOUND value.</t>
+          <t>A SOUND property converts to an entry in the <tt>media</tt> property (<xref target="sound_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>sound</tt> and <tt>uri</tt> property is set to the SOUND value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="sound_conversion">
             <name>SOUND conversion example</name>
@@ -1276,7 +1275,7 @@
         </section>
         <section>
           <name>URL</name>
-          <t>An URL property converts to an entry in the <tt>links</tt> property (<xref target="url_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose <tt>uri</tt> member is set to the URL value.</t>
+          <t>An URL property converts to an entry in the <tt>links</tt> property (<xref target="url_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose <tt>uri</tt> property is set to the URL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="url_conversion">
             <name>URL conversion example</name>
@@ -1313,7 +1312,7 @@
         <name>Security Properties</name>
         <section>
           <name>KEY</name>
-          <t>A KEY property converts to an entry in the <tt>cryptoKeys</tt> property (<xref target="key_conversion"/>).  The entry value is a <tt>CryptoResource</tt> object whose <tt>uri</tt> member is set to the KEY value.</t>
+          <t>A KEY property converts to an entry in the <tt>cryptoKeys</tt> property (<xref target="key_conversion"/>).  The entry value is a <tt>CryptoResource</tt> object whose <tt>uri</tt> property is set to the KEY value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="key_conversion">
             <name>KEY conversion example</name>
@@ -1346,7 +1345,7 @@
         <name>Calendar Properties</name>
         <section>
           <name>FBURL</name>
-          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> member is set to <tt>freeBusy</tt> and <tt>uri</tt> member is set to the FBURL value.</t>
+          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="fburl_conversion">
             <name>FBURL conversion example</name>
@@ -1425,7 +1424,7 @@
         </section>
         <section>
           <name>CALURI</name>
-          <t>A CALURI property converts to an entry in the <tt>calendars</tt> property (<xref target="caluri_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> member is set to <tt>calendar</tt> and <tt>uri</tt> member is set to the CALURI value.</t>
+          <t>A CALURI property converts to an entry in the <tt>calendars</tt> property (<xref target="caluri_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>calendar</tt> and <tt>uri</tt> property is set to the CALURI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caluri_conversion">
             <name>CALURI conversion example</name>
@@ -1536,7 +1535,7 @@
         </section>
         <section>
           <name>CREATED</name>
-          <t>The CREATED property is transformed into the <tt>created</tt> member (<xref target="created_conversion"/>).</t>
+          <t>The CREATED property is transformed into the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
           <figure anchor="created_conversion">
             <name>CREATED conversion example</name>
             <artwork><![CDATA[
@@ -1558,7 +1557,7 @@
         </section>
         <section>
           <name>LOCALE</name>
-          <t>The LOCALE property is transformed into the <tt>locale</tt> member (<xref target="locale_conversion"/>).</t>
+          <t>The LOCALE property is transformed into the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
           <figure anchor="locale_conversion">
             <name>LOCALE conversion example</name>
             <artwork><![CDATA[
@@ -1740,7 +1739,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
       <section>
         <name>Card Required Properties</name>
-        <t>While converting a vCard into a Card/CardGroup, only the topmost <tt>uid</tt> member is mandatory.  Implementers are REQUIRED to set it when it is missing.</t>
+        <t>While converting a vCard into a Card/CardGroup, only the topmost <tt>uid</tt> property is mandatory.  Implementers are REQUIRED to set it when it is missing.</t>
       </section>
     </section>
     <section>
@@ -1758,7 +1757,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <section>
         <name>Date and Time Representations</name>
         <t>The JSContact spec defines the <tt>UTCDateTime</tt> type to represent <xref target="RFC3339"/> "date-time" format with further restrictions.  This means that the matched vCard format for a <tt>UTCDateTime</tt> value MUST be one of the formats shown in Section 4.3.5 of <xref target="RFC6350"/> (i.e. "19961022T140000Z").</t>
-        <t>In addition to such format, the <tt>date</tt> member of the <tt>Anniversary</tt> type allows to specify both dates without the time and partial dates.  In such cases, the corresponding vCard format is that defined in Section 4.3.1.</t>
+        <t>In addition to such format, the <tt>date</tt> property of the <tt>Anniversary</tt> type allows to specify both dates without the time and partial dates.  In such cases, the corresponding vCard format is that defined in Section 4.3.1.</t>
       </section>
       <section>
         <name>Time Zone</name>
