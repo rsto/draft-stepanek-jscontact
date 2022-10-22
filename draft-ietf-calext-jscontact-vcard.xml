@@ -1733,11 +1733,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
           <t>The following steps illustrate how to convert from JSContact to vCard using these properties.</t>
           <ol>
             <li>Create an empty vCard and set its <tt>VERSION</tt> to <tt>4.0</tt>.</li>
-            <li>Add all entries in the JSContact extension <tt>props</tt> property as vCard properties (see <xref target="convert-nonstandard-jscontact"/>).</li>
+            <li>Add all entries in the JSContact extension <tt>props</tt> property as vCard properties (see <xref target="convert-other-jscontact"/>).</li>
             <li>
               <t>Convert each standard JSContact property value to its vCard property. Replace any already existing vCard property which must not occur more than once.</t>
             </li>
-            <li>If the JSContact property value is an object, add any vCard parameters that are encoded in the JSContact <tt>params</tt> extension property (see <xref target="convert-nonstandard-jscontact"/>). Ignore any parameters which must not be set more than once.</li>
+            <li>If the JSContact property value is an object, add any vCard parameters that are encoded in the JSContact <tt>params</tt> extension property (see <xref target="convert-other-jscontact"/>). Ignore any parameters which must not be set more than once.</li>
           </ol>
         </section>
       </section>
@@ -1772,8 +1772,8 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
         <name>CardGroup</name>
         <t>A CardGroup object converts to a vCard by merging its properties with the properties of "CardGroup.card" object.  If the "CardGroup.card.fullName" property exists, it MUST be used to set the FN value.</t>
       </section>
-      <section anchor="convert-nonstandard-jscontact">
-        <name>Non-standard properties</name>
+      <section anchor="convert-other-jscontact">
+        <name>Other properties</name>
         <t>JSContact objects and their embedded object types may contain properties for which no standard vCard property is defined. For example, a JSContact object may contain extended properties <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/> of which the semantics or purpose is unknown.</t>
         <t>This section defines an vCard extension property and parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact. Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="vcard-jsprop">
@@ -1900,12 +1900,12 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
             </dd>
           </dl>
         </section>
-        <section anchor="convert-nonstandard-jscontact-guideline">
+        <section anchor="convert-other-jscontact-guideline">
           <name>Guideline</name>
           <t>The following steps illustrate how to to convert from vCard to JSContact using these properties:</t>
           <ol>
             <li>Create an empty JSContact object and set its <tt>@type</tt>.</li>
-            <li>Convert every vCard property for which a standard or implementation-specific conversion is defined. Ignore the <tt>JSPROPS</tt> and <tt>JSPROP</tt> properties (see <xref target="convert-nonstandard-jscontact"/>).</li>
+            <li>Convert every vCard property for which a standard or implementation-specific conversion is defined. Ignore the <tt>JSPROPS</tt> and <tt>JSPROP</tt> properties (see <xref target="convert-other-jscontact"/>).</li>
             <li>
               <t>Convert each <tt>JSPROPS</tt> or <tt>JSPROP</tt> property ignored in the previous step. Ignore all pointers where any part but the last is missing, or where a property at the complete pointer path already exists in the JSContact object.</t>
             </li>
