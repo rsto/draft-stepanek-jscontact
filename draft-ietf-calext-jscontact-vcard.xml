@@ -1192,7 +1192,7 @@
         </section>
         <section>
           <name>REV</name>
-          <t>The REV property is transformed into the <tt>updated</tt> property (<xref target="rev_conversion"/>).</t>
+          <t>The REV property converts to the <tt>updated</tt> property (<xref target="rev_conversion"/>).</t>
           <figure anchor="rev_conversion">
             <name>REV conversion example</name>
             <artwork><![CDATA[
@@ -1531,7 +1531,7 @@
         </section>
         <section>
           <name>CREATED</name>
-          <t>The CREATED property is transformed into the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
+          <t>The CREATED property converts to the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
           <figure anchor="created_conversion">
             <name>CREATED conversion example</name>
             <artwork><![CDATA[
@@ -1553,7 +1553,7 @@
         </section>
         <section>
           <name>LOCALE</name>
-          <t>The LOCALE property is transformed into the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
+          <t>The LOCALE property converts to the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
           <figure anchor="locale_conversion">
             <name>LOCALE conversion example</name>
             <artwork><![CDATA[
@@ -1614,7 +1614,7 @@
         </section>
         <section anchor="prop_id_parameter">
           <name>PROP-ID</name>
-          <t>The PROP-ID parameter is transformed into a map key is of type Id (<xref target="propid_conversion"/>).</t>
+          <t>The PROP-ID parameter converts to a map key is of type Id (<xref target="propid_conversion"/>).</t>
           <t>When this parameter is missing, implementers MAY generate a map key as they see fit.</t>
           <figure anchor="propid_conversion">
             <name>PROP-ID conversion example</name>
