@@ -692,31 +692,24 @@
       </section>
       <section>
         <name>Geographical Properties</name>
+        <section anchor="prop-tz">
+          <name>TZ</name>
+          <t>A value of type TEXT converts to the <tt>timeZone</tt> property in the <tt>Address</tt> object.</t>
+          <t>A value of type UTC-OFFSET converts to the <tt>timeZone</tt> property in the <tt>Address</tt> object if the offset has zero minutes and the hour offset is in the range -12 &lt;= 14:</t>
+          <ul>
+            <li>If the hour offset is zero, use the time zone name <tt>Etc/UTC</tt>.</li>
+            <li>Otherwise construct the time zone name with <tt>ETC/GMT</tt> suffixed with the string representation of the reversed sign hour offset, including the sign but excluding leading zeros and minutes. For example, the UTC offset value <tt>-0500</tt> converts to <tt>ETC/GMT+5</tt>.</li>
+          </ul>
+          <t>For such property values, a TZ property having the same ALTID parameter value as an ADR property <bcp14>MAY</bcp14> convert to the same entry in the <tt>addresses</tt> property. For this, the ADR property either <bcp14>MUST</bcp14> have no TZ parameter set, or the values of the TZ parameter and property <bcp14>MUST</bcp14> match.</t>
+          <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact. To convert such property, see <xref target="convert-other-vcard-prop"/>.</t>
+        </section>
         <section anchor="prop-geo">
           <name>GEO</name>
           <t>This converts to the <tt>coordinates</tt> property of the <tt>Address</tt> object.</t>
           <ul>
-            <li>A GEO property having the same ALTID parameter value as an ADR property <bcp14>MAY</bcp14> convert to the same entry in the <tt>addresses</tt> property. For this, the ADR property either <bcp14>MUST</bcp14> have no TZ parameter set, or the values of the TZ parameter and property <bcp14>MUST</bcp14> match.</li>
+            <li>A GEO property having the same ALTID parameter value as an ADR property <bcp14>MAY</bcp14> convert to the same entry in the <tt>addresses</tt> property. For this, the ADR property either <bcp14>MUST</bcp14> have no GEO parameter set, or the values of the GEO parameter and property <bcp14>MUST</bcp14> match.</li>
             <li>In all other cases it converts to a new entry in the <tt>addresses</tt> property.</li>
           </ul>
-        </section>
-        <section anchor="prop-tz">
-          <name>TZ</name>
-          <t>As specified in Section 6.5.1 of <xref target="RFC6350"/>, the time zone information can be represented as a time zone name, as a UTC offset or as a URI.
-          </t>
-          <ul spacing="compact">
-            <li>
-              <t>If the TZ value is defined in the IANA timezone database, it is directly matched by the <tt>timeZone</tt> property in JSContact.</t>
-              <t/>
-            </li>
-            <li>
-              <t>An UTC offset MUST be converted into the related "Etc/GMT" time zone (e.g. the value "-0500" converts to "Etc/GMT+5").  If the UTC offset value contains minutes information or is not an IANA timezone name, it requires special handling.</t>
-              <t/>
-            </li>
-            <li>Since there is no URI scheme defined for time zones <xref target="uri-schemes"/>, any implementation that does use some a custom URI for a time zone is not interoperable anyway.  In this case, if the URI corresponds to an IANA time zone <xref target="time-zones"/>, this latter SHOULD be used.  Otherwise, the URI value is dumped into a string.</li>
-          </ul>
-          <t>The GEO and TZ properties are not directly converted to topmost Card members because the same information is represented through equivalent <tt>Address</tt> properties.</t>
-          <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first <tt>Address</tt> object.</t>
         </section>
       </section>
       <section>
