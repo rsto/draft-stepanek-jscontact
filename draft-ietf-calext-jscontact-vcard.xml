@@ -694,8 +694,11 @@
         <name>Geographical Properties</name>
         <section anchor="prop-geo">
           <name>GEO</name>
-          <t>The GEO and TZ properties are not directly converted to topmost Card members because the same information is represented through equivalent <tt>Address</tt> properties.</t>
-          <t>The ALTID parameter is used for associating both GEO and TZ properties with the related address information.  When the ALTID parameter is missing, the matched members SHOULD be included in the first <tt>Address</tt> object.</t>
+          <t>This converts to the <tt>coordinates</tt> property of the <tt>Address</tt> object.</t>
+          <ul>
+            <li>A GEO property having the same ALTID parameter value as an ADR property <bcp14>MAY</bcp14> convert to the same entry in the <tt>addresses</tt> property. For this, the ADR property either <bcp14>MUST</bcp14> have no TZ parameter set, or the values of the TZ parameter and property <bcp14>MUST</bcp14> match.</li>
+            <li>In all other cases it converts to a new entry in the <tt>addresses</tt> property.</li>
+          </ul>
         </section>
         <section anchor="prop-tz">
           <name>TZ</name>
