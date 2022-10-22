@@ -1575,8 +1575,8 @@
         </section>
         <section anchor="grammatical-gender">
           <name>GRAMMATICAL-GENDER and PRONOUNS</name>
-          <t>The GRAMMATICAL-GENDER property is transformed into the "speakToAs.grammaticalGender" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-          <t>The PRONOUNS property is transformed into the "speakToAs.pronouns" member (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <t>The GRAMMATICAL-GENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <t>The PRONOUNS property converts to an entry in the <tt>pronouns</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
           <figure anchor="grammatical_gender_pronouns_conversion">
             <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
             <artwork><![CDATA[
@@ -1584,8 +1584,8 @@
     VERSION:4.0
     ...
      GRAMMATICAL-GENDER:NEUTER
-     PRONOUNS=they/them
-     PRONOUNS:xe/xir
+     PRONOUNS;PREF=2:they/them
+     PRONOUNS;PREF=1:xe/xir
     ...
     END:VCARD
 
@@ -1594,10 +1594,18 @@
     ...
     "speakToAs": {
       "grammaticalGender": "neuter",
-      "pronouns": [
-          "they/them",
-          "xe/xir"
-      ]
+      "pronouns": {
+        "PRONOUNS-1": {
+          "@type": "Pronouns",
+          "pronouns": "they/them",
+          "pref": 2
+        },
+        "PRONOUNS-2": {
+          "@type": "Pronouns",
+          "pronouns": "xe/xir",
+          "pref": 1
+        }
+      }
     },
     ...
     }
