@@ -135,7 +135,71 @@
         <name>vCard Parameters</name>
         <section>
           <name>LANGUAGE</name>
-          <t>XXX</t>
+          <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on. The value of the LANGUAGE parameter defines the language key in the <tt>localizations</tt> property. The JSON pointer in the <tt>PatchObject</tt> is the path to the JSContact property that the vCard property converts to. The value of the PatchObject is the converted property value.</t>
+          <t>Note that an entry in the <tt>localizations</tt> <bcp14>MAY</bcp14> but need not point to an existing property. The following two examples illustrate each case.</t>
+          <figure anchor="language_conversion_patch_existing">
+            <name>LANGUAGE conversion example: patch existing property</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    TITLE:Boss
+    TITLE;LANGUAGE=fr:Patron
+    ...
+    END:VCARD
+
+    {
+      "@type": "Card",
+      ...
+      "titles": {
+        "t1": {
+          "@type": "Title",
+          "title": "Boss"
+        }
+      },
+      "localizations": {
+        "fr": {
+          "titles/t1/title": "Patron"
+        }
+      }
+    }
+        ]]></artwork>
+          </figure>
+          <figure anchor="language_conversion_patch_new">
+            <name>LANGUAGE conversion example: patch new property</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    TITLE;LANGUAGE=en:Boss
+    TITLE;LANGUAGE=fr:Patron
+    ...
+    END:VCARD
+
+    {
+      "@type": "Card",
+      ...
+      "localizations": {
+        "en": {
+          "titles": {
+            "t1": {
+              "@type": "Title",
+              "title": "Boss"
+            }
+          }
+        }
+        "fr": {
+          "titles": {
+            "t1": {
+              "@type": "Title",
+              "title": "Patron"
+            }
+          }
+        }
+      }
+    }
+        ]]></artwork>
+          </figure>
         </section>
         <section>
           <name>VALUE</name>
