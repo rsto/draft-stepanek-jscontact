@@ -100,6 +100,10 @@
           <name>The <tt>uid</tt> property</name>
           <t>The UID property in vCard is optional, but the <tt>uid</tt> property in JSContact is mandatory. Implementations that convert a vCard without UID property <bcp14>MUST</bcp14> generate a unique identifier as value for the <tt>uid</tt> property. They <bcp14>SHOULD</bcp14> generate the same identifier when repeatedly converting the same vCard, but they <bcp14>MAY</bcp14> generate different values. Consequently, a vCard without UID property <bcp14>MAY</bcp14> does not convert to one exact instance of a JSContact card or card group.</t>
         </section>
+        <section>
+          <name>Choosing identifiers</name>
+          <t>Multi-valued properties in JSContact typically are represented as a JSON object where the object keys are of the <tt>Id</tt> type and the object values are the converted vCard property. In absence of the PROP-ID parameter (see <xref target="prop_id_parameter"/>), implementations are free to choose any identifier for such entries. Whatever identifier generation scheme implementations use, they <bcp14>SHOULD</bcp14> generate values of short character length.  For example, this could be an incrementing number across all <tt>Id</tt>s or only unique within one JSON object.</t>
+        </section>
       </section>
       <section anchor="vcard-types">
         <name>vCard Value Data Types</name>
@@ -1689,8 +1693,7 @@
         </section>
         <section anchor="prop_id_parameter">
           <name>PROP-ID</name>
-          <t>The PROP-ID parameter converts to a map key is of type Id (<xref target="propid_conversion"/>).</t>
-          <t>When this parameter is missing, implementers MAY generate a map key as they see fit.</t>
+          <t>The PROP-ID parameter value of a vCard property converts to the <tt>Id</tt> of the JSContact property to which the vCard property converts to. </t>
           <figure anchor="propid_conversion">
             <name>PROP-ID conversion example</name>
             <artwork><![CDATA[
@@ -1821,8 +1824,8 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <name>Converting JSContact to vCard</name>
       <t>In most of the cases, the rules about the conversion from Card/CardGroup to vCard can be derived by reversing the rules presented in <xref target="vcard-jscontact-conversion"/>.  The remaining cases are treated in the following of this section.</t>
       <section>
-        <name>Id</name>
-        <t>Where a map key is of type Id, implementers are free to either ignore it or preserve it as a vCard information (<xref target="prop_id_parameter"/>).</t>
+        <name>Preserving identifiers</name>
+        <t>Implementations <bcp14>MUST</bcp14> convert the <tt>Id</tt> of a multi-valued JSContact property to the PROP-ID parameter value of the vCard property it converts to (see <xref target="prop_id_parameter"/>).</t>
       </section>
       <section>
         <name>Localizations</name>
