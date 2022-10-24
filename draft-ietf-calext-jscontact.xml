@@ -928,11 +928,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
     </section>
     <section anchor="iana-considerations" numbered="true" toc="default">
       <name>IANA Considerations</name>
-      <t>TBD</t>
+      <t>This section will be completed before IESG Last Call.</t>
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>TBD</t>
+      <t>This section will be completed before IESG Last Call.</t>
     </section>
   </middle>
   <back>
