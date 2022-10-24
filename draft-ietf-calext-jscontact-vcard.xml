@@ -764,15 +764,19 @@
             <li>If the hour offset is zero, use the time zone name <tt>Etc/UTC</tt>.</li>
             <li>Otherwise construct the time zone name with <tt>ETC/GMT</tt> suffixed with the string representation of the reversed sign hour offset, including the sign but excluding leading zeros and minutes. For example, the UTC offset value <tt>-0500</tt> converts to <tt>ETC/GMT+5</tt>.</li>
           </ul>
-          <t>For such property values, a TZ property having the same ALTID parameter value as an ADR property <bcp14>MAY</bcp14> convert to the same entry in the <tt>addresses</tt> property. For this, the ADR property either <bcp14>MUST</bcp14> have no TZ parameter set, or the values of the TZ parameter and property <bcp14>MUST</bcp14> match.</t>
+          <t>For such property values, also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
           <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact. To convert such property, see <xref target="convert-other-vcard-prop"/>.</t>
         </section>
         <section anchor="prop-geo">
           <name>GEO</name>
-          <t>This converts to the <tt>coordinates</tt> property of the <tt>Address</tt> object.</t>
+          <t>This converts to the <tt>coordinates</tt> property of the <tt>Address</tt> object.  Also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
+        </section>
+        <section anchor="combine-geo-props">
+          <name>Combining geographical properties</name>
+          <t>In vCard the properties ADR, GEO and TZ occur independently of each other. In JSContact, they all convert to properties of an <tt>Address</tt> object. It is implementation-specific if these vCard properties convert to <em>separate</em> address instances in JSContact, or if some or all of them convert to the <em>same</em> address. That being said, implementations <bcp14>SHOULD</bcp14> convert the properties to the <em>same</em> address for the following cases:</t>
           <ul>
-            <li>A GEO property having the same ALTID parameter value as an ADR property <bcp14>MAY</bcp14> convert to the same entry in the <tt>addresses</tt> property. For this, the ADR property either <bcp14>MUST</bcp14> have no GEO parameter set, or the values of the GEO parameter and property <bcp14>MUST</bcp14> match.</li>
-            <li>In all other cases it converts to a new entry in the <tt>addresses</tt> property.</li>
+            <li>The ALTID parameter values of the properties match.</li>
+            <li>The ALTID parameters are not set, but are set on any other ADR, GEO and TZ properties.</li>
           </ul>
         </section>
       </section>
