@@ -55,6 +55,7 @@
     <abstract>
       <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.</t>
     </abstract>
+    <note removeInRFC="true"><t>The verbatim string <tt>0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t></note>
   </front>
   <middle>
     <section>
