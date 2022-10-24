@@ -240,7 +240,7 @@ gram-gender-value = "animate" /
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-GRAMMATICAL-GENDER:NEUTER
+GRAMMATICAL-GENDER:neuter
 ]]></sourcecode>
           </dd>
         </dl>
