@@ -1574,6 +1574,35 @@
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
+        <section>
+          <name>X-ABLabel</name>
+          <t>This property is non-standard but widely in use in existing vCard data. It converts to the <tt>label</tt> property of a JSContact object type. The X-ABLabel property is preceded by a vCard property group name, and the label converts to the JSContact object which got converted from a vCard property having the same group.</t>
+          <figure anchor="xablabel_conversion">
+            <name>X-ABLabel conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    item1.TEL;VALUE=uri:tel:+1-555-555-5555
+    item1.X-ABLabel:foo
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "phones": {
+      "p1": {
+        "@type": "Phone",
+        "phone": "tel:+1-555-555-5555",
+        "label": "foo"
+      }
+    }
+    ...
+    }
+        ]]></artwork>
+          </figure>
+        </section>
       </section>
       <section>
         <name>Security Properties</name>
