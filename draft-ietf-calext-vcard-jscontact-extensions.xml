@@ -6,7 +6,7 @@
 <!ENTITY nbhy "&#8209;">
 <!ENTITY wj "&#8288;">
 ]>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-calext-vcard-jscontact-extensions-00" ipr="trust200902" consensus="true" obsoletes="" updates="" submissionType="IETF" xml:lang="en" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-calext-vcard-jscontact-extensions-01" ipr="trust200902" consensus="true" obsoletes="" updates="" submissionType="IETF" xml:lang="en" version="3">
   <front>
     <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-01"/>
@@ -36,7 +36,7 @@
         <email>mario.loffredo@iit.cnr.it</email>
       </address>
     </author>
-    <date year="2022" month="July" day="11"/>
+    <date year="2022" month="October" day="24"/>
     <area>Applications</area>
     <workgroup>Calendaring Extensions</workgroup>
     <keyword>addressbook</keyword>
