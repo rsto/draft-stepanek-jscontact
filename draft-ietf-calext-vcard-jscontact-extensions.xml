@@ -508,7 +508,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
     <section anchor="Security">
       <!-- All drafts are required to have a security considerations section. See RFC 3552 for a guide. -->
       <name>Security Considerations</name>
-      <t>This section will be filled at a later stage.</t>
+      <t>This section will be completed before IESG Last Call.</t>
     </section>
   </middle>
   <back>
