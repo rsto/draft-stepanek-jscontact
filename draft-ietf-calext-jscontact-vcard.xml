@@ -86,13 +86,20 @@
     <section anchor="vcard-jscontact-conversion">
       <name>Converting vCard to JSContact</name>
       <t>This section contains the conversion rules from vCard to JSContact Card/CardGroup. The order of <xref target="vcard-types"/> to <xref target="vcard-extended"/> is equal to <xref target="RFC6350"/> and also include properties of vCard extensions. <xref target="vcard-new-props"/> defines how to convert new vCard properties and parameters defined in vCard JSContact Extension RFC <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-      <section anchor="vcard-card-or-cardgroup">
-        <name>Card or CardGroup</name>
-        <t>The vCard format represents a contact and a <em>group</em> of contacts both as a vCard object. In contrast, JSContact defines two distinct object types: <tt>Card</tt> for a contact representing a single entity, <tt>CardGroup</tt> for a group of contacts. The following rules define which JSContact object type to choose:</t>
-        <ul>
-          <li>If the vCard does not contain the <tt>KIND</tt> property, or the value of this property is anything but <tt>group</tt> then convert it to a <tt>Card</tt> object.</li>
-          <li>If the <tt>KIND</tt> property value is <tt>group</tt> then choose a <tt>CardGroup</tt> object. If the vCard contains any standard properties that do not convert to a standard <tt>CardGroup</tt> property, convert the vCard <em>also</em> to a <tt>Card</tt> and use that as the value of the <tt>card</tt> property in the <tt>CardGroup</tt>.</li>
-        </ul>
+      <section>
+        <name>General rules</name>
+        <section anchor="vcard-card-or-cardgroup">
+          <name>Card or CardGroup</name>
+          <t>The vCard format represents a contact and a <em>group</em> of contacts both as a vCard object. In contrast, JSContact defines two distinct object types: <tt>Card</tt> for a contact representing a single entity, <tt>CardGroup</tt> for a group of contacts. The following rules define which JSContact object type to choose:</t>
+          <ul>
+            <li>If the vCard does not contain the <tt>KIND</tt> property, or the value of this property is anything but <tt>group</tt> then convert it to a <tt>Card</tt> object.</li>
+            <li>If the <tt>KIND</tt> property value is <tt>group</tt> then choose a <tt>CardGroup</tt> object. If the vCard contains any standard properties that do not convert to a standard <tt>CardGroup</tt> property, convert the vCard <em>also</em> to a <tt>Card</tt> and use that as the value of the <tt>card</tt> property in the <tt>CardGroup</tt>.</li>
+          </ul>
+        </section>
+        <section>
+          <name>The <tt>uid</tt> property</name>
+          <t>The UID property in vCard is optional, but the <tt>uid</tt> property in JSContact is mandatory. Implementations that convert a vCard without UID property <bcp14>MUST</bcp14> generate a unique identifier as value for the <tt>uid</tt> property. They <bcp14>SHOULD</bcp14> generate the same identifier when repeatedly converting the same vCard, but they <bcp14>MAY</bcp14> generate different values. Consequently, a vCard without UID property <bcp14>MAY</bcp14> does not convert to one exact instance of a JSContact card or card group.</t>
+        </section>
       </section>
       <section anchor="vcard-types">
         <name>vCard Value Data Types</name>
@@ -1808,10 +1815,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <li>If the JSContact property value is an object, add any vCard parameters that are encoded in the JSContact <tt>params</tt> extension property (see <xref target="convert-other-jscontact"/>). Ignore any parameters which must not be set more than once.</li>
           </ol>
         </section>
-      </section>
-      <section>
-        <name>Card Required Properties</name>
-        <t>While converting a vCard into a Card/CardGroup, only the topmost <tt>uid</tt> property is mandatory.  Implementers are REQUIRED to set it when it is missing.</t>
       </section>
     </section>
     <section>
