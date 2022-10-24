@@ -6,7 +6,7 @@
 <!ENTITY nbhy "&#8209;">
 <!ENTITY wj "&#8288;">
 ]>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-calext-vcard-jscontact-extensions-00" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" xml:lang="en" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-calext-vcard-jscontact-extensions-00" ipr="trust200902" consensus="true" obsoletes="" updates="" submissionType="IETF" xml:lang="en" version="3">
   <front>
     <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-01"/>
@@ -229,11 +229,11 @@ gram-gender-param =
                  ;
                  )
 
-gram-gender-value = "ANIMATE" /
-                    "FEMALE" /
-                    "INANIMATE" /
-                    "MALE" /
-                    "NEUTER" /
+gram-gender-value = "animate" /
+                    "female" /
+                    "inanimate" /
+                    "male" /
+                    "neuter" /
                     x-value
 ]]></sourcecode>
           </dd>
@@ -446,27 +446,27 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
         <tbody>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">ANIMATE</td>
+            <td align="left">animate</td>
             <td align="left">This document, Section 3.3</td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">FEMALE</td>
+            <td align="left">female</td>
             <td align="left">This document, Section 3.3</td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">INANIMATE</td>
+            <td align="left">inanimate</td>
             <td align="left">This document, Section 3.3</td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">MALE</td>
+            <td align="left">male</td>
             <td align="left">This document, Section 3.3</td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">NEUTER</td>
+            <td align="left">neuter</td>
             <td align="left">This document, Section 3.3</td>
           </tr>
         </tbody>
@@ -485,7 +485,6 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
       <references>
         <name>Normative References</name>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.2119.xml"/>
-        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
         <!-- The recommended and simplest way to include a well known reference -->
