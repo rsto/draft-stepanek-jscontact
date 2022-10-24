@@ -252,6 +252,10 @@
           <name>TZ</name>
           <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR. Also see the conversion of the TZ property in <xref target="prop-tz"/>. To convert this parameter for other vCard properties, see <xref target="convert-other-vcard-param"/>.</t>
         </section>
+        <section>
+          <name>DERIVED</name>
+          <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property. Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
       </section>
       <section>
         <name>General Properties</name>
