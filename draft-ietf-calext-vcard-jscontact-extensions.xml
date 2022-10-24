@@ -340,7 +340,35 @@ PRONOUNS;LANG=en:they/them
     </section>
     <section anchor="new-parameters">
       <name>New Parameters</name>
-      <section anchor="prop-id">
+      <section anchor="param-derived">
+        <name>DERIVED Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>DERIVED</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter specifies that the value of the associated property is derived from some other property value or values.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property when the value is derived from some other property or properties. When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
+            <t>For an example, an implementation may derive the value of the FN property from the name components of the N property. It indicates this by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+derived-param    = "DERIVED" "=" ("true" / "false")
+; Default is false
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+N:;John;Quinlan;Mr.;
+FN;DERIVED=TRUE:Mr. John Quinlan
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-propid">
         <name>PROP-ID Parameter</name>
         <dl>
           <dt>Parameter name:</dt>
@@ -389,31 +417,30 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <tr>
             <td/>
             <td align="left">CONTACT-CHANNEL-PREF</td>
-            <td align="left">This document, Section 3.1</td>
+            <td align="left">This document, <xref target="prop-contactchannelpref"/></td>
           </tr>
           <tr>
             <td/>
             <td align="left">CREATED</td>
-            <td align="left">This document, Section 3.2</td>
+            <td align="left">This document, <xref target="prop-created"/></td>
           </tr>
           <tr>
             <td/>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">This document, Section 3.3</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>
             <td/>
             <td align="left">LOCALE</td>
-            <td align="left">This document, Section 3.4</td>
+            <td align="left">This document, <xref target="prop-locale"/></td>
           </tr>
           <tr>
             <td/>
             <td align="left">PRONOUNS</td>
-            <td align="left">This document, Section 3.5</td>
+            <td align="left">This document, <xref target="prop-pronouns"/></td>
           </tr>
         </tbody>
       </table>
-
       <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
       <table anchor="new_parameters">
         <name>New VCARD Parameters</name>
@@ -428,11 +455,17 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <tr>
             <td/>
             <td align="left">PROP-ID</td>
-            <td align="left">This document, Section 4.1</td>
+            <td align="left">This document, <xref target="param-propid"/></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td/>
+            <td align="left">DERIVED</td>
+            <td align="left">This document, <xref target="param-derived"/></td>
           </tr>
         </tbody>
       </table>
-
       <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
       <table anchor="new_values">
         <name>New VCARD Property Values</name>
@@ -447,31 +480,30 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
             <td align="left">animate</td>
-            <td align="left">This document, Section 3.3</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
             <td align="left">female</td>
-            <td align="left">This document, Section 3.3</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
             <td align="left">inanimate</td>
-            <td align="left">This document, Section 3.3</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
             <td align="left">male</td>
-            <td align="left">This document, Section 3.3</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
             <td align="left">neuter</td>
-            <td align="left">This document, Section 3.3</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
         </tbody>
       </table>
-
     </section>
     <section anchor="Security">
       <!-- All drafts are required to have a security considerations section. See RFC 3552 for a guide. -->
