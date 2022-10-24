@@ -85,7 +85,7 @@
     </section>
     <section anchor="vcard-jscontact-conversion">
       <name>Converting vCard to JSContact</name>
-      <t>This section contains the conversion rules from vCard to JSContact Card/CardGroup. The order of <xref target="vcard-types"/> to <xref target="vcard-extended"/> is equal to <xref target="RFC6350"/> and also include properties of vCard extensions. <xref target="vcard-new-props"/> defines how to convert new vCard properties and parameters defined in vCard JSContact Extension RFC <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+      <t>This section contains the conversion rules from vCard to JSContact Card/CardGroup. Its follows the same structure as the <xref target="RFC6350">vCard v4 RFC document</xref>. Properties and parameters of vCard extension RFCs, including the <xref target="I-D.ietf-calext-vcard-jscontact-extensions">vCard JSContact Extension RFC</xref> are added to appropriate subsections.</t>
       <section>
         <name>General rules</name>
         <section anchor="vcard-card-or-cardgroup">
@@ -255,6 +255,43 @@
         <section>
           <name>DERIVED</name>
           <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property. Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="prop_id_parameter">
+          <name>PROP-ID</name>
+          <t>The PROP-ID parameter value of a vCard property converts to the <tt>Id</tt> of the JSContact property to which the vCard property converts to. </t>
+          <figure anchor="propid_conversion">
+            <name>PROP-ID conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
+    TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "phones": {
+      "PHONE-A": {
+        "@type": "Phone",
+        "contexts": { "private": true },
+        "features": { "voice": true },
+        "phone": "tel:+1-555-555-5555;ext=5555",
+        "pref": 1
+      },
+      "PHONE-B": {
+        "@type": "Phone",
+        "contexts": { "private": true },
+        "phone": "tel:+33-01-23-45-67"
+      }
+    ],
+    ...
+    }
+        ]]></artwork>
+          </figure>
+          <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
       </section>
       <section>
@@ -499,6 +536,45 @@
         <section>
           <name>GENDER</name>
           <t>This does not map to a standard property in JSContact. To convert this property, see <xref target="convert-other-vcard-prop"/>. Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="grammatical-gender">
+          <name>GRAMMATICAL-GENDER and PRONOUNS</name>
+          <t>The GRAMMATICAL-GENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <t>The PRONOUNS property converts to an entry in the <tt>pronouns</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <figure anchor="grammatical_gender_pronouns_conversion">
+            <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+     GRAMMATICAL-GENDER:NEUTER
+     PRONOUNS;PREF=2:they/them
+     PRONOUNS;PREF=1:xe/xir
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "speakToAs": {
+      "grammaticalGender": "neuter",
+      "pronouns": {
+        "PRONOUNS-1": {
+          "@type": "Pronouns",
+          "pronouns": "they/them",
+          "pref": 2
+        },
+        "PRONOUNS-2": {
+          "@type": "Pronouns",
+          "pronouns": "xe/xir",
+          "pref": 1
+        }
+      }
+    },
+    ...
+    }
+        ]]></artwork>
+          </figure>
         </section>
       </section>
       <section>
@@ -767,6 +843,95 @@
     }
         ]]></artwork>
           </figure>
+        </section>
+        <section>
+          <name>CONTACT-CHANNEL-PREF</name>
+          <t>A CONTACT-CHANNEL-PREF property converts to an entry in the <tt>preferredContactChannels</tt> property (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of <tt>ContactChannelPreference</tt> objects.</t>
+          <table anchor="contact_channel_key_conversion">
+            <name>CONTACT-CHANNEL-PREF values conversion</name>
+            <thead>
+              <tr>
+                <th align="left">CONTACT-CHANNEL-PREF value</th>
+                <th align="left">"preferredContactChannels" key</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">ADR</td>
+                <td align="left">addresses</td>
+              </tr>
+              <tr>
+                <td align="left">EMAIL</td>
+                <td align="left">emails</td>
+              </tr>
+              <tr>
+                <td align="left">IMPP</td>
+                <td align="left">onlineServices</td>
+              </tr>
+              <tr>
+                <td align="left">TEL</td>
+                <td align="left">phones</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactChannelPreference</tt> objects MUST be empty.</t>
+          <figure anchor="contact_channel_conversion">
+            <name>LANG conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    CONTACT-CHANNEL-PREF;PREF=1:EMAIL
+    CONTACT-CHANNEL-PREF;PREF=2:TEL
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "preferredContactChannels": {
+      "emails":[
+        {
+          "@type": "ContactChannelPreference",
+          "pref": 1
+        }
+      ],
+      "phones":[
+        {
+          "@type": "ContactChannelPreference",
+          "pref": 2
+        }
+      ]
+    },
+    ...
+    }
+        ]]></artwork>
+          </figure>
+          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section>
+          <name>LOCALE</name>
+          <t>The LOCALE property converts to the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
+          <figure anchor="locale_conversion">
+            <name>LOCALE conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    LOCALE:de-AT
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "locale": "de-AT",
+    ...
+    }
+        ]]></artwork>
+          </figure>
+          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
       </section>
       <section>
@@ -1386,6 +1551,29 @@
           <name>VERSION</name>
           <t>The VERSION property doesn't have a direct match with a JSContact feature.</t>
         </section>
+        <section>
+          <name>CREATED</name>
+          <t>The CREATED property converts to the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
+          <figure anchor="created_conversion">
+            <name>CREATED conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    CREATED:19940930T143510Z
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "created": "1994-09-30T14:35:10Z",
+    ...
+    }
+        ]]></artwork>
+          </figure>
+          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
       </section>
       <section>
         <name>Security Properties</name>
@@ -1543,209 +1731,21 @@
       </section>
       <section anchor="vcard-extended">
         <name>Extended Properties and Parameters</name>
-        <t>The convert as specified in <xref target="convert-other-vcard"/>.</t>
-      </section>
-      <section anchor="vcard-new-props">
-        <name>Converting new vCard properties and parameters</name>
-        <t>This section contains the conversion rules about new vCard properties and parameters as defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-        <section>
-          <name>CONTACT-CHANNEL-PREF</name>
-          <t>A CONTACT-CHANNEL-PREF property converts to an entry in the <tt>preferredContactChannels</tt> property (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of <tt>ContactChannelPreference</tt> objects.</t>
-          <table anchor="contact_channel_key_conversion">
-            <name>CONTACT-CHANNEL-PREF values conversion</name>
-            <thead>
-              <tr>
-                <th align="left">CONTACT-CHANNEL-PREF value</th>
-                <th align="left">"preferredContactChannels" key</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td align="left">ADR</td>
-                <td align="left">addresses</td>
-              </tr>
-              <tr>
-                <td align="left">EMAIL</td>
-                <td align="left">emails</td>
-              </tr>
-              <tr>
-                <td align="left">IMPP</td>
-                <td align="left">onlineServices</td>
-              </tr>
-              <tr>
-                <td align="left">TEL</td>
-                <td align="left">phones</td>
-              </tr>
-            </tbody>
-          </table>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactChannelPreference</tt> objects MUST be empty.</t>
-          <figure anchor="contact_channel_conversion">
-            <name>LANG conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CONTACT-CHANNEL-PREF;PREF=1:EMAIL
-    CONTACT-CHANNEL-PREF;PREF=2:TEL
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "preferredContactChannels": {
-      "emails":[
-        {
-          "@type": "ContactChannelPreference",
-          "pref": 1
-        }
-      ],
-      "phones":[
-        {
-          "@type": "ContactChannelPreference",
-          "pref": 2
-        }
-      ]
-    },
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section>
-          <name>CREATED</name>
-          <t>The CREATED property converts to the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
-          <figure anchor="created_conversion">
-            <name>CREATED conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CREATED:19940930T143510Z
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "created": "1994-09-30T14:35:10Z",
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section>
-          <name>LOCALE</name>
-          <t>The LOCALE property converts to the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
-          <figure anchor="locale_conversion">
-            <name>LOCALE conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    LOCALE:de-AT
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "locale": "de-AT",
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section anchor="grammatical-gender">
-          <name>GRAMMATICAL-GENDER and PRONOUNS</name>
-          <t>The GRAMMATICAL-GENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-          <t>The PRONOUNS property converts to an entry in the <tt>pronouns</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-          <figure anchor="grammatical_gender_pronouns_conversion">
-            <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-     GRAMMATICAL-GENDER:NEUTER
-     PRONOUNS;PREF=2:they/them
-     PRONOUNS;PREF=1:xe/xir
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "speakToAs": {
-      "grammaticalGender": "neuter",
-      "pronouns": {
-        "PRONOUNS-1": {
-          "@type": "Pronouns",
-          "pronouns": "they/them",
-          "pref": 2
-        },
-        "PRONOUNS-2": {
-          "@type": "Pronouns",
-          "pronouns": "xe/xir",
-          "pref": 1
-        }
-      }
-    },
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section anchor="prop_id_parameter">
-          <name>PROP-ID</name>
-          <t>The PROP-ID parameter value of a vCard property converts to the <tt>Id</tt> of the JSContact property to which the vCard property converts to. </t>
-          <figure anchor="propid_conversion">
-            <name>PROP-ID conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
-    TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "phones": {
-      "PHONE-A": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "features": { "voice": true },
-        "phone": "tel:+1-555-555-5555;ext=5555",
-        "pref": 1
-      },
-      "PHONE-B": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "phone": "tel:+33-01-23-45-67"
-      }
-    ],
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
+        <t>These convert as specified in <xref target="convert-other-vcard"/>.</t>
       </section>
     </section>
     <section>
       <name>Converting JSContact to vCard</name>
-        <t>A <tt>Card</tt> or <tt>CardGroup</tt> converts to vCard by applying the reserve rules of section <xref target="vcard-jscontact-conversion"/>. The following additional rules apply:</t>
-        <ul>
-          <li>Multi-valued JSContact properties convert to separate instances of the same vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="prop_id_parameter"/>).</li>
-          <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard. If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it. In this case, they <bcp14>MUST</bcp14> the DERIVED parameter on the FN property. Otherwise they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
-          <li>Vendor-extension and unknown properties convert to vCard as outlined in section <xref target="convert-other-jscontact"/>.</li>
-        </ul>
+      <t>A <tt>Card</tt> or <tt>CardGroup</tt> converts to vCard by applying the reserve rules of section <xref target="vcard-jscontact-conversion"/>. The following additional rules apply:</t>
+      <ul>
+        <li>Multi-valued JSContact properties convert to separate instances of the same vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="prop_id_parameter"/>).</li>
+        <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard. If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it. In this case, they <bcp14>MUST</bcp14> the DERIVED parameter on the FN property. Otherwise they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
+        <li>Vendor-extension and unknown properties convert to vCard as outlined in section <xref target="convert-other-jscontact"/>.</li>
+      </ul>
     </section>
     <section anchor="convert-nonstandard">
-     <name>Converting Extended and Unknown Properties</name>
-          <section anchor="convert-other-vcard">
+      <name>Converting Extended and Unknown Properties</name>
+      <section anchor="convert-other-vcard">
         <name>Non-standard vCard Properties and Parameters</name>
         <t>vCards may contain properties or parameters for which no standard JSContact property is defined. For example, a vCard may contain extended properties and parameters  (<xref target="RFC6350" section="6.10"/>) of which the semantics or purpose is unknown.</t>
         <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact. Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
@@ -1836,7 +1836,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
           </ol>
         </section>
       </section>
-          <section anchor="convert-other-jscontact">
+      <section anchor="convert-other-jscontact">
         <name>Non-standard JSContact properties</name>
         <t>JSContact objects and their embedded object types may contain properties for which no standard vCard property is defined. For example, a JSContact object may contain extended properties <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/> of which the semantics or purpose is unknown.</t>
         <t>This section defines an vCard extension property and parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact. Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
@@ -1976,7 +1976,6 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
           </ol>
         </section>
       </section>
-
     </section>
     <section anchor="IANA-considerations">
       <name>IANA Considerations</name>
