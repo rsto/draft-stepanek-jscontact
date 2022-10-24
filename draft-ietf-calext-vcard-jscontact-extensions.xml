@@ -375,7 +375,103 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section. See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
-      <t>This section will be filled at a later stage.</t>
+      <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_properties">
+        <name>New VCARD Properties</name>
+        <thead>
+          <tr>
+            <th align="left">Namespace</th>
+            <th align="left">Property</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td/>
+            <td align="left">CONTACT-CHANNEL-PREF</td>
+            <td align="left">This document, Section 3.1</td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">CREATED</td>
+            <td align="left">This document, Section 3.2</td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">This document, Section 3.3</td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">LOCALE</td>
+            <td align="left">This document, Section 3.4</td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">PRONOUNS</td>
+            <td align="left">This document, Section 3.5</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_parameters">
+        <name>New VCARD Parameters</name>
+        <thead>
+          <tr>
+            <th align="left">Namespace</th>
+            <th align="left">Parameter</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td/>
+            <td align="left">PROP-ID</td>
+            <td align="left">This document, Section 4.1</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_values">
+        <name>New VCARD Property Values</name>
+        <thead>
+          <tr>
+            <th align="left">Property</th>
+            <th align="left">Value</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">ANIMATE</td>
+            <td align="left">This document, Section 3.3</td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">FEMALE</td>
+            <td align="left">This document, Section 3.3</td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">INANIMATE</td>
+            <td align="left">This document, Section 3.3</td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">MALE</td>
+            <td align="left">This document, Section 3.3</td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">NEUTER</td>
+            <td align="left">This document, Section 3.3</td>
+          </tr>
+        </tbody>
+      </table>
+
     </section>
     <section anchor="Security">
       <!-- All drafts are required to have a security considerations section. See RFC 3552 for a guide. -->
