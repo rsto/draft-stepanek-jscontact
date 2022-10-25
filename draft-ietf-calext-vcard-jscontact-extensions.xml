@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <?xml-model href="rfc7991bis.rnc"?>
 <!DOCTYPE rfc [
 <!ENTITY nbsp "&#160;">
