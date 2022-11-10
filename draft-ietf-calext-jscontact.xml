@@ -225,7 +225,7 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="prop-label" numbered="true" toc="default">
           <name>The <tt>label</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property allows to associate contact data with user-defined labels. Such labels may be set for phone numbers, email addresses, and others. Typically these labels are displayed along with their associated contact data in graphical user interfaces. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
+          <t>This property allows to associate contact data with user-defined labels. Such labels may be set for phone numbers, email addresses and resources. Typically these labels are displayed along with their associated contact data in graphical user interfaces. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>The <tt>pref</tt> property</name>
@@ -385,8 +385,6 @@ The type of this name component. The value <bcp14>MUST</bcp14> be either one of 
 The contexts in which to use this nick name. Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
                 The preference of this nick name in relation to other nick names. Also see <xref target="prop-pref"/>.</li>
-            <li>label: <tt>String</tt> (optional).
-                A custom label for the nick name, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
@@ -470,8 +468,6 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
 The contexts in which to use these pronouns. Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
                 The preference of these pronouns in relation to other pronouns in the same context. Also see <xref target="prop-pref"/>.</li>
-            <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
       </section>
@@ -623,7 +619,7 @@ Defines the preference of this language in relation to other languages of the sa
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Address</tt>.
               </li>
             <li>fullAddress: <tt>String</tt> (optional).
-                The complete address, excluding type and label. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
+                The complete address. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
                   The street address. The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components. The StreetComponent object type is defined in the paragraph below.
@@ -652,8 +648,6 @@ The contexts of the address information. The boolean value <bcp14>MUST</bcp14> b
             </li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
                 The preference of this address in relation to other addresses. Also see <xref target="prop-pref"/>.</li>
-            <li>label: <tt>String</tt> (optional).
-A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
@@ -795,8 +789,6 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
             </li>
             <li>place: Address (optional).
                 An address associated with this anniversary, e.g. the place of birth or death.</li>
-            <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
           <t>A Timestamp object has the following properties:</t>
           <ul spacing="normal">
@@ -840,8 +832,6 @@ Specifies the type for this personal information. The value <bcp14>MUST</bcp14> 
 The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
             <li>level: <tt>String</tt> (optional)
                 Indicates the level of expertise, or engagement in hobby or interest. The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-extension-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
-            <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="notes" numbered="true" toc="default">
