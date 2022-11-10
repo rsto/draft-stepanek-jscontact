@@ -122,7 +122,7 @@
           <name>DATE, TIME, DATE-TIME, DATE-AND-OR-TIME, and TIMESTAMP</name>
           <t>The TIMESTAMP type generally converts to the <tt>UTCDateTime</tt>. It converts to the <tt>Timestamp</tt> type for anniversaries.</t>
           <t>The DATE type converts to the <tt>PartialDate</tt> type, which only is relevant for anniversaries. This does not apply to DATE values that only define a month or a day.</t>
-          <t>The TIME, DATE-TIME, DATE-AND-OR-TIME types and DATE type values that only define a month or day do not convert to any JSContact type. vCard properties or parameters having such values <bcp14>MAY</bcp14> convert as defined in <xref target="convert-other-vcard"/>.</t>
+          <t>The TIME, DATE-TIME, DATE-AND-OR-TIME types and DATE type values that only define a month or day do not convert to any JSContact type. vCard properties or parameters having such values <bcp14>MAY</bcp14> convert as defined in <xref target="new-jscontact"/>.</t>
         </section>
         <section>
           <name>BOOLEAN</name>
@@ -138,7 +138,7 @@
         </section>
         <section>
           <name>UTC-OFFSET</name>
-          <t>This either converts to a <tt>String</tt> containing an IANA TimeZone Database entry name (see <xref target="prop-tz"/>), or it does not convert to any JSContact type. For the latter, vCard properties or parameters having such values <bcp14>MAY</bcp14> convert to JSContact as defined in <xref target="convert-other-vcard"/>. </t>
+          <t>This either converts to a <tt>String</tt> containing an IANA TimeZone Database entry name (see <xref target="prop-tz"/>), or it does not convert to any JSContact type. For the latter, vCard properties or parameters having such values <bcp14>MAY</bcp14> convert to JSContact as defined in <xref target="new-jscontact"/>. </t>
         </section>
         <section>
           <name>LANGUAGE-TAG</name>
@@ -217,7 +217,7 @@
         </section>
         <section>
           <name>VALUE</name>
-          <t>This does not convert to a standard property in JSContact. It is implicit for standard types and conversion. For extended values, see <xref target="convert-other-vcard-param"/>.</t>
+          <t>This does not convert to a standard property in JSContact. It is implicit for standard types and conversion. For extended values, see <xref target="new-jscontact-param"/>.</t>
         </section>
         <section>
           <name>PREF</name>
@@ -225,11 +225,11 @@
         </section>
         <section>
           <name>ALTID</name>
-          <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="convert-other-vcard-param"/>.</t>
+          <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="new-jscontact-param"/>.</t>
         </section>
         <section>
           <name>PID</name>
-          <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="convert-other-vcard-param"/>.</t>
+          <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="new-jscontact-param"/>.</t>
         </section>
         <section>
           <name>TYPE</name>
@@ -241,19 +241,23 @@
         </section>
         <section>
           <name>CALSCALE</name>
-          <t>This parameter set on a BDAY or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type. To convert this parameter for other vCard properties, see <xref target="convert-other-vcard-param"/>.</t>
+          <t>This parameter set on a BDAY or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type. To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
         </section>
         <section>
           <name>SORT-AS</name>
-          <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="convert-other-vcard-param"/>.</t>
+          <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="new-jscontact-param"/>.</t>
         </section>
         <section>
           <name>GEO</name>
-          <t>This parameter set on a ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR. To convert this parameter for other vCard properties, see <xref target="convert-other-vcard-param"/>.</t>
+          <t>This parameter set on a ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR. To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
         </section>
         <section>
           <name>TZ</name>
-          <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR. Also see the conversion of the TZ property in <xref target="prop-tz"/>. To convert this parameter for other vCard properties, see <xref target="convert-other-vcard-param"/>.</t>
+          <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR. Also see the conversion of the TZ property in <xref target="prop-tz"/>. To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
+        </section>
+        <section>
+          <name>GROUP</name>
+          <t>This parameter exclusively is for use in jCard (see <xref target="RFC7095" section="7.1"/>). It <bcp14>MUST NOT</bcp14> be set in a vCard. To preserve a property group name of a vCard property, set the <tt>group</tt> parameter in the JSContact extension properties <tt>props</tt> or <tt>params</tt> defined in <xref target="new-jscontact"/>.</t>
         </section>
         <section>
           <name>DERIVED</name>
@@ -538,7 +542,7 @@
         </section>
         <section>
           <name>GENDER</name>
-          <t>This does not map to a standard property in JSContact. To convert this property, see <xref target="convert-other-vcard-prop"/>. Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This does not map to a standard property in JSContact. To convert this property, see <xref target="new-jscontact-props"/>. Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="grammatical-gender">
           <name>GRAMMATICAL-GENDER and PRONOUNS</name>
@@ -948,7 +952,7 @@
             <li>Otherwise construct the time zone name with <tt>ETC/GMT</tt> suffixed with the string representation of the reversed sign hour offset, including the sign but excluding leading zeros and minutes. For example, the UTC offset value <tt>-0500</tt> converts to <tt>ETC/GMT+5</tt>.</li>
           </ul>
           <t>For such property values, also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
-          <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact. To convert such property, see <xref target="convert-other-vcard-prop"/>.</t>
+          <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact. To convert such property, see <xref target="new-jscontact-props"/>.</t>
         </section>
         <section anchor="prop-geo">
           <name>GEO</name>
@@ -1763,13 +1767,13 @@
       </section>
       <section anchor="vcard-extended">
         <name>Extended Properties and Parameters</name>
-        <t>These convert as specified in <xref target="convert-other-vcard"/>.</t>
+        <t>These convert as specified in <xref target="new-jscontact"/>.</t>
       </section>
-      <section anchor="convert-other-vcard">
+      <section anchor="new-jscontact">
         <name>New JSContact properties</name>
         <t>vCards may contain properties or parameters for which no standard JSContact property is defined. For example, a vCard may contain extended properties and parameters of which the semantics or purpose are unknown <xref target="RFC6350" section="6.10"/>.</t>
         <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact. Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
-        <section anchor="convert-other-vcard-prop">
+        <section anchor="new-jscontact-props">
           <name>Property <tt>props</tt></name>
           <dl>
             <dt>Name:</dt>
@@ -1810,7 +1814,7 @@
             </dd>
           </dl>
         </section>
-        <section anchor="convert-other-vcard-param">
+        <section anchor="new-jscontact-param">
           <name>Property <tt>params</tt></name>
           <dl>
             <dt>Name:</dt>
