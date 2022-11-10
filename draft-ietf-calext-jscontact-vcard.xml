@@ -55,7 +55,7 @@
     <abstract>
       <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.</t>
     </abstract>
-    <note removeInRFC="true"><t>The verbatim string <tt>0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t></note>
+    <note removeInRFC="true"><t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t></note>
   </front>
   <middle>
     <section>
@@ -1912,14 +1912,34 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
             <dt>Example(s):</dt>
             <dd>
-              <t>This illustrates how to convert both complex and simple typed JSContact properties.</t>
-              <figure anchor="jsprop-object">
-                <name>JSON object value conversion example</name>
+              <t><br/></t> <!-- work around formatting -->
+              <t>This illustrates how to convert an property at the top-level in a Card object that is unknown to the implementation.</t>
+              <figure anchor="jsprop-unknown">
+                <name>Unknown property example</name>
                 <artwork><![CDATA[
   {
     "@type": "Card",
      ...
-     "foo": {
+     "someUnknownProperty": true
+  }
+
+  BEGIN:VCARD
+  VERSION:4.0
+  ...
+  X-RFC0000-JSPROP;X-RFC0000-JSPATH="someUnknownProperty":
+   data:application/json;true
+  ...
+  END:VCARD
+]]></artwork>
+              </figure>
+              <t>This illustrates how to convert a vendor-extension property at the top-level of a Card object. Note the required use of quoted string for the JSPATH value which allows the path to include the <tt>:</tt> (COLON) character.</t>
+              <figure anchor="jsprop-vendor-extension">
+                <name>Vendor-extension conversion example</name>
+                <artwork><![CDATA[
+  {
+    "@type": "Card",
+     ...
+     "example.com:foo": {
        "bar": 1234
      }
   }
@@ -1927,26 +1947,33 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;X-RFC0000-JSPATH="foo":
+  X-RFC0000-JSPROP;X-RFC0000-JSPATH="example.com:foo":
    data:application/json;base64,eyJiYXIiOiAxMjM0fQo=
   ...
   END:VCARD
 ]]></artwork>
               </figure>
-              <figure anchor="jsprop-boolean">
-                <name>JSON boolean value conversion example</name>
+              <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object. Although not recommended by <xref target="I-D.ietf-calext-jscontact" section="1.5.3"/>, the property name includes the <tt>/</tt> (SOLIDUS) character which requires escaping in the JSON pointer. The data URI value is not base64-encoded and so requires percent-encoding (see <xref target="RFC3986" section="2.1"/>).</t>
+              <figure anchor="jsprop-nested">
+                <name>Nested property example</name>
                 <artwork><![CDATA[
   {
     "@type": "Card",
      ...
-     "foo": true
+     "addresses": {
+       "adr1": {
+         "@type": "Address",
+         ...
+        "example.com:foo/bar": "tux hux"
+       }
+     }
   }
 
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;X-RFC0000-JSPATH="foo":
-   data:application/json;true
+  X-RFC0000-JSPROP;X-RFC0000-JSPATH="addresses/adr1/example.com:foo~1bar":
+   data:application/json;%22tux%20hux%22
   ...
   END:VCARD
 ]]></artwork>
@@ -1972,12 +1999,12 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
             <dd>
             This parameter is set on a X-RFC0000-JSPROP or X-RFC0000-PROP property.
             Its value defines the name of the JSContact property that got converted to this vCard property. The parameter value contains the JSON pointer of the JSContact
-            property. It <bcp14>MUST</bcp14> be quoted to preserve case.
+            property. It <bcp14>MUST</bcp14> be quoted.
             </dd>
             <dt>Example(s):</dt>
             <dd>
               <sourcecode name=""><![CDATA[
-  X-RFC0000-PROP;X-RFC0000-JSPATH="fooBar":baz
+  X-RFC0000-PROP;X-RFC0000-JSPATH="example.com:foo":data:application/json;1
   ]]></sourcecode>
             </dd>
           </dl>
@@ -2017,6 +2044,7 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2397.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6474.xml"/>

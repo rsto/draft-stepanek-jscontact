@@ -42,6 +42,7 @@
     <abstract>
       <t>This specification defines a data model and JSON representation of contact card information that can be used for data storage and exchange in address book or directory applications. It aims to be an alternative to the vCard data format and to be unambiguous, extendable and simple to process. In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.</t>
     </abstract>
+    <note removeInRFC="true"><t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t></note>
   </front>
   <middle>
     <section anchor="introduction" numbered="true" toc="default">
@@ -160,11 +161,11 @@ The contexts in which to use this resource. Also see <xref target="prop-contexts
             Vendor-extension properties allow for experimentation or to store data that only is useful for one particular service or application. Such properties <bcp14>MAY</bcp14> be set in any JSContact object. Implementations <bcp14>MUST</bcp14> preserve vendor-extension properties in JSContact data, irrespective if they know their use. Vendor-extension properties need not be registered at IANA (see <xref target="iana-considerations"/>). Vendors are strongly encouraged to specify new standard properties once a vendor-extension turns out to be useful also for other systems.
           </t>
           <t>
-            Vendor-extension property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by any other non-control ASCII or non-ASCII characters. The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>. The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.
+            Vendor-extension property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by a name consisting of any other non-control ASCII or non-ASCII characters. The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>. The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications. The name following the prefix <bcp14>SHOULD NOT</bcp14> contain the <tt>~</tt> (TILDE) and <tt>/</tt> (SOLIDUS) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> including that property.
           </t>
           <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-extension property names. Note that vendor prefix allow for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>. This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
           <sourcecode name="" type="abnf"><![CDATA[
-v-extension = v-prefix ":" v-string
+v-extension = v-prefix ":" v-name
 
 v-prefix = v-label *("." v-label)
 
@@ -173,8 +174,9 @@ v-label = alnum-int / alnum-int *(alnum-int / "-") alnum-int
 alnum-int = ALPHA / DIGIT / NON-ASCII
   ; see RFC 6350 Section 3.3
 
-v-string = 1*(WSP / %x21-7E / NON-ASCII)
+v-name = 1*(WSP / %x21-7E / NON-ASCII)
   ; any characters except CTLs, see RFC 6350 Section 3.3
+  ; use of %x2f ("/") and %x7e ("~") is discouraged
 ]]></sourcecode>
           <t>
             The value of vendor-extension properties can be any valid JSON value, and naming restrictions do not apply to such values. Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-extension properties.
@@ -190,7 +192,9 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
   "example.com:foo2": {
     "bar": "baz"
   },
-  "ietf.org:rfcXXXX/x-foo": "bar"
+  "ietf.org:rfc0000:params": {
+      "x-foo": "Bar"
+  },
   ...
 }
 ]]></artwork>
