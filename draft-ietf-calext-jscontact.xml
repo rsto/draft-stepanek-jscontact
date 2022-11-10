@@ -219,7 +219,7 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="prop-label" numbered="true" toc="default">
           <name>The <tt>label</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property allows to associate contact data with user-defined labels. Such labels may be set for phone numbers, email addresses, and others. Typically these labels are displayed along with their associated contact data in graphical user interfaces. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on graphical user interfaces with low resolution or devices with small screens.</t>
+          <t>This property allows to associate contact data with user-defined labels. Such labels may be set for phone numbers, email addresses, and others. Typically these labels are displayed along with their associated contact data in graphical user interfaces. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>The <tt>pref</tt> property</name>
