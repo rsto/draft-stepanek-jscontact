@@ -42,7 +42,9 @@
     <abstract>
       <t>This specification defines a data model and JSON representation of contact card information that can be used for data storage and exchange in address book or directory applications. It aims to be an alternative to the vCard data format and to be unambiguous, extendable and simple to process. In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.</t>
     </abstract>
-    <note removeInRFC="true"><t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t></note>
+    <note removeInRFC="true">
+      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t>
+    </note>
   </front>
   <middle>
     <section anchor="introduction" numbered="true" toc="default">

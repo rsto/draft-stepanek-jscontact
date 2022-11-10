@@ -55,7 +55,9 @@
     <abstract>
       <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.</t>
     </abstract>
-    <note removeInRFC="true"><t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t></note>
+    <note removeInRFC="true">
+      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t>
+    </note>
   </front>
   <middle>
     <section>
@@ -1912,7 +1914,10 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
             <dt>Example(s):</dt>
             <dd>
-              <t><br/></t> <!-- work around formatting -->
+              <t>
+                <br/>
+              </t>
+              <!-- work around formatting -->
               <t>This illustrates how to convert an property at the top-level in a Card object that is unknown to the implementation.</t>
               <figure anchor="jsprop-unknown">
                 <name>Unknown property example</name>
