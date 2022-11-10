@@ -157,7 +157,7 @@ The contexts in which to use this resource. Also see <xref target="prop-contexts
         <section anchor="vendor-extension-properties" numbered="true" toc="default">
           <name>Vendor-Extension Properties</name>
           <t>
-            Vendor-extension properties <bcp14>MAY</bcp14> be stored in JSContact data. These properties allow for experimentation or to store data that only is useful for one particular service or application. Implementations <bcp14>MUST</bcp14> preserve vendor extension properties in JSContact data, irrespective if they know their use.
+            Vendor-extension properties allow for experimentation or to store data that only is useful for one particular service or application. Such properties <bcp14>MAY</bcp14> be set in any JSContact object. Implementations <bcp14>MUST</bcp14> preserve vendor extension properties in JSContact data, irrespective if they know their use. Vendor-extension properties need not be registered at IANA (see <xref target="iana-considerations"/>). Vendors are strongly encouraged to specify new standard properties once a vendor-extension turns out to be useful also for other systems.
           </t>
           <t>
             Vendor extension property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by any other non-control ASCII or non-ASCII characters. The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>. The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.
@@ -195,9 +195,6 @@ v-string = 1*(WSP / %x21-7E / NON-ASCII)
 }
 ]]></artwork>
           </figure>
-          <t>
-          Vendors are strongly encouraged to specify new standard properties once a vendor-extension turns out to be useful also for other systems.
-          </t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
           <name>Unknown properties</name>
