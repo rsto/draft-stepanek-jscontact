@@ -1688,7 +1688,7 @@
         </section>
         <section>
           <name>CALADRURI</name>
-          <t>A CALADRURI property converts to an entry in the <tt>scheduling</tt> property (<xref target="caladruri_conversion"/>).  The entry value is a <tt>Scheduling</tt> object whose <tt>sendTo</tt> property includes an entry whose key is set to <tt>imip</tt> and value is set to the CALADRURI value.</t>
+          <t>A CALADRURI property converts to an entry in the <tt>schedulingAddresses</tt> property (<xref target="caladruri_conversion"/>).  The entry value is a <tt>SchedulingAddress</tt> object whose <tt>uri</tt> property is set to the CALADRURI value.</t>
           <t>The PREF parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caladruri_conversion">
             <name>CALADRURI conversion example</name>
@@ -1704,20 +1704,16 @@
     {
     "@type": "Card",
     ...
-    "scheduling": {
+    "schedulingAddresses": {
       ...
       "SCHEDULING-1": {
-        "@type": "Scheduling",
-        "sendTo": {
-          "imip": "mailto:janedoe@example.com"
-        },
+        "@type": "SchedulingAddress",
+        "uri": "mailto:janedoe@example.com",
         "pref": 1
       },
       "SCHEDULING-2": {
-        "@type": "Scheduling",
-        "sendTo": {
-            "imip": "http://example.com/calendar/jdoe"
-        }
+        "@type": "SchedulingAddress",
+        "uri": "http://example.com/calendar/jdoe"
       },
       ...
     },
