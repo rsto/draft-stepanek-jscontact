@@ -859,6 +859,9 @@ The actual information. This generally is free-text, but future specifications M
             <li>
               <t>language: <tt>String</tt> (optional). The human language in which the main content of this note is written in. The property value <bcp14>MUST</bcp14> be a valid language tag as defined <xref target="RFC5646"/>.</t>
             </li>
+            <li>
+              <t>created: <tt>UTCDateTime</tt> (optional). The date and time when this Note object was created..</t>
+            </li>
           </ul>
         </section>
         <section anchor="keywords" numbered="true" toc="default">
