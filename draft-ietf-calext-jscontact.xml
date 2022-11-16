@@ -234,6 +234,11 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100. Lower values correspond to a higher level of preference, with 1 being most preferred. If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type. For example, the preference orders within emails and phone numbers are indendepent of each other.</t>
         </section>
+          <section anchor="prop-sort-as" numbered="true" toc="default">
+              <name>The <tt>sortAs</tt> property</name>
+              <t>Type: <tt>String[]</tt></t>
+              <t>This property allows to define a list of strings that can be used for sorting this card within a collection of cards.</t>
+          </section>
       </section>
       <section anchor="vendor-extension-values" numbered="true" toc="default">
         <name>Vendor-Extension Values</name>
@@ -335,6 +340,9 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           locale: <tt>String</tt> (optional).
           The locale of the name. The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
         </li>
+              <li>sortAs: <tt>String[]</tt> (optional)
+                  The list of strings used to sort this card based on the name. Also see <xref target="prop-sort-as"/>.
+              </li>
           </ul>
           <t>A NameComponent object has the following properties:</t>
           <ul spacing="normal">
@@ -401,6 +409,9 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
             <li>units: <tt>String[]</tt> (optional).
                 A list of organizational unit names. If set, the list <bcp14>MUST</bcp14> contain at least one entry.
             </li>
+              <li>sortAs: <tt>String[]</tt> (optional)
+                  The list of strings used to sort this card based on the organization. Also see <xref target="prop-sort-as"/>.
+              </li>
           </ul>
         </section>
         <section anchor="titles" numbered="true" toc="default">

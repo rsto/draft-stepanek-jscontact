@@ -245,7 +245,7 @@
         </section>
         <section>
           <name>SORT-AS</name>
-          <t>This does not convert to a standard property in JSContact. To convert this parameter, see <xref target="new-jscontact-param"/>.</t>
+          <t>This converts to the <tt>sortAs</tt> property defined in <xref target="I-D.ietf-calext-jscontact" section="1.6.4"/></t>
         </section>
         <section>
           <name>GEO</name>
@@ -375,6 +375,7 @@
         <section>
           <name>N and NICKNAME</name>
           <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.  Name components<bcp14>SHOULD</bcp14>be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+          <t>The SORT-AS parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <table anchor="n_components">
             <name>N components conversion</name>
             <thead>
@@ -1039,7 +1040,7 @@
           <name>ORG</name>
           <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name and the <tt>units</tt> property contains the organizational units.</t>
           <t>Implementations MAY allow to represent organizational untits without the organizational name.  In this case, the first component of the ORG value MUST be an empty string (e.g. ORG:;DepartmentA).</t>
-          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>The ALTID, LANGUAGE and SORT-AS parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_conversion">
             <name>ORG conversion example</name>
             <artwork><![CDATA[
