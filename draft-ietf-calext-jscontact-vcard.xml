@@ -1603,7 +1603,10 @@
       "p1": {
         "@type": "Phone",
         "phone": "tel:+1-555-555-5555",
-        "label": "foo"
+        "label": "foo",
+        "ietf.org:rfc0000:params" : {
+          "group" : "item1"
+        }
       }
     }
     ...
