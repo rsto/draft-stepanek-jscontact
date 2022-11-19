@@ -1364,7 +1364,7 @@
         </section>
         <section>
           <name>NOTE</name>
-          <t>A NOTE property converts to a <tt>Note</tt> object in the <tt>notes</tt> array (<xref target="notes_conversion"/>)</t>
+          <t>A NOTE property converts to a <tt>Note</tt> object in the <tt>notes</tt> map (<xref target="notes_conversion"/>)</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="notes_conversion">
             <name>NOTE conversion example</name>
@@ -1379,11 +1379,11 @@
     {
     "@type": "Card",
     ...
-    "notes": [
-        {
+    "notes": {
+        "NOTE-1" : {
            "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri."
         }
-    ],
+    },
     ...
     }
         ]]></artwork>
