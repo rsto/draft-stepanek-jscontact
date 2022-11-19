@@ -74,7 +74,7 @@
         </t>
         <ul spacing="compact">
           <li>
-            <t>The JSContact data model defines some contact information that doesn't have a direct conversion with vCard properties.  In particular, unlike vCard, JSContact distinguishes between a single contact card, named Card, and a group of contact cards, named CardGroup.</t>
+            <t>The JSContact data model defines some contact information that doesn't have a direct conversion with vCard properties.</t>
             <t/>
           </li>
           <li>The properties that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as arrays, in some cases condensed in a single value.</li>
@@ -83,22 +83,14 @@
       <section>
         <name>Conventions Used in This Document</name>
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
-        <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the Card/CardGroup features are written in camel case wrapped in double quotes.</t>
+        <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the Card features are written in camel case wrapped in double quotes.</t>
       </section>
     </section>
     <section anchor="vcard-jscontact-conversion">
       <name>Converting vCard to JSContact</name>
-      <t>This section contains the conversion rules from vCard to JSContact Card/CardGroup. Its follows the same structure as the <xref target="RFC6350">vCard v4 RFC document</xref>. Properties and parameters of vCard extension RFCs, including the <xref target="I-D.ietf-calext-vcard-jscontact-extensions">vCard JSContact Extension RFC</xref> are added to appropriate subsections.</t>
+      <t>This section contains the conversion rules from vCard to JSContact Card. Its follows the same structure as the <xref target="RFC6350">vCard v4 RFC document</xref>. Properties and parameters of vCard extension RFCs, including the <xref target="I-D.ietf-calext-vcard-jscontact-extensions">vCard JSContact Extension RFC</xref> are added to appropriate subsections.</t>
       <section>
         <name>General rules</name>
-        <section anchor="vcard-card-or-cardgroup">
-          <name>Card or CardGroup</name>
-          <t>The vCard format represents a contact and a <em>group</em> of contacts both as a vCard object. In contrast, JSContact defines two distinct object types: <tt>Card</tt> for a contact representing a single entity, <tt>CardGroup</tt> for a group of contacts. The following rules define which JSContact object type to choose:</t>
-          <ul>
-            <li>If the vCard does not contain the <tt>KIND</tt> property, or the value of this property is anything but <tt>group</tt> then convert it to a <tt>Card</tt> object.</li>
-            <li>If the <tt>KIND</tt> property value is <tt>group</tt> then choose a <tt>CardGroup</tt> object. If the vCard contains any standard properties that do not convert to a standard <tt>CardGroup</tt> property, convert the vCard <em>also</em> to a <tt>Card</tt> and use that as the value of the <tt>card</tt> property in the <tt>CardGroup</tt>.</li>
-          </ul>
-        </section>
         <section>
           <name>The <tt>uid</tt> property</name>
           <t>The UID property in vCard is optional, but the <tt>uid</tt> property in JSContact is mandatory. Implementations that convert a vCard without UID property <bcp14>MUST</bcp14> generate a unique identifier as value for the <tt>uid</tt> property. They <bcp14>SHOULD</bcp14> generate the same identifier when repeatedly converting the same vCard, but they <bcp14>MAY</bcp14> generate different values. Consequently, a vCard without UID property <bcp14>MAY</bcp14> does not convert to one exact instance of a JSContact card or card group.</t>
@@ -340,7 +332,7 @@
         </section>
         <section>
           <name>KIND</name>
-          <t>The KIND property converts to the <tt>kind</tt> property (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.  The value <tt>group</tt> is reserved for a CardGroup instance.</t>
+          <t>The KIND property converts to the <tt>kind</tt> property (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.</t>
           <figure anchor="kind_conversion">
             <name>KIND conversion example</name>
             <artwork><![CDATA[
@@ -370,7 +362,6 @@
         <section>
           <name>FN</name>
           <t>All the FN instances are represented through the <tt>fullName</tt> property (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If the vCard represents a group of contacts, implementers MAY convert the FN property into either "CardGroup.card.fullName" or "CardGroup.name" or both properties.</t>
         </section>
         <section>
           <name>N and NICKNAME</name>
@@ -1071,7 +1062,7 @@
         </section>
         <section>
           <name>MEMBER</name>
-          <t>According to the JSContact specification, a group of contact cards is represented through a CardGroup (<xref target="group_example"/>).  The uids of the contact cards composing the group are included in the <tt>members</tt> property.</t>
+          <t>The uids of the contact cards composing the group are included in the <tt>members</tt> property (<xref target="group_example"/>).</t>
           <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
           <figure anchor="group_example">
             <name>Group example</name>
@@ -1085,7 +1076,7 @@
     END:VCARD
 
       {
-        "@type": "CardGroup",
+        "@type": "Card",
         "kind": "group",
         "fullName": "The Doe family",
         "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
@@ -1095,32 +1086,6 @@
         }
       }
         ]]></artwork>
-          </figure>
-          <t>Only if the GROUP contains properties that don't have a conversion to CardGroup properties, then the CardGroup.card property MAY contain the optional Card object of this group.</t>
-          <figure anchor="card_member_of_cardgroup_object">
-            <name>card member of CardGroup object</name>
-            <artwork><![CDATA[
-    {
-      "@type": "CardGroup",
-      "name": "The Doe family",
-      "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
-      "members": {
-         "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
-         "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
-      },
-      "card": {
-         "@type": "Card",
-         "fullName": "The Doe family",
-         "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
-         "photos": {
-           "PHOTO-1": {
-             "@type": "File",
-             "href": "http://www.example.com/pub/photos/jqpublic.gif"
-           }
-         }
-      }
-    }
-    ]]></artwork>
           </figure>
         </section>
         <section anchor="vCard-RELATED">
@@ -1501,7 +1466,7 @@
         </section>
         <section>
           <name>UID</name>
-          <t>The UID property corresponds to the <tt>uid</tt> property (<xref target="uid_conversion"/>) in both Card and CardGroup.</t>
+          <t>The UID property corresponds to the <tt>uid</tt> property (<xref target="uid_conversion"/>).</t>
           <figure anchor="uid_conversion">
             <name>UID conversion example</name>
             <artwork><![CDATA[
@@ -1853,7 +1818,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <name>Converting JSContact to vCard</name>
       <section>
         <name>Conversion Rules</name>
-        <t>A <tt>Card</tt> or <tt>CardGroup</tt> converts to vCard by applying the reserve rules of section <xref target="vcard-jscontact-conversion"/>. The following additional rules apply:</t>
+        <t>A <tt>Card</tt> converts to vCard by applying the reserve rules of section <xref target="vcard-jscontact-conversion"/>. The following additional rules apply:</t>
         <ul>
           <li>Multi-valued JSContact properties convert to separate instances of the same vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="prop_id_parameter"/>).</li>
           <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard. If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it. In this case, they <bcp14>MUST</bcp14> the DERIVED parameter on the FN property. Otherwise they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
@@ -1862,7 +1827,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
-        <t>JSContact objects and their embedded object types may contain properties for which no standard vCard property is defined. For example, a JSContact object may contain extended properties of which the semantics or purpose is unknown <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/>.</t>
+        <t>JSContact object types may contain properties for which no standard vCard property is defined. For example, a JSContact object may contain extended properties of which the semantics or purpose is unknown <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/>.</t>
         <t>This section defines an vCard extension property and parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact. Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="vcard-jsprop">
           <name>Property <tt>JSPROP</tt></name>
