@@ -492,7 +492,7 @@ The contexts in which to use these pronouns. Also see <xref target="prop-context
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt>.
               </li>
-            <li>email: <tt>String</tt> (mandatory).
+            <li>address: <tt>String</tt> (mandatory).
 The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
 The contexts in which to use this email address. Also see <xref target="prop-contexts"/>.</li>

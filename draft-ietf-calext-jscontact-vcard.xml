@@ -734,7 +734,7 @@
         </section>
         <section>
           <name>EMAIL</name>
-          <t>An EMAIL property converts to an entry in the <tt>emails</tt> property (<xref target="email_conversion"/>).  The entry value is an <tt>EmailAddress</tt> object.  The <tt>email</tt> property is set to the EMAIL value.</t>
+          <t>An EMAIL property converts to an entry in the <tt>emails</tt> property (<xref target="email_conversion"/>).  The entry value is an <tt>EmailAddress</tt> object.  The <tt>address</tt> property is set to the EMAIL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="email_conversion">
             <name>EMAIL conversion example</name>
@@ -754,11 +754,11 @@
       "EMAIL-1": {
         "@type": "EmailAddress",
         "contexts": { "work": true },
-        "email": "jqpublic@xyz.example.com"
+        "address": "jqpublic@xyz.example.com"
       },
       "EMAIL-2": {
         "@type": "EmailAddress",
-        "email": "jane_doe@example.com",
+        "address": "jane_doe@example.com",
         "pref": 1
       }
     },
@@ -1802,7 +1802,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
 "emails": {
   "email1": {
     "@type": "EmailAddress",
-    "email": "jane_doe@example.com",
+    "address": "jane_doe@example.com",
     "ietf.org:rfc0000:params": {
       "x-foo": "Bar"
     }
