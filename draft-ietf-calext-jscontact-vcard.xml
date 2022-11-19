@@ -1971,23 +1971,59 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
             </dd>
             <dt>Description:</dt>
             <dd>
-            This parameter is set on a X-RFC0000-JSPROP or X-RFC0000-PROP property.
+            This parameter is set on a X-RFC0000-JSPROP property.
             Its value defines the name of the JSContact property that got converted to this vCard property.  The parameter value contains the JSON pointer of the JSContact
             property.  It <bcp14>MUST</bcp14> be quoted.
             </dd>
             <dt>Example(s):</dt>
             <dd>
               <sourcecode name=""><![CDATA[
-  X-RFC0000-PROP;X-RFC0000-JSPATH="example.com:foo":data:application/json;1
+  X-RFC0000-JSPROP;X-RFC0000-JSPATH="example.com:foo":data:application/json;1
   ]]></sourcecode>
             </dd>
           </dl>
         </section>
       </section>
     </section>
-    <section anchor="IANA-considerations">
+    <section anchor="IANA">
+      <!-- All drafts are required to have an IANA considerations section. See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
-      <t>This document has no actions for IANA.</t>
+      <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_properties">
+        <name>New VCARD Properties</name>
+        <thead>
+          <tr>
+            <th align="left">Namespace</th>
+            <th align="left">Property</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td/>
+            <td align="left">X-RFC0000-JSPROP</td>
+            <td align="left">This document, <xref target="vcard-jsprop"/></td>
+          </tr>
+        </tbody>
+      </table>
+      <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_parameters">
+        <name>New VCARD Parameters</name>
+        <thead>
+          <tr>
+            <th align="left">Namespace</th>
+            <th align="left">Parameter</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td/>
+            <td align="left">X-RFC0000-JSPATH</td>
+            <td align="left">This document, <xref target="vcard-jsprop"/></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
     <section anchor="impl-status">
       <name>Implementation Status</name>
