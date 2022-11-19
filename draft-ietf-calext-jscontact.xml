@@ -817,7 +817,7 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
             <li>year: <tt>Int</tt> (optional). This is the calendar year.</li>
             <li>month: <tt>Int</tt> (optional). This is the calendar month, represented as the integers 1 &lt;= month &lt;= 12. If this property is set then either <tt>year</tt> or <tt>day</tt> <bcp14>MUST</bcp14> be set.</li>
             <li>day: <tt>Int</tt> (optional). This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year. If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
-            <li>calendarScale: <tt>String</tt> (optional). This is the calendar system in which this date occurs, in lowercase. This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="CLDR" format="default"/> or a vendor-specific value). Note that the year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.</li>
+            <li>calendarScale: <tt>String</tt> (optional). This is the calendar system in which this date occurs, in lowercase. This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="RFC7529" format="default"/> or a vendor-specific value). Note that the year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.</li>
           </ul>
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
@@ -952,6 +952,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7095.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7493.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7529.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7942.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6351.xml"/>
@@ -979,13 +980,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3966.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml"/>
-        <reference anchor="CLDR" target="http://cldr.unicode.org/">
-          <front>
-            <title>Unicode Common Locale Data Repository</title>
-            <author/>
-            <date/>
-          </front>
-        </reference>
       </references>
     </references>
   </back>
