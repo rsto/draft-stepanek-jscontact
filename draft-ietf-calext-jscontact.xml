@@ -40,19 +40,19 @@
     <keyword>cards</keyword>
     <keyword>VCARD</keyword>
     <abstract>
-      <t>This specification defines a data model and JSON representation of contact card information that can be used for data storage and exchange in address book or directory applications. It aims to be an alternative to the vCard data format and to be unambiguous, extendable and simple to process. In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.</t>
+      <t>This specification defines a data model and JSON representation of contact card information that can be used for data storage and exchange in address book or directory applications.  It aims to be an alternative to the vCard data format and to be unambiguous, extendable and simple to process.  In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.</t>
     </abstract>
     <note removeInRFC="true">
-      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t>
+      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder.  It will be replaced with the RFC number of this document.</t>
     </note>
   </front>
   <middle>
     <section anchor="introduction" numbered="true" toc="default">
       <name>Introduction</name>
-      <t>This document defines a data model for contact card data normally used in address book or directory applications and services. It aims to be an alternative to the vCard data format <xref target="RFC6350" format="default"/> and to provide a JSON-based standard representation of contact card data.</t>
+      <t>This document defines a data model for contact card data normally used in address book or directory applications and services.  It aims to be an alternative to the vCard data format <xref target="RFC6350" format="default"/> and to provide a JSON-based standard representation of contact card data.</t>
       <t>The key design considerations for this data model are as follows:</t>
       <ul spacing="normal">
-        <li>Most of the initial set of attributes should be taken from the vCard data format <xref target="RFC6350" format="default"/> and extensions (<xref target="RFC6473" format="default"/>, <xref target="RFC6474" format="default"/>, <xref target="RFC6715" format="default"/>, <xref target="RFC6869" format="default"/>, <xref target="RFC8605" format="default"/>). The specification should add new attributes or value types, or not support existing ones, where appropriate. Conversion between the data formats need not fully preserve semantic meaning.</li>
+        <li>Most of the initial set of attributes should be taken from the vCard data format <xref target="RFC6350" format="default"/> and extensions (<xref target="RFC6473" format="default"/>, <xref target="RFC6474" format="default"/>, <xref target="RFC6715" format="default"/>, <xref target="RFC6869" format="default"/>, <xref target="RFC8605" format="default"/>).  The specification should add new attributes or value types, or not support existing ones, where appropriate.  Conversion between the data formats need not fully preserve semantic meaning.</li>
         <li>The attributes of the cards data represented must be described as a simple key-value pair, reducing complexity of its representation.</li>
         <li>The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.</li>
         <li>Extensions, such as new properties and components, <bcp14>MUST NOT</bcp14> lead to requiring an update to this document.</li>
@@ -60,7 +60,7 @@
       <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>. Using JSON is mostly a pragmatic choice: its widespread use makes Card easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
       <section anchor="relation-to-the-xcard-and-jcard-formats" numbered="true" toc="default">
         <name>Relation to the xCard and jCard formats</name>
-        <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data, in XML and JSON format respectively. Both explicitly aim to not change the underlying data model. Accordingly, they are regarded as equal to vCard in the context of this document.</t>
+        <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data, in XML and JSON format respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
       </section>
       <section anchor="terminology" numbered="true" toc="default">
         <name>Terminology</name>
@@ -69,7 +69,7 @@ they appear in all capitals, as shown here.</t>
       </section>
       <section anchor="type-signatures" numbered="true" toc="default">
         <name>Type Signatures</name>
-        <t>Type signatures are given for all JSON values in this document. The following conventions are used:</t>
+        <t>Type signatures are given for all JSON values in this document.  The following conventions are used:</t>
         <ul spacing="normal">
           <li><tt>*</tt> - The type is undefined (the value could be any type, although permitted values may be constrained by the context of this value).</li>
           <li><tt>String</tt> - The JSON string type.</li>
@@ -97,7 +97,7 @@ they appear in all capitals, as shown here.</t>
         <section anchor="patchobject" numbered="true" toc="default">
           <name>PatchObject</name>
           <t>A PatchObject is of type <tt>String[*]</tt>, and represents an unordered set of patches on a JSON object.
-          Each key is a path represented in a subset of JSON pointer format <xref target="RFC6901"/>. The paths have an implicit leading <tt>/</tt>, so each key is prefixed with <tt>/</tt> before applying the JSON pointer evaluation algorithm.</t>
+          Each key is a path represented in a subset of JSON pointer format <xref target="RFC6901"/>.  The paths have an implicit leading <tt>/</tt>, so each key is prefixed with <tt>/</tt> before applying the JSON pointer evaluation algorithm.</t>
           <t>A patch within a PatchObject is only valid if all of the following conditions apply:</t>
           <ol>
             <li>The pointer <bcp14>MUST NOT</bcp14> reference inside an array (i.e., you <bcp14>MUST NOT</bcp14> insert/delete from an array; the array <bcp14>MUST</bcp14> be replaced in its entirety instead).</li>
@@ -107,33 +107,33 @@ they appear in all capitals, as shown here.</t>
           </ol>
           <t>The value associated with each pointer determines how to apply that patch:</t>
           <ul>
-            <li>If null, remove the property from the patched object. If the key is not present in the parent, this a no-op.</li>
+            <li>If null, remove the property from the patched object.  If the key is not present in the parent, this a no-op.</li>
             <li>If non-null, set the value given as the value for this property (this may be a replacement or addition to the object being patched).</li>
           </ul>
-          <t>A PatchObject does not define its own <tt>@type</tt> property. Instead, a <tt>@type</tt> property in a patch <bcp14>MUST</bcp14> be handled as any other patched property value.</t>
-          <t>Implementations <bcp14>MUST</bcp14> reject in its entirety a PatchObject if any of its patches is invalid.  Implementations <bcp14>MUST NOT</bcp14> apply partial patches.</t>
+          <t>A PatchObject does not define its own <tt>@type</tt> property.  Instead, a <tt>@type</tt> property in a patch <bcp14>MUST</bcp14> be handled as any other patched property value.</t>
+          <t>Implementations <bcp14>MUST</bcp14> reject in its entirety a PatchObject if any of its patches is invalid.   Implementations <bcp14>MUST NOT</bcp14> apply partial patches.</t>
         </section>
         <section anchor="resource" numbered="true" toc="default">
           <name>Resource</name>
-          <t>This data type defines a resource associated with the entity represented by this card, identified by a URI <xref target="RFC3986" format="default"/>. Several property definitions later in this document refer to the Resource data type as the basis for their property-specific value types. The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
+          <t>This data type defines a resource associated with the entity represented by this card, identified by a URI <xref target="RFC3986" format="default"/>.  Several property definitions later in this document refer to the Resource data type as the basis for their property-specific value types.  The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
           <t>A Resource object has the following properties:</t>
           <ul spacing="normal">
             <li>
-              <t>@type: <tt>String</tt> (mandatory). The allowed values are defined in the property definition that makes use of the Resource type.</t>
+              <t>@type: <tt>String</tt> (mandatory).  The allowed values are defined in the property definition that makes use of the Resource type.</t>
               <t>type: <tt>String</tt> (optional).
-The type of the resource. The allowed values are defined in the property definition that makes use of the Resource type.
+The type of the resource.  The allowed values are defined in the property definition that makes use of the Resource type.
 </t>
             </li>
             <li>uri: <tt>String</tt> (mandatory).
-The resource value. This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+The resource value.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
             <li>mediaType: <tt>String</tt> (optional).
-Used for URI resource values. Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
+Used for URI resource values.  Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
-The contexts in which to use this resource. Also see <xref target="prop-contexts"/>.</li>
+The contexts in which to use this resource.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
-                The preference of this resource in relation to other resources. Also see <xref target="prop-pref"/>.</li>
+                The preference of this resource in relation to other resources.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>. </li>
+                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="utcdatetime" numbered="true" toc="default">
@@ -144,28 +144,28 @@ The contexts in which to use this resource. Also see <xref target="prop-contexts
       </section>
       <section anchor="property-types" numbered="true" toc="default">
         <name>Property types</name>
-        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties. Like all other content of I-JSON objects, property names <bcp14>MUST</bcp14> be encoded in UTF-8. This specification distinguishes between three kinds of properties: standard properties, vendor-extension properties and unknown properties. The following sections define each kind.</t>
+        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  Like all other content of I-JSON objects, property names <bcp14>MUST</bcp14> be encoded in UTF-8. This specification distinguishes between three kinds of properties: standard properties, vendor-extension properties and unknown properties. The following sections define each kind.</t>
         <section anchor="standard-properties" numbered="true" toc="default">
           <name>Standard properties</name>
           <t>
-            Standard properties either are defined in this RFC document, or in any of its standard extensions. A property becomes standard only if its name and value type got registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.
+            Standard properties either are defined in this RFC document, or in any of its standard extensions.  A property becomes standard only if its name and value type got registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.
           </t>
           <t>
-            Implementations <bcp14>MUST</bcp14> validate and preserve standard properties in JSContact data. They <bcp14>MUST</bcp14> reject invalid standard properties. A property is invalid if its name matches the name of a standard property but the value violates its definition. This rule does not apply to properties that are considered unknown by the implementation (see <xref target="unknown-properties"/>).
+            Implementations <bcp14>MUST</bcp14> validate and preserve standard properties in JSContact data.  They <bcp14>MUST</bcp14> reject invalid standard properties.  A property is invalid if its name matches the name of a standard property but the value violates its definition.  This rule does not apply to properties that are considered unknown by the implementation (see <xref target="unknown-properties"/>).
           </t>
           <t>
-        Standard property names <bcp14>MUST NOT</bcp14> contain the <tt>COLON</tt> character (U+003A). They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but a notable exception of this rule is the <tt>@type</tt> property defined in later sections of this document. Standard property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
+        Standard property names <bcp14>MUST NOT</bcp14> contain the <tt>COLON</tt> character (U+003A). They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but a notable exception of this rule is the <tt>@type</tt> property defined in later sections of this document.  Standard property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
     </t>
         </section>
         <section anchor="vendor-extension-properties" numbered="true" toc="default">
           <name>Vendor-Extension Properties</name>
           <t>
-            Vendor-extension properties allow for experimentation or to store data that only is useful for one particular service or application. Such properties <bcp14>MAY</bcp14> be set in any JSContact object. Implementations <bcp14>MUST</bcp14> preserve vendor-extension properties in JSContact data, irrespective if they know their use. Vendor-extension properties need not be registered at IANA (see <xref target="iana-considerations"/>). Vendors are strongly encouraged to specify new standard properties once a vendor-extension turns out to be useful also for other systems.
+            Vendor-extension properties allow for experimentation or to store data that only is useful for one particular service or application.  Such properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-extension properties in JSContact data, irrespective if they know their use.  Vendor-extension properties need not be registered at IANA (see <xref target="iana-considerations"/>).  Vendors are strongly encouraged to specify new standard properties once a vendor-extension turns out to be useful also for other systems.
           </t>
           <t>
-            Vendor-extension property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by a name consisting of any other non-control ASCII or non-ASCII characters. The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>. The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications. The name following the prefix <bcp14>SHOULD NOT</bcp14> contain the <tt>~</tt> (TILDE) and <tt>/</tt> (SOLIDUS) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> including that property.
+            Vendor-extension property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by a name consisting of any other non-control ASCII or non-ASCII characters.  The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.  The name following the prefix <bcp14>SHOULD NOT</bcp14> contain the <tt>~</tt> (TILDE) and <tt>/</tt> (SOLIDUS) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> including that property.
           </t>
-          <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-extension property names. Note that vendor prefix allow for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>. This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
+          <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-extension property names.  Note that vendor prefix allow for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>.  This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
           <sourcecode name="" type="abnf"><![CDATA[
 v-extension = v-prefix ":" v-name
 
@@ -181,7 +181,7 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
   ; use of %x2f ("/") and %x7e ("~") is discouraged
 ]]></sourcecode>
           <t>
-            The value of vendor-extension properties can be any valid JSON value, and naming restrictions do not apply to such values. Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-extension properties.
+            The value of vendor-extension properties can be any valid JSON value, and naming restrictions do not apply to such values.  Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-extension properties.
           </t>
           <t>
             The following all are valid examples of vendor-extension properties.
@@ -205,18 +205,18 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="unknown-properties" numbered="true" toc="default">
           <name>Unknown properties</name>
           <t>
-          Implementations may encounter JSContact data where a JSON object key does not match the name of a property known to that implementation. They <bcp14>MUST NOT</bcp14> treat such properties as invalid, instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object. Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set standard properties or vendor-extension properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties. This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
+          Implementations may encounter JSContact data where a JSON object key does not match the name of a property known to that implementation.  They <bcp14>MUST NOT</bcp14> treat such properties as invalid, instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set standard properties or vendor-extension properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties.  This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
         </t>
         </section>
       </section>
       <section anchor="comon-properties">
         <name>Common properties</name>
-        <t>Most of the properties in this document are specific to a single JSCalendar object type. Such properties are defined along with the respective object type. The properties in this section however are common to multiple data types and better be defined just once. Note that these properties <bcp14>MUST</bcp14> only be set for a JSCalendar object if they are explicitly mentioned to be allowed for this object type.</t>
+        <t>Most of the properties in this document are specific to a single JSCalendar object type.  Such properties are defined along with the respective object type.  The properties in this section however are common to multiple data types and better be defined just once.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSCalendar object if they are explicitly mentioned to be allowed for this object type.</t>
         <section anchor="prop-contexts" numbered="true" toc="default">
           <name>The <tt>contexts</tt> property</name>
           <t>Type: <tt>String[Boolean]</tt></t>
-          <t>This property associates contact information with one or more contexts in which it should be used. For example, someone might have distinct phone numbers for work and private contexts, and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
-          <t>This document defines the following common contexts. Additional contexts may be defined in the properties or data types that make use of this property, may be registered in a future RFC, or be vendor-specific (<xref target="vendor-extension-properties"/>).</t>
+          <t>This property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts, and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
+          <t>This document defines the following common contexts.  Additional contexts may be defined in the properties or data types that make use of this property, may be registered in a future RFC, or be vendor-specific (<xref target="vendor-extension-properties"/>).</t>
           <ul spacing="normal">
             <li><tt>private</tt>: The contact information may be used to contact in a private context.</li>
             <li><tt>work</tt>: The contact information may be used to contact in a professional context.</li>
@@ -225,14 +225,14 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="prop-label" numbered="true" toc="default">
           <name>The <tt>label</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property allows to associate contact data with user-defined labels. Such labels may be set for phone numbers, email addresses and resources. Typically these labels are displayed along with their associated contact data in graphical user interfaces. While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
+          <t>This property allows to associate contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically these labels are displayed along with their associated contact data in graphical user interfaces.  While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>The <tt>pref</tt> property</name>
           <t>Type: <tt>UnsignedInt</tt></t>
-          <t>This property allows to define a preference order for contact information. For example, a card holder may have two email addresses and prefer to be contacted with one of them.</t>
-          <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100. Lower values correspond to a higher level of preference, with 1 being most preferred. If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
-          <t>Note that the preference only is defined in relation to contact information of the same type. For example, the preference orders within emails and phone numbers are indendepent of each other.</t>
+          <t>This property allows to define a preference order for contact information.  For example, a card holder may have two email addresses and prefer to be contacted with one of them.</t>
+          <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
+          <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are indendepent of each other.</t>
         </section>
           <section anchor="prop-sort-as" numbered="true" toc="default">
               <name>The <tt>sortAs</tt> property</name>
@@ -243,7 +243,7 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
       <section anchor="vendor-extension-values" numbered="true" toc="default">
         <name>Vendor-Extension Values</name>
         <t>
-            Some JSContact standard properties allow their values to be vendor-specific. One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-extension values. Such vendor-extension values <bcp14>MUST</bcp14> be valid <tt>v-extensions</tt> as defined in <xref target="vendor-extension-properties"/> . This is an example for a vendor-extension value:
+            Some JSContact standard properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-extension values.  Such vendor-extension values <bcp14>MUST</bcp14> be valid <tt>v-extensions</tt> as defined in <xref target="vendor-extension-properties"/>.  This is an example for a vendor-extension value:
           </t>
         <figure>
           <artwork><![CDATA[
@@ -268,12 +268,12 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="cardtype" numbered="true" toc="default">
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Card</tt>.</t>
+          <t>Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Card</tt>.</t>
         </section>
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views. <xref target="RFC4122" format="default"/> describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with <xref target="RFC6350" format="default"/> UIDs, implementations <bcp14>MUST</bcp14> accept both URI and free-form text.</t>
+          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  <xref target="RFC4122" format="default"/> describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with <xref target="RFC6350" format="default"/> UIDs, implementations <bcp14>MUST</bcp14> accept both URI and free-form text.</t>
         </section>
         <section anchor="prodid" numbered="true" toc="default">
           <name>prodId</name>
@@ -292,7 +292,7 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         </section>
         <section anchor="kind" numbered="true" toc="default">
           <name>kind</name>
-          <t>Type: <tt>String</tt> (optional). The kind of the entity the Card represents.</t>
+          <t>Type: <tt>String</tt> (optional).  The kind of the entity the Card represents.</t>
           <t>The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):</t>
           <ul spacing="normal">
             <li><tt>individual</tt>: a single person</li>
@@ -305,10 +305,10 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="relatedto" numbered="true" toc="default">
           <name>relatedTo</name>
           <t>Type: <tt>String[Relation]</tt> (optional).</t>
-          <t>Relates the object to other Card and CardGroup objects.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card or CardGroup and the value defines the relation. The Relation object has the following properties:</t>
+          <t>Relates the object to other Card and CardGroup objects.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card or CardGroup and the value defines the relation.  The Relation object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Relation</tt>.
+                Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Relation</tt>.
              </li>
             <li>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
 Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
@@ -319,7 +319,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="locale" numbered="true" toc="default">
           <name>locale</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card or card group. Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
+          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card or card group.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
         </section>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
@@ -331,102 +331,102 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>A Name object has the following properties</t>
           <ul spacing="normal">
             <li>@type: <tt>Name</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Name</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Name</tt>.
               </li>
             <li>components: <tt>NameComponent[]</tt> (mandatory).
-                The components making up the name. The component list <bcp14>MUST</bcp14> have at least one entry. Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity. Doing so, implementations <bcp14>MAY</bcp14> ignore any components of type <tt>separator</tt>.
+                The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.  Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity.  Doing so, implementations <bcp14>MAY</bcp14> ignore any components of type <tt>separator</tt>.
             </li>
             <li>
           locale: <tt>String</tt> (optional).
-          The locale of the name. The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
+          The locale of the name.  The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
         </li>
               <li>sortAs: <tt>String[]</tt> (optional)
-                  The list of strings used to sort this card based on the name. Also see <xref target="prop-sort-as"/>.
+                  The list of strings used to sort this card based on the name.  Also see <xref target="prop-sort-as"/>.
               </li>
           </ul>
           <t>A NameComponent object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>.
               </li>
             <li>value: <tt>String</tt> (mandatory).
 The value of this name component.</li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this name component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
+The type of this name component.  The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
 </t>
               <ul spacing="normal">
-                <li><tt>prefix</tt>. The value is a honorific title(s), e.g. "Mr", "Ms", "Dr".</li>
-                <li><tt>given</tt>. The value is a given name, also known as "first name", "personal name".</li>
-                <li><tt>surname</tt>. The value is a surname, also known as "last name", "family name".</li>
-                <li><tt>middle</tt>. The value is a middle name, also known as "additional name".</li>
-                <li><tt>suffix</tt>. The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
-                <li><tt>separator</tt>. A formatting separator for two name components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                <li><tt>prefix</tt>.  The value is a honorific title(s), e.g. "Mr", "Ms", "Dr".</li>
+                <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
+                <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
+                <li><tt>middle</tt>.  The value is a middle name, also known as "additional name".</li>
+                <li><tt>suffix</tt>.  The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
+                <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
                 </li>
               </ul>
             </li>
             <li>
               <t>nth: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
-                    Defines the rank of this name component to other name components of the same type. If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
-              <t>For example, two name components of type <tt>surname</tt> may have their <tt>nth</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively. In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
-              <t>Note that this property value does not indicate the order in which to print name components of the same type. Some cultures print the secondary surname before the first surname, others the first before the second. Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Name object to determine the appropriate formatting. They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
+                    Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
+              <t>For example, two name components of type <tt>surname</tt> may have their <tt>nth</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
+              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Name object to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
           </ul>
         </section>
         <section anchor="fullname" numbered="true" toc="default">
           <name>fullName</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card. The purpose of this property is to define a name, even if the individual name components are not known. In addition, it is meant to provide alternative versions of the name for internationalisation. Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
+          <t>The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.  The purpose of this property is to define a name, even if the individual name components are not known.  In addition, it is meant to provide alternative versions of the name for internationalisation.  Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
         </section>
         <section anchor="nicknames" numbered="true" toc="default">
           <name>nickNames</name>
           <t>Type: <tt>Id[NickName]</tt> (optional).</t>
-          <t>The nick names of the entity represented by this card. A NickName object has the following properties:</t>
+          <t>The nick names of the entity represented by this card.  A NickName object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>NickName</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NickName</tt>.
               </li>
             <li>name: <tt>String</tt> (mandatory).
                 The nick name.
             </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
-The contexts in which to use this nick name. Also see <xref target="prop-contexts"/>.</li>
+The contexts in which to use this nick name.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
-                The preference of this nick name in relation to other nick names. Also see <xref target="prop-pref"/>.</li>
+                The preference of this nick name in relation to other nick names.  Also see <xref target="prop-pref"/>.</li>
           </ul>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
           <t>Type: <tt>Id[Organization]</tt> (optional).</t>
-          <t>The companies or organization names and units associated with this card. An Organization object has the following properties, of which at least one of <tt>name</tt> and <tt>units</tt> <bcp14>MUST</bcp14> be set:</t>
+          <t>The companies or organization names and units associated with this card.  An Organization object has the following properties, of which at least one of <tt>name</tt> and <tt>units</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
               </li>
             <li>name: <tt>String</tt> (optional).
-                The name of this organization. If set, the value <bcp14>MUST</bcp14> be a non-empty string.
+                The name of this organization.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
             </li>
             <li>units: <tt>String[]</tt> (optional).
-                A list of organizational unit names. If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+                A list of organizational unit names.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
             </li>
               <li>sortAs: <tt>String[]</tt> (optional)
-                  The list of strings used to sort this card based on the organization. Also see <xref target="prop-sort-as"/>.
+                  The list of strings used to sort this card based on the organization.  Also see <xref target="prop-sort-as"/>.
               </li>
           </ul>
         </section>
         <section anchor="titles" numbered="true" toc="default">
           <name>titles</name>
           <t>Type : <tt>Id[Title]</tt> (optional).</t>
-          <t>The job titles or functional positions of the entity represented by this card. A Title has object the following properties:</t>
+          <t>The job titles or functional positions of the entity represented by this card.  A Title has object the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Title</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt>.
               </li>
             <li>title: <tt>String</tt> (mandatory).
                 The title of the entity represented by this card.
             </li>
             <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
-              Describes the organizational or situational type of this title. Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management. If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>).
+              Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>).
                                         </li>
             <li>organization: <tt>Id</tt> (optional).
                 The id of the organization in which this title is held.
@@ -436,14 +436,14 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
         <section anchor="speakToAs" numbered="true" toc="default">
           <name>speakToAs</name>
           <t>Type: <tt>SpeakToAs</tt> (optional).</t>
-          <t>Provides information how to address, speak to or refer to the entity that is represented by this card. A SpeakToAs object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
+          <t>Provides information how to address, speak to or refer to the entity that is represented by this card.  A SpeakToAs object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>SpeakToAs</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SpeakToAs</tt>.
               </li>
             <li>
               <t>grammaticalGender: <tt>String</tt> (optional).
-                  Defines which grammatical gender to use in salutations and other grammatical constructs. Allowed values are:</t>
+                  Defines which grammatical gender to use in salutations and other grammatical constructs.  Allowed values are:</t>
               <ul spacing="normal">
                 <li>
                   <tt>animate</tt>
@@ -471,14 +471,14 @@ The contexts in which to use this nick name. Also see <xref target="prop-context
           <t>A Pronouns object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Pronouns</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Pronouns</tt>.
               </li>
             <li>pronouns: <tt>String</tt> (mandatory).
-                  Defines the pronouns. Any value or form is allowed. Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>. The value <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</li>
+                  Defines the pronouns.  Any value or form is allowed.  Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>.  The value <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
-The contexts in which to use these pronouns. Also see <xref target="prop-contexts"/>.</li>
+The contexts in which to use these pronouns.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
-                The preference of these pronouns in relation to other pronouns in the same context. Also see <xref target="prop-pref"/>.</li>
+                The preference of these pronouns in relation to other pronouns in the same context.  Also see <xref target="prop-pref"/>.</li>
           </ul>
         </section>
       </section>
@@ -487,17 +487,17 @@ The contexts in which to use these pronouns. Also see <xref target="prop-context
         <section anchor="emails" numbered="true" toc="default">
           <name>emails</name>
           <t>Type: <tt>Id[EmailAddress]</tt> (optional).</t>
-          <t>The email addresses to contact the entity represented by this card. An EmailAddress object has the following properties:</t>
+          <t>The email addresses to contact the entity represented by this card.  An EmailAddress object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt>.
               </li>
             <li>address: <tt>String</tt> (mandatory).
-The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
+The email address.  This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
-The contexts in which to use this email address. Also see <xref target="prop-contexts"/>.</li>
+The contexts in which to use this email address.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
-                The preference of this email address in relation to other email addresses. Also see <xref target="prop-pref"/>.</li>
+                The preference of this email address in relation to other email addresses.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
@@ -505,38 +505,38 @@ The contexts in which to use this email address. Also see <xref target="prop-con
         <section anchor="onlineservices" numbered="true" toc="default">
           <name>onlineServices</name>
           <t>Type: <tt>Id[OnlineService]</tt> (optional).</t>
-          <t>The online services that are associated with the entity represented by this card. This can be messaging services, social media profiles, and other. An OnlineService object has the following properties, of which at least either the <tt>uri</tt> property or both the <tt>username</tt> and <tt>service</tt> properties <bcp14>MUST</bcp14> be set:</t>
+          <t>The online services that are associated with the entity represented by this card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties, of which at least either the <tt>uri</tt> property or both the <tt>username</tt> and <tt>service</tt> properties <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
               </li>
             <li>service: <tt>String</tt> (optional).
-The name of the online service or protocol. This <bcp14>SHOULD</bcp14> be the canonical service name including capitalisation. Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Twitter</tt>, <tt>XMPP</tt>.</li>
+The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the canonical service name including capitalisation.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Twitter</tt>, <tt>XMPP</tt>.</li>
             <li>uri: <tt>String</tt> (optional).
 The service-specific URI of the entity represented by this card.</li>
             <li>username: <tt>String</tt> (optional).
-The service-specific user name of the entity represented by this card. If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
+The service-specific user name of the entity represented by this card.  If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
-The contexts in which to use this service. Also see <xref target="prop-contexts"/>.</li>
+The contexts in which to use this service.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
-                The preference of this service in relation to other services. Also see <xref target="prop-pref"/>.</li>
+                The preference of this service in relation to other services.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>. </li>
+                A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="phones" numbered="true" toc="default">
           <name>phones</name>
           <t>Type: <tt>Id[Phone]</tt> (optional).</t>
-          <t>The phone numbers to contact the entity represented by this card. A Phone object has the following properties:</t>
+          <t>The phone numbers to contact the entity represented by this card.  A Phone object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
               </li>
             <li>phone: <tt>String</tt> (mandatory).
-The phone value, as either a URI or a free-text phone number. Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
+The phone value, as either a URI or a free-text phone number.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
-                  The set of contact features that this phone number may be used for. The set is represented as an object, with each key being a method type. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
+                  The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>voice</tt> The number is for calling by voice.</li>
@@ -549,9 +549,9 @@ The phone value, as either a URI or a free-text phone number. Typical URI scheme
               </ul>
             </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
-The contexts in which to use this number. Also see <xref target="prop-contexts"/>.</li>
+The contexts in which to use this number.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
-                The preference of this number in relation to other numbers. Also see <xref target="prop-pref"/>.</li>
+                The preference of this number in relation to other numbers.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
@@ -559,38 +559,38 @@ The contexts in which to use this number. Also see <xref target="prop-contexts"/
         <section anchor="preferredcontactchannels" numbered="true" toc="default">
           <name>preferredContactChannels</name>
           <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional)</t>
-          <t>Defines which channel the entity represented by this card prefers to be contacted with. The keys in the object <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):</t>
+          <t>Defines which channel the entity represented by this card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):</t>
           <ul spacing="normal">
-            <li><tt>addresses</tt>. The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
-            <li><tt>emails</tt>. The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
-            <li><tt>onlineServices</tt>. The entity prefers to be contacted by one of the entries in <xref target="onlineservices"><tt>onlineServices</tt></xref>.</li>
-            <li><tt>phones</tt>. The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
+            <li><tt>addresses</tt>.  The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
+            <li><tt>emails</tt>.  The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
+            <li><tt>onlineServices</tt>.  The entity prefers to be contacted by one of the entries in <xref target="onlineservices"><tt>onlineServices</tt></xref>.</li>
+            <li><tt>phones</tt>.  The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
           </ul>
-          <t>The values in the object are a (possibly empty) list of preferences for this contact channel. A valid ContactChannelPreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>The values in the object are a (possibly empty) list of preferences for this contact channel.  A valid ContactChannelPreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
           <t>A ContactChannelPreference object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>ContactChannelPreference</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>ContactChannelPreference</tt>.
               </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
-Defines the contexts in which to use this contact channel. Also see <xref target="prop-contexts"/>.</li>
+Defines the contexts in which to use this contact channel.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-Defines the preference of this contact channel in relation to other contact channels with the same contexts. Also see <xref target="prop-pref"/>.</li>
+Defines the preference of this contact channel in relation to other contact channels with the same contexts.  Also see <xref target="prop-pref"/>.</li>
           </ul>
         </section>
         <section anchor="preferredlanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
           <t>Type : <tt>String[LanguagePreference[]]</tt> (optional)</t>
-          <t>Defines the preferred languages for contacting the entity associated with this card. The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags. The values are a (possibly empty) list of contact language preferences for this language. A valid LanguagePreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>Defines the preferred languages for contacting the entity associated with this card.  The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags.  The values are a (possibly empty) list of contact language preferences for this language.  A valid LanguagePreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
           <t>A LanguagePreference object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>LanguagePreference</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>LanguagePreference</tt>.
               </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
-Defines the contexts in which to use this language. Also see <xref target="prop-contexts"/>.</li>
+Defines the contexts in which to use this language.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-Defines the preference of this language in relation to other languages of the same contexts. Also see <xref target="prop-pref"/>.</li>
+Defines the preference of this language in relation to other languages of the same contexts.  Also see <xref target="prop-pref"/>.</li>
           </ul>
         </section>
       </section>
@@ -599,7 +599,7 @@ Defines the preference of this language in relation to other languages of the sa
         <section anchor="calendars" numbered="true" toc="default">
           <name>calendars</name>
           <t>Type: <tt>Id[CalendarResource]</tt> (optional).</t>
-          <t>These are resources for calendaring, such as calendars to lookup free-busy information for the entity represented by this card. A CalendarResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are resources for calendaring, such as calendars to lookup free-busy information for the entity represented by this card.  A CalendarResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CalendarResource</tt>.</li>
           </ul>
@@ -612,7 +612,7 @@ Defines the preference of this language in relation to other languages of the sa
         <section anchor="schedulingAddresses" numbered="true" toc="default">
           <name>schedulingAddresses</name>
           <t>Type: <tt>Id[SchedulingAddress]</tt> (optional).</t>
-          <t>The scheduling addresses by which the entity may receive calendar scheduling invitations. A SchedulingAddress object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>The scheduling addresses by which the entity may receive calendar scheduling invitations.  A SchedulingAddress object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>.</li>
             <li>The <tt>type</tt> property value either is not set or it <bcp14>MUST</bcp14> be a valid object key of the JSCalendar <tt>sendTo</tt> property, as specified in <xref target="RFC8984" format="default" section="4.4.6"/> and future JSCalendar RFCs.</li>
@@ -624,16 +624,16 @@ Defines the preference of this language in relation to other languages of the sa
         <section anchor="addresses" numbered="true" toc="default">
           <name>addresses</name>
           <t>Type: <tt>Id[Address]</tt> (optional).</t>
-          <t>A map of address ids to Address objects, containing physical locations. An Address object has the following properties:</t>
+          <t>A map of address ids to Address objects, containing physical locations.  An Address object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Address</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Address</tt>.
               </li>
             <li>fullAddress: <tt>String</tt> (optional).
-                The complete address. This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
+                The complete address.  This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
-                  The street address. The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale. Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components. The StreetComponent object type is defined in the paragraph below.
+                  The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.  The StreetComponent object type is defined in the paragraph below.
               </t>
             </li>
             <li>locality: <tt>String</tt> (optional).
@@ -647,10 +647,10 @@ The postal code, post code, ZIP code or other short code associated with the add
             <li>countryCode: <tt>String</tt> (optional).
 The ISO-3166-1 country code.</li>
             <li>coordinates: <tt>String</tt> (optional) A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
-            <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in. This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
+            <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
             <li>
               <t>contexts: <tt>String[Boolean]</tt> (optional).
-The contexts of the address information. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. In addition to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
+The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  In addition to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
 </t>
               <ul spacing="normal">
                 <li><tt>billing</tt> An address to be used for billing.</li>
@@ -658,39 +658,39 @@ The contexts of the address information. The boolean value <bcp14>MUST</bcp14> b
               </ul>
             </li>
             <li>pref: <tt>UnsignedInt</tt> (optional)
-                The preference of this address in relation to other addresses. Also see <xref target="prop-pref"/>.</li>
+                The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt>.
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this street component. The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
+The type of this street component.  The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-extension-properties"/>):
 </t>
               <ul spacing="normal">
-                <li><tt>name</tt>. The street name.
+                <li><tt>name</tt>.  The street name.
                 </li>
-                <li><tt>number</tt>. The street number.
+                <li><tt>number</tt>.  The street number.
                 </li>
-                <li><tt>apartment</tt>. The apartment number or identifier.
+                <li><tt>apartment</tt>.  The apartment number or identifier.
                 </li>
-                <li><tt>room</tt>. The room number or identifier.
+                <li><tt>room</tt>.  The room number or identifier.
                 </li>
-                <li><tt>extension</tt>. The extension designation or box number.
+                <li><tt>extension</tt>.  The extension designation or box number.
                 </li>
-                <li><tt>direction</tt>. The cardinal direction, e.g. "North".
+                <li><tt>direction</tt>.  The cardinal direction, e.g. "North".
                 </li>
-                <li><tt>building</tt>. The building or building part this address is located in.
+                <li><tt>building</tt>.  The building or building part this address is located in.
                 </li>
-                <li><tt>floor</tt>. The floor this address is located on.
+                <li><tt>floor</tt>.  The floor this address is located on.
                 </li>
-                <li><tt>postOfficeBox</tt>. The post office box number or identifier.
+                <li><tt>postOfficeBox</tt>.  The post office box number or identifier.
                 </li>
-                <li><tt>separator</tt>. A separator for two street components. The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
+                <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
                 </li>
-                <li><tt>unknown</tt>. A street component value for which no type is known.
+                <li><tt>unknown</tt>.  A street component value for which no type is known.
                 </li>
               </ul>
             </li>
@@ -704,7 +704,7 @@ The value of this street component.</li>
         <section anchor="cryptokeys" numbered="true" toc="default">
           <name>cryptoKeys</name>
           <t>Type: <tt>Id[CryptoResource]</tt> (optional).</t>
-          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this card. A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this card.  A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>.</li>
             <li>The <tt>type</tt> property value either is not set, is defined in a future RFC or vendor-specific.</li>
@@ -713,20 +713,20 @@ The value of this street component.</li>
         <section anchor="directories" numbered="true" toc="default">
           <name>directories</name>
           <t>Type: <tt>Id[DirectoryResource]</tt> (optional).</t>
-          <t>These are directory service resources, such as entries in a directory or organizational directories for lookup. A DirectoryResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are directory service resources, such as entries in a directory or organizational directories for lookup.  A DirectoryResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>DirectoryResource</tt>.</li>
           </ul>
           <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
           <ul>
-            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of. This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.</li>
-            <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card. In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
+            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of.  This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.</li>
+            <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
           </ul>
         </section>
         <section anchor="links" numbered="true" toc="default">
           <name>links</name>
           <t>Type: <tt>Id[LinkResource]</tt> (optional).</t>
-          <t>These are links to resources that do not fit any of the other use-case specific resource properties. A LinkResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are links to resources that do not fit any of the other use-case specific resource properties.  A LinkResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>LinkResource</tt>.</li>
           </ul>
@@ -738,7 +738,7 @@ The value of this street component.</li>
         <section anchor="media" numbered="true" toc="default">
           <name>media</name>
           <t>Type: <tt>Id[MediaResource]</tt> (optional).</t>
-          <t>These are media resources such as photographs, avatars or sounds associated with the entity represented by this card. A MediaResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are media resources such as photographs, avatars or sounds associated with the entity represented by this card.  A MediaResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>MediaResource</tt>.</li>
           </ul>
@@ -755,7 +755,7 @@ The value of this street component.</li>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
-          <t>A map of language tags <xref target="RFC5646"/> to patches, which localize a property value into the locale of the respective language tag. The paths in the PatchObject keys are relative to the Card object that includes the localizations property. A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
+          <t>A map of language tags <xref target="RFC5646"/> to patches, which localize a property value into the locale of the respective language tag.  The paths in the PatchObject keys are relative to the Card object that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
           <t> The following example shows a Card object, where one of its addresses <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale.</t>
           <figure>
             <artwork><![CDATA[
@@ -780,14 +780,14 @@ The value of this street component.</li>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
           <t>Type : Id[Anniversary] (optional).</t>
-          <t>These are memorable dates and events for the entity represented by this card. An Anniversary object has the following properties:</t>
+          <t>These are memorable dates and events for the entity represented by this card.  An Anniversary object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Anniversary</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Anniversary</tt>.
               </li>
             <li>
               <t>type: <tt>String</tt> (optional).
-Specifies the type of the anniversary. This RFC predefines the following types, but implementations MAY use additional values:
+Specifies the type of the anniversary.  This RFC predefines the following types, but implementations MAY use additional values:
 </t>
               <ul spacing="normal">
                 <li><tt>birth</tt>: a birth day anniversary</li>
@@ -797,7 +797,7 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
             </li>
             <li>
               <t>date: <tt>Timestamp|PartialDate</tt> (mandatory).</t>
-              <t>The date of this anniversary in the Gregorian calendar. This <bcp14>MUST</bcp14> either be a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
+              <t>The date of this anniversary in the Gregorian calendar.  This <bcp14>MUST</bcp14> either be a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
             </li>
             <li>place: Address (optional).
                 An address associated with this anniversary, e.g. the place of birth or death.</li>
@@ -805,20 +805,20 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
           <t>A Timestamp object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Timestamp</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Timestamp</tt>.
               </li>
-            <li>utc: <tt>UTCDateTime</tt> (mandatory). Specifies the point in time in UTC time.
+            <li>utc: <tt>UTCDateTime</tt> (mandatory).  Specifies the point in time in UTC time.
           </li>
           </ul>
-          <t>A PartialDate object represents a complete or partial calendar date in the Gregorian calendar. It represents either a complete date, or a year, or a month in a year, or a day in a month. It has the following properties, of which at least <tt>year</tt> or <tt>month</tt> and <tt>day</tt> <bcp14>MUST</bcp14> be set:</t>
+          <t>A PartialDate object represents a complete or partial calendar date in the Gregorian calendar.  It represents either a complete date, or a year, or a month in a year, or a day in a month.  It has the following properties, of which at least <tt>year</tt> or <tt>month</tt> and <tt>day</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>PartialDate</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PartialDate</tt>.
               </li>
-            <li>year: <tt>Int</tt> (optional). This is the calendar year.</li>
-            <li>month: <tt>Int</tt> (optional). This is the calendar month, represented as the integers 1 &lt;= month &lt;= 12. If this property is set then either <tt>year</tt> or <tt>day</tt> <bcp14>MUST</bcp14> be set.</li>
-            <li>day: <tt>Int</tt> (optional). This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year. If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
-            <li>calendarScale: <tt>String</tt> (optional). This is the calendar system in which this date occurs, in lowercase. This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="RFC7529" format="default"/> or a vendor-specific value). Note that the year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.</li>
+            <li>year: <tt>Int</tt> (optional).  This is the calendar year.</li>
+            <li>month: <tt>Int</tt> (optional).  This is the calendar month, represented as the integers 1 &lt;= month &lt;= 12.  If this property is set then either <tt>year</tt> or <tt>day</tt> <bcp14>MUST</bcp14> be set.</li>
+            <li>day: <tt>Int</tt> (optional).  This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
+            <li>calendarScale: <tt>String</tt> (optional).  This is the calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="RFC7529" format="default"/> or a vendor-specific value).  Note that the year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.</li>
           </ul>
         </section>
         <section anchor="personalinfo" numbered="true" toc="default">
@@ -828,11 +828,11 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
 A PersonalInformation object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>PersonalInformation</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInformation</tt>.
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-Specifies the type for this personal information. The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-extension-properties"/>):
+Specifies the type for this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-extension-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>expertise</tt>: a field of expertise or credential</li>
@@ -841,60 +841,60 @@ Specifies the type for this personal information. The value <bcp14>MUST</bcp14> 
               </ul>
             </li>
             <li>value: <tt>String</tt> (mandatory).
-The actual information. This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
+The actual information.  This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
             <li>level: <tt>String</tt> (optional)
-                Indicates the level of expertise, or engagement in hobby or interest. The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-extension-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+                Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-extension-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
           </ul>
         </section>
         <section anchor="notes" numbered="true" toc="default">
           <name>notes</name>
           <t>Type: <tt>Note[]</tt> (optional).</t>
-          <t>Free-text notes associated with this card. A Note object has the following properties:</t>
+          <t>Free-text notes associated with this card.  A Note object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Note</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Note</tt>.
             </li>
             <li>
-              <t>note: <tt>String</tt> (mandatory). The free text value of this note.</t>
+              <t>note: <tt>String</tt> (mandatory).  The free text value of this note.</t>
             </li>
             <li>
-              <t>language: <tt>String</tt> (optional). The human language in which the main content of this note is written in. The property value <bcp14>MUST</bcp14> be a valid language tag as defined <xref target="RFC5646"/>.</t>
+              <t>language: <tt>String</tt> (optional).  The human language in which the main content of this note is written in.  The property value <bcp14>MUST</bcp14> be a valid language tag as defined <xref target="RFC5646"/>.</t>
             </li>
             <li>
-              <t>created: <tt>UTCDateTime</tt> (optional). The date and time when this Note object was created..</t>
+              <t>created: <tt>UTCDateTime</tt> (optional).  The date and time when this Note object was created..</t>
             </li>
           </ul>
         </section>
         <section anchor="keywords" numbered="true" toc="default">
           <name>keywords</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).
-A set of free-text keywords, also known as <em>tags</em>. The set is represented as an object, with each key being a keyword. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
         </section>
       </section>
     </section>
     <section anchor="groupcard" numbered="true" toc="default">
       <name>CardGroup</name>
       <t>MIME type: <tt>application/jscontact+json;type=cardgroup</tt></t>
-      <t>A CardGroup object represents a group of cards. Its members may be Cards or CardGroups.</t>
+      <t>A CardGroup object represents a group of cards.  Its members may be Cards or CardGroups.</t>
       <section anchor="group-properties" numbered="true" toc="default">
         <name>Group properties</name>
         <section anchor="cardgrouptype" numbered="true" toc="default">
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>CardGroup</tt>.</t>
+          <t>Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>CardGroup</tt>.</t>
         </section>
         <section anchor="group-uid" numbered="true" toc="default">
           <name>uid</name>
-          <t>Type: <tt>String</tt> (mandatory). The uid of this group, an identifier globally unique within both CardGroup and Card uid values. Also see <xref target="uid"/>.</t>
+          <t>Type: <tt>String</tt> (mandatory).  The uid of this group, an identifier globally unique within both CardGroup and Card uid values.  Also see <xref target="uid"/>.</t>
         </section>
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
-          <t>Type: <tt>String[Boolean]</tt> (mandatory). The members of this group.</t>
-          <t>The set is represented as an object, with each key being the uid of another Card or CardGroup. The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+          <t>Type: <tt>String[Boolean]</tt> (mandatory).  The members of this group.</t>
+          <t>The set is represented as an object, with each key being the uid of another Card or CardGroup.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
         </section>
         <section anchor="group-card" numbered="true" toc="default">
           <name>card</name>
-          <t>Type: <tt>Card</tt> (optional). The card that represents this group. The <tt>uid</tt> property of the card <bcp14>MUST</bcp14> match the value of the card group <tt>uid</tt> property.</t>
+          <t>Type: <tt>Card</tt> (optional).  The card that represents this group.  The <tt>uid</tt> property of the card <bcp14>MUST</bcp14> match the value of the card group <tt>uid</tt> property.</t>
         </section>
       </section>
     </section>
@@ -905,14 +905,14 @@ to publication as an RFC.
 This section records the status of known implementations of the
 protocol defined by this specification at the time of posting of this
 Internet-Draft, and is based on a proposal described in
-<xref target="RFC7942" format="default"/>. The description of implementations in this section is
+<xref target="RFC7942" format="default"/>.  The description of implementations in this section is
 intended to assist the IETF in its decision processes in progressing
-drafts to RFCs. Please note that the listing of any individual
+drafts to RFCs.  Please note that the listing of any individual
 implementation here does not imply endorsement by the IETF.
 Furthermore, no effort has been spent to verify the information
-presented here that was supplied by IETF contributors. This is not
+presented here that was supplied by IETF contributors.  This is not
 intended as, and must not be construed to be, a catalog of available
-implementations or their features. Readers are advised to note that
+implementations or their features.  Readers are advised to note that
 other implementations may exist.
 According to <xref target="RFC7942" format="default"/>, "this will allow reviewers and working groups
 to assign due consideration to documents that have the benefit of

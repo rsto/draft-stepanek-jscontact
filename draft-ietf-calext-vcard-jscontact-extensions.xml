@@ -56,8 +56,8 @@
     <section>
       <name>Preface</name>
       <t>
-        This document is a work in progress. The list of new or updated properties
-        and parameters is likely to be incomplete. This section is removed from
+        This document is a work in progress.  The list of new or updated properties
+        and parameters is likely to be incomplete.  This section is removed from
         the document before publication.
       </t>
     </section>
@@ -66,10 +66,10 @@
       <t>
         The JSContact <xref target="ref-jscontact"/> format aims to be an alternative to the
         vCard <xref target="RFC6350"/> format for representation of contact and addressbook
-        data. As such, it introduces new semantics that are not covered in the current
-        definition of vCard and its various extensions. Converting contact data between
+        data.  As such, it introduces new semantics that are not covered in the current
+        definition of vCard and its various extensions.  Converting contact data between
         the two formats is defined in <xref target="ref-jscontact-vcard"/> with the goal of
-        not loosing any semantics during conversion. In order to do so, this document
+        not loosing any semantics during conversion.  In order to do so, this document
         defines a new set of properties for vCard and extends existing definitions.
       </t>
       <section>
@@ -96,10 +96,10 @@
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>The PREF parameter defines the preference of this contact channel in relation to other contact channels. The TYPE parameter defines when to use this preference.</dd>
+          <dd>The PREF parameter defines the preference of this contact channel in relation to other contact channels.  The TYPE parameter defines when to use this preference.</dd>
           <dt>Description:</dt>
           <dd>
-            This defines an order of preferences for contact channels. The contact channels supported in this specification are phone numbers, email, instant messaging and postal delivery. They are identified by the name of the respective vCard property.
+            This defines an order of preferences for contact channels.  The contact channels supported in this specification are phone numbers, email, instant messaging and postal delivery.  They are identified by the name of the respective vCard property.
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -138,9 +138,9 @@ CONTACT-CHANNEL-PREF;PREF=2:TEL
           <dd>VALUE</dd>
           <dt>Description:</dt>
           <dd>
-            This is the time stamp when the vCard was created. Copying the
+            This is the time stamp when the vCard was created.  Copying the
             vCard across systems does not count as a new creation, nor does
-            a new revision. Instead, the time stamp value typically
+            a new revision.  Instead, the time stamp value typically
             stays unchanged for the existence of the vCard.
           </dd>
           <dt>Format definition:</dt>
@@ -194,16 +194,16 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dd>
             <t>
               This property defines the grammatical gender that the contact prefers
-              to be addressed by or referred at. Multiple occurrences of this property
+              to be addressed by or referred at.  Multiple occurrences of this property
               are allowed, but <bcp14>SHOULD</bcp14> be distinguished by the LANG
               parameter.
             </t>
             <t>
               Many human languages use grammatical genders in salutations and other
-              language constructs. For example, the German language typically distinguishes
+              language constructs.  For example, the German language typically distinguishes
               between the grammatical gender of the recipient in salutations.
               The allowed values for this property aim to cover grammatical genders
-              for the majority of human languages. Future RFCs <bcp14>MAY</bcp14>
+              for the majority of human languages.  Future RFCs <bcp14>MAY</bcp14>
               define additional values if the current selection is found to be inadequate.
             </t>
           </dd>
@@ -301,8 +301,8 @@ LOCALE:de-AT
           <dt>Description:</dt>
           <dd>
             This property contains the pronouns that the contact chooses to use for themselves.
-            The value is free-form text. These pronouns shall be used
-            when addressing or referring to the contact. Multiple occurrences of
+            The value is free-form text.  These pronouns shall be used
+            when addressing or referring to the contact.  Multiple occurrences of
             this property <bcp14>MAY</bcp14> define pronouns for multiple languages,
             preferences and contexts.
           </dd>
@@ -349,8 +349,8 @@ PRONOUNS;LANG=en:they/them
           <dd>This parameter specifies that the value of the associated property is derived from some other property value or values.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property when the value is derived from some other property or properties. When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
-            <t>For an example, an implementation may derive the value of the FN property from the name components of the N property. It indicates this by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
+            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property when the value is derived from some other property or properties.  When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
+            <t>For an example, an implementation may derive the value of the FN property from the name components of the N property.  It indicates this by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -378,10 +378,10 @@ FN;DERIVED=TRUE:Mr. John Quinlan
           <dt>Description:</dt>
           <dd>
             <t>
-              This parameter uniquely identifies a property among all of its siblings with the same name within a calendar component. A valid PROP-ID value must be of 1 and a maximum of 255 octets in size, and it MUST only contain the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (<tt>-</tt>), and underscore (<tt>_</tt>). The identifier only has the purpose to uniquely identify siblings, its value has no other meaning. If an application makes use of PROP-ID it <bcp14>SHOULD</bcp14> assign a unique identifier to each sibling property of the same name within their embedding component. The same identifier <bcp14>MAY</bcp14> be used for properties of a different name, and it <bcp14>MAY</bcp14> also be assigned to a same-named property that is not a sibling.
+              This parameter uniquely identifies a property among all of its siblings with the same name within a calendar component.  A valid PROP-ID value must be of 1 and a maximum of 255 octets in size, and it MUST only contain the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (<tt>-</tt>), and underscore (<tt>_</tt>).  The identifier only has the purpose to uniquely identify siblings, its value has no other meaning.  If an application makes use of PROP-ID it <bcp14>SHOULD</bcp14> assign a unique identifier to each sibling property of the same name within their embedding component.  The same identifier <bcp14>MAY</bcp14> be used for properties of a different name, and it <bcp14>MAY</bcp14> also be assigned to a same-named property that is not a sibling.
             </t>
             <t>
-              Resolving duplicate identifier conflicts is specific to the application. Similarly, handling properties where some but not all siblings have a PROP-ID is assigned, is application-specific.
+              Resolving duplicate identifier conflicts is specific to the application.  Similarly, handling properties where some but not all siblings have a PROP-ID is assigned, is application-specific.
             </t>
           </dd>
           <dt>Format definition:</dt>
