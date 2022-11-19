@@ -792,6 +792,7 @@ Specifies the type of the anniversary. This RFC predefines the following types, 
               <ul spacing="normal">
                 <li><tt>birth</tt>: a birth day anniversary</li>
                 <li><tt>death</tt>: a death day anniversary</li>
+                <li><tt>wedding</tt>: a wedding day anniversary</li>
               </ul>
             </li>
             <li>
