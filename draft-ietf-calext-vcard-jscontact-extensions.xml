@@ -457,8 +457,6 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
             <td align="left">PROP-ID</td>
             <td align="left">This document, <xref target="param-propid"/></td>
           </tr>
-        </tbody>
-        <tbody>
           <tr>
             <td/>
             <td align="left">DERIVED</td>
