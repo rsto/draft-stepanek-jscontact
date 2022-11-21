@@ -305,8 +305,8 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         </section>
           <section anchor="members" numbered="true" toc="default">
               <name>members</name>
-              <t>Type: <tt>String[Boolean]</tt> (mandatory).  The members of a Card representing a group.</t>
-              <t>The set is represented as an object, with each key being the uid of another Card.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+              <t>Type: <tt>String[Boolean]</tt> (optional).</t>
+              <t>This identifies the set of cards that are members of this group card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
           </section>
           <section anchor="relatedTo" numbered="true" toc="default">
           <name>relatedTo</name>
