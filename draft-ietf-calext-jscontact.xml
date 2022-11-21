@@ -621,7 +621,6 @@ Defines the preference of this language in relation to other languages of the sa
           <t>The scheduling addresses by which the entity may receive calendar scheduling invitations.  A SchedulingAddress object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>.</li>
-            <li>The <tt>type</tt> property value either is not set or it <bcp14>MUST</bcp14> be a valid object key of the JSCalendar <tt>sendTo</tt> property, as specified in <xref target="RFC8984" format="default" section="4.4.6"/> and future JSCalendar RFCs.</li>
           </ul>
         </section>
       </section>
@@ -2685,7 +2684,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8141.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml"/>
