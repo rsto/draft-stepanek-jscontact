@@ -234,11 +234,11 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are indendepent of each other.</t>
         </section>
-          <section anchor="prop-sort-as" numbered="true" toc="default">
-              <name>The <tt>sortAs</tt> property</name>
-              <t>Type: <tt>String[]</tt></t>
-              <t>This property allows to define a list of strings that can be used for sorting this card within a collection of cards.</t>
-          </section>
+        <section anchor="prop-sort-as" numbered="true" toc="default">
+          <name>The <tt>sortAs</tt> property</name>
+          <t>Type: <tt>String[]</tt></t>
+          <t>This property allows to define a list of strings that can be used for sorting this card within a collection of cards.</t>
+        </section>
       </section>
       <section anchor="vendor-extension-values" numbered="true" toc="default">
         <name>Vendor-Extension Values</name>
@@ -278,7 +278,7 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/> but for compatibility with <xref target="RFC6350"/> it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the <tt>uuid</tt> namespace <xref target="RFC4122" format="default"/>.  As of this writing, a revision of <xref target="RFC4122" /> is being worked on and is likely to introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudo-random UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
+          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/> but for compatibility with <xref target="RFC6350"/> it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the <tt>uuid</tt> namespace <xref target="RFC4122" format="default"/>.  As of this writing, a revision of <xref target="RFC4122"/> is being worked on and is likely to introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudo-random UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
         </section>
         <section anchor="prodId" numbered="true" toc="default">
           <name>prodId</name>
@@ -308,12 +308,12 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
             <li><tt>application</tt>: a software application</li>
           </ul>
         </section>
-          <section anchor="members" numbered="true" toc="default">
-              <name>members</name>
-              <t>Type: <tt>String[Boolean]</tt> (optional).</t>
-              <t>This identifies the set of cards that are members of this group card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
-          </section>
-          <section anchor="relatedTo" numbered="true" toc="default">
+        <section anchor="members" numbered="true" toc="default">
+          <name>members</name>
+          <t>Type: <tt>String[Boolean]</tt> (optional).</t>
+          <t>This identifies the set of cards that are members of this group card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
+        </section>
+        <section anchor="relatedTo" numbered="true" toc="default">
           <name>relatedTo</name>
           <t>Type: <tt>String[Relation]</tt> (optional).</t>
           <t>Relates the object to other Card objects.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card and the value defines the relation.  The Relation object has the following properties:</t>
@@ -344,14 +344,15 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
             <li>@type: <tt>Name</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Name</tt>.
               </li>
-            <li><t>components: <tt>NameComponent[]</tt> (mandatory). The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
-                <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity. This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character. Otherwise, inserting a single Space character in between name component values is a good choice.</t>
+            <li>
+              <t>components: <tt>NameComponent[]</tt> (mandatory). The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
+              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity. This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character. Otherwise, inserting a single Space character in between name component values is a good choice.</t>
             </li>
             <li>
           locale: <tt>String</tt> (optional).
           The locale of the name.  The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
         </li>
-              <li>sortAs: <tt>String[]</tt> (optional)
+            <li>sortAs: <tt>String[]</tt> (optional)
                   The list of strings used to sort this card based on the name.  Also see <xref target="prop-sort-as"/>.
               </li>
           </ul>
@@ -420,7 +421,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>units: <tt>String[]</tt> (optional).
                 A list of organizational unit names.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
             </li>
-              <li>sortAs: <tt>String[]</tt> (optional)
+            <li>sortAs: <tt>String[]</tt> (optional)
                   The list of strings used to sort this card based on the organization.  Also see <xref target="prop-sort-as"/>.
               </li>
           </ul>
@@ -921,7 +922,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </ul>
       </section>
     </section>
-
     <section anchor="iana-considerations" numbered="true" toc="default">
       <name>IANA Considerations</name>
       <section anchor="iana-mime-type" numbered="true" toc="default">
@@ -933,23 +933,23 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Subtype name:</dt>
           <dd>jscontact+json</dd>
           <dt>Required parameters:</dt>
-          <dd><t>type</t>
+          <dd>
+            <t>type</t>
             <t>The <tt>type</tt> parameter conveys the type of the JSContact data in the body part. The allowed parameter values correspond to the <tt>@type</tt> property of the JSON-formatted JSContact object in the body. This RFC specifies a single type, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
             <dl newline="false" spacing="normal">
               <dt><tt>card</tt>:</dt>
-	            <dd>The <tt>@type</tt> property value of the JSContact object <bcp14>MUST</bcp14> be
+              <dd>The <tt>@type</tt> property value of the JSContact object <bcp14>MUST</bcp14> be
 		          <tt>Card</tt>.</dd>
             </dl>
             <t>The parameter <bcp14>MUST NOT</bcp14> occur more than once.</t>
           </dd>
           <dt>Optional parameters:</dt>
           <dd>
-          	<t>version</t>
-          	<t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part. Its value <bcp14>MUST</bcp14> match the value of the <tt>version</tt> property of the JSContact object.</t>
+            <t>version</t>
+            <t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part. Its value <bcp14>MUST</bcp14> match the value of the <tt>version</tt> property of the JSContact object.</t>
           </dd>
           <dt>Encoding considerations:</dt>
-          <dd>This is the same as the encoding considerations of application/json, as specified in <xref
-	    target="RFC8259" sectionFormat="of" section="11"/>.</dd>
+          <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.</dd>
           <dt>Security considerations:</dt>
           <dd> See <xref target="security-considerations" format="default"/> of this document.</dd>
           <dt>Interoperability considerations:</dt>
@@ -1012,8 +1012,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <name>Designated Expert Review</name>
           <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging
 	    the submitter to document security and privacy considerations. For a common-use registration, the DE
-	      is expected to confirm that suitable documentation, as described in <xref target="RFC8126"
-	        sectionFormat="of" section="4.6"/>, is available to ensure interoperability. That documentation will
+	      is expected to confirm that suitable documentation, as described in <xref target="RFC8126" sectionFormat="of" section="4.6"/>, is available to ensure interoperability. That documentation will
 	        usually be in an RFC, but simple definitions are likely to use a web/wiki page, and if a sentence or
 		  two is deemed sufficient, it could be described in the registry itself. The DE should also verify that
 		    the property name does not conflict with work that is active or already published within the IETF. A
@@ -1037,34 +1036,34 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
 	    informing IANA; this can be done without discussion or review.</t>
         </section>
         <section anchor="iana-property-registry-template" numbered="true" toc="default">
-          <name>&quot;JSContact Properties&quot; Registry Template</name>
+          <name>"JSContact Properties" Registry Template</name>
           <dl newline="false">
             <dt>Property Name:</dt>
-	        <dd>This is the name of the property. The property name <bcp14>MUST NOT</bcp14> already be
+            <dd>This is the name of the property. The property name <bcp14>MUST NOT</bcp14> already be
 		    registered for
 		        any of the object types listed in the "Property Context" field of this registration. Other object
 			    types <bcp14>MAY</bcp14> already have registered a different property with the same name; however,
 			        the same name <bcp14>SHOULD</bcp14> only be used when the semantics are analogous.</dd>
             <dt>Property Type:</dt>
-	        <dd> This is the type of this property, using type signatures, as specified in <xref target="type-signatures" format="default"/>.
+            <dd> This is the type of this property, using type signatures, as specified in <xref target="type-signatures" format="default"/>.
 		    The property type <bcp14>MUST</bcp14> be registered in the "JSContact Types" registry.</dd>
             <dt>Property Context:</dt>
-	        <dd>This is a comma-separated list of JSContact object types this property is allowed on.</dd>
+            <dd>This is a comma-separated list of JSContact object types this property is allowed on.</dd>
             <dt>Reference or Description:</dt>
-	        <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names).</dd>
+            <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names).</dd>
             <dt>Intended Usage:</dt>
-	        <dd>This may be "common", "reserved", or "obsolete".</dd>
-	        <dt>Version:</dt>
-	        <dd>This defines the JSContact specification version on which this property definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dd>This may be "common", "reserved", or "obsolete".</dd>
+            <dt>Version:</dt>
+            <dd>This defines the JSContact specification version on which this property definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
             <dt>Change Controller:</dt>
-	        <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
+            <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
         </section>
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
-          <name>Initial Contents for the &quot;JSContact Properties&quot; Registry</name>
+          <name>Initial Contents for the "JSContact Properties" Registry</name>
           <t>The following table lists the initial entries of the "JSContact Properties" registry. All properties are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document. The change controller for all these properties is "IETF".</t>
-<table anchor="tab-iana-property-registry" align="center">
-  <name>Initial Contents of the &quot;JSContact Properties&quot; Registry</name>
+          <table anchor="tab-iana-property-registry" align="center">
+            <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
               <tr>
                 <th align="left">Property Name</th>
@@ -1079,36 +1078,35 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">@type</td>
                 <td align="left">String</td>
                 <td align="left">Card, ...</td>
-                <td align="left">
-                  <xref target="cardtype" format="default"/>, <xref target="card" format="default"/></td>
+                <td align="left"><xref target="cardtype" format="default"/>, <xref target="card" format="default"/></td>
               </tr>
             </tbody>
           </table>
         </section>
       </section>
       <section anchor="iana-type-registry" numbered="true" toc="default">
-        <name>Creation of the &quot;JSContact Types&quot; Registry</name>
+        <name>Creation of the "JSContact Types" Registry</name>
         <t>IANA has created the "JSContact Types" registry to avoid name collisions and provide a complete reference for all data types used for JSContact property values. The registration process is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
         <section anchor="iana-type-registry-template" numbered="true" toc="default">
-          <name>&quot;JSContact Types&quot; Registry Template</name>
+          <name>"JSContact Types" Registry Template</name>
           <dl newline="false">
             <dt>Type Name:</dt>
-	        <dd>the name of the type</dd>
+            <dd>the name of the type</dd>
             <dt>Reference or Description:</dt>
-	        <dd>a brief description or RFC number and section reference where the Type is specified (may be omitted for "reserved" type names)</dd>
+            <dd>a brief description or RFC number and section reference where the Type is specified (may be omitted for "reserved" type names)</dd>
             <dt>Intended Use:</dt>
-	        <dd>common, reserved, or obsolete</dd>
-	        <dt>Version:</dt>
-	        <dd>This defines the JSContact specification version on which this type definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dd>common, reserved, or obsolete</dd>
+            <dt>Version:</dt>
+            <dd>This defines the JSContact specification version on which this type definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
             <dt>Change Controller:</dt>
-	        <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
+            <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
           </dl>
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
-          <name>Initial Contents for the &quot;JSContact Types&quot; Registry</name>
+          <name>Initial Contents for the "JSContact Types" Registry</name>
           <t>The following table lists the initial entries of the JSContact Types registry. All types are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document. The change controller for all these properties is "IETF".</t>
           <table anchor="tab-iana-type-registry" align="left">
-	        <name>Initial Contents of the &quot;JSContact Types&quot; Registry</name>
+            <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
               <tr>
                 <th align="left">Type Name</th>
@@ -1119,12 +1117,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">Card</td>
                 <td align="left">
-                  <xref target="card" format="default"/></td>
+                  <xref target="card" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">Boolean</td>
                 <td align="left">
-                  <xref target="type-signatures" format="default"/></td>
+                  <xref target="type-signatures" format="default"/>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -1132,1807 +1132,1802 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-enum-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Enum Values" Registry</name>
-        <t>IANA has created the "JSContact Enum Values" registry to allow interoperable extension of semantics for properties with enumerable values. Each such property will have a subregistry of allowed values. The registration process for a new enum value or adding a new enumerable property is the same as for the &quot;JSContact Properties&quot; registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <t>IANA has created the "JSContact Enum Values" registry to allow interoperable extension of semantics for properties with enumerable values. Each such property will have a subregistry of allowed values. The registration process for a new enum value or adding a new enumerable property is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
         <section anchor="iana-enum-registry-registry-template" numbered="true" toc="default">
-          <name>&quot;JSContact Enum Values&quot; Registry Property Template</name>
-          <t>This template is for adding a subregistry for a new enumerable property to the &quot;JSContact Enum&quot; registry.</t>
+          <name>"JSContact Enum Values" Registry Property Template</name>
+          <t>This template is for adding a subregistry for a new enumerable property to the "JSContact Enum" registry.</t>
           <dl newline="false">
             <dt>Property Name:</dt>
-	        <dd>These are the name(s) of the property or properties where these values may be used. This <bcp14>MUST</bcp14> be registered in the &quot;JSContact Properties&quot; registry.</dd>
+            <dd>These are the name(s) of the property or properties where these values may be used. This <bcp14>MUST</bcp14> be registered in the "JSContact Properties" registry.</dd>
             <dt>Context:</dt>
-	        <dd>This is the list of allowed object types where the property or properties may appear, as registered in the &quot;JSContact Properties&quot; registry. This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
-	        <dt>Version:</dt>
-	        <dd>This defines the JSContact specification version on which this enum  value definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dd>This is the list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry. This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
+            <dt>Version:</dt>
+            <dd>This defines the JSContact specification version on which this enum  value definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
             <dt>Change Controller:</dt>
-	        <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
+            <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
-	        <dd>This is the initial list of defined values for this enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>. A subregistry will be created with these values for this property name/context tuple.</dd>
+            <dd>This is the initial list of defined values for this enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>. A subregistry will be created with these values for this property name/context tuple.</dd>
           </dl>
         </section>
         <section anchor="iana-enum-registry-value-template" numbered="true" toc="default">
-          <name>&quot;JSContact Enum Values&quot; Registry Value Template</name>
+          <name>"JSContact Enum Values" Registry Value Template</name>
           <t>This template is for adding a new enum value to a subregistry in the JSContact Enum registry.</t>
           <dl newline="false">
             <dt>Enum Value:</dt>
-	        <dd>the verbatim value of the enum</dd>
+            <dd>the verbatim value of the enum</dd>
             <dt>Reference or Description:</dt>
-	        <dd>a brief description or RFC number and section reference for the semantics of this value</dd>
+            <dd>a brief description or RFC number and section reference for the semantics of this value</dd>
           </dl>
         </section>
         <section anchor="iana-enum-registry-contents" numbered="true" toc="default">
-          <name>Initial Contents for the &quot;JSContact Enum Values&quot; Registry</name>
+          <name>Initial Contents for the "JSContact Enum Values" Registry</name>
           <t>For each subregistry created in this section, all RFC section references are for this document.</t>
-
-<dl spacing="compact" newline="false" indent="20">
-          <dt>Property Name:</dt><dd>kind</dd>
-          <dt>Context:</dt><dd>Card</dd>
-          <dt>Change Controller:</dt><dd>IETF</dd>
-          <dt>Version:</dt><dd>rfc0000</dd>
-          <dt>Initial Contents:</dt><dd>
-          <table anchor="tab-iana-enum-card-kind" align="left">
-	        <name>JSContact Enum Values for kind (Context: Card)</name>
-            <thead>
-              <tr>
-                <th align="left">Enum Value</th>
-                <th align="left">Reference or Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td align="left">individual</td>
-                <td align="left">
-                  <xref target="kind" format="default"/></td>
-              </tr>
-            </tbody>
-          </table></dd>
-</dl>
-</section>
-</section>
-</section>
-
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>Card</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-card-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: Card)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">individual</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+        </section>
+      </section>
+    </section>
     <section anchor="iana-considerations-old" numbered="true" toc="default">
       <name>OLD: IANA Considerations</name>
-
-
       <section anchor="types_registry" numbered="true" toc="default">
-       <name>Types Registry</name>
+        <name>Types Registry</name>
         <t>IANA is requested to add the following entries to the "Types Registry".</t>
         <table anchor="types_registry_table">
-            <name>Types Registry</name>
-            <thead>
-                <tr>
-                    <th align="left">Namespace</th>
-                    <th align="left">Type</th>
-                    <th align="left">Parent Type</th>
-                    <th align="left">Reference</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td/>
-                    <td align="left">Card</td>
-                    <td/>
-                    <td align="left">This document, <xref target="card"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Resource</td>
-                    <td/>
-                    <td align="left">This document, <xref target="resource"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Relation</td>
-                    <td/>
-                    <td align="left">This document, <xref target="relatedTo"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Name</td>
-                    <td/>
-                    <td align="left">This document, <xref target="name"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">NameComponent</td>
-                    <td/>
-                    <td align="left">This document, <xref target="name"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">NickName</td>
-                    <td/>
-                    <td align="left">This document, <xref target="nickNames"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Organization</td>
-                    <td/>
-                    <td align="left">This document, <xref target="organizations"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">OrgUnit</td>
-                    <td/>
-                    <td align="left">This document, <xref target="organizations"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Title</td>
-                    <td/>
-                    <td align="left">This document, <xref target="titles"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">SpeakToAs</td>
-                    <td/>
-                    <td align="left">This document, <xref target="speakToAs"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Pronouns</td>
-                    <td/>
-                    <td align="left">This document, <xref target="speakToAs"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">EmailAddress</td>
-                    <td/>
-                    <td align="left">This document, <xref target="emails"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">OnlineService</td>
-                    <td/>
-                    <td align="left">This document, <xref target="onlineServices"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Phone</td>
-                    <td/>
-                    <td align="left">This document, <xref target="phones"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">ContactChannelPreference</td>
-                    <td/>
-                    <td align="left">This document, <xref target="preferredContactChannels"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">LanguagePreference</td>
-                    <td/>
-                    <td align="left">This document, <xref target="preferredLanguages"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">CalendarResource</td>
-                    <td align="left">Resource</td>
-                    <td align="left">This document, <xref target="calendars"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">SchedulingAddress</td>
-                    <td align="left">Resource</td>
-                    <td align="left">This document, <xref target="schedulingAddresses"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Address</td>
-                    <td/>
-                    <td align="left">This document, <xref target="addresses"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">StreetComponent</td>
-                    <td/>
-                    <td align="left">This document, <xref target="addresses"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">CryptoResource</td>
-                    <td align="left">Resource</td>
-                    <td align="left">This document, <xref target="cryptoKeys"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">DirectoryResource</td>
-                    <td align="left">Resource</td>
-                    <td align="left">This document, <xref target="directories"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">LinkResource</td>
-                    <td align="left">Resource</td>
-                    <td align="left">This document, <xref target="links"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">MediaResource</td>
-                    <td align="left">Resource</td>
-                    <td align="left">This document, <xref target="media"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">PatchObject</td>
-                    <td/>
-                    <td align="left">This document, <xref target="localizations"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Anniversary</td>
-                    <td/>
-                    <td align="left">This document, <xref target="anniversaries"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Timestamp</td>
-                    <td/>
-                    <td align="left">This document, <xref target="anniversaries"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">PartialDate</td>
-                    <td/>
-                    <td align="left">This document, <xref target="anniversaries"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">PersonalInformation</td>
-                    <td/>
-                    <td align="left">This document, <xref target="personalInfo"/></td>
-                </tr>
-                <tr>
-                    <td/>
-                    <td align="left">Note</td>
-                    <td/>
-                    <td align="left">This document, <xref target="notes"/></td>
-                </tr>
-            </tbody>
+          <name>Types Registry</name>
+          <thead>
+            <tr>
+              <th align="left">Namespace</th>
+              <th align="left">Type</th>
+              <th align="left">Parent Type</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td/>
+              <td align="left">This document, <xref target="card"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td/>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Relation</td>
+              <td/>
+              <td align="left">This document, <xref target="relatedTo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Name</td>
+              <td/>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td/>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td/>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Organization</td>
+              <td/>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OrgUnit</td>
+              <td/>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td/>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td/>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td/>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td/>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td/>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td/>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">ContactChannelPreference</td>
+              <td/>
+              <td align="left">This document, <xref target="preferredContactChannels"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">LanguagePreference</td>
+              <td/>
+              <td align="left">This document, <xref target="preferredLanguages"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CalendarResource</td>
+              <td align="left">Resource</td>
+              <td align="left">This document, <xref target="calendars"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SchedulingAddress</td>
+              <td align="left">Resource</td>
+              <td align="left">This document, <xref target="schedulingAddresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td/>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td/>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CryptoResource</td>
+              <td align="left">Resource</td>
+              <td align="left">This document, <xref target="cryptoKeys"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">DirectoryResource</td>
+              <td align="left">Resource</td>
+              <td align="left">This document, <xref target="directories"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">LinkResource</td>
+              <td align="left">Resource</td>
+              <td align="left">This document, <xref target="links"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">MediaResource</td>
+              <td align="left">Resource</td>
+              <td align="left">This document, <xref target="media"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PatchObject</td>
+              <td/>
+              <td align="left">This document, <xref target="localizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td/>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Timestamp</td>
+              <td/>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PartialDate</td>
+              <td/>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td/>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Note</td>
+              <td/>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+          </tbody>
         </table>
       </section>
-
-        <section anchor="properties_registry" numbered="true" toc="default">
-            <name>Properties Registry</name>
-            <t>IANA is requested to add the following entries to the "Properties Registry".</t>
-            <table anchor="properties_registry_table">
-                <name>Properties Registry</name>
-                <thead>
-                    <tr>
-                        <th align="left">Namespace</th>
-                        <th align="left">Type</th>
-                        <th align="left">Property</th>
-                        <th align="left">Reference</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="cardtype"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">uid</td>
-                        <td align="left">This document, <xref target="uid"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">prodId</td>
-                        <td align="left">This document, <xref target="prodId"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">created</td>
-                        <td align="left">This document, <xref target="created"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">updated</td>
-                        <td align="left">This document, <xref target="updated"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">kind</td>
-                        <td align="left">This document, <xref target="kind"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">members</td>
-                        <td align="left">This document, <xref target="members"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">relatedTo</td>
-                        <td align="left">This document, <xref target="relatedTo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">locale</td>
-                        <td align="left">This document, <xref target="locale"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">name</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">fullName</td>
-                        <td align="left">This document, <xref target="fullName"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">nickNames</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">organizations</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">titles</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">speakToAs</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">emails</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">onlineServices</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">phones</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">preferredContactChannels</td>
-                        <td align="left">This document, <xref target="preferredContactChannels"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">preferredLanguages</td>
-                        <td align="left">This document, <xref target="preferredLanguages"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">calendars</td>
-                        <td align="left">This document, <xref target="calendars"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">schedulingAddresses</td>
-                        <td align="left">This document, <xref target="schedulingAddresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">addresses</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">cryptoKeys</td>
-                        <td align="left">This document, <xref target="cryptoKeys"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">directories</td>
-                        <td align="left">This document, <xref target="directories"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">links</td>
-                        <td align="left">This document, <xref target="links"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">media</td>
-                        <td align="left">This document, <xref target="media"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">localizations</td>
-                        <td align="left">This document, <xref target="localizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">anniversaries</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">personalInfo</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">notes</td>
-                        <td align="left">This document, <xref target="notes"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">keywords</td>
-                        <td align="left">This document, <xref target="keywords"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Resource</td>
-                        <td align="left">type</td>
-                        <td align="left">This document, <xref target="resource"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Resource</td>
-                        <td align="left">uri</td>
-                        <td align="left">This document, <xref target="resource"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Resource</td>
-                        <td align="left">mediaType</td>
-                        <td align="left">This document, <xref target="resource"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Resource</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="resource"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Resource</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="resource"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Resource</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="resource"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Relation</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="relatedTo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Relation</td>
-                        <td align="left">relation</td>
-                        <td align="left">This document, <xref target="relatedTo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Name</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Name</td>
-                        <td align="left">components</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Name</td>
-                        <td align="left">locale</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">value</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">nth</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NickName</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NickName</td>
-                        <td align="left">name</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NickName</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NickName</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NickName</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Organization</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Organization</td>
-                        <td align="left">name</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Organization</td>
-                        <td align="left">units</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Organization</td>
-                        <td align="left">sorAs</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OrgUnit</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OrgUnit</td>
-                        <td align="left">name</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OrgUnit</td>
-                        <td align="left">sorAs</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Title</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Title</td>
-                        <td align="left">title</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Title</td>
-                        <td align="left">type</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Title</td>
-                        <td align="left">organization</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">grammaticalGender</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">pronouns</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Pronouns</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Pronouns</td>
-                        <td align="left">pronouns</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Pronouns</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Pronouns</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Pronouns</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">address</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">service</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">uri</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">username</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">phone</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredContactChannel</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="preferredContactChannels"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredContactChannel</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="preferredContactChannels"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredContactChannel</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="preferredContactChannels"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredLanguage</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="preferredLanguages"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredLanguage</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="preferredLanguages"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredLanguage</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="preferredLanguages"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">CalendarResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="calendars"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SchedulingAddress</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="schedulingAddresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">fullAddress</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">street</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">locality</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">region</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">country</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">postcode</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">countryCode</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">coordinates</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">timeZone</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">contexts</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">pref</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">value</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">DirectoryResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="directories"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">CryptoResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="cryptoKeys"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">LinkResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="links"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">MediaResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="media"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">type</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">date</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">place</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Timestamp</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Timestamp</td>
-                        <td align="left">utc</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PartialDate</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PartialDate</td>
-                        <td align="left">year</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PartialDate</td>
-                        <td align="left">month</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PartialDate</td>
-                        <td align="left">day</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PartialDate</td>
-                        <td align="left">calendarScale</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">type</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">value</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">level</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">label</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Note</td>
-                        <td align="left">@type</td>
-                        <td align="left">This document, <xref target="notes"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Note</td>
-                        <td align="left">note</td>
-                        <td align="left">This document, <xref target="notes"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Note</td>
-                        <td align="left">language</td>
-                        <td align="left">This document, <xref target="notes"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Note</td>
-                        <td align="left">created</td>
-                        <td align="left">This document, <xref target="notes"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Note</td>
-                        <td align="left">author</td>
-                        <td align="left">This document, <xref target="notes"/></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-
-
-
-        <section anchor="values_registry" numbered="true" toc="default">
-            <name>Values Registry</name>
-            <t>IANA is requested to add the following entries to the "Values Registry".</t>
-            <table anchor="values_registry_table">
-                <name>Values Registry</name>
-                <thead>
-                    <tr>
-                        <th align="left">Namespace</th>
-                        <th align="left">Type</th>
-                        <th align="left">Property</th>
-                        <th align="left">Value</th>
-                        <th align="left">Reference</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td/>
-                        <td align="left">Context</td>
-                        <td align="left"></td>
-                        <td align="left">private</td>
-                        <td align="left">This document, <xref target="prop-contexts"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Context</td>
-                        <td align="left"></td>
-                        <td align="left">work</td>
-                        <td align="left">This document, <xref target="prop-contexts"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">@type</td>
-                        <td align="left">Card</td>
-                        <td align="left">This document, <xref target="card"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">kind</td>
-                        <td align="left">individual</td>
-                        <td align="left">This document, <xref target="kind"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">kind</td>
-                        <td align="left">group</td>
-                        <td align="left">This document, <xref target="kind"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">kind</td>
-                        <td align="left">org</td>
-                        <td align="left">This document, <xref target="kind"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">kind</td>
-                        <td align="left">location</td>
-                        <td align="left">This document, <xref target="kind"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">kind</td>
-                        <td align="left">device</td>
-                        <td align="left">This document, <xref target="kind"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Card</td>
-                        <td align="left">kind</td>
-                        <td align="left">application</td>
-                        <td align="left">This document, <xref target="kind"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Resource</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="resource"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Relation</td>
-                        <td align="left">@type</td>
-                        <td align="left">Relation</td>
-                        <td align="left">This document, <xref target="relatedTo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Name</td>
-                        <td align="left">@type</td>
-                        <td align="left">Name</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">@type</td>
-                        <td align="left">NameComponent</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">prefix</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">given</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">surname</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">middle</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">suffix</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NameComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">separator</td>
-                        <td align="left">This document, <xref target="name"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NickName</td>
-                        <td align="left">@type</td>
-                        <td align="left">NickName</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">NickName</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="nickNames"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Organization</td>
-                        <td align="left">@type</td>
-                        <td align="left">Organization</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OrgUnit</td>
-                        <td align="left">@type</td>
-                        <td align="left">OrgUnit</td>
-                        <td align="left">This document, <xref target="organizations"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Title</td>
-                        <td align="left">@type</td>
-                        <td align="left">Title</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Title</td>
-                        <td align="left">type</td>
-                        <td align="left">title</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Title</td>
-                        <td align="left">type</td>
-                        <td align="left">role</td>
-                        <td align="left">This document, <xref target="titles"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">@type</td>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">grammaticalGender</td>
-                        <td align="left">animate</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">grammaticalGender</td>
-                        <td align="left">female</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">grammaticalGender</td>
-                        <td align="left">inanimate</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">grammaticalGender</td>
-                        <td align="left">male</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SpeakToAs</td>
-                        <td align="left">grammaticalGender</td>
-                        <td align="left">neuter</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Pronouns</td>
-                        <td align="left">@type</td>
-                        <td align="left">Pronouns</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Pronouns</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="speakToAs"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">@type</td>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">EmailAddress</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="emails"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">@type</td>
-                        <td align="left">OnlineService</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">OnlineService</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="onlineServices"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">@type</td>
-                        <td align="left">Phone</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">voice</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">fax</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">pager</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">text</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">cell</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">textphone</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">features</td>
-                        <td align="left">video</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Phone</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="phones"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredContactChannel</td>
-                        <td align="left">@type</td>
-                        <td align="left">PreferredContactChannel</td>
-                        <td align="left">This document, <xref target="preferredContactChannels"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredContactChannel</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="preferredContactChannels"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredLanguage</td>
-                        <td align="left">@type</td>
-                        <td align="left">PreferredLanguage</td>
-                        <td align="left">This document, <xref target="preferredLanguages"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PreferredLanguage</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="preferredLanguages"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">CalendarResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">CalendarResource</td>
-                        <td align="left">This document, <xref target="calendars"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">CalendarResource</td>
-                        <td align="left">type</td>
-                        <td align="left">calendar</td>
-                        <td align="left">This document, <xref target="calendars"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">CalendarResource</td>
-                        <td align="left">type</td>
-                        <td align="left">freeBusy</td>
-                        <td align="left">This document, <xref target="calendars"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">SchedulingAddress</td>
-                        <td align="left">@type</td>
-                        <td align="left">SchedulingAddress</td>
-                        <td align="left">This document, <xref target="schedulingAddresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">@type</td>
-                        <td align="left">Address</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">contexts</td>
-                        <td align="left">Context values</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">contexts</td>
-                        <td align="left">billing</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Address</td>
-                        <td align="left">contexts</td>
-                        <td align="left">postal</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">@type</td>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">name</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">number</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">apartment</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">room</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">extension</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">direction</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">building</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">floor</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">postOfficeBox</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">separator</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">StreetComponent</td>
-                        <td align="left">type</td>
-                        <td align="left">unknown</td>
-                        <td align="left">This document, <xref target="addresses"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">CryptoResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">CryptoResource</td>
-                        <td align="left">This document, <xref target="cryptoKeys"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">DirectoryResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">DirectoryResource</td>
-                        <td align="left">This document, <xref target="directories"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">DirectoryResource</td>
-                        <td align="left">type</td>
-                        <td align="left">directory</td>
-                        <td align="left">This document, <xref target="directories"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">DirectoryResource</td>
-                        <td align="left">type</td>
-                        <td align="left">entry</td>
-                        <td align="left">This document, <xref target="directories"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">LinkResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">LinkResource</td>
-                        <td align="left">This document, <xref target="links"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">LinkResource</td>
-                        <td align="left">type</td>
-                        <td align="left">contact</td>
-                        <td align="left">This document, <xref target="links"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">MediaResource</td>
-                        <td align="left">@type</td>
-                        <td align="left">MediaResource</td>
-                        <td align="left">This document, <xref target="media"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">MediaResource</td>
-                        <td align="left">type</td>
-                        <td align="left">photo</td>
-                        <td align="left">This document, <xref target="media"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">MediaResource</td>
-                        <td align="left">type</td>
-                        <td align="left">sound</td>
-                        <td align="left">This document, <xref target="media"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">MediaResource</td>
-                        <td align="left">type</td>
-                        <td align="left">logo</td>
-                        <td align="left">This document, <xref target="media"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">@type</td>
-                        <td align="left">Anniversary</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">type</td>
-                        <td align="left">birth</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">type</td>
-                        <td align="left">death</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Anniversary</td>
-                        <td align="left">type</td>
-                        <td align="left">wedding</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Timestamp</td>
-                        <td align="left">@type</td>
-                        <td align="left">Timestamp</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PartialDate</td>
-                        <td align="left">@type</td>
-                        <td align="left">PartialDate</td>
-                        <td align="left">This document, <xref target="anniversaries"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">@type</td>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">type</td>
-                        <td align="left">expertise</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">type</td>
-                        <td align="left">hobby</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">type</td>
-                        <td align="left">interest</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">level</td>
-                        <td align="left">high</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">level</td>
-                        <td align="left">medium</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">PersonalInformation</td>
-                        <td align="left">level</td>
-                        <td align="left">low</td>
-                        <td align="left">This document, <xref target="personalInfo"/></td>
-                    </tr>
-                    <tr>
-                        <td/>
-                        <td align="left">Note</td>
-                        <td align="left">@type</td>
-                        <td align="left">Note</td>
-                        <td align="left">This document, <xref target="notes"/></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
+      <section anchor="properties_registry" numbered="true" toc="default">
+        <name>Properties Registry</name>
+        <t>IANA is requested to add the following entries to the "Properties Registry".</t>
+        <table anchor="properties_registry_table">
+          <name>Properties Registry</name>
+          <thead>
+            <tr>
+              <th align="left">Namespace</th>
+              <th align="left">Type</th>
+              <th align="left">Property</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="cardtype"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">uid</td>
+              <td align="left">This document, <xref target="uid"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">prodId</td>
+              <td align="left">This document, <xref target="prodId"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">created</td>
+              <td align="left">This document, <xref target="created"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">updated</td>
+              <td align="left">This document, <xref target="updated"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">kind</td>
+              <td align="left">This document, <xref target="kind"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">members</td>
+              <td align="left">This document, <xref target="members"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">relatedTo</td>
+              <td align="left">This document, <xref target="relatedTo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">locale</td>
+              <td align="left">This document, <xref target="locale"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">name</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">fullName</td>
+              <td align="left">This document, <xref target="fullName"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">nickNames</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">organizations</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">titles</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">speakToAs</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">emails</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">onlineServices</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">phones</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">preferredContactChannels</td>
+              <td align="left">This document, <xref target="preferredContactChannels"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">preferredLanguages</td>
+              <td align="left">This document, <xref target="preferredLanguages"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">calendars</td>
+              <td align="left">This document, <xref target="calendars"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">schedulingAddresses</td>
+              <td align="left">This document, <xref target="schedulingAddresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">addresses</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">cryptoKeys</td>
+              <td align="left">This document, <xref target="cryptoKeys"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">directories</td>
+              <td align="left">This document, <xref target="directories"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">links</td>
+              <td align="left">This document, <xref target="links"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">media</td>
+              <td align="left">This document, <xref target="media"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">localizations</td>
+              <td align="left">This document, <xref target="localizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">anniversaries</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">personalInfo</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">notes</td>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">keywords</td>
+              <td align="left">This document, <xref target="keywords"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td align="left">type</td>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td align="left">uri</td>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td align="left">mediaType</td>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Relation</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="relatedTo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Relation</td>
+              <td align="left">relation</td>
+              <td align="left">This document, <xref target="relatedTo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Name</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Name</td>
+              <td align="left">components</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Name</td>
+              <td align="left">locale</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">value</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">type</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">nth</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td align="left">name</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Organization</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Organization</td>
+              <td align="left">name</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Organization</td>
+              <td align="left">units</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Organization</td>
+              <td align="left">sorAs</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OrgUnit</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OrgUnit</td>
+              <td align="left">name</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OrgUnit</td>
+              <td align="left">sorAs</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td align="left">title</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td align="left">type</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td align="left">organization</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">grammaticalGender</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">pronouns</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td align="left">pronouns</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td align="left">address</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">service</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">uri</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">username</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">phone</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredContactChannel</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="preferredContactChannels"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredContactChannel</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="preferredContactChannels"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredContactChannel</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="preferredContactChannels"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredLanguage</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="preferredLanguages"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredLanguage</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="preferredLanguages"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredLanguage</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="preferredLanguages"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CalendarResource</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="calendars"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SchedulingAddress</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="schedulingAddresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">fullAddress</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">street</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">locality</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">region</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">country</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">postcode</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">countryCode</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">coordinates</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">timeZone</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">contexts</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">pref</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">value</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">DirectoryResource</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="directories"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CryptoResource</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="cryptoKeys"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">LinkResource</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="links"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">MediaResource</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="media"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">type</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">date</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">place</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Timestamp</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Timestamp</td>
+              <td align="left">utc</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PartialDate</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PartialDate</td>
+              <td align="left">year</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PartialDate</td>
+              <td align="left">month</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PartialDate</td>
+              <td align="left">day</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PartialDate</td>
+              <td align="left">calendarScale</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">type</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">value</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">level</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">label</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Note</td>
+              <td align="left">@type</td>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Note</td>
+              <td align="left">note</td>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Note</td>
+              <td align="left">language</td>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Note</td>
+              <td align="left">created</td>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Note</td>
+              <td align="left">author</td>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="values_registry" numbered="true" toc="default">
+        <name>Values Registry</name>
+        <t>IANA is requested to add the following entries to the "Values Registry".</t>
+        <table anchor="values_registry_table">
+          <name>Values Registry</name>
+          <thead>
+            <tr>
+              <th align="left">Namespace</th>
+              <th align="left">Type</th>
+              <th align="left">Property</th>
+              <th align="left">Value</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td/>
+              <td align="left">Context</td>
+              <td align="left"/>
+              <td align="left">private</td>
+              <td align="left">This document, <xref target="prop-contexts"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Context</td>
+              <td align="left"/>
+              <td align="left">work</td>
+              <td align="left">This document, <xref target="prop-contexts"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">@type</td>
+              <td align="left">Card</td>
+              <td align="left">This document, <xref target="card"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">kind</td>
+              <td align="left">individual</td>
+              <td align="left">This document, <xref target="kind"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">kind</td>
+              <td align="left">group</td>
+              <td align="left">This document, <xref target="kind"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">kind</td>
+              <td align="left">org</td>
+              <td align="left">This document, <xref target="kind"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">kind</td>
+              <td align="left">location</td>
+              <td align="left">This document, <xref target="kind"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">kind</td>
+              <td align="left">device</td>
+              <td align="left">This document, <xref target="kind"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Card</td>
+              <td align="left">kind</td>
+              <td align="left">application</td>
+              <td align="left">This document, <xref target="kind"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Resource</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="resource"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Relation</td>
+              <td align="left">@type</td>
+              <td align="left">Relation</td>
+              <td align="left">This document, <xref target="relatedTo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Name</td>
+              <td align="left">@type</td>
+              <td align="left">Name</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">@type</td>
+              <td align="left">NameComponent</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">type</td>
+              <td align="left">prefix</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">type</td>
+              <td align="left">given</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">type</td>
+              <td align="left">surname</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">type</td>
+              <td align="left">middle</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">type</td>
+              <td align="left">suffix</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NameComponent</td>
+              <td align="left">type</td>
+              <td align="left">separator</td>
+              <td align="left">This document, <xref target="name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td align="left">@type</td>
+              <td align="left">NickName</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">NickName</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="nickNames"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Organization</td>
+              <td align="left">@type</td>
+              <td align="left">Organization</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OrgUnit</td>
+              <td align="left">@type</td>
+              <td align="left">OrgUnit</td>
+              <td align="left">This document, <xref target="organizations"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td align="left">@type</td>
+              <td align="left">Title</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td align="left">type</td>
+              <td align="left">title</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Title</td>
+              <td align="left">type</td>
+              <td align="left">role</td>
+              <td align="left">This document, <xref target="titles"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">@type</td>
+              <td align="left">SpeakToAs</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">grammaticalGender</td>
+              <td align="left">animate</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">grammaticalGender</td>
+              <td align="left">female</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">grammaticalGender</td>
+              <td align="left">inanimate</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">grammaticalGender</td>
+              <td align="left">male</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SpeakToAs</td>
+              <td align="left">grammaticalGender</td>
+              <td align="left">neuter</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td align="left">@type</td>
+              <td align="left">Pronouns</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Pronouns</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="speakToAs"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td align="left">@type</td>
+              <td align="left">EmailAddress</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">EmailAddress</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="emails"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">@type</td>
+              <td align="left">OnlineService</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">OnlineService</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="onlineServices"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">@type</td>
+              <td align="left">Phone</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">voice</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">fax</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">pager</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">text</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">cell</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">textphone</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">features</td>
+              <td align="left">video</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Phone</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="phones"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredContactChannel</td>
+              <td align="left">@type</td>
+              <td align="left">PreferredContactChannel</td>
+              <td align="left">This document, <xref target="preferredContactChannels"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredContactChannel</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="preferredContactChannels"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredLanguage</td>
+              <td align="left">@type</td>
+              <td align="left">PreferredLanguage</td>
+              <td align="left">This document, <xref target="preferredLanguages"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PreferredLanguage</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="preferredLanguages"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CalendarResource</td>
+              <td align="left">@type</td>
+              <td align="left">CalendarResource</td>
+              <td align="left">This document, <xref target="calendars"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CalendarResource</td>
+              <td align="left">type</td>
+              <td align="left">calendar</td>
+              <td align="left">This document, <xref target="calendars"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CalendarResource</td>
+              <td align="left">type</td>
+              <td align="left">freeBusy</td>
+              <td align="left">This document, <xref target="calendars"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SchedulingAddress</td>
+              <td align="left">@type</td>
+              <td align="left">SchedulingAddress</td>
+              <td align="left">This document, <xref target="schedulingAddresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">@type</td>
+              <td align="left">Address</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">contexts</td>
+              <td align="left">Context values</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">contexts</td>
+              <td align="left">billing</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Address</td>
+              <td align="left">contexts</td>
+              <td align="left">postal</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">@type</td>
+              <td align="left">StreetComponent</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">name</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">number</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">apartment</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">room</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">extension</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">direction</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">building</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">floor</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">postOfficeBox</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">separator</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">StreetComponent</td>
+              <td align="left">type</td>
+              <td align="left">unknown</td>
+              <td align="left">This document, <xref target="addresses"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CryptoResource</td>
+              <td align="left">@type</td>
+              <td align="left">CryptoResource</td>
+              <td align="left">This document, <xref target="cryptoKeys"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">DirectoryResource</td>
+              <td align="left">@type</td>
+              <td align="left">DirectoryResource</td>
+              <td align="left">This document, <xref target="directories"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">DirectoryResource</td>
+              <td align="left">type</td>
+              <td align="left">directory</td>
+              <td align="left">This document, <xref target="directories"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">DirectoryResource</td>
+              <td align="left">type</td>
+              <td align="left">entry</td>
+              <td align="left">This document, <xref target="directories"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">LinkResource</td>
+              <td align="left">@type</td>
+              <td align="left">LinkResource</td>
+              <td align="left">This document, <xref target="links"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">LinkResource</td>
+              <td align="left">type</td>
+              <td align="left">contact</td>
+              <td align="left">This document, <xref target="links"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">MediaResource</td>
+              <td align="left">@type</td>
+              <td align="left">MediaResource</td>
+              <td align="left">This document, <xref target="media"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">MediaResource</td>
+              <td align="left">type</td>
+              <td align="left">photo</td>
+              <td align="left">This document, <xref target="media"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">MediaResource</td>
+              <td align="left">type</td>
+              <td align="left">sound</td>
+              <td align="left">This document, <xref target="media"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">MediaResource</td>
+              <td align="left">type</td>
+              <td align="left">logo</td>
+              <td align="left">This document, <xref target="media"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">@type</td>
+              <td align="left">Anniversary</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">type</td>
+              <td align="left">birth</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">type</td>
+              <td align="left">death</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Anniversary</td>
+              <td align="left">type</td>
+              <td align="left">wedding</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Timestamp</td>
+              <td align="left">@type</td>
+              <td align="left">Timestamp</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PartialDate</td>
+              <td align="left">@type</td>
+              <td align="left">PartialDate</td>
+              <td align="left">This document, <xref target="anniversaries"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">@type</td>
+              <td align="left">PersonalInformation</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">type</td>
+              <td align="left">expertise</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">type</td>
+              <td align="left">hobby</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">type</td>
+              <td align="left">interest</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">level</td>
+              <td align="left">high</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">level</td>
+              <td align="left">medium</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PersonalInformation</td>
+              <td align="left">level</td>
+              <td align="left">low</td>
+              <td align="left">This document, <xref target="personalInfo"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">Note</td>
+              <td align="left">@type</td>
+              <td align="left">Note</td>
+              <td align="left">This document, <xref target="notes"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
