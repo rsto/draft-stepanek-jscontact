@@ -211,7 +211,7 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
       </section>
       <section anchor="comon-properties">
         <name>Common properties</name>
-        <t>Most of the properties in this document are specific to a single JSCalendar object type.  Such properties are defined along with the respective object type.  The properties in this section however are common to multiple data types and better be defined just once.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSCalendar object if they are explicitly mentioned to be allowed for this object type.</t>
+        <t>Most of the properties in this document are specific to a single JSContact object type.  Such properties are defined along with the respective object type.  The properties in this section however are common to multiple data types and better be defined just once.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSContact object if they are explicitly mentioned to be allowed for this object type.</t>
         <section anchor="prop-contexts" numbered="true" toc="default">
           <name>The <tt>contexts</tt> property</name>
           <t>Type: <tt>String[Boolean]</tt></t>
@@ -269,6 +269,11 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
           <t>Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Card</tt>.</t>
+        </section>
+        <section anchor="prop-version" numbered="true" toc="default">
+          <name>@version</name>
+          <t>Type: <tt>String</tt> (mandatory).</t>
+          <t>Specifies the version of the JSContact specification used to define this card.  The value <bcp14>MUST</bcp14> be <tt>rfc0000</tt> if the JSContact object is defined according to this RFC document. It <bcp14>MAY</bcp14> differ if future RFC documents obsolete this specification.</t>
         </section>
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
@@ -916,8 +921,277 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </ul>
       </section>
     </section>
+
     <section anchor="iana-considerations" numbered="true" toc="default">
       <name>IANA Considerations</name>
+      <section anchor="iana-mime-type" numbered="true" toc="default">
+        <name>Media Type Registration</name>
+        <t>This document defines a media type for use with JSContact data formatted in JSON.</t>
+        <dl newline="false" spacing="normal">
+          <dt>Type name:</dt>
+          <dd>application</dd>
+          <dt>Subtype name:</dt>
+          <dd>jscontact+json</dd>
+          <dt>Required parameters:</dt>
+          <dd><t>type</t>
+            <t>The <tt>type</tt> parameter conveys the type of the JSContact data in the body part. The allowed parameter values correspond to the <tt>@type</tt> property of the JSON-formatted JSContact object in the body. This RFC specifies a single type, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
+            <dl newline="false" spacing="normal">
+              <dt><tt>card</tt>:</dt>
+	            <dd>The <tt>@type</tt> property value of the JSContact object <bcp14>MUST</bcp14> be
+		          <tt>Card</tt>.</dd>
+            </dl>
+            <t>The parameter <bcp14>MUST NOT</bcp14> occur more than once.</t>
+          </dd>
+          <dt>Optional parameters:</dt>
+          <dd>
+          	<t>version</t>
+          	<t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part. Its value <bcp14>MUST</bcp14> match the value of the <tt>version</tt> property of the JSContact object.</t>
+          </dd>
+          <dt>Encoding considerations:</dt>
+          <dd>This is the same as the encoding considerations of application/json, as specified in <xref
+	    target="RFC8259" sectionFormat="of" section="11"/>.</dd>
+          <dt>Security considerations:</dt>
+          <dd> See <xref target="security-considerations" format="default"/> of this document.</dd>
+          <dt>Interoperability considerations:</dt>
+          <dd>While JSContact is designed to avoid ambiguities as much as possible, when converting objects from other contact formats to/from JSContact, it is possible that differing representations for the same logical data or ambiguities in interpretation might arise. The semantic equivalence of two JSContact objects may be determined differently by different applications, for example, where URL values differ in case between the two objects.</dd>
+          <dt>Published specification:</dt>
+          <dd>TBD</dd>
+          <dt>Applications that use this media type:</dt>
+          <dd>Applications that currently make use of the text/vcard media type can use this as an alternative.</dd>
+          <dt>Fragment identifier considerations:</dt>
+          <dd>A JSON Pointer fragment identifier may be used, as defined in <xref target="RFC6901" sectionFormat="comma" section="6"/>.</dd>
+          <dt>Additional information:</dt>
+          <dd>
+            <dl newline="false" spacing="normal">
+              <dt>Magic number(s):</dt>
+              <dd>N/A</dd>
+              <dt>File extensions(s):</dt>
+              <dd>N/A</dd>
+              <dt>Macintosh file type code(s):</dt>
+              <dd>N/A</dd>
+            </dl>
+          </dd>
+          <dt>Person &amp; email address to contact for further information:</dt>
+          <dd>calsify@ietf.org</dd>
+          <dt>Intended usage:</dt>
+          <dd>COMMON</dd>
+          <dt>Restrictions on usage:</dt>
+          <dd>N/A</dd>
+          <dt>Author:</dt>
+          <dd>See the "Author's Address" section of this document.</dd>
+          <dt>Change controller:</dt>
+          <dd>IETF</dd>
+        </dl>
+      </section>
+      <section anchor="iana-property-registry" numbered="true" toc="default">
+        <name>Creation of the "JSContact Properties" Registry</name>
+        <t>IANA has created the "JSContact Properties" registry to allow interoperability of extensions to JSContact objects.</t>
+        <t>This registry follows the Expert Review process (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>). If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability. Preliminary community review for this registry is optional but strongly encouraged.</t>
+        <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>. IANA will list registrations with a common usage designation prominently and separately from those with other intended usage values.</t>
+        <t>A <tt>reserved</tt> registration reserves a property name without assigning semantics to avoid name collisions with future extensions or protocol use.</t>
+        <t>An <tt>obsolete</tt> registration denotes a property that is no longer expected to be added by up-to-date systems. A new property has probably been defined covering the obsolete property's semantics.</t>
+        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on. This typically is the latest specification version that is in effect when the property gets registered. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property <xref target="prop-version"/>.</t>
+        <t>The JSContact property registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay. It is designed to encourage vendors to document and register new properties they add for use cases not covered by the original specification, leading to increased interoperability.</t>
+        <section anchor="iana-property-registry-preliminary-community-review" numbered="true" toc="default">
+          <name>Preliminary Community Review</name>
+          <t>Notice of a potential new registration <bcp14>SHOULD</bcp14> be sent to the Calext mailing list
+	    &lt;calsify@ietf.org&gt; for review. This mailing list is appropriate to solicit community feedback
+	      on a proposed new property.</t>
+          <t>Property registrations must be marked with their intended use: "common", "reserved", or
+	    "obsolete".</t>
+          <t>The intent of the public posting to this list is to solicit comments and feedback on the choice of
+	    the property name, the unambiguity of the specification document, and a review of any
+	      interoperability or security considerations. The submitter may submit a revised registration proposal
+	        or abandon the registration completely at any time.</t>
+        </section>
+        <section anchor="iana-property-registry-submit-request-to-iana" numbered="true" toc="default">
+          <name>Submit Request to IANA</name>
+          <t>Registration requests can be sent to &lt;iana@iana.org&gt;.</t>
+        </section>
+        <section anchor="iana-property-registry-designated-expert-review" numbered="true" toc="default">
+          <name>Designated Expert Review</name>
+          <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging
+	    the submitter to document security and privacy considerations. For a common-use registration, the DE
+	      is expected to confirm that suitable documentation, as described in <xref target="RFC8126"
+	        sectionFormat="of" section="4.6"/>, is available to ensure interoperability. That documentation will
+	        usually be in an RFC, but simple definitions are likely to use a web/wiki page, and if a sentence or
+		  two is deemed sufficient, it could be described in the registry itself. The DE should also verify that
+		    the property name does not conflict with work that is active or already published within the IETF. A
+		      published specification is not required for reserved or obsolete registrations.</t>
+          <t>The DE will either approve or deny the registration request and publish a notice of the decision
+	    to the Calext WG mailing list or its successor, as well as inform IANA. A denial notice must be
+	      justified by an explanation, and, in the cases where it is possible, concrete suggestions on how the
+	        request can be modified so as to become acceptable should be provided.</t>
+        </section>
+        <section anchor="iana-property-registry-change-procedures" numbered="true" toc="default">
+          <name>Change Procedures</name>
+          <t>Once a JSContact property has been published by IANA, the change controller may request a
+	    change to its definition. The same procedure that would be appropriate for the original registration
+	      request is used to process a change request.</t>
+          <t>JSContact property registrations may not be deleted; properties that are no longer believed appropriate for use can be declared obsolete by a change to their "intended usage" field; such properties will be clearly marked in the IANA registry.</t>
+          <t>Significant changes to a JSContact property's definition should be requested only when there are
+	    serious omissions or errors in the published specification, as such changes may cause
+	      interoperability issues. When review is required, a change request may be denied if it renders
+	        entities that were valid under the previous definition invalid under the new definition.</t>
+          <t>The owner of a JSContact property may pass responsibility to another person or agency by
+	    informing IANA; this can be done without discussion or review.</t>
+        </section>
+        <section anchor="iana-property-registry-template" numbered="true" toc="default">
+          <name>&quot;JSContact Properties&quot; Registry Template</name>
+          <dl newline="false">
+            <dt>Property Name:</dt>
+	        <dd>This is the name of the property. The property name <bcp14>MUST NOT</bcp14> already be
+		    registered for
+		        any of the object types listed in the "Property Context" field of this registration. Other object
+			    types <bcp14>MAY</bcp14> already have registered a different property with the same name; however,
+			        the same name <bcp14>SHOULD</bcp14> only be used when the semantics are analogous.</dd>
+            <dt>Property Type:</dt>
+	        <dd> This is the type of this property, using type signatures, as specified in <xref target="type-signatures" format="default"/>.
+		    The property type <bcp14>MUST</bcp14> be registered in the "JSContact Types" registry.</dd>
+            <dt>Property Context:</dt>
+	        <dd>This is a comma-separated list of JSContact object types this property is allowed on.</dd>
+            <dt>Reference or Description:</dt>
+	        <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names).</dd>
+            <dt>Intended Usage:</dt>
+	        <dd>This may be "common", "reserved", or "obsolete".</dd>
+	        <dt>Version:</dt>
+	        <dd>This defines the JSContact specification version on which this property definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dt>Change Controller:</dt>
+	        <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
+          </dl>
+        </section>
+        <section anchor="iana-property-registry-contents" numbered="true" toc="default">
+          <name>Initial Contents for the &quot;JSContact Properties&quot; Registry</name>
+          <t>The following table lists the initial entries of the "JSContact Properties" registry. All properties are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document. The change controller for all these properties is "IETF".</t>
+<table anchor="tab-iana-property-registry" align="center">
+  <name>Initial Contents of the &quot;JSContact Properties&quot; Registry</name>
+            <thead>
+              <tr>
+                <th align="left">Property Name</th>
+                <th align="left">Property Type</th>
+                <th align="left">Property Context</th>
+                <th align="left">Reference or Description</th>
+              </tr>
+            </thead>
+            <!-- Everything in here should be sorted alphabetically: table entries by property name, the references for each property alphabetically by the object type or property they refer to -->
+            <tbody>
+              <tr>
+                <td align="left">@type</td>
+                <td align="left">String</td>
+                <td align="left">Card, ...</td>
+                <td align="left">
+                  <xref target="cardtype" format="default"/>, <xref target="card" format="default"/></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+      <section anchor="iana-type-registry" numbered="true" toc="default">
+        <name>Creation of the &quot;JSContact Types&quot; Registry</name>
+        <t>IANA has created the "JSContact Types" registry to avoid name collisions and provide a complete reference for all data types used for JSContact property values. The registration process is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <section anchor="iana-type-registry-template" numbered="true" toc="default">
+          <name>&quot;JSContact Types&quot; Registry Template</name>
+          <dl newline="false">
+            <dt>Type Name:</dt>
+	        <dd>the name of the type</dd>
+            <dt>Reference or Description:</dt>
+	        <dd>a brief description or RFC number and section reference where the Type is specified (may be omitted for "reserved" type names)</dd>
+            <dt>Intended Use:</dt>
+	        <dd>common, reserved, or obsolete</dd>
+	        <dt>Version:</dt>
+	        <dd>This defines the JSContact specification version on which this type definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dt>Change Controller:</dt>
+	        <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
+          </dl>
+        </section>
+        <section anchor="iana-type-registry-contents" numbered="true" toc="default">
+          <name>Initial Contents for the &quot;JSContact Types&quot; Registry</name>
+          <t>The following table lists the initial entries of the JSContact Types registry. All types are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document. The change controller for all these properties is "IETF".</t>
+          <table anchor="tab-iana-type-registry" align="left">
+	        <name>Initial Contents of the &quot;JSContact Types&quot; Registry</name>
+            <thead>
+              <tr>
+                <th align="left">Type Name</th>
+                <th align="left">Reference or Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">Card</td>
+                <td align="left">
+                  <xref target="card" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">Boolean</td>
+                <td align="left">
+                  <xref target="type-signatures" format="default"/></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+      <section anchor="iana-enum-registry" numbered="true" toc="default">
+        <name>Creation of the "JSContact Enum Values" Registry</name>
+        <t>IANA has created the "JSContact Enum Values" registry to allow interoperable extension of semantics for properties with enumerable values. Each such property will have a subregistry of allowed values. The registration process for a new enum value or adding a new enumerable property is the same as for the &quot;JSContact Properties&quot; registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <section anchor="iana-enum-registry-registry-template" numbered="true" toc="default">
+          <name>&quot;JSContact Enum Values&quot; Registry Property Template</name>
+          <t>This template is for adding a subregistry for a new enumerable property to the &quot;JSContact Enum&quot; registry.</t>
+          <dl newline="false">
+            <dt>Property Name:</dt>
+	        <dd>These are the name(s) of the property or properties where these values may be used. This <bcp14>MUST</bcp14> be registered in the &quot;JSContact Properties&quot; registry.</dd>
+            <dt>Context:</dt>
+	        <dd>This is the list of allowed object types where the property or properties may appear, as registered in the &quot;JSContact Properties&quot; registry. This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
+	        <dt>Version:</dt>
+	        <dd>This defines the JSContact specification version on which this enum  value definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dt>Change Controller:</dt>
+	        <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
+            <dt>Initial Contents:</dt>
+	        <dd>This is the initial list of defined values for this enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>. A subregistry will be created with these values for this property name/context tuple.</dd>
+          </dl>
+        </section>
+        <section anchor="iana-enum-registry-value-template" numbered="true" toc="default">
+          <name>&quot;JSContact Enum Values&quot; Registry Value Template</name>
+          <t>This template is for adding a new enum value to a subregistry in the JSContact Enum registry.</t>
+          <dl newline="false">
+            <dt>Enum Value:</dt>
+	        <dd>the verbatim value of the enum</dd>
+            <dt>Reference or Description:</dt>
+	        <dd>a brief description or RFC number and section reference for the semantics of this value</dd>
+          </dl>
+        </section>
+        <section anchor="iana-enum-registry-contents" numbered="true" toc="default">
+          <name>Initial Contents for the &quot;JSContact Enum Values&quot; Registry</name>
+          <t>For each subregistry created in this section, all RFC section references are for this document.</t>
+
+<dl spacing="compact" newline="false" indent="20">
+          <dt>Property Name:</dt><dd>kind</dd>
+          <dt>Context:</dt><dd>Card</dd>
+          <dt>Change Controller:</dt><dd>IETF</dd>
+          <dt>Version:</dt><dd>rfc0000</dd>
+          <dt>Initial Contents:</dt><dd>
+          <table anchor="tab-iana-enum-card-kind" align="left">
+	        <name>JSContact Enum Values for kind (Context: Card)</name>
+            <thead>
+              <tr>
+                <th align="left">Enum Value</th>
+                <th align="left">Reference or Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">individual</td>
+                <td align="left">
+                  <xref target="kind" format="default"/></td>
+              </tr>
+            </tbody>
+          </table></dd>
+</dl>
+</section>
+</section>
+</section>
+
+    <section anchor="iana-considerations-old" numbered="true" toc="default">
+      <name>OLD: IANA Considerations</name>
 
 
       <section anchor="types_registry" numbered="true" toc="default">
@@ -2684,6 +2958,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8141.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml"/>
