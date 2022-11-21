@@ -1082,8 +1082,122 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Card, ...</td>
-                <td align="left"><xref target="cardtype" format="default"/>, <xref target="card" format="default"/></td>
+                <td align="left">Address, Anniversary, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate, PatchObject, PersonalInformation, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
+                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="patchobject" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="resource" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">@version</td>
+                <td align="left">String</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="prop-version" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">components</td>
+                <td align="left">NameComponent[]</td>
+                <td align="left">Name</td>
+                <td align="left"><xref target="name" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">created</td>
+                <td align="left">UTCDateTime</td>
+                <td align="left">Card, Note</td>
+                <td align="left"><xref target="created" format="default"/>, <xref target="notes" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">fullName</td>
+                <td align="left">String</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="fullName" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">kind</td>
+                <td align="left">String</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="kind" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">locale</td>
+                <td align="left">String</td>
+                <td align="left">Card, name</td>
+                <td align="left"><xref target="locale" format="default"/>, <xref target="name" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">members</td>
+                <td align="left">String[Boolean]</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="members" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">name</td>
+                <td align="left">Name</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="name" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">name</td>
+                <td align="left">String</td>
+                <td align="left">NickName</td>
+                <td align="left"><xref target="nickNames" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">nickNames</td>
+                <td align="left">Id[NickName]</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="nickNames" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">nth</td>
+                <td align="left">UnsignedInt</td>
+                <td align="left">NameComponent</td>
+                <td align="left"><xref target="name" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">prodId</td>
+                <td align="left">String</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="prodId" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">relatedTo</td>
+                <td align="left">String[Relation]</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="relatedTo" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">relation</td>
+                <td align="left">String[Boolean]</td>
+                <td align="left">Relation</td>
+                <td align="left"><xref target="relatedTo" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">sortAs</td>
+                <td align="left">String[]</td>
+                <td align="left">Name</td>
+                <td align="left"><xref target="name" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">type</td>
+                <td align="left">String</td>
+                <td align="left">NameComponent</td>
+                <td align="left"><xref target="name" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">uid</td>
+                <td align="left">String</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="uid" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">updated</td>
+                <td align="left">UTCDateTime</td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="updated" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">value</td>
+                <td align="left">String</td>
+                <td align="left">NameComponent</td>
+                <td align="left"><xref target="name" format="default"/></td>
               </tr>
             </tbody>
           </table>
@@ -1120,15 +1234,213 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             </thead>
             <tbody>
               <tr>
-                <td align="left">Card</td>
+                <td align="left">Address</td>
                 <td align="left">
-                  <xref target="card" format="default"/>
+                  <xref target="addresses" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Anniversary</td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
                 </td>
               </tr>
               <tr>
                 <td align="left">Boolean</td>
                 <td align="left">
                   <xref target="type-signatures" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">CalendarResource</td>
+                <td align="left">
+                  <xref target="calendars" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Card</td>
+                <td align="left">
+                  <xref target="card" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">ContactChannelPreference</td>
+                <td align="left">
+                  <xref target="preferredContactChannels" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">CryptoResource</td>
+                <td align="left">
+                  <xref target="cryptoKeys" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">DirectoryResource</td>
+                <td align="left">
+                  <xref target="directories" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">EmailAddress</td>
+                <td align="left">
+                  <xref target="emails" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Id</td>
+                <td align="left">
+                  <xref target="id" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Int</td>
+                <td align="left">
+                  <xref target="int-unsignedint" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">LanguagePreference</td>
+                <td align="left">
+                  <xref target="preferredLanguages" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">LinkResource</td>
+                <td align="left">
+                  <xref target="links" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">MediaResource</td>
+                <td align="left">
+                  <xref target="media" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Name</td>
+                <td align="left">
+                  <xref target="name" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">NameComponent</td>
+                <td align="left">
+                  <xref target="name" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">NickName</td>
+                <td align="left">
+                  <xref target="nickNames" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Note</td>
+                <td align="left">
+                  <xref target="notes" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">OnlineService</td>
+                <td align="left">
+                  <xref target="onlineServices" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Organization</td>
+                <td align="left">
+                  <xref target="organizations" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">OrgUnit</td>
+                <td align="left">
+                  <xref target="organizations" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">PartialDate</td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">PatchObject</td>
+                <td align="left">
+                  <xref target="patchobject" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">PersonalInformation</td>
+                <td align="left">
+                  <xref target="personalInfo" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Phone</td>
+                <td align="left">
+                  <xref target="phones" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Pronouns</td>
+                <td align="left">
+                  <xref target="speakToAs" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Relation</td>
+                <td align="left">
+                  <xref target="relatedTo" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Resource</td>
+                <td align="left">
+                  <xref target="resource" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">SchedulingAddress</td>
+                <td align="left">
+                  <xref target="schedulingAddresses" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">SpeakToAs</td>
+                <td align="left">
+                  <xref target="speakToAs" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">StreetComponent</td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Timestamp</td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Title</td>
+                <td align="left">
+                  <xref target="titles" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">UnsignedInt</td>
+                <td align="left">
+                  <xref target="int-unsignedint" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">UTCDateTime</td>
+                <td align="left">
+                  <xref target="utcdatetime" format="default"/>
                 </td>
               </tr>
             </tbody>
@@ -1232,203 +1544,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
     </section>
     <section anchor="iana-considerations-old" numbered="true" toc="default">
       <name>OLD: IANA Considerations</name>
-      <section anchor="types_registry" numbered="true" toc="default">
-        <name>Types Registry</name>
-        <t>IANA is requested to add the following entries to the "Types Registry".</t>
-        <table anchor="types_registry_table">
-          <name>Types Registry</name>
-          <thead>
-            <tr>
-              <th align="left">Namespace</th>
-              <th align="left">Type</th>
-              <th align="left">Parent Type</th>
-              <th align="left">Reference</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td/>
-              <td align="left">This document, <xref target="card"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Resource</td>
-              <td/>
-              <td align="left">This document, <xref target="resource"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Relation</td>
-              <td/>
-              <td align="left">This document, <xref target="relatedTo"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Name</td>
-              <td/>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">NameComponent</td>
-              <td/>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">NickName</td>
-              <td/>
-              <td align="left">This document, <xref target="nickNames"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Organization</td>
-              <td/>
-              <td align="left">This document, <xref target="organizations"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">OrgUnit</td>
-              <td/>
-              <td align="left">This document, <xref target="organizations"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Title</td>
-              <td/>
-              <td align="left">This document, <xref target="titles"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">SpeakToAs</td>
-              <td/>
-              <td align="left">This document, <xref target="speakToAs"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Pronouns</td>
-              <td/>
-              <td align="left">This document, <xref target="speakToAs"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">EmailAddress</td>
-              <td/>
-              <td align="left">This document, <xref target="emails"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">OnlineService</td>
-              <td/>
-              <td align="left">This document, <xref target="onlineServices"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Phone</td>
-              <td/>
-              <td align="left">This document, <xref target="phones"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">ContactChannelPreference</td>
-              <td/>
-              <td align="left">This document, <xref target="preferredContactChannels"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">LanguagePreference</td>
-              <td/>
-              <td align="left">This document, <xref target="preferredLanguages"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">CalendarResource</td>
-              <td align="left">Resource</td>
-              <td align="left">This document, <xref target="calendars"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">SchedulingAddress</td>
-              <td align="left">Resource</td>
-              <td align="left">This document, <xref target="schedulingAddresses"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Address</td>
-              <td/>
-              <td align="left">This document, <xref target="addresses"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">StreetComponent</td>
-              <td/>
-              <td align="left">This document, <xref target="addresses"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">CryptoResource</td>
-              <td align="left">Resource</td>
-              <td align="left">This document, <xref target="cryptoKeys"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">DirectoryResource</td>
-              <td align="left">Resource</td>
-              <td align="left">This document, <xref target="directories"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">LinkResource</td>
-              <td align="left">Resource</td>
-              <td align="left">This document, <xref target="links"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">MediaResource</td>
-              <td align="left">Resource</td>
-              <td align="left">This document, <xref target="media"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">PatchObject</td>
-              <td/>
-              <td align="left">This document, <xref target="localizations"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Anniversary</td>
-              <td/>
-              <td align="left">This document, <xref target="anniversaries"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Timestamp</td>
-              <td/>
-              <td align="left">This document, <xref target="anniversaries"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">PartialDate</td>
-              <td/>
-              <td align="left">This document, <xref target="anniversaries"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">PersonalInformation</td>
-              <td/>
-              <td align="left">This document, <xref target="personalInfo"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Note</td>
-              <td/>
-              <td align="left">This document, <xref target="notes"/></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
       <section anchor="properties_registry" numbered="true" toc="default">
         <name>Properties Registry</name>
         <t>IANA is requested to add the following entries to the "Properties Registry".</t>
@@ -1443,78 +1558,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="cardtype"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">uid</td>
-              <td align="left">This document, <xref target="uid"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">prodId</td>
-              <td align="left">This document, <xref target="prodId"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">created</td>
-              <td align="left">This document, <xref target="created"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">updated</td>
-              <td align="left">This document, <xref target="updated"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">kind</td>
-              <td align="left">This document, <xref target="kind"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">members</td>
-              <td align="left">This document, <xref target="members"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">relatedTo</td>
-              <td align="left">This document, <xref target="relatedTo"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">locale</td>
-              <td align="left">This document, <xref target="locale"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">name</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">fullName</td>
-              <td align="left">This document, <xref target="fullName"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Card</td>
-              <td align="left">nickNames</td>
-              <td align="left">This document, <xref target="nickNames"/></td>
-            </tr>
             <tr>
               <td/>
               <td align="left">Card</td>
@@ -1673,66 +1716,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             </tr>
             <tr>
               <td/>
-              <td align="left">Relation</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="relatedTo"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Relation</td>
-              <td align="left">relation</td>
-              <td align="left">This document, <xref target="relatedTo"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Name</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Name</td>
-              <td align="left">components</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Name</td>
-              <td align="left">locale</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">NameComponent</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">NameComponent</td>
-              <td align="left">value</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">NameComponent</td>
-              <td align="left">type</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">NameComponent</td>
-              <td align="left">nth</td>
-              <td align="left">This document, <xref target="name"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">NickName</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="nickNames"/></td>
-            </tr>
-            <tr>
-              <td/>
               <td align="left">NickName</td>
               <td align="left">name</td>
               <td align="left">This document, <xref target="nickNames"/></td>
@@ -1754,12 +1737,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td align="left">NickName</td>
               <td align="left">label</td>
               <td align="left">This document, <xref target="nickNames"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Organization</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="organizations"/></td>
             </tr>
             <tr>
               <td/>
@@ -1782,12 +1759,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">OrgUnit</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="organizations"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">OrgUnit</td>
               <td align="left">name</td>
               <td align="left">This document, <xref target="organizations"/></td>
             </tr>
@@ -1796,12 +1767,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td align="left">OrgUnit</td>
               <td align="left">sorAs</td>
               <td align="left">This document, <xref target="organizations"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Title</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="titles"/></td>
             </tr>
             <tr>
               <td/>
@@ -1824,12 +1789,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">SpeakToAs</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="speakToAs"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">SpeakToAs</td>
               <td align="left">grammaticalGender</td>
               <td align="left">This document, <xref target="speakToAs"/></td>
             </tr>
@@ -1837,12 +1796,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td/>
               <td align="left">SpeakToAs</td>
               <td align="left">pronouns</td>
-              <td align="left">This document, <xref target="speakToAs"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Pronouns</td>
-              <td align="left">@type</td>
               <td align="left">This document, <xref target="speakToAs"/></td>
             </tr>
             <tr>
@@ -1868,12 +1821,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td align="left">Pronouns</td>
               <td align="left">label</td>
               <td align="left">This document, <xref target="speakToAs"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">EmailAddress</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="emails"/></td>
             </tr>
             <tr>
               <td/>
@@ -1898,12 +1845,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td align="left">EmailAddress</td>
               <td align="left">label</td>
               <td align="left">This document, <xref target="emails"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">OnlineService</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="onlineServices"/></td>
             </tr>
             <tr>
               <td/>
@@ -1944,12 +1885,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">Phone</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="phones"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Phone</td>
               <td align="left">phone</td>
               <td align="left">This document, <xref target="phones"/></td>
             </tr>
@@ -1980,12 +1915,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">PreferredContactChannel</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="preferredContactChannels"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">PreferredContactChannel</td>
               <td align="left">contexts</td>
               <td align="left">This document, <xref target="preferredContactChannels"/></td>
             </tr>
@@ -1998,12 +1927,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">PreferredLanguage</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="preferredLanguages"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">PreferredLanguage</td>
               <td align="left">contexts</td>
               <td align="left">This document, <xref target="preferredLanguages"/></td>
             </tr>
@@ -2012,24 +1935,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td align="left">PreferredLanguage</td>
               <td align="left">pref</td>
               <td align="left">This document, <xref target="preferredLanguages"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">CalendarResource</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="calendars"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">SchedulingAddress</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="schedulingAddresses"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Address</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="addresses"/></td>
             </tr>
             <tr>
               <td/>
@@ -2106,12 +2011,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">StreetComponent</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="addresses"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">StreetComponent</td>
               <td align="left">type</td>
               <td align="left">This document, <xref target="addresses"/></td>
             </tr>
@@ -2120,36 +2019,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td align="left">StreetComponent</td>
               <td align="left">value</td>
               <td align="left">This document, <xref target="addresses"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">DirectoryResource</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="directories"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">CryptoResource</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="cryptoKeys"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">LinkResource</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="links"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">MediaResource</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="media"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Anniversary</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="anniversaries"/></td>
             </tr>
             <tr>
               <td/>
@@ -2178,19 +2047,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">Timestamp</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="anniversaries"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Timestamp</td>
               <td align="left">utc</td>
-              <td align="left">This document, <xref target="anniversaries"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">PartialDate</td>
-              <td align="left">@type</td>
               <td align="left">This document, <xref target="anniversaries"/></td>
             </tr>
             <tr>
@@ -2220,12 +2077,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <tr>
               <td/>
               <td align="left">PersonalInformation</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="personalInfo"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">PersonalInformation</td>
               <td align="left">type</td>
               <td align="left">This document, <xref target="personalInfo"/></td>
             </tr>
@@ -2246,12 +2097,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <td align="left">PersonalInformation</td>
               <td align="left">label</td>
               <td align="left">This document, <xref target="personalInfo"/></td>
-            </tr>
-            <tr>
-              <td/>
-              <td align="left">Note</td>
-              <td align="left">@type</td>
-              <td align="left">This document, <xref target="notes"/></td>
             </tr>
             <tr>
               <td/>
