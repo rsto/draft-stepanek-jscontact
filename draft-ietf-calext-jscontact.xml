@@ -854,7 +854,7 @@ The actual information.  This generally is free-text, but future specifications 
         </section>
         <section anchor="notes" numbered="true" toc="default">
           <name>notes</name>
-          <t>Type: <tt>Note[]</tt> (optional).</t>
+          <t>Type: <tt>Id[Note]</tt> (optional).</t>
           <t>Free-text notes associated with this card.  A Note object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
@@ -867,10 +867,10 @@ The actual information.  This generally is free-text, but future specifications 
               <t>language: <tt>String</tt> (optional).  The human language in which the main content of this note is written in.  The property value <bcp14>MUST</bcp14> be a valid language tag as defined <xref target="RFC5646"/>.</t>
             </li>
             <li>
-              <t>created: <tt>UTCDateTime</tt> (optional).  The date and time when this Note object was created..</t>
+              <t>created: <tt>UTCDateTime</tt> (optional).  The date and time when this note was created.</t>
             </li>
             <li>
-              <t>author: <tt>String</tt> (optional).  TBD.</t>
+              <t>author: <tt>String</tt> (optional).  A URI value that identifies the author of this note.</t>
             </li>
           </ul>
         </section>
