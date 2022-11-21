@@ -995,7 +995,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>. IANA will list registrations with a common usage designation prominently and separately from those with other intended usage values.</t>
         <t>A <tt>reserved</tt> registration reserves a property name without assigning semantics to avoid name collisions with future extensions or protocol use.</t>
         <t>An <tt>obsolete</tt> registration denotes a property that is no longer expected to be added by up-to-date systems. A new property has probably been defined covering the obsolete property's semantics.</t>
-        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on. This typically is the latest specification version that is in effect when the property gets registered. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property <xref target="prop-version"/>.</t>
+        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on. This typically is the latest specification version that is in effect when the property gets registered. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property  in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>). Registering a new version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification. Such RFC document <bcp14>MUST</bcp14> specify all changes to former JSContact specifications.</t>
         <t>The JSContact property registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay. It is designed to encourage vendors to document and register new properties they add for use cases not covered by the original specification, leading to increased interoperability.</t>
         <section anchor="iana-property-registry-preliminary-community-review" numbered="true" toc="default">
           <name>Preliminary Community Review</name>
@@ -1191,6 +1191,36 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">individual</td>
                     <td align="left">
                       <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>@version</dd>
+            <dt>Context:</dt>
+            <dd>Card</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-card-version" align="left">
+                <name>JSContact Enum Values for @version (Context: Card)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">rfc0000</td>
+                    <td align="left">
+                      <xref target="prop-version" format="default"/>
                     </td>
                   </tr>
                 </tbody>
