@@ -273,7 +273,7 @@ v-name = 1*(WSP / %x21-7E / NON-ASCII)
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  <xref target="RFC4122" format="default"/> describes a range of established algorithms to generate universally unique identifiers (UUID), and the random or pseudo-random version is recommended.  For compatibility with <xref target="RFC6350" format="default"/> UIDs, implementations <bcp14>MUST</bcp14> accept both URI and free-form text.</t>
+          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/> but for compatibility with <xref target="RFC6350"/> it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the <tt>uuid</tt> namespace <xref target="RFC4122" format="default"/>.  As of this writing, a revision of <xref target="RFC4122" /> is being worked on and is likely to introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudo-random UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
         </section>
         <section anchor="prodId" numbered="true" toc="default">
           <name>prodId</name>
@@ -2684,6 +2684,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8141.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2234.xml"/>
