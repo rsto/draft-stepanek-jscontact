@@ -173,23 +173,28 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>This property allows to define a list of strings that can be used for sorting this card within a collection of cards.</t>
         </section>
       </section>
-      <section anchor="validation-and-versioning" numbered="true" toc="default">
-        <name>Validating JSContact Objects</name>
+        <section>
+        <name>Versioning</name>
+        <t>Every instance of a JSContact Card indicates which JSContact specification its IANA-registered properties and values are based on. This version is indicated by the <tt>@version</tt> <xref target="prop-version"/> property. This is to allow implementations correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions or other significant changes to existing JSContact specifications are introduced. All IANA-registered properties indicate the version at which they got introduced, updated or obsoleted.</t>
+        <t>Registering a new JSContact version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification. Such RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the  JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
+        </section>
+        <section>
+          <name>Validating JSContact Properties</name>
         <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties. This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, vendor-specific properties in <xref target="vendor-specific-properties"/>. A JSContact object is invalid if any its properties is invalid. If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
         <section anchor="iana-registered-properties" numbered="true" toc="default">
-          <name>IANA-registered properties</name>
+          <name>IANA-registered Properties</name>
           <t>
              An IANA-registered property is any property that got registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>. All properties defined in this specification are IANA-registered properties.
           </t>
           <t>
-            Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of a IANA-registered property but the value violates its definition. The <tt>@version</tt> property of the card defines which specification the definition is based on (see <xref target="prop-version"/>).
+            Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of a IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
           </t>
           <t>
         IANA-registered property names <bcp14>MUST NOT</bcp14> contain the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters. They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but a notable exception of this rule is the <tt>@type</tt> property defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
     </t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
-          <name>Unknown properties</name>
+          <name>Unknown Properties</name>
           <t>
           Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the restrictions of a IANA-registered property.</t>
           <t>Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid. Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties.  This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
@@ -995,7 +1000,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>. IANA will list registrations with a common usage designation prominently and separately from those with other intended usage values.</t>
         <t>A <tt>reserved</tt> registration reserves a property name without assigning semantics to avoid name collisions with future extensions or protocol use.</t>
         <t>An <tt>obsolete</tt> registration denotes a property that is no longer expected to be added by up-to-date systems. A new property has probably been defined covering the obsolete property's semantics.</t>
-        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on. This typically is the latest specification version that is in effect when the property gets registered. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property  in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>). Registering a new version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification. Such RFC document <bcp14>MUST</bcp14> specify all changes to former JSContact specifications.</t>
+        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on. This typically is the latest specification version that is in effect when the property gets registered. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</t>
         <t>The JSContact property registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay. It is designed to encourage vendors to document and register new properties they add for use cases not covered by the original specification, leading to increased interoperability.</t>
         <section anchor="iana-property-registry-preliminary-community-review" numbered="true" toc="default">
           <name>Preliminary Community Review</name>
@@ -1059,7 +1064,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Intended Usage:</dt>
             <dd>This may be "common", "reserved", or "obsolete".</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this property definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dd>This defines the JSContact specification version on which this property definition is based on. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
@@ -1552,7 +1557,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Intended Use:</dt>
             <dd>common, reserved, or obsolete</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this type definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dd>This defines the JSContact specification version on which this type definition is based on. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
           </dl>
@@ -1795,7 +1800,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Context:</dt>
             <dd>This is the list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry. This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this enum  value definition is based on. The version <bcp14>MUST</bcp14> be an allowed value of the <tt>@version</tt> property <xref target="prop-version"/>.</dd>
+            <dd>This defines the JSContact specification version on which this enum  value definition is based on. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
