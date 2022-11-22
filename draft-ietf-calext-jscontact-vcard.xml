@@ -1016,8 +1016,8 @@
         <name>Organizational Properties</name>
         <section>
           <name>TITLE and ROLE</name>
-          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> property is set to "title"/"role" and <tt>title</tt> property is set to the TITLE/ROLE value.  The rules to set the <tt>organization</tt> property are out of the scope of this document.</t>
-          <t>The value of the <tt>organization</tt> property can be derived if the TITLE or ROLE property is related to an ORG property through a group construct.</t>
+          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> property is set to <tt>title</tt> or <tt>role</tt> for TITLE and ROLE vCard properties, respectively. The <tt>name</tt> property is set to the vCard property value.</t>
+          <t>The value of the <tt>organization</tt> property can be derived if the TITLE or ROLE property is member of a vCard property group and exactly one other ORG property also is part of that group.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="title_role_conversion">
             <name>TITLE and ROLE conversion example</name>
@@ -1026,7 +1026,8 @@
     VERSION:4.0
     ...
     TITLE:Research Scientist
-    ROLE:Project Leader
+    group1.ROLE:Project Leader
+    group1.ORG:ABC, Inc.
     ...
     END:VCARD
 
@@ -1037,14 +1038,21 @@
       "TITLE-1": {
         "@type": "Title",
         "type": "title",
-        "title": "Project Leader"
+        "name": "Project Leader"
       },
       "TITLE-2": {
         "@type": "Title",
         "type": "role",
-        "title": "Research Scientist"
+        "name": "Research Scientist",
+        "organization": "ORG-1"
       }
     },
+    "organizations": {
+      "ORG-1": {
+        "@type": "Organization",
+        "name": "ABC, Inc."
+      }
+    }
     ...
     }
         ]]></artwork>

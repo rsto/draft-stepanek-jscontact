@@ -483,8 +483,8 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt>.
               </li>
-            <li>title: <tt>String</tt> (mandatory).
-                The title of the entity represented by this card.
+            <li>name: <tt>String</tt> (mandatory).
+                The title or role name of the entity represented by this card.
             </li>
             <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
               Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
@@ -1354,8 +1354,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">name</td>
                 <td align="left">String</td>
-                <td align="left">Author, NickName, Organization, OrgUnit</td>
-                <td align="left"><xref target="notes" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="organizations" format="default"/></td>
+                <td align="left">Author, NickName, Organization, OrgUnit, Title</td>
+                <td align="left"><xref target="notes" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="organizations" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">nickNames</td>
@@ -1524,12 +1524,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">String</td>
                 <td align="left">Address</td>
                 <td align="left"><xref target="addresses" format="default"/></td>
-              </tr>
-              <tr>
-                <td align="left">title</td>
-                <td align="left">String</td>
-                <td align="left">Title</td>
-                <td align="left"><xref target="titles" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">titles</td>
