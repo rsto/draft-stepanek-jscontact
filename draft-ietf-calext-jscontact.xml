@@ -924,7 +924,19 @@ The actual information.  This generally is free-text, but future specifications 
               <t>created: <tt>UTCDateTime</tt> (optional).  The date and time when this note was created.</t>
             </li>
             <li>
-              <t>author: <tt>String</tt> (optional).  A URI value that identifies the author of this note.</t>
+              <t>author: <tt>Author</tt> (optional).  The author of this note.</t>
+            </li>
+          </ul>
+          <t>An Author object has the following properties, of which at least one other than <tt>@type</tt> <bcp14>MUST</bcp14> be defined:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                 Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Author</tt>.
+            </li>
+            <li>
+              <t>name: <tt>String</tt> (optional). The name of this author.</t>
+            </li>
+            <li>
+              <t>uri: <tt>String</tt> (optional). A URI value that identifies the author.</t>
             </li>
           </ul>
         </section>
@@ -1126,7 +1138,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Address, Anniversary, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate, PatchObject, PersonalInformation, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
+                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate, PatchObject, PersonalInformation, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="patchobject" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="resource" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr>
@@ -1155,7 +1167,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
               <tr>
                 <td align="left">author</td>
-                <td align="left">String</td>
+                <td align="left">Author</td>
                 <td align="left">Note</td>
                 <td align="left"><xref target="notes" format="default"/></td>
               </tr>
@@ -1342,8 +1354,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">name</td>
                 <td align="left">String</td>
-                <td align="left">NickName, Organization, OrgUnit</td>
-                <td align="left"><xref target="nickNames" format="default"/>, <xref target="organizations" format="default"/></td>
+                <td align="left">Author, NickName, Organization, OrgUnit</td>
+                <td align="left"><xref target="notes" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="organizations" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">nickNames</td>
@@ -1552,8 +1564,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">uri</td>
                 <td align="left">String</td>
-                <td align="left">CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, SchedulingAddress</td>
-                <td align="left"><xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Author, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, SchedulingAddress</td>
+                <td align="left"><xref target="notes" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">username</td>
@@ -1623,6 +1635,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Anniversary</td>
                 <td align="left">
                   <xref target="anniversaries" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Author</td>
+                <td align="left">
+                  <xref target="notes" format="default"/>
                 </td>
               </tr>
               <tr>
