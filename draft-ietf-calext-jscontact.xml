@@ -167,11 +167,6 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are indendepent of each other.</t>
         </section>
-        <section anchor="prop-sort-as" numbered="true" toc="default">
-          <name>The <tt>sortAs</tt> property</name>
-          <t>Type: <tt>String[]</tt></t>
-          <t>This property allows to define a list of strings that can be used for sorting this card within a collection of cards.</t>
-        </section>
       </section>
         <section>
         <name>Versioning</name>
@@ -362,9 +357,41 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           locale: <tt>String</tt> (optional).
           The locale of the name.  The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
         </li>
-            <li>sortAs: <tt>String[]</tt> (optional)
-                  The list of strings used to sort this card based on the name.  Also see <xref target="prop-sort-as"/>.
-              </li>
+            <li><t>sortAs: <tt>String[String]</tt> (optional)</t>
+                <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type. The key in the map defines the name component type. The value for that key defines the verbatim string to compare when sorting by this name component type. Absence of a key indicates that this name component type should not be considered during sort. Sorting by that missing name component type or if the <tt>sortAs</tt> is not set is implementation-specific.</t>
+            <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below). For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
+
+            <t>This illustrates the use of sortAs. It indicates that the middle name followed by both surnames should be used when sorting this name by surname. The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort. Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
+              <figure anchor="example-name-sortas">
+                <name>JSContact Name <tt>sortAs</tt> example</name>
+                <sourcecode name=""><![CDATA[
+{
+  "@type": "Name",
+  "components": [{
+    "@type": "NameComponent",
+    "type": "given",
+    "value": "Robert"
+  }, {
+    "@type": "NameComponent",
+    "type": "middle",
+    "value": "Pau"
+  }, {
+    "@type": "NameComponent",
+    "type": "surname",
+    "value": "Shou"
+  }, {
+    "@type": "NameComponent",
+    "type": "surname",
+    "value": "Chang"
+  }],
+  "sortAs": {
+    "surname": "Pau Shou Chang",
+    "given": "Robert"
+  }
+}
+        ]]></sourcecode>
+              </figure>
+                            </li>
           </ul>
           <t>A NameComponent object has the following properties:</t>
           <ul spacing="normal">
@@ -428,13 +455,25 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>name: <tt>String</tt> (optional).
                 The name of this organization.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
             </li>
-            <li>units: <tt>String[]</tt> (optional).
-                A list of organizational unit names.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+            <li>sortAs: <tt>String</tt> (optional)
+                This defines how this organization name lexicographically sorts in relation to other organizations when compared by name. The value defines the verbatim string value to compare. In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
             </li>
-            <li>sortAs: <tt>String[]</tt> (optional)
-                  The list of strings used to sort this card based on the organization.  Also see <xref target="prop-sort-as"/>.
-              </li>
+            <li>units: <tt>OrgUnit[]</tt> (optional).
+                A list of organizational units.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+            </li>
           </ul>
+           <t>A OrgUnit object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OrgUnit</tt>.
+              </li>
+              <li>name: <tt>String</tt> (optional).
+                The name of this organizational unit.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
+            </li>
+            <li>sortAs: <tt>String</tt> (optional)
+                This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name. The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object. The property value defines the verbatim string value to compare. In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+            </li>
+            </ul>
         </section>
         <section anchor="titles" numbered="true" toc="default">
           <name>titles</name>
@@ -1446,15 +1485,15 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
               <tr>
                 <td align="left">sortAs</td>
-                <td align="left">String</td>
-                <td align="left">Organization, OrgUnit</td>
-                <td align="left"><xref target="organizations" format="default"/></td>
+                <td align="left">String[String]</td>
+                <td align="left">Name</td>
+                <td align="left"><xref target="name" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">sortAs</td>
-                <td align="left">String[]</td>
-                <td align="left">Name</td>
-                <td align="left"><xref target="name" format="default"/></td>
+                <td align="left">String</td>
+                <td align="left">Organization, OrgUnit</td>
+                <td align="left"><xref target="organizations" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">speakToAs</td>
