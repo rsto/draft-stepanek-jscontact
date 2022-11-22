@@ -349,7 +349,7 @@ PRONOUNS;LANG=en:they/them
           <dd>This parameter identifies the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property where conveying authorship is desired. It identifies the author as a URI <xref target="RFC3986"/>. Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted. Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows to name an author as free-text value (see <xref target="param-author-name"/>).</t>
+            <t>This property parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired. It identifies the author as a URI <xref target="RFC3986"/>. Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted. Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows to name an author as free-text value (see <xref target="param-author-name"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -375,7 +375,7 @@ NOTE;AUTHOR="mailto:john@example.com":This is some note.
           <dd>This parameter names the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property where conveying authorship is desired. It names the author as a free-text value. The parameter value <bcp14>MUST NOT</bcp14> be empty. Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>). Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows to identify an author by URI (see <xref target="param-author"/>).</t>
+            <t>This property parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired. It names the author as a free-text value. The parameter value <bcp14>MUST NOT</bcp14> be empty. Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>). Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows to identify an author by URI (see <xref target="param-author"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -388,6 +388,32 @@ author-name-param    = "AUTHOR-NAME" "=" param-value ; not empty
             <sourcecode name=""><![CDATA[
 NOTE;AUTHOR-NAME=John Doe:This is some note.
 NOTE;AUTHOR-NAME="_:l33tHacker:_":A note with an unusual author name.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-created">
+        <name>CREATED Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>CREATED</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter defines the date and time when a property was created in a vCard.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This property parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created. The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" section="4.3.5"/>. Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp. It is up to implementations to decide if a property change resembles an update or rather a delete and create.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+created-param    = "CREATED" "=" param-value ;
+                ; a valid TIMESTAMP from Section 4.3.5 of [RFC6350]
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+NOTE;CREATED=20221122T151823Z:This is some note.
 ]]></sourcecode>
           </dd>
         </dl>
@@ -516,13 +542,18 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           </tr>
           <tr>
             <td/>
-            <td align="left">PROP-ID</td>
-            <td align="left">This document, <xref target="param-propid"/></td>
+            <td align="left">CREATED</td>
+            <td align="left">This document, <xref target="param-created"/></td>
           </tr>
           <tr>
             <td/>
             <td align="left">DERIVED</td>
             <td align="left">This document, <xref target="param-derived"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">PROP-ID</td>
+            <td align="left">This document, <xref target="param-propid"/></td>
           </tr>
         </tbody>
       </table>
