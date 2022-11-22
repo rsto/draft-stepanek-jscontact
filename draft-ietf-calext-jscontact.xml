@@ -2311,7 +2311,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-speaktoas-grammaticalgender" align="left">
+              <table anchor="tab-iana-enum-speaktoas-preferredcontactchannels" align="left">
                 <name>JSContact Enum Values for preferredContactChannels (Context: Card)</name>
                 <thead>
                   <tr>
