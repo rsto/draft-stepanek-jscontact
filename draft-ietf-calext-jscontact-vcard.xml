@@ -1844,7 +1844,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dt>Purpose:</dt>
             <dd>This property represents a JSContact property in vCard.</dd>
             <dt>Value type:</dt>
-            <dd>URI, also see Format Definition for value restrictions.</dd>
+            <dd>TEXT, also see Format Definition for value restrictions.</dd>
             <dt>Conformance:</dt>
             <dd>The property can be specified multiple times in a vCard.</dd>
             <dt>Property parameters:</dt>
@@ -1857,28 +1857,20 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dt>Description:</dt>
             <dd>
               <t>
-                This property converts a JSContact property to vCard.  The property name
-                is defined using the X-RFC0000-JSPATH parameter (<xref target="vcard-jspath"/>).  A JSContact property value is represented as a data URL using the <tt>data</tt> scheme <xref target="RFC2397"/>.  The <tt>mediatype</tt> part of the URL <bcp14>MUST</bcp14> be <tt>application/json</tt> and <bcp14>MUST NOT</bcp14> define parameters.  The <tt>data</tt> part of the URL contains the value of the JSContact property.  The value <bcp14>MAY</bcp14>  base64-encoded, in which case the data URL <bcp14>MUST</bcp14> set the <tt>base64</tt> part accordingly.
+                This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>SHOULD</bcp14> be compact, e.g. without insignificant whitespace. The JSContact property name is defined using the X-RFC0000-JSPATH parameter (<xref target="vcard-jspath"/>).
               </t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode name="" type="abnf"><![CDATA[
-  jsprop = "X-RFC0000-JSPROP" jsprop-param ":" jsprop-value CRLF
-
-  jsprop-value  = "data:application/json" [";base64"] "," data
-                  ; data is defined in RFC 2397, section 3
+  jsprop = "X-RFC0000-JSPROP" jsprop-param ":" TEXT CRLF
 
   jsprop-param  = *(
-                  ; The following is MANDATORY and MUST NOT
+                  ; The following are MANDATORY and MUST NOT
                   ; occur more than once
-                  jspath-param /
-                  ;
-                  ; The following is OPTIONAL,
-                  ; but MUST NOT occur more than once.
-                  ;
-                  (";" "VALUE" "=" "URI" ) /
+                  ( ";" jspath-param ) /    ; see next section
+                  ( ";" "VALUE" "=" "TEXT")
                   ;
                   ; The following is OPTIONAL,
                   ; and MAY occur more than once.
@@ -1888,12 +1880,8 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
                   )
   ]]></sourcecode>
             </dd>
-            <dt>Example(s):</dt>
+            <dt anchor="vcard-jsprop-examples">Example(s):</dt>
             <dd>
-              <t>
-                <br/>
-              </t>
-              <!-- work around formatting -->
               <t>This illustrates how to convert an property at the top-level in a Card object that is unknown to the implementation.</t>
               <figure anchor="jsprop-unknown">
                 <name>Unknown property example</name>
@@ -1907,13 +1895,12 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;X-RFC0000-JSPATH="someUnknownProperty":
-   data:application/json;true
+  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="someUnknownProperty":true
   ...
   END:VCARD
 ]]></artwork>
               </figure>
-              <t>This illustrates how to convert a vendor-extension property at the top-level of a Card object.  Note the required use of quoted string for the JSPATH value which allows the path to include the <tt>:</tt> (COLON) character.</t>
+              <t>This illustrates how to convert a vendor-extension property at the top-level of a Card object.  Note the required use of quoted string for the JSPATH value which allows the path to include the COLON (U+003A) character.</t>
               <figure anchor="jsprop-vendor-extension">
                 <name>Vendor-extension conversion example</name>
                 <artwork><![CDATA[
@@ -1928,22 +1915,22 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;X-RFC0000-JSPATH="example.com:foo":
-   data:application/json;base64,eyJiYXIiOiAxMjM0fQo=
+  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="example.com:foo":{"bar":1234}
   ...
   END:VCARD
 ]]></artwork>
               </figure>
-              <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object.  Although not recommended by <xref target="I-D.ietf-calext-jscontact" section="1.5.3"/>, the property name includes the <tt>/</tt> (SOLIDUS) character which requires escaping in the JSON pointer.  The data URI value is not base64-encoded and so requires percent-encoding (see <xref target="RFC3986" section="2.1"/>).</t>
+              <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object using a path relative to the Card object.  Although not recommended by <xref target="I-D.ietf-calext-jscontact" section="1.5.3"/>, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
               <figure anchor="jsprop-nested">
-                <name>Nested property example</name>
+                <name>Nested property example with path relative to Card</name>
                 <artwork><![CDATA[
   {
     "@type": "Card",
      ...
-     "addresses": {
-       "adr1": {
-         "@type": "Address",
+     "phones": {
+       "phone1": {
+         "@type": "Phone",
+         "phone": "tel:+33-01-23-45-67"
          ...
         "example.com:foo/bar": "tux hux"
        }
@@ -1952,9 +1939,8 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
 
   BEGIN:VCARD
   VERSION:4.0
-  ...
-  X-RFC0000-JSPROP;X-RFC0000-JSPATH="addresses/adr1/example.com:foo~1bar":
-   data:application/json;%22tux%20hux%22
+  TEL:tel:+33-01-23-45-67
+  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="phones/phone1/example.com:foo~1bar":"tux hux"
   ...
   END:VCARD
 ]]></artwork>
@@ -1968,7 +1954,13 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dt>Parameter name:</dt>
             <dd>X-RFC0000-JSPATH</dd>
             <dt>Purpose:</dt>
-            <dd>This parameter defines the name of a JSContact property that got converted to a vCard property.  It is encoded as a PatchObject pointer as defined in <xref target="I-D.ietf-calext-jscontact" section="1.5.3"/></dd>
+            <dd>
+            This parameter is set on a JSPROP property. It defines the name and position of a JSContact property within its Card, when this JSContact property gets converted to a vCard JSPROP property <xref target="vcard-jsprop"/>.
+            </dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>If a JSContact property value converts to a vCard JSPROP property (see <xref target="vcard-jsprop"/>), then the value of the JSPATH parameter defines the path to that JSContact value within the Card. The parameter value is a JSON pointer <xref target="RFC6901"/>, its last segment either defines the property name or array position of the JSContact value.  The root of the JSON pointer always is the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character. If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSPROP property this parameter is set on <bcp14>MUST</bcp14> be ignored and <bcp14>SHOULD</bcp14> be discarded when rewriting the vCard.</t>
+            </dd>
             <dt>Format definition:</dt>
             <dd>
               <sourcecode name="" type="abnf"><![CDATA[
@@ -1976,16 +1968,11 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
                  ; also see param-value in RFC 6350, section 3.3
   ]]></sourcecode>
             </dd>
-            <dt>Description:</dt>
-            <dd>
-            This parameter is set on a X-RFC0000-JSPROP property.
-            Its value defines the name of the JSContact property that got converted to this vCard property.  The parameter value contains the JSON pointer of the JSContact
-            property.  It <bcp14>MUST</bcp14> be quoted.
-            </dd>
             <dt>Example(s):</dt>
             <dd>
+              <t>This illustrates a simple example. For further examples see <xref target="vcard-jsprop-examples"/>.</t>
               <sourcecode name=""><![CDATA[
-  X-RFC0000-JSPROP;X-RFC0000-JSPATH="example.com:foo":data:application/json;1
+  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="example.com:foo":"bar"
   ]]></sourcecode>
             </dd>
           </dl>
@@ -2060,13 +2047,12 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
       <references>
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2397.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6474.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6715.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6869.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7095.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7942.xml"/>
       </references>
