@@ -266,7 +266,7 @@
     "phones": {
       "p1": {
         "@type": "Phone",
-        "phone": "tel:+1-555-555-5555",
+        "number": "tel:+1-555-555-5555",
         "ietf.org:rfc0000:params" : {
          "group" : "item1"
         }
@@ -326,13 +326,13 @@
         "@type": "Phone",
         "contexts": { "private": true },
         "features": { "voice": true },
-        "phone": "tel:+1-555-555-5555;ext=5555",
+        "number": "tel:+1-555-555-5555;ext=5555",
         "pref": 1
       },
       "PHONE-B": {
         "@type": "Phone",
         "contexts": { "private": true },
-        "phone": "tel:+33-01-23-45-67"
+        "number": "tel:+33-01-23-45-67"
       }
     ],
     ...
@@ -750,7 +750,7 @@
         <name>Communications Properties</name>
         <section anchor="vCard-TEL">
           <name>TEL</name>
-          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>phone</tt> property is set to the TEL value.</t>
+          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>number</tt> property is set to the TEL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="tel_conversion">
             <name>TEL conversion example</name>
@@ -771,13 +771,13 @@
         "@type": "Phone",
         "contexts": { "private": true },
         "features": { "voice": true },
-        "phone": "tel:+1-555-555-5555;ext=5555",
+        "number": "tel:+1-555-555-5555;ext=5555",
         "pref": 1
       },
       "PHONE-2": {
         "@type": "Phone",
         "contexts": { "private": true },
-        "phone": "tel:+33-01-23-45-67"
+        "number": "tel:+33-01-23-45-67"
       }
     ],
     ...
@@ -1624,7 +1624,7 @@
     "phones": {
       "p1": {
         "@type": "Phone",
-        "phone": "tel:+1-555-555-5555",
+        "number": "tel:+1-555-555-5555",
         "label": "foo"
       }
     }
@@ -1977,7 +1977,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
      "phones": {
        "phone1": {
          "@type": "Phone",
-         "phone": "tel:+33-01-23-45-67"
+         "number": "tel:+33-01-23-45-67"
          ...
         "example.com:foo/bar": "tux hux"
        }

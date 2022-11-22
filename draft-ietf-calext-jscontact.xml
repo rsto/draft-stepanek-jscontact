@@ -593,8 +593,8 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
               </li>
-            <li>phone: <tt>String</tt> (mandatory).
-The phone value, as either a URI or a free-text phone number.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
+            <li>numbers: <tt>String</tt> (mandatory).
+The phone number, as either a URI or free-text.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
                   The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
@@ -1382,6 +1382,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left"><xref target="name" format="default"/></td>
               </tr>
               <tr>
+                <td align="left">number</td>
+                <td align="left">String</td>
+                <td align="left">Phone</td>
+                <td align="left"><xref target="phones" format="default"/></td>
+              </tr>
+              <tr>
                 <td align="left">onlineServices</td>
                 <td align="left">Id[OnlineService]</td>
                 <td align="left">Card</td>
@@ -1404,12 +1410,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Id[PersonalInformation]</td>
                 <td align="left">Card</td>
                 <td align="left"><xref target="personalInfo" format="default"/></td>
-              </tr>
-              <tr>
-                <td align="left">phone</td>
-                <td align="left">String</td>
-                <td align="left">Phone</td>
-                <td align="left"><xref target="phones" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">phones</td>
