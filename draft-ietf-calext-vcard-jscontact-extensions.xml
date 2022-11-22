@@ -340,6 +340,58 @@ PRONOUNS;LANG=en:they/them
     </section>
     <section anchor="new-parameters">
       <name>New Parameters</name>
+      <section anchor="param-author">
+        <name>AUTHOR Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>AUTHOR</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter identifies the author of the associated property value.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property where conveying authorship is desired. It identifies the author as a URI <xref target="RFC3986"/>. Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted. Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows to name an author as free-text value (see <xref target="param-author-name"/>).</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+author-param    = "AUTHOR" "=" DQUOTE +QSAFE-CHAR DQUOTE
+                ; a valid URI from Section 3 of [RFC3986]
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+NOTE;AUTHOR="mailto:john@example.com":This is some note.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-author-name">
+        <name>AUTHOR-NAME Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>AUTHOR-NAME</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter names the author of the associated property value.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property where conveying authorship is desired. It names the author as a free-text value. The parameter value <bcp14>MUST NOT</bcp14> be empty. Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>). Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows to identify an author by URI (see <xref target="param-author"/>).</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+author-name-param    = "AUTHOR-NAME" "=" param-value ; not empty
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+NOTE;AUTHOR-NAME=John Doe:This is some note.
+NOTE;AUTHOR-NAME="_:l33tHacker:_":A note with an unusual author name.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
       <section anchor="param-derived">
         <name>DERIVED Parameter</name>
         <dl>
@@ -454,6 +506,16 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
         <tbody>
           <tr>
             <td/>
+            <td align="left">AUTHOR</td>
+            <td align="left">This document, <xref target="param-author"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">AUTHOR-NAME</td>
+            <td align="left">This document, <xref target="param-author-name"/></td>
+          </tr>
+          <tr>
+            <td/>
             <td align="left">PROP-ID</td>
             <td align="left">This document, <xref target="param-propid"/></td>
           </tr>
@@ -515,6 +577,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
       <references>
         <name>Normative References</name>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
         <!-- The recommended and simplest way to include a well known reference -->
