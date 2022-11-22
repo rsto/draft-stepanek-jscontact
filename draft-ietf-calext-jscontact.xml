@@ -1846,6 +1846,36 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                       <xref target="kind" format="default"/>
                     </td>
                   </tr>
+                  <tr>
+                    <td align="left">group</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">org</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">location</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">device</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">application</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </dd>
@@ -1874,6 +1904,672 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">rfc0000</td>
                     <td align="left">
                       <xref target="prop-version" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>contexts</dd>
+            <dt>Context:</dt>
+            <dd>NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendaeResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-contexts" align="left">
+                <name>JSContact Enum Values for contexts (Context: NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendaeResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">private</td>
+                    <td align="left">
+                      <xref target="prop-contexts" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">work</td>
+                    <td align="left">
+                      <xref target="prop-contexts" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>contexts</dd>
+            <dt>Context:</dt>
+            <dd>Address</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-addr-contexts" align="left">
+                <name>JSContact Enum Values for contexts (Context: Address)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">private</td>
+                    <td align="left">
+                      <xref target="prop-contexts" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">work</td>
+                    <td align="left">
+                      <xref target="prop-contexts" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">billing</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">postal</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>features</dd>
+            <dt>Context:</dt>
+            <dd>Phone</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-phone-features" align="left">
+                <name>JSContact Enum Values for features (Context: Phone)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">voice</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">fax</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">pager</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">text</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">cell</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">textphone</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">video</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>StreetComponent</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-streetcomponent-type" align="left">
+                <name>JSContact Enum Values for type (Context: StreetComponent)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">name</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">number</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">apartment</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">room</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">extension</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">direction</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">building</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">floor</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">postOfficeBox</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">separator</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">unknown</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>NameComponent</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-namecomponent-type" align="left">
+                <name>JSContact Enum Values for type (Context: NameComponent)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">prefix</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">given</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">surname</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">middle</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">suffix</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">separator</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>Title</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-title-type" align="left">
+                <name>JSContact Enum Values for type (Context: Title)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">title</td>
+                    <td align="left">
+                      <xref target="titles" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">role</td>
+                    <td align="left">
+                      <xref target="titles" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>grammaticalGender</dd>
+            <dt>Context:</dt>
+            <dd>SpeakToAs</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-speaktoas-grammaticalgender" align="left">
+                <name>JSContact Enum Values for type (Context: SpeakToAs)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">animate</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">female</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">inanimate</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">male</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">neuter</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>preferredContactChannels</dd>
+            <dt>Context:</dt>
+            <dd>Card</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-speaktoas-grammaticalgender" align="left">
+                <name>JSContact Enum Values for preferredContactChannels (Context: Card)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">addresses</td>
+                    <td align="left">
+                      <xref target="preferredContactChannels" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">emails</td>
+                    <td align="left">
+                      <xref target="preferredContactChannels" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">onlineServices</td>
+                    <td align="left">
+                      <xref target="preferredContactChannels" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">phones</td>
+                    <td align="left">
+                      <xref target="preferredContactChannels" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>CalendarResource</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-calendarresource-type" align="left">
+                <name>JSContact Enum Values for type (Context: CalendarResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">calendar</td>
+                    <td align="left">
+                      <xref target="calendars" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">freeBusy</td>
+                    <td align="left">
+                      <xref target="calendars" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>DirectoryResource</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-directoryresource-type" align="left">
+                <name>JSContact Enum Values for type (Context: DirectoryResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">directory</td>
+                    <td align="left">
+                      <xref target="directories" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">entry</td>
+                    <td align="left">
+                      <xref target="directories" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>LinkResource</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-linkresource-type" align="left">
+                <name>JSContact Enum Values for type (Context: LinkResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">contact</td>
+                    <td align="left">
+                      <xref target="links" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>MediaResource</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-mediaresource-type" align="left">
+                <name>JSContact Enum Values for type (Context: MediaResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">photo</td>
+                    <td align="left">
+                      <xref target="media" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">sound</td>
+                    <td align="left">
+                      <xref target="media" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">logo</td>
+                    <td align="left">
+                      <xref target="media" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>Anniversary</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-anniversary-type" align="left">
+                <name>JSContact Enum Values for type (Context: Anniversary)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">birth</td>
+                    <td align="left">
+                      <xref target="anniversaries" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">death</td>
+                    <td align="left">
+                      <xref target="anniversaries" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">wedding</td>
+                    <td align="left">
+                      <xref target="anniversaries" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>type</dd>
+            <dt>Context:</dt>
+            <dd>PersonalInformation</dd>
+            <dt>Change Controller:</dt>
+            <dd>IETF</dd>
+            <dt>Version:</dt>
+            <dd>rfc0000</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-personalinformation-type" align="left">
+                <name>JSContact Enum Values for type (Context: PersonalInformation)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">expertise</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">hobby</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">interest</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
                     </td>
                   </tr>
                 </tbody>
