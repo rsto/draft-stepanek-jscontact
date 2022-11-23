@@ -54,21 +54,13 @@
   </front>
   <middle>
     <section>
-      <name>Preface</name>
-      <t>
-        This document is a work in progress.  The list of new or updated properties
-        and parameters is likely to be incomplete.  This section is removed from
-        the document before publication.
-      </t>
-    </section>
-    <section>
       <name>Introduction</name>
       <t>
-        The JSContact <xref target="ref-jscontact"/> format aims to be an alternative to the
+        The JSContact <xref target="I-D.ietf-calext-jscontact"/> format aims to be an alternative to the
         vCard <xref target="RFC6350"/> format for representation of contact and addressbook
         data.  As such, it introduces new semantics that are not covered in the current
         definition of vCard and its various extensions.  Converting contact data between
-        the two formats is defined in <xref target="ref-jscontact-vcard"/> with the goal of
+        the two formats is defined in <xref target="I-D.ietf-calext-jscontact-vcard"/> with the goal of
         not loosing any semantics during conversion.  In order to do so, this document
         defines a new set of properties for vCard and extends existing definitions.
       </t>
@@ -485,7 +477,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
-      <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1.  of <xref target="RFC6350"/>.</t>
+      <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
       <table anchor="new_properties">
         <name>New VCARD Properties</name>
         <thead>
@@ -523,7 +515,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           </tr>
         </tbody>
       </table>
-      <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2.  of <xref target="RFC6350"/>.</t>
+      <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
       <table anchor="new_parameters">
         <name>New VCARD Parameters</name>
         <thead>
@@ -561,7 +553,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           </tr>
         </tbody>
       </table>
-      <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4.  of <xref target="RFC6350"/>.</t>
+      <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
       <table anchor="new_values">
         <name>New VCARD Property Values</name>
         <thead>
@@ -614,18 +606,8 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
       </references>
       <references>
         <name>Informative References</name>
-        <reference anchor="ref-jscontact" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscontact/">
-          <front>
-            <title>JSContact: A JSON representation of contact data</title>
-            <author/>
-          </front>
-        </reference>
-        <reference anchor="ref-jscontact-vcard" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscontact-vcard/">
-          <front>
-            <title>JSContact: Converting from and to vCard</title>
-            <author/>
-          </front>
-        </reference>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact-vcard.xml"/>
       </references>
     </references>
   </back>
