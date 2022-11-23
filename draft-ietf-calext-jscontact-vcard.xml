@@ -97,7 +97,7 @@
         </section>
         <section>
           <name>Choosing identifiers</name>
-          <t>Multi-valued properties in JSContact typically are represented as a JSON object where the object keys are of the <tt>Id</tt> type and the object values are the converted vCard property. In absence of the PROP-ID parameter (see <xref target="prop_id_parameter"/>), implementations are free to choose any identifier for such entries. Whatever identifier generation scheme implementations use, they <bcp14>SHOULD</bcp14> generate values of short character length.  For example, this could be an incrementing number across all <tt>Id</tt>s or only unique within one JSON object.</t>
+          <t>Multi-valued properties in JSContact typically are represented as a JSON object where the object keys are of the <tt>Id</tt> type and the object values are the converted vCard property. In absence of the PROP-ID parameter (see <xref target="vcard-param-propid"/>), implementations are free to choose any identifier for such entries. Whatever identifier generation scheme implementations use, they <bcp14>SHOULD</bcp14> generate values of short character length.  For example, this could be an incrementing number across all <tt>Id</tt>s or only unique within one JSON object.</t>
         </section>
       </section>
       <section anchor="vcard-types">
@@ -110,7 +110,7 @@
           <name>URI</name>
           <t>This converts to the JSContact <tt>String</tt> type.</t>
         </section>
-        <section>
+        <section anchor="vcard-type-datetime">
           <name>DATE, TIME, DATE-TIME, DATE-AND-OR-TIME, and TIMESTAMP</name>
           <t>The TIMESTAMP type generally converts to the <tt>UTCDateTime</tt>. It converts to the <tt>Timestamp</tt> type for anniversaries.</t>
           <t>The DATE type converts to the <tt>PartialDate</tt> type, which only is relevant for anniversaries. This does not apply to DATE values that only define a month or a day.</t>
@@ -130,7 +130,7 @@
         </section>
         <section>
           <name>UTC-OFFSET</name>
-          <t>This either converts to a <tt>String</tt> containing an IANA TimeZone Database entry name (see <xref target="prop-tz"/>), or it does not convert to any JSContact type. For the latter, vCard properties or parameters having such values <bcp14>MAY</bcp14> convert to JSContact as defined in <xref target="new-jscontact"/>. </t>
+          <t>This either converts to a <tt>String</tt> containing an IANA TimeZone Database entry name (see <xref target="vcard-prop-tz"/>), or it does not convert to any JSContact type. For the latter, vCard properties or parameters having such values <bcp14>MAY</bcp14> convert to JSContact as defined in <xref target="new-jscontact"/>. </t>
         </section>
         <section>
           <name>LANGUAGE-TAG</name>
@@ -139,7 +139,7 @@
       </section>
       <section anchor="vcard-parameters">
         <name>vCard Parameters</name>
-        <section>
+        <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
           <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on. The value of the LANGUAGE parameter defines the language key in the <tt>localizations</tt> property. The JSON pointer in the <tt>PatchObject</tt> is the path to the JSContact property that the vCard property converts to. The value of the PatchObject is the converted property value.</t>
           <t>Note that an entry in the <tt>localizations</tt> <bcp14>MAY</bcp14> but need not point to an existing property.  The following two examples illustrate each case.</t>
@@ -207,47 +207,47 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-param-value">
           <name>VALUE</name>
           <t>This does not convert to a standard property in JSContact.  It is implicit for standard types and conversion.  For extended values, see <xref target="new-jscontact-param"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-pref">
           <name>PREF</name>
           <t>This converts to the <tt>pref</tt> property defined in <xref target="I-D.ietf-calext-jscontact" section="1.6.3"/></t>
         </section>
-        <section>
+        <section anchor="vcard-param-altid">
           <name>ALTID</name>
-          <t>This does not convert to a standard property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact extension properties <tt>props</tt> or <tt>params</tt> defined in <xref target="new-jscontact"/>.</t>
+          <t>This does not convert to a standard property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact extension properties <tt>props</tt> or <tt>params</tt> defined in <xref target="new-jscontact"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-pid">
           <name>PID</name>
           <t>This does not convert to a standard property in JSContact.  To convert this parameter, see <xref target="new-jscontact-param"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-type">
           <name>TYPE</name>
           <t>This converts to the <tt>contexts</tt> property defined in <xref target="I-D.ietf-calext-jscontact" section="1.6.1"/> as well as property-specific <tt>type</tt> property values defined in later sections.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-mediatype">
           <name>MEDIATYPE</name>
           <t>This converts to the <tt>mediaType</tt> property of the <tt>Resource</tt> object type.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-calscale">
           <name>CALSCALE</name>
           <t>This parameter set on a BDAY or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type.  To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
-          <t>This converts to the <tt>sortAs</tt> property defined in <xref target="I-D.ietf-calext-jscontact" section="1.6.4"/></t>
+          <t>This converts to the <tt>sortAs</tt> properties defined for the <tt>Name</tt>, <tt>Organization</tt> and <tt>OrgUnit</tt> object types.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-geo">
           <name>GEO</name>
           <t>This parameter set on a ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-param-tz">
           <name>TZ</name>
-          <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
+          <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
         </section>
-        <section anchor="vcard-group">
+        <section anchor="vcard-param-group">
           <name>GROUP</name>
           <t>This parameter exclusively is for use in jCard (see <xref target="RFC7095" section="7.1"/>).  It <bcp14>MUST NOT</bcp14> be set in a vCard.  Preserving the exact group name when converting from vCard to JSContact and back to vCard is not necessary. Any group identifiers will do, as long as the resulting vCard groups its  properties equally to the original vCard.  Implementations that still wish to preserve the exact property group name of a vCard property <bcp14>MAY</bcp14> set the <tt>group</tt> parameter in the JSContact extension properties <tt>props</tt> or <tt>params</tt> defined in <xref target="new-jscontact"/>.</t>
           <figure anchor="group_conversion_params">
@@ -276,7 +276,7 @@
     }
         ]]></artwork>
           </figure>
-                  <figure anchor="group_conversion_props">
+          <figure anchor="group_conversion_props">
             <name>An example how to preserve the group name in <tt>props</tt> during conversion.</name>
             <artwork><![CDATA[
     BEGIN:VCARD
@@ -298,13 +298,12 @@
     }
         ]]></artwork>
           </figure>
-
         </section>
-        <section>
+        <section anchor="vcard-param-derived">
           <name>DERIVED</name>
           <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-        <section anchor="prop_id_parameter">
+        <section anchor="vcard-param-propid">
           <name>PROP-ID</name>
           <t>The PROP-ID parameter value of a vCard property converts to the <tt>Id</tt> of the JSContact property to which the vCard property converts to.</t>
           <figure anchor="propid_conversion">
@@ -341,6 +340,16 @@
           </figure>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
+        <section anchor="vcard-param-level">
+          <name>LEVEL</name>
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInformation</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
+        </t>
+          <ul spacing="compact">
+            <li>"beginner" converts to "low";</li>
+            <li>"average" converts to "medium";</li>
+            <li>"expert" converts to "high".</li>
+          </ul>
+        </section>
       </section>
       <section>
         <name>General Properties</name>
@@ -348,7 +357,7 @@
           <name>BEGIN and END</name>
           <t>These do not convert to standard properties in JSContact.</t>
         </section>
-        <section>
+        <section anchor="vcard-prop-source">
           <name>SOURCE</name>
           <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -379,7 +388,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-kind">
           <name>KIND</name>
           <t>The KIND property converts to the <tt>kind</tt> property (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.</t>
           <figure anchor="kind_conversion">
@@ -401,18 +410,18 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-xml">
           <name>XML</name>
           <t>This does not convert to a standard property in JSContact.</t>
         </section>
       </section>
       <section>
         <name>Identification Properties</name>
-        <section>
+        <section anchor="vcard-prop-fn">
           <name>FN</name>
           <t>All the FN instances are represented through the <tt>fullName</tt> property (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-prop-n">
           <name>N and NICKNAME</name>
           <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.  Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
           <t>Each comma-separated item of the SORT-AS parameter value converts to an entry of the <tt>sortAs</tt> property where the key is the "type" value related to the sorted N component and the value is the corresponding item. Absence of a key in the <tt>sortAs</tt> indicates that its related part in the SORT-AS parameter value <bcp14>MUST</bcp14> either the empty string followed by COMMA, or no further SORT-AS parts are defined.</t>
@@ -490,7 +499,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-photo">
           <name>PHOTO</name>
           <t>A PHOTO property converts to an entry in the <tt>media</tt> property (<xref target="photo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>photo</tt> and <tt>uri</tt> property is set to the PHOTO value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -521,7 +530,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-anniversary">
           <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY</name>
           <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6474"/> are represented as <tt>Anniversary</tt> objects included in the <tt>anniversaries</tt> property (<xref target="anniversary_conversion"/>):</t>
           <ul spacing="compact">
@@ -585,11 +594,11 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-gender">
           <name>GENDER</name>
           <t>This does not map to a standard property in JSContact.  To convert this property, see <xref target="new-jscontact-props"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-        <section anchor="grammatical-gender">
+        <section anchor="vcard-prop-grammatical-gender">
           <name>GRAMMATICAL-GENDER and PRONOUNS</name>
           <t>The GRAMMATICAL-GENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
           <t>The PRONOUNS property converts to an entry in the <tt>pronouns</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
@@ -631,7 +640,7 @@
       </section>
       <section>
         <name>Delivery Addressing Properties</name>
-        <section anchor="vcard-adr">
+        <section anchor="vcard-prop-adr">
           <name>ADR</name>
           <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.</t>
           <t>The ADR components convert into the <tt>Address</tt> properties as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
@@ -748,7 +757,7 @@
       </section>
       <section>
         <name>Communications Properties</name>
-        <section anchor="vCard-TEL">
+        <section anchor="vcard-prop-tel">
           <name>TEL</name>
           <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>number</tt> property is set to the TEL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -785,7 +794,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-email">
           <name>EMAIL</name>
           <t>An EMAIL property converts to an entry in the <tt>emails</tt> property (<xref target="email_conversion"/>).  The entry value is an <tt>EmailAddress</tt> object.  The <tt>address</tt> property is set to the EMAIL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -820,7 +829,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-impp">
           <name>IMPP</name>
           <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The entry value is a <tt>OnlineService</tt> object and the <tt>uri</tt> property is set to the IMPP value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -851,7 +860,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-lang">
           <name>LANG</name>
           <t>A LANG property converts to an entry in the <tt>preferredContactLanguages</tt> property (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of <tt>ContactLanguage</tt> objects.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -896,7 +905,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-contact-channel-pref">
           <name>CONTACT-CHANNEL-PREF</name>
           <t>A CONTACT-CHANNEL-PREF property converts to an entry in the <tt>preferredContactChannels</tt> property (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of <tt>ContactChannelPreference</tt> objects.</t>
           <table anchor="contact_channel_key_conversion">
@@ -962,7 +971,7 @@
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-prop-locale">
           <name>LOCALE</name>
           <t>The LOCALE property converts to the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
           <figure anchor="locale_conversion">
@@ -988,7 +997,7 @@
       </section>
       <section>
         <name>Geographical Properties</name>
-        <section anchor="prop-tz">
+        <section anchor="vcard-prop-tz">
           <name>TZ</name>
           <t>A value of type TEXT converts to the <tt>timeZone</tt> property in the <tt>Address</tt> object.</t>
           <t>A value of type UTC-OFFSET converts to the <tt>timeZone</tt> property in the <tt>Address</tt> object if the offset has zero minutes and the hour offset is in the range -12 &lt;= 14:</t>
@@ -999,7 +1008,7 @@
           <t>For such property values, also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
           <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact.  To convert such property, see <xref target="new-jscontact-props"/>.</t>
         </section>
-        <section anchor="prop-geo">
+        <section anchor="vcard-prop-geo">
           <name>GEO</name>
           <t>This converts to the <tt>coordinates</tt> property of the <tt>Address</tt> object.  Also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
         </section>
@@ -1014,7 +1023,7 @@
       </section>
       <section>
         <name>Organizational Properties</name>
-        <section>
+        <section anchor="vcard-prop-title">
           <name>TITLE and ROLE</name>
           <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> property is set to <tt>title</tt> or <tt>role</tt> for TITLE and ROLE vCard properties, respectively. The <tt>name</tt> property is set to the vCard property value.</t>
           <t>The value of the <tt>organization</tt> property can be derived if the TITLE or ROLE property is member of a vCard property group and exactly one other ORG property also is part of that group.</t>
@@ -1058,7 +1067,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-logo">
           <name>LOGO</name>
           <t>A LOGO property converts to an entry in the <tt>media</tt> property (<xref target="logo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>logo</tt> and <tt>uri</tt> property is set to the LOGO value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1089,7 +1098,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-org">
           <name>ORG</name>
           <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name and the <tt>units</tt> property is an array of <tt>OrgUnit</tt> objects each containing the organizational unit name in the <tt>name</tt> property.</t>
           <t>Implementations MAY allow to represent organizational untits without the organizational name.  In this case, the first component of the ORG value MUST be an empty string (e.g. ORG:;DepartmentA).</t>
@@ -1124,7 +1133,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-member">
           <name>MEMBER</name>
           <t>The uids of the contact cards composing the group are included in the <tt>members</tt> property (<xref target="group_example"/>).</t>
           <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
@@ -1152,7 +1161,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section anchor="vCard-RELATED">
+        <section anchor="vcard-prop-related">
           <name>RELATED</name>
           <t>All the RELATED instances convert to the <tt>relatedTo</tt> property (<xref target="related_conversion"/>): an entry for each entity the entity described by the Card is associated with.  The map keys are the <tt>uid</tt> values of the associated cards.</t>
           <t>Each map value is a <tt>Relation</tt> object including only the <tt>relation</tt> property represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
@@ -1197,7 +1206,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-contact-uri">
           <name>CONTACT-URI</name>
           <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>type</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1232,14 +1241,7 @@
       </section>
       <section>
         <name>Personal Information Properties</name>
-        <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInformation</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
-        </t>
-        <ul spacing="compact">
-          <li>"beginner" converts to "low";</li>
-          <li>"average" converts to "medium";</li>
-          <li>"expert" converts to "high".</li>
-        </ul>
-        <section>
+        <section anchor="vcard-prop-expertise">
           <name>EXPERTISE</name>
           <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> property is set to "expertise".</t>
           <t>The INDEX parameter is represented as the index of the expertise among the declared expertises.</t>
@@ -1278,7 +1280,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-hobby">
           <name>HOBBY</name>
           <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> property is set to "hobby".</t>
           <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
@@ -1317,7 +1319,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-interest">
           <name>INTEREST</name>
           <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> property is set to "interest".</t>
           <t>The INDEX parameter is represented as the index of the interest among the declared interests.</t>
@@ -1356,7 +1358,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-org-directory">
           <name>ORG-DIRECTORY</name>
           <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1398,7 +1400,7 @@
       </section>
       <section>
         <name>Explanatory Properties</name>
-        <section>
+        <section anchor="vcard-prop-categories">
           <name>CATEGORIES</name>
           <t>A CATEGORIES property converts to a set of entries of the <tt>keywords</tt> property (<xref target="categories_conversion"/>).  The keys are the comma-separated text values of the CATEGORIES property.</t>
           <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
@@ -1426,7 +1428,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-note">
           <name>NOTE</name>
           <t>A NOTE property converts to a <tt>Note</tt> object in the <tt>notes</tt> map (<xref target="notes_conversion"/>)</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1453,7 +1455,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-prodid">
           <name>PRODID</name>
           <t>The PRODID property converts to the <tt>prodId</tt> property (<xref target="prodid_conversion"/>).</t>
           <figure anchor="prodid_conversion">
@@ -1475,7 +1477,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-rev">
           <name>REV</name>
           <t>The REV property converts to the <tt>updated</tt> property (<xref target="rev_conversion"/>).</t>
           <figure anchor="rev_conversion">
@@ -1497,7 +1499,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-sound">
           <name>SOUND</name>
           <t>A SOUND property converts to an entry in the <tt>media</tt> property (<xref target="sound_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>sound</tt> and <tt>uri</tt> property is set to the SOUND value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1528,7 +1530,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-uid">
           <name>UID</name>
           <t>The UID property corresponds to the <tt>uid</tt> property (<xref target="uid_conversion"/>).</t>
           <figure anchor="uid_conversion">
@@ -1550,11 +1552,11 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-pid">
           <name>CLIENTPIDMAP and PID Parameter</name>
           <t>The CLIENTPIDMAP property and the PDI parameter don't have a direct match with a Card feature.</t>
         </section>
-        <section>
+        <section anchor="vcard-prop-url">
           <name>URL</name>
           <t>An URL property converts to an entry in the <tt>links</tt> property (<xref target="url_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose <tt>uri</tt> property is set to the URL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1584,11 +1586,11 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-version">
           <name>VERSION</name>
           <t>The VERSION property doesn't have a direct match with a JSContact feature.</t>
         </section>
-        <section>
+        <section anchor="vcard-prop-created">
           <name>CREATED</name>
           <t>The CREATED property converts to the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
           <figure anchor="created_conversion">
@@ -1611,10 +1613,10 @@
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-        <section>
+        <section anchor="vcard-prop-xablabel">
           <name>X-ABLabel</name>
           <t>This property is non-standard but widely in use in existing vCard data.  It converts to the <tt>label</tt> property of a JSContact object type.  The X-ABLabel property is preceded by a vCard property group name, and the label converts to the JSContact object which got converted from a vCard property having the same group.</t>
-        <t>The group name is not preserved and implementations are free to choose any unique group name when converting back to vCard. For an example how to preserve the group name see <xref target="vcard-group"/>.</t>
+          <t>The group name is not preserved and implementations are free to choose any unique group name when converting back to vCard. For an example how to preserve the group name see <xref target="vcard-param-group"/>.</t>
           <figure anchor="xablabel_conversion">
             <name>X-ABLabel conversion example</name>
             <artwork><![CDATA[
@@ -1644,7 +1646,7 @@
       </section>
       <section>
         <name>Security Properties</name>
-        <section>
+        <section anchor="vcard-prop-key">
           <name>KEY</name>
           <t>A KEY property converts to an entry in the <tt>cryptoKeys</tt> property (<xref target="key_conversion"/>).  The entry value is a <tt>CryptoResource</tt> object whose <tt>uri</tt> property is set to the KEY value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1677,7 +1679,7 @@
       </section>
       <section>
         <name>Calendar Properties</name>
-        <section>
+        <section anchor="vcard-prop-fburl">
           <name>FBURL</name>
           <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1716,7 +1718,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-caladruri">
           <name>CALADRURI</name>
           <t>A CALADRURI property converts to an entry in the <tt>schedulingAddresses</tt> property (<xref target="caladruri_conversion"/>).  The entry value is a <tt>SchedulingAddress</tt> object whose <tt>uri</tt> property is set to the CALADRURI value.</t>
           <t>The PREF parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1752,7 +1754,7 @@
         ]]></artwork>
           </figure>
         </section>
-        <section>
+        <section anchor="vcard-prop-caluri">
           <name>CALURI</name>
           <t>A CALURI property converts to an entry in the <tt>calendars</tt> property (<xref target="caluri_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>calendar</tt> and <tt>uri</tt> property is set to the CALURI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1880,12 +1882,1082 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <name>Converting JSContact to vCard</name>
       <section>
         <name>Conversion Rules</name>
-        <t>A <tt>Card</tt> converts to vCard by applying the reserve rules of section <xref target="vcard-jscontact-conversion"/>.  The following additional rules apply:</t>
+        <t>A <tt>Card</tt> converts to vCard by applying the reserve rules of converting vCard to JSContact. <xref target="table_convert_jscontact_to_vcard"/> lists the relevant document sections for each JSContact object type and property.  The following additional rules apply:</t>
         <ul>
-          <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="prop_id_parameter"/>).</li>
+          <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
           <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> the DERIVED parameter on the FN property.  Otherwise they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
           <li>Vendor-extension and unknown properties convert to vCard as outlined in section <xref target="convert-other-jscontact"/>.</li>
         </ul>
+        <table anchor="table_convert_jscontact_to_vcard">
+          <name>Conversion rules by JSContact property</name>
+          <thead>
+            <tr>
+              <th align="left">JSContact Type</th>
+              <th align="left">Property Name</th>
+              <th align="left">Relevant Section(s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Address</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>coordinates</td>
+              <td><xref target="vcard-param-geo"/>, <xref target="vcard-prop-geo"/></td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>country</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>countryCode</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>fullAddress</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>locality</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>postcode</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>region</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>street</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>timeZone</td>
+              <td><xref target="vcard-param-tz"/>, <xref target="vcard-prop-tz"/></td>
+            </tr>
+            <tr>
+              <td>Anniversary</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Anniversary</td>
+              <td>date</td>
+              <td>
+                <xref target="vcard-prop-anniversary"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Anniversary</td>
+              <td>place</td>
+              <td>
+                <xref target="vcard-prop-anniversary"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Anniversary</td>
+              <td>type</td>
+              <td>
+                <xref target="vcard-prop-anniversary"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Author</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Author</td>
+              <td>name</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>Author</td>
+              <td>uri</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
+              <td>mediaType</td>
+              <td>
+                <xref target="vcard-param-mediatype"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
+              <td>type</td>
+              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
+              <td>uri</td>
+              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>@version</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>addresses</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>anniversaries</td>
+              <td>
+                <xref target="vcard-prop-anniversary"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>calendars</td>
+              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>created</td>
+              <td>
+                <xref target="vcard-prop-created"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>directories</td>
+              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>emails</td>
+              <td>
+                <xref target="vcard-prop-email"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>fullName</td>
+              <td>
+                <xref target="vcard-prop-fn"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>keywords</td>
+              <td>
+                <xref target="vcard-prop-categories"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>kind</td>
+              <td>
+                <xref target="vcard-prop-kind"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>links</td>
+              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>locale</td>
+              <td>
+                <xref target="vcard-prop-locale"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>localizations</td>
+              <td>
+                <xref target="vcard-param-language"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>media</td>
+              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>members</td>
+              <td>
+                <xref target="vcard-prop-member"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>name</td>
+              <td>
+                <xref target="vcard-prop-n"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>nickNames</td>
+              <td>
+                <xref target="vcard-prop-n"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>notes</td>
+              <td>
+                <xref target="vcard-prop-note"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>onlineServices</td>
+              <td>
+                <xref target="vcard-prop-impp"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>organizations</td>
+              <td>
+                <xref target="vcard-prop-org"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>personalInfo</td>
+              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>phones</td>
+              <td>
+                <xref target="vcard-prop-tel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>preferredContactChannels</td>
+              <td>
+                <xref target="vcard-prop-contact-channel-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>preferredLanguages</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>prodId</td>
+              <td>
+                <xref target="vcard-prop-prodid"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>relatedTo</td>
+              <td>
+                <xref target="vcard-prop-related"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>schedulingAddresses</td>
+              <td>
+                <xref target="vcard-prop-caladruri"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>speakToAs</td>
+              <td>
+                <xref target="vcard-prop-grammatical-gender"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>titles</td>
+              <td>
+                <xref target="vcard-prop-title"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>uid</td>
+              <td>
+                <xref target="vcard-prop-uid"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Card</td>
+              <td>updated</td>
+              <td>
+                <xref target="vcard-prop-rev"/>
+              </td>
+            </tr>
+            <tr>
+              <td>ContactChannelPreference</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>ContactChannelPreference</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>ContactChannelPreference</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
+              <td>mediaType</td>
+              <td>
+                <xref target="vcard-param-mediatype"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
+              <td>type</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
+              <td>uri</td>
+              <td>
+                <xref target="vcard-prop-key"/>
+              </td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>mediaType</td>
+              <td>
+                <xref target="vcard-param-mediatype"/>
+              </td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>type</td>
+              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>uri</td>
+              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
+            </tr>
+            <tr>
+              <td>EmailAddress</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>EmailAddress</td>
+              <td>address</td>
+              <td>
+                <xref target="vcard-prop-email"/>
+              </td>
+            </tr>
+            <tr>
+              <td>EmailAddress</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>EmailAddress</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>EmailAddress</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>LanguagePreference</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>LanguagePreference</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>LanguagePreference</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
+              <td>mediaType</td>
+              <td>
+                <xref target="vcard-param-mediatype"/>
+              </td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
+              <td>type</td>
+              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
+              <td>uri</td>
+              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/>&gt;</td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
+              <td>mediaType</td>
+              <td>
+                <xref target="vcard-param-mediatype"/>
+              </td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
+              <td>type</td>
+              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
+              <td>uri</td>
+              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>components</td>
+              <td>
+                <xref target="vcard-prop-n"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>locale</td>
+              <td>
+                <xref target="vcard-prop-locale"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>sortAs</td>
+              <td>
+                <xref target="vcard-param-sortas"/>
+              </td>
+            </tr>
+            <tr>
+              <td>NameComponent</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>NameComponent</td>
+              <td>nth</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>NameComponent</td>
+              <td>type</td>
+              <td>
+                <xref target="vcard-prop-n"/>
+              </td>
+            </tr>
+            <tr>
+              <td>NameComponent</td>
+              <td>value</td>
+              <td>
+                <xref target="vcard-prop-n"/>
+              </td>
+            </tr>
+            <tr>
+              <td>NickName</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>NickName</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>NickName</td>
+              <td>name</td>
+              <td>
+                <xref target="vcard-prop-n"/>
+              </td>
+            </tr>
+            <tr>
+              <td>NickName</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td>author</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td>created</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td>language</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td>note</td>
+              <td>
+                <xref target="vcard-prop-note"/>
+              </td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
+              <td>service</td>
+              <td>
+                <xref target="vcard-prop-impp"/>
+              </td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
+              <td>uri</td>
+              <td>
+                <xref target="vcard-prop-impp"/>
+              </td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
+              <td>username</td>
+              <td>TBD</td>
+            </tr>
+            <tr>
+              <td>OrgUnit</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>OrgUnit</td>
+              <td>name</td>
+              <td>
+                <xref target="vcard-prop-org"/>
+              </td>
+            </tr>
+            <tr>
+              <td>OrgUnit</td>
+              <td>sortAs</td>
+              <td>
+                <xref target="vcard-param-sortas"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Organization</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Organization</td>
+              <td>name</td>
+              <td>
+                <xref target="vcard-prop-org"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Organization</td>
+              <td>sortAs</td>
+              <td>
+                <xref target="vcard-param-sortas"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Organization</td>
+              <td>units</td>
+              <td>
+                <xref target="vcard-prop-org"/>
+              </td>
+            </tr>
+            <tr>
+              <td>PartialDate</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>PartialDate</td>
+              <td>calendarScale</td>
+              <td>
+                <xref target="vcard-param-calscale"/>
+              </td>
+            </tr>
+            <tr>
+              <td>PartialDate</td>
+              <td>day</td>
+              <td>
+                <xref target="vcard-type-datetime"/>
+              </td>
+            </tr>
+            <tr>
+              <td>PartialDate</td>
+              <td>month</td>
+              <td>
+                <xref target="vcard-type-datetime"/>
+              </td>
+            </tr>
+            <tr>
+              <td>PartialDate</td>
+              <td>year</td>
+              <td>
+                <xref target="vcard-type-datetime"/>
+              </td>
+            </tr>
+            <tr>
+              <td>PatchObject</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>PersonalInformation</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>PersonalInformation</td>
+              <td>level</td>
+              <td>
+                <xref target="vcard-param-level"/>
+              </td>
+            </tr>
+            <tr>
+              <td>PersonalInformation</td>
+              <td>type</td>
+              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
+            </tr>
+            <tr>
+              <td>PersonalInformation</td>
+              <td>value</td>
+              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>features</td>
+              <td>
+                <xref target="vcard-prop-tel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>number</td>
+              <td>
+                <xref target="vcard-prop-tel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Pronouns</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Pronouns</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Pronouns</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Pronouns</td>
+              <td>pronouns</td>
+              <td>
+                <xref target="vcard-prop-grammatical-gender"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Relation</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Relation</td>
+              <td>relation</td>
+              <td>
+                <xref target="vcard-prop-related"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Resource</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>SchedulingAddress</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>SchedulingAddress</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>SchedulingAddress</td>
+              <td>label</td>
+              <td>
+                <xref target="vcard-prop-xablabel"/>
+              </td>
+            </tr>
+            <tr>
+              <td>SchedulingAddress</td>
+              <td>pref</td>
+              <td>
+                <xref target="vcard-param-pref"/>
+              </td>
+            </tr>
+            <tr>
+              <td>SchedulingAddress</td>
+              <td>uri</td>
+              <td>
+                <xref target="vcard-prop-caladruri"/>
+              </td>
+            </tr>
+            <tr>
+              <td>SpeakToAs</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>SpeakToAs</td>
+              <td>grammaticalGender</td>
+              <td>
+                <xref target="vcard-prop-grammatical-gender"/>
+              </td>
+            </tr>
+            <tr>
+              <td>SpeakToAs</td>
+              <td>pronouns</td>
+              <td>
+                <xref target="vcard-prop-grammatical-gender"/>
+              </td>
+            </tr>
+            <tr>
+              <td>StreetComponent</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>StreetComponent</td>
+              <td>type</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>StreetComponent</td>
+              <td>value</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Timestamp</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Timestamp</td>
+              <td>utc</td>
+              <td>
+                <xref target="vcard-type-datetime"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Title</td>
+              <td>@type</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Title</td>
+              <td>name</td>
+              <td>
+                <xref target="vcard-prop-title"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Title</td>
+              <td>organization</td>
+              <td>
+                <xref target="vcard-prop-title"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Title</td>
+              <td>type</td>
+              <td>
+                <xref target="vcard-prop-title"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </section>
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
