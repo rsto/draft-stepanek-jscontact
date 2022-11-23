@@ -168,14 +168,14 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are indendepent of each other.</t>
         </section>
       </section>
-        <section>
+      <section>
         <name>Versioning</name>
-        <t>Every instance of a JSContact Card indicates which JSContact specification its IANA-registered properties and values are based on. This version is indicated by the <tt>@version</tt> <xref target="prop-version"/> property. This is to allow implementations correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions or other significant changes to existing JSContact specifications are introduced. All IANA-registered properties indicate the version at which they got introduced, updated or obsoleted.</t>
-        <t>Registering a new JSContact version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification. Such RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the  JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
-        </section>
-        <section>
-          <name>Validating JSContact Properties</name>
-        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties. This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, vendor-specific properties in <xref target="vendor-specific-properties"/>. A JSContact object is invalid if any its properties is invalid. If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
+        <t>Every instance of a JSContact Card indicates which JSContact specification its IANA-registered properties and values are based on.  This version is indicated by the <tt>@version</tt> <xref target="prop-version"/> property.  This is to allow implementations correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions or other significant changes to existing JSContact specifications are introduced.  All IANA-registered properties indicate the version at which they got introduced, updated or obsoleted.</t>
+        <t>Registering a new JSContact version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification.  Such RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the  JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
+      </section>
+      <section>
+        <name>Validating JSContact Properties</name>
+        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, vendor-specific properties in <xref target="vendor-specific-properties"/>. A JSContact object is invalid if any its properties is invalid.  If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
@@ -185,27 +185,27 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
             Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of a IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
           </t>
           <t>
-        IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters. They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but a notable exception of this rule is the <tt>@type</tt> property defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
+        IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but a notable exception of this rule is the <tt>@type</tt> property defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
     </t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
           <name>Unknown Properties</name>
           <t>
           Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the restrictions of a IANA-registered property.</t>
-          <t>Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid. Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties.  This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
+          <t>Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid.  Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties.  This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
         </t>
         </section>
       </section>
       <section>
         <name>Vendor-Specific Extensions</name>
-        <t>Vendors may extend properties and values for experimentation or to store data that only is useful for one particular service or application. Such extensions need not be registered at IANA, but vendors are strongly encouraged to do so other than for experimentation. This specification aims to make it easy to register new entries at IANA. Typically, sending a short description to the IETF working group mailing list is enough for Expert Review to make a decision. Notably, publishing a new RFC document is not required in the general case. The following sections define the requirements for vendor-specific properties and values. For further information on how to register new properties or values at IANA see <xref target="iana-considerations"/>.</t>
+        <t>Vendors may extend properties and values for experimentation or to store data that only is useful for one particular service or application.  Such extensions need not be registered at IANA, but vendors are strongly encouraged to do so other than for experimentation.  This specification aims to make it easy to register new entries at IANA.  Typically, sending a short description to the IETF working group mailing list is enough for Expert Review to make a decision.  Notably, publishing a new RFC document is not required in the general case.  The following sections define the requirements for vendor-specific properties and values.  For further information on how to register new properties or values at IANA see <xref target="iana-considerations"/>.</t>
         <section anchor="vendor-specific-properties" numbered="true" toc="default">
           <name>Vendor-specific Properties</name>
           <t>
             Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property.
           </t>
           <t>
-            Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by a name consisting of any other non-control ASCII or non-ASCII characters.  The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.  The name following the prefix <bcp14>MUST NOT</bcp14> contain the <tt>QUOTATION MARK</tt> (U+0022) character. It <bcp14>SHOULD NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> including that property.
+            Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by a name consisting of any other non-control ASCII or non-ASCII characters.  The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.  The name following the prefix <bcp14>MUST NOT</bcp14> contain the <tt>QUOTATION MARK</tt> (U+0022) character.  It <bcp14>SHOULD NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> including that property.
           </t>
           <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-specific property names.  Note that the vendor prefix allows for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>.  This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
           <sourcecode name="" type="abnf"><![CDATA[
@@ -275,7 +275,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
         <section anchor="prop-version" numbered="true" toc="default">
           <name>@version</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the version of the JSContact specification used to define this card.  The value <bcp14>MUST</bcp14> be <tt>rfc0000</tt> if the JSContact object is defined according to this RFC document. It <bcp14>MAY</bcp14> differ if future RFC documents obsolete this specification.</t>
+          <t>Specifies the version of the JSContact specification used to define this card.  The value <bcp14>MUST</bcp14> be <tt>rfc0000</tt> if the JSContact object is defined according to this RFC document.  It <bcp14>MAY</bcp14> differ if future RFC documents obsolete this specification.</t>
         </section>
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
@@ -348,17 +348,17 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               </li>
             <li>
               <t>components: <tt>NameComponent[]</tt> (mandatory). The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
-              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity. This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character. Otherwise, inserting a single Space character in between name component values is a good choice.</t>
+              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character.  Otherwise, inserting a single Space character in between name component values is a good choice.</t>
             </li>
             <li>
           locale: <tt>String</tt> (optional).
           The locale of the name.  The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
         </li>
-            <li><t>sortAs: <tt>String[String]</tt> (optional)</t>
-                <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type. The key in the map defines the name component type. The value for that key defines the verbatim string to compare when sorting by this name component type. Absence of a key indicates that this name component type should not be considered during sort. Sorting by that missing name component type or if the <tt>sortAs</tt> is not set is implementation-specific.</t>
-            <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below). For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
-
-            <t>This illustrates the use of sortAs. It indicates that the middle name followed by both surnames should be used when sorting this name by surname. The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort. Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
+            <li>
+              <t>sortAs: <tt>String[String]</tt> (optional)</t>
+              <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> is not set is implementation-specific.</t>
+              <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below). For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
+              <t>This illustrates the use of sortAs.  It indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
               <figure anchor="example-name-sortas">
                 <name>JSContact Name <tt>sortAs</tt> example</name>
                 <sourcecode name=""><![CDATA[
@@ -388,7 +388,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
 }
         ]]></sourcecode>
               </figure>
-                            </li>
+            </li>
           </ul>
           <t>A NameComponent object has the following properties:</t>
           <ul spacing="normal">
@@ -402,11 +402,11 @@ The value of this name component.</li>
 The type of this name component.  The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
-                <li><tt>prefix</tt>.  The value is a honorific title(s), e.g. "Mr", "Ms", "Dr".</li>
+                <li><tt>prefix</tt>.  The value is a honorific title(s), e.g.  "Mr", "Ms", "Dr".</li>
                 <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
                 <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
                 <li><tt>middle</tt>.  The value is a middle name, also known as "additional name".</li>
-                <li><tt>suffix</tt>.  The value is a honorific suffix, e.g. "B.A.", "Esq.".</li>
+                <li><tt>suffix</tt>.  The value is a honorific suffix, e.g.  "B.A.", "Esq.".</li>
                 <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character.
                 </li>
               </ul>
@@ -422,7 +422,7 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
         <section anchor="fullName" numbered="true" toc="default">
           <name>fullName</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>The full name (e.g. the personal name and surname of an individual, the name of an organization) of the entity represented by this card.  The purpose of this property is to define a name, even if the individual name components are not known.  In addition, it is meant to provide alternative versions of the name for internationalisation.  Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
+          <t>The full name (e.g.  the personal name and surname of an individual, the name of an organization) of the entity represented by this card.  The purpose of this property is to define a name, even if the individual name components are not known.  In addition, it is meant to provide alternative versions of the name for internationalisation.  Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
         </section>
         <section anchor="nickNames" numbered="true" toc="default">
           <name>nickNames</name>
@@ -453,24 +453,24 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
                 The name of this organization.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
             </li>
             <li>sortAs: <tt>String</tt> (optional)
-                This defines how this organization name lexicographically sorts in relation to other organizations when compared by name. The value defines the verbatim string value to compare. In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+                This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
             </li>
             <li>units: <tt>OrgUnit[]</tt> (optional).
                 A list of organizational units.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
             </li>
           </ul>
-           <t>A OrgUnit object has the following properties:</t>
+          <t>A OrgUnit object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OrgUnit</tt>.
               </li>
-              <li>name: <tt>String</tt> (optional).
+            <li>name: <tt>String</tt> (optional).
                 The name of this organizational unit.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
             </li>
             <li>sortAs: <tt>String</tt> (optional)
-                This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name. The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object. The property value defines the verbatim string value to compare. In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+                This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name.  The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
             </li>
-            </ul>
+          </ul>
         </section>
         <section anchor="titles" numbered="true" toc="default">
           <name>titles</name>
@@ -747,7 +747,7 @@ The type of this street component.  The value <bcp14>MUST</bcp14> be either one 
                 </li>
                 <li><tt>extension</tt>.  The extension designation or box number.
                 </li>
-                <li><tt>direction</tt>.  The cardinal direction, e.g. "North".
+                <li><tt>direction</tt>.  The cardinal direction, e.g.  "North".
                 </li>
                 <li><tt>building</tt>.  The building or building part this address is located in.
                 </li>
@@ -786,7 +786,7 @@ The value of this street component.</li>
           </ul>
           <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
           <ul>
-            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of.  This typically is an organizational directory that also contains associated entities, e.g. co-workers and management in a company directory.</li>
+            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
             <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
           </ul>
         </section>
@@ -812,7 +812,7 @@ The value of this street component.</li>
           <t>The <tt>type</tt> property value must be one of the following, or be defined in a future RFC or vendor-specific:</t>
           <ul>
             <li><tt>photo</tt> The resource is a photograph or avatar.</li>
-            <li><tt>sound</tt> The resource is audio media, e.g. to specify the proper pronunciation of the name property contents.</li>
+            <li><tt>sound</tt> The resource is audio media, e.g.  to specify the proper pronunciation of the name property contents.</li>
             <li><tt>logo</tt> The resource is a graphic image or logo associated with entity represented by this card.</li>
           </ul>
         </section>
@@ -867,7 +867,7 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
               <t>The date of this anniversary in the Gregorian calendar.  This <bcp14>MUST</bcp14> either be a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
             </li>
             <li>place: Address (optional).
-                An address associated with this anniversary, e.g. the place of birth or death.</li>
+                An address associated with this anniversary, e.g.  the place of birth or death.</li>
           </ul>
           <t>A Timestamp object has the following properties:</t>
           <ul spacing="normal">
@@ -937,7 +937,7 @@ The actual information.  This generally is free-text, but future specifications 
           <t>An Author object has the following properties, of which at least one other than <tt>@type</tt> <bcp14>MUST</bcp14> be defined:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                 Specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>Author</tt>.
+                 Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Author</tt>.
             </li>
             <li>
               <t>name: <tt>String</tt> (optional). The name of this author.</t>
@@ -1003,7 +1003,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Required parameters:</dt>
           <dd>
             <t>type</t>
-            <t>The <tt>type</tt> parameter conveys the type of the JSContact data in the body part. The allowed parameter values correspond to the <tt>@type</tt> property of the JSON-formatted JSContact object in the body. This RFC specifies a single type, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
+            <t>The <tt>type</tt> parameter conveys the type of the JSContact data in the body part.  The allowed parameter values correspond to the <tt>@type</tt> property of the JSON-formatted JSContact object in the body.  This RFC specifies a single type, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
             <dl newline="false" spacing="normal">
               <dt><tt>card</tt>:</dt>
               <dd>The <tt>@type</tt> property value of the JSContact object <bcp14>MUST</bcp14> be
@@ -1014,14 +1014,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Optional parameters:</dt>
           <dd>
             <t>version</t>
-            <t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part. Its value <bcp14>MUST</bcp14> match the value of the <tt>version</tt> property of the JSContact object.</t>
+            <t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part.  Its value <bcp14>MUST</bcp14> match the value of the <tt>version</tt> property of the JSContact object.</t>
           </dd>
           <dt>Encoding considerations:</dt>
           <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.</dd>
           <dt>Security considerations:</dt>
           <dd> See <xref target="security-considerations" format="default"/> of this document.</dd>
           <dt>Interoperability considerations:</dt>
-          <dd>While JSContact is designed to avoid ambiguities as much as possible, when converting objects from other contact formats to/from JSContact, it is possible that differing representations for the same logical data or ambiguities in interpretation might arise. The semantic equivalence of two JSContact objects may be determined differently by different applications, for example, where URL values differ in case between the two objects.</dd>
+          <dd>While JSContact is designed to avoid ambiguities as much as possible, when converting objects from other contact formats to/from JSContact, it is possible that differing representations for the same logical data or ambiguities in interpretation might arise.  The semantic equivalence of two JSContact objects may be determined differently by different applications, for example, where URL values differ in case between the two objects.</dd>
           <dt>Published specification:</dt>
           <dd>TBD</dd>
           <dt>Applications that use this media type:</dt>
@@ -1054,22 +1054,22 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       <section anchor="iana-property-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Properties" Registry</name>
         <t>IANA has created the "JSContact Properties" registry to allow interoperability of extensions to JSContact objects.</t>
-        <t>This registry follows the Expert Review process (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>). If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability. Preliminary community review for this registry is optional but strongly encouraged.</t>
+        <t>This registry follows the Expert Review process (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>). If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability.  Preliminary community review for this registry is optional but strongly encouraged.</t>
         <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>. IANA will list registrations with a common usage designation prominently and separately from those with other intended usage values.</t>
         <t>A <tt>reserved</tt> registration reserves a property name without assigning semantics to avoid name collisions with future extensions or protocol use.</t>
-        <t>An <tt>obsolete</tt> registration denotes a property that is no longer expected to be added by up-to-date systems. A new property has probably been defined covering the obsolete property's semantics.</t>
-        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on. This typically is the latest specification version that is in effect when the property gets registered. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</t>
-        <t>The JSContact property registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay. It is designed to encourage vendors to document and register new properties they add for use cases not covered by the original specification, leading to increased interoperability.</t>
+        <t>An <tt>obsolete</tt> registration denotes a property that is no longer expected to be added by up-to-date systems.  A new property has probably been defined covering the obsolete property's semantics.</t>
+        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on.  This typically is the latest specification version that is in effect when the property gets registered.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</t>
+        <t>The JSContact property registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay.  It is designed to encourage vendors to document and register new properties they add for use cases not covered by the original specification, leading to increased interoperability.</t>
         <section anchor="iana-property-registry-preliminary-community-review" numbered="true" toc="default">
           <name>Preliminary Community Review</name>
           <t>Notice of a potential new registration <bcp14>SHOULD</bcp14> be sent to the Calext mailing list
-	    &lt;calsify@ietf.org&gt; for review. This mailing list is appropriate to solicit community feedback
+	    &lt;calsify@ietf.org&gt; for review.  This mailing list is appropriate to solicit community feedback
 	      on a proposed new property.</t>
           <t>Property registrations must be marked with their intended use: "common", "reserved", or
 	    "obsolete".</t>
           <t>The intent of the public posting to this list is to solicit comments and feedback on the choice of
 	    the property name, the unambiguity of the specification document, and a review of any
-	      interoperability or security considerations. The submitter may submit a revised registration proposal
+	      interoperability or security considerations.  The submitter may submit a revised registration proposal
 	        or abandon the registration completely at any time.</t>
         </section>
         <section anchor="iana-property-registry-submit-request-to-iana" numbered="true" toc="default">
@@ -1079,26 +1079,26 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <section anchor="iana-property-registry-designated-expert-review" numbered="true" toc="default">
           <name>Designated Expert Review</name>
           <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging
-	    the submitter to document security and privacy considerations. For a common-use registration, the DE
-	      is expected to confirm that suitable documentation, as described in <xref target="RFC8126" sectionFormat="of" section="4.6"/>, is available to ensure interoperability. That documentation will
+	    the submitter to document security and privacy considerations.  For a common-use registration, the DE
+	      is expected to confirm that suitable documentation, as described in <xref target="RFC8126" sectionFormat="of" section="4.6"/>, is available to ensure interoperability.  That documentation will
 	        usually be in an RFC, but simple definitions are likely to use a web/wiki page, and if a sentence or
-		  two is deemed sufficient, it could be described in the registry itself. The DE should also verify that
-		    the property name does not conflict with work that is active or already published within the IETF. A
+		  two is deemed sufficient, it could be described in the registry itself.  The DE should also verify that
+		    the property name does not conflict with work that is active or already published within the IETF.  A
 		      published specification is not required for reserved or obsolete registrations.</t>
           <t>The DE will either approve or deny the registration request and publish a notice of the decision
-	    to the Calext WG mailing list or its successor, as well as inform IANA. A denial notice must be
+	    to the Calext WG mailing list or its successor, as well as inform IANA.  A denial notice must be
 	      justified by an explanation, and, in the cases where it is possible, concrete suggestions on how the
 	        request can be modified so as to become acceptable should be provided.</t>
         </section>
         <section anchor="iana-property-registry-change-procedures" numbered="true" toc="default">
           <name>Change Procedures</name>
           <t>Once a JSContact property has been published by IANA, the change controller may request a
-	    change to its definition. The same procedure that would be appropriate for the original registration
+	    change to its definition.  The same procedure that would be appropriate for the original registration
 	      request is used to process a change request.</t>
           <t>JSContact property registrations may not be deleted; properties that are no longer believed appropriate for use can be declared obsolete by a change to their "intended usage" field; such properties will be clearly marked in the IANA registry.</t>
           <t>Significant changes to a JSContact property's definition should be requested only when there are
 	    serious omissions or errors in the published specification, as such changes may cause
-	      interoperability issues. When review is required, a change request may be denied if it renders
+	      interoperability issues.  When review is required, a change request may be denied if it renders
 	        entities that were valid under the previous definition invalid under the new definition.</t>
           <t>The owner of a JSContact property may pass responsibility to another person or agency by
 	    informing IANA; this can be done without discussion or review.</t>
@@ -1107,9 +1107,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <name>"JSContact Properties" Registry Template</name>
           <dl newline="false">
             <dt>Property Name:</dt>
-            <dd>This is the name of the property. The property name <bcp14>MUST NOT</bcp14> already be
+            <dd>This is the name of the property.  The property name <bcp14>MUST NOT</bcp14> already be
 		    registered for
-		        any of the object types listed in the "Property Context" field of this registration. Other object
+		        any of the object types listed in the "Property Context" field of this registration.  Other object
 			    types <bcp14>MAY</bcp14> already have registered a different property with the same name; however,
 			        the same name <bcp14>SHOULD</bcp14> only be used when the semantics are analogous.</dd>
             <dt>Property Type:</dt>
@@ -1122,14 +1122,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Intended Usage:</dt>
             <dd>This may be "common", "reserved", or "obsolete".</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this property definition is based on. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dd>This defines the JSContact specification version on which this property definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
         </section>
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Properties" Registry</name>
-          <t>The following table lists the initial entries of the "JSContact Properties" registry. All properties are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document. The change controller for all these properties is "IETF".</t>
+          <t>The following table lists the initial entries of the "JSContact Properties" registry.  All properties are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
           <table anchor="tab-iana-property-registry" align="center">
             <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
@@ -1145,56 +1145,72 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate, PatchObject, PersonalInformation, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
-                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="patchobject" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="resource" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
+                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInformation, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
+                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="resource" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">@version</td>
                 <td align="left">String</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="prop-version" format="default"/></td>
+                <td align="left">
+                  <xref target="prop-version" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">address</td>
                 <td align="left">String</td>
                 <td align="left">EmailAddress</td>
-                <td align="left"><xref target="emails" format="default"/></td>
+                <td align="left">
+                  <xref target="emails" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">addresses</td>
                 <td align="left">Id[Address]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">anniversaries</td>
                 <td align="left">Id[Anniversary]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">author</td>
                 <td align="left">Author</td>
                 <td align="left">Note</td>
-                <td align="left"><xref target="notes" format="default"/></td>
+                <td align="left">
+                  <xref target="notes" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">calendars</td>
                 <td align="left">Id[CalendarResource]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="calendars" format="default"/></td>
+                <td align="left">
+                  <xref target="calendars" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">calendarScale</td>
                 <td align="left">String</td>
                 <td align="left">PartialDate</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">components</td>
                 <td align="left">NameComponent[]</td>
                 <td align="left">Name</td>
-                <td align="left"><xref target="name" format="default"/></td>
+                <td align="left">
+                  <xref target="name" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">contexts</td>
@@ -1206,19 +1222,25 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">coordinates</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">country</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">countryCode</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">created</td>
@@ -1230,61 +1252,81 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">date</td>
                 <td align="left">Timestamp|PartialDate</td>
                 <td align="left">Anniversary</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">day</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">PartialDate</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">directories</td>
                 <td align="left">Id[DirectoryResource]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="directories" format="default"/></td>
+                <td align="left">
+                  <xref target="directories" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">emails</td>
                 <td align="left">Id[EmailAddress]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="emails" format="default"/></td>
+                <td align="left">
+                  <xref target="emails" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">features</td>
                 <td align="left">String[Boolean]</td>
                 <td align="left">Phone</td>
-                <td align="left"><xref target="phones" format="default"/></td>
+                <td align="left">
+                  <xref target="phones" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">fullAddress</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">fullName</td>
                 <td align="left">String</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="fullName" format="default"/></td>
+                <td align="left">
+                  <xref target="fullName" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">grammaticalGender</td>
                 <td align="left">String</td>
                 <td align="left">SpeakToAs</td>
-                <td align="left"><xref target="speakToAs" format="default"/></td>
+                <td align="left">
+                  <xref target="speakToAs" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">keywords</td>
                 <td align="left">String[Boolean]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="keywords" format="default"/></td>
+                <td align="left">
+                  <xref target="keywords" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">kind</td>
                 <td align="left">String</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="kind" format="default"/></td>
+                <td align="left">
+                  <xref target="kind" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">label</td>
@@ -1296,19 +1338,25 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">language</td>
                 <td align="left">String</td>
                 <td align="left">Note</td>
-                <td align="left"><xref target="notes" format="default"/></td>
+                <td align="left">
+                  <xref target="notes" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">level</td>
                 <td align="left">String</td>
                 <td align="left">PersonalInformation</td>
-                <td align="left"><xref target="personalInfo" format="default"/></td>
+                <td align="left">
+                  <xref target="personalInfo" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">links</td>
                 <td align="left">Id[LinkResource]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="links" format="default"/></td>
+                <td align="left">
+                  <xref target="links" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">locale</td>
@@ -1320,43 +1368,55 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">locality</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">localizations</td>
                 <td align="left">String[PatchObject]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="localizations" format="default"/></td>
+                <td align="left">
+                  <xref target="localizations" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">media</td>
                 <td align="left">Id[MediaResource]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="media" format="default"/></td>
+                <td align="left">
+                  <xref target="media" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">mediaType</td>
                 <td align="left">String</td>
                 <td align="left">CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource</td>
-                <td align="left"><xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left"><xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">members</td>
                 <td align="left">String[Boolean]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="members" format="default"/></td>
+                <td align="left">
+                  <xref target="members" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">month</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">PartialDate</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">name</td>
                 <td align="left">Name</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="name" format="default"/></td>
+                <td align="left">
+                  <xref target="name" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">name</td>
@@ -1368,175 +1428,231 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">nickNames</td>
                 <td align="left">Id[NickName]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="nickNames" format="default"/></td>
+                <td align="left">
+                  <xref target="nickNames" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">note</td>
                 <td align="left">String</td>
                 <td align="left">Note</td>
-                <td align="left"><xref target="notes" format="default"/></td>
+                <td align="left">
+                  <xref target="notes" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">notes</td>
                 <td align="left">Id[Note]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="notes" format="default"/></td>
+                <td align="left">
+                  <xref target="notes" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">nth</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">NameComponent</td>
-                <td align="left"><xref target="name" format="default"/></td>
+                <td align="left">
+                  <xref target="name" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">number</td>
                 <td align="left">String</td>
                 <td align="left">Phone</td>
-                <td align="left"><xref target="phones" format="default"/></td>
+                <td align="left">
+                  <xref target="phones" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">onlineServices</td>
                 <td align="left">Id[OnlineService]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="onlineServices" format="default"/></td>
+                <td align="left">
+                  <xref target="onlineServices" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">organization</td>
                 <td align="left">String</td>
                 <td align="left">Title</td>
-                <td align="left"><xref target="titles" format="default"/></td>
+                <td align="left">
+                  <xref target="titles" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">organizations</td>
                 <td align="left">Id[Organization]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="organizations" format="default"/></td>
+                <td align="left">
+                  <xref target="organizations" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">personalInfo</td>
                 <td align="left">Id[PersonalInformation]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="personalInfo" format="default"/></td>
+                <td align="left">
+                  <xref target="personalInfo" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">phones</td>
                 <td align="left">Id[Phone]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="phones" format="default"/></td>
+                <td align="left">
+                  <xref target="phones" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">place</td>
                 <td align="left">Address</td>
                 <td align="left">Anniversary</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">postcode</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">pref</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
-                <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/> <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/><xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">preferredContactChannels</td>
                 <td align="left">String[ContactChannelPreference[]]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="preferredContactChannels" format="default"/></td>
+                <td align="left">
+                  <xref target="preferredContactChannels" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">preferredLanguages</td>
                 <td align="left">String[LanguagePreference[]]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="preferredLanguages" format="default"/></td>
+                <td align="left">
+                  <xref target="preferredLanguages" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">prodId</td>
                 <td align="left">String</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="prodId" format="default"/></td>
+                <td align="left">
+                  <xref target="prodId" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">pronouns</td>
                 <td align="left">Id[Pronouns]</td>
                 <td align="left">SpeakToAs</td>
-                <td align="left"><xref target="speakToAs" format="default"/></td>
+                <td align="left">
+                  <xref target="speakToAs" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">pronouns</td>
                 <td align="left">String</td>
                 <td align="left">Pronouns</td>
-                <td align="left"><xref target="speakToAs" format="default"/></td>
+                <td align="left">
+                  <xref target="speakToAs" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">region</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">relatedTo</td>
                 <td align="left">String[Relation]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="relatedTo" format="default"/></td>
+                <td align="left">
+                  <xref target="relatedTo" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">relation</td>
                 <td align="left">String[Boolean]</td>
                 <td align="left">Relation</td>
-                <td align="left"><xref target="relatedTo" format="default"/></td>
+                <td align="left">
+                  <xref target="relatedTo" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">schedulingAddresses</td>
                 <td align="left">Id[SchedulingAddress]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">
+                  <xref target="schedulingAddresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">service</td>
                 <td align="left">String</td>
                 <td align="left">OnlineService</td>
-                <td align="left"><xref target="onlineServices" format="default"/></td>
+                <td align="left">
+                  <xref target="onlineServices" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">sortAs</td>
                 <td align="left">String[String]</td>
                 <td align="left">Name</td>
-                <td align="left"><xref target="name" format="default"/></td>
+                <td align="left">
+                  <xref target="name" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">sortAs</td>
                 <td align="left">String</td>
                 <td align="left">Organization, OrgUnit</td>
-                <td align="left"><xref target="organizations" format="default"/></td>
+                <td align="left">
+                  <xref target="organizations" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">speakToAs</td>
                 <td align="left">SpeakToAs</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="speakToAs" format="default"/></td>
+                <td align="left">
+                  <xref target="speakToAs" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">street</td>
                 <td align="left">StreetComponent[]</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">timeZone</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
-                <td align="left"><xref target="addresses" format="default"/></td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">titles</td>
                 <td align="left">Id[Title]</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="titles" format="default"/></td>
+                <td align="left">
+                  <xref target="titles" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">type</td>
@@ -1548,19 +1664,25 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">uid</td>
                 <td align="left">String</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="uid" format="default"/></td>
+                <td align="left">
+                  <xref target="uid" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">units</td>
                 <td align="left">OrgUnit[]</td>
                 <td align="left">Organization</td>
-                <td align="left"><xref target="organizations" format="default"/></td>
+                <td align="left">
+                  <xref target="organizations" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">updated</td>
                 <td align="left">UTCDateTime</td>
                 <td align="left">Card</td>
-                <td align="left"><xref target="updated" format="default"/></td>
+                <td align="left">
+                  <xref target="updated" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">uri</td>
@@ -1572,13 +1694,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">username</td>
                 <td align="left">String</td>
                 <td align="left">OnlineService</td>
-                <td align="left"><xref target="onlineServices" format="default"/></td>
+                <td align="left">
+                  <xref target="onlineServices" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">utc</td>
                 <td align="left">UTCDateTime</td>
                 <td align="left">Timestamp</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
               <tr>
                 <td align="left">value</td>
@@ -1590,7 +1716,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">year</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">PartialDate</td>
-                <td align="left"><xref target="anniversaries" format="default"/></td>
+                <td align="left">
+                  <xref target="anniversaries" format="default"/>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -1598,7 +1726,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-type-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Types" Registry</name>
-        <t>IANA has created the "JSContact Types" registry to avoid name collisions and provide a complete reference for all data types used for JSContact property values. The registration process is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <t>IANA has created the "JSContact Types" registry to avoid name collisions and provide a complete reference for all data types used for JSContact property values.  The registration process is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
         <section anchor="iana-type-registry-template" numbered="true" toc="default">
           <name>"JSContact Types" Registry Template</name>
           <dl newline="false">
@@ -1606,17 +1734,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>the name of the type</dd>
             <dt>Reference or Description:</dt>
             <dd>a brief description or RFC number and section reference where the Type is specified (may be omitted for "reserved" type names)</dd>
-            <dt>Intended Use:</dt>
+            <dt>Intended Usage:</dt>
             <dd>common, reserved, or obsolete</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this type definition is based on. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dd>This defines the JSContact specification version on which this type definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
           </dl>
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Types" Registry</name>
-          <t>The following table lists the initial entries of the JSContact Types registry. All types are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document. The change controller for all these properties is "IETF".</t>
+          <t>The following table lists the initial entries of the JSContact Types registry.  All types are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
           <table anchor="tab-iana-type-registry" align="left">
             <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
@@ -1765,12 +1893,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">PatchObject</td>
-                <td align="left">
-                  <xref target="patchobject" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">PersonalInformation</td>
                 <td align="left">
                   <xref target="personalInfo" format="default"/>
@@ -1848,17 +1970,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-enum-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Enum Values" Registry</name>
-        <t>IANA has created the "JSContact Enum Values" registry to allow interoperable extension of semantics for properties with enumerable values. Each such property will have a subregistry of allowed values. The registration process for a new enum value or adding a new enumerable property is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <t>IANA has created the "JSContact Enum Values" registry to allow interoperable extension of semantics for properties with enumerable values.  Each such property will have a subregistry of allowed values.  The registration process for a new enum value or adding a new enumerable property is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
         <section anchor="iana-enum-registry-registry-template" numbered="true" toc="default">
           <name>"JSContact Enum Values" Registry Property Template</name>
           <t>This template is for adding a subregistry for a new enumerable property to the "JSContact Enum" registry.</t>
           <dl newline="false">
             <dt>Property Name:</dt>
-            <dd>These are the name(s) of the property or properties where these values may be used. This <bcp14>MUST</bcp14> be registered in the "JSContact Properties" registry.</dd>
+            <dd>These are the name(s) of the property or properties where these values may be used.  This <bcp14>MUST</bcp14> be registered in the "JSContact Properties" registry.</dd>
             <dt>Context:</dt>
-            <dd>This is the list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry. This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
+            <dd>This is the list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry.  This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this enum  value definition is based on. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dd>This defines the JSContact specification version on which this enum  value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
@@ -2639,22 +2761,22 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>Contact information is very privacy sensitive.  It can reveal the identity, location and credentials information, employment status, interests and hobbies, and social network of a user. Its transmission and storage must be done carefully to protect it from possible threats, such as eavesdropping, replay, message insertion, deletion, modification, and on-path attacks.</t>
-      <t>The data being stored and transmitted may be used in systems with real-world consequences. For example, a malicious actor might provide JSContact data that uses the name of another person but insert their contact details to impersonate the unknown victim.  Such systems must be careful to authenticate all data they receive to prevent them from being subverted and ensure the change comes from an authorized entity.</t>
+      <t>Contact information is very privacy sensitive.  It can reveal the identity, location and credentials information, employment status, interests and hobbies, and social network of a user.  Its transmission and storage must be done carefully to protect it from possible threats, such as eavesdropping, replay, message insertion, deletion, modification, and on-path attacks.</t>
+      <t>The data being stored and transmitted may be used in systems with real-world consequences.  For example, a malicious actor might provide JSContact data that uses the name of another person but insert their contact details to impersonate the unknown victim.  Such systems must be careful to authenticate all data they receive to prevent them from being subverted and ensure the change comes from an authorized entity.</t>
       <t>This document only defines the data format; such considerations are primarily the concern of the API or method of storage and transmission of such files.</t>
       <section anchor="json-parsing" numbered="true" toc="default">
         <name>JSON Parsing</name>
         <t>The security considerations of <xref target="RFC8259" format="default"/> apply to the use of JSON as the data interchange format.
         </t>
-        <t>As for any serialization format, parsers need to thoroughly check the syntax of the supplied data. JSON uses opening and closing tags for several types and structures, and it is possible that the end of the supplied data will be reached when scanning for a matching closing tag; this is an error condition, and implementations need to stop scanning at the end of the supplied data.</t>
-        <t>JSON also uses a string encoding with some escape sequences to encode special characters within a string. Care is needed when processing these escape sequences to ensure that they are fully formed before the special processing is triggered, with special care taken when the escape sequences appear adjacent to other (non-escaped) special characters or adjacent to the end of data (as in the previous paragraph).</t>
+        <t>As for any serialization format, parsers need to thoroughly check the syntax of the supplied data.  JSON uses opening and closing tags for several types and structures, and it is possible that the end of the supplied data will be reached when scanning for a matching closing tag; this is an error condition, and implementations need to stop scanning at the end of the supplied data.</t>
+        <t>JSON also uses a string encoding with some escape sequences to encode special characters within a string.  Care is needed when processing these escape sequences to ensure that they are fully formed before the special processing is triggered, with special care taken when the escape sequences appear adjacent to other (non-escaped) special characters or adjacent to the end of data (as in the previous paragraph).</t>
         <t>If parsing JSON into a non-textual structured data format, implementations may need to allocate storage to hold JSON string elements.  Since JSON does not use explicit string lengths, the risk of denial of service due to resource exhaustion is small, but implementations may still wish to place limits on the size of allocations they are willing to make in any given context, to avoid untrusted data causing excessive memory allocation.</t>
       </section>
       <section anchor="uri-values" numbered="true" toc="default">
         <name>URI Values</name>
-        <t>Several JSContact properties contain URIs as values, and processing these properties requires extra care. <xref target="RFC3986" sectionFormat="of" section="7"/> discusses security risks related to URIs.</t>
-        <t>Fetching remote resources carries inherent risks. Connections must only be allowed on well-known ports, using allowed protocols (generally, just HTTP/HTTPS on their default ports). The URL must be resolved externally and not allowed to access internal resources. Connecting to an external source reveals IP (and therefore often location) information.</t>
-        <t>A maliciously constructed JSContact object may contain a very large number of URIs. In the case of published addressbooks with a large number of subscribers, such objects could be widely distributed. Implementations should be careful to limit the automatic fetching of linked resources to reduce the risk of this being an amplification vector for a denial-of-service attack.</t>
+        <t>Several JSContact properties contain URIs as values, and processing these properties requires extra care.  <xref target="RFC3986" sectionFormat="of" section="7"/> discusses security risks related to URIs.</t>
+        <t>Fetching remote resources carries inherent risks.  Connections must only be allowed on well-known ports, using allowed protocols (generally, just HTTP/HTTPS on their default ports). The URL must be resolved externally and not allowed to access internal resources.  Connecting to an external source reveals IP (and therefore often location) information.</t>
+        <t>A maliciously constructed JSContact object may contain a very large number of URIs.  In the case of published addressbooks with a large number of subscribers, such objects could be widely distributed.  Implementations should be careful to limit the automatic fetching of linked resources to reduce the risk of this being an amplification vector for a denial-of-service attack.</t>
       </section>
     </section>
   </middle>
