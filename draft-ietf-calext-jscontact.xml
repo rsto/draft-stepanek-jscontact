@@ -235,10 +235,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
   "example.com:foo": "bar",
   "example.com:foo2": {
     "bar": "baz"
-  },
-  "ietf.org:rfc0000:params": {
-      "x-foo": "Bar"
-  },
+  }
   ...
 }
 ]]></artwork>
