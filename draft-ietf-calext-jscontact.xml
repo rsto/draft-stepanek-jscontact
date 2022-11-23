@@ -1606,7 +1606,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>the name of the type</dd>
             <dt>Reference or Description:</dt>
             <dd>a brief description or RFC number and section reference where the Type is specified (may be omitted for "reserved" type names)</dd>
-            <dt>Intended Use:</dt>
+            <dt>Intended Usage:</dt>
             <dd>common, reserved, or obsolete</dd>
             <dt>Version:</dt>
             <dd>This defines the JSContact specification version on which this type definition is based on. The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
