@@ -2632,7 +2632,23 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>This section will be completed before IESG Last Call.</t>
+      <t>Contact information is very privacy sensitive.  It can reveal the identity, location and credentials information, employment status, interests and hobbies, and social network of a user. Its transmission and storage must be done carefully to protect it from possible threats, such as eavesdropping, replay, message insertion, deletion, modification, and on-path attacks.</t>
+      <t>The data being stored and transmitted may be used in systems with real-world consequences. For example, a malicious actor might provide JSContact data that uses the name of another person but insert their contact details to impersonate the unknown victim.  Such systems must be careful to authenticate all data they receive to prevent them from being subverted and ensure the change comes from an authorized entity.</t>
+      <t>This document only defines the data format; such considerations are primarily the concern of the API or method of storage and transmission of such files.</t>
+      <section anchor="json-parsing" numbered="true" toc="default">
+        <name>JSON Parsing</name>
+        <t>The security considerations of <xref target="RFC8259" format="default"/> apply to the use of JSON as the data interchange format.
+        </t>
+        <t>As for any serialization format, parsers need to thoroughly check the syntax of the supplied data. JSON uses opening and closing tags for several types and structures, and it is possible that the end of the supplied data will be reached when scanning for a matching closing tag; this is an error condition, and implementations need to stop scanning at the end of the supplied data.</t>
+        <t>JSON also uses a string encoding with some escape sequences to encode special characters within a string. Care is needed when processing these escape sequences to ensure that they are fully formed before the special processing is triggered, with special care taken when the escape sequences appear adjacent to other (non-escaped) special characters or adjacent to the end of data (as in the previous paragraph).</t>
+        <t>If parsing JSON into a non-textual structured data format, implementations may need to allocate storage to hold JSON string elements.  Since JSON does not use explicit string lengths, the risk of denial of service due to resource exhaustion is small, but implementations may still wish to place limits on the size of allocations they are willing to make in any given context, to avoid untrusted data causing excessive memory allocation.</t>
+      </section>
+      <section anchor="uri-values" numbered="true" toc="default">
+        <name>URI Values</name>
+        <t>Several JSContact properties contain URIs as values, and processing these properties requires extra care. <xref target="RFC3986" sectionFormat="of" section="7"/> discusses security risks related to URIs.</t>
+        <t>Fetching remote resources carries inherent risks. Connections must only be allowed on well-known ports, using allowed protocols (generally, just HTTP/HTTPS on their default ports). The URL must be resolved externally and not allowed to access internal resources. Connecting to an external source reveals IP (and therefore often location) information.</t>
+        <t>A maliciously constructed JSContact object may contain a very large number of URIs. In the case of published addressbooks with a large number of subscribers, such objects could be widely distributed. Implementations should be careful to limit the automatic fetching of linked resources to reduce the risk of this being an amplification vector for a denial-of-service attack.</t>
+      </section>
     </section>
   </middle>
   <back>

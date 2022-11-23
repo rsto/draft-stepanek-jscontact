@@ -478,6 +478,10 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
         </dl>
       </section>
     </section>
+    <section anchor="security-considerations" numbered="true" toc="default">
+      <name>Security Considerations</name>
+      <t>This specification extends the vCard Format Specification. The same security considerations as outlined in <xref target="RFC6350" section="9"/> apply.</t>
+    </section>
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section. See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
@@ -595,11 +599,6 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           </tr>
         </tbody>
       </table>
-    </section>
-    <section anchor="Security">
-      <!-- All drafts are required to have a security considerations section. See RFC 3552 for a guide. -->
-      <name>Security Considerations</name>
-      <t>This section will be completed before IESG Last Call.</t>
     </section>
   </middle>
   <back>

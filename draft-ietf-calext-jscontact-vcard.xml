@@ -2034,6 +2034,10 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
         </section>
       </section>
     </section>
+    <section anchor="security-considerations">
+      <name>Security Considerations</name>
+      <t>This specification defines how to convert between the JSContact and vCard formats. The security considerations for parsing and formatting such data apply and are outlined in <xref target="I-D.ietf-calext-jscontact" section="9"/> and <xref target="RFC6350" section="9"/>.</t>
+    </section>
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section. See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
@@ -2090,10 +2094,6 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
           <li>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</li>
         </ul>
       </section>
-    </section>
-    <section anchor="security-considerations">
-      <name>Security Considerations</name>
-      <t>This document doesn't present any security consideration.</t>
     </section>
   </middle>
   <back>
