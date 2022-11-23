@@ -56,7 +56,7 @@
       <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.</t>
     </abstract>
     <note removeInRFC="true">
-      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of this document.</t>
+      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder. It will be replaced with the RFC number of the JSContact specification.</t>
     </note>
   </front>
   <middle>
@@ -209,7 +209,7 @@
         </section>
         <section anchor="vcard-param-value">
           <name>VALUE</name>
-          <t>This does not convert to a standard property in JSContact.  It is implicit for standard types and conversion.  For extended values, see <xref target="new-jscontact-param"/>.</t>
+          <t>This does not convert to a standard property in JSContact.  It is implicit for standard types and conversion.  For extended values, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-pref">
           <name>PREF</name>
@@ -221,7 +221,7 @@
         </section>
         <section anchor="vcard-param-pid">
           <name>PID</name>
-          <t>This does not convert to a standard property in JSContact.  To convert this parameter, see <xref target="new-jscontact-param"/>.</t>
+          <t>This does not convert to a standard property in JSContact.  To convert this parameter, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-type">
           <name>TYPE</name>
@@ -233,7 +233,7 @@
         </section>
         <section anchor="vcard-param-calscale">
           <name>CALSCALE</name>
-          <t>This parameter set on a BDAY or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type.  To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
+          <t>This parameter set on a BDAY or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
@@ -241,11 +241,11 @@
         </section>
         <section anchor="vcard-param-geo">
           <name>GEO</name>
-          <t>This parameter set on a ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
+          <t>This parameter set on a ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-tz">
           <name>TZ</name>
-          <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="new-jscontact-param"/>.</t>
+          <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-group">
           <name>GROUP</name>
@@ -267,7 +267,7 @@
       "p1": {
         "@type": "Phone",
         "number": "tel:+1-555-555-5555",
-        "ietf.org:rfc0000:params" : {
+        "vCardParams" : {
          "group" : "item1"
         }
       }
@@ -289,7 +289,7 @@
     {
     "@type": "Card",
     ...
-    "ietf:rfc0000:props": [
+    "vCardProps": [
       ["x-foo", {
         "group": "item2"
       }, "unknown", "bar"]
@@ -596,7 +596,7 @@
         </section>
         <section anchor="vcard-prop-gender">
           <name>GENDER</name>
-          <t>This does not map to a standard property in JSContact.  To convert this property, see <xref target="new-jscontact-props"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This does not map to a standard property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-prop-grammatical-gender">
           <name>GRAMMATICAL-GENDER and PRONOUNS</name>
@@ -1006,7 +1006,7 @@
             <li>Otherwise construct the time zone name with <tt>ETC/GMT</tt> suffixed with the string representation of the reversed sign hour offset, including the sign but excluding leading zeros and minutes.  For example, the UTC offset value <tt>-0500</tt> converts to <tt>ETC/GMT+5</tt>.</li>
           </ul>
           <t>For such property values, also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
-          <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact.  To convert such property, see <xref target="new-jscontact-props"/>.</t>
+          <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact.  To convert such property, see <xref target="jscontact-prop-vcardprops"/>.</t>
         </section>
         <section anchor="vcard-prop-geo">
           <name>GEO</name>
@@ -1802,12 +1802,12 @@
         <name>New JSContact properties</name>
         <t>vCards may contain properties or parameters for which no standard JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purpose are unknown <xref target="RFC6350" section="6.10"/>.</t>
         <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
-        <section anchor="new-jscontact-props">
-          <name>Property <tt>props</tt></name>
+        <section anchor="jscontact-prop-vcardprops">
+          <name>Property <tt>vCardProps</tt></name>
           <dl>
             <dt>Name:</dt>
             <dd>
-              <tt>ietf.org:rfc0000:props</tt>
+              <tt>vCardProps</tt>
             </dd>
             <dt>Type:</dt>
             <dd><tt>JCardProp[]</tt>, where <tt>JCardProp</tt> denotes a jCard-encoded vCard property as defined in <xref target="RFC7095" section="3.3"/>.
@@ -1830,7 +1830,7 @@
     {
     "@type": "Card",
     ...
-    "ietf:rfc0000:props": [
+    "vCardProps": [
       ["x-foo", {
         "x-bar": "Hello",
         "group": "item1"
@@ -1843,12 +1843,12 @@
             </dd>
           </dl>
         </section>
-        <section anchor="new-jscontact-param">
-          <name>Property <tt>params</tt></name>
+        <section anchor="jscontact-prop-vcardparams">
+          <name>Property <tt>vCardParams</tt></name>
           <dl>
             <dt>Name:</dt>
             <dd>
-              <tt>ietf.org:rfc0000:params</tt>
+              <tt>vCardParams</tt>
             </dd>
             <dt>Type:</dt>
             <dd>
@@ -1867,7 +1867,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   "email1": {
     "@type": "EmailAddress",
     "address": "jane_doe@example.com",
-    "ietf.org:rfc0000:params": {
+    "vCardParams": {
       "x-foo": "Bar"
     }
   }
@@ -2962,12 +2962,12 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
         <t>JSContact object types may contain properties for which no standard vCard property is defined.  For example, a JSContact object may contain extended properties of which the semantics or purpose is unknown <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/>.</t>
-        <t>This section defines an vCard extension property and parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
-        <section anchor="vcard-jsprop">
-          <name>Property <tt>JSPROP</tt></name>
+        <t>This section defines new vCard properties and parameters by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+        <section anchor="vcard-prop-jscontact-prop">
+          <name>Property <tt>JSCONTACT-PROP</tt></name>
           <dl>
             <dt>Property name:</dt>
-            <dd>X-RFC0000-JSPROP</dd>
+            <dd>JSCONTACT-PROP</dd>
             <dt>Purpose:</dt>
             <dd>This property represents a JSContact property in vCard.</dd>
             <dt>Value type:</dt>
@@ -2976,7 +2976,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>The property can be specified multiple times in a vCard.</dd>
             <dt>Property parameters:</dt>
             <dd>
-              The X-RFC0000-JSPATH parameter MUST be set exactly once for this property.
+              The JSPTR parameter MUST be set exactly once for this property.
               The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
               <bcp14>MUST</bcp14> be URI.  Other IANA and non-standard property parameters
               can be specified on this property.
@@ -2984,16 +2984,17 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dt>Description:</dt>
             <dd>
               <t>
-                This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>SHOULD</bcp14> be compact, e.g. without insignificant whitespace. The JSContact property name is defined using the X-RFC0000-JSPATH parameter (<xref target="vcard-jspath"/>).
+                This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>SHOULD</bcp14> be compact, e.g. without insignificant whitespace.
               </t>
+              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card. The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer always is the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character. If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and <bcp14>SHOULD</bcp14> be discarded from the vCard.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode name="" type="abnf"><![CDATA[
-  jsprop = "X-RFC0000-JSPROP" jsprop-param ":" TEXT CRLF
+  jscontact-prop = "JSCONTACT-PROP" jscontact-prop-param ":" TEXT CRLF
 
-  jsprop-param  = *(
+  jscontact-prop-param  = *(
                   ; The following are MANDATORY and MUST NOT
                   ; occur more than once
                   ( ";" jspath-param ) /    ; see next section
@@ -3007,10 +3008,10 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
                   )
   ]]></sourcecode>
             </dd>
-            <dt anchor="vcard-jsprop-examples">Example(s):</dt>
+            <dt anchor="vcard-prop-jscontact-prop-examples">Example(s):</dt>
             <dd>
               <t>This illustrates how to convert an property at the top-level in a Card object that is unknown to the implementation.</t>
-              <figure anchor="jsprop-unknown">
+              <figure anchor="jscontact-prop-unknown">
                 <name>Unknown property example</name>
                 <artwork><![CDATA[
   {
@@ -3022,13 +3023,13 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="someUnknownProperty":true
+  JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
   ...
   END:VCARD
 ]]></artwork>
               </figure>
-              <t>This illustrates how to convert a vendor-extension property at the top-level of a Card object.  Note the required use of quoted string for the JSPATH value which allows the path to include the COLON (U+003A) character.</t>
-              <figure anchor="jsprop-vendor-extension">
+              <t>This illustrates how to convert a vendor-extension property at the top-level of a Card object.  Note the required use of quoted string for the JSPTR value which allows the path to include the COLON (U+003A) character.</t>
+              <figure anchor="jscontact-prop-vendor-extension">
                 <name>Vendor-extension conversion example</name>
                 <artwork><![CDATA[
   {
@@ -3042,13 +3043,13 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   ...
-  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="example.com:foo":{"bar":1234}
+  JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
   ...
   END:VCARD
 ]]></artwork>
               </figure>
               <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object using a path relative to the Card object.  Although not recommended by <xref target="I-D.ietf-calext-jscontact" section="1.5.3"/>, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
-              <figure anchor="jsprop-nested">
+              <figure anchor="jscontact-prop-nested">
                 <name>Nested property example with path relative to Card</name>
                 <artwork><![CDATA[
   {
@@ -3067,7 +3068,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   BEGIN:VCARD
   VERSION:4.0
   TEL:tel:+33-01-23-45-67
-  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="phones/phone1/example.com:foo~1bar":"tux hux"
+  JSCONTACT-PROP;VALUE=TEXT;JSPTR="phones/phone1/example.com:foo~1bar":"tux hux"
   ...
   END:VCARD
 ]]></artwork>
@@ -3075,31 +3076,31 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
           </dl>
         </section>
-        <section anchor="vcard-jspath">
-          <name>Parameter <tt>JSPATH</tt></name>
+        <section anchor="vcard-param-jsptr">
+          <name>Parameter <tt>JSPTR</tt></name>
           <dl>
             <dt>Parameter name:</dt>
-            <dd>X-RFC0000-JSPATH</dd>
+            <dd>JSPTR</dd>
             <dt>Purpose:</dt>
             <dd>
-            This parameter is set on a JSPROP property. It defines the name and position of a JSContact property within its Card, when this JSContact property gets converted to a vCard JSPROP property <xref target="vcard-jsprop"/>.
+            This parameter contains a JSON pointer <xref target="RFC6901"/> that relates its vCard property to some JSON data. Its exact semantics depend on the definition of the property where this parameter is set on.
             </dd>
             <dt>Description:</dt>
             <dd>
-              <t>If a JSContact property value converts to a vCard JSPROP property (see <xref target="vcard-jsprop"/>), then the value of the JSPATH parameter defines the path to that JSContact value within the Card. The parameter value is a JSON pointer <xref target="RFC6901"/>, its last segment either defines the property name or array position of the JSContact value.  The root of the JSON pointer always is the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character. If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSPROP property this parameter is set on <bcp14>MUST</bcp14> be ignored and <bcp14>SHOULD</bcp14> be discarded when rewriting the vCard.</t>
+              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>. Currently, its semantics only are defined for the JSCONTACT-PROP property (see <xref target="vcard-prop-jscontact-prop"/>), but it may also be used for other use cases in the future.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
               <sourcecode name="" type="abnf"><![CDATA[
-jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
+jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
                  ; also see param-value in RFC 6350, section 3.3
   ]]></sourcecode>
             </dd>
             <dt>Example(s):</dt>
             <dd>
-              <t>This illustrates a simple example. For further examples see <xref target="vcard-jsprop-examples"/>.</t>
+              <t>This illustrates a simple example. For further examples see <xref target="vcard-prop-jscontact-prop-examples"/>.</t>
               <sourcecode name=""><![CDATA[
-  X-RFC0000-JSPROP;VALUE=TEXT;X-RFC0000-JSPATH="example.com:foo":"bar"
+  JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
   ]]></sourcecode>
             </dd>
           </dl>
@@ -3113,42 +3114,118 @@ jspath-param  = "X-RFC0000-JSPATH" "=" DQUOTE *QSAFE-CHAR DQUOTE
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section. See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
-      <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
-      <table anchor="new_properties">
-        <name>New VCARD Properties</name>
-        <thead>
-          <tr>
-            <th align="left">Namespace</th>
-            <th align="left">Property</th>
-            <th align="left">Reference</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td/>
-            <td align="left">X-RFC0000-JSPROP</td>
-            <td align="left">This document, <xref target="vcard-jsprop"/></td>
-          </tr>
-        </tbody>
-      </table>
-      <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
-      <table anchor="new_parameters">
-        <name>New VCARD Parameters</name>
-        <thead>
-          <tr>
-            <th align="left">Namespace</th>
-            <th align="left">Parameter</th>
-            <th align="left">Reference</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td/>
-            <td align="left">X-RFC0000-JSPATH</td>
-            <td align="left">This document, <xref target="vcard-jsprop"/></td>
-          </tr>
-        </tbody>
-      </table>
+      <section>
+        <name>New vCard Properties</name>
+        <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
+        <table anchor="new_properties">
+          <name>New VCARD Properties</name>
+          <thead>
+            <tr>
+              <th align="left">Namespace</th>
+              <th align="left">Property</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td/>
+              <td align="left">JSCONTACT-PROP</td>
+              <td align="left">This document, <xref target="vcard-prop-jscontact-prop"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <name>New vCard Parameters</name>
+        <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
+        <table anchor="new_parameters">
+          <name>New VCARD Parameters</name>
+          <thead>
+            <tr>
+              <th align="left">Namespace</th>
+              <th align="left">Parameter</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td/>
+              <td align="left">JSPTR</td>
+              <td align="left">This document, <xref target="vcard-param-jsptr"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <name>New JSContact Properties</name>
+        <t>IANA is requested to add the following entries to the "JSContact Properties" registry.</t>
+        <table anchor="tab-iana-property-registry" align="center">
+          <name>Initial Contents of the "JSContact Properties" Registry</name>
+          <thead>
+            <tr>
+              <th align="left">Property Name</th>
+              <th align="left">Property Type</th>
+              <th align="left">Property Context</th>
+              <th align="left">Reference or Description</th>
+              <th align="left">Intended Usage</th>
+              <th align="left">Version</th>
+              <th align="left">Change Controller</th>
+            </tr>
+          </thead>
+          <!-- Everything in here should be sorted alphabetically: table entries by property name, the references for each property alphabetically by the object type or property they refer to -->
+          <tbody>
+            <tr>
+              <td align="left">vCardParams</td>
+              <td align="left">String[String]</td>
+              <td align="left">Any JSContact object type that contains the <tt>@type</tt> property.</td>
+              <td align="left">
+                <xref target="jscontact-prop-vcardparams" format="default"/>
+              </td>
+              <td align="left">common</td>
+              <td align="left">rfc0000</td>
+              <td align="left">IETF</td>
+            </tr>
+            <tr>
+              <td align="left">vCardProps</td>
+              <td align="left">JCardProp[]</td>
+              <td align="left">Card</td>
+              <td align="left">
+                <xref target="jscontact-prop-vcardprops" format="default"/>
+              </td>
+              <td align="left">common</td>
+              <td align="left">rfc0000</td>
+              <td align="left">IETF</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <name>New JSContact Types</name>
+        <t>IANA is requested to add the following entries to the "JSContact Types" registry.</t>
+        <table anchor="tab-iana-jscontact-type-registry" align="left">
+          <name>Additional Contents of the "JSContact Types" Registry</name>
+          <thead>
+            <tr>
+              <th align="left">Type Name</th>
+              <th align="left">Reference or Description</th>
+              <th align="left">Intended Usage</th>
+              <th align="left">Version</th>
+              <th align="left">Change Controller</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left">JCardProp</td>
+              <td align="left">
+                <xref target="jscontact-prop-vcardprops" format="default"/>
+              </td>
+              <td align="left">common</td>
+              <td align="left">rfc0000</td>
+              <td align="left">IETF</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </section>
     <section anchor="impl-status">
       <name>Implementation Status</name>
