@@ -57,7 +57,7 @@
         <li>The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.</li>
         <li>Extensions, such as new properties and components, <bcp14>MUST NOT</bcp14> lead to requiring an update to this document.</li>
       </ul>
-      <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>. Using JSON is mostly a pragmatic choice: its widespread use makes Card easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
+      <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>.  Using JSON is mostly a pragmatic choice: its widespread use makes Card easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
       <section anchor="relation-to-the-xcard-and-jcard-formats" numbered="true" toc="default">
         <name>Relation to the xCard and jCard formats</name>
         <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data, in XML and JSON format respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
@@ -175,11 +175,11 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       </section>
       <section>
         <name>Validating JSContact Properties</name>
-        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, vendor-specific properties in <xref target="vendor-specific-properties"/>. A JSContact object is invalid if any its properties is invalid.  If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
+        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, vendor-specific properties in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any its properties is invalid.  If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
-             An IANA-registered property is any property that got registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>. All properties defined in this specification are IANA-registered properties.
+             An IANA-registered property is any property that got registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification are IANA-registered properties.
           </t>
           <t>
             Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of a IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
@@ -347,7 +347,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Name</tt>.
               </li>
             <li>
-              <t>components: <tt>NameComponent[]</tt> (mandatory). The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
+              <t>components: <tt>NameComponent[]</tt> (mandatory).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
               <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character.  Otherwise, inserting a single Space character in between name component values is a good choice.</t>
             </li>
             <li>
@@ -357,7 +357,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional)</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> is not set is implementation-specific.</t>
-              <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below). For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
+              <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
               <t>This illustrates the use of sortAs.  It indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
               <figure anchor="example-name-sortas">
                 <name>JSContact Name <tt>sortAs</tt> example</name>
@@ -940,10 +940,10 @@ The actual information.  This generally is free-text, but future specifications 
                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Author</tt>.
             </li>
             <li>
-              <t>name: <tt>String</tt> (optional). The name of this author.</t>
+              <t>name: <tt>String</tt> (optional).  The name of this author.</t>
             </li>
             <li>
-              <t>uri: <tt>String</tt> (optional). A URI value that identifies the author.</t>
+              <t>uri: <tt>String</tt> (optional).  A URI value that identifies the author.</t>
             </li>
           </ul>
         </section>
@@ -1054,8 +1054,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       <section anchor="iana-property-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Properties" Registry</name>
         <t>IANA has created the "JSContact Properties" registry to allow interoperability of extensions to JSContact objects.</t>
-        <t>This registry follows the Expert Review process (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>). If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability.  Preliminary community review for this registry is optional but strongly encouraged.</t>
-        <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>. IANA will list registrations with a common usage designation prominently and separately from those with other intended usage values.</t>
+        <t>This registry follows the Expert Review process (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>).  If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability.  Preliminary community review for this registry is optional but strongly encouraged.</t>
+        <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>.  IANA will list registrations with a common usage designation prominently and separately from those with other intended usage values.</t>
         <t>A <tt>reserved</tt> registration reserves a property name without assigning semantics to avoid name collisions with future extensions or protocol use.</t>
         <t>An <tt>obsolete</tt> registration denotes a property that is no longer expected to be added by up-to-date systems.  A new property has probably been defined covering the obsolete property's semantics.</t>
         <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on.  This typically is the latest specification version that is in effect when the property gets registered.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</t>
@@ -1129,7 +1129,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Properties" Registry</name>
-          <t>The following table lists the initial entries of the "JSContact Properties" registry.  All properties are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
+          <t>The following table lists the initial entries of the "JSContact Properties" registry.  All properties are for common use and their version is <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
           <table anchor="tab-iana-property-registry" align="center">
             <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
@@ -1744,7 +1744,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Types" Registry</name>
-          <t>The following table lists the initial entries of the JSContact Types registry.  All types are for common use and their version is <tt>rfc0000</tt>. All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
+          <t>The following table lists the initial entries of the JSContact Types registry.  All types are for common use and their version is <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
           <table anchor="tab-iana-type-registry" align="left">
             <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
@@ -1984,7 +1984,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Change Controller:</dt>
             <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
-            <dd>This is the initial list of defined values for this enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>. A subregistry will be created with these values for this property name/context tuple.</dd>
+            <dd>This is the initial list of defined values for this enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>.  A subregistry will be created with these values for this property name/context tuple.</dd>
           </dl>
         </section>
         <section anchor="iana-enum-registry-value-template" numbered="true" toc="default">
@@ -2775,7 +2775,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       <section anchor="uri-values" numbered="true" toc="default">
         <name>URI Values</name>
         <t>Several JSContact properties contain URIs as values, and processing these properties requires extra care.  <xref target="RFC3986" sectionFormat="of" section="7"/> discusses security risks related to URIs.</t>
-        <t>Fetching remote resources carries inherent risks.  Connections must only be allowed on well-known ports, using allowed protocols (generally, just HTTP/HTTPS on their default ports). The URL must be resolved externally and not allowed to access internal resources.  Connecting to an external source reveals IP (and therefore often location) information.</t>
+        <t>Fetching remote resources carries inherent risks.  Connections must only be allowed on well-known ports, using allowed protocols (generally, just HTTP/HTTPS on their default ports).  The URL must be resolved externally and not allowed to access internal resources.  Connecting to an external source reveals IP (and therefore often location) information.</t>
         <t>A maliciously constructed JSContact object may contain a very large number of URIs.  In the case of published addressbooks with a large number of subscribers, such objects could be widely distributed.  Implementations should be careful to limit the automatic fetching of linked resources to reduce the risk of this being an amplification vector for a denial-of-service attack.</t>
       </section>
     </section>

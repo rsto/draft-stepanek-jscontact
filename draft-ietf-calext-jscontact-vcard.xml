@@ -76,7 +76,7 @@
     </section>
     <section anchor="vcard-jscontact-conversion">
       <name>Converting vCard to JSContact</name>
-      <t>This section contains the conversion rules from vCard to JSContact Card.  Its follows the same structure as the <xref target="RFC6350">vCard v4 RFC document</xref>. Properties and parameters of vCard extension RFCs, including the <xref target="I-D.ietf-calext-vcard-jscontact-extensions">vCard JSContact Extension RFC</xref> are added to appropriate subsections.</t>
+      <t>This section contains the conversion rules from vCard to JSContact Card.  Its follows the same structure as the <xref target="RFC6350">vCard v4 RFC document</xref>.  Properties and parameters of vCard extension RFCs, including the <xref target="I-D.ietf-calext-vcard-jscontact-extensions">vCard JSContact Extension RFC</xref> are added to appropriate subsections.</t>
       <section>
         <name>General rules</name>
         <section>
@@ -3098,7 +3098,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
             <dt>Description:</dt>
             <dd>
-              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>. Currently, its semantics only are defined for the JSCONTACT-PROP property (see <xref target="vcard-prop-jscontact-prop"/>), but it may also be used for other use cases in the future.</t>
+              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>.  Currently, its semantics only are defined for the JSCONTACT-PROP property (see <xref target="vcard-prop-jscontact-prop"/>), but it may also be used for other use cases in the future.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
