@@ -670,9 +670,19 @@ Defines the preference of this language in relation to other languages of the sa
         <section anchor="schedulingAddresses" numbered="true" toc="default">
           <name>schedulingAddresses</name>
           <t>Type: <tt>Id[SchedulingAddress]</tt> (optional).</t>
-          <t>The scheduling addresses by which the entity may receive calendar scheduling invitations.  A SchedulingAddress object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
-          <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>.</li>
+          <t>The scheduling addresses by which the entity may receive calendar scheduling invitations.  A SchedulingAddress object has the following properties:</t>
+          <ul spacing="normal">
+            <li>
+              <t>@type: <tt>String</tt> (mandatory).  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>.</t>
+            </li>
+            <li>uri: <tt>String</tt> (mandatory).
+The address to use for calendar scheduling with this contact.  This <bcp14>MUST</bcp14> be a URI as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+            <li>contexts: <tt>String[Boolean]</tt> (optional)
+The contexts in which to use this scheduling address.  Also see <xref target="prop-contexts"/>.</li>
+            <li>pref: <tt>UnsignedInt</tt> (optional)
+                The preference of this scheduling address in relation to other scheduling address.  Also see <xref target="prop-pref"/>.</li>
+            <li>label: <tt>String</tt> (optional).
+                A custom label for the scheduling address, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
       </section>
@@ -1327,8 +1337,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">mediaType</td>
                 <td align="left">String</td>
-                <td align="left">CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
-                <td align="left"><xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource</td>
+                <td align="left"><xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">members</td>
