@@ -128,9 +128,9 @@ The type of the resource.  The allowed values are defined in the property defini
 The resource value.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
             <li>mediaType: <tt>String</tt> (optional).
 Used for URI resource values.  Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
-            <li>contexts: <tt>String[Boolean]</tt> (optional)
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this resource.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this resource in relation to other resources.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
@@ -355,7 +355,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           The locale of the name.  The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
         </li>
             <li>
-              <t>sortAs: <tt>String[String]</tt> (optional)</t>
+              <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> is not set is implementation-specific.</t>
               <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
               <t>This illustrates the use of sortAs.  It indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
@@ -437,7 +437,7 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
             </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
 The contexts in which to use this nick name.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this nick name in relation to other nick names.  Also see <xref target="prop-pref"/>.</li>
           </ul>
         </section>
@@ -452,7 +452,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>name: <tt>String</tt> (optional).
                 The name of this organization.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
             </li>
-            <li>sortAs: <tt>String</tt> (optional)
+            <li>sortAs: <tt>String</tt> (optional).
                 This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
             </li>
             <li>units: <tt>OrgUnit[]</tt> (optional).
@@ -467,7 +467,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>name: <tt>String</tt> (optional).
                 The name of this organizational unit.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
             </li>
-            <li>sortAs: <tt>String</tt> (optional)
+            <li>sortAs: <tt>String</tt> (optional).
                 This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name.  The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
             </li>
           </ul>
@@ -533,9 +533,9 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
               </li>
             <li>pronouns: <tt>String</tt> (mandatory).
                   Defines the pronouns.  Any value or form is allowed.  Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>.  The value <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</li>
-            <li>contexts: <tt>String[Boolean]</tt> (optional)
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use these pronouns.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of these pronouns in relation to other pronouns in the same context.  Also see <xref target="prop-pref"/>.</li>
           </ul>
         </section>
@@ -552,9 +552,9 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
               </li>
             <li>address: <tt>String</tt> (mandatory).
 The email address.  This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
-            <li>contexts: <tt>String[Boolean]</tt> (optional)
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this email address.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this email address in relation to other email addresses.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
@@ -574,9 +574,9 @@ The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the c
 The service-specific URI of the entity represented by this card.</li>
             <li>username: <tt>String</tt> (optional).
 The service-specific user name of the entity represented by this card.  If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
-            <li>contexts: <tt>String[Boolean]</tt> (optional)
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this service.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this service in relation to other services.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
@@ -606,9 +606,9 @@ The phone number, as either a URI or free-text.  Typical URI schemes are the <xr
                 <li><tt>video</tt> The number supports video conferencing.</li>
               </ul>
             </li>
-            <li>contexts: <tt>String[Boolean]</tt> (optional)
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this number.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this number in relation to other numbers.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
@@ -616,7 +616,7 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
         </section>
         <section anchor="preferredContactChannels" numbered="true" toc="default">
           <name>preferredContactChannels</name>
-          <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional)</t>
+          <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional).</t>
           <t>Defines which channel the entity represented by this card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
           <ul spacing="normal">
             <li><tt>addresses</tt>.  The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
@@ -638,7 +638,7 @@ Defines the preference of this contact channel in relation to other contact chan
         </section>
         <section anchor="preferredLanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
-          <t>Type : <tt>String[LanguagePreference[]]</tt> (optional)</t>
+          <t>Type : <tt>String[LanguagePreference[]]</tt> (optional).</t>
           <t>Defines the preferred languages for contacting the entity associated with this card.  The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags.  The values are a (possibly empty) list of contact language preferences for this language.  A valid LanguagePreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
           <t>A LanguagePreference object has the following properties:</t>
           <ul spacing="normal">
@@ -677,9 +677,9 @@ Defines the preference of this language in relation to other languages of the sa
             </li>
             <li>uri: <tt>String</tt> (mandatory).
 The address to use for calendar scheduling with this contact.  This <bcp14>MUST</bcp14> be a URI as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
-            <li>contexts: <tt>String[Boolean]</tt> (optional)
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this scheduling address.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this scheduling address in relation to other scheduling address.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
                 A custom label for the scheduling address, see <xref target="prop-label"/>.</li>
@@ -713,8 +713,8 @@ The country name.</li>
 The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
             <li>countryCode: <tt>String</tt> (optional).
 The ISO-3166-1 country code.</li>
-            <li>coordinates: <tt>String</tt> (optional) A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
-            <li>timeZone: <tt>String</tt> (optional) Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
+            <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
+            <li>timeZone: <tt>String</tt> (optional).  Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
             <li>
               <t>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  In addition to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
@@ -724,7 +724,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                 <li><tt>postal</tt> An address to be used for delivering physical items.</li>
               </ul>
             </li>
-            <li>pref: <tt>UnsignedInt</tt> (optional)
+            <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
           <t>A StreetComponent object has the following properties:</t>
@@ -909,7 +909,7 @@ Specifies the type for this personal information.  The value <bcp14>MUST</bcp14>
             </li>
             <li>value: <tt>String</tt> (mandatory).
 The actual information.  This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
-            <li>level: <tt>String</tt> (optional)
+            <li>level: <tt>String</tt> (optional).
                 Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
           </ul>
         </section>
