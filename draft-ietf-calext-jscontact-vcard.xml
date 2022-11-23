@@ -2609,7 +2609,9 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>Note</td>
               <td>created</td>
-              <td><xref target="vcard-param-created"/></td>
+              <td>
+                <xref target="vcard-param-created"/>
+              </td>
             </tr>
             <tr>
               <td>Note</td>
