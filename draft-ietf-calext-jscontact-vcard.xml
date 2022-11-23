@@ -235,6 +235,16 @@
           <name>TZ</name>
           <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
+        <section anchor="vcard-param-level">
+          <name>LEVEL</name>
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInformation</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
+        </t>
+          <ul spacing="compact">
+            <li>"beginner" converts to "low";</li>
+            <li>"average" converts to "medium";</li>
+            <li>"expert" converts to "high".</li>
+          </ul>
+        </section>
         <section anchor="vcard-param-group">
           <name>GROUP</name>
           <t>This parameter exclusively is for use in jCard (see <xref target="RFC7095" section="7.1"/>).  It <bcp14>MUST NOT</bcp14> be set in a vCard.  Preserving the exact group name when converting from vCard to JSContact and back to vCard is not necessary. Any group identifiers will do, as long as the resulting vCard groups its  properties equally to the original vCard.  Implementations that still wish to preserve the exact property group name of a vCard property <bcp14>MAY</bcp14> set the <tt>group</tt> parameter in the JSContact extension properties <tt>props</tt> or <tt>params</tt> defined in <xref target="new-jscontact"/>.</t>
@@ -287,6 +297,21 @@
         ]]></artwork>
           </figure>
         </section>
+        <section anchor="vcard-param-author">
+          <name>AUTHOR</name>
+          <t>The AUTHOR parameter value of a vCard NOTE property converts to the <tt>uri</tt> property of the Author object for this note. To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="vcard-param-author-name">
+          <name>AUTHOR-NAME</name>
+          <t>The AUTHOR-NAME parameter value of a vCard NOTE property converts to the <tt>name</tt> property of the Author object for this note. To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="vcard-param-created">
+          <name>CREATED</name>
+          <t>The CREATED parameter value of a vCard NOTE property converts to the <tt>created</tt> property of the Note object. To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
         <section anchor="vcard-param-derived">
           <name>DERIVED</name>
           <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
@@ -327,16 +352,6 @@
         ]]></artwork>
           </figure>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-        </section>
-        <section anchor="vcard-param-level">
-          <name>LEVEL</name>
-          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInformation</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
-        </t>
-          <ul spacing="compact">
-            <li>"beginner" converts to "low";</li>
-            <li>"average" converts to "medium";</li>
-            <li>"expert" converts to "high".</li>
-          </ul>
         </section>
       </section>
       <section>
@@ -1426,7 +1441,8 @@
     BEGIN:VCARD
     VERSION:4.0
     ...
-    NOTE:This fax number is operational 0800 to 1715 EST\, Mon-Fri.
+    NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
+      This fax number is operational 0800 to 1715 EST\, Mon-Fri.
     ...
     END:VCARD
 
@@ -1435,7 +1451,12 @@
     ...
     "notes": {
         "NOTE-1" : {
-           "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri."
+           "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
+           "created": "2022-11-23T15:01:32Z",
+           "author": {
+             "@type": "Author",
+             "name": "John"
+           }
         }
     },
     ...
@@ -2583,12 +2604,12 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>Note</td>
               <td>author</td>
-              <td>TBD</td>
+              <td><xref target="vcard-param-author"/>, <xref target="vcard-param-author-name"/></td>
             </tr>
             <tr>
               <td>Note</td>
               <td>created</td>
-              <td>TBD</td>
+              <td><xref target="vcard-param-created"/></td>
             </tr>
             <tr>
               <td>Note</td>
