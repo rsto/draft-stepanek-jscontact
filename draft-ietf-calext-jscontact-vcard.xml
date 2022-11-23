@@ -2017,12 +2017,12 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>Author</td>
               <td>name</td>
-              <td>TBD</td>
+              <td><xref target="vcard-param-author-name"/></td>
             </tr>
             <tr>
               <td>Author</td>
               <td>uri</td>
-              <td>TBD</td>
+              <td><xref target="vcard-param-author"/></td>
             </tr>
             <tr>
               <td>CalendarResource</td>
