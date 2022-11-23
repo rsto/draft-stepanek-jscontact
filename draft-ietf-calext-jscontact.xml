@@ -1189,7 +1189,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
-                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendaeResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
+                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
                 <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
@@ -1962,7 +1962,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>contexts</dd>
             <dt>Context:</dt>
-            <dd>NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendaeResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</dd>
+            <dd>NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</dd>
             <dt>Change Controller:</dt>
             <dd>IETF</dd>
             <dt>Version:</dt>
@@ -1970,7 +1970,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-contexts" align="left">
-                <name>JSContact Enum Values for contexts (Context: NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendaeResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress)</name>
+                <name>JSContact Enum Values for contexts (Context: NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
