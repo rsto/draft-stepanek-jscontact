@@ -69,18 +69,6 @@
         <t>To achieve this, this document defines a standard how to convert contact data between JSContact and vCard (and consequently jCard). </t>
       </section>
       <section>
-        <name>Scope and Caveats</name>
-        <t>JSContact and vCard have a lot of semantics in common, however some differences must be outlined:
-        </t>
-        <ul spacing="compact">
-          <li>
-            <t>The JSContact data model defines some contact information that doesn't have a direct conversion with vCard properties.</t>
-            <t/>
-          </li>
-          <li>The properties that can be present multiple times in a vCard are represented through different collections in JSContact; mainly as maps, sometimes as arrays, in some cases condensed in a single value.</li>
-        </ul>
-      </section>
-      <section>
         <name>Conventions Used in This Document</name>
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
         <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the Card features are written in camel case wrapped in double quotes.</t>
