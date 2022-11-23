@@ -628,14 +628,5 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
         </reference>
       </references>
     </references>
-    <!--section anchor="Acknowledgements" numbered="false">
-      <name>Acknowledgements</name>
-      <t>This template uses extracts from templates written by Pekka Savola, Elwyn Davies and
-        Henrik Levkowetz.  [REPLACE]</t>
-    </section-->
-    <!--section anchor="Contributors" numbered="false">
-      <name>Contributors</name>
-      <t>Thanks to all of the contributors.  [REPLACE]</t>
-    </section-->
   </back>
 </rfc>
