@@ -506,9 +506,9 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
               </ul>
             </li>
             <li>
-              <t>nth: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
+              <t>rank: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
                     Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
-              <t>For example, two name components of type <tt>surname</tt> may have their <tt>nth</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
+              <t>For example, two name components of type <tt>surname</tt> may have their <tt>rank</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
               <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Name object to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
           </ul>
@@ -1685,14 +1685,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">nth</td>
-                <td align="left">UnsignedInt</td>
-                <td align="left">NameComponent</td>
-                <td align="left">
-                  <xref target="name" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">number</td>
                 <td align="left">String</td>
                 <td align="left">Phone</td>
@@ -1800,6 +1792,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Pronouns</td>
                 <td align="left">
                   <xref target="speakToAs" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">rank</td>
+                <td align="left">UnsignedInt</td>
+                <td align="left">NameComponent</td>
+                <td align="left">
+                  <xref target="name" format="default"/>
                 </td>
               </tr>
               <tr>
