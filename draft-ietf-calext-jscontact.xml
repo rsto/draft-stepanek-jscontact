@@ -318,6 +318,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).</t>
           <t>This identifies the set of cards that are members of this group card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
+          <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g. "IETF Participants").</t>
         </section>
         <section anchor="relatedTo" numbered="true" toc="default">
           <name>relatedTo</name>
