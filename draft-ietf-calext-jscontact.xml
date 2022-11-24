@@ -547,7 +547,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <sourcecode name=""><![CDATA[
    ...
     "nickNames": {
-       "mynickname": {
+       "mynick": {
           "@type": "NickName",
           "name": "Johnny"
        }
@@ -628,16 +628,16 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <sourcecode name=""><![CDATA[
   ...
   "titles": {
-    "atitle": {
+    "mytitle": {
       "@type": "Title",
       "type": "title",
-      "name": "Project Leader",
-      "organization": "ABC"
+      "name": "Research Scientist"
     },
-    "arole": {
+    "mainrole": {
       "@type": "Title",
       "type": "role",
-      "name": "Research Scientist"
+      "name": "Project Leader",
+      "organization": "ABC"
     }
   },
   "organizations": {
@@ -704,12 +704,12 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
    "speakToAs": {
      "grammaticalGender": "neuter",
      "pronouns": {
-       "PRONOUNS-1": {
+       "pronouns": {
          "@type": "Pronouns",
          "pronouns": "they/them",
          "pref": 2
        },
-       "PRONOUNS-2": {
+       "pronounsX": {
          "@type": "Pronouns",
          "pronouns": "xe/xir",
          "pref": 1
@@ -794,7 +794,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
    ...
    "onlineServices": {
      ...
-     "OS-1": {
+     "xmpp": {
        "@type": "OnlineService",
        "uri": "xmpp:alice@example.com",
        "pref": 1
