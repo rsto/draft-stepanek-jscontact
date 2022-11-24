@@ -232,6 +232,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
             <artwork><![CDATA[
 {
   "@type": "Card",
+  "@version" : "rfc0000",
   "example.com:foo": "bar",
   "example.com:foo2": {
     "bar": "baz"
@@ -250,6 +251,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
             <artwork><![CDATA[
 {
   "@type": "Card",
+  "@version" : "rfc0000",
   "kind": "example.com:kind:foo",
   ...
 }
@@ -838,6 +840,7 @@ The value of this street component.</li>
           <figure>
             <artwork><![CDATA[
   "@type": "Card",
+  "@version" : "rfc0000",
   ...
   "addresses": {
     "addr1": {
