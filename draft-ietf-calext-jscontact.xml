@@ -360,7 +360,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
               <t>This illustrates the use of sortAs.  It indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
               <figure anchor="example-name-sortas">
-                <name>JSContact Name <tt>sortAs</tt> example</name>
+                <name>Name <tt>sortAs</tt> example</name>
                 <sourcecode name=""><![CDATA[
 {
   "@type": "Name",
