@@ -1941,7 +1941,9 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>Address</td>
               <td>fullAddress</td>
-              <td>TBD</td>
+              <td>
+                <xref target="vcard-prop-adr"/>
+              </td>
             </tr>
             <tr>
               <td>Address</td>
@@ -2224,7 +2226,9 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>Card</td>
               <td>preferredLanguages</td>
-              <td>TBD</td>
+              <td>
+                <xref target="vcard-prop-lang"/>
+              </td>
             </tr>
             <tr>
               <td>Card</td>
@@ -2330,7 +2334,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>CryptoResource</td>
               <td>type</td>
-              <td>TBD</td>
+              <td>not applicable</td>
             </tr>
             <tr>
               <td>CryptoResource</td>
