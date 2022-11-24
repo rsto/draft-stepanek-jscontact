@@ -346,6 +346,10 @@
           </figure>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
+        <section anchor="vcard-param-service-type">
+          <name>SERVICE-TYPE</name>
+          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type. Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
         <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
           <t>This converts to the <tt>sortAs</tt> properties defined for the <tt>Name</tt>, <tt>Organization</tt> and <tt>OrgUnit</tt> object types.</t>
@@ -881,7 +885,7 @@
         </section>
         <section anchor="vcard-prop-impp">
           <name>IMPP</name>
-          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The entry value is a <tt>OnlineService</tt> object and the <tt>uri</tt> property is set to the IMPP value.</t>
+          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The <tt>type</tt> of the OnlineService is set to <tt>impp</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the IMPP value. </t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
@@ -901,7 +905,8 @@
       ...
       "OS-1": {
         "@type": "OnlineService",
-        "uri": "xmpp:alice@example.com",
+        "user": "xmpp:alice@example.com",
+        "type": "impp",
         "pref": 1
       },
       ...
@@ -975,6 +980,40 @@
     "@version" : "rfc0000",
     ...
     "locale": "de-AT",
+    ...
+    }
+        ]]></artwork>
+          </figure>
+          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="vcard-prop-socialprofile">
+          <name>SOCIALPROFILE</name>
+          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>type</tt> of the OnlineService is set to <tt>username</tt>. Otherwise the <tt>type</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value. </t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <figure anchor="socialprofile_conversion">
+            <name>IMPP conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    "@version" : "rfc0000",
+    ...
+    "onlineServices": {
+      ...
+      "OS-1": {
+        "@type": "OnlineService",
+        "service": "Twitter",
+        "user": "https://twitter.com/ietf",
+        "type": "uri"
+      },
+      ...
+    },
     ...
     }
         ]]></artwork>
@@ -2698,20 +2737,22 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>OnlineService</td>
               <td>service</td>
               <td>
-                <xref target="vcard-prop-impp"/>
+                <xref target="vcard-param-service-type"/>
               </td>
             </tr>
             <tr>
               <td>OnlineService</td>
-              <td>uri</td>
+              <td>type</td>
               <td>
-                <xref target="vcard-prop-impp"/>
+                <xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/>
               </td>
             </tr>
             <tr>
               <td>OnlineService</td>
-              <td>username</td>
-              <td>TBD</td>
+              <td>user</td>
+              <td>
+                <xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/>
+              </td>
             </tr>
             <tr>
               <td>OrgUnit</td>

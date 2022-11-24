@@ -777,7 +777,7 @@ The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the c
             <li>
               <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property. The type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
-                <li><tt>messaging</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging. The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
+                <li><tt>impp</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging. The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
                 <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI, such as for a social media service. The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
                 <li><tt>username</tt>: The value of the <tt>user</tt> property is a service-specific username, such as for a social media service. Any free-text value is allowed. The <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
               </ul>
@@ -2996,7 +2996,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
-                    <td align="left">messaging</td>
+                    <td align="left">impp</td>
                     <td align="left">
                       <xref target="onlineServices" format="default"/>
                     </td>

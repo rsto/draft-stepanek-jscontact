@@ -329,6 +329,41 @@ PRONOUNS;LANG=en:they/them
           </dd>
         </dl>
       </section>
+      <section anchor="prop-socialprofile">
+        <name>SOCIALPROFILE Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>SOCIALPROFILE</dd>
+          <dt>Purpose:</dt>
+          <dd>To specify the URI or username for social media profiles associated with the object the vCard represents.</dd>
+          <dt>Value type:</dt>
+          <dd>A single URI or TEXT value. The default value type is URI.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*</dd>
+          <dt>Property parameters:</dt>
+          <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI. It <bcp14>MUST</bcp14> be assigned if the value type is TEXT. In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
+          <dt>Description:</dt>
+          <dd>
+            Several vCard addressbook implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts. This specification provides a standard property for the same purpose. In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+SOCIALPR-param = "VALUE=uri" / "VALUE=text" / service-type-param / any-param
+SOCIALPR-value = URI / text ; Value and VALUE parameter MUST match.
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+SOCIALPROFILE:https://github.com/github
+SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=TEXT:peter94
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
     </section>
     <section anchor="new-parameters">
       <name>New Parameters</name>
@@ -341,7 +376,7 @@ PRONOUNS;LANG=en:they/them
           <dd>This parameter identifies the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows to name an author as free-text value (see <xref target="param-author-name"/>).</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows to name an author as free-text value (see <xref target="param-author-name"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -367,7 +402,7 @@ NOTE;AUTHOR="mailto:john@example.com":This is some note.
           <dd>This parameter names the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It names the author as a free-text value.  The parameter value <bcp14>MUST NOT</bcp14> be empty.  Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows to identify an author by URI (see <xref target="param-author"/>).</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It names the author as a free-text value.  The parameter value <bcp14>MUST NOT</bcp14> be empty.  Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows to identify an author by URI (see <xref target="param-author"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -393,7 +428,7 @@ NOTE;AUTHOR-NAME="_:l33tHacker:_":A note with an unusual author name.
           <dd>This parameter defines the date and time when a property was created in a vCard.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created.  The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" section="4.3.5"/>.  Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp.  It is up to implementations to decide if a property change resembles an update or rather a delete and create.</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created.  The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" section="4.3.5"/>.  Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp.  It is up to implementations to decide if a property change resembles an update or rather a delete and create.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -503,6 +538,32 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           </dd>
         </dl>
       </section>
+      <section anchor="param-service-type">
+        <name>SERVICE-TYPE Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>SERVICE-TYPE</dd>
+          <dt>Purpose:</dt>
+          <dd>To define the online service name associated with a messaging or social media profile.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the online service associated with that property value. Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.</t>
+            <t>Several vCard addressbook implementations currently use an experimental X-SERVICE-TYPE parameter property to achieve the same as this parameter. This specification provides a standard parameter for the same purpose.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+service-type-param    = param-value
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+           <sourcecode name=""><![CDATA[
+SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
@@ -547,6 +608,11 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
             <td align="left">PRONOUNS</td>
             <td align="left">This document, <xref target="prop-pronouns"/></td>
           </tr>
+          <tr>
+            <td/>
+            <td align="left">SOCIALPROFILE</td>
+            <td align="left">This document, <xref target="prop-socialprofile"/></td>
+          </tr>
         </tbody>
       </table>
       <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
@@ -589,6 +655,11 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
             <td/>
             <td align="left">PROP-ID</td>
             <td align="left">This document, <xref target="param-propid"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">SERVICE-TYPE</td>
+            <td align="left">This document, <xref target="param-service-type"/></td>
           </tr>
         </tbody>
       </table>
