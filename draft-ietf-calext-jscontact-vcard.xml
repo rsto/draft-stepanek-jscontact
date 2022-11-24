@@ -360,6 +360,28 @@
           <name>BEGIN and END</name>
           <t>These do not convert to standard properties in JSContact.</t>
         </section>
+        <section anchor="vcard-prop-kind">
+          <name>KIND</name>
+          <t>The KIND property converts to the <tt>kind</tt> property (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.</t>
+          <figure anchor="kind_conversion">
+            <name>KIND conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    KIND:individual
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "kind": "individual",
+    ...
+    }
+        ]]></artwork>
+          </figure>
+        </section>
         <section anchor="vcard-prop-source">
           <name>SOURCE</name>
           <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
@@ -391,28 +413,6 @@
         ]]></artwork>
           </figure>
         </section>
-        <section anchor="vcard-prop-kind">
-          <name>KIND</name>
-          <t>The KIND property converts to the <tt>kind</tt> property (<xref target="kind_conversion"/>).  Allowed values are those described in Section 6.1.4 of <xref target="RFC6350"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.</t>
-          <figure anchor="kind_conversion">
-            <name>KIND conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    KIND:individual
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "kind": "individual",
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
         <section anchor="vcard-prop-xml">
           <name>XML</name>
           <t>This does not convert to a standard property in JSContact.</t>
@@ -420,6 +420,113 @@
       </section>
       <section>
         <name>Identification Properties</name>
+        <section anchor="vcard-prop-anniversary">
+          <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY</name>
+          <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6474"/> are represented as <tt>Anniversary</tt> objects included in the <tt>anniversaries</tt> property (<xref target="anniversary_conversion"/>):</t>
+          <ul spacing="compact">
+            <li>
+              <t>BDAY and BIRTHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>type</tt> is set to "birth";</t>
+              <t/>
+            </li>
+            <li>
+              <t>DEATHDATE and DEATHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>type</tt> is set to "death";</t>
+              <t/>
+            </li>
+            <li>ANNIVERSARY converts to <tt>date</tt> where <tt>type</tt> is "wedding".</li>
+          </ul>
+          <t>Both birth and death places are represented as instances of the <tt>Address</tt> object.</t>
+          <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs convert to <tt>Address</tt> instances including only the <tt>coordinates</tt> property.  If the URI value is not a geo URI, the place is ignored.</t>
+          <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE properties convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <figure anchor="anniversary_conversion">
+            <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    BDAY:19531015T231000Z
+    BIRTHPLACE:Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
+    DEATHDATE:19960415
+    DEATHPLACE:4445 Courtright Street\nNew England, ND 58647\nU.S.A.
+    ANNIVERSARY:19860201
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "anniversaries": {
+      "ANNIVERSARY-1" : {
+        "@type": "Anniversary",
+        "type": "birth",
+        "date": "1953-10-15T23:10:00Z",
+        "place": {
+          "@type": "Address",
+          "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
+        }
+      },
+      "ANNIVERSARY-2" : {
+        "@type": "Anniversary",
+        "type": "death",
+        "date": "1996-04-15",
+        "place": {
+          "@type": "Address",
+          "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
+        }
+      },
+      "ANNIVERSARY-3" : {
+        "@type": "Anniversary",
+        "type": "wedding",
+        "date": "1986-02-01"
+      }
+    },
+    ...
+    }
+        ]]></artwork>
+          </figure>
+        </section>
+        <section anchor="vcard-prop-gender">
+          <name>GENDER</name>
+          <t>This does not map to a standard property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="vcard-prop-grammatical-gender">
+          <name>GRAMMATICAL-GENDER and PRONOUNS</name>
+          <t>The GRAMMATICAL-GENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <t>The PRONOUNS property converts to an entry in the <tt>pronouns</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <figure anchor="grammatical_gender_pronouns_conversion">
+            <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+     GRAMMATICAL-GENDER:NEUTER
+     PRONOUNS;PREF=2:they/them
+     PRONOUNS;PREF=1:xe/xir
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "speakToAs": {
+      "grammaticalGender": "neuter",
+      "pronouns": {
+        "PRONOUNS-1": {
+          "@type": "Pronouns",
+          "pronouns": "they/them",
+          "pref": 2
+        },
+        "PRONOUNS-2": {
+          "@type": "Pronouns",
+          "pronouns": "xe/xir",
+          "pref": 1
+        }
+      }
+    },
+    ...
+    }
+        ]]></artwork>
+          </figure>
+        </section>
         <section anchor="vcard-prop-fn">
           <name>FN</name>
           <t>All the FN instances are represented through the <tt>fullName</tt> property (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -527,113 +634,6 @@
          "uri": "http://www.example.com/pub/photos/jqpublic.gif"
        },
        ...
-    },
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section anchor="vcard-prop-anniversary">
-          <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY</name>
-          <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6474"/> are represented as <tt>Anniversary</tt> objects included in the <tt>anniversaries</tt> property (<xref target="anniversary_conversion"/>):</t>
-          <ul spacing="compact">
-            <li>
-              <t>BDAY and BIRTHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>type</tt> is set to "birth";</t>
-              <t/>
-            </li>
-            <li>
-              <t>DEATHDATE and DEATHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>type</tt> is set to "death";</t>
-              <t/>
-            </li>
-            <li>ANNIVERSARY converts to <tt>date</tt> where <tt>type</tt> is "wedding".</li>
-          </ul>
-          <t>Both birth and death places are represented as instances of the <tt>Address</tt> object.</t>
-          <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs convert to <tt>Address</tt> instances including only the <tt>coordinates</tt> property.  If the URI value is not a geo URI, the place is ignored.</t>
-          <t>The ALTID and LANGUAGE parameters of both BIRTHPLACE and DEATHPLACE properties convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <figure anchor="anniversary_conversion">
-            <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    BDAY:19531015T231000Z
-    BIRTHPLACE:Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
-    DEATHDATE:19960415
-    DEATHPLACE:4445 Courtright Street\nNew England, ND 58647\nU.S.A.
-    ANNIVERSARY:19860201
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "anniversaries": {
-      "ANNIVERSARY-1" : {
-        "@type": "Anniversary",
-        "type": "birth",
-        "date": "1953-10-15T23:10:00Z",
-        "place": {
-          "@type": "Address",
-          "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
-        }
-      },
-      "ANNIVERSARY-2" : {
-        "@type": "Anniversary",
-        "type": "death",
-        "date": "1996-04-15",
-        "place": {
-          "@type": "Address",
-          "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
-        }
-      },
-      "ANNIVERSARY-3" : {
-        "@type": "Anniversary",
-        "type": "wedding",
-        "date": "1986-02-01"
-      }
-    },
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section anchor="vcard-prop-gender">
-          <name>GENDER</name>
-          <t>This does not map to a standard property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-        </section>
-        <section anchor="vcard-prop-grammatical-gender">
-          <name>GRAMMATICAL-GENDER and PRONOUNS</name>
-          <t>The GRAMMATICAL-GENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-          <t>The PRONOUNS property converts to an entry in the <tt>pronouns</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-          <figure anchor="grammatical_gender_pronouns_conversion">
-            <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-     GRAMMATICAL-GENDER:NEUTER
-     PRONOUNS;PREF=2:they/them
-     PRONOUNS;PREF=1:xe/xir
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "speakToAs": {
-      "grammaticalGender": "neuter",
-      "pronouns": {
-        "PRONOUNS-1": {
-          "@type": "Pronouns",
-          "pronouns": "they/them",
-          "pref": 2
-        },
-        "PRONOUNS-2": {
-          "@type": "Pronouns",
-          "pronouns": "xe/xir",
-          "pref": 1
-        }
-      }
     },
     ...
     }
@@ -760,42 +760,71 @@
       </section>
       <section>
         <name>Communications Properties</name>
-        <section anchor="vcard-prop-tel">
-          <name>TEL</name>
-          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>number</tt> property is set to the TEL value.</t>
+        <section anchor="vcard-prop-contact-channel-pref">
+          <name>CONTACT-CHANNEL-PREF</name>
+          <t>A CONTACT-CHANNEL-PREF property converts to an entry in the <tt>preferredContactChannels</tt> property (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of <tt>ContactChannelPreference</tt> objects.</t>
+          <table anchor="contact_channel_key_conversion">
+            <name>CONTACT-CHANNEL-PREF values conversion</name>
+            <thead>
+              <tr>
+                <th align="left">CONTACT-CHANNEL-PREF value</th>
+                <th align="left">"preferredContactChannels" key</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">ADR</td>
+                <td align="left">addresses</td>
+              </tr>
+              <tr>
+                <td align="left">EMAIL</td>
+                <td align="left">emails</td>
+              </tr>
+              <tr>
+                <td align="left">IMPP</td>
+                <td align="left">onlineServices</td>
+              </tr>
+              <tr>
+                <td align="left">TEL</td>
+                <td align="left">phones</td>
+              </tr>
+            </tbody>
+          </table>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <figure anchor="tel_conversion">
-            <name>TEL conversion example</name>
+          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactChannelPreference</tt> objects MUST be empty.</t>
+          <figure anchor="contact_channel_conversion">
+            <name>LANG conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
-    TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
-    TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
+    CONTACT-CHANNEL-PREF;PREF=1:EMAIL
+    CONTACT-CHANNEL-PREF;PREF=2:TEL
     ...
     END:VCARD
 
     {
     "@type": "Card",
     ...
-    "phones": {
-      "PHONE-1": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "features": { "voice": true },
-        "number": "tel:+1-555-555-5555;ext=5555",
-        "pref": 1
-      },
-      "PHONE-2": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "number": "tel:+33-01-23-45-67"
-      }
-    ],
+    "preferredContactChannels": {
+      "emails":[
+        {
+          "@type": "ContactChannelPreference",
+          "pref": 1
+        }
+      ],
+      "phones":[
+        {
+          "@type": "ContactChannelPreference",
+          "pref": 2
+        }
+      ]
+    },
     ...
     }
         ]]></artwork>
           </figure>
+          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-prop-email">
           <name>EMAIL</name>
@@ -908,72 +937,6 @@
         ]]></artwork>
           </figure>
         </section>
-        <section anchor="vcard-prop-contact-channel-pref">
-          <name>CONTACT-CHANNEL-PREF</name>
-          <t>A CONTACT-CHANNEL-PREF property converts to an entry in the <tt>preferredContactChannels</tt> property (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of <tt>ContactChannelPreference</tt> objects.</t>
-          <table anchor="contact_channel_key_conversion">
-            <name>CONTACT-CHANNEL-PREF values conversion</name>
-            <thead>
-              <tr>
-                <th align="left">CONTACT-CHANNEL-PREF value</th>
-                <th align="left">"preferredContactChannels" key</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td align="left">ADR</td>
-                <td align="left">addresses</td>
-              </tr>
-              <tr>
-                <td align="left">EMAIL</td>
-                <td align="left">emails</td>
-              </tr>
-              <tr>
-                <td align="left">IMPP</td>
-                <td align="left">onlineServices</td>
-              </tr>
-              <tr>
-                <td align="left">TEL</td>
-                <td align="left">phones</td>
-              </tr>
-            </tbody>
-          </table>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactChannelPreference</tt> objects MUST be empty.</t>
-          <figure anchor="contact_channel_conversion">
-            <name>LANG conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CONTACT-CHANNEL-PREF;PREF=1:EMAIL
-    CONTACT-CHANNEL-PREF;PREF=2:TEL
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "preferredContactChannels": {
-      "emails":[
-        {
-          "@type": "ContactChannelPreference",
-          "pref": 1
-        }
-      ],
-      "phones":[
-        {
-          "@type": "ContactChannelPreference",
-          "pref": 2
-        }
-      ]
-    },
-    ...
-    }
-        ]]></artwork>
-          </figure>
-          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-        </section>
         <section anchor="vcard-prop-locale">
           <name>LOCALE</name>
           <t>The LOCALE property converts to the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
@@ -997,9 +960,50 @@
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
+        <section anchor="vcard-prop-tel">
+          <name>TEL</name>
+          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>number</tt> property is set to the TEL value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <figure anchor="tel_conversion">
+            <name>TEL conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
+    TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "phones": {
+      "PHONE-1": {
+        "@type": "Phone",
+        "contexts": { "private": true },
+        "features": { "voice": true },
+        "number": "tel:+1-555-555-5555;ext=5555",
+        "pref": 1
+      },
+      "PHONE-2": {
+        "@type": "Phone",
+        "contexts": { "private": true },
+        "number": "tel:+33-01-23-45-67"
+      }
+    ],
+    ...
+    }
+        ]]></artwork>
+          </figure>
+        </section>
       </section>
       <section>
         <name>Geographical Properties</name>
+        <section anchor="vcard-prop-geo">
+          <name>GEO</name>
+          <t>This converts to the <tt>coordinates</tt> property of the <tt>Address</tt> object.  Also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
+        </section>
         <section anchor="vcard-prop-tz">
           <name>TZ</name>
           <t>A value of type TEXT converts to the <tt>timeZone</tt> property in the <tt>Address</tt> object.</t>
@@ -1010,10 +1014,6 @@
           </ul>
           <t>For such property values, also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
           <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact.  To convert such property, see <xref target="jscontact-prop-vcardprops"/>.</t>
-        </section>
-        <section anchor="vcard-prop-geo">
-          <name>GEO</name>
-          <t>This converts to the <tt>coordinates</tt> property of the <tt>Address</tt> object.  Also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
         </section>
         <section anchor="combine-geo-props">
           <name>Combining geographical properties</name>
@@ -1026,45 +1026,33 @@
       </section>
       <section>
         <name>Organizational Properties</name>
-        <section anchor="vcard-prop-title">
-          <name>TITLE and ROLE</name>
-          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> property is set to <tt>title</tt> or <tt>role</tt> for TITLE and ROLE vCard properties, respectively.  The <tt>name</tt> property is set to the vCard property value.</t>
-          <t>The value of the <tt>organization</tt> property can be derived if the TITLE or ROLE property is member of a vCard property group and exactly one other ORG property also is part of that group.</t>
-          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <figure anchor="title_role_conversion">
-            <name>TITLE and ROLE conversion example</name>
+        <section anchor="vcard-prop-contact-uri">
+          <name>CONTACT-URI</name>
+          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>type</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <figure anchor="contact_uri_conversion">
+            <name>CONTACT-URI conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
-    TITLE:Research Scientist
-    group1.ROLE:Project Leader
-    group1.ORG:ABC, Inc.
+    CONTACT-URI;PREF=1:mailto:contact@example.com
     ...
     END:VCARD
 
     {
     "@type": "Card",
     ...
-    "titles": {
-      "TITLE-1": {
-        "@type": "Title",
-        "type": "title",
-        "name": "Project Leader"
+    "links": {
+      ...
+      "CONTACT-1": {
+        "@type": "LinkResource",
+        "type": "contact",
+        "uri": "mailto:contact@example.com",
+        "pref": 1
       },
-      "TITLE-2": {
-        "@type": "Title",
-        "type": "role",
-        "name": "Research Scientist",
-        "organization": "ORG-1"
-      }
+      ...
     },
-    "organizations": {
-      "ORG-1": {
-        "@type": "Organization",
-        "name": "ABC, Inc."
-      }
-    }
     ...
     }
         ]]></artwork>
@@ -1101,6 +1089,34 @@
         ]]></artwork>
           </figure>
         </section>
+        <section anchor="vcard-prop-member">
+          <name>MEMBER</name>
+          <t>The uids of the contact cards composing the group are included in the <tt>members</tt> property (<xref target="group_example"/>).</t>
+          <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
+          <figure anchor="group_example">
+            <name>Group example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    KIND:group
+    FN:The Doe family
+    MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
+    MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
+    END:VCARD
+
+      {
+        "@type": "Card",
+        "kind": "group",
+        "fullName": "The Doe family",
+        "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+        "members": {
+          "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
+          "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
+        }
+      }
+        ]]></artwork>
+          </figure>
+        </section>
         <section anchor="vcard-prop-org">
           <name>ORG</name>
           <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name and the <tt>units</tt> property is an array of <tt>OrgUnit</tt> objects each containing the organizational unit name in the <tt>name</tt> property.</t>
@@ -1133,34 +1149,6 @@
     },
     ...
     }
-        ]]></artwork>
-          </figure>
-        </section>
-        <section anchor="vcard-prop-member">
-          <name>MEMBER</name>
-          <t>The uids of the contact cards composing the group are included in the <tt>members</tt> property (<xref target="group_example"/>).</t>
-          <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
-          <figure anchor="group_example">
-            <name>Group example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    KIND:group
-    FN:The Doe family
-    MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
-    MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
-    END:VCARD
-
-      {
-        "@type": "Card",
-        "kind": "group",
-        "fullName": "The Doe family",
-        "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
-        "members": {
-          "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
-          "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
-        }
-      }
         ]]></artwork>
           </figure>
         </section>
@@ -1209,33 +1197,45 @@
         ]]></artwork>
           </figure>
         </section>
-        <section anchor="vcard-prop-contact-uri">
-          <name>CONTACT-URI</name>
-          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>type</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <figure anchor="contact_uri_conversion">
-            <name>CONTACT-URI conversion example</name>
+        <section anchor="vcard-prop-title">
+          <name>TITLE and ROLE</name>
+          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> property is set to <tt>title</tt> or <tt>role</tt> for TITLE and ROLE vCard properties, respectively.  The <tt>name</tt> property is set to the vCard property value.</t>
+          <t>The value of the <tt>organization</tt> property can be derived if the TITLE or ROLE property is member of a vCard property group and exactly one other ORG property also is part of that group.</t>
+          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <figure anchor="title_role_conversion">
+            <name>TITLE and ROLE conversion example</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
-    CONTACT-URI;PREF=1:mailto:contact@example.com
+    TITLE:Research Scientist
+    group1.ROLE:Project Leader
+    group1.ORG:ABC, Inc.
     ...
     END:VCARD
 
     {
     "@type": "Card",
     ...
-    "links": {
-      ...
-      "CONTACT-1": {
-        "@type": "LinkResource",
-        "type": "contact",
-        "uri": "mailto:contact@example.com",
-        "pref": 1
+    "titles": {
+      "TITLE-1": {
+        "@type": "Title",
+        "type": "title",
+        "name": "Project Leader"
       },
-      ...
+      "TITLE-2": {
+        "@type": "Title",
+        "type": "role",
+        "name": "Research Scientist",
+        "organization": "ORG-1"
+      }
     },
+    "organizations": {
+      "ORG-1": {
+        "@type": "Organization",
+        "name": "ABC, Inc."
+      }
+    }
     ...
     }
         ]]></artwork>
@@ -1431,6 +1431,33 @@
         ]]></artwork>
           </figure>
         </section>
+        <section anchor="vcard-prop-pid">
+          <name>CLIENTPIDMAP and PID Parameter</name>
+          <t>The CLIENTPIDMAP property and the PDI parameter don't have a direct match with a Card feature.</t>
+        </section>
+        <section anchor="vcard-prop-created">
+          <name>CREATED</name>
+          <t>The CREATED property converts to the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
+          <figure anchor="created_conversion">
+            <name>CREATED conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    CREATED:19940930T143510Z
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "created": "1994-09-30T14:35:10Z",
+    ...
+    }
+        ]]></artwork>
+          </figure>
+          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
         <section anchor="vcard-prop-note">
           <name>NOTE</name>
           <t>A NOTE property converts to a <tt>Note</tt> object in the <tt>notes</tt> map (<xref target="notes_conversion"/>)</t>
@@ -1561,10 +1588,6 @@
         ]]></artwork>
           </figure>
         </section>
-        <section anchor="vcard-prop-pid">
-          <name>CLIENTPIDMAP and PID Parameter</name>
-          <t>The CLIENTPIDMAP property and the PDI parameter don't have a direct match with a Card feature.</t>
-        </section>
         <section anchor="vcard-prop-url">
           <name>URL</name>
           <t>An URL property converts to an entry in the <tt>links</tt> property (<xref target="url_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose <tt>uri</tt> property is set to the URL value.</t>
@@ -1598,29 +1621,6 @@
         <section anchor="vcard-prop-version">
           <name>VERSION</name>
           <t>The VERSION property doesn't have a direct match with a JSContact feature.</t>
-        </section>
-        <section anchor="vcard-prop-created">
-          <name>CREATED</name>
-          <t>The CREATED property converts to the <tt>created</tt> property (<xref target="created_conversion"/>).</t>
-          <figure anchor="created_conversion">
-            <name>CREATED conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CREATED:19940930T143510Z
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "created": "1994-09-30T14:35:10Z",
-    ...
-    }
-        ]]></artwork>
-          </figure>
-          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-prop-xablabel">
           <name>X-ABLabel</name>
@@ -1688,45 +1688,6 @@
       </section>
       <section>
         <name>Calendar Properties</name>
-        <section anchor="vcard-prop-fburl">
-          <name>FBURL</name>
-          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <figure anchor="fburl_conversion">
-            <name>FBURL conversion example</name>
-            <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    FBURL;PREF=1:http://www.example.com/busy/janedoe
-    FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
-    ...
-    END:VCARD
-
-    {
-    "@type": "Card",
-    ...
-    "calendars": {
-      ...
-      "FBURL-1": {
-        "@type": "CalendarResource",
-        "type": "freeBusy",
-        "uri": "http://www.example.com/busy/janedoe",
-        "pref": 1
-      },
-      "FBURL-2": {
-        "@type": "CalendarResource",
-        "type": "freeBusy",
-        "uri": "ftp://example.com/busy/project-a.ifb",
-        "mediaType": "text/calendar"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
-          </figure>
-        </section>
         <section anchor="vcard-prop-caladruri">
           <name>CALADRURI</name>
           <t>A CALADRURI property converts to an entry in the <tt>schedulingAddresses</tt> property (<xref target="caladruri_conversion"/>).  The entry value is a <tt>SchedulingAddress</tt> object whose <tt>uri</tt> property is set to the CALADRURI value.</t>
@@ -1793,6 +1754,45 @@
         "@type": "CalendarResource",
         "type": "calendar",
         "uri": "ftp://ftp.example.com/calA.ics",
+        "mediaType": "text/calendar"
+      },
+      ...
+    },
+    ...
+    }
+        ]]></artwork>
+          </figure>
+        </section>
+        <section anchor="vcard-prop-fburl">
+          <name>FBURL</name>
+          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <figure anchor="fburl_conversion">
+            <name>FBURL conversion example</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    FBURL;PREF=1:http://www.example.com/busy/janedoe
+    FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
+    ...
+    END:VCARD
+
+    {
+    "@type": "Card",
+    ...
+    "calendars": {
+      ...
+      "FBURL-1": {
+        "@type": "CalendarResource",
+        "type": "freeBusy",
+        "uri": "http://www.example.com/busy/janedoe",
+        "pref": 1
+      },
+      "FBURL-2": {
+        "@type": "CalendarResource",
+        "type": "freeBusy",
+        "uri": "ftp://example.com/busy/project-a.ifb",
         "mediaType": "text/calendar"
       },
       ...
