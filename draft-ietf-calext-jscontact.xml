@@ -590,7 +590,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
               </li>
-            <li>numbers: <tt>String</tt> (mandatory).
+            <li>number: <tt>String</tt> (mandatory).
 The phone number, as either a URI or free-text.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
