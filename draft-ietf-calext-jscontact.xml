@@ -233,6 +233,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
 {
   "@type": "Card",
   "@version" : "rfc0000",
+  ...
   "example.com:foo": "bar",
   "example.com:foo2": {
     "bar": "baz"
@@ -249,12 +250,9 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
           </t>
           <figure>
             <artwork><![CDATA[
-{
-  "@type": "Card",
-  "@version" : "rfc0000",
+  ...
   "kind": "example.com:kind:foo",
   ...
-}
 ]]></artwork>
           </figure>
           <t>
@@ -287,21 +285,53 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
           <name>uid</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
           <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/> but for compatibility with <xref target="RFC6350"/> it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the <tt>uuid</tt> namespace <xref target="RFC4122" format="default"/>.  As of this writing, a revision of <xref target="RFC4122"/> is being worked on and is likely to introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudo-random UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
+          <figure anchor="example-uid">
+            <name><tt>uid</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="prodId" numbered="true" toc="default">
           <name>prodId</name>
           <t>Type: <tt>String</tt> (optional).</t>
           <t>The identifier for the product that created the Card object.</t>
+          <figure anchor="example-prodId">
+            <name><tt>prodId</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="created" numbered="true" toc="default">
           <name>created</name>
           <t>Type: <tt>UTCDateTime</tt> (optional).</t>
           <t>The date and time when this Card object was created.</t>
+          <figure anchor="example-created">
+            <name><tt>created</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "created": "1994-09-30T14:35:10Z",
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="updated" numbered="true" toc="default">
           <name>updated</name>
           <t>Type: <tt>UTCDateTime</tt> (optional).</t>
           <t>The date and time when the data in this Card object was last modified.</t>
+          <figure anchor="example-updated">
+            <name><tt>updated</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+   "updated": "1995-10-31T22:27:10Z",
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="kind" numbered="true" toc="default">
           <name>kind</name>
@@ -315,12 +345,34 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
             <li><tt>device</tt>: a device, such as appliances, computers, or network elements</li>
             <li><tt>application</tt>: a software application</li>
           </ul>
+          <figure anchor="example-kind">
+            <name><tt>kind</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "kind": "individual",
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).</t>
           <t>This identifies the set of cards that are members of this group card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
           <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g. "IETF Participants").</t>
+          <figure anchor="example-members">
+            <name><tt>members</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "kind": "group",
+  "fullName": "The Doe family",
+  "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+  "members": {
+    "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
+    "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
+  },
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="relatedTo" numbered="true" toc="default">
           <name>relatedTo</name>
@@ -335,11 +387,44 @@ Describes how the linked object is related to the linking object.  The relation 
 Keys in the set <bcp14>MUST</bcp14> be one of the RELATED property <xref target="RFC6350" format="default"/> type parameter values, or an IANA-registered value, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
 The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </ul>
+          <figure anchor="example-relatedto">
+            <name><tt>relatedTo</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "relatedTo" : {
+    "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
+      "@type" : "Relation",
+      "relation" : {
+        "friend" : true
+      }
+    },
+    "http://example.com/directory/jdoe.vcf" : {
+      "@type" : "Relation",
+      "relation" : {
+        "contact" : true
+      }
+    },
+    "Please contact my assistant Jane Doe for any inquiries." : {
+      "@type" : "Relation",
+      "relation" : { }
+    }
+  },
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="locale" numbered="true" toc="default">
           <name>locale</name>
           <t>Type: <tt>String</tt> (optional).</t>
           <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card or card group.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
+          <figure anchor="example-locale">
+            <name><tt>locale</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "locale": "de-AT",
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
@@ -366,33 +451,35 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> is not set is implementation-specific.</t>
               <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
               <t>This illustrates the use of sortAs.  It indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
-              <figure anchor="example-name-sortas">
-                <name>Name <tt>sortAs</tt> example</name>
+              <figure anchor="example-name">
+                <name><tt>name</tt> example</name>
                 <sourcecode name=""><![CDATA[
-{
-  "@type": "Name",
-  "components": [{
-    "@type": "NameComponent",
-    "type": "given",
-    "value": "Robert"
-  }, {
-    "@type": "NameComponent",
-    "type": "middle",
-    "value": "Pau"
-  }, {
-    "@type": "NameComponent",
-    "type": "surname",
-    "value": "Shou"
-  }, {
-    "@type": "NameComponent",
-    "type": "surname",
-    "value": "Chang"
-  }],
-  "sortAs": {
-    "surname": "Pau Shou Chang",
-    "given": "Robert"
-  }
-}
+  ...
+  "name": {
+    "@type": "Name",
+    "components": [{
+      "@type": "NameComponent",
+      "type": "given",
+      "value": "Robert"
+    }, {
+      "@type": "NameComponent",
+      "type": "middle",
+      "value": "Pau"
+    }, {
+      "@type": "NameComponent",
+      "type": "surname",
+      "value": "Shou"
+    }, {
+      "@type": "NameComponent",
+      "type": "surname",
+      "value": "Chang"
+    }],
+    "sortAs": {
+      "surname": "Pau Shou Chang",
+      "given": "Robert"
+    }
+  },
+  ...
         ]]></sourcecode>
               </figure>
             </li>
@@ -430,6 +517,14 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
           <name>fullName</name>
           <t>Type: <tt>String</tt> (optional).</t>
           <t>The full name (e.g.  the personal name and surname of an individual, the name of an organization) of the entity represented by this card.  The purpose of this property is to define a name, even if the individual name components are not known.  In addition, it is meant to provide alternative versions of the name for internationalisation.  Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
+          <figure anchor="example-fullName">
+            <name><tt>fullName</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "fullName": "Mr.  John Q.  Public, Esq.",
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="nickNames" numbered="true" toc="default">
           <name>nickNames</name>
@@ -447,6 +542,19 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this nick name in relation to other nick names.  Also see <xref target="prop-pref"/>.</li>
           </ul>
+          <figure anchor="example-nickNames">
+            <name><tt>nickNames</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+    "nickNames": {
+       "mynickname": {
+          "@type": "NickName",
+          "name": "Johnny"
+       }
+    },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
@@ -478,6 +586,24 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
                 This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name.  The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
             </li>
           </ul>
+          <figure anchor="example-organizations">
+            <name><tt>organizations</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "organizations": {
+   "ABC": {
+     "@type": "Organization",
+     "name": "ABC, Inc.",
+     "units":[
+       {"@type": "OrgUnit", "name": "North American Division"},
+       {"@type": "OrgUnit", "name": "Marketing"}
+     ],
+     "sortAs": "ABC"
+   }
+  },
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="titles" numbered="true" toc="default">
           <name>titles</name>
@@ -497,6 +623,33 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
                 The id of the organization in which this title is held.
             </li>
           </ul>
+
+          <figure anchor="example-titles">
+            <name><tt>titles</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "titles": {
+    "atitle": {
+      "@type": "Title",
+      "type": "title",
+      "name": "Project Leader",
+      "organization": "ABC"
+    },
+    "arole": {
+      "@type": "Title",
+      "type": "role",
+      "name": "Research Scientist"
+    }
+  },
+  "organizations": {
+    "ABC": {
+      "@type": "Organization",
+      "name": "ABC, Inc."
+    }
+  },
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="speakToAs" numbered="true" toc="default">
           <name>speakToAs</name>
@@ -545,6 +698,28 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
             <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of these pronouns in relation to other pronouns in the same context.  Also see <xref target="prop-pref"/>.</li>
           </ul>
+          <figure anchor="example-speakToAs">
+            <name><tt>speakToAs</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "speakToAs": {
+     "grammaticalGender": "neuter",
+     "pronouns": {
+       "PRONOUNS-1": {
+         "@type": "Pronouns",
+         "pronouns": "they/them",
+         "pref": 2
+       },
+       "PRONOUNS-2": {
+         "@type": "Pronouns",
+         "pronouns": "xe/xir",
+         "pref": 1
+       }
+     }
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
       </section>
       <section anchor="contact-properties" numbered="true" toc="default">
@@ -566,6 +741,25 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
+          <figure anchor="example-emails">
+            <name><tt>emails</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "emails": {
+     "public": {
+       "@type": "EmailAddress",
+       "contexts": { "work": true },
+       "address": "jqpublic@xyz.example.com"
+     },
+     "personal": {
+       "@type": "EmailAddress",
+       "address": "jane_doe@example.com",
+       "pref": 1
+     }
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="onlineServices" numbered="true" toc="default">
           <name>onlineServices</name>
@@ -595,6 +789,22 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
+          <figure anchor="example-onlineServices">
+            <name><tt>onlineServices</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "onlineServices": {
+     ...
+     "OS-1": {
+       "@type": "OnlineService",
+       "uri": "xmpp:alice@example.com",
+       "pref": 1
+     },
+     ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="phones" numbered="true" toc="default">
           <name>phones</name>
@@ -627,6 +837,29 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
             <li>label: <tt>String</tt> (optional).
                 A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
+          <figure anchor="example-phones">
+            <name><tt>phones</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+     "phones": {
+       "private": {
+         "@type": "Phone",
+         "contexts": { "private": true },
+         "features": { "voice": true },
+         "number": "tel:+1-555-555-5555;ext=5555",
+         "pref": 1
+       },
+       "work": {
+         "@type": "Phone",
+         "contexts": { "work": true },
+         "number": "tel:+33-01-23-45-67"
+       }
+     },
+     ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="preferredContactChannels" numbered="true" toc="default">
           <name>preferredContactChannels</name>
@@ -840,19 +1073,18 @@ The value of this street component.</li>
           <t> The following example shows a Card object, where one of its addresses <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale.</t>
           <figure>
             <artwork><![CDATA[
-  "@type": "Card",
-  "@version" : "rfc0000",
-  ...
-  "addresses": {
-    "addr1": {
-      "@type": "Address",
-      "locality": "Tokyo",
-     }
-   },
-   "localizations": {
-     "jp": {
-        "addresses/addr1/locality":"東京"
-     }
+...
+"addresses": {
+  "addr1": {
+    "@type": "Address",
+    "locality": "Tokyo",
+   }
+ },
+ "localizations": {
+   "jp": {
+      "addresses/addr1/locality":"東京"
+   }
+...
    }]]></artwork>
           </figure>
         </section>
