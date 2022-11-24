@@ -260,6 +260,10 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
           </t>
         </section>
       </section>
+      <section anchor="reserved-prop-names">
+        <name>Reserved Property Names</name>
+        <t>This specification reserves the property name <tt>extra</tt> at IANA. A JSContact object <bcp14>MUST NOT</bcp14> be defined to have a property with this name. This is to provide implementations with a name to map unknown or vendor-specific properties to, and which never may occur as a property in a JSContact object.</t>
+      </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
       <name>Card</name>
@@ -1129,7 +1133,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Properties" Registry</name>
-          <t>The following table lists the initial entries of the "JSContact Properties" registry.  All properties are for common use and their version is <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
+          <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  All properties are for version <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-property-registry" align="center">
             <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
@@ -1719,6 +1723,31 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">
                   <xref target="anniversaries" format="default"/>
                 </td>
+              </tr>
+            </tbody>
+          </table>
+            <t>The following table lists the initial <tt>reserved</tt> usage entries of the "JSContact Properties" registry.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <table anchor="tab-iana-reserved-property-registry" align="center">
+            <name>Initial Contents of the "JSContact Properties" Registry</name>
+            <thead>
+              <tr>
+                <th align="left">Property Name</th>
+                <th align="left">Property Type</th>
+                <th align="left">Property Context</th>
+                <th align="left">Reference or Description</th>
+                <th align="left">Intended Usage</th>
+              </tr>
+            </thead>
+            <!-- Everything in here should be sorted alphabetically: table entries by property name, the references for each property alphabetically by the object type or property they refer to -->
+            <tbody>
+              <tr>
+                <td align="left">extra</td>
+                <td align="left">not applicable</td>
+                <td align="left">not applicable</td>
+                <td align="left">
+                  <xref target="reserved-prop-names" format="default"/>
+                </td>
+                <td align="left">reserved</td>
               </tr>
             </tbody>
           </table>
