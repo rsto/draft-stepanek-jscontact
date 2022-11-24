@@ -1012,7 +1012,7 @@
     ...
     "onlineServices": {
       ...
-      "ietf": {
+      "OS-1": {
         "@type": "OnlineService",
         "service": "Twitter",
         "user": "https://twitter.com/ietf",
