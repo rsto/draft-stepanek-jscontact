@@ -623,7 +623,6 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
                 The id of the organization in which this title is held.
             </li>
           </ul>
-
           <figure anchor="example-titles">
             <name><tt>titles</tt> example</name>
             <sourcecode name=""><![CDATA[
@@ -882,6 +881,27 @@ Defines the contexts in which to use this contact channel.  Also see <xref targe
             <li>pref: <tt>UnsignedInt</tt> (optional).
 Defines the preference of this contact channel in relation to other contact channels with the same contexts.  Also see <xref target="prop-pref"/>.</li>
           </ul>
+          <figure anchor="example-preferredContactChannels">
+            <name><tt>preferredContactChannels</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "preferredContactChannels": {
+     "emails":[
+       {
+         "@type": "ContactChannelPreference",
+         "pref": 1
+       }
+     ],
+     "phones":[
+       {
+         "@type": "ContactChannelPreference",
+         "pref": 2
+       }
+     ]
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="preferredLanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
@@ -897,6 +917,33 @@ Defines the contexts in which to use this language.  Also see <xref target="prop
             <li>pref: <tt>UnsignedInt</tt> (optional).
 Defines the preference of this language in relation to other languages of the same contexts.  Also see <xref target="prop-pref"/>.</li>
           </ul>
+          <figure anchor="example-preferredLanguages">
+            <name><tt>preferredLanguages</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "preferredLanguages": {
+     "en":[
+       {
+         "@type": "LanguagePreference",
+         "contexts": { "work": true },
+         "pref": 1
+       }
+     ],
+     "fr":[
+       {
+         "@type": "LanguagePreference",
+         "contexts": { "work": true },
+         "pref": 2
+       },
+       {
+         "@type": "ContactLanguage",
+         "contexts": { "private": true }
+       }
+     ]
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
       </section>
       <section anchor="calendaring-and-scheduling-properties" numbered="true" toc="default">
@@ -913,6 +960,29 @@ Defines the preference of this language in relation to other languages of the sa
             <li><tt>calendar</tt> The resource is a calendar that contains entries such as calendar events or tasks.</li>
             <li><tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
           </ul>
+          <figure anchor="example-calendars">
+          <name><tt>calendars</tt> example</name>
+          <sourcecode name=""><![CDATA[
+   ...
+   "calendars": {
+       ...
+       "calA": {
+         "@type": "CalendarResource",
+         "type": "calendar",
+         "uri": "ftp://ftp.example.com/calA.ics",
+         "mediaType": "text/calendar"
+       },
+      "project-a": {
+        "@type": "CalendarResource",
+        "type": "freeBusy",
+        "uri": "ftp://example.com/busy/project-a.ifb",
+        "mediaType": "text/calendar"
+      },
+    ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="schedulingAddresses" numbered="true" toc="default">
           <name>schedulingAddresses</name>
@@ -931,6 +1001,26 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
             <li>label: <tt>String</tt> (optional).
                 A custom label for the scheduling address, see <xref target="prop-label"/>.</li>
           </ul>
+          <figure anchor="example-schedulingAddresses">
+            <name><tt>schedulingAddresses</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "schedulingAddresses": {
+     ...
+     "janedoe": {
+       "@type": "SchedulingAddress",
+       "uri": "mailto:janedoe@example.com",
+       "pref": 1
+     },
+     "jdoe": {
+       "@type": "SchedulingAddress",
+       "uri": "http://example.com/calendar/jdoe"
+     },
+     ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
       </section>
       <section anchor="address-and-location-properties" numbered="true" toc="default">
@@ -1011,6 +1101,43 @@ The type of this street component.  The value <bcp14>MUST</bcp14> be either one 
             <li>value: <tt>String</tt> (mandatory).
 The value of this street component.</li>
           </ul>
+          <figure anchor="example-addresses">
+            <name><tt>addresses</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+    "addresses": {
+      "work" : {
+        "@type": "Address",
+        "contexts": { "work": true },
+        "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
+        "street": [
+           { "@type": "StreetComponent", "type": "name", "value": "Oak St" },
+           { "@type": "StreetComponent", "type": "number", "value": "54321" }
+        ],
+        "locality": "Reston",
+        "region": "VA",
+        "country": "USA",
+        "postcode": "20190",
+        "countryCode": "US"
+      },
+      "home": {
+        "@type": "Address",
+        "contexts": { "private": true },
+        "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
+        "street": [
+           { "@type": "StreetComponent", "type": "name", "value": "Elm St" },
+           { "@type": "StreetComponent", "type": "number", "value": "12345" }
+        ],
+        "locality": "Reston",
+        "region": "VA",
+        "country": "USA",
+        "postcode": "20190",
+        "countryCode": "US"
+      }
+    },
+    ...
+        ]]></sourcecode>
+          </figure>
         </section>
       </section>
       <section anchor="resource-properties" numbered="true" toc="default">
@@ -1023,6 +1150,21 @@ The value of this street component.</li>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>.</li>
             <li>The <tt>type</tt> property value either is not set, is defined in a future RFC or vendor-specific.</li>
           </ul>
+          <figure anchor="example-cryptoKeys">
+            <name><tt>cryptoKeys</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "cryptoKeys": {
+     ...
+     "mykey": {
+       "@type": "CryptoResource",
+       "uri": "http://www.example.com/keys/jdoe.cer"
+     },
+     ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="directories" numbered="true" toc="default">
           <name>directories</name>
@@ -1036,6 +1178,28 @@ The value of this street component.</li>
             <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
             <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
           </ul>
+          <figure anchor="example-directories">
+          <name><tt>directories</tt> example</name>
+          <sourcecode name=""><![CDATA[
+   ...
+    "directories": {
+      ...
+       "Dupont": {
+         "@type": "DirectoryResource",
+         "type": "entry",
+         "uri": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
+       },
+      "Engineering": {
+        "@type": "DirectoryResource",
+        "type": "directory",
+        "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
+        "pref": 1
+      },
+   ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="links" numbered="true" toc="default">
           <name>links</name>
@@ -1048,6 +1212,23 @@ The value of this street component.</li>
           <ul>
             <li><tt>contact</tt> The resource is an URI by which the entity represented by this card may be contacted, including web forms or other media that require user interaction.</li>
           </ul>
+          <figure anchor="example-links">
+            <name><tt>links</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "links": {
+     ...
+     "contact": {
+       "@type": "LinkResource",
+       "type": "contact",
+       "uri": "mailto:contact@example.com",
+       "pref": 1
+     },
+     ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="media" numbered="true" toc="default">
           <name>media</name>
@@ -1062,6 +1243,32 @@ The value of this street component.</li>
             <li><tt>sound</tt> The resource is audio media, e.g.  to specify the proper pronunciation of the name property contents.</li>
             <li><tt>logo</tt> The resource is a graphic image or logo associated with entity represented by this card.</li>
           </ul>
+          <figure anchor="example-media">
+            <name><tt>media</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "media": {
+     ...
+      "john": {
+        "@type": "MediaResource",
+        "type": "sound",
+        "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
+      },
+     "abccorp": {
+       "@type": "MediaResource",
+       "type": "logo",
+       "uri": "http://www.example.com/pub/logos/abccorp.jpg"
+     },
+      "jqpublic": {
+        "@type": "MediaResource",
+        "type": "photo",
+        "uri": "http://www.example.com/pub/photos/jqpublic.gif"
+      },
+      ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
       </section>
       <section anchor="multilingual-properties" numbered="true" toc="default">
@@ -1136,6 +1343,38 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
             <li>day: <tt>UnsignedInt</tt> (optional).  This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
             <li>calendarScale: <tt>String</tt> (optional).  This is the calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="RFC7529" format="default"/> or a vendor-specific value).  Note that the year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.</li>
           </ul>
+          <figure anchor="example-anniversaries">
+            <name><tt>anniversaries</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+    "anniversaries": {
+      "birth" : {
+        "@type": "Anniversary",
+        "type": "birth",
+        "date": "1953-10-15T23:10:00Z",
+        "place": {
+          "@type": "Address",
+          "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
+        }
+      },
+      "death" : {
+        "@type": "Anniversary",
+        "type": "death",
+        "date": "1996-04-15",
+        "place": {
+          "@type": "Address",
+          "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
+        }
+      },
+      "marriage" : {
+        "@type": "Anniversary",
+        "type": "wedding",
+        "date": "1986-02-01"
+      }
+    },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="personalInfo" numbered="true" toc="default">
           <name>personalInfo</name>
@@ -1161,6 +1400,35 @@ The actual information.  This generally is free-text, but future specifications 
             <li>level: <tt>String</tt> (optional).
                 Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
           </ul>
+          <figure anchor="example-personalInfo">
+            <name><tt>personalInfo</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "personalInfo": {
+     ...
+     "myexpertise" : {
+       "@type": "PersonalInformation",
+       "type": "expertise",
+       "value": "chemistry",
+       "level": "high"
+     },
+     "firsthobby" : {
+       "@type": "PersonalInformation",
+       "type": "hobby",
+       "value": "reading",
+       "level": "high"
+     },
+     "music-interest" : {
+       "@type": "PersonalInformation",
+       "type": "interest",
+       "value": "r&b music",
+       "level": "medium"
+     },
+     ...
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="notes" numbered="true" toc="default">
           <name>notes</name>
@@ -1192,11 +1460,41 @@ The actual information.  This generally is free-text, but future specifications 
               <t>uri: <tt>String</tt> (optional).  A URI value that identifies the author.</t>
             </li>
           </ul>
+          <figure anchor="example-notes">
+            <name><tt>notes</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+    "notes": {
+        "reminder" : {
+           "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
+           "created": "2022-11-23T15:01:32Z",
+           "author": {
+             "@type": "Author",
+             "name": "John"
+           }
+        }
+    },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="keywords" numbered="true" toc="default">
           <name>keywords</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).
 A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+          <figure anchor="example-keywords">
+            <name><tt>keywords</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "keywords": {
+     "INTERNET": true,
+     "IETF": true,
+     "INDUSTRY": true,
+     "INFORMATION TECHNOLOGY": true
+   },
+   ...
+        ]]></sourcecode>
+          </figure>
         </section>
       </section>
     </section>
