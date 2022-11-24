@@ -449,8 +449,8 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
               </li>
-            <li>name: <tt>String</tt> (optional).
-                The name of this organization.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
+            <li>name: <tt>String</tt> (mandatory).
+                The name of this organization.
             </li>
             <li>sortAs: <tt>String</tt> (optional).
                 This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
@@ -590,7 +590,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
               </li>
-            <li>numbers: <tt>String</tt> (mandatory).
+            <li>number: <tt>String</tt> (mandatory).
 The phone number, as either a URI or free-text.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
