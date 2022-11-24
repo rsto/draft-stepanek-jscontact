@@ -567,17 +567,23 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
         <section anchor="onlineServices" numbered="true" toc="default">
           <name>onlineServices</name>
           <t>Type: <tt>Id[OnlineService]</tt> (optional).</t>
-          <t>The online services that are associated with the entity represented by this card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties, of which at least either the <tt>uri</tt> property or both the <tt>username</tt> and <tt>service</tt> properties <bcp14>MUST</bcp14> be set:</t>
+          <t>The online services that are associated with the entity represented by this card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
-              </li>
+            </li>
             <li>service: <tt>String</tt> (optional).
 The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the canonical service name including capitalisation.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Twitter</tt>, <tt>XMPP</tt>.</li>
-            <li>uri: <tt>String</tt> (optional).
-The service-specific URI of the entity represented by this card.</li>
-            <li>username: <tt>String</tt> (optional).
-The service-specific user name of the entity represented by this card.  If this property is set, then the <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
+            <li>user: <tt>String</tt> (mandatory).
+                  This identifies the user of the entity represented by this card at this online service. The <tt>type</tt> property defines the how to interpret the value.
+            </li>
+            <li>
+              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property. The type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+              <ul spacing="normal">
+                <li><tt>username</tt>: The value of the <tt>user</tt> property is a service-specific user name. Any free-text value is allowed. The <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
+                <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI. It <bcp14>MUST</bcp14> be a valid URI as defined in <xref target="RFC3986"/>.</li>
+              </ul>
+            </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this service.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -1661,8 +1667,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">type</td>
                 <td align="left">String</td>
-                <td align="left">Anniversary, NameComponent, Title, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, StreetComponent, PersonalInformation</td>
-                <td align="left"><xref target="anniversaries" format="default"/>, <xref target="name" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="addresses" format="default"/>, <xref target="personalInfo" format="default"/></td>
+                <td align="left">Anniversary, NameComponent, Title, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, StreetComponent, PersonalInformation</td>
+                <td align="left"><xref target="anniversaries" format="default"/>, <xref target="name" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="addresses" format="default"/>, <xref target="personalInfo" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">uid</td>
@@ -1691,11 +1697,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">uri</td>
                 <td align="left">String</td>
-                <td align="left">Author, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, SchedulingAddress</td>
-                <td align="left"><xref target="notes" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Author, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
+                <td align="left"><xref target="notes" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
-                <td align="left">username</td>
+                <td align="left">user</td>
                 <td align="left">String</td>
                 <td align="left">OnlineService</td>
                 <td align="left">
