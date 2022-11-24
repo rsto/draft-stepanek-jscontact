@@ -1070,11 +1070,13 @@ The value of this street component.</li>
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
           <t>A map of language tags <xref target="RFC5646"/> to patches, which localize a property value into the locale of the respective language tag.  The paths in the PatchObject keys are relative to the Card object that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
+          <t>A localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant. If only localized values are available for a property, implementations <bcp14>SHOULD</bpc14> choose one of them to be the non-localized property variant. They still <bcp14>MAY</bcp14> preserve the locale of the property value by duplicating the property also in the <tt>localization</tt> property.</t>
           <t> The following example shows a Card object, where one of its addresses <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale.</t>
           <figure>
             <artwork><![CDATA[
 ...
-"addresses": {
+ "locale": "en",
+ "addresses": {
   "addr1": {
     "@type": "Address",
     "locality": "Tokyo",
