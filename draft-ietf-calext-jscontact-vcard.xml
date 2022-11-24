@@ -298,10 +298,6 @@
             <li>"expert" converts to "high".</li>
           </ul>
         </section>
-        <section anchor="vcard-param-ranks">
-          <name>RANKS</name>
-          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value. Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-        </section>
         <section anchor="vcard-param-mediatype">
           <name>MEDIATYPE</name>
           <t>This converts to the <tt>mediaType</tt> property of the <tt>Resource</tt> object type.</t>
@@ -351,6 +347,10 @@
         ]]></artwork>
           </figure>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="vcard-param-ranks">
+          <name>RANKS</name>
+          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value. Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
@@ -943,17 +943,17 @@
     "@type": "Card",
     "@version" : "rfc0000",
     ...
-    "preferredContactLanguages": {
+    "preferredLanguages": {
       "en":[
         {
-          "@type": "ContactLanguage",
+          "@type": "LanguagePreference",
           "contexts": { "work": true },
           "pref": 1
         }
       ],
       "fr":[
         {
-          "@type": "ContactLanguage",
+          "@type": "LanguagePreference",
           "contexts": { "work": true },
           "pref": 2
         },
