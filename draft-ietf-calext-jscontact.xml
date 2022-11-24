@@ -935,9 +935,6 @@ The actual information.  This generally is free-text, but future specifications 
               <t>note: <tt>String</tt> (mandatory).  The free text value of this note.</t>
             </li>
             <li>
-              <t>language: <tt>String</tt> (optional).  The human language in which the main content of this note is written in.  The property value <bcp14>MUST</bcp14> be a valid language tag as defined <xref target="RFC5646"/>.</t>
-            </li>
-            <li>
               <t>created: <tt>UTCDateTime</tt> (optional).  The date and time when this note was created.</t>
             </li>
             <li>
@@ -1343,14 +1340,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">String</td>
                 <td align="left">EmailAddress, OnlineService, Phone, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
                 <td align="left"><xref target="prop-label" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
-              </tr>
-              <tr>
-                <td align="left">language</td>
-                <td align="left">String</td>
-                <td align="left">Note</td>
-                <td align="left">
-                  <xref target="notes" format="default"/>
-                </td>
               </tr>
               <tr>
                 <td align="left">level</td>

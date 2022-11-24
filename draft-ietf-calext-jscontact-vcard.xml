@@ -2619,11 +2619,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>Note</td>
-              <td>language</td>
-              <td>TBD</td>
-            </tr>
-            <tr>
-              <td>Note</td>
               <td>note</td>
               <td>
                 <xref target="vcard-prop-note"/>
