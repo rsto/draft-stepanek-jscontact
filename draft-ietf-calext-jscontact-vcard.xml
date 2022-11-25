@@ -129,7 +129,7 @@
         <name>vCard Parameters</name>
         <section anchor="vcard-param-altid">
           <name>ALTID</name>
-          <t>This does not convert to a standard property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact extension properties <tt>props</tt> or <tt>params</tt> defined in <xref target="new-jscontact"/>.</t>
+          <t>This does not convert to an IANA-registered property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact extension properties <tt>props</tt> or <tt>params</tt> defined in <xref target="new-jscontact"/>.</t>
         </section>
         <section anchor="vcard-param-author">
           <name>AUTHOR</name>
@@ -304,7 +304,7 @@
         </section>
         <section anchor="vcard-param-pid">
           <name>PID</name>
-          <t>This does not convert to a standard property in JSContact.  To convert this parameter, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This does not convert to an IANA-registered property in JSContact.  To convert this parameter, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-pref">
           <name>PREF</name>
@@ -371,13 +371,13 @@
       </section>
       <section anchor="vcard-param-value">
         <name>VALUE</name>
-        <t>This does not convert to a standard property in JSContact.  It is implicit for standard types and conversion.  For extended values, see <xref target="jscontact-prop-vcardparams"/>.</t>
+        <t>This does not convert to an IANA-registered property in JSContact.  To preserve properties with experimental values, see <xref target="jscontact-prop-vcardparams"/> and <xref target="jscontact-prop-vcardprops"/>.</t>
       </section>
       <section>
         <name>General Properties</name>
         <section>
           <name>BEGIN and END</name>
-          <t>These do not convert to standard properties in JSContact.</t>
+          <t>These do not convert to IANA-registered properties in JSContact.</t>
         </section>
         <section anchor="vcard-prop-kind">
           <name>KIND</name>
@@ -436,7 +436,7 @@
         </section>
         <section anchor="vcard-prop-xml">
           <name>XML</name>
-          <t>This does not convert to a standard property in JSContact.</t>
+          <t>This does not convert to an IANA-registered property in JSContact.</t>
         </section>
       </section>
       <section>
@@ -508,7 +508,7 @@
         </section>
         <section anchor="vcard-prop-gender">
           <name>GENDER</name>
-          <t>This does not map to a standard property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This does not map to an IANA-registered property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-prop-grammatical-gender">
           <name>GRAMMATICAL-GENDER and PRONOUNS</name>
@@ -1080,7 +1080,7 @@
             <li>Otherwise construct the time zone name with <tt>ETC/GMT</tt> suffixed with the string representation of the reversed sign hour offset, including the sign but excluding leading zeros and minutes.  For example, the UTC offset value <tt>-0500</tt> converts to <tt>ETC/GMT+5</tt>.</li>
           </ul>
           <t>For such property values, also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
-          <t>Any other value of type UTC-OFFSET or URI does not convert to a standard property in JSContact.  To convert such property, see <xref target="jscontact-prop-vcardprops"/>.</t>
+          <t>Any other value of type UTC-OFFSET or URI does not convert to an IANA-registered property in JSContact.  To convert such property, see <xref target="jscontact-prop-vcardprops"/>.</t>
         </section>
         <section anchor="combine-geo-props">
           <name>Combining geographical properties</name>
@@ -1707,7 +1707,7 @@
         </section>
         <section anchor="vcard-prop-xablabel">
           <name>X-ABLabel</name>
-          <t>This property is non-standard but widely in use in existing vCard data.  It converts to the <tt>label</tt> property of a JSContact object type.  The X-ABLabel property is preceded by a vCard property group name, and the label converts to the JSContact object which got converted from a vCard property having the same group.</t>
+          <t>This property is experimental but widely in use in existing vCard data.  It converts to the <tt>label</tt> property of a JSContact object type.  The X-ABLabel property is preceded by a vCard property group name, and the label converts to the JSContact object which got converted from a vCard property having the same group.</t>
           <t>The group name is not preserved and implementations are free to choose any unique group name when converting back to vCard.  For an example how to preserve the group name see <xref target="vcard-param-group"/>.</t>
           <figure anchor="xablabel_conversion">
             <name>X-ABLabel conversion example</name>
@@ -1897,7 +1897,7 @@
       </section>
       <section anchor="new-jscontact">
         <name>New JSContact properties</name>
-        <t>vCards may contain properties or parameters for which no standard JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purpose are unknown <xref target="RFC6350" section="6.10"/>.</t>
+        <t>vCards may contain properties or parameters for which no IANA-registered JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purpose are unknown <xref target="RFC6350" section="6.10"/>.</t>
         <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="jscontact-prop-vcardprops">
           <name>Property <tt>vCardProps</tt></name>
@@ -1910,7 +1910,7 @@
             <dd><tt>JCardProp[]</tt>, where <tt>JCardProp</tt> denotes a jCard-encoded vCard property as defined in <xref target="RFC7095" section="3.3"/>.
     </dd>
             <dt>Definition:</dt>
-            <dd>This property is set on a JSContact object that represents a vCard.  It contains properties that are set in the vCard represented by this JSContact object.  Each entry in this list typically represents a vCard property for which no conversion to a standard JSContact property is defined.  It <bcp14>MAY</bcp14> contain vCard standard properties which also got converted to a standard property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
+            <dd>This property is set on a JSContact object that represents a vCard.  It contains properties that are set in the vCard represented by this JSContact object.  Each entry in this list typically represents a vCard property for which no conversion to a IANA-registered JSContact property is defined.  It <bcp14>MAY</bcp14> contain vCard IANA-registered properties which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
             <dt>Example:</dt>
             <dd>
               <t>This illustrates how to convert a vCard extension property:</t>
@@ -1953,7 +1953,7 @@
               <tt>String[String|String[]]</tt>
             </dd>
             <dt>Definition:</dt>
-            <dd>This property is set on a JSContact object that represents a vCard property.  Its value <bcp14>MUST</bcp14> be a JSON object containing vCard property parameters, defined as array element 2 in <xref target="RFC7095" section="3.3"/>.  Each entry represents a parameter of the vCard property that converts to the JSContact object.  Typically, these are parameters for which no standard property is defined in the JSContact object.  It <bcp14>MAY</bcp14> contain vCard standard parameters which also got converted to a standard property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
+            <dd>This property is set on a JSContact object that represents a vCard property.  Its value <bcp14>MUST</bcp14> be a JSON object containing vCard property parameters, defined as array element 2 in <xref target="RFC7095" section="3.3"/>.  Each entry represents a parameter of the vCard property that converts to the JSContact object.  Typically, these are parameters for which no IANA-registered property is defined in the JSContact object.  It <bcp14>MAY</bcp14> contain vCard IANA-registered parameters which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
             <dt>Example:</dt>
             <dd>
               <sourcecode><![CDATA[
@@ -3062,7 +3062,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
-        <t>JSContact object types may contain properties for which no standard vCard property is defined.  For example, a JSContact object may contain extended properties of which the semantics or purpose is unknown <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/>.</t>
+        <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain extended properties of which the semantics or purpose is unknown <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/>.</t>
         <t>This section defines new vCard properties and parameters by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="vcard-prop-jscontact-prop">
           <name>Property <tt>JSCONTACT-PROP</tt></name>
@@ -3079,7 +3079,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>
               The JSPTR parameter MUST be set exactly once for this property.
               The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
-              <bcp14>MUST</bcp14> be URI.  Other IANA and non-standard property parameters
+              <bcp14>MUST</bcp14> be URI.  Other IANA-registered and experimental property parameters
               can be specified on this property.
             </dd>
             <dt>Description:</dt>
