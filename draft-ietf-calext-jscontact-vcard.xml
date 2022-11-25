@@ -33,7 +33,7 @@
       </address>
     </author>
     <author fullname="Robert Stepanek" initials="R." surname="Stepanek">
-      <organization>FastMail</organization>
+      <organization>Fastmail</organization>
       <address>
         <postal>
           <street>PO Box 234, Collins St West</street>
@@ -156,7 +156,7 @@
         </section>
         <section anchor="vcard-param-geo">
           <name>GEO</name>
-          <t>This parameter set on a ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on an ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-group">
           <name>GROUP</name>
@@ -220,7 +220,7 @@
             <li>If a vCard property occurs one or more times and at least one has not the LANGUAGE parameter set, then the implementation should choose the non-localized property among them.</li>
             <li>If all vCard properties of the same type have the LANGUAGE parameter set, then the implementation should choose one of these properties to set both as non-localized and localized property.  This is to preserve the language information of the property value.</li>
           </ul>
-          <t>The following two examples illustrate these case .</t>
+          <t>The following two examples illustrate these cases.</t>
           <figure anchor="language_conversion_patch_existing">
             <name>LANGUAGE conversion example: patch non-localized property</name>
             <artwork><![CDATA[
@@ -366,7 +366,7 @@
         </section>
         <section anchor="vcard-param-tz">
           <name>TZ</name>
-          <t>This parameter set on a ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on an ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
       </section>
       <section anchor="vcard-param-value">
@@ -994,7 +994,7 @@
         </section>
         <section anchor="vcard-prop-socialprofile">
           <name>SOCIALPROFILE</name>
-          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>type</tt> of the OnlineService is set to <tt>username</tt>. Otherwise the <tt>type</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value.  </t>
+          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>type</tt> of the OnlineService is set to <tt>username</tt>. Otherwise, the <tt>type</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value.  </t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>
@@ -1708,7 +1708,7 @@
         <section anchor="vcard-prop-xablabel">
           <name>X-ABLabel</name>
           <t>This property is experimental but widely in use in existing vCard data.  It converts to the <tt>label</tt> property of a JSContact object type.  The X-ABLabel property is preceded by a vCard property group name, and the label converts to the JSContact object which got converted from a vCard property having the same group.</t>
-          <t>The group name is not preserved and implementations are free to choose any unique group name when converting back to vCard.  For an example how to preserve the group name see <xref target="vcard-param-group"/>.</t>
+          <t>The group name is not preserved, implementations are free to choose any unique group name when converting back to vCard.  For an example how to preserve the group name see <xref target="vcard-param-group"/>.</t>
           <figure anchor="xablabel_conversion">
             <name>X-ABLabel conversion example</name>
             <artwork><![CDATA[
@@ -1897,7 +1897,7 @@
       </section>
       <section anchor="new-jscontact">
         <name>New JSContact properties</name>
-        <t>vCards may contain properties or parameters for which no IANA-registered JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purpose are unknown <xref target="RFC6350" section="6.10"/>.</t>
+        <t>vCards may contain properties or parameters for which no IANA-registered JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purposes are unknown <xref target="RFC6350" section="6.10"/>.</t>
         <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="jscontact-prop-vcardprops">
           <name>Property <tt>vCardProps</tt></name>
@@ -1983,7 +1983,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
         <t>A <tt>Card</tt> converts to vCard by applying the reserve rules of converting vCard to JSContact.  <xref target="table_convert_jscontact_to_vcard"/> lists the relevant document sections for each JSContact object type and property.  The following additional rules apply:</t>
         <ul>
           <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
-          <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> the DERIVED parameter on the FN property.  Otherwise they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
+          <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> the DERIVED parameter on the FN property.  Otherwise, they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
           <li>Vendor-extension and unknown properties convert to vCard as outlined in section <xref target="convert-other-jscontact"/>.</li>
         </ul>
         <table anchor="table_convert_jscontact_to_vcard">
@@ -3111,7 +3111,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
             <dt anchor="vcard-prop-jscontact-prop-examples">Example(s):</dt>
             <dd>
-              <t>This illustrates how to convert an property at the top-level in a Card object that is unknown to the implementation.</t>
+              <t>This illustrates how to convert a property at the top-level in a Card object that is unknown to the implementation.</t>
               <figure anchor="jscontact-prop-unknown">
                 <name>Unknown property example</name>
                 <artwork><![CDATA[
@@ -3335,7 +3335,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       <name>Implementation Status</name>
       <t>NOTE: Please remove this section and the reference to RFC 7942 prior to publication as an RFC.</t>
       <t>This section records the status of known implementations of the protocol as defined in this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <xref target="RFC7942"/>.  The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.  Please note that the listing of any individual implementation here does not imply endorsement by the IETF.  Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.  This is not intended as, and must not be construed to be, a catalog of available implementations or their features.  Readers are advised to note that other implementations may exist.</t>
-      <t>According to RFC 7942, "this will allow reviewers and working groups to assign due considerationto documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.  It is up to the individual working groups to use this information as they see fit".</t>
+      <t>According to RFC 7942, "this will allow reviewers and working groups to assign due consideration to documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.  It is up to the individual working groups to use this information as they see fit".</t>
       <section anchor="it-cnr-iit">
         <name>CNR</name>
         <ul spacing="compact">

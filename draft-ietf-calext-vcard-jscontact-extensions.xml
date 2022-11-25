@@ -11,7 +11,7 @@
     <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-01"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
-      <organization>FastMail</organization>
+      <organization>Fastmail</organization>
       <address>
         <postal>
           <street>PO Box 234, Collins St West</street>
@@ -57,7 +57,7 @@
       <name>Introduction</name>
       <t>
         The JSContact <xref target="I-D.ietf-calext-jscontact"/> format aims to be an alternative to the
-        vCard <xref target="RFC6350"/> format for representation of contact and addressbook
+        vCard <xref target="RFC6350"/> format for representation of contact and address book
         data.  As such, it introduces new semantics that are not covered in the current
         definition of vCard and its various extensions.  Converting contact data between
         the two formats is defined in <xref target="I-D.ietf-calext-jscontact-vcard"/> with the goal of
@@ -255,7 +255,7 @@ GRAMMATICAL-GENDER:neuter
             This property defines the locale in which property values of type
             <tt>TEXT</tt> shall be assumed to be written for this vCard.
             If a vCard property includes the <tt>LANG</tt> parameter, then the
-            parameter value has higher precendence than the <tt>LOCALE</tt>
+            parameter value has higher precedence than the <tt>LOCALE</tt>
             property value.
           </dd>
           <dt>Format definition:</dt>
@@ -344,7 +344,7 @@ PRONOUNS;LANG=en:they/them
           <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI.  It <bcp14>MUST</bcp14> be assigned if the value type is TEXT.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
           <dt>Description:</dt>
           <dd>
-            Several vCard addressbook implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides a standard property for the same purpose.  In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
+            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides a standard property for the same purpose.  In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -548,7 +548,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <dt>Description:</dt>
           <dd>
             <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the online service associated with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.</t>
-            <t>Several vCard addressbook implementations currently use an experimental X-SERVICE-TYPE parameter property to achieve the same as this parameter.  This specification provides a standard parameter for the same purpose.</t>
+            <t>Several vCard address book implementations currently use an experimental X-SERVICE-TYPE parameter property to achieve the same as this parameter.  This specification provides a standard parameter for the same purpose.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
