@@ -490,7 +490,7 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
             <sourcecode name="" type="abnf"><![CDATA[
 ranks-param     = ranks-component 4(";" ranks-component)
 ranks-component = rank *("," rank)
-rank            = "" / ("1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9") *DIGIT
+rank            = (("1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9") *DIGIT)) / ""
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
