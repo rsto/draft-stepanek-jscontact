@@ -337,14 +337,14 @@ PRONOUNS;LANG=en:they/them
           <dt>Purpose:</dt>
           <dd>To specify the URI or username for social media profiles associated with the object the vCard represents.</dd>
           <dt>Value type:</dt>
-          <dd>A single URI or TEXT value. The default value type is URI.</dd>
+          <dd>A single URI or TEXT value.  The default value type is URI.</dd>
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI. It <bcp14>MUST</bcp14> be assigned if the value type is TEXT. In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
+          <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI.  It <bcp14>MUST</bcp14> be assigned if the value type is TEXT.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
           <dt>Description:</dt>
           <dd>
-            Several vCard addressbook implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts. This specification provides a standard property for the same purpose. In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
+            Several vCard addressbook implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides a standard property for the same purpose.  In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -482,8 +482,8 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           <dd>This parameter specifies a ranking among the name components of a vCard N property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>The vCard N property defines the name of the object represented by a vCard. A name may consist of multiple name components of the same type, such as surnames, and these form a sequence of values in the structured N property value. However, the order in which a name component appears in the N property value does not allow to infer its culturally or otherwise significant rank among other values of the same component type. Notably, cultures may distinguish between a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.</t>
-            <t>The RANKS parameter on a N property assigns a rank among the same-typed name components of a N property value. The parameter value is structurally equivalent to the multi-valued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by colon. The rank is an integer number larger than or equal to 1 and indicates the first or nth rank. Its location within the RANKS parameter value ranks the name component value at that same position within the N property value. An empty or absent rank indicates that the rank of its related name component value is undefined.</t>
+            <t>The vCard N property defines the name of the object represented by a vCard.  A name may consist of multiple name components of the same type, such as surnames, and these form a sequence of values in the structured N property value.  However, the order in which a name component appears in the N property value does not allow to infer its culturally or otherwise significant rank among other values of the same component type.  Notably, cultures may distinguish between a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.</t>
+            <t>The RANKS parameter on a N property assigns a rank among the same-typed name components of a N property value.  The parameter value is structurally equivalent to the multi-valued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by colon.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -547,8 +547,8 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <dd>To define the online service name associated with a messaging or social media profile.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the online service associated with that property value. Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.</t>
-            <t>Several vCard addressbook implementations currently use an experimental X-SERVICE-TYPE parameter property to achieve the same as this parameter. This specification provides a standard parameter for the same purpose.</t>
+            <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the online service associated with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.</t>
+            <t>Several vCard addressbook implementations currently use an experimental X-SERVICE-TYPE parameter property to achieve the same as this parameter.  This specification provides a standard parameter for the same purpose.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>

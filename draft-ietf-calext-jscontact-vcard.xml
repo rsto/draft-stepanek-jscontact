@@ -215,10 +215,10 @@
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
           <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on.  The value of the LANGUAGE parameter defines the language key in the <tt>localizations</tt> property.  The JSON pointer in the <tt>PatchObject</tt> is the path to the JSContact property that the vCard property converts to.  The value of the PatchObject is the converted property value.</t>
-          <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations. For this, the implementation should choose one of the vCard properties to also set in the main Card:</t>
+          <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations.  For this, the implementation should choose one of the vCard properties to also set in the main Card:</t>
           <ul>
             <li>If a vCard property occurs one or more times and at least one has not the LANGUAGE parameter set, then the implementation should choose the non-localized property among them.</li>
-            <li>If all vCard properties of the same type have the LANGUAGE parameter set, then the implementation should choose one of these properties to set both as non-localized and localized property. This is to preserve the language information of the property value.</li>
+            <li>If all vCard properties of the same type have the LANGUAGE parameter set, then the implementation should choose one of these properties to set both as non-localized and localized property.  This is to preserve the language information of the property value.</li>
           </ul>
           <t>The following two examples illustrate these case .</t>
           <figure anchor="language_conversion_patch_existing">
@@ -350,11 +350,11 @@
         </section>
         <section anchor="vcard-param-ranks">
           <name>RANKS</name>
-          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value. Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
-          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type. Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
@@ -891,7 +891,7 @@
         </section>
         <section anchor="vcard-prop-impp">
           <name>IMPP</name>
-          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The <tt>type</tt> of the OnlineService is set to <tt>impp</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the IMPP value. </t>
+          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The <tt>type</tt> of the OnlineService is set to <tt>impp</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the IMPP value.  </t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
@@ -994,7 +994,7 @@
         </section>
         <section anchor="vcard-prop-socialprofile">
           <name>SOCIALPROFILE</name>
-          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>type</tt> of the OnlineService is set to <tt>username</tt>. Otherwise the <tt>type</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value. </t>
+          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>type</tt> of the OnlineService is set to <tt>username</tt>. Otherwise the <tt>type</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value.  </t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>

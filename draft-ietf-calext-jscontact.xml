@@ -262,7 +262,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
       </section>
       <section anchor="reserved-prop-names">
         <name>Reserved Property Names</name>
-        <t>This specification reserves the property name <tt>extra</tt> at IANA. A JSContact object <bcp14>MUST NOT</bcp14> be defined to have a property with this name. This is to provide implementations with a name to map unknown or vendor-specific properties to, and which never may occur as a property in a JSContact object.</t>
+        <t>This specification reserves the property name <tt>extra</tt> at IANA.  A JSContact object <bcp14>MUST NOT</bcp14> be defined to have a property with this name.  This is to provide implementations with a name to map unknown or vendor-specific properties to, and which never may occur as a property in a JSContact object.</t>
       </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
@@ -332,7 +332,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).</t>
           <t>This identifies the set of cards that are members of this group card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
-          <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g. "IETF Participants").</t>
+          <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g.  "IETF Participants").</t>
           <figure anchor="example-members">
             <name><tt>members</tt> example</name>
             <sourcecode name=""><![CDATA[
@@ -765,14 +765,14 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <li>service: <tt>String</tt> (optional).
 The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the canonical service name including capitalisation.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>user: <tt>String</tt> (mandatory).
-                  This identifies 	the entity represented by this card at this online service. The <tt>type</tt> property defines the how to interpret the value.
+                  This identifies 	the entity represented by this card at this online service.  The <tt>type</tt> property defines the how to interpret the value.
             </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property. The type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
-                <li><tt>impp</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging. The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
-                <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI, such as for a social media service. The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
-                <li><tt>username</tt>: The value of the <tt>user</tt> property is a service-specific username, such as for a social media service. Any free-text value is allowed. The <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
+                <li><tt>impp</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
+                <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI, such as for a social media service.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
+                <li><tt>username</tt>: The value of the <tt>user</tt> property is a service-specific username, such as for a social media service.  Any free-text value is allowed.  The <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
               </ul>
             </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
