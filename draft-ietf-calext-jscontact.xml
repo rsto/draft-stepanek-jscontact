@@ -281,32 +281,6 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
           <t>Type: <tt>String</tt> (mandatory).</t>
           <t>Specifies the version of the JSContact specification used to define this card.  The value <bcp14>MUST</bcp14> be <tt>rfc0000</tt> if the JSContact object is defined according to this RFC document.  It <bcp14>MAY</bcp14> differ if future RFC documents obsolete this specification.</t>
         </section>
-        <section anchor="uid" numbered="true" toc="default">
-          <name>uid</name>
-          <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/> but for compatibility with <xref target="RFC6350"/> it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the <tt>uuid</tt> namespace <xref target="RFC4122" format="default"/>.  As of this writing, a revision of <xref target="RFC4122"/> is being worked on and is likely to introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudo-random UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
-          <figure anchor="example-uid">
-            <name><tt>uid</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
-  ...
-        ]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="prodId" numbered="true" toc="default">
-          <name>prodId</name>
-          <t>Type: <tt>String</tt> (optional).</t>
-          <t>The identifier for the product that created the Card object.</t>
-          <figure anchor="example-prodId">
-            <name><tt>prodId</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
-  ...
-        ]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="created" numbered="true" toc="default">
           <name>created</name>
           <t>Type: <tt>UTCDateTime</tt> (optional).</t>
@@ -316,19 +290,6 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
             <sourcecode name=""><![CDATA[
   ...
   "created": "1994-09-30T14:35:10Z",
-  ...
-        ]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="updated" numbered="true" toc="default">
-          <name>updated</name>
-          <t>Type: <tt>UTCDateTime</tt> (optional).</t>
-          <t>The date and time when the data in this Card object was last modified.</t>
-          <figure anchor="example-updated">
-            <name><tt>updated</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-   "updated": "1995-10-31T22:27:10Z",
   ...
         ]]></sourcecode>
           </figure>
@@ -354,6 +315,19 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
         ]]></sourcecode>
           </figure>
         </section>
+        <section anchor="locale" numbered="true" toc="default">
+          <name>locale</name>
+          <t>Type: <tt>String</tt> (optional).</t>
+          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card or card group.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
+          <figure anchor="example-locale">
+            <name><tt>locale</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "locale": "de-AT",
+  ...
+        ]]></sourcecode>
+          </figure>
+        </section>
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).</t>
@@ -370,6 +344,19 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
     "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
     "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
   },
+  ...
+        ]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="prodId" numbered="true" toc="default">
+          <name>prodId</name>
+          <t>Type: <tt>String</tt> (optional).</t>
+          <t>The identifier for the product that created the Card object.</t>
+          <figure anchor="example-prodId">
+            <name><tt>prodId</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
   ...
         ]]></sourcecode>
           </figure>
@@ -413,15 +400,28 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="locale" numbered="true" toc="default">
-          <name>locale</name>
-          <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card or card group.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
-          <figure anchor="example-locale">
-            <name><tt>locale</tt> example</name>
+        <section anchor="uid" numbered="true" toc="default">
+          <name>uid</name>
+          <t>Type: <tt>String</tt> (mandatory).</t>
+          <t>An identifier, used to associate the object as the same across different systems, addressbooks and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/> but for compatibility with <xref target="RFC6350"/> it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the <tt>uuid</tt> namespace <xref target="RFC4122" format="default"/>.  As of this writing, a revision of <xref target="RFC4122"/> is being worked on and is likely to introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudo-random UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
+          <figure anchor="example-uid">
+            <name><tt>uid</tt> example</name>
             <sourcecode name=""><![CDATA[
   ...
-  "locale": "de-AT",
+  "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
+  ...
+        ]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="updated" numbered="true" toc="default">
+          <name>updated</name>
+          <t>Type: <tt>UTCDateTime</tt> (optional).</t>
+          <t>The date and time when the data in this Card object was last modified.</t>
+          <figure anchor="example-updated">
+            <name><tt>updated</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+   "updated": "1995-10-31T22:27:10Z",
   ...
         ]]></sourcecode>
           </figure>
@@ -429,6 +429,19 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
         <name>Name and Organization properties</name>
+        <section anchor="fullName" numbered="true" toc="default">
+          <name>fullName</name>
+          <t>Type: <tt>String</tt> (optional).</t>
+          <t>The full name (e.g.  the personal name and surname of an individual, the name of an organization) of the entity represented by this card.  The purpose of this property is to define a name, even if the individual name components are not known.  In addition, it is meant to provide alternative versions of the name for internationalisation.  Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
+          <figure anchor="example-fullName">
+            <name><tt>fullName</tt> example</name>
+            <sourcecode name=""><![CDATA[
+   ...
+   "fullName": "Mr.  John Q.  Public, Esq.",
+   ...
+        ]]></sourcecode>
+          </figure>
+        </section>
         <section anchor="name" numbered="true" toc="default">
           <name>name</name>
           <t>Type: <tt>Name</tt> (optional).</t>
@@ -513,19 +526,6 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
             </li>
           </ul>
         </section>
-        <section anchor="fullName" numbered="true" toc="default">
-          <name>fullName</name>
-          <t>Type: <tt>String</tt> (optional).</t>
-          <t>The full name (e.g.  the personal name and surname of an individual, the name of an organization) of the entity represented by this card.  The purpose of this property is to define a name, even if the individual name components are not known.  In addition, it is meant to provide alternative versions of the name for internationalisation.  Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
-          <figure anchor="example-fullName">
-            <name><tt>fullName</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "fullName": "Mr.  John Q.  Public, Esq.",
-   ...
-        ]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="nickNames" numbered="true" toc="default">
           <name>nickNames</name>
           <t>Type: <tt>Id[NickName]</tt> (optional).</t>
@@ -605,51 +605,6 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
         ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="titles" numbered="true" toc="default">
-          <name>titles</name>
-          <t>Type : <tt>Id[Title]</tt> (optional).</t>
-          <t>The job titles or functional positions of the entity represented by this card.  A Title has object the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt>.
-              </li>
-            <li>name: <tt>String</tt> (mandatory).
-                The title or role name of the entity represented by this card.
-            </li>
-            <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
-              Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
-                                        </li>
-            <li>organization: <tt>Id</tt> (optional).
-                The id of the organization in which this title is held.
-            </li>
-          </ul>
-          <figure anchor="example-titles">
-            <name><tt>titles</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "titles": {
-    "mytitle": {
-      "@type": "Title",
-      "type": "title",
-      "name": "Research Scientist"
-    },
-    "mainrole": {
-      "@type": "Title",
-      "type": "role",
-      "name": "Project Leader",
-      "organization": "ABC"
-    }
-  },
-  "organizations": {
-    "ABC": {
-      "@type": "Organization",
-      "name": "ABC, Inc."
-    }
-  },
-  ...
-        ]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="speakToAs" numbered="true" toc="default">
           <name>speakToAs</name>
           <t>Type: <tt>SpeakToAs</tt> (optional).</t>
@@ -717,6 +672,51 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
      }
    },
    ...
+        ]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="titles" numbered="true" toc="default">
+          <name>titles</name>
+          <t>Type : <tt>Id[Title]</tt> (optional).</t>
+          <t>The job titles or functional positions of the entity represented by this card.  A Title has object the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt>.
+              </li>
+            <li>name: <tt>String</tt> (mandatory).
+                The title or role name of the entity represented by this card.
+            </li>
+            <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
+              Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
+                                        </li>
+            <li>organization: <tt>Id</tt> (optional).
+                The id of the organization in which this title is held.
+            </li>
+          </ul>
+          <figure anchor="example-titles">
+            <name><tt>titles</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "titles": {
+    "mytitle": {
+      "@type": "Title",
+      "type": "title",
+      "name": "Research Scientist"
+    },
+    "mainrole": {
+      "@type": "Title",
+      "type": "role",
+      "name": "Project Leader",
+      "organization": "ABC"
+    }
+  },
+  "organizations": {
+    "ABC": {
+      "@type": "Organization",
+      "name": "ABC, Inc."
+    }
+  },
+  ...
         ]]></sourcecode>
           </figure>
         </section>
@@ -961,8 +961,8 @@ Defines the preference of this language in relation to other languages of the sa
             <li><tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
           </ul>
           <figure anchor="example-calendars">
-          <name><tt>calendars</tt> example</name>
-          <sourcecode name=""><![CDATA[
+            <name><tt>calendars</tt> example</name>
+            <sourcecode name=""><![CDATA[
    ...
    "calendars": {
        ...
@@ -1179,8 +1179,8 @@ The value of this street component.</li>
             <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
           </ul>
           <figure anchor="example-directories">
-          <name><tt>directories</tt> example</name>
-          <sourcecode name=""><![CDATA[
+            <name><tt>directories</tt> example</name>
+            <sourcecode name=""><![CDATA[
    ...
     "directories": {
       ...
@@ -1376,55 +1376,19 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
         ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="personalInfo" numbered="true" toc="default">
-          <name>personalInfo</name>
-          <t>Type: <tt>Id[PersonalInformation]</tt> (optional).</t>
-          <t>Defines personal information about the entity represented by this card.
-A PersonalInformation object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInformation</tt>.
-              </li>
-            <li>
-              <t>type: <tt>String</tt> (mandatory).
-Specifies the type for this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>):
-</t>
-              <ul spacing="normal">
-                <li><tt>expertise</tt>: a field of expertise or credential</li>
-                <li><tt>hobby</tt>: a hobby</li>
-                <li><tt>interest</tt>: an interest</li>
-              </ul>
-            </li>
-            <li>value: <tt>String</tt> (mandatory).
-The actual information.  This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
-            <li>level: <tt>String</tt> (optional).
-                Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
-          </ul>
-          <figure anchor="example-personalInfo">
-            <name><tt>personalInfo</tt> example</name>
+        <section anchor="keywords" numbered="true" toc="default">
+          <name>keywords</name>
+          <t>Type: <tt>String[Boolean]</tt> (optional).
+A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
+          <figure anchor="example-keywords">
+            <name><tt>keywords</tt> example</name>
             <sourcecode name=""><![CDATA[
    ...
-   "personalInfo": {
-     ...
-     "myexpertise" : {
-       "@type": "PersonalInformation",
-       "type": "expertise",
-       "value": "chemistry",
-       "level": "high"
-     },
-     "firsthobby" : {
-       "@type": "PersonalInformation",
-       "type": "hobby",
-       "value": "reading",
-       "level": "high"
-     },
-     "music-interest" : {
-       "@type": "PersonalInformation",
-       "type": "interest",
-       "value": "r&b music",
-       "level": "medium"
-     },
-     ...
+   "keywords": {
+     "INTERNET": true,
+     "IETF": true,
+     "INDUSTRY": true,
+     "INFORMATION TECHNOLOGY": true
    },
    ...
         ]]></sourcecode>
@@ -1478,19 +1442,55 @@ The actual information.  This generally is free-text, but future specifications 
         ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="keywords" numbered="true" toc="default">
-          <name>keywords</name>
-          <t>Type: <tt>String[Boolean]</tt> (optional).
-A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
-          <figure anchor="example-keywords">
-            <name><tt>keywords</tt> example</name>
+        <section anchor="personalInfo" numbered="true" toc="default">
+          <name>personalInfo</name>
+          <t>Type: <tt>Id[PersonalInformation]</tt> (optional).</t>
+          <t>Defines personal information about the entity represented by this card.
+A PersonalInformation object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (mandatory).
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInformation</tt>.
+              </li>
+            <li>
+              <t>type: <tt>String</tt> (mandatory).
+Specifies the type for this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>):
+</t>
+              <ul spacing="normal">
+                <li><tt>expertise</tt>: a field of expertise or credential</li>
+                <li><tt>hobby</tt>: a hobby</li>
+                <li><tt>interest</tt>: an interest</li>
+              </ul>
+            </li>
+            <li>value: <tt>String</tt> (mandatory).
+The actual information.  This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
+            <li>level: <tt>String</tt> (optional).
+                Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+          </ul>
+          <figure anchor="example-personalInfo">
+            <name><tt>personalInfo</tt> example</name>
             <sourcecode name=""><![CDATA[
    ...
-   "keywords": {
-     "INTERNET": true,
-     "IETF": true,
-     "INDUSTRY": true,
-     "INFORMATION TECHNOLOGY": true
+   "personalInfo": {
+     ...
+     "myexpertise" : {
+       "@type": "PersonalInformation",
+       "type": "expertise",
+       "value": "chemistry",
+       "level": "high"
+     },
+     "firsthobby" : {
+       "@type": "PersonalInformation",
+       "type": "hobby",
+       "value": "reading",
+       "level": "high"
+     },
+     "music-interest" : {
+       "@type": "PersonalInformation",
+       "type": "interest",
+       "value": "r&b music",
+       "level": "medium"
+     },
+     ...
    },
    ...
         ]]></sourcecode>
@@ -2258,7 +2258,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
             </tbody>
           </table>
-            <t>The following table lists the initial <tt>reserved</tt> usage entries of the "JSContact Properties" registry.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>reserved</tt> usage entries of the "JSContact Properties" registry.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-reserved-property-registry" align="center">
             <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
