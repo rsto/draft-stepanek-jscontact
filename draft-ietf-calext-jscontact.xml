@@ -385,16 +385,10 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         "friend" : true
       }
     },
-    "http://example.com/directory/jdoe.vcf" : {
-      "@type" : "Relation",
-      "relation" : {
-        "contact" : true
-      }
-    },
-    "Please contact my assistant Jane Doe for any inquiries." : {
+    "8cacdfb7d1ffdb59@example.com" : {
       "@type" : "Relation",
       "relation" : { }
-    }
+    },
   },
   ...
         ]]></sourcecode>
@@ -547,7 +541,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <sourcecode name=""><![CDATA[
    ...
     "nickNames": {
-       "mynick": {
+       "k391": {
           "@type": "NickName",
           "name": "Johnny"
        }
@@ -591,7 +585,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <sourcecode name=""><![CDATA[
   ...
   "organizations": {
-   "ABC": {
+   "o1": {
      "@type": "Organization",
      "name": "ABC, Inc.",
      "units":[
@@ -659,12 +653,12 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
    "speakToAs": {
      "grammaticalGender": "neuter",
      "pronouns": {
-       "pronouns": {
+       "k19": {
          "@type": "Pronouns",
          "pronouns": "they/them",
          "pref": 2
        },
-       "pronounsX": {
+       "k32": {
          "@type": "Pronouns",
          "pronouns": "xe/xir",
          "pref": 1
@@ -698,20 +692,20 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
             <sourcecode name=""><![CDATA[
   ...
   "titles": {
-    "mytitle": {
+    "le9": {
       "@type": "Title",
       "type": "title",
       "name": "Research Scientist"
     },
-    "mainrole": {
+    "k2": {
       "@type": "Title",
       "type": "role",
       "name": "Project Leader",
-      "organization": "ABC"
+      "organization": "o2"
     }
   },
   "organizations": {
-    "ABC": {
+    "o2": {
       "@type": "Organization",
       "name": "ABC, Inc."
     }
@@ -745,12 +739,12 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <sourcecode name=""><![CDATA[
    ...
    "emails": {
-     "public": {
+     "e1": {
        "@type": "EmailAddress",
        "contexts": { "work": true },
        "address": "jqpublic@xyz.example.com"
      },
-     "personal": {
+     "e2": {
        "@type": "EmailAddress",
        "address": "jane_doe@example.com",
        "pref": 1
@@ -794,9 +788,10 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
    ...
    "onlineServices": {
      ...
-     "xmpp": {
+     "x1": {
        "@type": "OnlineService",
-       "uri": "xmpp:alice@example.com",
+       "user": "xmpp:alice@example.com",
+       "type": "impp",
        "pref": 1
      },
      ...
@@ -841,14 +836,14 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
             <sourcecode name=""><![CDATA[
    ...
      "phones": {
-       "private": {
+       "tel0": {
          "@type": "Phone",
          "contexts": { "private": true },
          "features": { "voice": true },
          "number": "tel:+1-555-555-5555;ext=5555",
          "pref": 1
        },
-       "work": {
+       "tel3": {
          "@type": "Phone",
          "contexts": { "work": true },
          "number": "tel:+33-01-23-45-67"
@@ -1007,14 +1002,9 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
    ...
    "schedulingAddresses": {
      ...
-     "janedoe": {
+     "sched1": {
        "@type": "SchedulingAddress",
-       "uri": "mailto:janedoe@example.com",
-       "pref": 1
-     },
-     "jdoe": {
-       "@type": "SchedulingAddress",
-       "uri": "http://example.com/calendar/jdoe"
+       "uri": "mailto:janedoe@example.com"
      },
      ...
    },
@@ -1106,7 +1096,7 @@ The value of this street component.</li>
             <sourcecode name=""><![CDATA[
    ...
     "addresses": {
-      "work" : {
+      "k23" : {
         "@type": "Address",
         "contexts": { "work": true },
         "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
@@ -1120,7 +1110,7 @@ The value of this street component.</li>
         "postcode": "20190",
         "countryCode": "US"
       },
-      "home": {
+      "k24": {
         "@type": "Address",
         "contexts": { "private": true },
         "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
@@ -1184,12 +1174,12 @@ The value of this street component.</li>
    ...
     "directories": {
       ...
-       "Dupont": {
+       "dir1": {
          "@type": "DirectoryResource",
          "type": "entry",
          "uri": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
        },
-      "Engineering": {
+      "dir2": {
         "@type": "DirectoryResource",
         "type": "directory",
         "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
@@ -1218,7 +1208,7 @@ The value of this street component.</li>
    ...
    "links": {
      ...
-     "contact": {
+     "link3": {
        "@type": "LinkResource",
        "type": "contact",
        "uri": "mailto:contact@example.com",
@@ -1249,17 +1239,17 @@ The value of this street component.</li>
    ...
    "media": {
      ...
-      "john": {
+      "res45": {
         "@type": "MediaResource",
         "type": "sound",
         "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
       },
-     "abccorp": {
+     "res47": {
        "@type": "MediaResource",
        "type": "logo",
        "uri": "http://www.example.com/pub/logos/abccorp.jpg"
      },
-      "jqpublic": {
+      "res1": {
         "@type": "MediaResource",
         "type": "photo",
         "uri": "http://www.example.com/pub/photos/jqpublic.gif"
@@ -1348,7 +1338,7 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
             <sourcecode name=""><![CDATA[
    ...
     "anniversaries": {
-      "birth" : {
+      "k8" : {
         "@type": "Anniversary",
         "type": "birth",
         "date": "1953-10-15T23:10:00Z",
@@ -1357,7 +1347,7 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
           "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
         }
       },
-      "death" : {
+      "k9" : {
         "@type": "Anniversary",
         "type": "death",
         "date": "1996-04-15",
@@ -1366,7 +1356,7 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
           "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
         }
       },
-      "marriage" : {
+      "k12" : {
         "@type": "Anniversary",
         "type": "wedding",
         "date": "1986-02-01"
@@ -1385,10 +1375,8 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
             <sourcecode name=""><![CDATA[
    ...
    "keywords": {
-     "INTERNET": true,
-     "IETF": true,
-     "INDUSTRY": true,
-     "INFORMATION TECHNOLOGY": true
+     "internet": true,
+     "IETF": true
    },
    ...
         ]]></sourcecode>
@@ -1429,7 +1417,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
             <sourcecode name=""><![CDATA[
    ...
     "notes": {
-        "reminder" : {
+        "n1" : {
            "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
            "created": "2022-11-23T15:01:32Z",
            "author": {
@@ -1472,19 +1460,19 @@ The actual information.  This generally is free-text, but future specifications 
    ...
    "personalInfo": {
      ...
-     "myexpertise" : {
+     "pi2" : {
        "@type": "PersonalInformation",
        "type": "expertise",
        "value": "chemistry",
        "level": "high"
      },
-     "firsthobby" : {
+     "pi1" : {
        "@type": "PersonalInformation",
        "type": "hobby",
        "value": "reading",
        "level": "high"
      },
-     "music-interest" : {
+     "pi6" : {
        "@type": "PersonalInformation",
        "type": "interest",
        "value": "r&b music",
