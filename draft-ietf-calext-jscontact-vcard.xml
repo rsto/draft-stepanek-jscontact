@@ -308,7 +308,7 @@
         </section>
         <section anchor="vcard-param-pref">
           <name>PREF</name>
-          <t>This converts to the <tt>pref</tt> property defined in <xref target="I-D.ietf-calext-jscontact" section="1.6.3"/></t>
+          <t>This converts to the <tt>pref</tt> property.</t>
         </section>
         <section anchor="vcard-param-propid">
           <name>PROP-ID</name>
@@ -362,7 +362,7 @@
         </section>
         <section anchor="vcard-param-type">
           <name>TYPE</name>
-          <t>This converts to the <tt>contexts</tt> property defined in <xref target="I-D.ietf-calext-jscontact" section="1.6.1"/> as well as property-specific <tt>type</tt> property values defined in later sections.</t>
+          <t>This converts to the <tt>contexts</tt> property as well as property-specific <tt>type</tt> property values defined in later sections.</t>
         </section>
         <section anchor="vcard-param-tz">
           <name>TZ</name>
@@ -3062,7 +3062,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       </section>
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
-        <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain extended properties of which the semantics or purpose is unknown <xref target="I-D.ietf-calext-jscontact" section="1.5.2"/>.</t>
+        <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain vendor-specific properties of which the semantics or purpose are unknown.</t>
         <t>This section defines new vCard properties and parameters by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="vcard-prop-jscontact-prop">
           <name>Property <tt>JSCONTACT-PROP</tt></name>
@@ -3151,7 +3151,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
   END:VCARD
 ]]></artwork>
               </figure>
-              <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object using a path relative to the Card object.  Although not recommended by <xref target="I-D.ietf-calext-jscontact" section="1.5.3"/>, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
+              <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object using a path relative to the Card object.  Although not recommended, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
               <figure anchor="jscontact-prop-nested">
                 <name>Nested property example with path relative to Card</name>
                 <artwork><![CDATA[
@@ -3213,7 +3213,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
     </section>
     <section anchor="security-considerations">
       <name>Security Considerations</name>
-      <t>This specification defines how to convert between the JSContact and vCard formats.  The security considerations for parsing and formatting such data apply and are outlined in <xref target="I-D.ietf-calext-jscontact" section="9"/> and <xref target="RFC6350" section="9"/>.</t>
+      <t>This specification defines how to convert between the JSContact and vCard formats.  The security considerations for parsing and formatting such data apply and are outlined in <xref target="I-D.ietf-calext-jscontact" section="5"/> and <xref target="RFC6350" section="9"/>.</t>
     </section>
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
