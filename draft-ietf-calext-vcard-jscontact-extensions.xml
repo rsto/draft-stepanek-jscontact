@@ -1,15 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<?xml-model href="rfc7991bis.rnc"?>
-<!DOCTYPE rfc [
-<!ENTITY nbsp "&#160;">
-<!ENTITY zwsp "&#8203;">
-<!ENTITY nbhy "&#8209;">
-<!ENTITY wj "&#8288;">
-]>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-calext-vcard-jscontact-extensions-01" ipr="trust200902" consensus="true" obsoletes="" updates="" submissionType="IETF" xml:lang="en" version="3">
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE rfc>
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-calext-vcard-jscontact-extensions-02" ipr="trust200902" consensus="true" obsoletes="" updates="" submissionType="IETF" xml:lang="en" version="3">
   <front>
     <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-01"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-02"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>Fastmail</organization>
       <address>
@@ -36,7 +30,7 @@
         <email>mario.loffredo@iit.cnr.it</email>
       </address>
     </author>
-    <date year="2022" month="October" day="24"/>
+    <date year="2022" month="November" day="25"/>
     <area>Applications</area>
     <workgroup>Calendaring Extensions</workgroup>
     <keyword>addressbook</keyword>
