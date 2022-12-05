@@ -1254,7 +1254,7 @@ The value of this street component.</li>
       "res1": {
         "@type": "MediaResource",
         "type": "photo",
-        "uri": "http://www.example.com/pub/photos/jqpublic.gif"
+        "uri": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4..."
       },
       ...
    },
