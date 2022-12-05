@@ -53,11 +53,11 @@
       <t>The key design considerations for this data model are as follows:</t>
       <ul spacing="normal">
         <li>Most of the initial set of attributes should be taken from the vCard data format <xref target="RFC6350" format="default"/> and extensions (<xref target="RFC6473" format="default"/>, <xref target="RFC6474" format="default"/>, <xref target="RFC6715" format="default"/>, <xref target="RFC6869" format="default"/>, <xref target="RFC8605" format="default"/>).  The specification should add new attributes or value types, or not support existing ones, where appropriate.  Conversion between the data formats need not fully preserve semantic meaning.</li>
-        <li>The attributes of the cards data represented must be described as a simple key-value pair, reducing complexity of its representation.</li>
+        <li>The attributes of the card data represented must be described as a simple key-value pair, reducing complexity of its representation.</li>
         <li>The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.</li>
         <li>Extensions, such as new properties and components, <bcp14>MUST NOT</bcp14> lead to requiring an update to this document.</li>
       </ul>
-      <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>.  Using JSON is mostly a pragmatic choice: its widespread use makes Card easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
+      <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>.  Using JSON is mostly a pragmatic choice: its widespread use makes JSContact easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
       <section anchor="relation-to-the-xcard-and-jcard-formats" numbered="true" toc="default">
         <name>Relation to the xCard and jCard formats</name>
         <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data, in XML and JSON format respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
@@ -87,7 +87,7 @@ they appear in all capitals, as shown here.</t>
           <name>Id</name>
           <t>Where <tt>Id</tt> is given as a data type, it means a <tt>String</tt> of at least 1 and a maximum of 255 octets in size, and it <bcp14>MUST</bcp14> only contain characters from the <tt>URL and Filename Safe</tt> base64url alphabet, as defined in Section 5 of <xref target="RFC4648" format="default"/>, excluding the pad character (<tt>=</tt>).  This means the allowed characters are the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (<tt>-</tt>), and underscore (<tt>_</tt>).</t>
           <t>In many places in JSContact a JSON map is used where the map keys are of type Id and the map values are all the same type of object.  This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key).  This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSContact object.  The map keys <bcp14>MUST</bcp14> be preserved across multiple versions of the JSContact object.</t>
-          <t>Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two Card objects might use the same Ids in their respective <tt>photos</tt> properties.  Or within the same Card object the same Id could appear in the <tt>emails</tt> and <tt>phones</tt> properties.  These situations do not imply any semantic connections among the objects.</t>
+          <t>Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two <xref target="card">Card</xref> objects might use the same Ids in their respective <tt>photos</tt> properties.  Or within the same Card object the same Id could appear in the <tt>emails</tt> and <tt>phones</tt> properties.  These situations do not imply any semantic connections among the objects.</t>
         </section>
         <section anchor="int-unsignedint" numbered="true" toc="default">
           <name>Int and UnsignedInt</name>
@@ -120,6 +120,8 @@ they appear in all capitals, as shown here.</t>
           <ul spacing="normal">
             <li>
               <t>@type: <tt>String</tt> (mandatory).  The allowed values are defined in the property definition that makes use of the Resource type.</t>
+            </li>
+            <li>
               <t>type: <tt>String</tt> (optional).
 The type of the resource.  The allowed values are defined in the property definition that makes use of the Resource type.
 </t>
@@ -144,7 +146,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       </section>
       <section anchor="comon-properties">
         <name>Common properties</name>
-        <t>Most of the properties in this document are specific to a single JSContact object type.  Such properties are defined along with the respective object type.  The properties in this section however are common to multiple data types and better be defined just once.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSContact object if they are explicitly mentioned to be allowed for this object type.</t>
+        <t>Most of the properties in this document are specific to a single JSContact object type.  Such properties are defined along with the respective object type.  The properties in this section are common to multiple data types and are defined here to avoid repetition.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSContact object if they are explicitly mentioned to be allowed for this object type.</t>
         <section anchor="prop-contexts" numbered="true" toc="default">
           <name>The <tt>contexts</tt> property</name>
           <t>Type: <tt>String[Boolean]</tt></t>
@@ -170,16 +172,16 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       </section>
       <section>
         <name>Versioning</name>
-        <t>Every instance of a JSContact Card indicates which JSContact specification its IANA-registered properties and values are based on.  This version is indicated by the <tt>@version</tt> <xref target="prop-version"/> property.  This is to allow implementations correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions or other significant changes to existing JSContact specifications are introduced.  All IANA-registered properties indicate the version at which they got introduced, updated or obsoleted.</t>
-        <t>Registering a new JSContact version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification.  Such RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the  JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
+        <t>Every instance of a JSContact Card indicates which JSContact specification its IANA-registered properties and values are based on.  This version is indicated by the <tt>@version</tt> <xref target="prop-version"/> property.  This is to allow implementations to correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions or other significant changes to existing JSContact specifications are introduced.  All IANA-registered properties indicate the version at which they got introduced, updated or obsoleted.</t>
+        <t>Registering a new JSContact version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification.  Such a RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the  JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
       </section>
       <section>
         <name>Validating JSContact Properties</name>
-        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, vendor-specific properties in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any its properties are invalid.  If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
+        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, while vendor-specific properties are defined in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any its properties are invalid.  If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
-             An IANA-registered property is any property that got registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification are IANA-registered properties.
+             An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification are IANA-registered properties.
           </t>
           <t>
             Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
@@ -931,7 +933,7 @@ Defines the preference of this language in relation to other languages of the sa
          "pref": 2
        },
        {
-         "@type": "ContactLanguage",
+         "@type": "LanguagePreference",
          "contexts": { "private": true }
        }
      ]
