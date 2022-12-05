@@ -1343,27 +1343,25 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
       "k8" : {
         "@type": "Anniversary",
         "type": "birth",
-        "date": "1953-10-15T23:10:00Z",
-        "place": {
-          "@type": "Address",
-          "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
+        "date": {
+          "@type": "PartialDate",
+          "year": 1953,
+          "month": 4,
+          "day": 15
         }
       },
       "k9" : {
         "@type": "Anniversary",
         "type": "death",
-        "date": "1996-04-15",
+        "date": {
+          "@type": "Timestamp",
+          "utc": "1996-10-15T23:10:00Z"
+        },
         "place": {
           "@type": "Address",
           "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
         }
-      },
-      "k12" : {
-        "@type": "Anniversary",
-        "type": "wedding",
-        "date": "1986-02-01"
       }
-    },
    ...
         ]]></sourcecode>
           </figure>
