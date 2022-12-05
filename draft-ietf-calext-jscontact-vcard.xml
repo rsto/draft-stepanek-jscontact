@@ -1225,9 +1225,7 @@
         </section>
         <section anchor="vcard-prop-related">
           <name>RELATED</name>
-          <t>All the RELATED instances convert to the <tt>relatedTo</tt> property (<xref target="related_conversion"/>): an entry for each relationship between another entity and the entity represented by this Card.  The map keys are the <tt>uid</tt> values of the associated cards.</t>
-          <t>Each map value is a <tt>Relation</tt> object including only the <tt>relation</tt> property represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
-          <t>If the relation type is unspecified, the <tt>relation</tt> property <bcp14>MUST</bcp14> be empty.</t>
+          <t>This converts to an entry in the <tt>relatedTo</tt> property (<xref target="related_conversion"/>). The property value converts to the key in the <tt>relatedTo</tt> property. The TYPE parameters convert to the <tt>relation<tt> of the <tt>Relation</tt> object value. Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
           <figure anchor="related_conversion">
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
