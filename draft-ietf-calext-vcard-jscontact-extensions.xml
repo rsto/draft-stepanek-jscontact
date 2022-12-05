@@ -340,7 +340,7 @@ PRONOUNS;LANG=en:they/them
           <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI.  It <bcp14>MUST</bcp14> be assigned if the value type is TEXT.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
           <dt>Description:</dt>
           <dd>
-            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides a standard property for the same purpose.  In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
+            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides an IANA-registered property for the same purpose.  In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -544,7 +544,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <dt>Description:</dt>
           <dd>
             <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the online service associated with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.</t>
-            <t>Several vCard address book implementations currently use an experimental X-SERVICE-TYPE parameter property to achieve the same as this parameter.  This specification provides a standard parameter for the same purpose.</t>
+            <t>Several vCard address book implementations currently use an experimental X-SERVICE-TYPE parameter.  This specification provides an IANA-registered parameter for the same purpose.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
