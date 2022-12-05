@@ -66,7 +66,7 @@
         <name>Motivation</name>
         <t>The JSContact data model and format <xref target="I-D.ietf-calext-jscontact"/> aims to be an alternative to the widely used vCard <xref target="RFC6350"/> standard and jCard <xref target="RFC7095"/>.</t>
         <t>While applications might prefer JSContact to exchange contact card data with other systems, they are likely to interoperate with services and clients that only support vCard or jCard.  Similarly, existing contact data providers and consumers already using vCard or jCard might want to represent their contact data also in JSContact.</t>
-        <t>To achieve this, this document defines a standard how to convert contact data between JSContact and vCard (and consequently jCard). </t>
+        <t>To achieve this, this document defines standard rules to convert contact data between JSContact and vCard (and consequently jCard). </t>
       </section>
       <section>
         <name>Conventions Used in This Document</name>
@@ -81,7 +81,7 @@
         <name>General rules</name>
         <section>
           <name>The <tt>uid</tt> property</name>
-          <t>The UID property in vCard is optional, but the <tt>uid</tt> property in JSContact is mandatory.  Implementations that convert a vCard without UID property <bcp14>MUST</bcp14> generate a unique identifier as value for the <tt>uid</tt> property.  They <bcp14>SHOULD</bcp14> generate the same identifier when repeatedly converting the same vCard, but they <bcp14>MAY</bcp14> generate different values.  Consequently, a vCard without UID property <bcp14>MAY</bcp14> does not convert to one exact instance of a JSContact card or card group.</t>
+          <t>The UID property in vCard is optional, but the <tt>uid</tt> property in JSContact is mandatory.  Implementations that convert a vCard without UID property <bcp14>MUST</bcp14> generate a unique identifier as a value for the <tt>uid</tt> property.  They <bcp14>SHOULD</bcp14> generate the same identifier when repeatedly converting the same vCard, but they <bcp14>MAY</bcp14> generate different values.  Consequently, a vCard without UID property <bcp14>MAY</bcp14> not convert to one exact instance of a JSContact card or card group.</t>
         </section>
         <section>
           <name>Choosing identifiers</name>
@@ -143,7 +143,7 @@
         </section>
         <section anchor="vcard-param-calscale">
           <name>CALSCALE</name>
-          <t>This parameter set on a BDAY or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on a BDAY, DEATHDATE or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-created">
           <name>CREATED</name>
@@ -217,7 +217,7 @@
           <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on.  The value of the LANGUAGE parameter defines the language key in the <tt>localizations</tt> property.  The JSON pointer in the <tt>PatchObject</tt> is the path to the JSContact property that the vCard property converts to.  The value of the PatchObject is the converted property value.</t>
           <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations.  For this, the implementation should choose one of the vCard properties to also set in the main Card:</t>
           <ul>
-            <li>If a vCard property occurs one or more times and at least one has not the LANGUAGE parameter set, then the implementation should choose the non-localized property among them.</li>
+            <li>If a vCard property occurs one or more times and at least one does not have the LANGUAGE parameter set, then the implementation should choose the non-localized property among them.</li>
             <li>If all vCard properties of the same type have the LANGUAGE parameter set, then the implementation should choose one of these properties to set both as non-localized and localized property.  This is to preserve the language information of the property value.</li>
           </ul>
           <t>The following two examples illustrate these cases.</t>
@@ -573,7 +573,7 @@
               </tr>
               <tr>
                 <td align="left">Given Names</td>
-                <td align="left">personal</td>
+                <td align="left">given</td>
               </tr>
               <tr>
                 <td align="left">Family Names</td>
@@ -581,7 +581,7 @@
               </tr>
               <tr>
                 <td align="left">Additional Names</td>
-                <td align="left">additional</td>
+                <td align="left">middle</td>
               </tr>
               <tr>
                 <td align="left">Honorific Suffixes</td>
@@ -672,7 +672,7 @@
           <name>ADR</name>
           <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.</t>
           <t>The ADR components convert into the <tt>Address</tt> properties as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
-          <t>The "street address" and "extended address" ADR components MAY be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
+          <t>The "street address" and "extended address" ADR components <bcp14>MAY</bcp14> be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
           <table anchor="adr_components_vs_address_members">
             <name>ADR components vs.  Address members conversion</name>
             <thead>
@@ -817,7 +817,7 @@
             </tbody>
           </table>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactChannelPreference</tt> objects MUST be empty.</t>
+          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactChannelPreference</tt> objects <bcp14>MUST</bcp14> be empty.</t>
           <figure anchor="contact_channel_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
@@ -926,7 +926,7 @@
           <name>LANG</name>
           <t>A LANG property converts to an entry in the <tt>preferredContactLanguages</tt> property (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of <tt>ContactLanguage</tt> objects.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactLanguage</tt> objects MUST be empty.</t>
+          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactLanguage</tt> objects <bcp14>MUST</bcp14> be empty.</t>
           <figure anchor="lang_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
@@ -1161,7 +1161,7 @@
         <section anchor="vcard-prop-member">
           <name>MEMBER</name>
           <t>The uids of the contact cards composing the group are included in the <tt>members</tt> property (<xref target="group_example"/>).</t>
-          <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
+          <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementers <bcp14>MAY</bcp14> insert the map entries by order of preference.</t>
           <figure anchor="group_example">
             <name>Group example</name>
             <artwork><![CDATA[
@@ -1190,7 +1190,7 @@
         <section anchor="vcard-prop-org">
           <name>ORG</name>
           <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name and the <tt>units</tt> property is an array of <tt>OrgUnit</tt> objects each containing the organizational unit name in the <tt>name</tt> property.</t>
-          <t>Implementations MAY allow to represent organizational untits without the organizational name.  In this case, the first component of the ORG value MUST be an empty string (e.g.  ORG:;DepartmentA).</t>
+          <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational untits without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.  ORG:;DepartmentA).</t>
           <t>The ALTID, LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <t>The first item of the comma-separated SORT-AS parameter value converts to the <tt>sortAs</tt> property of the <tt>Organization</tt> object.  The subsequent items convert to the <tt>sortAs</tt> property of the corresponding <tt>OrgUnit</tt> object</t>
           <figure anchor="org_conversion">
@@ -1225,9 +1225,9 @@
         </section>
         <section anchor="vcard-prop-related">
           <name>RELATED</name>
-          <t>All the RELATED instances convert to the <tt>relatedTo</tt> property (<xref target="related_conversion"/>): an entry for each entity the entity described by the Card is associated with.  The map keys are the <tt>uid</tt> values of the associated cards.</t>
+          <t>All the RELATED instances convert to the <tt>relatedTo</tt> property (<xref target="related_conversion"/>): an entry for each relationship between another entity and the entity represented by this Card.  The map keys are the <tt>uid</tt> values of the associated cards.</t>
           <t>Each map value is a <tt>Relation</tt> object including only the <tt>relation</tt> property represented as a set of the RELATED-specific values of the TYPE parameter as defined in Section 6.6.6 of <xref target="RFC6350"/>.</t>
-          <t>If the relation type is unspecified, the <tt>relation</tt> property MUST be empty.</t>
+          <t>If the relation type is unspecified, the <tt>relation</tt> property <bcp14>MUST</bcp14> be empty.</t>
           <figure anchor="related_conversion">
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
@@ -1481,7 +1481,7 @@
         <section anchor="vcard-prop-categories">
           <name>CATEGORIES</name>
           <t>A CATEGORIES property converts to a set of entries of the <tt>keywords</tt> property (<xref target="categories_conversion"/>).  The keys are the comma-separated text values of the CATEGORIES property.</t>
-          <t>In this case, the PREF parameter has not a JSContact counterpart; however, the implementers MAY insert the map entries by order of preference.</t>
+          <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementers <bcp14>MAY</bcp14> insert the map entries by order of preference.</t>
           <figure anchor="categories_conversion">
             <name>CATEGORIES conversion example</name>
             <artwork><![CDATA[
@@ -1980,10 +1980,10 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <name>Converting JSContact to vCard</name>
       <section>
         <name>Conversion Rules</name>
-        <t>A <tt>Card</tt> converts to vCard by applying the reserve rules of converting vCard to JSContact.  <xref target="table_convert_jscontact_to_vcard"/> lists the relevant document sections for each JSContact object type and property.  The following additional rules apply:</t>
+        <t>A <tt>Card</tt> converts to vCard by applying the reverse rules of converting vCard to JSContact.  <xref target="table_convert_jscontact_to_vcard"/> lists the relevant document sections for each JSContact object type and property.  The following additional rules apply:</t>
         <ul>
           <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
-          <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> the DERIVED parameter on the FN property.  Otherwise, they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
+          <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.  Otherwise, they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
           <li>Vendor-extension and unknown properties convert to vCard as outlined in section <xref target="convert-other-jscontact"/>.</li>
         </ul>
         <table anchor="table_convert_jscontact_to_vcard">
@@ -3077,7 +3077,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>The property can be specified multiple times in a vCard.</dd>
             <dt>Property parameters:</dt>
             <dd>
-              The JSPTR parameter MUST be set exactly once for this property.
+              The JSPTR parameter <bcp14>MUST</bcp14> be set exactly once for this property.
               The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
               <bcp14>MUST</bcp14> be URI.  Other IANA-registered and experimental property parameters
               can be specified on this property.
