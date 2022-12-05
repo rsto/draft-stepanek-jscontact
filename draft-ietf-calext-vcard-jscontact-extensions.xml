@@ -189,8 +189,9 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
               language constructs.  For example, the German language typically distinguishes
               between the grammatical gender of the recipient in salutations.
               The allowed values for this property aim to cover grammatical genders
-              for the majority of human languages.  Future RFCs <bcp14>MAY</bcp14>
-              define additional values if the current selection is found to be inadequate.
+              for the majority of human languages.  This specification registers an <xref target="new_values">initial
+              list</xref> of allowed values at the IANA vCard Property Values Registry, but
+              this may be extended later.
             </t>
           </dd>
           <dt>Format definition:</dt>
@@ -220,6 +221,7 @@ gram-gender-value = "animate" /
                     "inanimate" /
                     "male" /
                     "neuter" /
+                    iana-token
                     x-value
 ]]></sourcecode>
           </dd>
