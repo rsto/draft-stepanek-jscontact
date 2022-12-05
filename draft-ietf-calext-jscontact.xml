@@ -1050,7 +1050,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
 </t>
               <ul spacing="normal">
                 <li><tt>billing</tt> An address to be used for billing.</li>
-                <li><tt>postal</tt> An address to be used for delivering physical items.</li>
+                <li><tt>delivery</tt> An address to be used for delivering physical items.</li>
               </ul>
             </li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -2726,7 +2726,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">postal</td>
+                    <td align="left">delivery</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
