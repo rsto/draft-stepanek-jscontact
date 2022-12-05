@@ -1333,7 +1333,7 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
             <li>year: <tt>UnsignedInt</tt> (optional).  This is the calendar year.</li>
             <li>month: <tt>UnsignedInt</tt> (optional).  This is the calendar month, represented as the integers 1 &lt;= month &lt;= 12.  If this property is set then either <tt>year</tt> or <tt>day</tt> <bcp14>MUST</bcp14> be set.</li>
             <li>day: <tt>UnsignedInt</tt> (optional).  This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
-            <li>calendarScale: <tt>String</tt> (optional).  This is the calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="RFC7529" format="default"/> or a vendor-specific value).  Note that the year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.</li>
+            <li>calendarScale: <tt>String</tt> (optional).  This is the calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="RFC7529" format="default"/> or a vendor-specific value.  The year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.  Note that for calendar systems with leap months, the <tt>year</tt> property might be required to convert between the Gregorian calendar date and the respective calendar system.</li>
           </ul>
           <figure anchor="example-anniversaries">
             <name><tt>anniversaries</tt> example</name>
