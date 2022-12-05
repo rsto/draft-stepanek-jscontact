@@ -1,0 +1,718 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE rfc>
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" docName="draft-ietf-calext-vcard-jscontact-extensions-02" ipr="trust200902" consensus="true" obsoletes="" updates="" submissionType="IETF" xml:lang="en" version="3">
+  <front>
+    <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-02"/>
+    <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
+      <organization>Fastmail</organization>
+      <address>
+        <postal>
+          <street>PO Box 234, Collins St West</street>
+          <city>Melbourne</city>
+          <code>VIC 8007</code>
+          <country>Australia</country>
+          <region> </region>
+        </postal>
+        <email>rsto@fastmailteam.com</email>
+      </address>
+    </author>
+    <author initials="M." surname="Loffredo" fullname="Mario Loffredo">
+      <organization>IIT-CNR</organization>
+      <address>
+        <postal>
+          <street>Via Moruzzi,1</street>
+          <city>Pisa</city>
+          <code>56124</code>
+          <country>Italy</country>
+          <region> </region>
+        </postal>
+        <email>mario.loffredo@iit.cnr.it</email>
+      </address>
+    </author>
+    <date year="2022" month="November" day="25"/>
+    <area>Applications</area>
+    <workgroup>Calendaring Extensions</workgroup>
+    <keyword>addressbook</keyword>
+    <keyword>contacts</keyword>
+    <keyword>cards</keyword>
+    <keyword>VCARD</keyword>
+    <keyword>JSContact</keyword>
+    <abstract>
+      <t>
+        This document defines a set of new properties for vCard and extends the use of existing ones.
+        Their primary purpose is to align the same set of features between the JSContact and vCard formats,
+        but the new definitions also aim to be useful within just the vCard format.
+      </t>
+    </abstract>
+  </front>
+  <middle>
+    <section>
+      <name>Introduction</name>
+      <t>
+        The JSContact <xref target="I-D.ietf-calext-jscontact"/> format aims to be an alternative to the
+        vCard <xref target="RFC6350"/> format for representation of contact and address book
+        data.  As such, it introduces new semantics that are not covered in the current
+        definition of vCard and its various extensions.  Converting contact data between
+        the two formats is defined in <xref target="I-D.ietf-calext-jscontact-vcard"/> with the goal of
+        not loosing any semantics during conversion.  In order to do so, this document
+        defines a new set of properties for vCard and extends existing definitions.
+      </t>
+      <section>
+        <name>Requirements Language</name>
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL",
+          "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT
+          RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+          interpreted as described in BCP 14 <xref target="RFC2119"/>
+          <xref target="RFC8174"/> when, and only when, they appear in
+          all capitals, as shown here.</t>
+      </section>
+    </section>
+    <section anchor="new-properties">
+      <name>New Properties</name>
+      <section anchor="prop-contactchannelpref">
+        <name>CONTACT-CHANNEL-PREF Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>CONTACT-CHANNEL-PREF</dd>
+          <dt>Purpose:</dt>
+          <dd>This property defines which channels the entity associated with this vCard prefers to be contacted with.</dd>
+          <dt>Value type:</dt>
+          <dd>A single text value, restricted to an enumerated list of allowed values.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*</dd>
+          <dt>Property parameters:</dt>
+          <dd>The PREF parameter defines the preference of this contact channel in relation to other contact channels.  The TYPE parameter defines when to use this preference.</dd>
+          <dt>Description:</dt>
+          <dd>
+            This defines an order of preferences for contact channels.  The contact channels supported in this specification are phone numbers, email, instant messaging and postal delivery.  They are identified by the name of the respective vCard property.
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+contact-channel-pref  = "CONTACT-CHANNEL-PREF
+                    *(";" contact-channel-pref-param )
+                      ":" contact-channel-pref-value CRLF
+
+contact-channel-pref-param  = type-param / pref-param / any-param
+
+contact-channel-pref-value = "ADR" / "EMAIL" / "IMPP" / "TEL" / x-value
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+CONTACT-CHANNEL-PREF;PREF=1:EMAIL
+CONTACT-CHANNEL-PREF;PREF=2:TEL
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="prop-created">
+        <name>CREATED Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>CREATED</dd>
+          <dt>Purpose:</dt>
+          <dd>This property defines the date and time when the vCard was created</dd>
+          <dt>Value type:</dt>
+          <dd>A single timestamp value.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*1</dd>
+          <dt>Property parameters:</dt>
+          <dd>VALUE</dd>
+          <dt>Description:</dt>
+          <dd>
+            This is the time stamp when the vCard was created.  Copying the
+            vCard across systems does not count as a new creation, nor does
+            a new revision.  Instead, the time stamp value typically
+            stays unchanged for the existence of the vCard.
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+created       = "CREATED" createdparam
+                ":" timestamp CRLF
+
+createdparam  = *(
+                 ;
+                 ; The following is OPTIONAL,
+                 ; but MUST NOT occur more than once.
+                 ;
+                 (";" "VALUE" "=" "TIMESTAMP") /
+                 ;
+                 ; The following is OPTIONAL,
+                 ; and MAY occur more than once.
+                 ;
+                 (";" any-param)
+                 ;
+                 )
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+CREATED:20220705093412Z
+CREATED;VALUE=TIMESTAMP:20211022T140000-05
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="prop-grammatical-gender">
+        <name>GRAMMATICAL-GENDER Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>GRAMMATICAL-GENDER</dd>
+          <dt>Purpose:</dt>
+          <dd>
+            This property defines the grammatical gender that shall be used
+            to address the entity represented by this vCard.
+          </dd>
+          <dt>Value type:</dt>
+          <dd>A single text value, restricted to an enumerated list of allowed values.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*</dd>
+          <dt>Property parameters:</dt>
+          <dd>LANG</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>
+              This property defines the grammatical gender that the contact prefers
+              to be addressed by or referred at.  Multiple occurrences of this property
+              are allowed, but <bcp14>SHOULD</bcp14> be distinguished by the LANG
+              parameter.
+            </t>
+            <t>
+              Many human languages use grammatical genders in salutations and other
+              language constructs.  For example, the German language typically distinguishes
+              between the grammatical gender of the recipient in salutations.
+              The allowed values for this property aim to cover grammatical genders
+              for the majority of human languages.  Future RFCs <bcp14>MAY</bcp14>
+              define additional values if the current selection is found to be inadequate.
+            </t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+gram-gender       = "GRAMMATICAL-GENDER" gram-gender-param
+                      ":" gram-gender-value CRLF
+
+gram-gender-param =
+                *(
+                 ;
+                 ; The following is OPTIONAL,
+                 ; but MUST NOT occur more than once.
+                 ;
+                 (";" language-param) /
+                 ;
+                 ; The following is OPTIONAL,
+                 ; and MAY occur more than once.
+                 ;
+                 (";" any-param)
+                 ;
+                 )
+
+gram-gender-value = "animate" /
+                    "female" /
+                    "inanimate" /
+                    "male" /
+                    "neuter" /
+                    x-value
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+GRAMMATICAL-GENDER:neuter
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="prop-locale">
+        <name>LOCALE Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>LOCALE</dd>
+          <dt>Purpose:</dt>
+          <dd>This property defines the default locale that human-readable text values in this vCard should be assumed written in.</dd>
+          <dt>Value type:</dt>
+          <dd>A single Language-Tag value as defined in <xref target="RFC6350" section="4"/>.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*1</dd>
+          <dt>Property parameters:</dt>
+          <dd>The LANG parameter <bcp14>MUST NOT</bcp14> be assigned to this property.</dd>
+          <dt>Description:</dt>
+          <dd>
+            This property defines the locale in which property values of type
+            <tt>TEXT</tt> shall be assumed to be written for this vCard.
+            If a vCard property includes the <tt>LANG</tt> parameter, then the
+            parameter value has higher precedence than the <tt>LOCALE</tt>
+            property value.
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+locale       = "LOCALE" any-param
+                ":" Language-Tag CRLF   ; defined in RFC6350, Section 4.
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+LOCALE:de-AT
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="prop-pronouns">
+        <name>PRONOUNS Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>PRONOUNS</dd>
+          <dt>Purpose:</dt>
+          <dd>
+            This property defines the pronouns that shall be used
+            to refer to the entity represented by this vCard.
+          </dd>
+          <dt>Value type:</dt>
+          <dd>A single text value.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*</dd>
+          <dt>Property parameters:</dt>
+          <dd>LANG, PREF, TYPE</dd>
+          <dt>Description:</dt>
+          <dd>
+            This property contains the pronouns that the contact chooses to use for themselves.
+            The value is free-form text.  These pronouns shall be used
+            when addressing or referring to the contact.  Multiple occurrences of
+            this property <bcp14>MAY</bcp14> define pronouns for multiple languages,
+            preferences and contexts.
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+pronouns       = "PRONOUNS" pronouns-param
+                ":" text CRLF
+
+pronouns-param =
+                *(
+                 ;
+                 ; The following is OPTIONAL,
+                 ; but MUST NOT occur more than once.
+                 ;
+                 (";" language-param / pref-param / type-param) /
+                 ;
+                 ; The following is OPTIONAL,
+                 ; and MAY occur more than once.
+                 ;
+                 (";" any-param)
+                 ;
+                 )
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+PRONOUNS;LANG=en:they/them
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="prop-socialprofile">
+        <name>SOCIALPROFILE Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>SOCIALPROFILE</dd>
+          <dt>Purpose:</dt>
+          <dd>To specify the URI or username for social media profiles associated with the object the vCard represents.</dd>
+          <dt>Value type:</dt>
+          <dd>A single URI or TEXT value.  The default value type is URI.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*</dd>
+          <dt>Property parameters:</dt>
+          <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI.  It <bcp14>MUST</bcp14> be assigned if the value type is TEXT.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
+          <dt>Description:</dt>
+          <dd>
+            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides a standard property for the same purpose.  In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+SOCIALPR-param = "VALUE=uri" / "VALUE=text" / service-type-param / any-param
+SOCIALPR-value = URI / text ; Value and VALUE parameter MUST match.
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+SOCIALPROFILE:https://github.com/github
+SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=TEXT:peter94
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+    </section>
+    <section anchor="new-parameters">
+      <name>New Parameters</name>
+      <section anchor="param-author">
+        <name>AUTHOR Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>AUTHOR</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter identifies the author of the associated property value.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows to name an author as free-text value (see <xref target="param-author-name"/>).</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+author-param    = "AUTHOR" "=" DQUOTE +QSAFE-CHAR DQUOTE
+                ; a valid URI from Section 3 of [RFC3986]
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+NOTE;AUTHOR="mailto:john@example.com":This is some note.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-author-name">
+        <name>AUTHOR-NAME Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>AUTHOR-NAME</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter names the author of the associated property value.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It names the author as a free-text value.  The parameter value <bcp14>MUST NOT</bcp14> be empty.  Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows to identify an author by URI (see <xref target="param-author"/>).</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+author-name-param    = "AUTHOR-NAME" "=" param-value ; not empty
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+NOTE;AUTHOR-NAME=John Doe:This is some note.
+NOTE;AUTHOR-NAME="_:l33tHacker:_":A note with an unusual author name.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-created">
+        <name>CREATED Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>CREATED</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter defines the date and time when a property was created in a vCard.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created.  The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" section="4.3.5"/>.  Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp.  It is up to implementations to decide if a property change resembles an update or rather a delete and create.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+created-param    = "CREATED" "=" param-value ;
+                ; a valid TIMESTAMP from Section 4.3.5 of [RFC6350]
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+NOTE;CREATED=20221122T151823Z:This is some note.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-derived">
+        <name>DERIVED Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>DERIVED</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter specifies that the value of the associated property is derived from some other property value or values.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This property parameter <bcp14>MAY</bcp14> be specified on any property when the value is derived from some other property or properties.  When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
+            <t>For an example, an implementation may derive the value of the FN property from the name components of the N property.  It indicates this by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+derived-param    = "DERIVED" "=" ("true" / "false")
+; Default is false
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+N:;John;Quinlan;Mr.;
+FN;DERIVED=TRUE:Mr.  John Quinlan
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-ranks">
+        <name>RANKS Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>RANKS</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter specifies a ranking among the name components of a vCard N property value.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>The vCard N property defines the name of the object represented by a vCard.  A name may consist of multiple name components of the same type, such as surnames, and these form a sequence of values in the structured N property value.  However, the order in which a name component appears in the N property value does not allow to infer its culturally or otherwise significant rank among other values of the same component type.  Notably, cultures may distinguish between a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.</t>
+            <t>The RANKS parameter on a N property assigns a rank among the same-typed name components of a N property value.  The parameter value is structurally equivalent to the multi-valued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by colon.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+ranks-param     = ranks-component 4(";" ranks-component)
+ranks-component = rank *("," rank)
+rank            = (("1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9") *DIGIT)) / ""
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+N;RANKS="2,1";Gómez,Rodriguez;Pablo;;;
+             ; The culturally "first" surname is Rodriguez but
+             ; it appears at the second position in the N property.
+
+N;RANKS=",1;,1":Hamilton,Cartland;Mary,Barbara;;Dame;
+             ; The writer Dame Mary Barbara Hamilton Cartland
+             ; generally published as "Barbara Cartland"
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-propid">
+        <name>PROP-ID Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>PROP-ID</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter identifies a property among all its siblings of the same type.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>
+              This parameter uniquely identifies a property among all of its siblings with the same name within a vCard.  A valid PROP-ID value must be of 1 and a maximum of 255 octets in size, and it MUST only contain the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (<tt>-</tt>), and underscore (<tt>_</tt>).  The identifier only has the purpose to uniquely identify siblings, its value has no other meaning.  If an application makes use of PROP-ID it <bcp14>SHOULD</bcp14> assign a unique identifier to each sibling property of the same name within their embedding component.  The same identifier <bcp14>MAY</bcp14> be used for properties of a different name, and it <bcp14>MAY</bcp14> also be assigned to a same-named property that is not a sibling.
+            </t>
+            <t>
+              Resolving duplicate identifier conflicts is specific to the application.  Similarly, handling properties where some but not all siblings have a PROP-ID is assigned, is application-specific.
+            </t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+prop-id-param  = "PROP-ID" "=" 1*255(ALPHA / DIGIT / "-"/ "_")
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
+        <...remainder of base64-encoded data...>
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-service-type">
+        <name>SERVICE-TYPE Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>SERVICE-TYPE</dd>
+          <dt>Purpose:</dt>
+          <dd>To define the online service name associated with a messaging or social media profile.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the online service associated with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.</t>
+            <t>Several vCard address book implementations currently use an experimental X-SERVICE-TYPE parameter property to achieve the same as this parameter.  This specification provides a standard parameter for the same purpose.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+service-type-param    = param-value
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+           <sourcecode name=""><![CDATA[
+SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+    </section>
+    <section anchor="security-considerations" numbered="true" toc="default">
+      <name>Security Considerations</name>
+      <t>This specification extends the vCard Format Specification.  The same security considerations as outlined in <xref target="RFC6350" section="9"/> apply.</t>
+    </section>
+    <section anchor="IANA">
+      <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
+      <name>IANA Considerations</name>
+      <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_properties">
+        <name>New VCARD Properties</name>
+        <thead>
+          <tr>
+            <th align="left">Namespace</th>
+            <th align="left">Property</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td/>
+            <td align="left">CONTACT-CHANNEL-PREF</td>
+            <td align="left">This document, <xref target="prop-contactchannelpref"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">CREATED</td>
+            <td align="left">This document, <xref target="prop-created"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">LOCALE</td>
+            <td align="left">This document, <xref target="prop-locale"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">PRONOUNS</td>
+            <td align="left">This document, <xref target="prop-pronouns"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">SOCIALPROFILE</td>
+            <td align="left">This document, <xref target="prop-socialprofile"/></td>
+          </tr>
+        </tbody>
+      </table>
+      <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_parameters">
+        <name>New VCARD Parameters</name>
+        <thead>
+          <tr>
+            <th align="left">Namespace</th>
+            <th align="left">Parameter</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td/>
+            <td align="left">AUTHOR</td>
+            <td align="left">This document, <xref target="param-author"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">AUTHOR-NAME</td>
+            <td align="left">This document, <xref target="param-author-name"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">CREATED</td>
+            <td align="left">This document, <xref target="param-created"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">DERIVED</td>
+            <td align="left">This document, <xref target="param-derived"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">PROP-ID</td>
+            <td align="left">This document, <xref target="param-propid"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">RANKS</td>
+            <td align="left">This document, <xref target="param-ranks"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">SERVICE-TYPE</td>
+            <td align="left">This document, <xref target="param-service-type"/></td>
+          </tr>
+        </tbody>
+      </table>
+      <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_values">
+        <name>New VCARD Property Values</name>
+        <thead>
+          <tr>
+            <th align="left">Property</th>
+            <th align="left">Value</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">animate</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">female</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">inanimate</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">male</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">neuter</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </middle>
+  <back>
+    <references>
+      <name>References</name>
+      <references>
+        <name>Normative References</name>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.3986.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
+        <!-- The recommended and simplest way to include a well known reference -->
+      </references>
+      <references>
+        <name>Informative References</name>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact-vcard.xml"/>
+      </references>
+    </references>
+  </back>
+</rfc>
