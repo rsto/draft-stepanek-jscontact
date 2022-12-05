@@ -1678,7 +1678,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">@type</td>
                 <td align="left">String</td>
                 <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInformation, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
-                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="resource" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
+                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">@version</td>
@@ -2293,8 +2293,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Types" Registry</name>
-          <t>The following table lists the initial entries of the JSContact Types registry.  All types are for common use and their version is <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is "IETF".</t>
-          <table anchor="tab-iana-type-registry" align="left">
+          <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  All types are for version <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <table anchor="tab-iana-type-registry-common" align="left">
             <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
               <tr>
@@ -2466,12 +2466,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">Resource</td>
-                <td align="left">
-                  <xref target="resource" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">SchedulingAddress</td>
                 <td align="left">
                   <xref target="schedulingAddresses" format="default"/>
@@ -2511,6 +2505,24 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">UTCDateTime</td>
                 <td align="left">
                   <xref target="utcdatetime" format="default"/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <t>The following table lists the initial <tt>reserved</tt> usage entries of the JSContact Types registry.  All types are for version <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <table anchor="tab-iana-type-registry-reserved" align="left">
+            <name>Initial Contents of the "JSContact Types" Registry</name>
+            <thead>
+              <tr>
+                <th align="left">Type Name</th>
+                <th align="left">Reference or Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">Resource</td>
+                <td align="left">
+                  <xref target="resource" format="default"/>
                 </td>
               </tr>
             </tbody>
