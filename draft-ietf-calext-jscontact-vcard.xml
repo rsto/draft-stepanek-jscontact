@@ -212,6 +212,10 @@
         ]]></artwork>
           </figure>
         </section>
+        <section anchor="vcard-param-index">
+          <name>INDEX</name>
+          <t>This parameter set on an properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>position</tt> property of the <tt>PersonalInformation</tt> and <tt>DirectoryResource</tt> objects.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+        </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
           <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on.  The value of the LANGUAGE parameter defines the language key in the <tt>localizations</tt> property.  The JSON pointer in the <tt>PatchObject</tt> is the path to the JSContact property that the vCard property converts to.  The value of the PatchObject is the converted property value.</t>
@@ -480,7 +484,10 @@
       "ANNIVERSARY-1" : {
         "@type": "Anniversary",
         "type": "birth",
-        "date": "1953-10-15T23:10:00Z",
+        "date": {
+          "@type": "Timestamp",
+          "utc": "1953-10-15T23:10:00Z"
+        },
         "place": {
           "@type": "Address",
           "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
@@ -489,7 +496,12 @@
       "ANNIVERSARY-2" : {
         "@type": "Anniversary",
         "type": "death",
-        "date": "1996-04-15",
+        "date": {
+          "@type": "PartialDate",
+          "year": 1996,
+          "month": 4,
+          "year": 15
+        },
         "place": {
           "@type": "Address",
           "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
@@ -498,7 +510,12 @@
       "ANNIVERSARY-3" : {
         "@type": "Anniversary",
         "type": "wedding",
-        "date": "1986-02-01"
+        "date": {
+          "@type": "PartialDate",
+          "year": 1986,
+          "month": 2,
+          "day": 1
+        }
       }
     },
     ...
@@ -612,9 +629,9 @@
         "@type": "Name",
         "components":[
           { "@type": "NameComponent", "type": "prefix", "value": "Mr."  },
-          { "@type": "NameComponent", "type": "personal", "value": "John" },
+          { "@type": "NameComponent", "type": "given", "value": "John" },
           { "@type": "NameComponent", "type": "surname", "value": "Public" },
-          { "@type": "NameComponent", "type": "additional", "value": "Quinlan" },
+          { "@type": "NameComponent", "type": "middle", "value": "Quinlan" },
           { "@type": "NameComponent", "type": "suffix", "value": "Esq." }
         ],
         "sortAs": {
@@ -924,9 +941,9 @@
         </section>
         <section anchor="vcard-prop-lang">
           <name>LANG</name>
-          <t>A LANG property converts to an entry in the <tt>preferredContactLanguages</tt> property (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of <tt>ContactLanguage</tt> objects.</t>
+          <t>A LANG property converts to an entry in the <tt>preferredLanguages</tt> property (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of <tt>LanguagePreference</tt> objects.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactLanguage</tt> objects <bcp14>MUST</bcp14> be empty.</t>
+          <t>If both PREF and TYPE parameters are missing, the array of <tt>LanguagePreference</tt> objects <bcp14>MUST</bcp14> be empty.</t>
           <figure anchor="lang_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
@@ -958,7 +975,7 @@
           "pref": 2
         },
         {
-          "@type": "ContactLanguage",
+          "@type": "LanguagePreference",
           "contexts": { "private": true }
         }
       ]
@@ -1225,7 +1242,7 @@
         </section>
         <section anchor="vcard-prop-related">
           <name>RELATED</name>
-          <t>This converts to an entry in the <tt>relatedTo</tt> property (<xref target="related_conversion"/>). The property value converts to the key in the <tt>relatedTo</tt> property. The TYPE parameters convert to the <tt>relation<tt> of the <tt>Relation</tt> object value. Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This converts to an entry in the <tt>relatedTo</tt> property (<xref target="related_conversion"/>). The property value converts to the key in the <tt>relatedTo</tt> property. The TYPE parameters convert to the <tt>relation</tt> of the <tt>Relation</tt> object value. Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
           <figure anchor="related_conversion">
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
@@ -1316,7 +1333,7 @@
         <section anchor="vcard-prop-expertise">
           <name>EXPERTISE</name>
           <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> property is set to "expertise".</t>
-          <t>The INDEX parameter is represented as the index of the expertise among the declared expertises.</t>
+          <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
             <artwork><![CDATA[
@@ -1337,14 +1354,16 @@
       "PERSINFO-1" : {
         "@type": "PersonalInformation",
         "type": "expertise",
-        "value": "chemistry",
-        "level": "high"
+        "value": "chinese literature",
+         "level": "low",
+         "position": 2
       },
       "PERSINFO-2" : {
         "@type": "PersonalInformation",
         "type": "expertise",
-        "value": "chinese literature",
-         "level": "low"
+        "value": "chemistry",
+        "level": "high",
+        "position": 1
       },
       ...
     },
@@ -1356,7 +1375,7 @@
         <section anchor="vcard-prop-hobby">
           <name>HOBBY</name>
           <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> property is set to "hobby".</t>
-          <t>The INDEX parameter is represented as the index of the hobby among the declared hobbies.</t>
+          <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="hobby_conversion">
             <name>HOBBY conversion example</name>
             <artwork><![CDATA[
@@ -1378,13 +1397,15 @@
         "@type": "PersonalInformation",
         "type": "hobby",
         "value": "reading",
-        "level": "high"
+        "level": "high",
+        "position": 1
       },
       "PERSINFO-2" : {
         "@type": "PersonalInformation",
         "type": "hobby",
         "value": "sewing",
-        "level": "high"
+        "level": "high",
+        "position": 2
       },
       ...
     },
@@ -1396,7 +1417,7 @@
         <section anchor="vcard-prop-interest">
           <name>INTEREST</name>
           <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> property is set to "interest".</t>
-          <t>The INDEX parameter is represented as the index of the interest among the declared interests.</t>
+          <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="interest_conversion">
             <name>INTEREST conversion example</name>
             <artwork><![CDATA[
@@ -1418,13 +1439,15 @@
         "@type": "PersonalInformation",
         "type": "interest",
         "value": "r&b music",
-        "level": "medium"
+        "level": "medium",
+        "position": 1
       },
       "PERSINFO-2" : {
         "@type": "PersonalInformation",
         "type": "interest",
         "value": "rock ’n’ roll music",
-        "level": "high"
+        "level": "high",
+        "position": 2
       },
       ...
     },
@@ -1436,8 +1459,7 @@
         <section anchor="vcard-prop-org-directory">
           <name>ORG-DIRECTORY</name>
           <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>The INDEX parameter is represented as the index of the directory among the online resources with the <tt>directory</tt> type.</t>
+          <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY conversion example</name>
             <artwork><![CDATA[
@@ -1458,7 +1480,8 @@
       "DIRECTORY-1": {
         "@type": "DirectoryResource",
         "type": "directory",
-        "uri": "http://directory.mycompany.example.com"
+        "uri": "http://directory.mycompany.example.com",
+        "position": 1
       },
       "DIRECTORY-2": {
         "@type": "DirectoryResource",
@@ -2458,6 +2481,13 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>DirectoryResource</td>
+              <td>position</td>
+              <td>
+                <xref target="vcard-param-index"/>
+              </td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
               <td>pref</td>
               <td>
                 <xref target="vcard-param-pref"/>
@@ -2851,6 +2881,13 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>level</td>
               <td>
                 <xref target="vcard-param-level"/>
+              </td>
+            </tr>
+            <tr>
+              <td>PersonalInformation</td>
+              <td>position</td>
+              <td>
+                <xref target="vcard-param-index"/>
               </td>
             </tr>
             <tr>
