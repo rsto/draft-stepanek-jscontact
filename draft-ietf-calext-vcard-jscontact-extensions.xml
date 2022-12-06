@@ -478,8 +478,8 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           <dd>This parameter specifies a ranking among the name components of a vCard N property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>The vCard N property defines the name of the object represented by a vCard.  A name may consist of multiple name components of the same type, such as surnames, and these form a sequence of values in the structured N property value.  However, the order in which a name component appears in the N property value does not allow to infer its culturally or otherwise significant rank among other values of the same component type.  Notably, cultures may distinguish between a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.</t>
-            <t>The RANKS parameter on a N property assigns a rank among the same-typed name components of a N property value.  The parameter value is structurally equivalent to the multi-valued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by colon.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined.</t>
+            <t>The RANKS parameter on a N property assigns a rank among the same-typed name components of a N property value. Some cultures assign ranks to name components, such as a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name. But the N property value 	does not allow to infer a culturally or otherwise significant rank from the order in which same-typed name components are stored in it.</t>
+            <t>The parameter value is structurally equivalent to the multi-valued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -498,7 +498,7 @@ N;RANKS="2,1":Gómez,Rodriguez;Pablo;;;
 
 N;RANKS=",1;,1":Hamilton,Cartland;Mary,Barbara;;Dame;
              ; The writer Dame Mary Barbara Hamilton Cartland
-             ; generally published as "Barbara Cartland"
+             ; published as "Barbara Cartland"
 ]]></sourcecode>
           </dd>
         </dl>
