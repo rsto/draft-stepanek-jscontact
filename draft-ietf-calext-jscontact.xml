@@ -568,12 +568,14 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>name: <tt>String</tt> (mandatory).
                 The name of this organization.
             </li>
-            <li>sortAs: <tt>String</tt> (optional).
-                This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
-            </li>
             <li>units: <tt>OrgUnit[]</tt> (optional).
                 A list of organizational units.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
             </li>
+            <li>sortAs: <tt>String</tt> (optional).
+                This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+            </li>
+            <li>contexts: <tt>String[Boolean]</tt> (optional).
+The contexts in which association with this organization apply.  For example, membership in a choir may only apply in a private context.  Also see <xref target="prop-contexts"/>.</li>
           </ul>
           <t>A OrgUnit object has the following properties:</t>
           <ul spacing="normal">
@@ -1764,8 +1766,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
-                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
-                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, Organization, SchedulingAddress</td>
+                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="organizations" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">coordinates</td>
