@@ -428,7 +428,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="fullName" numbered="true" toc="default">
           <name>fullName</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>The full name (e.g.  the personal name and surname of an individual, the name of an organization) of the entity represented by this card.  The purpose of this property is to define a name, even if the individual name components are not known.  In addition, it is meant to provide alternative versions of the name for internationalization.  Implementations <bcp14>SHOULD</bcp14> prefer using the <em>name</em> property over this one and <bcp14>SHOULD NOT</bcp14> store the concatenated name component values in this property.</t>
+          <t>This is the full name of the entity represented by this card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set. If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>name</tt> property as the name of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated name component values of the <tt>name</tt> property in the <tt>fullName</tt> property value.</t>
           <figure anchor="example-fullName">
             <name><tt>fullName</tt> example</name>
             <sourcecode name=""><![CDATA[
@@ -1025,8 +1025,6 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Address</tt>.
               </li>
-            <li>fullAddress: <tt>String</tt> (optional).
-                The complete address.  This property is mainly useful to represent addresses of which the individual address components are unknown, or to provide localized representations.</li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
                   The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.  The StreetComponent object type is defined in the paragraph below.
@@ -1053,6 +1051,9 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                 <li><tt>delivery</tt> An address to be used for delivering physical items.</li>
               </ul>
             </li>
+            <li>fullAddress: <tt>String</tt> (optional).
+                This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set. If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
+                </li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
@@ -1895,9 +1896,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">listAs</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">DirectoryResource, PersonalInformation</td>
-                <td align="left">
-                  <xref target="directories" format="default"/>, <xref target="personalInfo" format="default"/>
-                </td>
+                <td align="left"><xref target="directories" format="default"/>, <xref target="personalInfo" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">locale</td>
