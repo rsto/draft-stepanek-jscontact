@@ -301,10 +301,11 @@
             <li>"average" converts to "medium";</li>
             <li>"expert" converts to "high".</li>
           </ul>
+          <t>To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-mediatype">
           <name>MEDIATYPE</name>
-          <t>This converts to the <tt>mediaType</tt> property of the <tt>Resource</tt> object type.</t>
+          <t>This converts to the <tt>mediaType</tt> property of the <tt>Resource</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-pid">
           <name>PID</name>
@@ -354,15 +355,15 @@
         </section>
         <section anchor="vcard-param-ranks">
           <name>RANKS</name>
-          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
-          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
-          <t>This converts to the <tt>sortAs</tt> properties defined for the <tt>Name</tt>, <tt>Organization</tt> and <tt>OrgUnit</tt> object types.</t>
+          <t>This converts to the <tt>sortAs</tt> properties defined for the <tt>Name</tt>, <tt>Organization</tt> and <tt>OrgUnit</tt> object types.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-type">
           <name>TYPE</name>
