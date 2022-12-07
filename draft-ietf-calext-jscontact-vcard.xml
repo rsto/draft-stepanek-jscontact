@@ -55,9 +55,6 @@
     <abstract>
       <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.</t>
     </abstract>
-    <note removeInRFC="true">
-      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder.  It will be replaced with the RFC number of the JSContact specification.</t>
-    </note>
   </front>
   <middle>
     <section>
@@ -173,7 +170,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "phones": {
       "p1": {
@@ -200,7 +197,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "vCardProps": [
       ["x-foo", {
@@ -238,7 +235,7 @@
 
     {
       "@type": "Card",
-      "@version" : "rfc0000",
+      "@version" : "1",
       ...
       "titles": {
         "t1": {
@@ -267,7 +264,7 @@
 
     {
       "@type": "Card",
-      "@version" : "rfc0000",
+      "@version" : "1",
       ...
       "titles": {
         "t1": {
@@ -331,7 +328,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "phones": {
       "PHONE-A": {
@@ -399,7 +396,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "kind": "individual",
     ...
@@ -423,7 +420,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "directories": {
        ...
@@ -479,7 +476,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "anniversaries": {
       "ANNIVERSARY-1" : {
@@ -546,7 +543,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "speakToAs": {
       "grammaticalGender": "neuter",
@@ -623,7 +620,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "fullName": "Mr.  John Q.  Public, Esq.",
     "name": {
@@ -667,7 +664,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "media": {
        ...
@@ -764,7 +761,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "addresses": {
       "ADDR-1" : {
@@ -849,7 +846,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "preferredContactChannels": {
       "emails":[
@@ -888,7 +885,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "emails": {
       "EMAIL-1": {
@@ -923,7 +920,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "onlineServices": {
       ...
@@ -959,7 +956,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "preferredLanguages": {
       "en":[
@@ -1001,7 +998,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "locale": "de-AT",
     ...
@@ -1026,7 +1023,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "onlineServices": {
       ...
@@ -1061,7 +1058,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "phones": {
       "PHONE-1": {
@@ -1127,7 +1124,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "links": {
       ...
@@ -1160,7 +1157,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "media": {
       ...
@@ -1193,7 +1190,7 @@
 
       {
         "@type": "Card",
-        "@version" : "rfc0000",
+        "@version" : "1",
         "kind": "group",
         "fullName": "The Doe family",
         "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
@@ -1223,7 +1220,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "organizations": {
       "ORG-1": {
@@ -1258,7 +1255,7 @@
 
     {
       "@type" : "Card",
-      "@version" : "rfc0000",
+      "@version" : "1",
       ...
       "relatedTo" : {
         "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
@@ -1302,7 +1299,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "titles": {
       "TITLE-1": {
@@ -1348,7 +1345,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "personalInfo": {
       ...
@@ -1390,7 +1387,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "personalInfo": {
       ...
@@ -1432,7 +1429,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "personalInfo": {
       ...
@@ -1474,7 +1471,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "directories": {
       ...
@@ -1516,7 +1513,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "keywords": {
       "INTERNET": true,
@@ -1548,7 +1545,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "created": "1994-09-30T14:35:10Z",
     ...
@@ -1574,7 +1571,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "notes": {
         "NOTE-1" : {
@@ -1606,7 +1603,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
     ...
@@ -1629,7 +1626,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "updated": "1995-10-31T22:27:10Z",
     ...
@@ -1653,7 +1650,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "media": {
       ...
@@ -1684,7 +1681,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
     ...
@@ -1708,7 +1705,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "links": {
       ...
@@ -1744,7 +1741,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "phones": {
       "p1": {
@@ -1777,7 +1774,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "cryptoKeys": {
       ...
@@ -1812,7 +1809,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "schedulingAddresses": {
       ...
@@ -1849,7 +1846,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "calendars": {
       ...
@@ -1889,7 +1886,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "calendars": {
       ...
@@ -1948,7 +1945,7 @@
 
     {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
     ...
     "vCardProps": [
       ["x-foo", {
@@ -3153,7 +3150,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
                 <artwork><![CDATA[
   {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
      ...
      "someUnknownProperty": true
   }
@@ -3172,7 +3169,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
                 <artwork><![CDATA[
   {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
      ...
      "example.com:foo": {
        "bar": 1234
@@ -3193,7 +3190,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
                 <artwork><![CDATA[
   {
     "@type": "Card",
-    "@version" : "rfc0000",
+    "@version" : "1",
      ...
      "phones": {
        "phone1": {
@@ -3298,7 +3295,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       </section>
       <section>
         <name>New JSContact Properties</name>
-        <t>IANA is requested to add the following entries to the "JSContact Properties" registry.</t>
+        <t>IANA is requested to add the following entries to the "JSContact Properties" registry.  The <tt>Obsoleted Version</tt> is not set.</t>
         <table anchor="tab-iana-property-registry" align="center">
           <name>Initial Contents of the "JSContact Properties" Registry</name>
           <thead>
@@ -3322,7 +3319,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
                 <xref target="jscontact-prop-vcardparams" format="default"/>
               </td>
               <td align="left">common</td>
-              <td align="left">rfc0000</td>
+              <td align="left">1</td>
               <td align="left">IETF</td>
             </tr>
             <tr>
@@ -3333,7 +3330,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
                 <xref target="jscontact-prop-vcardprops" format="default"/>
               </td>
               <td align="left">common</td>
-              <td align="left">rfc0000</td>
+              <td align="left">1</td>
               <td align="left">IETF</td>
             </tr>
           </tbody>
@@ -3341,7 +3338,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       </section>
       <section>
         <name>New JSContact Types</name>
-        <t>IANA is requested to add the following entries to the "JSContact Types" registry.</t>
+        <t>IANA is requested to add the following entries to the "JSContact Types" registry.  The <tt>Obsoleted Version</tt> is not set.</t>
         <table anchor="tab-iana-jscontact-type-registry" align="left">
           <name>Additional Contents of the "JSContact Types" Registry</name>
           <thead>
@@ -3360,7 +3357,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
                 <xref target="jscontact-prop-vcardprops" format="default"/>
               </td>
               <td align="left">common</td>
-              <td align="left">rfc0000</td>
+              <td align="left">1</td>
               <td align="left">IETF</td>
             </tr>
           </tbody>

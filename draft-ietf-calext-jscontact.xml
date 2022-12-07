@@ -42,9 +42,6 @@
     <abstract>
       <t>This specification defines a data model and JSON representation of contact card information that can be used for data storage and exchange in address book or directory applications.  It aims to be an alternative to the vCard data format and to be unambiguous, extendable and simple to process.  In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.</t>
     </abstract>
-    <note removeInRFC="true">
-      <t>The verbatim case-insensitive string <tt>rfc0000</tt> in this document is a placeholder.  It will be replaced with the RFC number of this document.</t>
-    </note>
   </front>
   <middle>
     <section anchor="introduction" numbered="true" toc="default">
@@ -172,8 +169,8 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       </section>
       <section>
         <name>Versioning</name>
-        <t>Every instance of a JSContact Card indicates which JSContact specification its IANA-registered properties and values are based on.  This version is indicated by the <tt>@version</tt> <xref target="prop-version"/> property.  This is to allow implementations to correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions or other significant changes to existing JSContact specifications are introduced.  All IANA-registered properties indicate the version at which they got introduced, updated or obsoleted.</t>
-        <t>Registering a new JSContact version <bcp14>MUST</bcp14> be done by publishing a new standard RFC document that updates or obsoletes an existing JSContact specification.  Such a RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the  JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
+        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  This is done by use of the  <xref target="prop-version"><tt>@version</tt></xref> property with in the Card, and by the <xref target="iana-mime-type">version</xref> parameter of the JSContact MIME content type. The JSContact version is meant to help implementations to correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions, or if other significant changes to existing JSContact specifications are introduced.  All IANA-registered elements indicate the version at which they got introduced or updated, or obsoleted.</t>
+        <t>If Expert Review or the IETF working group decides that a new JSContact version is required, a new standard RFC document <bcp14>MUST</bcp14> be published. Such a RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
       </section>
       <section>
         <name>Validating JSContact Properties</name>
@@ -234,7 +231,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
             <artwork><![CDATA[
 {
   "@type": "Card",
-  "@version" : "rfc0000",
+  "@version" : "1",
   ...
   "example.com:foo": "bar",
   "example.com:foo2": {
@@ -281,7 +278,15 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
         <section anchor="prop-version" numbered="true" toc="default">
           <name>@version</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the version of the JSContact specification used to define this card.  The value <bcp14>MUST</bcp14> be <tt>rfc0000</tt> if the JSContact object is defined according to this RFC document.  It <bcp14>MAY</bcp14> differ if future RFC documents obsolete this specification.</t>
+          <t>Specifies the JSContact version used to define this card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>@version</tt> property.  This specification registers the JSContact version value <tt>1</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
+          <figure anchor="example-version">
+            <name><tt>@version</tt> example</name>
+            <sourcecode name=""><![CDATA[
+  ...
+  "@version": "1",
+  ...
+        ]]></sourcecode>
+          </figure>
         </section>
         <section anchor="created" numbered="true" toc="default">
           <name>created</name>
@@ -1660,18 +1665,20 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Context:</dt>
             <dd>This is a comma-separated list of JSContact object types this property is allowed on.</dd>
             <dt>Reference or Description:</dt>
-            <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names).</dd>
+            <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names). This must include references to all RFC documents where this property is introduced or updated.</dd>
             <dt>Intended Usage:</dt>
             <dd>This may be "common", "reserved", or "obsolete".</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this property definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dd>This defines the JSContact version on which this property definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Obsoleted Version:</dt>
+            <dd>This defines the JSContact version after which this property got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> not be set, or be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
         </section>
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Properties" Registry</name>
-          <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  All properties are for version <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  The Version for all properties is <tt>1</tt>.  The Obsoleted Version for all properties is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-property-registry" align="center">
             <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
@@ -2302,14 +2309,16 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Intended Usage:</dt>
             <dd>common, reserved, or obsolete</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this type definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dd>This defines the JSContact version on which this type definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Obsoleted Version:</dt>
+            <dd>This defines the JSContact version after which this type definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
           </dl>
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Types" Registry</name>
-          <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  All types are for version <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  The Version for all types is <tt>1</tt>.  The Obsoleted Version for all types is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-type-registry-common" align="left">
             <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
@@ -2525,7 +2534,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
             </tbody>
           </table>
-          <t>The following table lists the initial <tt>reserved</tt> usage entries of the JSContact Types registry.  All types are for version <tt>rfc0000</tt>.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>reserved</tt> usage entries of the JSContact Types registry.  All types are for version <tt>1</tt>.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-type-registry-reserved" align="left">
             <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
@@ -2557,7 +2566,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Context:</dt>
             <dd>This is the list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry.  This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
             <dt>Version:</dt>
-            <dd>This defines the JSContact specification version on which this enum  value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dd>This defines the JSContact version on which this enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Obsoleted Version:</dt>
+            <dd>This defines the JSContact version after which this enum value definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
@@ -2569,23 +2580,23 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <t>This template is for adding a new enum value to a subregistry in the JSContact Enum registry.</t>
           <dl newline="false">
             <dt>Enum Value:</dt>
-            <dd>the verbatim value of the enum</dd>
+            <dd>The verbatim value of the enum</dd>
             <dt>Reference or Description:</dt>
-            <dd>a brief description or RFC number and section reference for the semantics of this value</dd>
+            <dd>A brief description or RFC number and section reference for the semantics of this value</dd>
+            <dt>Version:</dt>
+            <dd>The JSContact version on which the enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Obsoleted Version:</dt>
+            <dd>The JSContact version after which this enum value got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
           </dl>
         </section>
         <section anchor="iana-enum-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Enum Values" Registry</name>
-          <t>For each subregistry created in this section, all RFC section references are for this document.</t>
+          <t>For each subregistry created in this section, all RFC section references are for this document. For all entries, the Version is <tt>1</tt>, the Obsoleted Version is not set, the Change Controller is <tt>IETF</tt>.</t>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
             <dd>kind</dd>
             <dt>Context:</dt>
             <dd>Card</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-card-kind" align="left">
@@ -2642,10 +2653,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>@version</dd>
             <dt>Context:</dt>
             <dd>Card</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-card-version" align="left">
@@ -2658,7 +2665,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
-                    <td align="left">rfc0000</td>
+                    <td align="left">1</td>
                     <td align="left">
                       <xref target="prop-version" format="default"/>
                     </td>
@@ -2672,10 +2679,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>contexts</dd>
             <dt>Context:</dt>
             <dd>NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-contexts" align="left">
@@ -2708,10 +2711,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>contexts</dd>
             <dt>Context:</dt>
             <dd>Address</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-addr-contexts" align="left">
@@ -2756,10 +2755,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>features</dd>
             <dt>Context:</dt>
             <dd>Phone</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-phone-features" align="left">
@@ -2822,10 +2817,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>StreetComponent</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-streetcomponent-type" align="left">
@@ -2912,10 +2903,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>NameComponent</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-namecomponent-type" align="left">
@@ -2972,10 +2959,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>Title</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-title-type" align="left">
@@ -3008,10 +2991,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>grammaticalGender</dd>
             <dt>Context:</dt>
             <dd>SpeakToAs</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-speaktoas-grammaticalgender" align="left">
@@ -3062,10 +3041,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>preferredContactChannels</dd>
             <dt>Context:</dt>
             <dd>Card</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-speaktoas-preferredcontactchannels" align="left">
@@ -3110,10 +3085,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>CalendarResource</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-calendarresource-type" align="left">
@@ -3146,10 +3117,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>DirectoryResource</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-directoryresource-type" align="left">
@@ -3182,10 +3149,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>LinkResource</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-linkresource-type" align="left">
@@ -3212,10 +3175,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>MediaResource</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-mediaresource-type" align="left">
@@ -3254,10 +3213,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>Anniversary</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-anniversary-type" align="left">
@@ -3296,10 +3251,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>OnlineService</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-onlineservice-type" align="left">
@@ -3338,10 +3289,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>type</dd>
             <dt>Context:</dt>
             <dd>PersonalInformation</dd>
-            <dt>Change Controller:</dt>
-            <dd>IETF</dd>
-            <dt>Version:</dt>
-            <dd>rfc0000</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-personalinformation-type" align="left">
