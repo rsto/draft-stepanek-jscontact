@@ -214,7 +214,7 @@
         </section>
         <section anchor="vcard-param-index">
           <name>INDEX</name>
-          <t>This parameter set on an properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>position</tt> property of the <tt>PersonalInformation</tt> and <tt>DirectoryResource</tt> objects.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on the EXPERTISE, HOBBY, INTEREST and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>listAs</tt> property of the <tt>PersonalInformation</tt> and <tt>DirectoryResource</tt> objects.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
@@ -2475,16 +2475,16 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>DirectoryResource</td>
-              <td>mediaType</td>
+              <td>listAs</td>
               <td>
-                <xref target="vcard-param-mediatype"/>
+                <xref target="vcard-param-index"/>
               </td>
             </tr>
             <tr>
               <td>DirectoryResource</td>
-              <td>position</td>
+              <td>mediaType</td>
               <td>
-                <xref target="vcard-param-index"/>
+                <xref target="vcard-param-mediatype"/>
               </td>
             </tr>
             <tr>
@@ -2879,16 +2879,16 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>PersonalInformation</td>
-              <td>level</td>
+              <td>listAs</td>
               <td>
-                <xref target="vcard-param-level"/>
+                <xref target="vcard-param-index"/>
               </td>
             </tr>
             <tr>
               <td>PersonalInformation</td>
-              <td>position</td>
+              <td>level</td>
               <td>
-                <xref target="vcard-param-index"/>
+                <xref target="vcard-param-level"/>
               </td>
             </tr>
             <tr>

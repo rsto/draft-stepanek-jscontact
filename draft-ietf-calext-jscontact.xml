@@ -1170,6 +1170,12 @@ The value of this street component.</li>
             <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
             <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
           </ul>
+          <t>In addition, the DirectoryResource object has the following property:</t>
+          <ul>
+            <li>listAs: <tt>UnsignedInt</tt> (optional).
+              This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+            </li>
+          </ul>
           <figure anchor="example-directories">
             <name><tt>directories</tt> example</name>
             <sourcecode name=""><![CDATA[
@@ -1453,6 +1459,9 @@ Specifies the type for this personal information.  The value <bcp14>MUST</bcp14>
 The actual information.  This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
             <li>level: <tt>String</tt> (optional).
                 Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+            <li>listAs: <tt>UnsignedInt</tt> (optional).
+                This defines the position of this personal information in the list of all PersonalInformation objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero. Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+            </li>
           </ul>
           <figure anchor="example-personalInfo">
             <name><tt>personalInfo</tt> example</name>
@@ -1880,6 +1889,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Card</td>
                 <td align="left">
                   <xref target="links" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">listAs</td>
+                <td align="left">UnsignedInt</td>
+                <td align="left">DirectoryResource, PersonalInformation</td>
+                <td align="left">
+                  <xref target="directories" format="default"/>, <xref target="personalInfo" format="default"/>
                 </td>
               </tr>
               <tr>
