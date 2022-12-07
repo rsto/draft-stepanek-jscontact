@@ -211,7 +211,7 @@
         </section>
         <section anchor="vcard-param-index">
           <name>INDEX</name>
-          <t>This parameter set on the EXPERTISE, HOBBY, INTEREST and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>listAs</tt> property of the <tt>PersonalInformation</tt> and <tt>DirectoryResource</tt> objects.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on the EXPERTISE, HOBBY, INTEREST and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>listAs</tt> property of the <tt>PersonalInfo</tt> and <tt>DirectoryResource</tt> objects.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
@@ -291,7 +291,7 @@
         </section>
         <section anchor="vcard-param-level">
           <name>LEVEL</name>
-          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInformation</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
+          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInfo</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
           </t>
           <ul spacing="compact">
             <li>"beginner" converts to "low";</li>
@@ -1330,7 +1330,7 @@
         <name>Personal Information Properties</name>
         <section anchor="vcard-prop-expertise">
           <name>EXPERTISE</name>
-          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> property is set to "expertise".</t>
+          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> property is set to "expertise".</t>
           <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
@@ -1350,14 +1350,14 @@
     "personalInfo": {
       ...
       "PERSINFO-1" : {
-        "@type": "PersonalInformation",
+        "@type": "PersonalInfo",
         "type": "expertise",
         "value": "chinese literature",
          "level": "low",
          "position": 2
       },
       "PERSINFO-2" : {
-        "@type": "PersonalInformation",
+        "@type": "PersonalInfo",
         "type": "expertise",
         "value": "chemistry",
         "level": "high",
@@ -1372,7 +1372,7 @@
         </section>
         <section anchor="vcard-prop-hobby">
           <name>HOBBY</name>
-          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> property is set to "hobby".</t>
+          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> property is set to "hobby".</t>
           <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="hobby_conversion">
             <name>HOBBY conversion example</name>
@@ -1392,14 +1392,14 @@
     "personalInfo": {
       ...
       "PERSINFO-1" : {
-        "@type": "PersonalInformation",
+        "@type": "PersonalInfo",
         "type": "hobby",
         "value": "reading",
         "level": "high",
         "position": 1
       },
       "PERSINFO-2" : {
-        "@type": "PersonalInformation",
+        "@type": "PersonalInfo",
         "type": "hobby",
         "value": "sewing",
         "level": "high",
@@ -1414,7 +1414,7 @@
         </section>
         <section anchor="vcard-prop-interest">
           <name>INTEREST</name>
-          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInformation</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> property is set to "interest".</t>
+          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> property is set to "interest".</t>
           <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="interest_conversion">
             <name>INTEREST conversion example</name>
@@ -1434,14 +1434,14 @@
     "personalInfo": {
       ...
       "PERSINFO-1" : {
-        "@type": "PersonalInformation",
+        "@type": "PersonalInfo",
         "type": "interest",
         "value": "r&b music",
         "level": "medium",
         "position": 1
       },
       "PERSINFO-2" : {
-        "@type": "PersonalInformation",
+        "@type": "PersonalInfo",
         "type": "interest",
         "value": "rock ’n’ roll music",
         "level": "high",
@@ -2870,31 +2870,31 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>not applicable</td>
             </tr>
             <tr>
-              <td>PersonalInformation</td>
+              <td>PersonalInfo</td>
               <td>@type</td>
               <td>not applicable</td>
             </tr>
             <tr>
-              <td>PersonalInformation</td>
+              <td>PersonalInfo</td>
               <td>listAs</td>
               <td>
                 <xref target="vcard-param-index"/>
               </td>
             </tr>
             <tr>
-              <td>PersonalInformation</td>
+              <td>PersonalInfo</td>
               <td>level</td>
               <td>
                 <xref target="vcard-param-level"/>
               </td>
             </tr>
             <tr>
-              <td>PersonalInformation</td>
+              <td>PersonalInfo</td>
               <td>type</td>
               <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
             </tr>
             <tr>
-              <td>PersonalInformation</td>
+              <td>PersonalInfo</td>
               <td>value</td>
               <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
             </tr>

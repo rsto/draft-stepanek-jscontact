@@ -1446,12 +1446,12 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
         </section>
         <section anchor="personalInfo" numbered="true" toc="default">
           <name>personalInfo</name>
-          <t>Type: <tt>Id[PersonalInformation]</tt> (optional).</t>
+          <t>Type: <tt>Id[PersonalInfo]</tt> (optional).</t>
           <t>Defines personal information about the entity represented by this card.
-A PersonalInformation object has the following properties:</t>
+A PersonalInfo object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInformation</tt>.
+                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInfo</tt>.
               </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
@@ -1464,11 +1464,11 @@ Specifies the type for this personal information.  The value <bcp14>MUST</bcp14>
               </ul>
             </li>
             <li>value: <tt>String</tt> (mandatory).
-The actual information.  This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInformation.</li>
+The actual information.  This generally is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInfo.</li>
             <li>level: <tt>String</tt> (optional).
                 Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-                This defines the position of this personal information in the list of all PersonalInformation objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero. Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+                This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero. Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
             </li>
             <li>label: <tt>String</tt> (optional).
                 A custom label. See <xref target="prop-label"/>.</li>
@@ -1480,19 +1480,19 @@ The actual information.  This generally is free-text, but future specifications 
    "personalInfo": {
      ...
      "pi2" : {
-       "@type": "PersonalInformation",
+       "@type": "PersonalInfo",
        "type": "expertise",
        "value": "chemistry",
        "level": "high"
      },
      "pi1" : {
-       "@type": "PersonalInformation",
+       "@type": "PersonalInfo",
        "type": "hobby",
        "value": "reading",
        "level": "high"
      },
      "pi6" : {
-       "@type": "PersonalInformation",
+       "@type": "PersonalInfo",
        "type": "interest",
        "value": "r&b music",
        "level": "medium"
@@ -1698,7 +1698,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInformation, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
+                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr>
@@ -1884,13 +1884,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">label</td>
                 <td align="left">String</td>
-                <td align="left">EmailAddress, OnlineService, Phone, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, PersonalInformation, SchedulingAddress</td>
+                <td align="left">EmailAddress, OnlineService, Phone, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, PersonalInfo, SchedulingAddress</td>
                 <td align="left"><xref target="prop-label" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">level</td>
                 <td align="left">String</td>
-                <td align="left">PersonalInformation</td>
+                <td align="left">PersonalInfo</td>
                 <td align="left">
                   <xref target="personalInfo" format="default"/>
                 </td>
@@ -1906,7 +1906,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">listAs</td>
                 <td align="left">UnsignedInt</td>
-                <td align="left">DirectoryResource, PersonalInformation</td>
+                <td align="left">DirectoryResource, PersonalInfo</td>
                 <td align="left"><xref target="directories" format="default"/>, <xref target="personalInfo" format="default"/></td>
               </tr>
               <tr>
@@ -2033,7 +2033,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
               <tr>
                 <td align="left">personalInfo</td>
-                <td align="left">Id[PersonalInformation]</td>
+                <td align="left">Id[PersonalInfo]</td>
                 <td align="left">Card</td>
                 <td align="left">
                   <xref target="personalInfo" format="default"/>
@@ -2208,7 +2208,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">type</td>
                 <td align="left">String</td>
-                <td align="left">Anniversary, NameComponent, Title, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, StreetComponent, PersonalInformation</td>
+                <td align="left">Anniversary, NameComponent, Title, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, StreetComponent, PersonalInfo</td>
                 <td align="left"><xref target="anniversaries" format="default"/>, <xref target="name" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="addresses" format="default"/>, <xref target="personalInfo" format="default"/></td>
               </tr>
               <tr>
@@ -2260,7 +2260,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">value</td>
                 <td align="left">String</td>
-                <td align="left">NameComponent, StreetComponent, PersonalInformation</td>
+                <td align="left">NameComponent, StreetComponent, PersonalInfo</td>
                 <td align="left"><xref target="name" format="default"/>, <xref target="addresses" format="default"/>, <xref target="personalInfo" format="default"/></td>
               </tr>
               <tr>
@@ -2471,7 +2471,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">PersonalInformation</td>
+                <td align="left">PersonalInfo</td>
                 <td align="left">
                   <xref target="personalInfo" format="default"/>
                 </td>
@@ -3292,11 +3292,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>type</dd>
             <dt>Context:</dt>
-            <dd>PersonalInformation</dd>
+            <dd>PersonalInfo</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-personalinformation-type" align="left">
-                <name>JSContact Enum Values for type (Context: PersonalInformation)</name>
+                <name>JSContact Enum Values for type (Context: PersonalInfo)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
