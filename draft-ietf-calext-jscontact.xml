@@ -248,7 +248,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
         <section anchor="vendor-specific-values" numbered="true" toc="default">
           <name>Vendor-specific Values</name>
           <t>
-            Some JSContact IANA-registered properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-specific values.  Such vendor-specific values <bcp14>MUST</bcp14> be valid <tt>v-extensions</tt> as defined in <xref target="vendor-specific-properties"/>.  This is an example for a vendor-specific value:
+            Some JSContact IANA-registered properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-specific values.  Such vendor-specific values <bcp14>MUST</bcp14> be valid <tt>v-extension</tt> values as defined in <xref target="vendor-specific-properties"/>.  This is an example for a vendor-specific value:
           </t>
           <figure>
             <artwork><![CDATA[
