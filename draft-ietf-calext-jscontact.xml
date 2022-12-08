@@ -565,7 +565,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
             <li>@type: <tt>String</tt> (mandatory).
                   Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
               </li>
-            <li>name: <tt>String</tt> (mandatory).
+            <li>name: <tt>String</tt> (optional).
                 The name of this organization.
             </li>
             <li>units: <tt>OrgUnit[]</tt> (optional).
