@@ -1282,10 +1282,20 @@ The value of this street component.</li>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
-          <t>A map of language tags <xref target="RFC5646"/> to patches, which localize a property value into the locale of the respective language tag.  The paths in the PatchObject keys are relative to the Card object that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
-          <t>A localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant.  If only localized values are available for properties of a Card, then implementations <bcp14>SHOULD</bcp14> choose one of them to be the main locale and set the <tt>locale</tt> property accordingly.</t>
-          <t> The following example shows a Card object, where one of its addresses <tt>Tokyo</tt> is localized for the <tt>jp</tt> locale.</t>
-          <figure>
+          <t>This property localizes property values in this Card to languages other than the main locale.  Its purpose is to provide language-specific alternatives to existing values, not to add new values. In other words, a localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant.</t>
+          <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card object that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
+          <t>Conceptually, a Card is localized as follows:</t>
+          <ul>
+            <li>Determine the language tag in which this Card should be localized in.</li>
+            <li>If the localizations property includes a key for that language, obtain the PatchObject value. If there is no such key, stop.</li>
+            <li>Create a copy of the Card, but do not copy the localizations property.</li>
+            <li>Apply all patches in the PatchObject to the copy of the Card.</li>
+            <li>Optionally, set the <tt>locale</tt> property in the copy of the Card.</li>
+            <li>Use the patched copy of the Card as the localized variant of the original Card.</li>
+          </ul>
+          <t>A patch in the PatchObject may patch a simple-typed property value, or a complex type.</t>
+          <t><xref target="example-localizations-simple"/> shows how a single String property value is localized in the <tt>jp</tt> locale.</t>
+          <figure anchor="example-localizations-simple">
             <artwork><![CDATA[
 ...
  "locale": "en",
@@ -1299,8 +1309,53 @@ The value of this street component.</li>
    "jp": {
       "addresses/addr1/locality":"東京"
    }
+ }
 ...
-   }]]></artwork>
+   ]]></artwork>
+          </figure>
+          <t><xref target="example-localizations-complex"/> shows how a complete object property value is localized in the <tt>en</tt> locale.</t>
+          <figure anchor="example-localizations-complex">
+            <artwork><![CDATA[
+...
+ "name": {
+   "@type": "Name",
+   "locale": "ru",
+   "components": [{
+     "@type": "NameComponent",
+     "type": "given",
+     "value": "Фёдор"
+   }, {
+     "@type": "NameComponent",
+     "type": "middle",
+     "value": "Михайлович"
+   }, {
+      "@type": "NameComponent",
+     "type": "surname",
+     "value": "Достоевский"
+   }]
+ },
+ "localizations": {
+   "en": {
+     "name: {
+       "@type": "Name",
+       "locale": "en",
+       "components": [{
+         "@type": "NameComponent",
+         "type": "given",
+         "value": "Fyodor"
+       }, {
+         "@type": "NameComponent",
+         "type": "middle",
+         "value": "Mikhailovich"
+       }, {
+         "@type": "NameComponent",
+         "type": "surname",
+         "value": "Dostoevsky"
+       }]
+   }
+ }
+...
+   ]]></artwork>
           </figure>
         </section>
       </section>
