@@ -215,14 +215,16 @@
         </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
-          <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on.  The value of the LANGUAGE parameter defines the language key in the <tt>localizations</tt> property.  The JSON pointer in the <tt>PatchObject</tt> is the path to the JSContact property that the vCard property converts to.  The value of the PatchObject is the converted property value.</t>
-          <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations.  For this, the implementation should choose one of the vCard properties to also set in the main Card:</t>
+          <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on. The value of the LANGUAGE parameter defines the language tag key in the <tt>localizations</tt> property.</t>
+          <t>This specification does not define a single standard conversion rule for how to convert the property values. Instead, building the localizations value is implementation-specific.</t>
+          <t>Two options to populate the localizations property are:</t>
           <ul>
-            <li>If a vCard property occurs one or more times and at least one does not have the LANGUAGE parameter set, then the implementation should choose the non-localized property among them.</li>
-            <li>If all vCard properties of the same type have the LANGUAGE parameter set, then the implementation should choose one of these properties to set both as non-localized and localized property.  This is to preserve the language information of the property value.</li>
+            <li>One Patch Per Property: For each vCard property with a LANGUAGE parameter, set the complete path in the PatchObject to the JSContact property that the vCard property converts to. The value of the patch is the converted property value. This is simple to process and adequate if the vCard only contains a few properties with LANGUAGE parameter.</li>
+            <li>Bundle Patches by Parent: If a PatchObject contains multiple paths that have the same parent paths, then it might be possible to combine these patches into one patch that patches the parent property. This is possible if the property in the Card is patched in its entirety.</li>
           </ul>
-          <t>The following two examples illustrate these cases.</t>
-          <figure anchor="language_conversion_patch_existing">
+          <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations. As a general rule, an implementation <bcp14>SHOULD</bcp14> choose those vCard properties to convert to the non-localized card, that either all have the same LANGUAGE parameter value or none at all.</t>
+          <t>As a special case, if one or more vCard properties of the same type do not have the LANGUAGE parameter set, then choose them to convert to the non-localized Card.  Convert any with LANGUAGE parameter to the localizations property. <xref target="language-patch-no-language"/> illustrates this.</t>
+          <figure anchor="language-patch-no-language">
             <name>LANGUAGE conversion example: patch non-localized property</name>
             <artwork><![CDATA[
     BEGIN:VCARD
@@ -251,12 +253,15 @@
     }
         ]]></artwork>
           </figure>
-          <figure anchor="language_conversion_patch_new">
+          <t>As another special case, if all vCard properties of the same type have the LANGUAGE parameter set, and their language tags do not match the locale of the main Card, then choose one of them to convert to the non-localized card. The language tag can be preserved by adding a PatchObject to localizations for that language tag, even if that PatchObject is empty. <xref target="language-patch-empty"/> illustrates this.</t>
+          <figure anchor="language-patch-empty">
             <name>LANGUAGE conversion example: patch localized property with empty patch object</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
+    LOCALE:es
+    FN:"Gabriel García Márquez"
     TITLE;LANGUAGE=en:Boss
     TITLE;LANGUAGE=fr:Patron
     ...
@@ -266,21 +271,21 @@
       "@type": "Card",
       "@version" : "1",
       ...
+      "locale": "es",
+      "fullName": "Gabriel García Márquez",
       "titles": {
         "t1": {
           "@type": "Title",
-          "title": "Boss"
+          "title": "Novelist"
         }
       },
       "localizations": {
-        "en": {
-          "titles/t1/title": "Boss"
-        },
+        "en": {},
         "fr": {
           "titles": {
             "t1": {
               "@type": "Title",
-              "title": "Patron"
+              "title": "Écrivain
             }
           }
         }
