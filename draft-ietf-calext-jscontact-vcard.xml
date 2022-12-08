@@ -3295,7 +3295,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       </section>
       <section>
         <name>New JSContact Properties</name>
-        <t>IANA is requested to add the following entries to the "JSContact Properties" registry.  The <tt>Obsoleted Version</tt> is not set.</t>
+        <t>IANA is requested to add the following entries to the "JSContact Properties" registry.</t>
         <table anchor="tab-iana-property-registry" align="center">
           <name>Initial Contents of the "JSContact Properties" Registry</name>
           <thead>
@@ -3305,7 +3305,8 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               <th align="left">Property Context</th>
               <th align="left">Reference or Description</th>
               <th align="left">Intended Usage</th>
-              <th align="left">Version</th>
+              <th align="left">Since Version</th>
+              <th align="left">Until Version</th>
               <th align="left">Change Controller</th>
             </tr>
           </thead>
@@ -3320,6 +3321,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               </td>
               <td align="left">common</td>
               <td align="left">1</td>
+              <td align="left"></td>
               <td align="left">IETF</td>
             </tr>
             <tr>
@@ -3331,6 +3333,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               </td>
               <td align="left">common</td>
               <td align="left">1</td>
+              <td align="left"></td>
               <td align="left">IETF</td>
             </tr>
           </tbody>
@@ -3338,7 +3341,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       </section>
       <section>
         <name>New JSContact Types</name>
-        <t>IANA is requested to add the following entries to the "JSContact Types" registry.  The <tt>Obsoleted Version</tt> is not set.</t>
+        <t>IANA is requested to add the following entries to the "JSContact Types" registry.</t>
         <table anchor="tab-iana-jscontact-type-registry" align="left">
           <name>Additional Contents of the "JSContact Types" Registry</name>
           <thead>
@@ -3346,7 +3349,8 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               <th align="left">Type Name</th>
               <th align="left">Reference or Description</th>
               <th align="left">Intended Usage</th>
-              <th align="left">Version</th>
+              <th align="left">Since Version</th>
+              <th align="left">Until Version</th>
               <th align="left">Change Controller</th>
             </tr>
           </thead>
@@ -3358,6 +3362,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               </td>
               <td align="left">common</td>
               <td align="left">1</td>
+              <td align="left"></td>
               <td align="left">IETF</td>
             </tr>
           </tbody>

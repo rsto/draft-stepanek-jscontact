@@ -169,7 +169,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       </section>
       <section>
         <name>Versioning</name>
-        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  This is done by use of the  <xref target="prop-version"><tt>@version</tt></xref> property with in the Card, and by the <xref target="iana-mime-type">version</xref> parameter of the JSContact MIME content type. The JSContact version is meant to help implementations to correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions, or if other significant changes to existing JSContact specifications are introduced.  All IANA-registered elements indicate the version at which they got introduced or updated, or obsoleted.</t>
+        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  This is done by use of the  <xref target="prop-version"><tt>@version</tt></xref> property with in the Card, and by the <xref target="iana-mime-type">version</xref> parameter of the JSContact MIME content type. The JSContact version is meant to help implementations to correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions, or if other significant changes to existing JSContact specifications are introduced.  All IANA-registered elements indicate the version at which they got introduced, updated or obsoleted.</t>
         <t>If Expert Review or the IETF working group decides that a new JSContact version is required, a new standard RFC document <bcp14>MUST</bcp14> be published. Such a RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
       </section>
       <section>
@@ -1672,17 +1672,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names). This must include references to all RFC documents where this property is introduced or updated.</dd>
             <dt>Intended Usage:</dt>
             <dd>This may be "common", "reserved", or "obsolete".</dd>
-            <dt>Version:</dt>
+            <dt>Since Version:</dt>
             <dd>This defines the JSContact version on which this property definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
-            <dt>Obsoleted Version:</dt>
-            <dd>This defines the JSContact version after which this property got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> not be set, or be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Until Version:</dt>
+            <dd>This defines the JSContact version after which this property got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> not be set, or be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
         </section>
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Properties" Registry</name>
-          <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  The Version for all properties is <tt>1</tt>.  The Obsoleted Version for all properties is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  The Since Version for all properties is <tt>1</tt>.  The Until Version for all properties is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-property-registry" align="center">
             <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
@@ -2312,17 +2312,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>a brief description or RFC number and section reference where the Type is specified (may be omitted for "reserved" type names)</dd>
             <dt>Intended Usage:</dt>
             <dd>common, reserved, or obsolete</dd>
-            <dt>Version:</dt>
+            <dt>Since Version:</dt>
             <dd>This defines the JSContact version on which this type definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
-            <dt>Obsoleted Version:</dt>
-            <dd>This defines the JSContact version after which this type definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Until Version:</dt>
+            <dd>This defines the JSContact version after which this type definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
           </dl>
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Types" Registry</name>
-          <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  The Version for all types is <tt>1</tt>.  The Obsoleted Version for all types is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  The Since Version for all types is <tt>1</tt>.  The Until Version for all types is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-type-registry-common" align="left">
             <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
@@ -2569,10 +2569,10 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>These are the name(s) of the property or properties where these values may be used.  This <bcp14>MUST</bcp14> be registered in the "JSContact Properties" registry.</dd>
             <dt>Context:</dt>
             <dd>This is the list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry.  This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
-            <dt>Version:</dt>
+            <dt>Since Version:</dt>
             <dd>This defines the JSContact version on which this enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
-            <dt>Obsoleted Version:</dt>
-            <dd>This defines the JSContact version after which this enum value definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Until Version:</dt>
+            <dd>This defines the JSContact version after which this enum value definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
             <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
@@ -2587,15 +2587,15 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>The verbatim value of the enum</dd>
             <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference for the semantics of this value</dd>
-            <dt>Version:</dt>
+            <dt>Since Version:</dt>
             <dd>The JSContact version on which the enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
-            <dt>Obsoleted Version:</dt>
-            <dd>The JSContact version after which this enum value got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The obsoleted version either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
+            <dt>Until Version:</dt>
+            <dd>The JSContact version after which this enum value got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
           </dl>
         </section>
         <section anchor="iana-enum-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Enum Values" Registry</name>
-          <t>For each subregistry created in this section, all RFC section references are for this document. For all entries, the Version is <tt>1</tt>, the Obsoleted Version is not set, the Change Controller is <tt>IETF</tt>.</t>
+          <t>For each subregistry created in this section, all RFC section references are for this document. For all entries, the Since Version is <tt>1</tt>, the Until Version is not set, the Change Controller is <tt>IETF</tt>.</t>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
             <dd>kind</dd>
