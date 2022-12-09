@@ -1246,6 +1246,7 @@
           <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational untits without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.  ORG:;DepartmentA).</t>
           <t>The ALTID, LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <t>The first item of the comma-separated SORT-AS parameter value converts to the <tt>sortAs</tt> property of the <tt>Organization</tt> object.  The subsequent items convert to the <tt>sortAs</tt> property of the corresponding <tt>OrgUnit</tt> object</t>
+          <t>The TYPE parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_conversion">
             <name>ORG conversion example</name>
             <artwork><![CDATA[
@@ -1369,7 +1370,7 @@
         <section anchor="vcard-prop-expertise">
           <name>EXPERTISE</name>
           <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> property is set to "expertise".</t>
-          <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>The INDEX parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
             <artwork><![CDATA[
@@ -1411,7 +1412,7 @@
         <section anchor="vcard-prop-hobby">
           <name>HOBBY</name>
           <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> property is set to "hobby".</t>
-          <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>The INDEX parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="hobby_conversion">
             <name>HOBBY conversion example</name>
             <artwork><![CDATA[
@@ -1453,7 +1454,7 @@
         <section anchor="vcard-prop-interest">
           <name>INTEREST</name>
           <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> property is set to "interest".</t>
-          <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>The INDEX parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="interest_conversion">
             <name>INTEREST conversion example</name>
             <artwork><![CDATA[
