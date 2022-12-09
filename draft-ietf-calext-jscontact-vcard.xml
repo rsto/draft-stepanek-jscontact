@@ -222,14 +222,48 @@
             <li>One Patch Per Property: For each vCard property with a LANGUAGE parameter, set the complete path in the PatchObject to the JSContact property that the vCard property converts to. The value of the patch is the converted property value. This is simple to process and adequate if the vCard only contains a few properties with LANGUAGE parameter.</li>
             <li>Bundle Patches by Parent: If a PatchObject contains multiple paths that have the same parent paths, then it might be possible to combine these patches into one patch that patches the parent property. This is possible if the property in the Card is patched in its entirety.</li>
           </ul>
-          <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations. As a general rule, an implementation <bcp14>SHOULD</bcp14> choose those vCard properties to convert to the non-localized card, that either all have the same LANGUAGE parameter value or none at all.</t>
-          <t>As a special case, if one or more vCard properties of the same type do not have the LANGUAGE parameter set, then choose them to convert to the non-localized Card.  Convert any with LANGUAGE parameter to the localizations property. <xref target="language-patch-no-language"/> illustrates this.</t>
-          <figure anchor="language-patch-no-language">
-            <name>LANGUAGE conversion example: patch non-localized property</name>
+          <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations.</t>
+          <t>As a general rule, an implementation <bcp14>SHOULD</bcp14> choose those vCard properties to convert to the non-localized card, that either all have the same LANGUAGE parameter value or none at all. <xref target="language-patch-dominant-language"/> illustrates this.</t>
+          <figure anchor="language-patch-dominant-language">
+            <name>LANGUAGE conversion example: one dominant language</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
+    FN;LANGUAGE=EN:John Doe
+    TITLE;LANGUAGE=EN:Boss
+    TITLE;LANGUAGE=fr:Patron
+    ...
+    END:VCARD
+
+    {
+      "@type": "Card",
+      "@version" : "1",
+      ...
+      "locale": "en",
+      "fullName": "John Doe",
+      "titles": {
+        "t1": {
+          "@type": "Title",
+          "title": "Boss"
+        }
+      },
+      "localizations": {
+        "fr": {
+          "titles/t1/title": "Patron"
+        }
+      }
+    }
+        ]]></artwork>
+          </figure>
+          <t>As a special case, if one or more vCard properties of the same type do not have the LANGUAGE parameter set, then choose them to the non-localized Card.  Convert any with LANGUAGE parameters to the localizations property.<xref target="language-patch-no-language"/> illustrates this.</t>
+          <figure anchor="language-patch-no-language">
+            <name>LANGUAGE conversion example: property without language</name>
+            <artwork><![CDATA[
+    BEGIN:VCARD
+    VERSION:4.0
+    ...
+    FN:John Doe
     TITLE:Boss
     TITLE;LANGUAGE=fr:Patron
     ...
@@ -253,15 +287,15 @@
     }
         ]]></artwork>
           </figure>
-          <t>As another special case, if all vCard properties of the same type have the LANGUAGE parameter set, and their language tags do not match the locale of the main Card, then choose one of them to convert to the non-localized card. The language tag can be preserved by adding a PatchObject to localizations for that language tag, even if that PatchObject is empty. <xref target="language-patch-empty"/> illustrates this.</t>
-          <figure anchor="language-patch-empty">
-            <name>LANGUAGE conversion example: patch localized property with empty patch object</name>
+          <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card. In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object. Implementations <bcp14>SHOULD</bcp14> avoid this scenario as much as possible.</t>
+          <figure anchor="language-patch-no-dominant">
+            <name>LANGUAGE conversion example: conflicting locale and language</name>
             <artwork><![CDATA[
     BEGIN:VCARD
     VERSION:4.0
     ...
     LOCALE:es
-    FN:"Gabriel García Márquez"
+    FN:Gabriel García Márquez
     TITLE;LANGUAGE=en:Boss
     TITLE;LANGUAGE=fr:Patron
     ...
@@ -273,21 +307,20 @@
       ...
       "locale": "es",
       "fullName": "Gabriel García Márquez",
-      "titles": {
-        "t1": {
-          "@type": "Title",
-          "title": "Novelist"
-        }
-      },
       "localizations": {
-        "en": {},
+        "en": {
+          "titles": {
+            "t1": {
+              "@type": "Title",
+              "title": "Novelist"
+            }
+        },
         "fr": {
           "titles": {
             "t1": {
               "@type": "Title",
-              "title": "Écrivain
+              "title": "Écrivain"
             }
-          }
         }
       }
     }
