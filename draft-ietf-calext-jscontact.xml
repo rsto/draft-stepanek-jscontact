@@ -1346,7 +1346,7 @@ The value of this street component.</li>
  },
  "localizations": {
    "en": {
-     "name: {
+     "name": {
        "@type": "Name",
        "components": [{
          "@type": "NameComponent",
