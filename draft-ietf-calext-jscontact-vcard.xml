@@ -2165,12 +2165,16 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>Author</td>
               <td>name</td>
-              <td><xref target="vcard-param-author-name"/></td>
+              <td>
+                <xref target="vcard-param-author-name"/>
+              </td>
             </tr>
             <tr>
               <td>Author</td>
               <td>uri</td>
-              <td><xref target="vcard-param-author"/></td>
+              <td>
+                <xref target="vcard-param-author"/>
+              </td>
             </tr>
             <tr>
               <td>CalendarResource</td>
@@ -2704,7 +2708,9 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>NameComponent</td>
               <td>rank</td>
-              <td><xref target="vcard-param-ranks"/></td>
+              <td>
+                <xref target="vcard-param-ranks"/>
+              </td>
             </tr>
             <tr>
               <td>NameComponent</td>
@@ -2806,16 +2812,12 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>OnlineService</td>
               <td>type</td>
-              <td>
-                <xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/>
-              </td>
+              <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
             </tr>
             <tr>
               <td>OnlineService</td>
               <td>user</td>
-              <td>
-                <xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/>
-              </td>
+              <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
             </tr>
             <tr>
               <td>OrgUnit</td>
@@ -3352,7 +3354,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               </td>
               <td align="left">common</td>
               <td align="left">1</td>
-              <td align="left"></td>
+              <td align="left"/>
               <td align="left">IETF</td>
             </tr>
             <tr>
@@ -3364,7 +3366,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               </td>
               <td align="left">common</td>
               <td align="left">1</td>
-              <td align="left"></td>
+              <td align="left"/>
               <td align="left">IETF</td>
             </tr>
           </tbody>
@@ -3393,7 +3395,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
               </td>
               <td align="left">common</td>
               <td align="left">1</td>
-              <td align="left"></td>
+              <td align="left"/>
               <td align="left">IETF</td>
             </tr>
           </tbody>
