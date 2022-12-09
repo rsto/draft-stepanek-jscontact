@@ -1242,8 +1242,8 @@
         </section>
         <section anchor="vcard-prop-org">
           <name>ORG</name>
-          <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name and the <tt>units</tt> property is an array of <tt>OrgUnit</tt> objects each containing the organizational unit name in the <tt>name</tt> property.</t>
-          <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational untits without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.  ORG:;DepartmentA).</t>
+          <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name, and the <tt>units</tt> property is an array of <tt>OrgUnit</tt> objects each containing the organizational unit name in the <tt>name</tt> property.</t>
+          <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational units without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.  ORG:;DepartmentA).</t>
           <t>The ALTID, LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <t>The first item of the comma-separated SORT-AS parameter value converts to the <tt>sortAs</tt> property of the <tt>Organization</tt> object.  The subsequent items convert to the <tt>sortAs</tt> property of the corresponding <tt>OrgUnit</tt> object</t>
           <t>The TYPE parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1968,7 +1968,7 @@
             <dd><tt>JCardProp[]</tt>, where <tt>JCardProp</tt> denotes a jCard-encoded vCard property as defined in <xref target="RFC7095" section="3.3"/>.
     </dd>
             <dt>Definition:</dt>
-            <dd>This property is set on a JSContact object that represents a vCard.  It contains properties that are set in the vCard represented by this JSContact object.  Each entry in this list typically represents a vCard property for which no conversion to a IANA-registered JSContact property is defined.  It <bcp14>MAY</bcp14> contain vCard IANA-registered properties which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
+            <dd>This property is set on a JSContact object that represents a vCard.  It contains properties that are set in the vCard represented by this JSContact object.  Each entry in this list typically represents a vCard property for which no conversion to an IANA-registered JSContact property is defined.  It <bcp14>MAY</bcp14> contain vCard IANA-registered properties which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
             <dt>Example:</dt>
             <dd>
               <t>This illustrates how to convert a vCard extension property:</t>
