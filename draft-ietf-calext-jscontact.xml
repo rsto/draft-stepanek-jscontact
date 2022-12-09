@@ -245,7 +245,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
             <artwork><![CDATA[
 {
   "@type": "Card",
-  "@version" : "1",
+  "@version" : "1.0",
   ...
   "example.com:foo": "bar",
   "example.com:foo2": {
