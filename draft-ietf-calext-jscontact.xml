@@ -169,8 +169,8 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       </section>
       <section>
         <name>Versioning</name>
-        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  This is done by use of the  <xref target="prop-version"><tt>@version</tt></xref> property with in the Card, and by the <xref target="iana-mime-type">version</xref> parameter of the JSContact MIME content type. The JSContact version is meant to help implementations to correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions, or if other significant changes to existing JSContact specifications are introduced.  All IANA-registered elements indicate the version at which they got introduced, updated or obsoleted.</t>
-        <t>If Expert Review or the IETF working group decides that a new JSContact version is required, a new standard RFC document <bcp14>MUST</bcp14> be published. Such a RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
+        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  This is done by use of the  <xref target="prop-version"><tt>@version</tt></xref> property with in the Card, and by the <xref target="iana-mime-type">version</xref> parameter of the JSContact MIME content type.  The JSContact version is meant to help implementations to correctly process JSContact data even if future JSContact specifications update or obsolete current property definitions, or if other significant changes to existing JSContact specifications are introduced.  All IANA-registered elements indicate the version at which they got introduced, updated or obsoleted.</t>
+        <t>If Expert Review or the IETF working group decides that a new JSContact version is required, a new standard RFC document <bcp14>MUST</bcp14> be published.  Such a RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version and register the new version in the JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
       </section>
       <section>
         <name>Validating JSContact Properties</name>
@@ -197,7 +197,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       </section>
       <section>
         <name>Vendor-Specific Extensions</name>
-        <t>Vendors may extend properties and values for experimentation or to store contacts data that only is useful for a single service or application.  Such extensions are not meant for interoperation and vendors <bcp14>MUST NOT</bcp14> expect other implementations to process their contents.  If instead interoperation is desired, vendors are strongly encouraged to define and register new properties, types and values at IANA. Typically, sending a short description to the IETF working group mailing list is enough for Expert Review to make a decision.  Notably, publishing a new RFC document is not required in the general case. <xref target="iana-considerations"/> defines how to register new properties, types or values at IANA. <xref target="iana-registered-properties"/> defines the naming conventions for IANA-registered elements.</t>
+        <t>Vendors may extend properties and values for experimentation or to store contacts data that only is useful for a single service or application.  Such extensions are not meant for interoperation and vendors <bcp14>MUST NOT</bcp14> expect other implementations to process their contents.  If instead interoperation is desired, vendors are strongly encouraged to define and register new properties, types and values at IANA.  Typically, sending a short description to the IETF working group mailing list is enough for Expert Review to make a decision.  Notably, publishing a new RFC document is not required in the general case.  <xref target="iana-considerations"/> defines how to register new properties, types or values at IANA.  <xref target="iana-registered-properties"/> defines the naming conventions for IANA-registered elements.</t>
         <section anchor="vendor-specific-properties" numbered="true" toc="default">
           <name>Vendor-specific Properties</name>
           <t>
@@ -433,7 +433,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="fullName" numbered="true" toc="default">
           <name>fullName</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the full name of the entity represented by this card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set. If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>name</tt> property as the name of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated name component values of the <tt>name</tt> property in the <tt>fullName</tt> property value.</t>
+          <t>This is the full name of the entity represented by this card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>name</tt> property as the name of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated name component values of the <tt>name</tt> property in the <tt>fullName</tt> property value.</t>
           <figure anchor="example-fullName">
             <name><tt>fullName</tt> example</name>
             <sourcecode name=""><![CDATA[
@@ -1055,7 +1055,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               </ul>
             </li>
             <li>fullAddress: <tt>String</tt> (optional).
-                This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set. If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
+                This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
                 </li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
                 The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
@@ -1278,12 +1278,12 @@ The value of this street component.</li>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
-          <t>This property localizes property values in this Card to languages other than the main locale.  Its purpose is to provide language-specific alternatives to existing values, not to add new values. In other words, a localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant.</t>
+          <t>This property localizes property values in this Card to languages other than the main locale.  Its purpose is to provide language-specific alternatives to existing values, not to add new values.  In other words, a localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant.</t>
           <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card object that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
           <t>Conceptually, a Card is localized as follows:</t>
           <ul>
             <li>Determine the language tag in which this Card should be localized in.</li>
-            <li>If the localizations property includes a key for that language, obtain the PatchObject value. If there is no such key, stop.</li>
+            <li>If the localizations property includes a key for that language, obtain the PatchObject value.  If there is no such key, stop.</li>
             <li>Create a copy of the Card, but do not copy the localizations property.</li>
             <li>Apply all patches in the PatchObject to the copy of the Card.</li>
             <li>Optionally, set the <tt>locale</tt> property in the copy of the Card.</li>
@@ -1518,10 +1518,10 @@ The actual information.  This generally is free-text, but future specifications 
             <li>level: <tt>String</tt> (optional).
                 Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-                This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero. Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+                This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
             </li>
             <li>label: <tt>String</tt> (optional).
-                A custom label. See <xref target="prop-label"/>.</li>
+                A custom label.  See <xref target="prop-label"/>.</li>
           </ul>
           <figure anchor="example-personalInfo">
             <name><tt>personalInfo</tt> example</name>
@@ -1732,7 +1732,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Properties" Registry</name>
-          <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  The Since Version for all properties is <tt>1</tt>.  The Until Version for all properties is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  The Since Version for all properties is <tt>1</tt>.  The Until Version for all properties is not set.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-property-registry" align="center">
             <name>Initial Contents of the "JSContact Properties" Registry</name>
             <thead>
@@ -2374,7 +2374,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Types" Registry</name>
-          <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  The Since Version for all types is <tt>1</tt>.  The Until Version for all types is not set. All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
+          <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  The Since Version for all types is <tt>1</tt>.  The Until Version for all types is not set.  All RFC section references are for this document.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-type-registry-common" align="left">
             <name>Initial Contents of the "JSContact Types" Registry</name>
             <thead>
@@ -2647,7 +2647,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-enum-registry-contents" numbered="true" toc="default">
           <name>Initial Contents for the "JSContact Enum Values" Registry</name>
-          <t>For each subregistry created in this section, all RFC section references are for this document. For all entries, the Since Version is <tt>1</tt>, the Until Version is not set, the Change Controller is <tt>IETF</tt>.</t>
+          <t>For each subregistry created in this section, all RFC section references are for this document.  For all entries, the Since Version is <tt>1</tt>, the Until Version is not set, the Change Controller is <tt>IETF</tt>.</t>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
             <dd>kind</dd>

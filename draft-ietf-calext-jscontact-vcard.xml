@@ -215,15 +215,15 @@
         </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
-          <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on. The value of the LANGUAGE parameter defines the language tag key in the <tt>localizations</tt> property.</t>
-          <t>This specification does not define a single standard conversion rule for how to convert the property values. Instead, building the localizations value is implementation-specific.</t>
+          <t>This converts to an entry in the <tt>localizations</tt> property for the vCard property that this parameter is set on.  The value of the LANGUAGE parameter defines the language tag key in the <tt>localizations</tt> property.</t>
+          <t>This specification does not define a single standard conversion rule for how to convert the property values.  Instead, building the localizations value is implementation-specific.</t>
           <t>Two options to populate the localizations property are:</t>
           <ul>
-            <li>One Patch Per Property: For each vCard property with a LANGUAGE parameter, set the complete path in the PatchObject to the JSContact property that the vCard property converts to. The value of the patch is the converted property value. This is simple to process and adequate if the vCard only contains a few properties with LANGUAGE parameter.</li>
-            <li>Bundle Patches by Parent: If a PatchObject contains multiple paths that have the same parent paths, then it might be possible to combine these patches into one patch that patches the parent property. This is possible if the property in the Card is patched in its entirety.</li>
+            <li>One Patch Per Property: For each vCard property with a LANGUAGE parameter, set the complete path in the PatchObject to the JSContact property that the vCard property converts to.  The value of the patch is the converted property value.  This is simple to process and adequate if the vCard only contains a few properties with LANGUAGE parameter.</li>
+            <li>Bundle Patches by Parent: If a PatchObject contains multiple paths that have the same parent paths, then it might be possible to combine these patches into one patch that patches the parent property.  This is possible if the property in the Card is patched in its entirety.</li>
           </ul>
           <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations.</t>
-          <t>As a general rule, an implementation <bcp14>SHOULD</bcp14> choose those vCard properties to convert to the non-localized card, that either all have the same LANGUAGE parameter value or none at all. <xref target="language-patch-dominant-language"/> illustrates this.</t>
+          <t>As a general rule, an implementation <bcp14>SHOULD</bcp14> choose those vCard properties to convert to the non-localized card, that either all have the same LANGUAGE parameter value or none at all.  <xref target="language-patch-dominant-language"/> illustrates this.</t>
           <figure anchor="language-patch-dominant-language">
             <name>LANGUAGE conversion example: one dominant language</name>
             <artwork><![CDATA[
@@ -287,7 +287,7 @@
     }
         ]]></artwork>
           </figure>
-          <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card. In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object. Implementations <bcp14>SHOULD</bcp14> avoid this scenario as much as possible.</t>
+          <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.  Implementations <bcp14>SHOULD</bcp14> avoid this scenario as much as possible.</t>
           <figure anchor="language-patch-no-dominant">
             <name>LANGUAGE conversion example: conflicting locale and language</name>
             <artwork><![CDATA[
@@ -1278,7 +1278,7 @@
         </section>
         <section anchor="vcard-prop-related">
           <name>RELATED</name>
-          <t>This converts to an entry in the <tt>relatedTo</tt> property (<xref target="related_conversion"/>). The property value converts to the key in the <tt>relatedTo</tt> property. The TYPE parameters convert to the <tt>relation</tt> of the <tt>Relation</tt> object value. Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This converts to an entry in the <tt>relatedTo</tt> property (<xref target="related_conversion"/>).  The property value converts to the key in the <tt>relatedTo</tt> property.  The TYPE parameters convert to the <tt>relation</tt> of the <tt>Relation</tt> object value.  Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
           <figure anchor="related_conversion">
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
@@ -3286,7 +3286,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       <name>IANA Considerations</name>
       <section>
         <name>New vCard Properties</name>
-        <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1.  of <xref target="RFC6350"/>.</t>
+        <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
         <table anchor="new_properties">
           <name>New VCARD Properties</name>
           <thead>
@@ -3307,7 +3307,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       </section>
       <section>
         <name>New vCard Parameters</name>
-        <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2.  of <xref target="RFC6350"/>.</t>
+        <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
         <table anchor="new_parameters">
           <name>New VCARD Parameters</name>
           <thead>
