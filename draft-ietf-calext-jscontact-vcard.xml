@@ -99,11 +99,11 @@
         </section>
         <section>
           <name>INTEGER</name>
-          <t>This converts to the JSContact <tt>Number</tt> type.</t>
+          <t>This converts to the JSContact <tt>Int</tt> and <tt>UnsignedInt</tt> types.</t>
         </section>
         <section>
           <name>FLOAT</name>
-          <t>This converts to the JSContact <tt>Int</tt> and <tt>UnsignedInt</tt> types.</t>
+          <t>This converts to the JSContact <tt>Number</tt> type.</t>
         </section>
         <section>
           <name>LANGUAGE-TAG</name>
@@ -2842,6 +2842,13 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>Organization</td>
               <td>@type</td>
               <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>Organization</td>
+              <td>contexts</td>
+              <td>
+                <xref target="vcard-param-type"/>
+              </td>
             </tr>
             <tr>
               <td>Organization</td>
