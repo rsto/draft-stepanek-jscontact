@@ -78,7 +78,7 @@
         <name>General rules</name>
         <section>
           <name>The <tt>uid</tt> property</name>
-          <t>The UID property in vCard is optional, but the <tt>uid</tt> property in JSContact is mandatory.  Implementations that convert a vCard without UID property <bcp14>MUST</bcp14> generate a unique identifier as a value for the <tt>uid</tt> property.  They <bcp14>SHOULD</bcp14> generate the same identifier when repeatedly converting the same vCard, but they <bcp14>MAY</bcp14> generate different values.  Consequently, a vCard without UID property <bcp14>MAY</bcp14> not convert to one exact instance of a JSContact card or card group.</t>
+          <t>The UID property in vCard is optional, but the <tt>uid</tt> property in JSContact is mandatory.  Implementations that convert a vCard without UID property <bcp14>MUST</bcp14> generate a unique identifier as a value for the <tt>uid</tt> property.  They <bcp14>SHOULD</bcp14> generate the same identifier when repeatedly converting the same vCard, but they <bcp14>MAY</bcp14> generate different values.  Consequently, a vCard without UID property <bcp14>MAY</bcp14> not convert to one exact instance of a JSContact card.</t>
         </section>
         <section>
           <name>Choosing identifiers</name>

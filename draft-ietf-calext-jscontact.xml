@@ -325,7 +325,7 @@ v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
         <section anchor="locale" numbered="true" toc="default">
           <name>locale</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card or card group.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
+          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
           <figure anchor="example-locale">
             <name><tt>locale</tt> example</name>
             <sourcecode name=""><![CDATA[
