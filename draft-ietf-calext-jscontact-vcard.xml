@@ -2658,13 +2658,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>Name</td>
-              <td>locale</td>
-              <td>
-                <xref target="vcard-prop-locale"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Name</td>
               <td>sortAs</td>
               <td>
                 <xref target="vcard-param-sortas"/>

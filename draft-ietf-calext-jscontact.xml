@@ -457,10 +457,6 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character.  Otherwise, inserting a single Space character in between name component values is a good choice.</t>
             </li>
             <li>
-          locale: <tt>String</tt> (optional).
-          The locale of the name.  The value <bcp14>MUST</bcp14> be a language tag as defined <xref target="RFC5646"/>.
-        </li>
-            <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
               <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
@@ -523,7 +519,7 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
               <t>rank: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
                     Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
               <t>For example, two name components of type <tt>surname</tt> may have their <tt>rank</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
-              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Name object to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
+              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Card object to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
           </ul>
         </section>
@@ -1317,9 +1313,9 @@ The value of this street component.</li>
           <figure anchor="example-localizations-complex">
             <artwork><![CDATA[
 ...
+ "locale": "ru",
  "name": {
    "@type": "Name",
-   "locale": "ru",
    "components": [{
      "@type": "NameComponent",
      "type": "given",
@@ -1338,7 +1334,6 @@ The value of this street component.</li>
    "en": {
      "name: {
        "@type": "Name",
-       "locale": "en",
        "components": [{
          "@type": "NameComponent",
          "type": "given",
@@ -1967,8 +1962,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">locale</td>
                 <td align="left">String</td>
-                <td align="left">Card, Name</td>
-                <td align="left"><xref target="locale" format="default"/>, <xref target="name" format="default"/></td>
+                <td align="left">Card</td>
+                <td align="left"><xref target="locale" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">locality</td>
