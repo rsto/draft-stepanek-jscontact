@@ -91,7 +91,7 @@
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-contact-channel-pref  = "CONTACT-CHANNEL-PREF
+contact-channel-pref  = "CONTACT-CHANNEL-PREF"
                     *(";" contact-channel-pref-param )
                       ":" contact-channel-pref-value CRLF
 
@@ -377,7 +377,7 @@ SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=TEXT:peter94
           <dt>Format definition:</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
-author-param    = "AUTHOR" "=" DQUOTE +QSAFE-CHAR DQUOTE
+author-param    = "AUTHOR" "=" DQUOTE 1*QSAFE-CHAR DQUOTE
                 ; a valid URI from Section 3 of [RFC3986]
 ]]></sourcecode>
           </dd>
@@ -486,7 +486,7 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
             <sourcecode name="" type="abnf"><![CDATA[
 ranks-param     = ranks-component 4(";" ranks-component)
 ranks-component = rank *("," rank)
-rank            = (("1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9") *DIGIT)) / ""
+rank            = (("1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9") *DIGIT) / ""
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>

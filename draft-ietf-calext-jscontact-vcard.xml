@@ -3272,6 +3272,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <sourcecode name="" type="abnf"><![CDATA[
 jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
                  ; also see param-value in RFC 6350, section 3.3
+
   ]]></sourcecode>
             </dd>
             <dt>Example(s):</dt>

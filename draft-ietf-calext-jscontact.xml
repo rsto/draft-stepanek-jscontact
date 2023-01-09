@@ -231,9 +231,10 @@ v-label = alnum-int / alnum-int *(alnum-int / "-") alnum-int
 alnum-int = ALPHA / DIGIT / NON-ASCII
   ; see RFC 6350 Section 3.3
 
-v-name = 1*(WSP / "!" / %23-7e / NON-ASCII)
+v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
   ; any characters except CTLs and DQUOTE, also see RFC 6350 Section 3.3
   ; use of "/" (%x2f) and "~" (%x7e) is discouraged
+
 ]]></sourcecode>
           <t>
             The value of vendor-specific properties can be any valid JSON value, and naming restrictions do not apply to such values.  Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-specific properties.
