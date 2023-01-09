@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE rfc [
 <!ENTITY nbsp "&#160;">
 <!ENTITY zwsp "&#8203;">
@@ -14,7 +14,7 @@
 <?rfc sortrefs="yes"?>
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" submissionType="IETF" category="std" consensus="true" docName="draft-ietf-calext-jscontact-vcard-04" ipr="trust200902" tocInclude="true" tocDepth="4" sortRefs="true" symRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" submissionType="IETF" category="std" consensus="true" docName="draft-ietf-calext-jscontact-vcard-05" ipr="trust200902" tocInclude="true" tocDepth="4" sortRefs="true" symRefs="true" version="3">
   <!-- xml2rfc v2v3 conversion 3.12.10 -->
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
@@ -45,7 +45,7 @@
         <uri>https://www.fastmail.com</uri>
       </address>
     </author>
-    <date year="2022" month="November" day="25"/>
+    <date year="2022" month="December" day="9"/>
     <area>Applications</area>
     <workgroup>calext</workgroup>
     <keyword>JSON</keyword>
