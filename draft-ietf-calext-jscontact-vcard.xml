@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc [
 <!ENTITY nbsp "&#160;">
 <!ENTITY zwsp "&#8203;">
@@ -72,7 +72,7 @@
       <section anchor="abnf-notations">
         <name>ABNF Notations</name>
         <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document either are defined in <xref target="RFC5234"/> (such as the ABNF for CRLF, WSP, DQUOTE, VCHAR, ALPHA, and DIGIT) or <xref target="RFC6350"/>.
-        </t>
+    </t>
       </section>
     </section>
     <section anchor="vcard-jscontact-conversion">
@@ -165,52 +165,52 @@
           <figure anchor="group_conversion_params">
             <name>An example how to preserve the group name in <tt>params</tt> during conversion.</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    item1.TEL;VALUE=uri:tel:+1-555-555-5555
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+item1.TEL;VALUE=uri:tel:+1-555-555-5555
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "phones": {
-      "p1": {
-        "@type": "Phone",
-        "number": "tel:+1-555-555-5555",
-        "vCardParams" : {
-         "group" : "item1"
-        }
-      }
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"phones": {
+  "p1": {
+    "@type": "Phone",
+    "number": "tel:+1-555-555-5555",
+    "vCardParams" : {
+     "group" : "item1"
     }
-    ...
-    }
-        ]]></artwork>
+  }
+}
+...
+}
+]]></artwork>
           </figure>
           <figure anchor="group_conversion_props">
             <name>An example how to preserve the group name in <tt>props</tt> during conversion.</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    item2.X-FOO:bar
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+item2.X-FOO:bar
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "vCardProps": [
-      ["x-foo", {
-        "group": "item2"
-      }, "unknown", "bar"]
-    ]
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"vCardProps": [
+  ["x-foo", {
+    "group": "item2"
+  }, "unknown", "bar"]
+]
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-param-index">
@@ -231,110 +231,110 @@
           <figure anchor="language-patch-dominant-language">
             <name>LANGUAGE conversion example: one dominant language</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    FN;LANGUAGE=EN:John Doe
-    TITLE;LANGUAGE=EN:Boss
-    TITLE;LANGUAGE=fr:Patron
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+FN;LANGUAGE=EN:John Doe
+TITLE;LANGUAGE=EN:Boss
+TITLE;LANGUAGE=fr:Patron
+...
+END:VCARD
 
-    {
-      "@type": "Card",
-      "@version" : "1.0",
-      ...
-      "locale": "en",
-      "fullName": "John Doe",
-      "titles": {
-        "t1": {
-          "@type": "Title",
-          "title": "Boss"
-        }
-      },
-      "localizations": {
-        "fr": {
-          "titles/t1/title": "Patron"
-        }
-      }
+{
+  "@type": "Card",
+  "@version" : "1.0",
+  ...
+  "locale": "en",
+  "fullName": "John Doe",
+  "titles": {
+    "t1": {
+      "@type": "Title",
+      "title": "Boss"
     }
-        ]]></artwork>
+  },
+  "localizations": {
+    "fr": {
+      "titles/t1/title": "Patron"
+    }
+  }
+}
+]]></artwork>
           </figure>
           <t>As a special case, if one or more vCard properties of the same type do not have the LANGUAGE parameter set, then choose them to the non-localized Card.  Convert any with LANGUAGE parameters to the localizations property.<xref target="language-patch-no-language"/> illustrates this.</t>
           <figure anchor="language-patch-no-language">
             <name>LANGUAGE conversion example: property without language</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    FN:John Doe
-    TITLE:Boss
-    TITLE;LANGUAGE=fr:Patron
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+FN:John Doe
+TITLE:Boss
+TITLE;LANGUAGE=fr:Patron
+...
+END:VCARD
 
-    {
-      "@type": "Card",
-      "@version" : "1.0",
-      ...
-      "titles": {
-        "t1": {
-          "@type": "Title",
-          "title": "Boss"
-        }
-      },
-      "localizations": {
-        "fr": {
-          "titles/t1/title": "Patron"
-        }
-      }
+{
+  "@type": "Card",
+  "@version" : "1.0",
+  ...
+  "titles": {
+    "t1": {
+      "@type": "Title",
+      "title": "Boss"
     }
-        ]]></artwork>
+  },
+  "localizations": {
+    "fr": {
+      "titles/t1/title": "Patron"
+    }
+  }
+}
+]]></artwork>
           </figure>
           <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.  Implementations <bcp14>SHOULD</bcp14> avoid this scenario as much as possible.</t>
           <figure anchor="language-patch-no-dominant">
             <name>LANGUAGE conversion example: conflicting locale and language</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    LOCALE:es
-    FN:Gabriel García Márquez
-    TITLE;LANGUAGE=en:Boss
-    TITLE;LANGUAGE=fr:Patron
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+LOCALE:es
+FN:Gabriel García Márquez
+TITLE;LANGUAGE=en:Boss
+TITLE;LANGUAGE=fr:Patron
+...
+END:VCARD
 
-    {
-      "@type": "Card",
-      "@version" : "1.0",
-      ...
-      "locale": "es",
-      "fullName": "Gabriel García Márquez",
-      "localizations": {
-        "en": {
-          "titles": {
-            "t1": {
-              "@type": "Title",
-              "title": "Novelist"
-            }
-        },
-        "fr": {
-          "titles": {
-            "t1": {
-              "@type": "Title",
-              "title": "Écrivain"
-            }
+{
+  "@type": "Card",
+  "@version" : "1.0",
+  ...
+  "locale": "es",
+  "fullName": "Gabriel García Márquez",
+  "localizations": {
+    "en": {
+      "titles": {
+        "t1": {
+          "@type": "Title",
+          "title": "Novelist"
         }
-      }
+    },
+    "fr": {
+      "titles": {
+        "t1": {
+          "@type": "Title",
+          "title": "Écrivain"
+        }
     }
-        ]]></artwork>
+  }
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-param-level">
           <name>LEVEL</name>
           <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInfo</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
-          </t>
+      </t>
           <ul spacing="compact">
             <li>"beginner" converts to "low";</li>
             <li>"average" converts to "medium";</li>
@@ -360,35 +360,35 @@
           <figure anchor="propid_conversion">
             <name>PROP-ID conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
-    TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
+TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "phones": {
-      "PHONE-A": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "features": { "voice": true },
-        "number": "tel:+1-555-555-5555;ext=5555",
-        "pref": 1
-      },
-      "PHONE-B": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "number": "tel:+33-01-23-45-67"
-      }
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"phones": {
+  "PHONE-A": {
+    "@type": "Phone",
+    "contexts": { "private": true },
+    "features": { "voice": true },
+    "number": "tel:+1-555-555-5555;ext=5555",
+    "pref": 1
+  },
+  "PHONE-B": {
+    "@type": "Phone",
+    "contexts": { "private": true },
+    "number": "tel:+33-01-23-45-67"
+  }
+},
+...
+}
+]]></artwork>
           </figure>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
@@ -429,21 +429,21 @@
           <figure anchor="kind_conversion">
             <name>KIND conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    KIND:individual
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+KIND:individual
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "kind": "individual",
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"kind": "individual",
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-source">
@@ -453,29 +453,29 @@
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    SOURCE:http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+SOURCE:http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "directories": {
-       ...
-       "ENTRY-1": {
-         "@type": "DirectoryResource",
-         "type": "entry",
-         "uri": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
-       },
-       ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"directories": {
+   ...
+   "ENTRY-1": {
+     "@type": "DirectoryResource",
+     "type": "entry",
+     "uri": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
+   },
+   ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-xml">
@@ -505,62 +505,62 @@
           <figure anchor="anniversary_conversion">
             <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    BDAY:19531015T231000Z
-    BIRTHPLACE:Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
-    DEATHDATE:19960415
-    DEATHPLACE:4445 Courtright Street\nNew England, ND 58647\nU.S.A.
-    ANNIVERSARY:19860201
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+BDAY:19531015T231000Z
+BIRTHPLACE:Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
+DEATHDATE:19960415
+DEATHPLACE:4445 Courtright Street\nNew England, ND 58647\nU.S.A.
+ANNIVERSARY:19860201
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "anniversaries": {
-      "ANNIVERSARY-1" : {
-        "@type": "Anniversary",
-        "type": "birth",
-        "date": {
-          "@type": "Timestamp",
-          "utc": "1953-10-15T23:10:00Z"
-        },
-        "place": {
-          "@type": "Address",
-          "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
-        }
-      },
-      "ANNIVERSARY-2" : {
-        "@type": "Anniversary",
-        "type": "death",
-        "date": {
-          "@type": "PartialDate",
-          "year": 1996,
-          "month": 4,
-          "year": 15
-        },
-        "place": {
-          "@type": "Address",
-          "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
-        }
-      },
-      "ANNIVERSARY-3" : {
-        "@type": "Anniversary",
-        "type": "wedding",
-        "date": {
-          "@type": "PartialDate",
-          "year": 1986,
-          "month": 2,
-          "day": 1
-        }
-      }
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"anniversaries": {
+  "ANNIVERSARY-1" : {
+    "@type": "Anniversary",
+    "type": "birth",
+    "date": {
+      "@type": "Timestamp",
+      "utc": "1953-10-15T23:10:00Z"
     },
-    ...
+    "place": {
+      "@type": "Address",
+      "fullAddress": "Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
     }
-        ]]></artwork>
+  },
+  "ANNIVERSARY-2" : {
+    "@type": "Anniversary",
+    "type": "death",
+    "date": {
+      "@type": "PartialDate",
+      "year": 1996,
+      "month": 4,
+      "year": 15
+    },
+    "place": {
+      "@type": "Address",
+      "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
+    }
+  },
+  "ANNIVERSARY-3" : {
+    "@type": "Anniversary",
+    "type": "wedding",
+    "date": {
+      "@type": "PartialDate",
+      "year": 1986,
+      "month": 2,
+      "day": 1
+    }
+  }
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-gender">
@@ -574,37 +574,37 @@
           <figure anchor="grammatical_gender_pronouns_conversion">
             <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-     GRAMMATICAL-GENDER:NEUTER
-     PRONOUNS;PREF=2:they/them
-     PRONOUNS;PREF=1:xe/xir
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+ GRAMMATICAL-GENDER:NEUTER
+ PRONOUNS;PREF=2:they/them
+ PRONOUNS;PREF=1:xe/xir
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "speakToAs": {
-      "grammaticalGender": "neuter",
-      "pronouns": {
-        "PRONOUNS-1": {
-          "@type": "Pronouns",
-          "pronouns": "they/them",
-          "pref": 2
-        },
-        "PRONOUNS-2": {
-          "@type": "Pronouns",
-          "pronouns": "xe/xir",
-          "pref": 1
-        }
-      }
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"speakToAs": {
+  "grammaticalGender": "neuter",
+  "pronouns": {
+    "PRONOUNS-1": {
+      "@type": "Pronouns",
+      "pronouns": "they/them",
+      "pref": 2
     },
-    ...
+    "PRONOUNS-2": {
+      "@type": "Pronouns",
+      "pronouns": "xe/xir",
+      "pref": 1
     }
-        ]]></artwork>
+  }
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-fn">
@@ -651,43 +651,43 @@
           <figure anchor="fn_n_nickname_conversion">
             <name>FN, N, NICKNAME conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    FN:Mr.  John Q.  Public\, Esq.
-    N;SORT-AS="Public,John":Public;John;Quinlan;Mr.;Esq.
-    NICKNAME:Johnny
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+FN:Mr.  John Q.  Public\, Esq.
+N;SORT-AS="Public,John":Public;John;Quinlan;Mr.;Esq.
+NICKNAME:Johnny
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "fullName": "Mr.  John Q.  Public, Esq.",
-    "name": {
-        "@type": "Name",
-        "components":[
-          { "@type": "NameComponent", "type": "prefix", "value": "Mr."  },
-          { "@type": "NameComponent", "type": "given", "value": "John" },
-          { "@type": "NameComponent", "type": "surname", "value": "Public" },
-          { "@type": "NameComponent", "type": "middle", "value": "Quinlan" },
-          { "@type": "NameComponent", "type": "suffix", "value": "Esq." }
-        ],
-        "sortAs": {
-            "surname": "Public",
-            "given": "John"
-        }
-    },
-    "nickNames": {
-       "NICK-1": {
-          "@type": "NickName",
-          "name": "Johnny"
-       }
-    },
-    ...
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"fullName": "Mr.  John Q.  Public, Esq.",
+"name": {
+    "@type": "Name",
+    "components":[
+      { "@type": "NameComponent", "type": "prefix", "value": "Mr."  },
+      { "@type": "NameComponent", "type": "given", "value": "John" },
+      { "@type": "NameComponent", "type": "surname", "value": "Public" },
+      { "@type": "NameComponent", "type": "middle", "value": "Quinlan" },
+      { "@type": "NameComponent", "type": "suffix", "value": "Esq." }
+    ],
+    "sortAs": {
+        "surname": "Public",
+        "given": "John"
     }
-        ]]></artwork>
+},
+"nickNames": {
+   "NICK-1": {
+      "@type": "NickName",
+      "name": "Johnny"
+   }
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-photo">
@@ -697,29 +697,29 @@
           <figure anchor="photo_conversion">
             <name>PHOTO conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    PHOTO:http://www.example.com/pub/photos/jqpublic.gif
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+PHOTO:http://www.example.com/pub/photos/jqpublic.gif
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "media": {
-       ...
-       "PHOTO-1": {
-         "@type": "MediaResource",
-         "type": "photo",
-         "uri": "http://www.example.com/pub/photos/jqpublic.gif"
-       },
-       ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"media": {
+   ...
+   "PHOTO-1": {
+     "@type": "MediaResource",
+     "type": "photo",
+     "uri": "http://www.example.com/pub/photos/jqpublic.gif"
+   },
+   ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -793,51 +793,51 @@
           <figure anchor="adr_conversion">
             <name>ADR conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA
-    ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA
+ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "addresses": {
-      "ADDR-1" : {
-        "@type": "Address",
-        "contexts": { "work": true },
-        "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
-        "street": [
-           { "@type": "StreetComponent", "type": "name", "value": "Oak St" },
-           { "@type": "StreetComponent", "type": "number", "value": "54321" }
-        ],
-        "locality": "Reston",
-        "region": "VA",
-        "country": "USA",
-        "postcode": "20190",
-        "countryCode": "US"
-      },
-      "ADDR-2": {
-        "@type": "Address",
-        "contexts": { "private": true },
-        "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
-        "street": [
-           { "@type": "StreetComponent", "type": "name", "value": "Elm St" },
-           { "@type": "StreetComponent", "type": "number", "value": "12345" }
-        ],
-        "locality": "Reston",
-        "region": "VA",
-        "country": "USA",
-        "postcode": "20190",
-        "countryCode": "US"
-      }
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"addresses": {
+  "ADDR-1" : {
+    "@type": "Address",
+    "contexts": { "work": true },
+    "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
+    "street": [
+       { "@type": "StreetComponent", "type": "name", "value": "Oak St" },
+       { "@type": "StreetComponent", "type": "number", "value": "54321" }
+    ],
+    "locality": "Reston",
+    "region": "VA",
+    "country": "USA",
+    "postcode": "20190",
+    "countryCode": "US"
+  },
+  "ADDR-2": {
+    "@type": "Address",
+    "contexts": { "private": true },
+    "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
+    "street": [
+       { "@type": "StreetComponent", "type": "name", "value": "Elm St" },
+       { "@type": "StreetComponent", "type": "number", "value": "12345" }
+    ],
+    "locality": "Reston",
+    "region": "VA",
+    "country": "USA",
+    "postcode": "20190",
+    "countryCode": "US"
+  }
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -878,35 +878,35 @@
           <figure anchor="contact_channel_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CONTACT-CHANNEL-PREF;PREF=1:EMAIL
-    CONTACT-CHANNEL-PREF;PREF=2:TEL
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+CONTACT-CHANNEL-PREF;PREF=1:EMAIL
+CONTACT-CHANNEL-PREF;PREF=2:TEL
+...
+END:VCARD
 
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"preferredContactChannels": {
+  "emails":[
     {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "preferredContactChannels": {
-      "emails":[
-        {
-          "@type": "ContactChannelPreference",
-          "pref": 1
-        }
-      ],
-      "phones":[
-        {
-          "@type": "ContactChannelPreference",
-          "pref": 2
-        }
-      ]
-    },
-    ...
+      "@type": "ContactChannelPreference",
+      "pref": 1
     }
-        ]]></artwork>
+  ],
+  "phones":[
+    {
+      "@type": "ContactChannelPreference",
+      "pref": 2
+    }
+  ]
+},
+...
+}
+]]></artwork>
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
@@ -917,33 +917,33 @@
           <figure anchor="email_conversion">
             <name>EMAIL conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    EMAIL;TYPE=work:jqpublic@xyz.example.com
-    EMAIL;PREF=1:jane_doe@example.com
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+EMAIL;TYPE=work:jqpublic@xyz.example.com
+EMAIL;PREF=1:jane_doe@example.com
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "emails": {
-      "EMAIL-1": {
-        "@type": "EmailAddress",
-        "contexts": { "work": true },
-        "address": "jqpublic@xyz.example.com"
-      },
-      "EMAIL-2": {
-        "@type": "EmailAddress",
-        "address": "jane_doe@example.com",
-        "pref": 1
-      }
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"emails": {
+  "EMAIL-1": {
+    "@type": "EmailAddress",
+    "contexts": { "work": true },
+    "address": "jqpublic@xyz.example.com"
+  },
+  "EMAIL-2": {
+    "@type": "EmailAddress",
+    "address": "jane_doe@example.com",
+    "pref": 1
+  }
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-impp">
@@ -953,30 +953,30 @@
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    IMPP;PREF=1:xmpp:alice@example.com
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+IMPP;PREF=1:xmpp:alice@example.com
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "onlineServices": {
-      ...
-      "OS-1": {
-        "@type": "OnlineService",
-        "user": "xmpp:alice@example.com",
-        "type": "impp",
-        "pref": 1
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"onlineServices": {
+  ...
+  "OS-1": {
+    "@type": "OnlineService",
+    "user": "xmpp:alice@example.com",
+    "type": "impp",
+    "pref": 1
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-lang">
@@ -987,42 +987,42 @@
           <figure anchor="lang_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    LANG;TYPE=work;PREF=1:en
-    LANG;TYPE=work;PREF=2:fr
-    LANG;TYPE=home:fr
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+LANG;TYPE=work;PREF=1:en
+LANG;TYPE=work;PREF=2:fr
+LANG;TYPE=home:fr
+...
+END:VCARD
 
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"preferredLanguages": {
+  "en":[
     {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "preferredLanguages": {
-      "en":[
-        {
-          "@type": "LanguagePreference",
-          "contexts": { "work": true },
-          "pref": 1
-        }
-      ],
-      "fr":[
-        {
-          "@type": "LanguagePreference",
-          "contexts": { "work": true },
-          "pref": 2
-        },
-        {
-          "@type": "LanguagePreference",
-          "contexts": { "private": true }
-        }
-      ]
-    },
-    ...
+      "@type": "LanguagePreference",
+      "contexts": { "work": true },
+      "pref": 1
     }
-        ]]></artwork>
+  ],
+  "fr":[
+    {
+      "@type": "LanguagePreference",
+      "contexts": { "work": true },
+      "pref": 2
+    },
+    {
+      "@type": "LanguagePreference",
+      "contexts": { "private": true }
+    }
+  ]
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-locale">
@@ -1031,21 +1031,21 @@
           <figure anchor="locale_conversion">
             <name>LOCALE conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    LOCALE:de-AT
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+LOCALE:de-AT
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "locale": "de-AT",
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"locale": "de-AT",
+...
+}
+]]></artwork>
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
@@ -1056,30 +1056,30 @@
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "onlineServices": {
-      ...
-      "OS-1": {
-        "@type": "OnlineService",
-        "service": "Twitter",
-        "user": "https://twitter.com/ietf",
-        "type": "uri"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"onlineServices": {
+  ...
+  "OS-1": {
+    "@type": "OnlineService",
+    "service": "Twitter",
+    "user": "https://twitter.com/ietf",
+    "type": "uri"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
@@ -1090,35 +1090,35 @@
           <figure anchor="tel_conversion">
             <name>TEL conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
-    TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
+TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "phones": {
-      "PHONE-1": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "features": { "voice": true },
-        "number": "tel:+1-555-555-5555;ext=5555",
-        "pref": 1
-      },
-      "PHONE-2": {
-        "@type": "Phone",
-        "contexts": { "private": true },
-        "number": "tel:+33-01-23-45-67"
-      }
-    ],
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"phones": {
+  "PHONE-1": {
+    "@type": "Phone",
+    "contexts": { "private": true },
+    "features": { "voice": true },
+    "number": "tel:+1-555-555-5555;ext=5555",
+    "pref": 1
+  },
+  "PHONE-2": {
+    "@type": "Phone",
+    "contexts": { "private": true },
+    "number": "tel:+33-01-23-45-67"
+  }
+],
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -1157,30 +1157,30 @@
           <figure anchor="contact_uri_conversion">
             <name>CONTACT-URI conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CONTACT-URI;PREF=1:mailto:contact@example.com
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+CONTACT-URI;PREF=1:mailto:contact@example.com
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "links": {
-      ...
-      "CONTACT-1": {
-        "@type": "LinkResource",
-        "type": "contact",
-        "uri": "mailto:contact@example.com",
-        "pref": 1
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"links": {
+  ...
+  "CONTACT-1": {
+    "@type": "LinkResource",
+    "type": "contact",
+    "uri": "mailto:contact@example.com",
+    "pref": 1
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-logo">
@@ -1190,29 +1190,29 @@
           <figure anchor="logo_conversion">
             <name>LOGO conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    LOGO:http://www.example.com/pub/logos/abccorp.jpg
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+LOGO:http://www.example.com/pub/logos/abccorp.jpg
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "media": {
-      ...
-      "LOGO-1": {
-        "@type": "MediaResource",
-        "type": "logo",
-        "uri": "http://www.example.com/pub/logos/abccorp.jpg"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"media": {
+  ...
+  "LOGO-1": {
+    "@type": "MediaResource",
+    "type": "logo",
+    "uri": "http://www.example.com/pub/logos/abccorp.jpg"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-member">
@@ -1222,26 +1222,26 @@
           <figure anchor="group_example">
             <name>Group example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    KIND:group
-    FN:The Doe family
-    MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
-    MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+KIND:group
+FN:The Doe family
+MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
+MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
+END:VCARD
 
-      {
-        "@type": "Card",
-        "@version" : "1.0",
-        "kind": "group",
-        "fullName": "The Doe family",
-        "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
-        "members": {
-          "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
-          "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
-        }
-      }
-        ]]></artwork>
+  {
+    "@type": "Card",
+    "@version" : "1.0",
+    "kind": "group",
+    "fullName": "The Doe family",
+    "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+    "members": {
+      "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
+      "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
+    }
+  }
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-org">
@@ -1254,31 +1254,31 @@
           <figure anchor="org_conversion">
             <name>ORG conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "organizations": {
-      "ORG-1": {
-        "@type": "Organization",
-        "name": "ABC, Inc.",
-        "units":[
-          {"@type": "OrgUnit", "name": "North American Division"},
-          {"@type": "OrgUnit", "name": "Marketing"}
-        ],
-        "sortAs": "ABC"
-      }
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"organizations": {
+  "ORG-1": {
+    "@type": "Organization",
+    "name": "ABC, Inc.",
+    "units":[
+      {"@type": "OrgUnit", "name": "North American Division"},
+      {"@type": "OrgUnit", "name": "Marketing"}
+    ],
+    "sortAs": "ABC"
+  }
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-related">
@@ -1287,40 +1287,40 @@
           <figure anchor="related_conversion">
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-    RELATED;TYPE=contact:http://example.com/directory/jdoe.vcf
-    RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+RELATED;TYPE=contact:http://example.com/directory/jdoe.vcf
+RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
+...
+END:VCARD
 
-    {
-      "@type" : "Card",
-      "@version" : "1.0",
-      ...
-      "relatedTo" : {
-        "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
-          "@type" : "Relation",
-          "relation" : {
-            "friend" : true
-          }
-        },
-        "http://example.com/directory/jdoe.vcf" : {
-          "@type" : "Relation",
-          "relation" : {
-            "contact" : true
-          }
-        },
-        "Please contact my assistant Jane Doe for any inquiries." : {
-          "@type" : "Relation",
-          "relation" : { }
-        }
-      },
-      ...
+{
+  "@type" : "Card",
+  "@version" : "1.0",
+  ...
+  "relatedTo" : {
+    "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
+      "@type" : "Relation",
+      "relation" : {
+        "friend" : true
+      }
+    },
+    "http://example.com/directory/jdoe.vcf" : {
+      "@type" : "Relation",
+      "relation" : {
+        "contact" : true
+      }
+    },
+    "Please contact my assistant Jane Doe for any inquiries." : {
+      "@type" : "Relation",
+      "relation" : { }
     }
-        ]]></artwork>
+  },
+  ...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-title">
@@ -1331,41 +1331,41 @@
           <figure anchor="title_role_conversion">
             <name>TITLE and ROLE conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    TITLE:Research Scientist
-    group1.ROLE:Project Leader
-    group1.ORG:ABC, Inc.
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+TITLE:Research Scientist
+group1.ROLE:Project Leader
+group1.ORG:ABC, Inc.
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "titles": {
-      "TITLE-1": {
-        "@type": "Title",
-        "type": "title",
-        "name": "Project Leader"
-      },
-      "TITLE-2": {
-        "@type": "Title",
-        "type": "role",
-        "name": "Research Scientist",
-        "organization": "ORG-1"
-      }
-    },
-    "organizations": {
-      "ORG-1": {
-        "@type": "Organization",
-        "name": "ABC, Inc."
-      }
-    }
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"titles": {
+  "TITLE-1": {
+    "@type": "Title",
+    "type": "title",
+    "name": "Project Leader"
+  },
+  "TITLE-2": {
+    "@type": "Title",
+    "type": "role",
+    "name": "Research Scientist",
+    "organization": "ORG-1"
+  }
+},
+"organizations": {
+  "ORG-1": {
+    "@type": "Organization",
+    "name": "ABC, Inc."
+  }
+}
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -1378,39 +1378,39 @@
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    EXPERTISE;LEVEL=beginner;INDEX=2:chinese literature
-    EXPERTISE;INDEX=1;LEVEL=expert:chemistry
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+EXPERTISE;LEVEL=beginner;INDEX=2:chinese literature
+EXPERTISE;INDEX=1;LEVEL=expert:chemistry
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "personalInfo": {
-      ...
-      "PERSINFO-1" : {
-        "@type": "PersonalInfo",
-        "type": "expertise",
-        "value": "chinese literature",
-         "level": "low",
-         "position": 2
-      },
-      "PERSINFO-2" : {
-        "@type": "PersonalInfo",
-        "type": "expertise",
-        "value": "chemistry",
-        "level": "high",
-        "position": 1
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"personalInfo": {
+  ...
+  "PERSINFO-1" : {
+    "@type": "PersonalInfo",
+    "type": "expertise",
+    "value": "chinese literature",
+     "level": "low",
+     "position": 2
+  },
+  "PERSINFO-2" : {
+    "@type": "PersonalInfo",
+    "type": "expertise",
+    "value": "chemistry",
+    "level": "high",
+    "position": 1
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-hobby">
@@ -1420,39 +1420,39 @@
           <figure anchor="hobby_conversion">
             <name>HOBBY conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    HOBBY;INDEX=1;LEVEL=high:reading
-    HOBBY;INDEX=2;LEVEL=high:sewing
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+HOBBY;INDEX=1;LEVEL=high:reading
+HOBBY;INDEX=2;LEVEL=high:sewing
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "personalInfo": {
-      ...
-      "PERSINFO-1" : {
-        "@type": "PersonalInfo",
-        "type": "hobby",
-        "value": "reading",
-        "level": "high",
-        "position": 1
-      },
-      "PERSINFO-2" : {
-        "@type": "PersonalInfo",
-        "type": "hobby",
-        "value": "sewing",
-        "level": "high",
-        "position": 2
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"personalInfo": {
+  ...
+  "PERSINFO-1" : {
+    "@type": "PersonalInfo",
+    "type": "hobby",
+    "value": "reading",
+    "level": "high",
+    "position": 1
+  },
+  "PERSINFO-2" : {
+    "@type": "PersonalInfo",
+    "type": "hobby",
+    "value": "sewing",
+    "level": "high",
+    "position": 2
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-interest">
@@ -1462,39 +1462,39 @@
           <figure anchor="interest_conversion">
             <name>INTEREST conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    INTEREST;INDEX=1;LEVEL=medium:r&b music
-    INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+INTEREST;INDEX=1;LEVEL=medium:r&b music
+INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "personalInfo": {
-      ...
-      "PERSINFO-1" : {
-        "@type": "PersonalInfo",
-        "type": "interest",
-        "value": "r&b music",
-        "level": "medium",
-        "position": 1
-      },
-      "PERSINFO-2" : {
-        "@type": "PersonalInfo",
-        "type": "interest",
-        "value": "rock ’n’ roll music",
-        "level": "high",
-        "position": 2
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"personalInfo": {
+  ...
+  "PERSINFO-1" : {
+    "@type": "PersonalInfo",
+    "type": "interest",
+    "value": "r&b music",
+    "level": "medium",
+    "position": 1
+  },
+  "PERSINFO-2" : {
+    "@type": "PersonalInfo",
+    "type": "interest",
+    "value": "rock ’n’ roll music",
+    "level": "high",
+    "position": 2
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-org-directory">
@@ -1504,37 +1504,37 @@
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    ORG-DIRECTORY;INDEX=1:http://directory.mycompany.example.com
-    ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+ORG-DIRECTORY;INDEX=1:http://directory.mycompany.example.com
+ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "directories": {
-      ...
-      "DIRECTORY-1": {
-        "@type": "DirectoryResource",
-        "type": "directory",
-        "uri": "http://directory.mycompany.example.com",
-        "position": 1
-      },
-      "DIRECTORY-2": {
-        "@type": "DirectoryResource",
-        "type": "directory",
-        "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
-        "pref": 1
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"directories": {
+  ...
+  "DIRECTORY-1": {
+    "@type": "DirectoryResource",
+    "type": "directory",
+    "uri": "http://directory.mycompany.example.com",
+    "position": 1
+  },
+  "DIRECTORY-2": {
+    "@type": "DirectoryResource",
+    "type": "directory",
+    "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
+    "pref": 1
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -1547,26 +1547,26 @@
           <figure anchor="categories_conversion">
             <name>CATEGORIES conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CATEGORIES:INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+CATEGORIES:INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "keywords": {
-      "INTERNET": true,
-      "IETF": true,
-      "INDUSTRY": true,
-      "INFORMATION TECHNOLOGY": true
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"keywords": {
+  "INTERNET": true,
+  "IETF": true,
+  "INDUSTRY": true,
+  "INFORMATION TECHNOLOGY": true
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-pid">
@@ -1579,21 +1579,21 @@
           <figure anchor="created_conversion">
             <name>CREATED conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CREATED:19940930T143510Z
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+CREATED:19940930T143510Z
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "created": "1994-09-30T14:35:10Z",
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"created": "1994-09-30T14:35:10Z",
+...
+}
+]]></artwork>
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
@@ -1604,31 +1604,31 @@
           <figure anchor="notes_conversion">
             <name>NOTE conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
-      This fax number is operational 0800 to 1715 EST\, Mon-Fri.
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
+  This fax number is operational 0800 to 1715 EST\, Mon-Fri.
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "notes": {
-        "NOTE-1" : {
-           "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
-           "created": "2022-11-23T15:01:32Z",
-           "author": {
-             "@type": "Author",
-             "name": "John"
-           }
-        }
-    },
-    ...
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"notes": {
+    "NOTE-1" : {
+       "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
+       "created": "2022-11-23T15:01:32Z",
+       "author": {
+         "@type": "Author",
+         "name": "John"
+       }
     }
-        ]]></artwork>
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-prodid">
@@ -1637,21 +1637,21 @@
           <figure anchor="prodid_conversion">
             <name>PRODID conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-rev">
@@ -1660,21 +1660,21 @@
           <figure anchor="rev_conversion">
             <name>REV conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    REV:19951031T222710Z
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+REV:19951031T222710Z
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "updated": "1995-10-31T22:27:10Z",
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"updated": "1995-10-31T22:27:10Z",
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-sound">
@@ -1684,29 +1684,29 @@
           <figure anchor="sound_conversion">
             <name>SOUND conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "media": {
-      ...
-      "SOUND-1": {
-        "@type": "MediaResource",
-        "type": "sound",
-        "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"media": {
+  ...
+  "SOUND-1": {
+    "@type": "MediaResource",
+    "type": "sound",
+    "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-uid">
@@ -1715,21 +1715,21 @@
           <figure anchor="uid_conversion">
             <name>UID conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-url">
@@ -1739,28 +1739,28 @@
           <figure anchor="url_conversion">
             <name>URL conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    URL:http://example.org/restaurant.french/~chezchic.html
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+URL:http://example.org/restaurant.french/~chezchic.html
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "links": {
-      ...
-      "LINK-1": {
-        "@type": "LinkResource",
-        "uri": "http://example.org/restaurant.french/~chezchic.html"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"links": {
+  ...
+  "LINK-1": {
+    "@type": "LinkResource",
+    "uri": "http://example.org/restaurant.french/~chezchic.html"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-version">
@@ -1774,28 +1774,28 @@
           <figure anchor="xablabel_conversion">
             <name>X-ABLabel conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    item1.TEL;VALUE=uri:tel:+1-555-555-5555
-    item1.X-ABLabel:foo
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+item1.TEL;VALUE=uri:tel:+1-555-555-5555
+item1.X-ABLabel:foo
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "phones": {
-      "p1": {
-        "@type": "Phone",
-        "number": "tel:+1-555-555-5555",
-        "label": "foo"
-      }
-    }
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"phones": {
+  "p1": {
+    "@type": "Phone",
+    "number": "tel:+1-555-555-5555",
+    "label": "foo"
+  }
+}
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -1808,28 +1808,28 @@
           <figure anchor="key_conversion">
             <name>KEY conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    KEY:http://www.example.com/keys/jdoe.cer
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+KEY:http://www.example.com/keys/jdoe.cer
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "cryptoKeys": {
-      ...
-      "KEY-1": {
-        "@type": "CryptoResource",
-        "uri": "http://www.example.com/keys/jdoe.cer"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"cryptoKeys": {
+  ...
+  "KEY-1": {
+    "@type": "CryptoResource",
+    "uri": "http://www.example.com/keys/jdoe.cer"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -1842,34 +1842,34 @@
           <figure anchor="caladruri_conversion">
             <name>CALADRURI conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CALADRURI;PREF=1:mailto:janedoe@example.com
-    CALADRURI:http://example.com/calendar/jdoe
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+CALADRURI;PREF=1:mailto:janedoe@example.com
+CALADRURI:http://example.com/calendar/jdoe
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "schedulingAddresses": {
-      ...
-      "SCHEDULING-1": {
-        "@type": "SchedulingAddress",
-        "uri": "mailto:janedoe@example.com",
-        "pref": 1
-      },
-      "SCHEDULING-2": {
-        "@type": "SchedulingAddress",
-        "uri": "http://example.com/calendar/jdoe"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"schedulingAddresses": {
+  ...
+  "SCHEDULING-1": {
+    "@type": "SchedulingAddress",
+    "uri": "mailto:janedoe@example.com",
+    "pref": 1
+  },
+  "SCHEDULING-2": {
+    "@type": "SchedulingAddress",
+    "uri": "http://example.com/calendar/jdoe"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-caluri">
@@ -1879,37 +1879,37 @@
           <figure anchor="caluri_conversion">
             <name>CALURI conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    CALURI;PREF=1:http://cal.example.com/calA
-    CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+CALURI;PREF=1:http://cal.example.com/calA
+CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "calendars": {
-      ...
-      "CAL-1": {
-        "@type": "CalendarResource",
-        "type": "calendar",
-        "uri": "http://cal.example.com/calA",
-        "pref": 1
-      },
-      "CAL-2": {
-        "@type": "CalendarResource",
-        "type": "calendar",
-        "uri": "ftp://ftp.example.com/calA.ics",
-        "mediaType": "text/calendar"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"calendars": {
+  ...
+  "CAL-1": {
+    "@type": "CalendarResource",
+    "type": "calendar",
+    "uri": "http://cal.example.com/calA",
+    "pref": 1
+  },
+  "CAL-2": {
+    "@type": "CalendarResource",
+    "type": "calendar",
+    "uri": "ftp://ftp.example.com/calA.ics",
+    "mediaType": "text/calendar"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
         <section anchor="vcard-prop-fburl">
@@ -1919,37 +1919,37 @@
           <figure anchor="fburl_conversion">
             <name>FBURL conversion example</name>
             <artwork><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    FBURL;PREF=1:http://www.example.com/busy/janedoe
-    FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+FBURL;PREF=1:http://www.example.com/busy/janedoe
+FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "calendars": {
-      ...
-      "FBURL-1": {
-        "@type": "CalendarResource",
-        "type": "freeBusy",
-        "uri": "http://www.example.com/busy/janedoe",
-        "pref": 1
-      },
-      "FBURL-2": {
-        "@type": "CalendarResource",
-        "type": "freeBusy",
-        "uri": "ftp://example.com/busy/project-a.ifb",
-        "mediaType": "text/calendar"
-      },
-      ...
-    },
-    ...
-    }
-        ]]></artwork>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"calendars": {
+  ...
+  "FBURL-1": {
+    "@type": "CalendarResource",
+    "type": "freeBusy",
+    "uri": "http://www.example.com/busy/janedoe",
+    "pref": 1
+  },
+  "FBURL-2": {
+    "@type": "CalendarResource",
+    "type": "freeBusy",
+    "uri": "ftp://example.com/busy/project-a.ifb",
+    "mediaType": "text/calendar"
+  },
+  ...
+},
+...
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -1970,7 +1970,7 @@
             </dd>
             <dt>Type:</dt>
             <dd><tt>JCardProp[]</tt>, where <tt>JCardProp</tt> denotes a jCard-encoded vCard property as defined in <xref target="RFC7095" section="3.3"/>.
-    </dd>
+</dd>
             <dt>Definition:</dt>
             <dd>This property is set on a JSContact object that represents a vCard.  It contains properties that are set in the vCard represented by this JSContact object.  Each entry in this list typically represents a vCard property for which no conversion to an IANA-registered JSContact property is defined.  It <bcp14>MAY</bcp14> contain vCard IANA-registered properties which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
             <dt>Example:</dt>
@@ -1979,26 +1979,26 @@
               <figure anchor="props_conversion">
                 <name>JSContact <tt>props</tt> example</name>
                 <sourcecode name=""><![CDATA[
-    BEGIN:VCARD
-    VERSION:4.0
-    ...
-    item1.X-FOO;X-BAR=Hello:World!
-    ...
-    END:VCARD
+BEGIN:VCARD
+VERSION:4.0
+...
+item1.X-FOO;X-BAR=Hello:World!
+...
+END:VCARD
 
-    {
-    "@type": "Card",
-    "@version" : "1.0",
-    ...
-    "vCardProps": [
-      ["x-foo", {
-        "x-bar": "Hello",
-        "group": "item1"
-      }, "unknown", "World!"]
-    ]
-    ...
-    }
-        ]]></sourcecode>
+{
+"@type": "Card",
+"@version" : "1.0",
+...
+"vCardProps": [
+  ["x-foo", {
+    "x-bar": "Hello",
+    "group": "item1"
+  }, "unknown", "World!"]
+]
+...
+}
+]]></sourcecode>
               </figure>
             </dd>
           </dl>
@@ -2025,11 +2025,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <sourcecode><![CDATA[
 "emails": {
   "email1": {
-    "@type": "EmailAddress",
-    "address": "jane_doe@example.com",
-    "vCardParams": {
-      "x-foo": "Bar"
-    }
+"@type": "EmailAddress",
+"address": "jane_doe@example.com",
+"vCardParams": {
+  "x-foo": "Bar"
+}
   }
 }
 ]]></sourcecode>
@@ -3155,16 +3155,16 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>The property can be specified multiple times in a vCard.</dd>
             <dt>Property parameters:</dt>
             <dd>
-              The JSPTR parameter <bcp14>MUST</bcp14> be set exactly once for this property.
-              The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
-              <bcp14>MUST</bcp14> be URI.  Other IANA-registered and experimental property parameters
-              can be specified on this property.
-            </dd>
+          The JSPTR parameter <bcp14>MUST</bcp14> be set exactly once for this property.
+          The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
+          <bcp14>MUST</bcp14> be URI.  Other IANA-registered and experimental property parameters
+          can be specified on this property.
+        </dd>
             <dt>Description:</dt>
             <dd>
               <t>
-                This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>SHOULD</bcp14> be compact, e.g.  without insignificant whitespace.
-              </t>
+            This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>SHOULD</bcp14> be compact, e.g.  without insignificant whitespace.
+          </t>
               <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer always is the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and <bcp14>SHOULD</bcp14> be discarded from the vCard.</t>
             </dd>
             <dt>Format definition:</dt>
@@ -3174,18 +3174,18 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
 jscontact-prop = "JSCONTACT-PROP" jscontact-prop-param ":" TEXT CRLF
 
 jscontact-prop-param  = *(
-                ; The following are MANDATORY and MUST NOT
-                ; occur more than once
-                ( ";" jspath-param ) /    ; see next section
-                ( ";" "VALUE" "=" "TEXT")
-                ;
-                ; The following is OPTIONAL,
-                ; and MAY occur more than once.
-                ;
-                (";" other-param)
-                ;
-                )
-  ]]></sourcecode>
+            ; The following are MANDATORY and MUST NOT
+            ; occur more than once
+            ( ";" jspath-param ) /    ; see next section
+            ( ";" "VALUE" "=" "TEXT")
+            ;
+            ; The following is OPTIONAL,
+            ; and MAY occur more than once.
+            ;
+            (";" other-param)
+            ;
+            )
+]]></sourcecode>
             </dd>
             <dt anchor="vcard-prop-jscontact-prop-examples">Example(s):</dt>
             <dd>
@@ -3194,10 +3194,10 @@ jscontact-prop-param  = *(
                 <name>Unknown property example</name>
                 <artwork><![CDATA[
   {
-    "@type": "Card",
-    "@version" : "1.0",
-     ...
-     "someUnknownProperty": true
+"@type": "Card",
+"@version" : "1.0",
+ ...
+ "someUnknownProperty": true
   }
 
   BEGIN:VCARD
@@ -3213,12 +3213,12 @@ jscontact-prop-param  = *(
                 <name>Vendor-extension conversion example</name>
                 <artwork><![CDATA[
   {
-    "@type": "Card",
-    "@version" : "1.0",
-     ...
-     "example.com:foo": {
-       "bar": 1234
-     }
+"@type": "Card",
+"@version" : "1.0",
+ ...
+ "example.com:foo": {
+   "bar": 1234
+ }
   }
 
   BEGIN:VCARD
@@ -3234,17 +3234,17 @@ jscontact-prop-param  = *(
                 <name>Nested property example with path relative to Card</name>
                 <artwork><![CDATA[
   {
-    "@type": "Card",
-    "@version" : "1.0",
+"@type": "Card",
+"@version" : "1.0",
+ ...
+ "phones": {
+   "phone1": {
+     "@type": "Phone",
+     "number": "tel:+33-01-23-45-67"
      ...
-     "phones": {
-       "phone1": {
-         "@type": "Phone",
-         "number": "tel:+33-01-23-45-67"
-         ...
-        "example.com:foo/bar": "tux hux"
-       }
-     }
+    "example.com:foo/bar": "tux hux"
+   }
+ }
   }
 
   BEGIN:VCARD
@@ -3265,8 +3265,8 @@ jscontact-prop-param  = *(
             <dd>JSPTR</dd>
             <dt>Purpose:</dt>
             <dd>
-            This parameter contains a JSON pointer <xref target="RFC6901"/> that relates its vCard property to some JSON data.  Its exact semantics depend on the definition of the property where this parameter is set on.
-            </dd>
+        This parameter contains a JSON pointer <xref target="RFC6901"/> that relates its vCard property to some JSON data.  Its exact semantics depend on the definition of the property where this parameter is set on.
+        </dd>
             <dt>Description:</dt>
             <dd>
               <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>.  Currently, its semantics only are defined for the JSCONTACT-PROP property (see <xref target="vcard-prop-jscontact-prop"/>), but it may also be used for other use cases in the future.</t>
@@ -3275,16 +3275,16 @@ jscontact-prop-param  = *(
             <dd>
               <sourcecode name="" type="abnf"><![CDATA[
 jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
-                 ; also see param-value in RFC 6350, section 3.3
+             ; also see param-value in RFC 6350, section 3.3
 
-  ]]></sourcecode>
+]]></sourcecode>
             </dd>
             <dt>Example(s):</dt>
             <dd>
               <t>This illustrates a simple example.  For further examples see <xref target="vcard-prop-jscontact-prop-examples"/>.</t>
               <sourcecode name=""><![CDATA[
   JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
-  ]]></sourcecode>
+]]></sourcecode>
             </dd>
           </dl>
         </section>

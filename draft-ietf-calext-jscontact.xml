@@ -66,7 +66,7 @@
       <section anchor="abnf-notations">
         <name>ABNF Notations</name>
         <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document either are defined in <xref target="RFC5234"/> (such as the ABNF for CRLF, WSP, DQUOTE, VCHAR, ALPHA, and DIGIT) or <xref target="RFC6350"/>.
-        </t>
+    </t>
       </section>
       <section anchor="type-signatures" numbered="true" toc="default">
         <name>Type Signatures</name>
@@ -98,7 +98,7 @@
         <section anchor="patchobject" numbered="true" toc="default">
           <name>PatchObject</name>
           <t>A PatchObject is of type <tt>String[*]</tt>, and represents an unordered set of patches on a JSON object.
-          Each key is a path represented in a subset of JSON pointer format <xref target="RFC6901"/>.  The paths have an implicit leading <tt>/</tt>, so each key is prefixed with <tt>/</tt> before applying the JSON pointer evaluation algorithm.</t>
+      Each key is a path represented in a subset of JSON pointer format <xref target="RFC6901"/>.  The paths have an implicit leading <tt>/</tt>, so each key is prefixed with <tt>/</tt> before applying the JSON pointer evaluation algorithm.</t>
           <t>A patch within a PatchObject is only valid if all the following conditions apply:</t>
           <ol>
             <li>The pointer <bcp14>MUST NOT</bcp14> reference inside an array (i.e., you <bcp14>MUST NOT</bcp14> insert/delete from an array; the array <bcp14>MUST</bcp14> be replaced in its entirety instead).</li>
@@ -134,9 +134,9 @@ Used for URI resource values.  Provides the media type <xref target="RFC2046" fo
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this resource.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of this resource in relation to other resources.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this resource in relation to other resources.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>.</li>
+            A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
         </section>
         <section anchor="utcdatetime" numbered="true" toc="default">
@@ -196,21 +196,21 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
-             An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification are IANA-registered properties.
-          </t>
+         An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification are IANA-registered properties.
+      </t>
           <t>
-            Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
-          </t>
+        Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
+      </t>
           <t>
-        IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but notable exceptions of this rule are metadata properties such as <tt>@type</tt> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
-    </t>
+    IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but notable exceptions of this rule are metadata properties such as <tt>@type</tt> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
+</t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
           <name>Unknown Properties</name>
           <t>
-          Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the restrictions of an IANA-registered property.</t>
+      Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the restrictions of an IANA-registered property.</t>
           <t>Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid.  Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties.  This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
-        </t>
+    </t>
         </section>
       </section>
       <section>
@@ -219,11 +219,11 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="vendor-specific-properties" numbered="true" toc="default">
           <name>Vendor-specific Properties</name>
           <t>
-            Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property.
-          </t>
+        Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property.
+      </t>
           <t>
-            Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by a name consisting of any other non-control ASCII or non-ASCII characters.  The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.  The name following the prefix <bcp14>MUST NOT</bcp14> contain the <tt>QUOTATION MARK</tt> (U+0022) character.  It <bcp14>SHOULD NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> including that property.
-          </t>
+        Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix, followed by the <tt>COLON</tt> character (U+003A), followed by a name consisting of any other non-control ASCII or non-ASCII characters.  The vendor-specific prefix <bcp14>SHOULD</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.  The name following the prefix <bcp14>MUST NOT</bcp14> contain the <tt>QUOTATION MARK</tt> (U+0022) character.  It <bcp14>SHOULD NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> including that property.
+      </t>
           <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-specific property names.  Note that the vendor prefix allows for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>.  This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
           <sourcecode name="" type="abnf"><![CDATA[
 v-extension = v-prefix ":" v-name
@@ -241,22 +241,16 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
 
 ]]></sourcecode>
           <t>
-            The value of vendor-specific properties can be any valid JSON value, and naming restrictions do not apply to such values.  Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-specific properties.
-          </t>
+        The value of vendor-specific properties can be any valid JSON value, and naming restrictions do not apply to such values.  Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-specific properties.
+      </t>
           <t>
-            The following all are valid examples of vendor-specific properties.
-          </t>
+        The following all are valid examples of vendor-specific properties.
+      </t>
           <figure>
             <artwork><![CDATA[
-{
-  "@type": "Card",
-  "@version" : "1.0",
-  ...
-  "example.com:foo": "bar",
-  "example.com:foo2": {
-    "bar": "baz"
-  }
-  ...
+"example.com:foo": "bar",
+"example.com:foo2": {
+  "bar": "baz"
 }
 ]]></artwork>
           </figure>
@@ -264,18 +258,16 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="vendor-specific-values" numbered="true" toc="default">
           <name>Vendor-specific Values</name>
           <t>
-            Some JSContact IANA-registered properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-specific values.  Such vendor-specific values <bcp14>MUST</bcp14> be valid <tt>v-extension</tt> values as defined in <xref target="vendor-specific-properties"/>.  This is an example for a vendor-specific value:
-          </t>
+        Some JSContact IANA-registered properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-specific values.  Such vendor-specific values <bcp14>MUST</bcp14> be valid <tt>v-extension</tt> values as defined in <xref target="vendor-specific-properties"/>.  This is an example for a vendor-specific value:
+      </t>
           <figure>
             <artwork><![CDATA[
-  ...
-  "kind": "example.com:kind:foo",
-  ...
+"kind": "example.com:kind:foo"
 ]]></artwork>
           </figure>
           <t>
-          Vendors are strongly encouraged to specify new standard values once a vendor-specific turns out to be useful also for other systems.
-          </t>
+      Vendors are strongly encouraged to specify new standard values once a vendor-specific turns out to be useful also for other systems.
+      </t>
         </section>
       </section>
       <section anchor="reserved-prop-names">
@@ -300,11 +292,9 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <t>Specifies the JSContact version used to define this card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>@version</tt> property.  This specification registers the JSContact version value <tt>1.0</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
           <figure anchor="example-version">
             <name><tt>@version</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "@version": "1.0",
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"@version": "1.0",
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="created" numbered="true" toc="default">
@@ -313,11 +303,9 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <t>The date and time when this Card object was created.</t>
           <figure anchor="example-created">
             <name><tt>created</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "created": "1994-09-30T14:35:10Z",
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"created": "1994-09-30T14:35:10Z",
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="kind" numbered="true" toc="default">
@@ -334,11 +322,9 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           </ul>
           <figure anchor="example-kind">
             <name><tt>kind</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "kind": "individual",
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"kind": "individual",
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="locale" numbered="true" toc="default">
@@ -347,11 +333,9 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
           <figure anchor="example-locale">
             <name><tt>locale</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "locale": "de-AT",
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"locale": "de-AT",
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="members" numbered="true" toc="default">
@@ -361,17 +345,15 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g.  "IETF Participants").</t>
           <figure anchor="example-members">
             <name><tt>members</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "kind": "group",
-  "fullName": "The Doe family",
-  "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
-  "members": {
-    "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
-    "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
-  },
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"kind": "group",
+"fullName": "The Doe family",
+"uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+"members": {
+  "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
+  "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="prodId" numbered="true" toc="default">
@@ -380,11 +362,9 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <t>The identifier for the product that created the Card object.</t>
           <figure anchor="example-prodId">
             <name><tt>prodId</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN"
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="relatedTo" numbered="true" toc="default">
@@ -393,8 +373,8 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <t>Relates the object to other Card objects.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card and the value defines the relation.  The Relation object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Relation</tt>.
-             </li>
+            Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Relation</tt>.
+         </li>
             <li>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
 Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
 Keys in the set <bcp14>MUST</bcp14> be one of the RELATED property <xref target="RFC6350" format="default"/> type parameter values, or an IANA-registered value, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
@@ -402,22 +382,20 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </ul>
           <figure anchor="example-relatedto">
             <name><tt>relatedTo</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "relatedTo" : {
-    "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
-      "@type" : "Relation",
-      "relation" : {
-        "friend" : true
-      }
-    },
-    "8cacdfb7d1ffdb59@example.com" : {
-      "@type" : "Relation",
-      "relation" : { }
-    },
+            <sourcecode name="" type="json"><![CDATA[
+"relatedTo": {
+  "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6": {
+    "@type": "Relation",
+    "relation": {
+      "friend": true
+    }
   },
-  ...
-        ]]></sourcecode>
+  "8cacdfb7d1ffdb59@example.com": {
+    "@type": "Relation",
+    "relation": {}
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="uid" numbered="true" toc="default">
@@ -426,11 +404,9 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>An identifier, used to associate the object as the same across different systems, address books and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/> but for compatibility with <xref target="RFC6350"/> it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the <tt>uuid</tt> namespace <xref target="RFC4122" format="default"/>.  As of this writing, a revision of <xref target="RFC4122"/> is being worked on and is likely to introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudo-random UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
           <figure anchor="example-uid">
             <name><tt>uid</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="updated" numbered="true" toc="default">
@@ -439,11 +415,9 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>The date and time when the data in this Card object was last modified.</t>
           <figure anchor="example-updated">
             <name><tt>updated</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-   "updated": "1995-10-31T22:27:10Z",
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"updated": "1995-10-31T22:27:10Z"
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -455,11 +429,9 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>This is the full name of the entity represented by this card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>name</tt> property as the name of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated name component values of the <tt>name</tt> property in the <tt>fullName</tt> property value.</t>
           <figure anchor="example-fullName">
             <name><tt>fullName</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "fullName": "Mr.  John Q.  Public, Esq.",
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"fullName": "Mr.  John Q.  Public, Esq."
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="name" numbered="true" toc="default">
@@ -469,8 +441,8 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>A Name object has the following properties</t>
           <ul spacing="normal">
             <li>@type: <tt>Name</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Name</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Name</tt>.
+          </li>
             <li>
               <t>components: <tt>NameComponent[]</tt> (mandatory).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
               <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character.  Otherwise, inserting a single Space character in between name component values is a good choice.</t>
@@ -482,42 +454,45 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               <t><xref target="example-name"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
               <figure anchor="example-name">
                 <name><tt>name</tt> example</name>
-                <sourcecode name=""><![CDATA[
-  ...
-  "name": {
-    "@type": "Name",
-    "components": [{
+                <sourcecode name="" type="json"><![CDATA[
+"name": {
+  "@type": "Name",
+  "components": [
+    {
       "@type": "NameComponent",
       "type": "given",
       "value": "Robert"
-    }, {
+    },
+    {
       "@type": "NameComponent",
       "type": "middle",
       "value": "Pau"
-    }, {
+    },
+    {
       "@type": "NameComponent",
       "type": "surname",
       "value": "Shou"
-    }, {
+    },
+    {
       "@type": "NameComponent",
       "type": "surname",
       "value": "Chang"
-    }],
-    "sortAs": {
-      "surname": "Pau Shou Chang",
-      "given": "Robert"
     }
-  },
-  ...
-        ]]></sourcecode>
+  ],
+  "sortAs": {
+    "surname": "Pau Shou Chang",
+    "given": "Robert"
+  }
+}
+]]></sourcecode>
               </figure>
             </li>
           </ul>
           <t>A NameComponent object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>.
+          </li>
             <li>value: <tt>String</tt> (mandatory).
 The value of this name component.</li>
             <li>
@@ -531,12 +506,12 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
                 <li><tt>middle</tt>.  The value is a middle name, also known as "additional name".</li>
                 <li><tt>suffix</tt>.  The value is an honorific suffix, e.g.  "B.A.", "Esq.".</li>
                 <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character.
-                </li>
+            </li>
               </ul>
             </li>
             <li>
               <t>rank: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
-                    Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
+                Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
               <t>For example, two name components of type <tt>surname</tt> may have their <tt>rank</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
               <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Card object to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
@@ -548,28 +523,26 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
           <t>The nick names of the entity represented by this card.  A NickName object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NickName</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NickName</tt>.
+          </li>
             <li>name: <tt>String</tt> (mandatory).
-                The nick name.
-            </li>
+            The nick name.
+        </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
 The contexts in which to use this nick name.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of this nick name in relation to other nick names.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this nick name in relation to other nick names.  Also see <xref target="prop-pref"/>.</li>
           </ul>
           <figure anchor="example-nickNames">
             <name><tt>nickNames</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-    "nickNames": {
-       "k391": {
-          "@type": "NickName",
-          "name": "Johnny"
-       }
-    },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"nickNames": {
+  "k391": {
+    "@type": "NickName",
+    "name": "Johnny"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
@@ -578,49 +551,53 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
           <t>The companies or organization names and units associated with this card.  An Organization object has the following properties, of which at least one of <tt>name</tt> and <tt>units</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
+          </li>
             <li>name: <tt>String</tt> (optional).
-                The name of this organization.
-            </li>
+            The name of this organization.
+        </li>
             <li>units: <tt>OrgUnit[]</tt> (optional).
-                A list of organizational units.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
-            </li>
+            A list of organizational units.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+        </li>
             <li>sortAs: <tt>String</tt> (optional).
-                This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
-            </li>
+            This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+        </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which association with this organization apply.  For example, membership in a choir may only apply in a private context.  Also see <xref target="prop-contexts"/>.</li>
           </ul>
           <t>A OrgUnit object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OrgUnit</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OrgUnit</tt>.
+          </li>
             <li>name: <tt>String</tt> (optional).
-                The name of this organizational unit.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
-            </li>
+            The name of this organizational unit.  If set, the value <bcp14>MUST</bcp14> be a non-empty string.
+        </li>
             <li>sortAs: <tt>String</tt> (optional).
-                This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name.  The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
-            </li>
+            This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name.  The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+        </li>
           </ul>
           <figure anchor="example-organizations">
             <name><tt>organizations</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "organizations": {
-   "o1": {
-     "@type": "Organization",
-     "name": "ABC, Inc.",
-     "units":[
-       {"@type": "OrgUnit", "name": "North American Division"},
-       {"@type": "OrgUnit", "name": "Marketing"}
-     ],
-     "sortAs": "ABC"
-   }
-  },
-  ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"organizations": {
+  "o1": {
+    "@type": "Organization",
+    "name": "ABC, Inc.",
+    "units": [
+      {
+        "@type": "OrgUnit",
+        "name": "North American Division"
+      },
+      {
+        "@type": "OrgUnit",
+        "name": "Marketing"
+      }
+    ],
+    "sortAs": "ABC"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="speakToAs" numbered="true" toc="default">
@@ -629,11 +606,11 @@ The contexts in which association with this organization apply.  For example, me
           <t>Provides information how to address, speak to or refer to the entity that is represented by this card.  A SpeakToAs object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SpeakToAs</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SpeakToAs</tt>.
+          </li>
             <li>
               <t>grammaticalGender: <tt>String</tt> (optional).
-                  Defines which grammatical gender to use in salutations and other grammatical constructs.  Allowed values are:</t>
+              Defines which grammatical gender to use in salutations and other grammatical constructs.  Allowed values are:</t>
               <ul spacing="normal">
                 <li>
                   <tt>animate</tt>
@@ -655,42 +632,40 @@ The contexts in which association with this organization apply.  For example, me
             </li>
             <li>
               <t>pronouns: <tt>Id[Pronouns]</tt> (optional).
-                 Defines the pronouns that the contact chooses to use for themselves.</t>
+             Defines the pronouns that the contact chooses to use for themselves.</t>
             </li>
           </ul>
           <t>A Pronouns object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Pronouns</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Pronouns</tt>.
+          </li>
             <li>pronouns: <tt>String</tt> (mandatory).
-                  Defines the pronouns.  Any value or form is allowed.  Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>.  The value <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</li>
+              Defines the pronouns.  Any value or form is allowed.  Examples in English include <tt>she/her</tt> and <tt>they/them/theirs</tt>.  The value <bcp14>MAY</bcp14> be overridden in the <tt>localizations</tt> property (<xref target="localizations"/>).</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use these pronouns.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of these pronouns in relation to other pronouns in the same context.  Also see <xref target="prop-pref"/>.</li>
+            The preference of these pronouns in relation to other pronouns in the same context.  Also see <xref target="prop-pref"/>.</li>
           </ul>
           <figure anchor="example-speakToAs">
             <name><tt>speakToAs</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "speakToAs": {
-     "grammaticalGender": "neuter",
-     "pronouns": {
-       "k19": {
-         "@type": "Pronouns",
-         "pronouns": "they/them",
-         "pref": 2
-       },
-       "k32": {
-         "@type": "Pronouns",
-         "pronouns": "xe/xir",
-         "pref": 1
-       }
-     }
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"speakToAs": {
+  "grammaticalGender": "neuter",
+  "pronouns": {
+    "k19": {
+      "@type": "Pronouns",
+      "pronouns": "they/them",
+      "pref": 2
+    },
+    "k32": {
+      "@type": "Pronouns",
+      "pronouns": "xe/xir",
+      "pref": 1
+    }
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="titles" numbered="true" toc="default">
@@ -699,43 +674,41 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
           <t>The job titles or functional positions of the entity represented by this card.  A Title has object the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt>.
+          </li>
             <li>name: <tt>String</tt> (mandatory).
-                The title or role name of the entity represented by this card.
-            </li>
+            The title or role name of the entity represented by this card.
+        </li>
             <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
-              Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
-                                        </li>
+          Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
+                                    </li>
             <li>organization: <tt>Id</tt> (optional).
-                The id of the organization in which this title is held.
-            </li>
+            The id of the organization in which this title is held.
+        </li>
           </ul>
           <figure anchor="example-titles">
             <name><tt>titles</tt> example</name>
-            <sourcecode name=""><![CDATA[
-  ...
-  "titles": {
-    "le9": {
-      "@type": "Title",
-      "type": "title",
-      "name": "Research Scientist"
-    },
-    "k2": {
-      "@type": "Title",
-      "type": "role",
-      "name": "Project Leader",
-      "organization": "o2"
-    }
+            <sourcecode name="" type="json"><![CDATA[
+"titles": {
+  "le9": {
+    "@type": "Title",
+    "type": "title",
+    "name": "Research Scientist"
   },
-  "organizations": {
-    "o2": {
-      "@type": "Organization",
-      "name": "ABC, Inc."
-    }
-  },
-  ...
-        ]]></sourcecode>
+  "k2": {
+    "@type": "Title",
+    "type": "role",
+    "name": "Project Leader",
+    "organization": "o2"
+  }
+},
+"organizations": {
+  "o2": {
+    "@type": "Organization",
+    "name": "ABC, Inc."
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -747,35 +720,35 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
           <t>The email addresses to contact the entity represented by this card.  An EmailAddress object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt>.
+          </li>
             <li>address: <tt>String</tt> (mandatory).
 The email address.  This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in Section 3.4.1 of <xref target="RFC5322" format="default"/>.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this email address.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of this email address in relation to other email addresses.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this email address in relation to other email addresses.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>.</li>
+            A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
           <figure anchor="example-emails">
             <name><tt>emails</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "emails": {
-     "e1": {
-       "@type": "EmailAddress",
-       "contexts": { "work": true },
-       "address": "jqpublic@xyz.example.com"
-     },
-     "e2": {
-       "@type": "EmailAddress",
-       "address": "jane_doe@example.com",
-       "pref": 1
-     }
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"emails": {
+  "e1": {
+    "@type": "EmailAddress",
+    "contexts": {
+      "work": true
+    },
+    "address": "jqpublic@xyz.example.com"
+  },
+  "e2": {
+    "@type": "EmailAddress",
+    "address": "jane_doe@example.com",
+    "pref": 1
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="onlineServices" numbered="true" toc="default">
@@ -784,13 +757,13 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
           <t>The online services that are associated with the entity represented by this card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
-            </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>.
+        </li>
             <li>service: <tt>String</tt> (optional).
 The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the canonical service name including capitalization.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>user: <tt>String</tt> (mandatory).
-                  This identifies 	the entity represented by this card at this online service.  The <tt>type</tt> property defines the how to interpret the value.
-            </li>
+              This identifies 	the entity represented by this card at this online service.  The <tt>type</tt> property defines the how to interpret the value.
+        </li>
             <li>
               <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
@@ -802,26 +775,22 @@ The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the c
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this service.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of this service in relation to other services.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this service in relation to other services.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>.</li>
+            A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
           <figure anchor="example-onlineServices">
             <name><tt>onlineServices</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "onlineServices": {
-     ...
-     "x1": {
-       "@type": "OnlineService",
-       "user": "xmpp:alice@example.com",
-       "type": "impp",
-       "pref": 1
-     },
-     ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"onlineServices": {
+  "x1": {
+    "@type": "OnlineService",
+    "user": "xmpp:alice@example.com",
+    "type": "impp",
+    "pref": 1
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="phones" numbered="true" toc="default">
@@ -830,13 +799,13 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
           <t>The phone numbers to contact the entity represented by this card.  A Phone object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt>.
+          </li>
             <li>number: <tt>String</tt> (mandatory).
 The phone number, as either a URI or free-text.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
-                  The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+              The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>voice</tt> The number is for calling by voice.</li>
@@ -851,32 +820,34 @@ The phone number, as either a URI or free-text.  Typical URI schemes are the <xr
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this number.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of this number in relation to other numbers.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this number in relation to other numbers.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
-                A custom label for the value, see <xref target="prop-label"/>.</li>
+            A custom label for the value, see <xref target="prop-label"/>.</li>
           </ul>
           <figure anchor="example-phones">
             <name><tt>phones</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-     "phones": {
-       "tel0": {
-         "@type": "Phone",
-         "contexts": { "private": true },
-         "features": { "voice": true },
-         "number": "tel:+1-555-555-5555;ext=5555",
-         "pref": 1
-       },
-       "tel3": {
-         "@type": "Phone",
-         "contexts": { "work": true },
-         "number": "tel:+33-01-23-45-67"
-       }
-     },
-     ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"phones": {
+  "tel0": {
+    "@type": "Phone",
+    "contexts": {
+      "private": true
+    },
+    "features": {
+      "voice": true
+    },
+    "number": "tel:+1-555-555-5555;ext=5555",
+    "pref": 1
+  },
+  "tel3": {
+    "@type": "Phone",
+    "contexts": {
+      "work": true
+    },
+    "number": "tel:+33-01-23-45-67"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="preferredContactChannels" numbered="true" toc="default">
@@ -893,8 +864,8 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
           <t>A ContactChannelPreference object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>ContactChannelPreference</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>ContactChannelPreference</tt>.
+          </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 Defines the contexts in which to use this contact channel.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -902,24 +873,22 @@ Defines the preference of this contact channel in relation to other contact chan
           </ul>
           <figure anchor="example-preferredContactChannels">
             <name><tt>preferredContactChannels</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "preferredContactChannels": {
-     "emails":[
-       {
-         "@type": "ContactChannelPreference",
-         "pref": 1
-       }
-     ],
-     "phones":[
-       {
-         "@type": "ContactChannelPreference",
-         "pref": 2
-       }
-     ]
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"preferredContactChannels": {
+  "emails": [
+    {
+      "@type": "ContactChannelPreference",
+      "pref": 1
+    }
+  ],
+  "phones": [
+    {
+      "@type": "ContactChannelPreference",
+      "pref": 2
+    }
+  ]
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="preferredLanguages" numbered="true" toc="default">
@@ -929,8 +898,8 @@ Defines the preference of this contact channel in relation to other contact chan
           <t>A LanguagePreference object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>LanguagePreference</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>LanguagePreference</tt>.
+          </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 Defines the contexts in which to use this language.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -938,30 +907,34 @@ Defines the preference of this language in relation to other languages of the sa
           </ul>
           <figure anchor="example-preferredLanguages">
             <name><tt>preferredLanguages</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "preferredLanguages": {
-     "en":[
-       {
-         "@type": "LanguagePreference",
-         "contexts": { "work": true },
-         "pref": 1
-       }
-     ],
-     "fr":[
-       {
-         "@type": "LanguagePreference",
-         "contexts": { "work": true },
-         "pref": 2
-       },
-       {
-         "@type": "LanguagePreference",
-         "contexts": { "private": true }
-       }
-     ]
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"preferredLanguages": {
+  "en": [
+    {
+      "@type": "LanguagePreference",
+      "contexts": {
+        "work": true
+      },
+      "pref": 1
+    }
+  ],
+  "fr": [
+    {
+      "@type": "LanguagePreference",
+      "contexts": {
+        "work": true
+      },
+      "pref": 2
+    },
+    {
+      "@type": "LanguagePreference",
+      "contexts": {
+        "private": true
+      }
+    }
+  ]
+}
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -981,26 +954,22 @@ Defines the preference of this language in relation to other languages of the sa
           </ul>
           <figure anchor="example-calendars">
             <name><tt>calendars</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "calendars": {
-       ...
-       "calA": {
-         "@type": "CalendarResource",
-         "type": "calendar",
-         "uri": "ftp://ftp.example.com/calA.ics",
-         "mediaType": "text/calendar"
-       },
-      "project-a": {
-        "@type": "CalendarResource",
-        "type": "freeBusy",
-        "uri": "ftp://example.com/busy/project-a.ifb",
-        "mediaType": "text/calendar"
-      },
-    ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"calendars": {
+  "calA": {
+    "@type": "CalendarResource",
+    "type": "calendar",
+    "uri": "ftp://ftp.example.com/calA.ics",
+    "mediaType": "text/calendar"
+  },
+  "project-a": {
+    "@type": "CalendarResource",
+    "type": "freeBusy",
+    "uri": "ftp://example.com/busy/project-a.ifb",
+    "mediaType": "text/calendar"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="schedulingAddresses" numbered="true" toc="default">
@@ -1016,24 +985,20 @@ The address to use for calendar scheduling with this contact.  This <bcp14>MUST<
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this scheduling address.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of this scheduling address in relation to other scheduling address.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this scheduling address in relation to other scheduling address.  Also see <xref target="prop-pref"/>.</li>
             <li>label: <tt>String</tt> (optional).
-                A custom label for the scheduling address, see <xref target="prop-label"/>.</li>
+            A custom label for the scheduling address, see <xref target="prop-label"/>.</li>
           </ul>
           <figure anchor="example-schedulingAddresses">
             <name><tt>schedulingAddresses</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "schedulingAddresses": {
-     ...
-     "sched1": {
-       "@type": "SchedulingAddress",
-       "uri": "mailto:janedoe@example.com"
-     },
-     ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"schedulingAddresses": {
+  "sched1": {
+    "@type": "SchedulingAddress",
+    "uri": "mailto:janedoe@example.com"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -1045,12 +1010,12 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           <t>A map of address ids to Address objects, containing physical locations.  An Address object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Address</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Address</tt>.
+          </li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
-                  The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.  The StreetComponent object type is defined in the paragraph below.
-              </t>
+              The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.  The StreetComponent object type is defined in the paragraph below.
+          </t>
             </li>
             <li>locality: <tt>String</tt> (optional).
 The city, town, village, post town, or other locality within which the street address may be found.</li>
@@ -1074,43 +1039,43 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               </ul>
             </li>
             <li>fullAddress: <tt>String</tt> (optional).
-                This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
-                </li>
+            This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
+            </li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-                The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt>.
+          </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
 The type of this street component.  The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>name</tt>.  The street name.
-                </li>
+            </li>
                 <li><tt>number</tt>.  The street number.
-                </li>
+            </li>
                 <li><tt>apartment</tt>.  The apartment number or identifier.
-                </li>
+            </li>
                 <li><tt>room</tt>.  The room number or identifier.
-                </li>
+            </li>
                 <li><tt>extension</tt>.  The extension designation or box number.
-                </li>
+            </li>
                 <li><tt>direction</tt>.  The cardinal direction, e.g.  "North".
-                </li>
+            </li>
                 <li><tt>building</tt>.  The building or building part this address is located in.
-                </li>
+            </li>
                 <li><tt>floor</tt>.  The floor this address is located on.
-                </li>
+            </li>
                 <li><tt>postOfficeBox</tt>.  The post office box number or identifier.
-                </li>
+            </li>
                 <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
-                </li>
+            </li>
                 <li><tt>unknown</tt>.  A street component value for which no type is known.
-                </li>
+            </li>
               </ul>
             </li>
             <li>value: <tt>String</tt> (mandatory).
@@ -1118,40 +1083,58 @@ The value of this street component.</li>
           </ul>
           <figure anchor="example-addresses">
             <name><tt>addresses</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-    "addresses": {
-      "k23" : {
-        "@type": "Address",
-        "contexts": { "work": true },
-        "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
-        "street": [
-           { "@type": "StreetComponent", "type": "name", "value": "Oak St" },
-           { "@type": "StreetComponent", "type": "number", "value": "54321" }
-        ],
-        "locality": "Reston",
-        "region": "VA",
-        "country": "USA",
-        "postcode": "20190",
-        "countryCode": "US"
-      },
-      "k24": {
-        "@type": "Address",
-        "contexts": { "private": true },
-        "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
-        "street": [
-           { "@type": "StreetComponent", "type": "name", "value": "Elm St" },
-           { "@type": "StreetComponent", "type": "number", "value": "12345" }
-        ],
-        "locality": "Reston",
-        "region": "VA",
-        "country": "USA",
-        "postcode": "20190",
-        "countryCode": "US"
-      }
+            <sourcecode name="" type="json"><![CDATA[
+"addresses": {
+  "k23": {
+    "@type": "Address",
+    "contexts": {
+      "work": true
     },
-    ...
-        ]]></sourcecode>
+    "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
+    "street": [
+      {
+        "@type": "StreetComponent",
+        "type": "name",
+        "value": "Oak St"
+      },
+      {
+        "@type": "StreetComponent",
+        "type": "number",
+        "value": "54321"
+      }
+    ],
+    "locality": "Reston",
+    "region": "VA",
+    "country": "USA",
+    "postcode": "20190",
+    "countryCode": "US"
+  },
+  "k24": {
+    "@type": "Address",
+    "contexts": {
+      "private": true
+    },
+    "fullAddress": "12345 Elm St\nReston\nVA\n20190\nUSA",
+    "street": [
+      {
+        "@type": "StreetComponent",
+        "type": "name",
+        "value": "Elm St"
+      },
+      {
+        "@type": "StreetComponent",
+        "type": "number",
+        "value": "12345"
+      }
+    ],
+    "locality": "Reston",
+    "region": "VA",
+    "country": "USA",
+    "postcode": "20190",
+    "countryCode": "US"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -1167,18 +1150,14 @@ The value of this street component.</li>
           </ul>
           <figure anchor="example-cryptoKeys">
             <name><tt>cryptoKeys</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "cryptoKeys": {
-     ...
-     "mykey": {
-       "@type": "CryptoResource",
-       "uri": "http://www.example.com/keys/jdoe.cer"
-     },
-     ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"cryptoKeys": {
+  "mykey": {
+    "@type": "CryptoResource",
+    "uri": "http://www.example.com/keys/jdoe.cer"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="directories" numbered="true" toc="default">
@@ -1196,30 +1175,25 @@ The value of this street component.</li>
           <t>In addition, the DirectoryResource object has the following property:</t>
           <ul>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-              This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
-            </li>
+          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+        </li>
           </ul>
           <figure anchor="example-directories">
             <name><tt>directories</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-    "directories": {
-      ...
-       "dir1": {
-         "@type": "DirectoryResource",
-         "type": "entry",
-         "uri": "http://directory.example.com/address books/jdoe/Jean%20Dupont.vcf"
-       },
-      "dir2": {
-        "@type": "DirectoryResource",
-        "type": "directory",
-        "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
-        "pref": 1
-      },
-   ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"directories": {
+  "dir1": {
+    "@type": "DirectoryResource",
+    "type": "entry",
+    "uri": "http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
+  },
+  "dir2": {
+    "@type": "DirectoryResource",
+    "type": "directory",
+    "uri": "ldap://ldap.example/o=Example%20Tech,ou=Engineering",
+    "pref": 1
+  }
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="links" numbered="true" toc="default">
@@ -1235,20 +1209,16 @@ The value of this street component.</li>
           </ul>
           <figure anchor="example-links">
             <name><tt>links</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "links": {
-     ...
-     "link3": {
-       "@type": "LinkResource",
-       "type": "contact",
-       "uri": "mailto:contact@example.com",
-       "pref": 1
-     },
-     ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"links": {
+  "link3": {
+    "@type": "LinkResource",
+    "type": "contact",
+    "uri": "mailto:contact@example.com",
+    "pref": 1
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="media" numbered="true" toc="default">
@@ -1266,29 +1236,25 @@ The value of this street component.</li>
           </ul>
           <figure anchor="example-media">
             <name><tt>media</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "media": {
-     ...
-      "res45": {
-        "@type": "MediaResource",
-        "type": "sound",
-        "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
-      },
-     "res47": {
-       "@type": "MediaResource",
-       "type": "logo",
-       "uri": "http://www.example.com/pub/logos/abccorp.jpg"
-     },
-      "res1": {
-        "@type": "MediaResource",
-        "type": "photo",
-        "uri": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4..."
-      },
-      ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"media": {
+  "res45": {
+    "@type": "MediaResource",
+    "type": "sound",
+    "uri": "CID:JOHNQ.part8.19960229T080000.xyzMail@example.com"
+  },
+  "res47": {
+    "@type": "MediaResource",
+    "type": "logo",
+    "uri": "http://www.example.com/pub/logos/abccorp.jpg"
+  },
+  "res1": {
+    "@type": "MediaResource",
+    "type": "photo",
+    "uri": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4..."
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -1312,64 +1278,69 @@ The value of this street component.</li>
           <t><xref target="example-localizations-simple"/> shows how a single String property value is localized in the <tt>jp</tt> locale.</t>
           <figure anchor="example-localizations-simple">
             <artwork><![CDATA[
-...
- "locale": "en",
- "addresses": {
+"locale": "en",
+"addresses": {
   "addr1": {
     "@type": "Address",
-    "locality": "Tokyo",
-   }
- },
- "localizations": {
-   "jp": {
-      "addresses/addr1/locality":"東京"
-   }
- }
-...
-   ]]></artwork>
+    "locality": "Tokyo"
+  }
+},
+"localizations": {
+  "jp": {
+    "addresses/addr1/locality": "東京"
+  }
+}
+]]></artwork>
           </figure>
           <t><xref target="example-localizations-complex"/> shows how a complete object property value is localized in the <tt>en</tt> locale.</t>
           <figure anchor="example-localizations-complex">
             <artwork><![CDATA[
-...
- "locale": "ru",
- "name": {
-   "@type": "Name",
-   "components": [{
-     "@type": "NameComponent",
-     "type": "given",
-     "value": "Фёдор"
-   }, {
-     "@type": "NameComponent",
-     "type": "middle",
-     "value": "Михайлович"
-   }, {
+"locale": "ru",
+"name": {
+  "@type": "Name",
+  "components": [
+    {
       "@type": "NameComponent",
-     "type": "surname",
-     "value": "Достоевский"
-   }]
- },
- "localizations": {
-   "en": {
-     "name": {
-       "@type": "Name",
-       "components": [{
-         "@type": "NameComponent",
-         "type": "given",
-         "value": "Fyodor"
-       }, {
-         "@type": "NameComponent",
-         "type": "middle",
-         "value": "Mikhailovich"
-       }, {
-         "@type": "NameComponent",
-         "type": "surname",
-         "value": "Dostoevsky"
-       }]
-   }
- }
-...
-   ]]></artwork>
+      "type": "given",
+      "value": "Фёдор"
+    },
+    {
+      "@type": "NameComponent",
+      "type": "middle",
+      "value": "Михайлович"
+    },
+    {
+      "@type": "NameComponent",
+      "type": "surname",
+      "value": "Достоевский"
+    }
+  ]
+},
+"localizations": {
+  "en": {
+    "name": {
+      "@type": "Name",
+      "components": [
+        {
+          "@type": "NameComponent",
+          "type": "given",
+          "value": "Fyodor"
+        },
+        {
+          "@type": "NameComponent",
+          "type": "middle",
+          "value": "Mikhailovich"
+        },
+        {
+          "@type": "NameComponent",
+          "type": "surname",
+          "value": "Dostoevsky"
+        }
+      ]
+    }
+  }
+}
+]]></artwork>
           </figure>
         </section>
       </section>
@@ -1381,8 +1352,8 @@ The value of this street component.</li>
           <t>These are memorable dates and events for the entity represented by this card.  An Anniversary object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Anniversary</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Anniversary</tt>.
+          </li>
             <li>
               <t>type: <tt>String</tt> (optional).
 Specifies the type of the anniversary.  This RFC predefines the following types, but implementations MAY use additional values:
@@ -1398,21 +1369,21 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
               <t>The date of this anniversary in the Gregorian calendar.  This <bcp14>MUST</bcp14> either be a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
             </li>
             <li>place: Address (optional).
-                An address associated with this anniversary, e.g.  the place of birth or death.</li>
+            An address associated with this anniversary, e.g.  the place of birth or death.</li>
           </ul>
           <t>A Timestamp object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Timestamp</tt>.
-              </li>
-            <li>utc: <tt>UTCDateTime</tt> (mandatory).  Specifies the point in time in UTC time.
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Timestamp</tt>.
           </li>
+            <li>utc: <tt>UTCDateTime</tt> (mandatory).  Specifies the point in time in UTC time.
+      </li>
           </ul>
           <t>A PartialDate object represents a complete or partial calendar date in the Gregorian calendar.  It represents either a complete date, or a year, or a month in a year, or a day in a month.  It has the following properties, of which at least <tt>year</tt> or <tt>month</tt> and <tt>day</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PartialDate</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PartialDate</tt>.
+          </li>
             <li>year: <tt>UnsignedInt</tt> (optional).  This is the calendar year.</li>
             <li>month: <tt>UnsignedInt</tt> (optional).  This is the calendar month, represented as the integers 1 &lt;= month &lt;= 12.  If this property is set then either <tt>year</tt> or <tt>day</tt> <bcp14>MUST</bcp14> be set.</li>
             <li>day: <tt>UnsignedInt</tt> (optional).  This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
@@ -1420,33 +1391,32 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
           </ul>
           <figure anchor="example-anniversaries">
             <name><tt>anniversaries</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-    "anniversaries": {
-      "k8" : {
-        "@type": "Anniversary",
-        "type": "birth",
-        "date": {
-          "@type": "PartialDate",
-          "year": 1953,
-          "month": 4,
-          "day": 15
-        }
-      },
-      "k9" : {
-        "@type": "Anniversary",
-        "type": "death",
-        "date": {
-          "@type": "Timestamp",
-          "utc": "1996-10-15T23:10:00Z"
-        },
-        "place": {
-          "@type": "Address",
-          "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
-        }
-      }
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"anniversaries": {
+  "k8": {
+    "@type": "Anniversary",
+    "type": "birth",
+    "date": {
+      "@type": "PartialDate",
+      "year": 1953,
+      "month": 4,
+      "day": 15
+    }
+  },
+  "k9": {
+    "@type": "Anniversary",
+    "type": "death",
+    "date": {
+      "@type": "Timestamp",
+      "utc": "1996-10-15T23:10:00Z"
+    },
+    "place": {
+      "@type": "Address",
+      "fullAddress": "4445 Tree Street\nNew England, ND 58647\nUSA"
+    }
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="keywords" numbered="true" toc="default">
@@ -1455,14 +1425,12 @@ Specifies the type of the anniversary.  This RFC predefines the following types,
 A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.</t>
           <figure anchor="example-keywords">
             <name><tt>keywords</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "keywords": {
-     "internet": true,
-     "IETF": true
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"keywords": {
+  "internet": true,
+  "IETF": true
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="notes" numbered="true" toc="default">
@@ -1471,8 +1439,8 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
           <t>Free-text notes associated with this card.  A Note object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Note</tt>.
-            </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Note</tt>.
+        </li>
             <li>
               <t>note: <tt>String</tt> (mandatory).  The free text value of this note.</t>
             </li>
@@ -1486,8 +1454,8 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
           <t>An Author object has the following properties, of which at least one other than <tt>@type</tt> <bcp14>MUST</bcp14> be defined:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                 Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Author</tt>.
-            </li>
+             Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Author</tt>.
+        </li>
             <li>
               <t>name: <tt>String</tt> (optional).  The name of this author.</t>
             </li>
@@ -1497,20 +1465,18 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
           </ul>
           <figure anchor="example-notes">
             <name><tt>notes</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-    "notes": {
-        "n1" : {
-           "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
-           "created": "2022-11-23T15:01:32Z",
-           "author": {
-             "@type": "Author",
-             "name": "John"
-           }
-        }
-    },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"notes": {
+  "n1": {
+    "note": "Open office hours are 1600 to 1715 EST, Mon-Fri",
+    "created": "2022-11-23T15:01:32Z",
+    "author": {
+      "@type": "Author",
+      "name": "John"
+    }
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="personalInfo" numbered="true" toc="default">
@@ -1520,8 +1486,8 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
 A PersonalInfo object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
-                  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInfo</tt>.
-              </li>
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInfo</tt>.
+          </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
 Specifies the type for this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>):
@@ -1535,41 +1501,37 @@ Specifies the type for this personal information.  The value <bcp14>MUST</bcp14>
             <li>value: <tt>String</tt> (mandatory).
 The actual information.  This is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInfo.</li>
             <li>level: <tt>String</tt> (optional).
-                Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+            Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-                This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
-            </li>
+            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+        </li>
             <li>label: <tt>String</tt> (optional).
-                A custom label.  See <xref target="prop-label"/>.</li>
+            A custom label.  See <xref target="prop-label"/>.</li>
           </ul>
           <figure anchor="example-personalInfo">
             <name><tt>personalInfo</tt> example</name>
-            <sourcecode name=""><![CDATA[
-   ...
-   "personalInfo": {
-     ...
-     "pi2" : {
-       "@type": "PersonalInfo",
-       "type": "expertise",
-       "value": "chemistry",
-       "level": "high"
-     },
-     "pi1" : {
-       "@type": "PersonalInfo",
-       "type": "hobby",
-       "value": "reading",
-       "level": "high"
-     },
-     "pi6" : {
-       "@type": "PersonalInfo",
-       "type": "interest",
-       "value": "r&b music",
-       "level": "medium"
-     },
-     ...
-   },
-   ...
-        ]]></sourcecode>
+            <sourcecode name="" type="json"><![CDATA[
+"personalInfo": {
+  "pi2": {
+    "@type": "PersonalInfo",
+    "type": "expertise",
+    "value": "chemistry",
+    "level": "high"
+  },
+  "pi1": {
+    "@type": "PersonalInfo",
+    "type": "hobby",
+    "value": "reading",
+    "level": "high"
+  },
+  "pi6": {
+    "@type": "PersonalInfo",
+    "type": "interest",
+    "value": "r&b music",
+    "level": "medium"
+  }
+}
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -3408,7 +3370,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       <section anchor="json-parsing" numbered="true" toc="default">
         <name>JSON Parsing</name>
         <t>The security considerations of <xref target="RFC8259" format="default"/> apply to the use of JSON as the data interchange format.
-        </t>
+    </t>
         <t>As for any serialization format, parsers need to thoroughly check the syntax of the supplied data.  JSON uses opening and closing tags for several types and structures, and it is possible that the end of the supplied data will be reached when scanning for a matching closing tag; this is an error condition, and implementations need to stop scanning at the end of the supplied data.</t>
         <t>JSON also uses a string encoding with some escape sequences to encode special characters within a string.  Care is needed when processing these escape sequences to ensure that they are fully formed before the special processing is triggered, with special care taken when the escape sequences appear adjacent to other (non-escaped) special characters or adjacent to the end of data (as in the previous paragraph).</t>
         <t>If parsing JSON into a non-textual structured data format, implementations may need to allocate storage to hold JSON string elements.  Since JSON does not use explicit string lengths, the risk of denial of service due to resource exhaustion is small, but implementations may still wish to place limits on the size of allocations they are willing to make in any given context, to avoid untrusted data causing excessive memory allocation.</t>
@@ -3453,7 +3415,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3966.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml"/>
-		<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6474.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6715.xml"/>
