@@ -77,7 +77,7 @@
           <li><tt>Number</tt> - The JSON number type.</li>
           <li><tt>Boolean</tt> - The JSON boolean type.</li>
           <li><tt>A[B]</tt> - A JSON object where the keys are all of type <tt>A</tt>, and the values are all of type <tt>B</tt>.</li>
-          <li><tt>A[]</tt> - An array of values of type <tt>A</tt>.</li>
+          <li><tt>A[]</tt> - A JSON array of values of type <tt>A</tt>.</li>
           <li><tt>A|B</tt> - The value is either of type <tt>A</tt> or of type <tt>B</tt>.</li>
         </ul>
       </section>
