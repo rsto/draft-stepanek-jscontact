@@ -628,7 +628,6 @@ PHOTO:http://www.example.com/pub/photos/jqpublic.gif
           <name>ADR</name>
           <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.</t>
           <t>The ADR components convert into the <tt>Address</tt> properties as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
-          <t>The "street address" and "extended address" ADR components <bcp14>MAY</bcp14> be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
           <table anchor="adr_components_vs_address_members">
             <name>ADR components vs.  Address members conversion</name>
             <thead>
@@ -683,6 +682,8 @@ PHOTO:http://www.example.com/pub/photos/jqpublic.gif
               </tr>
             </tbody>
           </table>
+            <t>Applications <bcp14>SHOULD</bcp14> separate the ADR "street address" component into street name, number and directions. If they can not determine the respective street components from the ADR "street address"", then they <bcp14>SHOULD</bcp14> convert these to a single <tt>name</tt> StreetComponent object.</t>
+            <t>The "street address" and "extended address" ADR components <bcp14>MAY</bcp14> be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
           <t>The LABEL parameter converts to the <tt>fullAddress</tt> property.</t>
           <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
           <t>The TZ parameter converts to the <tt>timeZone</tt> property.</t>
