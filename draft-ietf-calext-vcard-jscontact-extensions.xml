@@ -97,7 +97,8 @@ contact-channel-pref  = "CONTACT-CHANNEL-PREF"
 
 contact-channel-pref-param  = type-param / pref-param / any-param
 
-contact-channel-pref-value = "ADR" / "EMAIL" / "IMPP" / "TEL" / x-value
+contact-channel-pref-value = "ADR" / "EMAIL" / "IMPP" / "TEL" /
+                             x-value
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
@@ -258,8 +259,8 @@ GRAMMATICAL-GENDER:neuter
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-locale       = "LOCALE" any-param
-                ":" Language-Tag CRLF   ; defined in RFC6350, Section 4.
+locale       = "LOCALE" any-param ":" Language-Tag CRLF
+               ; Language-Tag is defined in RFC6350, Section 4.
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
@@ -298,8 +299,7 @@ LOCALE:de-AT
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-pronouns       = "PRONOUNS" pronouns-param
-                ":" text CRLF
+pronouns       = "PRONOUNS" pronouns-param ":" text CRLF
 
 pronouns-param =
                 *(
@@ -346,8 +346,13 @@ PRONOUNS;LANG=en:they/them
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-SOCIALPR-param = "VALUE=uri" / "VALUE=text" / service-type-param / any-param
-SOCIALPR-value = URI / text ; Value and VALUE parameter MUST match.
+socialpr       = "SOCIALPROFILE" socialpr-param ":"
+                                 socialpr-value CRLF
+
+socialpr-param = "VALUE=uri" / "VALUE=text" /
+                 service-type-param / any-param
+
+socialpr-value = URI / text
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
@@ -410,7 +415,7 @@ author-name-param    = "AUTHOR-NAME" "=" param-value ; not empty
           <dd>
             <sourcecode name=""><![CDATA[
 NOTE;AUTHOR-NAME=John Doe:This is some note.
-NOTE;AUTHOR-NAME="_:l33tHacker:_":A note with an unusual author name.
+NOTE;AUTHOR-NAME="_:l33tHckr:_":A note by an unusual author name.
 ]]></sourcecode>
           </dd>
         </dl>
@@ -429,8 +434,8 @@ NOTE;AUTHOR-NAME="_:l33tHacker:_":A note with an unusual author name.
           <dt>Format definition:</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
-created-param    = "CREATED" "=" param-value ;
-                ; a valid TIMESTAMP from Section 4.3.5 of [RFC6350]
+created-param = "CREATED" "=" param-value ;
+             ; a valid TIMESTAMP of Section 4.3.5 of [RFC6350]
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
@@ -479,22 +484,25 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           <dt>Description:</dt>
           <dd>
             <t>The RANKS parameter on a N property assigns a rank among the same-typed name components of a N property value.  Some cultures assign ranks to name components, such as a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.  But the N property value 	does not allow to infer a culturally or otherwise significant rank from the order in which same-typed name components are stored in it.</t>
-            <t>The parameter value is structurally equivalent to the multi-valued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined.</t>
+            <t>The parameter value is structurally equivalent to the multi-valued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined. If the RANKS parameter is set, its value <bcp14>MUST NOT</bcp14> be the empty string.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
+NONZERO-DIGIT   = %x31-39 ; "1" to "9"
+
 ranks-param     = ranks-component 4(";" ranks-component)
 ranks-component = rank *("," rank)
-rank            = (("1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9") *DIGIT) / ""
+rank            = (NONZERO-DIGIT *DIGIT) / ""
+
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
 N;RANKS="2,1":Gómez,Rodriguez;Pablo;;;
-             ; The culturally "first" surname is Rodriguez but
-             ; it appears at the second position in the N property.
+             ; The culturally "first" surname is Rodriguez but it
+             ; appears at the second position in the N property.
 
 N;RANKS=",1;,1":Hamilton,Cartland;Mary,Barbara;;Dame;
              ; The writer Dame Mary Barbara Hamilton Cartland

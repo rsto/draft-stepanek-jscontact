@@ -236,7 +236,7 @@ alnum-int = ALPHA / DIGIT / NON-ASCII
   ; see RFC 6350 Section 3.3
 
 v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
-  ; any characters except CTLs and DQUOTE, also see RFC 6350 Section 3.3
+  ; any characters except CTLs and DQUOTE
   ; use of "/" (%x2f) and "~" (%x7e) is discouraged
 
 ]]></sourcecode>

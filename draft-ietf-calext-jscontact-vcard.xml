@@ -3171,20 +3171,20 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode name="" type="abnf"><![CDATA[
-  jscontact-prop = "JSCONTACT-PROP" jscontact-prop-param ":" TEXT CRLF
+jscontact-prop = "JSCONTACT-PROP" jscontact-prop-param ":" TEXT CRLF
 
-  jscontact-prop-param  = *(
-                  ; The following are MANDATORY and MUST NOT
-                  ; occur more than once
-                  ( ";" jspath-param ) /    ; see next section
-                  ( ";" "VALUE" "=" "TEXT")
-                  ;
-                  ; The following is OPTIONAL,
-                  ; and MAY occur more than once.
-                  ;
-                  (";" other-param)
-                  ;
-                  )
+jscontact-prop-param  = *(
+                ; The following are MANDATORY and MUST NOT
+                ; occur more than once
+                ( ";" jspath-param ) /    ; see next section
+                ( ";" "VALUE" "=" "TEXT")
+                ;
+                ; The following is OPTIONAL,
+                ; and MAY occur more than once.
+                ;
+                (";" other-param)
+                ;
+                )
   ]]></sourcecode>
             </dd>
             <dt anchor="vcard-prop-jscontact-prop-examples">Example(s):</dt>
