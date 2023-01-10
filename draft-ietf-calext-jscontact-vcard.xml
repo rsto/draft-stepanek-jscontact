@@ -65,10 +65,14 @@
         <t>While applications might prefer JSContact to exchange contact card data with other systems, they are likely to interoperate with services and clients that only support vCard or jCard.  Similarly, existing contact data providers and consumers already using vCard or jCard might want to represent their contact data also in JSContact.</t>
         <t>To achieve this, this document defines standard rules to convert contact data between JSContact and vCard (and consequently jCard). </t>
       </section>
-      <section>
-        <name>Conventions Used in This Document</name>
-        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
-        <t>In the following of this document, the vCard features, namely properties and parameters, are written in uppercase while the Card features are written in camel case wrapped in double quotes.</t>
+      <section anchor="notational-conventions" numbered="true" toc="default">
+        <name>Notational Conventions</name>
+        <t>The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>", "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default" sectionFormat="of" derivedContent="RFC2119"/> <xref target="RFC8174" format="default" sectionFormat="of" derivedContent="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
+      </section>
+      <section anchor="abnf-notations">
+        <name>ABNF Notations</name>
+        <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document either are defined in <xref target="RFC5234"/> (such as the ABNF for CRLF, WSP, DQUOTE, VCHAR, ALPHA, and DIGIT) or <xref target="RFC6350"/>.
+        </t>
       </section>
     </section>
     <section anchor="vcard-jscontact-conversion">
@@ -3435,6 +3439,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
       <references>
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6474.xml"/>
@@ -3448,6 +3453,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
         <name>Informative References</name>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-vcard-jscontact-extensions.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
       </references>
     </references>
