@@ -46,10 +46,10 @@
   <middle>
     <section anchor="introduction" numbered="true" toc="default">
       <name>Introduction</name>
-      <t>This document defines a data model for contact card data normally used in address book or directory applications and services.  It aims to be an alternative to the vCard data format <xref target="RFC6350" format="default"/> and to provide a JSON-based standard representation of contact card data.</t>
+      <t>This document defines a data model for contact card data normally used in address book or directory applications and services.  It aims to be an alternative to the vCard data format <xref target="RFC6350" format="default"/>.</t>
       <t>The key design considerations for this data model are as follows:</t>
       <ul spacing="normal">
-        <li>Most of the initial set of attributes should be taken from the vCard data format <xref target="RFC6350" format="default"/> and extensions (<xref target="RFC6473" format="default"/>, <xref target="RFC6474" format="default"/>, <xref target="RFC6715" format="default"/>, <xref target="RFC6869" format="default"/>, <xref target="RFC8605" format="default"/>).  The specification should add new attributes or value types, or not support existing ones, where appropriate.  Conversion between the data formats need not fully preserve semantic meaning.</li>
+        <li>The data model and set of attributes should mostly be compatible with the one defined for the vCard data format <xref target="RFC6350" format="default"/> and extensions (<xref target="RFC6473" format="default"/>, <xref target="RFC6474" format="default"/>, <xref target="RFC6715" format="default"/>, <xref target="RFC6869" format="default"/>, <xref target="RFC8605" format="default"/>).  The specification should add new attributes or value types where appropriate. Not all existing vCard definitions need an equivalent in JSContact, especially if the vCard definition is considered to be obsolete or otherwise inappropriate.  Conversion between the data formats need not fully preserve semantic meaning.</li>
         <li>The attributes of the card data represented must be described as a simple key-value pair, reducing complexity of its representation.</li>
         <li>The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.</li>
         <li>Extensions, such as new properties and components, <bcp14>MUST NOT</bcp14> lead to requiring an update to this document.</li>
