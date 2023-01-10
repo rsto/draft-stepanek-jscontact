@@ -165,17 +165,9 @@
           <figure anchor="group_conversion_params">
             <name>An example how to preserve the group name in <tt>params</tt> during conversion.</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 item1.TEL;VALUE=uri:tel:+1-555-555-5555
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "phones": {
   "p1": {
     "@type": "Phone",
@@ -185,31 +177,19 @@ END:VCARD
     }
   }
 }
-...
-}
 ]]></artwork>
           </figure>
           <figure anchor="group_conversion_props">
             <name>An example how to preserve the group name in <tt>props</tt> during conversion.</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 item2.X-FOO:bar
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "vCardProps": [
   ["x-foo", {
     "group": "item2"
   }, "unknown", "bar"]
 ]
-...
-}
 ]]></artwork>
           </figure>
         </section>
@@ -231,31 +211,22 @@ END:VCARD
           <figure anchor="language-patch-dominant-language">
             <name>LANGUAGE conversion example: one dominant language</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 FN;LANGUAGE=EN:John Doe
 TITLE;LANGUAGE=EN:Boss
 TITLE;LANGUAGE=fr:Patron
-...
-END:VCARD
-
-{
-  "@type": "Card",
-  "@version" : "1.0",
-  ...
-  "locale": "en",
-  "fullName": "John Doe",
-  "titles": {
-    "t1": {
-      "@type": "Title",
-      "title": "Boss"
-    }
-  },
-  "localizations": {
-    "fr": {
-      "titles/t1/title": "Patron"
-    }
+]]></artwork>
+            <artwork><![CDATA[
+"locale": "en",
+"fullName": "John Doe",
+"titles": {
+  "t1": {
+    "@type": "Title",
+    "title": "Boss"
+  }
+},
+"localizations": {
+  "fr": {
+    "titles/t1/title": "Patron"
   }
 }
 ]]></artwork>
@@ -264,29 +235,20 @@ END:VCARD
           <figure anchor="language-patch-no-language">
             <name>LANGUAGE conversion example: property without language</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 FN:John Doe
 TITLE:Boss
 TITLE;LANGUAGE=fr:Patron
-...
-END:VCARD
-
-{
-  "@type": "Card",
-  "@version" : "1.0",
-  ...
-  "titles": {
-    "t1": {
-      "@type": "Title",
-      "title": "Boss"
-    }
-  },
-  "localizations": {
-    "fr": {
-      "titles/t1/title": "Patron"
-    }
+]]></artwork>
+            <artwork><![CDATA[
+"titles": {
+  "t1": {
+    "@type": "Title",
+    "title": "Boss"
+  }
+},
+"localizations": {
+  "fr": {
+    "titles/t1/title": "Patron"
   }
 }
 ]]></artwork>
@@ -295,37 +257,28 @@ END:VCARD
           <figure anchor="language-patch-no-dominant">
             <name>LANGUAGE conversion example: conflicting locale and language</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 LOCALE:es
 FN:Gabriel García Márquez
 TITLE;LANGUAGE=en:Boss
 TITLE;LANGUAGE=fr:Patron
-...
-END:VCARD
-
-{
-  "@type": "Card",
-  "@version" : "1.0",
-  ...
-  "locale": "es",
-  "fullName": "Gabriel García Márquez",
-  "localizations": {
-    "en": {
-      "titles": {
-        "t1": {
-          "@type": "Title",
-          "title": "Novelist"
-        }
-    },
-    "fr": {
-      "titles": {
-        "t1": {
-          "@type": "Title",
-          "title": "Écrivain"
-        }
-    }
+]]></artwork>
+            <artwork><![CDATA[
+"locale": "es",
+"fullName": "Gabriel García Márquez",
+"localizations": {
+  "en": {
+    "titles": {
+      "t1": {
+        "@type": "Title",
+        "title": "Novelist"
+      }
+  },
+  "fr": {
+    "titles": {
+      "t1": {
+        "@type": "Title",
+        "title": "Écrivain"
+      }
   }
 }
 ]]></artwork>
@@ -360,18 +313,10 @@ END:VCARD
           <figure anchor="propid_conversion">
             <name>PROP-ID conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
 TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "phones": {
   "PHONE-A": {
     "@type": "Phone",
@@ -385,8 +330,6 @@ END:VCARD
     "contexts": { "private": true },
     "number": "tel:+33-01-23-45-67"
   }
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -429,20 +372,10 @@ END:VCARD
           <figure anchor="kind_conversion">
             <name>KIND conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 KIND:individual
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
-"kind": "individual",
-...
-}
+]]></artwork>
+            <artwork><![CDATA[
+"kind": "individual"
 ]]></artwork>
           </figure>
         </section>
@@ -453,27 +386,15 @@ END:VCARD
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 SOURCE:http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "directories": {
-   ...
    "ENTRY-1": {
      "@type": "DirectoryResource",
      "type": "entry",
      "uri": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
-   },
-   ...
-},
-...
+   }
 }
 ]]></artwork>
           </figure>
@@ -505,21 +426,13 @@ END:VCARD
           <figure anchor="anniversary_conversion">
             <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 BDAY:19531015T231000Z
 BIRTHPLACE:Mail Drop: TNE QB\n123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
 DEATHDATE:19960415
 DEATHPLACE:4445 Courtright Street\nNew England, ND 58647\nU.S.A.
 ANNIVERSARY:19860201
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "anniversaries": {
   "ANNIVERSARY-1" : {
     "@type": "Anniversary",
@@ -557,8 +470,6 @@ END:VCARD
       "day": 1
     }
   }
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -574,19 +485,11 @@ END:VCARD
           <figure anchor="grammatical_gender_pronouns_conversion">
             <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
- GRAMMATICAL-GENDER:NEUTER
- PRONOUNS;PREF=2:they/them
- PRONOUNS;PREF=1:xe/xir
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+GRAMMATICAL-GENDER:NEUTER
+PRONOUNS;PREF=2:they/them
+PRONOUNS;PREF=1:xe/xir
+]]></artwork>
+            <artwork><![CDATA[
 "speakToAs": {
   "grammaticalGender": "neuter",
   "pronouns": {
@@ -601,8 +504,6 @@ END:VCARD
       "pref": 1
     }
   }
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -651,19 +552,6 @@ END:VCARD
           <figure anchor="fn_n_nickname_conversion">
             <name>FN, N, NICKNAME conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
-FN:Mr.  John Q.  Public\, Esq.
-N;SORT-AS="Public,John":Public;John;Quinlan;Mr.;Esq.
-NICKNAME:Johnny
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
 "fullName": "Mr.  John Q.  Public, Esq.",
 "name": {
     "@type": "Name",
@@ -684,8 +572,29 @@ END:VCARD
       "@type": "NickName",
       "name": "Johnny"
    }
+}
+]]></artwork>
+            <artwork><![CDATA[
+"fullName": "Mr.  John Q.  Public, Esq.",
+"name": {
+    "@type": "Name",
+    "components":[
+      { "@type": "NameComponent", "type": "prefix", "value": "Mr."  },
+      { "@type": "NameComponent", "type": "given", "value": "John" },
+      { "@type": "NameComponent", "type": "surname", "value": "Public" },
+      { "@type": "NameComponent", "type": "middle", "value": "Quinlan" },
+      { "@type": "NameComponent", "type": "suffix", "value": "Esq." }
+    ],
+    "sortAs": {
+        "surname": "Public",
+        "given": "John"
+    }
 },
-...
+"nickNames": {
+   "NICK-1": {
+      "@type": "NickName",
+      "name": "Johnny"
+   }
 }
 ]]></artwork>
           </figure>
@@ -697,27 +606,15 @@ END:VCARD
           <figure anchor="photo_conversion">
             <name>PHOTO conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 PHOTO:http://www.example.com/pub/photos/jqpublic.gif
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "media": {
-   ...
    "PHOTO-1": {
      "@type": "MediaResource",
      "type": "photo",
      "uri": "http://www.example.com/pub/photos/jqpublic.gif"
-   },
-   ...
-},
-...
+   }
 }
 ]]></artwork>
           </figure>
@@ -793,18 +690,10 @@ END:VCARD
           <figure anchor="adr_conversion">
             <name>ADR conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA
 ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "addresses": {
   "ADDR-1" : {
     "@type": "Address",
@@ -834,8 +723,6 @@ END:VCARD
     "postcode": "20190",
     "countryCode": "US"
   }
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -878,18 +765,10 @@ END:VCARD
           <figure anchor="contact_channel_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 CONTACT-CHANNEL-PREF;PREF=1:EMAIL
 CONTACT-CHANNEL-PREF;PREF=2:TEL
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "preferredContactChannels": {
   "emails":[
     {
@@ -903,8 +782,6 @@ END:VCARD
       "pref": 2
     }
   ]
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -917,18 +794,10 @@ END:VCARD
           <figure anchor="email_conversion">
             <name>EMAIL conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 EMAIL;TYPE=work:jqpublic@xyz.example.com
 EMAIL;PREF=1:jane_doe@example.com
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "emails": {
   "EMAIL-1": {
     "@type": "EmailAddress",
@@ -940,8 +809,6 @@ END:VCARD
     "address": "jane_doe@example.com",
     "pref": 1
   }
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -953,28 +820,16 @@ END:VCARD
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 IMPP;PREF=1:xmpp:alice@example.com
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "onlineServices": {
-  ...
   "OS-1": {
     "@type": "OnlineService",
     "user": "xmpp:alice@example.com",
     "type": "impp",
     "pref": 1
   },
-  ...
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -987,19 +842,11 @@ END:VCARD
           <figure anchor="lang_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 LANG;TYPE=work;PREF=1:en
 LANG;TYPE=work;PREF=2:fr
 LANG;TYPE=home:fr
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "preferredLanguages": {
   "en":[
     {
@@ -1019,8 +866,6 @@ END:VCARD
       "contexts": { "private": true }
     }
   ]
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -1031,20 +876,10 @@ END:VCARD
           <figure anchor="locale_conversion">
             <name>LOCALE conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 LOCALE:de-AT
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
-"locale": "de-AT",
-...
-}
+]]></artwork>
+            <artwork><![CDATA[
+"locale": "de-AT"
 ]]></artwork>
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
@@ -1056,17 +891,9 @@ END:VCARD
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "onlineServices": {
   ...
   "OS-1": {
@@ -1074,10 +901,7 @@ END:VCARD
     "service": "Twitter",
     "user": "https://twitter.com/ietf",
     "type": "uri"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1090,18 +914,10 @@ END:VCARD
           <figure anchor="tel_conversion">
             <name>TEL conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
 TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "phones": {
   "PHONE-1": {
     "@type": "Phone",
@@ -1115,8 +931,6 @@ END:VCARD
     "contexts": { "private": true },
     "number": "tel:+33-01-23-45-67"
   }
-],
-...
 }
 ]]></artwork>
           </figure>
@@ -1157,28 +971,16 @@ END:VCARD
           <figure anchor="contact_uri_conversion">
             <name>CONTACT-URI conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 CONTACT-URI;PREF=1:mailto:contact@example.com
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "links": {
-  ...
   "CONTACT-1": {
     "@type": "LinkResource",
     "type": "contact",
     "uri": "mailto:contact@example.com",
     "pref": 1
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1190,27 +992,15 @@ END:VCARD
           <figure anchor="logo_conversion">
             <name>LOGO conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 LOGO:http://www.example.com/pub/logos/abccorp.jpg
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "media": {
-  ...
   "LOGO-1": {
     "@type": "MediaResource",
     "type": "logo",
     "uri": "http://www.example.com/pub/logos/abccorp.jpg"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1222,25 +1012,19 @@ END:VCARD
           <figure anchor="group_example">
             <name>Group example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
 KIND:group
 FN:The Doe family
 MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
 MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
-END:VCARD
-
-  {
-    "@type": "Card",
-    "@version" : "1.0",
-    "kind": "group",
-    "fullName": "The Doe family",
-    "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
-    "members": {
-      "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
-      "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
-    }
-  }
+]]></artwork>
+            <artwork><![CDATA[
+"kind": "group",
+"fullName": "The Doe family",
+"uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
+"members": {
+  "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
+  "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
+}
 ]]></artwork>
           </figure>
         </section>
@@ -1254,17 +1038,9 @@ END:VCARD
           <figure anchor="org_conversion">
             <name>ORG conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "organizations": {
   "ORG-1": {
     "@type": "Organization",
@@ -1275,8 +1051,6 @@ END:VCARD
     ],
     "sortAs": "ABC"
   }
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -1287,38 +1061,28 @@ END:VCARD
           <figure anchor="related_conversion">
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 RELATED;TYPE=contact:http://example.com/directory/jdoe.vcf
 RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
-...
-END:VCARD
-
-{
-  "@type" : "Card",
-  "@version" : "1.0",
-  ...
-  "relatedTo" : {
-    "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
-      "@type" : "Relation",
-      "relation" : {
-        "friend" : true
-      }
-    },
-    "http://example.com/directory/jdoe.vcf" : {
-      "@type" : "Relation",
-      "relation" : {
-        "contact" : true
-      }
-    },
-    "Please contact my assistant Jane Doe for any inquiries." : {
-      "@type" : "Relation",
-      "relation" : { }
+]]></artwork>
+            <artwork><![CDATA[
+"relatedTo" : {
+  "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
+    "@type" : "Relation",
+    "relation" : {
+      "friend" : true
     }
   },
-  ...
+  "http://example.com/directory/jdoe.vcf" : {
+    "@type" : "Relation",
+    "relation" : {
+      "contact" : true
+    }
+  },
+  "Please contact my assistant Jane Doe for any inquiries." : {
+    "@type" : "Relation",
+    "relation" : { }
+  }
 }
 ]]></artwork>
           </figure>
@@ -1331,19 +1095,11 @@ END:VCARD
           <figure anchor="title_role_conversion">
             <name>TITLE and ROLE conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 TITLE:Research Scientist
 group1.ROLE:Project Leader
 group1.ORG:ABC, Inc.
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "titles": {
   "TITLE-1": {
     "@type": "Title",
@@ -1363,8 +1119,6 @@ END:VCARD
     "name": "ABC, Inc."
   }
 }
-...
-}
 ]]></artwork>
           </figure>
         </section>
@@ -1378,20 +1132,11 @@ END:VCARD
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 EXPERTISE;LEVEL=beginner;INDEX=2:chinese literature
 EXPERTISE;INDEX=1;LEVEL=expert:chemistry
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "personalInfo": {
-  ...
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
     "type": "expertise",
@@ -1405,10 +1150,7 @@ END:VCARD
     "value": "chemistry",
     "level": "high",
     "position": 1
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1420,20 +1162,11 @@ END:VCARD
           <figure anchor="hobby_conversion">
             <name>HOBBY conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 HOBBY;INDEX=1;LEVEL=high:reading
 HOBBY;INDEX=2;LEVEL=high:sewing
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "personalInfo": {
-  ...
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
     "type": "hobby",
@@ -1447,10 +1180,7 @@ END:VCARD
     "value": "sewing",
     "level": "high",
     "position": 2
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1462,20 +1192,11 @@ END:VCARD
           <figure anchor="interest_conversion">
             <name>INTEREST conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 INTEREST;INDEX=1;LEVEL=medium:r&b music
 INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "personalInfo": {
-  ...
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
     "type": "interest",
@@ -1489,10 +1210,7 @@ END:VCARD
     "value": "rock ’n’ roll music",
     "level": "high",
     "position": 2
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1504,20 +1222,11 @@ END:VCARD
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 ORG-DIRECTORY;INDEX=1:http://directory.mycompany.example.com
 ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "directories": {
-  ...
   "DIRECTORY-1": {
     "@type": "DirectoryResource",
     "type": "directory",
@@ -1529,10 +1238,7 @@ END:VCARD
     "type": "directory",
     "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
     "pref": 1
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1547,24 +1253,14 @@ END:VCARD
           <figure anchor="categories_conversion">
             <name>CATEGORIES conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
-CATEGORIES:INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+CATEGORIES:internet,IETF,Industry,Information Technology
+]]></artwork>
+            <artwork><![CDATA[
 "keywords": {
-  "INTERNET": true,
+  "internet": true,
   "IETF": true,
-  "INDUSTRY": true,
-  "INFORMATION TECHNOLOGY": true
-},
-...
+  "Industry": true,
+  "Information Technology": true
 }
 ]]></artwork>
           </figure>
@@ -1579,20 +1275,10 @@ END:VCARD
           <figure anchor="created_conversion">
             <name>CREATED conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 CREATED:19940930T143510Z
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
-"created": "1994-09-30T14:35:10Z",
-...
-}
+]]></artwork>
+            <artwork><![CDATA[
+"created": "1994-09-30T14:35:10Z"
 ]]></artwork>
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
@@ -1604,18 +1290,10 @@ END:VCARD
           <figure anchor="notes_conversion">
             <name>NOTE conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
   This fax number is operational 0800 to 1715 EST\, Mon-Fri.
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "notes": {
     "NOTE-1" : {
        "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
@@ -1625,8 +1303,6 @@ END:VCARD
          "name": "John"
        }
     }
-},
-...
 }
 ]]></artwork>
           </figure>
@@ -1637,20 +1313,10 @@ END:VCARD
           <figure anchor="prodid_conversion">
             <name>PRODID conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
-"prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN",
-...
-}
+]]></artwork>
+            <artwork><![CDATA[
+"prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN"
 ]]></artwork>
           </figure>
         </section>
@@ -1660,20 +1326,10 @@ END:VCARD
           <figure anchor="rev_conversion">
             <name>REV conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 REV:19951031T222710Z
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
-"updated": "1995-10-31T22:27:10Z",
-...
-}
+]]></artwork>
+            <artwork><![CDATA[
+"updated": "1995-10-31T22:27:10Z"
 ]]></artwork>
           </figure>
         </section>
@@ -1684,27 +1340,16 @@ END:VCARD
           <figure anchor="sound_conversion">
             <name>SOUND conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "media": {
   ...
   "SOUND-1": {
     "@type": "MediaResource",
     "type": "sound",
     "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1715,20 +1360,10 @@ END:VCARD
           <figure anchor="uid_conversion">
             <name>UID conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
-"uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
-...
-}
+]]></artwork>
+            <artwork><![CDATA[
+"uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
 ]]></artwork>
           </figure>
         </section>
@@ -1739,26 +1374,14 @@ END:VCARD
           <figure anchor="url_conversion">
             <name>URL conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 URL:http://example.org/restaurant.french/~chezchic.html
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "links": {
-  ...
   "LINK-1": {
     "@type": "LinkResource",
     "uri": "http://example.org/restaurant.french/~chezchic.html"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1774,26 +1397,16 @@ END:VCARD
           <figure anchor="xablabel_conversion">
             <name>X-ABLabel conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 item1.TEL;VALUE=uri:tel:+1-555-555-5555
 item1.X-ABLabel:foo
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "phones": {
   "p1": {
     "@type": "Phone",
     "number": "tel:+1-555-555-5555",
     "label": "foo"
   }
-}
-...
 }
 ]]></artwork>
           </figure>
@@ -1808,26 +1421,14 @@ END:VCARD
           <figure anchor="key_conversion">
             <name>KEY conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 KEY:http://www.example.com/keys/jdoe.cer
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "cryptoKeys": {
-  ...
   "KEY-1": {
     "@type": "CryptoResource",
     "uri": "http://www.example.com/keys/jdoe.cer"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1842,20 +1443,11 @@ END:VCARD
           <figure anchor="caladruri_conversion">
             <name>CALADRURI conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 CALADRURI;PREF=1:mailto:janedoe@example.com
 CALADRURI:http://example.com/calendar/jdoe
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "schedulingAddresses": {
-  ...
   "SCHEDULING-1": {
     "@type": "SchedulingAddress",
     "uri": "mailto:janedoe@example.com",
@@ -1864,10 +1456,7 @@ END:VCARD
   "SCHEDULING-2": {
     "@type": "SchedulingAddress",
     "uri": "http://example.com/calendar/jdoe"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1879,20 +1468,12 @@ END:VCARD
           <figure anchor="caluri_conversion">
             <name>CALURI conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 CALURI;PREF=1:http://cal.example.com/calA
 CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
-...
-END:VCARD
 
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "calendars": {
-  ...
   "CAL-1": {
     "@type": "CalendarResource",
     "type": "calendar",
@@ -1904,10 +1485,7 @@ END:VCARD
     "type": "calendar",
     "uri": "ftp://ftp.example.com/calA.ics",
     "mediaType": "text/calendar"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1919,20 +1497,11 @@ END:VCARD
           <figure anchor="fburl_conversion">
             <name>FBURL conversion example</name>
             <artwork><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 FBURL;PREF=1:http://www.example.com/busy/janedoe
 FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></artwork>
+            <artwork><![CDATA[
 "calendars": {
-  ...
   "FBURL-1": {
     "@type": "CalendarResource",
     "type": "freeBusy",
@@ -1944,10 +1513,7 @@ END:VCARD
     "type": "freeBusy",
     "uri": "ftp://example.com/busy/project-a.ifb",
     "mediaType": "text/calendar"
-  },
-  ...
-},
-...
+  }
 }
 ]]></artwork>
           </figure>
@@ -1979,25 +1545,15 @@ END:VCARD
               <figure anchor="props_conversion">
                 <name>JSContact <tt>props</tt> example</name>
                 <sourcecode name=""><![CDATA[
-BEGIN:VCARD
-VERSION:4.0
-...
 item1.X-FOO;X-BAR=Hello:World!
-...
-END:VCARD
-
-{
-"@type": "Card",
-"@version" : "1.0",
-...
+]]></sourcecode>
+                <sourcecode name="" type="json"><![CDATA[
 "vCardProps": [
   ["x-foo", {
     "x-bar": "Hello",
     "group": "item1"
   }, "unknown", "World!"]
 ]
-...
-}
 ]]></sourcecode>
               </figure>
             </dd>
@@ -2018,21 +1574,24 @@ END:VCARD
             <dd>This property is set on a JSContact object that represents a vCard property.  Its value <bcp14>MUST</bcp14> be a JSON object containing vCard property parameters, defined as array element 2 in <xref target="RFC7095" section="3.3"/>.  Each entry represents a parameter of the vCard property that converts to the JSContact object.  Typically, these are parameters for which no IANA-registered property is defined in the JSContact object.  It <bcp14>MAY</bcp14> contain vCard IANA-registered parameters which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
             <dt>Example:</dt>
             <dd>
-              <sourcecode><![CDATA[
+              <t>This illustrates how to convert a vCard extension parameter:</t>
+              <figure anchor="params_conversion">
+                <name>JSContact <tt>vCardParams</tt> example</name>
+                <sourcecode><![CDATA[
 EMAIL;X-FOO=Bar:jane_doe@example.com
 ]]></sourcecode>
-              <t>converts to</t>
-              <sourcecode><![CDATA[
+                <sourcecode><![CDATA[
 "emails": {
   "email1": {
-"@type": "EmailAddress",
-"address": "jane_doe@example.com",
-"vCardParams": {
-  "x-foo": "Bar"
-}
+    "@type": "EmailAddress",
+    "address": "jane_doe@example.com",
+    "vCardParams": {
+      "x-foo": "Bar"
+    }
   }
 }
 ]]></sourcecode>
+              </figure>
             </dd>
           </dl>
         </section>
@@ -3193,66 +2752,39 @@ jscontact-prop-param  = *(
               <figure anchor="jscontact-prop-unknown">
                 <name>Unknown property example</name>
                 <artwork><![CDATA[
-  {
-"@type": "Card",
-"@version" : "1.0",
- ...
- "someUnknownProperty": true
-  }
-
-  BEGIN:VCARD
-  VERSION:4.0
-  ...
-  JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
-  ...
-  END:VCARD
+"someUnknownProperty": true
+]]></artwork>
+                <artwork><![CDATA[
+JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
 ]]></artwork>
               </figure>
               <t>This illustrates how to convert a vendor-extension property at the top-level of a Card object.  Note the required use of quoted string for the JSPTR value which allows the path to include the COLON (U+003A) character.</t>
               <figure anchor="jscontact-prop-vendor-extension">
                 <name>Vendor-extension conversion example</name>
                 <artwork><![CDATA[
-  {
-"@type": "Card",
-"@version" : "1.0",
- ...
- "example.com:foo": {
-   "bar": 1234
- }
-  }
-
-  BEGIN:VCARD
-  VERSION:4.0
-  ...
-  JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
-  ...
-  END:VCARD
+"example.com:foo": {
+  "bar": 1234
+}
+]]></artwork>
+                <artwork><![CDATA[
+JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
 ]]></artwork>
               </figure>
               <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object using a path relative to the Card object.  Although not recommended, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
               <figure anchor="jscontact-prop-nested">
                 <name>Nested property example with path relative to Card</name>
                 <artwork><![CDATA[
-  {
-"@type": "Card",
-"@version" : "1.0",
- ...
- "phones": {
-   "phone1": {
-     "@type": "Phone",
-     "number": "tel:+33-01-23-45-67"
-     ...
+"phones": {
+  "phone1": {
+   "@type": "Phone",
+   "number": "tel:+33-01-23-45-67"
     "example.com:foo/bar": "tux hux"
-   }
  }
-  }
-
-  BEGIN:VCARD
-  VERSION:4.0
-  TEL:tel:+33-01-23-45-67
-  JSCONTACT-PROP;VALUE=TEXT;JSPTR="phones/phone1/example.com:foo~1bar":"tux hux"
-  ...
-  END:VCARD
+}
+]]></artwork>
+                <artwork><![CDATA[
+TEL:tel:+33-01-23-45-67
+JSCONTACT-PROP;VALUE=TEXT;JSPTR="phones/phone1/example.com:foo~1bar":"tux hux"
 ]]></artwork>
               </figure>
             </dd>
@@ -3283,7 +2815,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
             <dd>
               <t>This illustrates a simple example.  For further examples see <xref target="vcard-prop-jscontact-prop-examples"/>.</t>
               <sourcecode name=""><![CDATA[
-  JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
+JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
 ]]></sourcecode>
             </dd>
           </dl>
