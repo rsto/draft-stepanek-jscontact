@@ -313,8 +313,10 @@ TITLE;LANGUAGE=fr:Patron
           <figure anchor="propid_conversion">
             <name>PROP-ID conversion example</name>
             <artwork><![CDATA[
-TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
-TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
+TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home"
+  :tel:+1-555-555-5555;ext=5555
+TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
+  :tel:+33-01-23-45-67
 ]]></artwork>
             <artwork><![CDATA[
 "phones": {
@@ -386,14 +388,14 @@ KIND:individual
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
             <artwork><![CDATA[
-SOURCE:http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf
+SOURCE:http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
 ]]></artwork>
             <artwork><![CDATA[
 "directories": {
    "ENTRY-1": {
      "@type": "DirectoryResource",
      "type": "entry",
-     "uri": "http://directory.example.com/addressbooks/jdoe/Jean%20Dupont.vcf"
+     "uri": "http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
    }
 }
 ]]></artwork>
@@ -1291,12 +1293,12 @@ CREATED:19940930T143510Z
             <name>NOTE conversion example</name>
             <artwork><![CDATA[
 NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
-  This fax number is operational 0800 to 1715 EST\, Mon-Fri.
+  Office hours are from 0800 to 1715 EST\, Mon-Fri.
 ]]></artwork>
             <artwork><![CDATA[
 "notes": {
     "NOTE-1" : {
-       "note": "This fax number is operational 0800 to 1715 EST, Mon-Fri.",
+       "note": "Office hours are from 0800 to 1715 EST, Mon-Fri.",
        "created": "2022-11-23T15:01:32Z",
        "author": {
          "@type": "Author",
