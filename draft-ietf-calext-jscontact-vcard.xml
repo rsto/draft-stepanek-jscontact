@@ -240,6 +240,7 @@ TITLE:Boss
 TITLE;LANGUAGE=fr:Patron
 ]]></artwork>
             <artwork><![CDATA[
+"fullName": "John Doe",
 "titles": {
   "t1": {
     "@type": "Title",
@@ -553,29 +554,6 @@ PRONOUNS;PREF=1:xe/xir
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="fn_n_nickname_conversion">
             <name>FN, N, NICKNAME conversion example</name>
-            <artwork><![CDATA[
-"fullName": "Mr.  John Q.  Public, Esq.",
-"name": {
-    "@type": "Name",
-    "components":[
-      { "@type": "NameComponent", "type": "prefix", "value": "Mr."  },
-      { "@type": "NameComponent", "type": "given", "value": "John" },
-      { "@type": "NameComponent", "type": "surname", "value": "Public" },
-      { "@type": "NameComponent", "type": "middle", "value": "Quinlan" },
-      { "@type": "NameComponent", "type": "suffix", "value": "Esq." }
-    ],
-    "sortAs": {
-        "surname": "Public",
-        "given": "John"
-    }
-},
-"nickNames": {
-   "NICK-1": {
-      "@type": "NickName",
-      "name": "Johnny"
-   }
-}
-]]></artwork>
             <artwork><![CDATA[
 "fullName": "Mr.  John Q.  Public, Esq.",
 "name": {
