@@ -152,7 +152,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <name>The <tt>contexts</tt> property</name>
           <t>Type: <tt>String[Boolean]</tt></t>
           <t>This property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts, and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
-          <t>This document defines the following common contexts.  Additional contexts may be defined in the properties or data types that make use of this property, may be registered in a future RFC, or be vendor-specific (<xref target="vendor-specific-properties"/>).</t>
+          <t>This document defines the following common contexts.  Additional contexts may be defined in the properties or data types that make use of this property, may be registered at IANA (<xref target="iana-enum-registry-value-template"/>, or be vendor-specific (<xref target="vendor-specific-properties"/>).</t>
           <ul spacing="normal">
             <li><tt>private</tt>: The contact information may be used to contact in a private context.</li>
             <li><tt>work</tt>: The contact information may be used to contact in a professional context.</li>
@@ -311,7 +311,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="kind" numbered="true" toc="default">
           <name>kind</name>
           <t>Type: <tt>String</tt> (optional).  The kind of the entity the Card represents.</t>
-          <t>The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+          <t>The value <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
           <ul spacing="normal">
             <li><tt>individual</tt>: a single person</li>
             <li><tt>group</tt>: a group person of persons or entities</li>
@@ -497,7 +497,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
 The value of this name component.</li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this name component.  The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+The type of this name component.  The value <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>prefix</tt>.  The value is an honorific title(s), e.g.  "Mr", "Ms", "Dr".</li>
@@ -680,7 +680,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
             The title or role name of the entity represented by this card.
         </li>
             <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
-          Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
+          Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
                                     </li>
             <li>organization: <tt>Id</tt> (optional).
             The id of the organization in which this title is held.
@@ -765,7 +765,7 @@ The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the c
               This identifies 	the entity represented by this card at this online service.  The <tt>type</tt> property defines the how to interpret the value.
         </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
                 <li><tt>impp</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
                 <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI, such as for a social media service.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
@@ -805,7 +805,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
 The phone number, as either a URI or free-text.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
-              The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+              The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>voice</tt> The number is for calling by voice.</li>
@@ -853,7 +853,7 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
         <section anchor="preferredContactChannels" numbered="true" toc="default">
           <name>preferredContactChannels</name>
           <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional).</t>
-          <t>Defines which channel the entity represented by this card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+          <t>Defines which channel the entity represented by this card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
           <ul spacing="normal">
             <li><tt>addresses</tt>.  The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
             <li><tt>emails</tt>.  The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
@@ -947,7 +947,7 @@ Defines the preference of this language in relation to other languages of the sa
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CalendarResource</tt>.</li>
           </ul>
-          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>calendar</tt> The resource is a calendar that contains entries such as calendar events or tasks.</li>
             <li><tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
@@ -1051,7 +1051,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
           </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this street component.  The value <bcp14>MUST</bcp14> be either one of the following values, registered in a future RFC, or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+The type of this street component.  The value <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>name</tt>.  The street name.
@@ -1146,7 +1146,7 @@ The value of this street component.</li>
           <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this card.  A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>.</li>
-            <li>The <tt>type</tt> property value either is not set, is defined in a future RFC or vendor-specific.</li>
+            <li>The <tt>type</tt> property value either is not set, is registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific.</li>
           </ul>
           <figure anchor="example-cryptoKeys">
             <name><tt>cryptoKeys</tt> example</name>
@@ -1167,7 +1167,7 @@ The value of this street component.</li>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>DirectoryResource</tt>.</li>
           </ul>
-          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
             <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
@@ -1203,7 +1203,7 @@ The value of this street component.</li>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>LinkResource</tt>.</li>
           </ul>
-          <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>contact</tt> The resource is an URI by which the entity represented by this card may be contacted, including web forms or other media that require user interaction.</li>
           </ul>
@@ -1228,7 +1228,7 @@ The value of this street component.</li>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>MediaResource</tt>.</li>
           </ul>
-          <t>The <tt>type</tt> property value must be one of the following, or be defined in a future RFC or vendor-specific:</t>
+          <t>The <tt>type</tt> property value must be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>photo</tt> The resource is a photograph or avatar.</li>
             <li><tt>sound</tt> The resource is audio media, e.g.  to specify the proper pronunciation of the name property contents.</li>
@@ -1356,7 +1356,7 @@ The value of this street component.</li>
           </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-Specifies the type of the anniversary.  This RFC defines a small set of common anniversary types, additional types <bcp14>MAY</bcp14> be registered at IANA (see <xref target="iana-enum-registry-value-template"/>):
+Specifies the type of the anniversary.  This RFC defines a small set of common anniversary types, additional types <bcp14>MAY</bcp14> be registered at IANA (<xref target="iana-enum-registry-value-template"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>birth</tt>: a birthday anniversary</li>
@@ -1490,7 +1490,7 @@ A PersonalInfo object has the following properties:</t>
           </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-Specifies the type for this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>):
+Specifies the type for this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>expertise</tt>: a field of expertise or credential</li>
@@ -1501,7 +1501,7 @@ Specifies the type for this personal information.  The value <bcp14>MUST</bcp14>
             <li>value: <tt>String</tt> (mandatory).
 The actual information.  This is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInfo.</li>
             <li>level: <tt>String</tt> (optional).
-            Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered in a future RFC or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
+            Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
             This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
         </li>
