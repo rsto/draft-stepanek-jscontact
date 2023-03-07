@@ -352,7 +352,7 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
         </section>
         <section anchor="vcard-param-type">
           <name>TYPE</name>
-          <t>This converts to the <tt>contexts</tt> property as well as property-specific <tt>type</tt> property values defined in later sections.</t>
+          <t>This converts to the <tt>contexts</tt> property as well as property-specific <tt>type</tt> property values defined in later sections. If not specified otherwise for a specific JSContact property, the vCard <tt>home</tt> and <tt>work</tt> parameter values convert to the JSContact <tt>private</tt> and <tt>work</tt> contexts, respectively.</t>
         </section>
         <section anchor="vcard-param-tz">
           <name>TZ</name>
