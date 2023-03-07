@@ -1355,8 +1355,8 @@ The value of this street component.</li>
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Anniversary</tt>.
           </li>
             <li>
-              <t>type: <tt>String</tt> (optional).
-Specifies the type of the anniversary.  This RFC predefines the following types, but implementations MAY use additional values:
+              <t>type: <tt>String</tt> (mandatory).
+Specifies the type of the anniversary.  This RFC defines a small set of common anniversary types, additional types <bcp14>MAY</bcp14> be registered at IANA (see <xref target="iana-enum-registry-value-template"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>birth</tt>: a birthday anniversary</li>
