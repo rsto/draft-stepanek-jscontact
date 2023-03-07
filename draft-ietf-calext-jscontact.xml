@@ -1031,7 +1031,7 @@ The country name.</li>
             <li>postcode: <tt>String</tt> (optional).
 The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
             <li>countryCode: <tt>String</tt> (optional).
-The ISO-3166-1 country code.</li>
+The Alpha-2 or Alpha-3 ISO-3166-1 country code <xref target="ISO.3166-1.2006"/>.</li>
             <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
             <li>timeZone: <tt>String</tt> (optional).  Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
             <li>
@@ -3415,6 +3415,18 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8141.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
+        <reference anchor="ISO.3166-1.2006">
+          <front>
+            <title>Codes for the representation of names of countries, 3rd
+              edition</title>
+            <author>
+              <organization>International Organization for
+                Standardization</organization>
+            </author>
+            <date year="2006"/>
+          </front>
+          <seriesInfo name="ISO" value="Standard 3166-1"/>
+        </reference>
       </references>
       <references>
         <name>Informative References</name>
