@@ -765,7 +765,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <li>service: <tt>String</tt> (optional).
 The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the canonical service name including capitalization.  Typically the service name is the one which the providers of that service use on their web sites, in their apps or other publishing material.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>user: <tt>String</tt> (mandatory).
-              This identifies 	the entity represented by this card at this online service.  The <tt>type</tt> property defines the how to interpret the value.
+              This identifies the entity represented by this card at this online service.  The <tt>type</tt> property defines how to interpret the value.
         </li>
             <li>
               <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-onlineservice-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
