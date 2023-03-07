@@ -196,7 +196,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
-         An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification are IANA-registered properties.
+         An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification, including their object value types and enumerated values, are registered at IANA.
       </t>
           <t>
         Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
