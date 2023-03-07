@@ -272,7 +272,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
       </section>
       <section anchor="reserved-prop-names">
         <name>Reserved Property Names</name>
-        <t>This specification reserves the property name <tt>extra</tt> at IANA.  A JSContact object <bcp14>MUST NOT</bcp14> be defined to have a property with this name.  This is to provide implementations with a name to map unknown or vendor-specific properties to, and which never may occur as a property in a JSContact object.</t>
+        <t>This specification reserves the property name <tt>extra</tt> at IANA.  Its sole purpose is to provide implementors with an internal variable name which is certain to never occur as a property name in a JSContact object.  Implementations might want to map unknown or vendor-specific properties to a variable with this name, but this is implementation-specific.  Any JSContact object including a property with this name is invalid.</t>
       </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
