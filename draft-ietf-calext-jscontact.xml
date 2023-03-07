@@ -120,7 +120,7 @@
           <t>A Resource object has the following properties:</t>
           <ul spacing="normal">
             <li>
-              <t>@type: <tt>String</tt> (mandatory).  The allowed values are defined in the property definition that makes use of the Resource type.</t>
+              <t>@type: <tt>String</tt> (mandatory).  Specifies the type of this resource object.  The allowed value is defined in the type definition that make use of the Resource type.</t>
             </li>
             <li>
               <t>type: <tt>String</tt> (optional).
