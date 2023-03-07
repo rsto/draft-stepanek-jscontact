@@ -281,6 +281,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
       <t>A Card object stores information about a person, organization or company.</t>
       <section anchor="metadata-properties" numbered="true" toc="default">
         <name>Metadata properties</name>
+        <t>This section defines properties about this particular instance of a Card object, such as its unique identifier, its creation date, how it relates to other Card objects and other metadata information.</t>
         <section anchor="cardtype" numbered="true" toc="default">
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
@@ -423,6 +424,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
         <name>Name and Organization properties</name>
+        <t>This section defines properties that name the entity represented by this card, its related organizations and roles, as well as how to refer the entity represented by this card in spoken or written language.</t>
         <section anchor="fullName" numbered="true" toc="default">
           <name>fullName</name>
           <t>Type: <tt>String</tt> (optional).</t>
@@ -714,6 +716,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
       </section>
       <section anchor="contact-properties" numbered="true" toc="default">
         <name>Contact properties</name>
+        <t>This section defines properties how to contact the entity represented by this card.</t>
         <section anchor="emails" numbered="true" toc="default">
           <name>emails</name>
           <t>Type: <tt>Id[EmailAddress]</tt> (optional).</t>
@@ -940,6 +943,7 @@ Defines the preference of this language in relation to other languages of the sa
       </section>
       <section anchor="calendaring-and-scheduling-properties" numbered="true" toc="default">
         <name>Calendaring and Scheduling properties</name>
+        <t>This section defines properties how to schedule calendar events with the entity represented by this card.</t>
         <section anchor="calendars" numbered="true" toc="default">
           <name>calendars</name>
           <t>Type: <tt>Id[CalendarResource]</tt> (optional).</t>
@@ -1004,6 +1008,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
       </section>
       <section anchor="address-and-location-properties" numbered="true" toc="default">
         <name>Address and Location properties</name>
+        <t>This section defines properties for postal addresses and geographical locations associated with the entity represented by this card.</t>
         <section anchor="addresses" numbered="true" toc="default">
           <name>addresses</name>
           <t>Type: <tt>Id[Address]</tt> (optional).</t>
@@ -1140,6 +1145,7 @@ The value of this street component.</li>
       </section>
       <section anchor="resource-properties" numbered="true" toc="default">
         <name>Resource properties</name>
+        <t>This section defines properties for digital resources associated with the entity represented by this card.</t>
         <section anchor="cryptoKeys" numbered="true" toc="default">
           <name>cryptoKeys</name>
           <t>Type: <tt>Id[CryptoResource]</tt> (optional).</t>
@@ -1260,6 +1266,7 @@ The value of this street component.</li>
       </section>
       <section anchor="multilingual-properties" numbered="true" toc="default">
         <name>Multilingual properties</name>
+        <t>This section defines properties how to localize the content of this card in human languages.</t>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
@@ -1346,6 +1353,7 @@ The value of this street component.</li>
       </section>
       <section anchor="additional-properties" numbered="true" toc="default">
         <name>Additional properties</name>
+        <t>This section defines properties for which none of the previous sections is appropriate.</t>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
           <t>Type : Id[Anniversary] (optional).</t>
