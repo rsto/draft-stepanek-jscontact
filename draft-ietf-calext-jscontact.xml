@@ -1690,8 +1690,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
 	    serious omissions or errors in the published specification, as such changes may cause
 	      interoperability issues.  When review is required, a change request may be denied if it renders
 	        entities that were valid under the previous definition invalid under the new definition.</t>
-          <t>The owner of a JSContact property may pass responsibility to another person or agency by
-	    informing IANA; this can be done without discussion or review.</t>
         </section>
         <section anchor="iana-property-registry-template" numbered="true" toc="default">
           <name>"JSContact Properties" Registry Template</name>
