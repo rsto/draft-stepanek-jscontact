@@ -311,7 +311,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="kind" numbered="true" toc="default">
           <name>kind</name>
           <t>Type: <tt>String</tt> (optional).  The kind of the entity the Card represents.</t>
-          <t>The value <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+          <t>The value <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-card-kind"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
           <ul spacing="normal">
             <li><tt>individual</tt>: a single person</li>
             <li><tt>group</tt>: a group person of persons or entities</li>
@@ -497,7 +497,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
 The value of this name component.</li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this name component.  The value <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+The type of this name component.  The value <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-namecomponent-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>prefix</tt>.  The value is an honorific title(s), e.g.  "Mr", "Ms", "Dr".</li>
@@ -765,7 +765,7 @@ The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the c
               This identifies 	the entity represented by this card at this online service.  The <tt>type</tt> property defines the how to interpret the value.
         </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-onlineservice-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
                 <li><tt>impp</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
                 <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI, such as for a social media service.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
@@ -805,7 +805,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
 The phone number, as either a URI or free-text.  Typical URI schemes are the <xref target="RFC3966" format="default"/> <tt>tel</tt> or <xref target="RFC3261" format="default"/> <tt>sip</tt> schemes, but any URI scheme is allowed.</li>
             <li>
               <t>features: <tt>String[Boolean]</tt> (optional).
-              The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+              The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The method type <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-phone-features"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>voice</tt> The number is for calling by voice.</li>
@@ -853,7 +853,7 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
         <section anchor="preferredContactChannels" numbered="true" toc="default">
           <name>preferredContactChannels</name>
           <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional).</t>
-          <t>Defines which channel the entity represented by this card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+          <t>Defines which channel the entity represented by this card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-preferredcontactchannels"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
           <ul spacing="normal">
             <li><tt>addresses</tt>.  The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
             <li><tt>emails</tt>.  The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
@@ -1051,7 +1051,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
           </li>
             <li>
               <t>type: <tt>String</tt> (mandatory).
-The type of this street component.  The value <bcp14>MUST</bcp14> be either one of the folllowing values, registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+The type of this street component.  The value <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-streetcomponent-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>name</tt>.  The street name.
@@ -3080,7 +3080,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>Card</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-speaktoas-preferredcontactchannels" align="left">
+              <table anchor="tab-iana-enum-preferredcontactchannels" align="left">
                 <name>JSContact Enum Values for preferredContactChannels (Context: Card)</name>
                 <thead>
                   <tr>
