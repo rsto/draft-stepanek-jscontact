@@ -1704,7 +1704,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd> This is the type of this property, using type signatures, as specified in <xref target="type-signatures" format="default"/>.
 		    The property type <bcp14>MUST</bcp14> be registered in the "JSContact Types" registry.</dd>
             <dt>Property Context:</dt>
-            <dd>This is a comma-separated list of JSContact object types this property is allowed on.</dd>
+            <dd>This is a comma-separated list of JSContact object types (<xref target="iana-type-registry-contents"/>) that contain this property.</dd>
             <dt>Reference or Description:</dt>
             <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names). This must include references to all RFC documents where this property is introduced or updated.</dd>
             <dt>Intended Usage:</dt>
