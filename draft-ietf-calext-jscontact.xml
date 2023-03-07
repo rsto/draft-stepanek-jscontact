@@ -548,12 +548,12 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
           <t>Type: <tt>Id[Organization]</tt> (optional).</t>
-          <t>The companies or organization names and units associated with this card.  An Organization object has the following properties:</t>
+          <t>The companies or organization names and units associated with this card.  An Organization object has the following properties, of which at least one of the <tt>name</tt> and <tt>units</tt> properties <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt>.
           </li>
-            <li>name: <tt>String</tt> (mandatory).
+            <li>name: <tt>String</tt> (optional).
             The name of this organization.
         </li>
             <li>units: <tt>OrgUnit[]</tt> (optional).
