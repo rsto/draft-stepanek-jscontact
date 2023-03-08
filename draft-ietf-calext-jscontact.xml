@@ -1593,7 +1593,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Required parameters:</dt>
           <dd>
             <t>type</t>
-            <t>The <tt>type</tt> parameter conveys the type of the JSContact data in the body part.  The allowed parameter values correspond to the <tt>@type</tt> property of the JSON-formatted JSContact object in the body.  This RFC specifies a single type, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
+            <t>The <tt>type</tt> parameter conveys the type of the JSContact data in the body part.  The allowed parameter values correspond to the <xref target="cardtype"><tt>@type</tt></xref> property of the JSON-formatted JSContact object in the body.  This RFC specifies a single type, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
             <dl newline="false" spacing="normal">
               <dt><tt>card</tt>:</dt>
               <dd>The <tt>@type</tt> property value of the JSContact object <bcp14>MUST</bcp14> be
@@ -1604,7 +1604,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Optional parameters:</dt>
           <dd>
             <t>version</t>
-            <t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part.  Its value <bcp14>MUST</bcp14> match the value of the <tt>version</tt> property of the JSContact object.</t>
+            <t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part.  Its value <bcp14>MUST</bcp14> match the value of the <xref target="prop-version"><tt>version</tt></xref> property of the JSContact object.</t>
           </dd>
           <dt>Encoding considerations:</dt>
           <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.</dd>
