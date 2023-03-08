@@ -2356,7 +2356,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Until Version:</dt>
             <dd>This defines the JSContact version after which this type definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
-            <dd>who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream)</dd>
+            <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
         </section>
         <section anchor="iana-type-registry-contents" numbered="true" toc="default">
@@ -2631,7 +2631,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Until Version:</dt>
             <dd>This defines the JSContact version after which this enum value definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</dd>
             <dt>Change Controller:</dt>
-            <dd> (<tt>IETF</tt> for properties defined in RFCs from the IETF stream).</dd>
+            <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
             <dd>This is the initial list of defined values for this enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>.  A subregistry will be created with these values for this property name/context tuple.</dd>
           </dl>
