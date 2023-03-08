@@ -1593,18 +1593,16 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Required parameters:</dt>
           <dd>
             <t>type</t>
-            <t>The <tt>type</tt> parameter conveys the type of the JSContact data in the body part.  The allowed parameter values correspond to the <xref target="cardtype"><tt>@type</tt></xref> property of the JSON-formatted JSContact object in the body.  This RFC specifies a single type, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
+            <t>This parameter conveys the type of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  This RFC specifies a single allowed parameter value, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
             <dl newline="false" spacing="normal">
               <dt><tt>card</tt>:</dt>
-              <dd>The <tt>@type</tt> property value of the JSContact object <bcp14>MUST</bcp14> be
-		          <tt>Card</tt>.</dd>
+              <dd>The body part <bcp14>MUST</bcp14> consist of exactly one JSContact <xref target="card"><tt>Card</tt></xref> object.</dd>
             </dl>
-            <t>The parameter <bcp14>MUST NOT</bcp14> occur more than once.</t>
           </dd>
           <dt>Optional parameters:</dt>
           <dd>
             <t>version</t>
-            <t>The <tt>version</tt> parameter conveys the version of the JSContact object in the body part.  Its value <bcp14>MUST</bcp14> match the value of the <xref target="prop-version"><tt>version</tt></xref> property of the JSContact object.</t>
+            <t>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>@version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</t>
           </dd>
           <dt>Encoding considerations:</dt>
           <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.</dd>
@@ -1738,7 +1736,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
-              <tr>
+              <tr anchor="iana-property-registry-version">
                 <td align="left">@version</td>
                 <td align="left">String</td>
                 <td align="left">Card</td>
