@@ -202,7 +202,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
       </t>
           <t>
-    IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters (the ALPHA and DIGIT rules defined in <xref target="RFC2234" section="6.1"/>), but notable exceptions of this rule are metadata properties such as <tt>@type</tt> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
+    IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/>).  Notable exceptions of this rule are metadata properties such as <tt>@type</tt> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
 </t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
@@ -3416,7 +3416,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2046.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml"/>
