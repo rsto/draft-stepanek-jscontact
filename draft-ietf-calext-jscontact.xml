@@ -88,7 +88,7 @@
           <name>Id</name>
           <t>Where <tt>Id</tt> is given as a data type, it means a <tt>String</tt> of at least 1 and a maximum of 255 octets in size, and it <bcp14>MUST</bcp14> only contain characters from the <tt>URL and Filename Safe</tt> base64url alphabet, as defined in Section 5 of <xref target="RFC4648" format="default"/>, excluding the pad character (<tt>=</tt>).  This means the allowed characters are the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (<tt>-</tt>), and underscore (<tt>_</tt>).</t>
           <t>In many places in JSContact a JSON map is used where the map keys are of type Id and the map values are all the same type of object.  This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key).  This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSContact object.  The map keys <bcp14>MUST</bcp14> be preserved across multiple versions of the JSContact object.</t>
-          <t>Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two <xref target="card">Card</xref> objects might use the same Ids in their respective <tt>photos</tt> properties.  Or within the same Card object the same Id could appear in the <tt>emails</tt> and <tt>phones</tt> properties.  These situations do not imply any semantic connections among the objects.</t>
+          <t>Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map).  For example, two <xref target="card">Card</xref> objects might use the same Ids in their respective <tt>photos</tt> properties.  Or within the same Card the same Id could appear in the <tt>emails</tt> and <tt>phones</tt> properties.  These situations do not imply any semantic connections among the objects.</t>
         </section>
         <section anchor="int-unsignedint" numbered="true" toc="default">
           <name>Int and UnsignedInt</name>
@@ -116,7 +116,7 @@
         </section>
         <section anchor="resource" numbered="true" toc="default">
           <name>Resource</name>
-          <t>This data type defines a resource associated with the entity represented by this card, identified by a URI <xref target="RFC3986" format="default"/>.  Several property definitions later in this document refer to the Resource data type as the basis for their property-specific value types.  The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
+          <t>This data type defines a resource associated with the entity represented by this Card, identified by a URI <xref target="RFC3986" format="default"/>.  Several property definitions later in this document refer to the Resource data type as the basis for their property-specific value types.  The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
           <t>A Resource object has the following properties:</t>
           <ul spacing="normal">
             <li>
@@ -166,7 +166,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>The <tt>pref</tt> property</name>
           <t>Type: <tt>UnsignedInt</tt></t>
-          <t>This property allows to define a preference order for contact information.  For example, a card holder may have two email addresses and prefer to be contacted with one of them.</t>
+          <t>This property allows to define a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are independent of each other.</t>
         </section>
@@ -205,7 +205,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
          An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification, including their object value types and enumerated values, are registered at IANA.
       </t>
           <t>
-        Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card object <tt>@version</tt> property (<xref target="prop-version"/>).
+        Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card <tt>@version</tt> property (<xref target="prop-version"/>).
       </t>
           <t>
             IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/>).  Notable exceptions of this rule are metadata properties such as <xref target="prop-type"><tt>@type</tt></xref> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
@@ -284,10 +284,10 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
     <section anchor="card" numbered="true" toc="default">
       <name>Card</name>
       <t>Media type: <tt>application/jscontact+json;type=card</tt> (see <xref target="iana-media-type"/>).</t>
-      <t>A Card object stores information about a person, organization or company.</t>
+      <t>A Card stores information about a person, organization or company.</t>
       <section anchor="metadata-properties" numbered="true" toc="default">
         <name>Metadata properties</name>
-        <t>This section defines properties about this particular instance of a Card object, such as its unique identifier, its creation date, how it relates to other Card objects and other metadata information.</t>
+        <t>This section defines properties about this particular instance of a Card, such as its unique identifier, its creation date, how it relates to other Cards and other metadata information.</t>
         <section anchor="cardtype" numbered="true" toc="default">
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
@@ -296,7 +296,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="prop-version" numbered="true" toc="default">
           <name>@version</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the JSContact version used to define this card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>@version</tt> property.  This specification registers the JSContact version value <tt>1.0</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
+          <t>Specifies the JSContact version used to define this Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>@version</tt> property.  This specification registers the JSContact version value <tt>1.0</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
           <figure anchor="example-version">
             <name><tt>@version</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -307,7 +307,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="created" numbered="true" toc="default">
           <name>created</name>
           <t>Type: <tt>UTCDateTime</tt> (optional).</t>
-          <t>The date and time when this Card object was created.</t>
+          <t>The date and time when this Card was created.</t>
           <figure anchor="example-created">
             <name><tt>created</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -337,7 +337,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="locale" numbered="true" toc="default">
           <name>locale</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the card.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
+          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the Card.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
           <figure anchor="example-locale">
             <name><tt>locale</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -348,7 +348,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).</t>
-          <t>This identifies the set of cards that are members of this group card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
+          <t>This identifies the set of Cards that are members of this group Card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
           <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g.  "IETF Participants").</t>
           <figure anchor="example-members">
             <name><tt>members</tt> example</name>
@@ -366,7 +366,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="prodId" numbered="true" toc="default">
           <name>prodId</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>The identifier for the product that created the Card object.</t>
+          <t>The identifier for the product that created the Card.</t>
           <figure anchor="example-prodId">
             <name><tt>prodId</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -377,7 +377,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="relatedTo" numbered="true" toc="default">
           <name>relatedTo</name>
           <t>Type: <tt>String[Relation]</tt> (optional).</t>
-          <t>Relates the object to other Card objects.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card and the value defines the relation.  The Relation object has the following properties:</t>
+          <t>Relates the object to other Cards.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card and the value defines the relation.  The Relation object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
             Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Relation</tt> (<xref target="iana-type-registry-contents"/>).
@@ -419,7 +419,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="updated" numbered="true" toc="default">
           <name>updated</name>
           <t>Type: <tt>UTCDateTime</tt> (optional).</t>
-          <t>The date and time when the data in this Card object was last modified.</t>
+          <t>The date and time when the data in this Card was last modified.</t>
           <figure anchor="example-updated">
             <name><tt>updated</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -430,11 +430,11 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
         <name>Name and Organization properties</name>
-        <t>This section defines properties that name the entity represented by this card, its related organizations and roles, as well as how to refer the entity represented by this card in spoken or written language.</t>
+        <t>This section defines properties that name the entity represented by this Card, its related organizations and roles, as well as how to refer the entity represented by this Card in spoken or written language.</t>
         <section anchor="fullName" numbered="true" toc="default">
           <name>fullName</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the full name of the entity represented by this card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>name</tt> property as the name of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated name component values of the <tt>name</tt> property in the <tt>fullName</tt> property value.</t>
+          <t>This is the full name of the entity represented by this Card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>name</tt> property as the name of the entity represented by this Card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated name component values of the <tt>name</tt> property in the <tt>fullName</tt> property value.</t>
           <figure anchor="example-fullName">
             <name><tt>fullName</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -521,14 +521,14 @@ The type of this name component.  The value <bcp14>MUST</bcp14> be either one of
               <t>rank: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
                 Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
               <t>For example, two name components of type <tt>surname</tt> may have their <tt>rank</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
-              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Card object to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
+              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Card to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
           </ul>
         </section>
         <section anchor="nickNames" numbered="true" toc="default">
           <name>nickNames</name>
           <t>Type: <tt>Id[NickName]</tt> (optional).</t>
-          <t>The nick names of the entity represented by this card.  A NickName object has the following properties:</t>
+          <t>The nick names of the entity represented by this Card.  A NickName object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NickName</tt> (<xref target="iana-type-registry-contents"/>).
@@ -556,7 +556,7 @@ The contexts in which to use this nick name.  Also see <xref target="prop-contex
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
           <t>Type: <tt>Id[Organization]</tt> (optional).</t>
-          <t>The companies or organization names and units associated with this card.  An Organization object has the following properties, of which at least one of the <tt>name</tt> and <tt>units</tt> properties <bcp14>MUST</bcp14> be set:</t>
+          <t>The companies or organization names and units associated with this Card.  An Organization object has the following properties, of which at least one of the <tt>name</tt> and <tt>units</tt> properties <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt> (<xref target="iana-type-registry-contents"/>).
@@ -611,7 +611,7 @@ The contexts in which association with this organization apply.  For example, me
         <section anchor="speakToAs" numbered="true" toc="default">
           <name>speakToAs</name>
           <t>Type: <tt>SpeakToAs</tt> (optional).</t>
-          <t>Provides information how to address, speak to or refer to the entity that is represented by this card.  A SpeakToAs object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
+          <t>Provides information how to address, speak to or refer to the entity that is represented by this Card.  A SpeakToAs object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SpeakToAs</tt> (<xref target="iana-type-registry-contents"/>).
@@ -682,13 +682,13 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
         <section anchor="titles" numbered="true" toc="default">
           <name>titles</name>
           <t>Type : <tt>Id[Title]</tt> (optional).</t>
-          <t>The job titles or functional positions of the entity represented by this card.  A Title has object the following properties:</t>
+          <t>The job titles or functional positions of the entity represented by this Card.  A Title has object the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>name: <tt>String</tt> (mandatory).
-            The title or role name of the entity represented by this card.
+            The title or role name of the entity represented by this Card.
         </li>
             <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
           Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
@@ -725,11 +725,11 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
       </section>
       <section anchor="contact-properties" numbered="true" toc="default">
         <name>Contact properties</name>
-        <t>This section defines properties how to contact the entity represented by this card.</t>
+        <t>This section defines properties how to contact the entity represented by this Card.</t>
         <section anchor="emails" numbered="true" toc="default">
           <name>emails</name>
           <t>Type: <tt>Id[EmailAddress]</tt> (optional).</t>
-          <t>The email addresses to contact the entity represented by this card.  An EmailAddress object has the following properties:</t>
+          <t>The email addresses to contact the entity represented by this Card.  An EmailAddress object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt> (<xref target="iana-type-registry-contents"/>).
@@ -766,7 +766,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
         <section anchor="onlineServices" numbered="true" toc="default">
           <name>onlineServices</name>
           <t>Type: <tt>Id[OnlineService]</tt> (optional).</t>
-          <t>The online services that are associated with the entity represented by this card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties:</t>
+          <t>The online services that are associated with the entity represented by this Card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt> (<xref target="iana-type-registry-contents"/>).
@@ -774,7 +774,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <li>service: <tt>String</tt> (optional).
 The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the canonical service name including capitalization.  Typically the service name is the one which the providers of that service use on their web sites, in their apps or other publishing material.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>user: <tt>String</tt> (mandatory).
-              This identifies the entity represented by this card at this online service.  The <tt>type</tt> property defines how to interpret the value.
+              This identifies the entity represented by this Card at this online service.  The <tt>type</tt> property defines how to interpret the value.
         </li>
             <li>
               <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-onlineservice-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
@@ -808,7 +808,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
         <section anchor="phones" numbered="true" toc="default">
           <name>phones</name>
           <t>Type: <tt>Id[Phone]</tt> (optional).</t>
-          <t>The phone numbers to contact the entity represented by this card.  A Phone object has the following properties:</t>
+          <t>The phone numbers to contact the entity represented by this Card.  A Phone object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt> (<xref target="iana-type-registry-contents"/>).
@@ -865,7 +865,7 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
         <section anchor="preferredContactChannels" numbered="true" toc="default">
           <name>preferredContactChannels</name>
           <t>Type : <tt>String[ContactChannelPreference[]]</tt> (optional).</t>
-          <t>Defines which channel the entity represented by this card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-preferredcontactchannels"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+          <t>Defines which channel the entity represented by this Card prefers to be contacted with.  The keys in the object <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-preferredcontactchannels"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
           <ul spacing="normal">
             <li><tt>addresses</tt>.  The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
             <li><tt>emails</tt>.  The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
@@ -906,7 +906,7 @@ Defines the preference of this contact channel in relation to other contact chan
         <section anchor="preferredLanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
           <t>Type : <tt>String[LanguagePreference[]]</tt> (optional).</t>
-          <t>Defines the preferred languages for contacting the entity associated with this card.  The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags.  The values are a (possibly empty) list of contact language preferences for this language.  A valid LanguagePreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>Defines the preferred languages for contacting the entity associated with this Card.  The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags.  The values are a (possibly empty) list of contact language preferences for this language.  A valid LanguagePreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
           <t>A LanguagePreference object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
@@ -952,11 +952,11 @@ Defines the preference of this language in relation to other languages of the sa
       </section>
       <section anchor="calendaring-and-scheduling-properties" numbered="true" toc="default">
         <name>Calendaring and Scheduling properties</name>
-        <t>This section defines properties how to schedule calendar events with the entity represented by this card.</t>
+        <t>This section defines properties how to schedule calendar events with the entity represented by this Card.</t>
         <section anchor="calendars" numbered="true" toc="default">
           <name>calendars</name>
           <t>Type: <tt>Id[CalendarResource]</tt> (optional).</t>
-          <t>These are resources for calendaring, such as calendars to lookup free-busy information for the entity represented by this card.  A CalendarResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are resources for calendaring, such as calendars to lookup free-busy information for the entity represented by this Card.  A CalendarResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CalendarResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
           </ul>
@@ -1017,7 +1017,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
       </section>
       <section anchor="address-and-location-properties" numbered="true" toc="default">
         <name>Address and Location properties</name>
-        <t>This section defines properties for postal addresses and geographical locations associated with the entity represented by this card.</t>
+        <t>This section defines properties for postal addresses and geographical locations associated with the entity represented by this Card.</t>
         <section anchor="addresses" numbered="true" toc="default">
           <name>addresses</name>
           <t>Type: <tt>Id[Address]</tt> (optional).</t>
@@ -1053,7 +1053,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               </ul>
             </li>
             <li>fullAddress: <tt>String</tt> (optional).
-            This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
+            This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this Card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
             </li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
@@ -1078,7 +1078,7 @@ The type of this street component.  The value <bcp14>MUST</bcp14> be either one 
             </li>
                 <li><tt>extension</tt>.  The extension designation or box number.
             </li>
-                <li><tt>direction</tt>.  The cardinal direction, e.g.  "North".
+                <li><tt>direction</tt>.  The Cardinal direction, e.g.  "North".
             </li>
                 <li><tt>building</tt>.  The building or building part this address is located in.
             </li>
@@ -1154,11 +1154,11 @@ The value of this street component.</li>
       </section>
       <section anchor="resource-properties" numbered="true" toc="default">
         <name>Resource properties</name>
-        <t>This section defines properties for digital resources associated with the entity represented by this card.</t>
+        <t>This section defines properties for digital resources associated with the entity represented by this Card.</t>
         <section anchor="cryptoKeys" numbered="true" toc="default">
           <name>cryptoKeys</name>
           <t>Type: <tt>Id[CryptoResource]</tt> (optional).</t>
-          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this card.  A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this Card.  A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
             <li>The <tt>type</tt> property value either is not set, is registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific.</li>
@@ -1184,13 +1184,13 @@ The value of this street component.</li>
           </ul>
           <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
-            <li><tt>directory</tt> The resource is a directory service where the entity represented by this card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
-            <li><tt>entry</tt> The resource is a directory entry of the entity represented by this card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
+            <li><tt>directory</tt> The resource is a directory service where the entity represented by this Card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
+            <li><tt>entry</tt> The resource is a directory entry of the entity represented by this Card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
           </ul>
           <t>In addition, the DirectoryResource object has the following property:</t>
           <ul>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>type</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
         </li>
           </ul>
           <figure anchor="example-directories">
@@ -1220,7 +1220,7 @@ The value of this street component.</li>
           </ul>
           <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
-            <li><tt>contact</tt> The resource is an URI by which the entity represented by this card may be contacted, including web forms or other media that require user interaction.</li>
+            <li><tt>contact</tt> The resource is an URI by which the entity represented by this Card may be contacted, including web forms or other media that require user interaction.</li>
           </ul>
           <figure anchor="example-links">
             <name><tt>links</tt> example</name>
@@ -1239,7 +1239,7 @@ The value of this street component.</li>
         <section anchor="media" numbered="true" toc="default">
           <name>media</name>
           <t>Type: <tt>Id[MediaResource]</tt> (optional).</t>
-          <t>These are media resources such as photographs, avatars, or sounds associated with the entity represented by this card.  A MediaResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are media resources such as photographs, avatars, or sounds associated with the entity represented by this Card.  A MediaResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>MediaResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
           </ul>
@@ -1247,7 +1247,7 @@ The value of this street component.</li>
           <ul>
             <li><tt>photo</tt> The resource is a photograph or avatar.</li>
             <li><tt>sound</tt> The resource is audio media, e.g.  to specify the proper pronunciation of the name property contents.</li>
-            <li><tt>logo</tt> The resource is a graphic image or logo associated with entity represented by this card.</li>
+            <li><tt>logo</tt> The resource is a graphic image or logo associated with entity represented by this Card.</li>
           </ul>
           <figure anchor="example-media">
             <name><tt>media</tt> example</name>
@@ -1275,12 +1275,12 @@ The value of this street component.</li>
       </section>
       <section anchor="multilingual-properties" numbered="true" toc="default">
         <name>Multilingual properties</name>
-        <t>This section defines properties how to localize the content of this card in human languages.</t>
+        <t>This section defines properties how to localize the content of this Card in human languages.</t>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
           <t>This property localizes property values in this Card to languages other than the main locale.  Its purpose is to provide language-specific alternatives to existing values, not to add new values.  In other words, a localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant.</t>
-          <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card object that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
+          <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
           <t>Conceptually, a Card is localized as follows:</t>
           <ul>
             <li>Determine the language tag in which this Card should be localized in.</li>
@@ -1366,7 +1366,7 @@ The value of this street component.</li>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
           <t>Type : Id[Anniversary] (optional).</t>
-          <t>These are memorable dates and events for the entity represented by this card.  An Anniversary object has the following properties:</t>
+          <t>These are memorable dates and events for the entity represented by this Card.  An Anniversary object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Anniversary</tt> (<xref target="iana-type-registry-contents"/>).
@@ -1453,7 +1453,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
         <section anchor="notes" numbered="true" toc="default">
           <name>notes</name>
           <t>Type: <tt>Id[Note]</tt> (optional).</t>
-          <t>Free-text notes associated with this card.  A Note object has the following properties:</t>
+          <t>Free-text notes associated with this Card.  A Note object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Note</tt> (<xref target="iana-type-registry-contents"/>).
@@ -1499,7 +1499,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
         <section anchor="personalInfo" numbered="true" toc="default">
           <name>personalInfo</name>
           <t>Type: <tt>Id[PersonalInfo]</tt> (optional).</t>
-          <t>Defines personal information about the entity represented by this card.
+          <t>Defines personal information about the entity represented by this Card.
 A PersonalInfo object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
@@ -1520,7 +1520,7 @@ The actual information.  This is free-text, but future specifications MAY restri
             <li>level: <tt>String</tt> (optional).
             Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
         </li>
             <li>label: <tt>String</tt> (optional).
             A custom label.  See <xref target="prop-label"/>.</li>
