@@ -218,9 +218,10 @@ gram-gender-param =
                  )
 
 gram-gender-value = "animate" /
-                    "female" /
+                    "common" /
+                    "feminine" /
                     "inanimate" /
-                    "male" /
+                    "masculine" /
                     "neuter" /
                     iana-token
                     x-value
@@ -685,7 +686,12 @@ SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">female</td>
+            <td align="left">common</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+          </tr>
+          <tr>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">feminine</td>
             <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>
@@ -695,7 +701,7 @@ SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
           </tr>
           <tr>
             <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">male</td>
+            <td align="left">masculine</td>
             <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>

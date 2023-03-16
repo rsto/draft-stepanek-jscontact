@@ -612,19 +612,22 @@ The contexts in which association with this organization apply.  For example, me
           </li>
             <li>
               <t>grammaticalGender: <tt>String</tt> (optional).
-              Defines which grammatical gender to use in salutations and other grammatical constructs.  Allowed values are:</t>
+                Defines which grammatical gender to use in salutations and other grammatical constructs.  This document defines the following grammatical genders.  Additional ones may be registered at IANA (<xref target="iana-enum-registry-value-template"/>), or be vendor-specific (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
                 <li>
                   <tt>animate</tt>
                 </li>
                 <li>
-                  <tt>female</tt>
+                  <tt>common</tt>
+                </li>
+                <li>
+                  <tt>feminine</tt>
                 </li>
                 <li>
                   <tt>inanimate</tt>
                 </li>
                 <li>
-                  <tt>male</tt>
+                  <tt>masculine</tt>
                 </li>
                 <li>
                   <tt>neuter</tt>
@@ -3068,7 +3071,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">female</td>
+                    <td align="left">common</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">feminine</td>
                     <td align="left">
                       <xref target="speakToAs" format="default"/>
                     </td>
@@ -3080,7 +3089,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">male</td>
+                    <td align="left">masculine</td>
                     <td align="left">
                       <xref target="speakToAs" format="default"/>
                     </td>
