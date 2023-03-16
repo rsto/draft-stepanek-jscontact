@@ -92,7 +92,7 @@
         </section>
         <section anchor="int-unsignedint" numbered="true" toc="default">
           <name>Int and UnsignedInt</name>
-          <t>Where <tt>Int</tt> is given as a data type, it means an integer in the range -2<sup>53</sup>+1 &lt;= value &lt;= 2^<sup>53</sup>-1, the safe range for integers stored in a floating-point double, represented as a JSON <tt>Number</tt>.</t>
+          <t>Where <tt>Int</tt> is given as a data type, it means an integer in the range -2<sup>53</sup>+1 &lt;= value &lt;= 2<sup>53</sup>-1, the safe range for integers stored in a floating-point double, represented as a JSON <tt>Number</tt>.</t>
           <t>Where <tt>UnsignedInt</tt> is given as a data type, it means an integer in the range 0 &lt;= value &lt;= 2<sup>53</sup>-1, represented as a JSON <tt>Number</tt>.</t>
         </section>
         <section anchor="patchobject" numbered="true" toc="default">
