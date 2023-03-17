@@ -1485,6 +1485,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
             <sourcecode name="" type="json"><![CDATA[
 "notes": {
   "n1": {
+    "@type": "Note",
     "note": "Open office hours are 1600 to 1715 EST, Mon-Fri",
     "created": "2022-11-23T15:01:32Z",
     "author": {
