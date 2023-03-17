@@ -123,8 +123,8 @@
               <t>@type: <tt>String</tt> (mandatory).  Specifies the type of this resource object.  The allowed value is defined in later sections of this document for each concrete resource type (<xref target="resource-properties"/>).</t>
             </li>
             <li>
-              <t>type: <tt>String</tt> (optional).
-The type of the resource.  The allowed values are defined in the property definition that makes use of the Resource type.
+              <t>kind: <tt>String</tt> (optional).
+The kind of the resource.  The allowed values are defined in the property definition that makes use of the Resource type.
 </t>
             </li>
             <li>uri: <tt>String</tt> (mandatory).
@@ -174,7 +174,6 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <name>The <tt>@type</tt> property</name>
           <t>Type: <tt>String</tt></t>
           <t>This property defines the JSContact type of a JSContact object.  It allows implementations to determine which JSContact type a given JSON object represents.  For example, the value of the <tt>@type</tt> property of a <xref target="card">Card</xref> is <tt>Card</tt>.  An implementation now knows to parse a JSON object with such a property to a JSContact Card.</t>
-          <t>Note that some object type definitions in other sections of this document also define a <tt>type</tt> property, which is unrelated to the <tt>@type</tt> property.</t>
         </section>
       </section>
       <section>
@@ -458,7 +457,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
-              <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>type</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
+              <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>kind</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
               <t><xref target="example-name"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
               <figure anchor="example-name">
                 <name><tt>name</tt> example</name>
@@ -468,22 +467,22 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
   "components": [
     {
       "@type": "NameComponent",
-      "type": "given",
+      "kind": "given",
       "value": "Robert"
     },
     {
       "@type": "NameComponent",
-      "type": "middle",
+      "kind": "middle",
       "value": "Pau"
     },
     {
       "@type": "NameComponent",
-      "type": "surname",
+      "kind": "surname",
       "value": "Shou"
     },
     {
       "@type": "NameComponent",
-      "type": "surname",
+      "kind": "surname",
       "value": "Chang"
     }
   ],
@@ -504,8 +503,8 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
             <li>value: <tt>String</tt> (mandatory).
 The value of this name component.</li>
             <li>
-              <t>type: <tt>String</tt> (mandatory).
-The type of this name component.  The value <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-namecomponent-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+              <t>kind: <tt>String</tt> (mandatory).
+The kind of this name component.  The value <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-namecomponent-kind"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>prefix</tt>.  The value is an honorific title(s), e.g.  "Mr", "Ms", "Dr".</li>
@@ -690,8 +689,8 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
             <li>name: <tt>String</tt> (mandatory).
             The title or role name of the entity represented by this Card.
         </li>
-            <li>type: <tt>String</tt> (optional, default <tt>title</tt>).
-          Describes the organizational or situational type of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
+            <li>kind: <tt>String</tt> (optional, default <tt>title</tt>).
+          Describes the organizational or situational kind of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>).
                                     </li>
             <li>organization: <tt>Id</tt> (optional).
             The id of the organization in which this title is held.
@@ -703,12 +702,12 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
 "titles": {
   "le9": {
     "@type": "Title",
-    "type": "title",
+    "kind": "title",
     "name": "Research Scientist"
   },
   "k2": {
     "@type": "Title",
-    "type": "role",
+    "kind": "role",
     "name": "Project Leader",
     "organization": "o2"
   }
@@ -774,10 +773,10 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <li>service: <tt>String</tt> (optional).
 The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the canonical service name including capitalization.  Typically the service name is the one which the providers of that service use on their web sites, in their apps or other publishing material.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>user: <tt>String</tt> (mandatory).
-              This identifies the entity represented by this Card at this online service.  The <tt>type</tt> property defines how to interpret the value.
+              This identifies the entity represented by this Card at this online service.  The <tt>kind</tt> property defines how to interpret the value.
         </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory). This defines the type of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-onlineservice-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
+              <t>kind: <tt>String</tt> (mandatory). This defines the kind of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-onlineservice-kind"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
                 <li><tt>impp</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
                 <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI, such as for a social media service.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
@@ -798,7 +797,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
   "x1": {
     "@type": "OnlineService",
     "user": "xmpp:alice@example.com",
-    "type": "impp",
+    "kind": "impp",
     "pref": 1
   }
 }
@@ -960,7 +959,7 @@ Defines the preference of this language in relation to other languages of the sa
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CalendarResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
           </ul>
-          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
+          <t>The <tt>kind</tt> property value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>calendar</tt> The resource is a calendar that contains entries such as calendar events or tasks.</li>
             <li><tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
@@ -971,13 +970,13 @@ Defines the preference of this language in relation to other languages of the sa
 "calendars": {
   "calA": {
     "@type": "CalendarResource",
-    "type": "calendar",
+    "kind": "calendar",
     "uri": "ftp://ftp.example.com/calA.ics",
     "mediaType": "text/calendar"
   },
   "project-a": {
     "@type": "CalendarResource",
-    "type": "freeBusy",
+    "kind": "freeBusy",
     "uri": "ftp://example.com/busy/project-a.ifb",
     "mediaType": "text/calendar"
   }
@@ -1064,8 +1063,8 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory).
-The type of this street component.  The value <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-streetcomponent-type"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
+              <t>kind: <tt>String</tt> (mandatory).
+The kind of this street component.  The value <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-streetcomponent-kind"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>name</tt>.  The street name.
@@ -1108,12 +1107,12 @@ The value of this street component.</li>
     "street": [
       {
         "@type": "StreetComponent",
-        "type": "name",
+        "kind": "name",
         "value": "Oak St"
       },
       {
         "@type": "StreetComponent",
-        "type": "number",
+        "kind": "number",
         "value": "54321"
       }
     ],
@@ -1132,12 +1131,12 @@ The value of this street component.</li>
     "street": [
       {
         "@type": "StreetComponent",
-        "type": "name",
+        "kind": "name",
         "value": "Elm St"
       },
       {
         "@type": "StreetComponent",
-        "type": "number",
+        "kind": "number",
         "value": "12345"
       }
     ],
@@ -1161,7 +1160,7 @@ The value of this street component.</li>
           <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this Card.  A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
-            <li>The <tt>type</tt> property value either is not set, is registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific.</li>
+            <li>The <tt>kind</tt> property value either is not set, is registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific.</li>
           </ul>
           <figure anchor="example-cryptoKeys">
             <name><tt>cryptoKeys</tt> example</name>
@@ -1182,7 +1181,7 @@ The value of this street component.</li>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>DirectoryResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
           </ul>
-          <t>The <tt>type</tt> property value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
+          <t>The <tt>kind</tt> property value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>directory</tt> The resource is a directory service where the entity represented by this Card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
             <li><tt>entry</tt> The resource is a directory entry of the entity represented by this Card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
@@ -1190,7 +1189,7 @@ The value of this street component.</li>
           <t>In addition, the DirectoryResource object has the following property:</t>
           <ul>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>type</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
         </li>
           </ul>
           <figure anchor="example-directories">
@@ -1199,12 +1198,12 @@ The value of this street component.</li>
 "directories": {
   "dir1": {
     "@type": "DirectoryResource",
-    "type": "entry",
+    "kind": "entry",
     "uri": "http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
   },
   "dir2": {
     "@type": "DirectoryResource",
-    "type": "directory",
+    "kind": "directory",
     "uri": "ldap://ldap.example/o=Example%20Tech,ou=Engineering",
     "pref": 1
   }
@@ -1218,7 +1217,7 @@ The value of this street component.</li>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>LinkResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
           </ul>
-          <t>The <tt>type</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
+          <t>The <tt>kind</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>contact</tt> The resource is an URI by which the entity represented by this Card may be contacted, including web forms or other media that require user interaction.</li>
           </ul>
@@ -1228,7 +1227,7 @@ The value of this street component.</li>
 "links": {
   "link3": {
     "@type": "LinkResource",
-    "type": "contact",
+    "kind": "contact",
     "uri": "mailto:contact@example.com",
     "pref": 1
   }
@@ -1243,7 +1242,7 @@ The value of this street component.</li>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>MediaResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
           </ul>
-          <t>The <tt>type</tt> property value must be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
+          <t>The <tt>kind</tt> property value must be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
             <li><tt>photo</tt> The resource is a photograph or avatar.</li>
             <li><tt>sound</tt> The resource is audio media, e.g.  to specify the proper pronunciation of the name property contents.</li>
@@ -1255,17 +1254,17 @@ The value of this street component.</li>
 "media": {
   "res45": {
     "@type": "MediaResource",
-    "type": "sound",
+    "kind": "sound",
     "uri": "CID:JOHNQ.part8.19960229T080000.xyzMail@example.com"
   },
   "res47": {
     "@type": "MediaResource",
-    "type": "logo",
+    "kind": "logo",
     "uri": "http://www.example.com/pub/logos/abccorp.jpg"
   },
   "res1": {
     "@type": "MediaResource",
-    "type": "photo",
+    "kind": "photo",
     "uri": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4..."
   }
 }
@@ -1317,17 +1316,17 @@ The value of this street component.</li>
   "components": [
     {
       "@type": "NameComponent",
-      "type": "given",
+      "kind": "given",
       "value": "Фёдор"
     },
     {
       "@type": "NameComponent",
-      "type": "middle",
+      "kind": "middle",
       "value": "Михайлович"
     },
     {
       "@type": "NameComponent",
-      "type": "surname",
+      "kind": "surname",
       "value": "Достоевский"
     }
   ]
@@ -1339,17 +1338,17 @@ The value of this street component.</li>
       "components": [
         {
           "@type": "NameComponent",
-          "type": "given",
+          "kind": "given",
           "value": "Fyodor"
         },
         {
           "@type": "NameComponent",
-          "type": "middle",
+          "kind": "middle",
           "value": "Mikhailovich"
         },
         {
           "@type": "NameComponent",
-          "type": "surname",
+          "kind": "surname",
           "value": "Dostoevsky"
         }
       ]
@@ -1372,8 +1371,8 @@ The value of this street component.</li>
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Anniversary</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory).
-Specifies the type of the anniversary.  This RFC defines a small set of common anniversary types, additional types <bcp14>MAY</bcp14> be registered at IANA (<xref target="iana-enum-registry-value-template"/>):
+              <t>kind: <tt>String</tt> (mandatory).
+Specifies the kind of the anniversary.  This RFC defines a small set of common anniversary types, additional types <bcp14>MAY</bcp14> be registered at IANA (<xref target="iana-enum-registry-value-template"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>birth</tt>: a birthday anniversary</li>
@@ -1412,7 +1411,7 @@ Specifies the type of the anniversary.  This RFC defines a small set of common a
 "anniversaries": {
   "k8": {
     "@type": "Anniversary",
-    "type": "birth",
+    "kind": "birth",
     "date": {
       "@type": "PartialDate",
       "year": 1953,
@@ -1422,7 +1421,7 @@ Specifies the type of the anniversary.  This RFC defines a small set of common a
   },
   "k9": {
     "@type": "Anniversary",
-    "type": "death",
+    "kind": "death",
     "date": {
       "@type": "Timestamp",
       "utc": "1996-10-15T23:10:00Z"
@@ -1507,8 +1506,8 @@ A PersonalInfo object has the following properties:</t>
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInfo</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
-              <t>type: <tt>String</tt> (mandatory).
-Specifies the type for this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):
+              <t>kind: <tt>String</tt> (mandatory).
+Specifies the kind of this personal information.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>):
 </t>
               <ul spacing="normal">
                 <li><tt>expertise</tt>: a field of expertise or credential</li>
@@ -1521,7 +1520,7 @@ The actual information.  This is free-text, but future specifications MAY restri
             <li>level: <tt>String</tt> (optional).
             Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/> or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>type</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
         </li>
             <li>label: <tt>String</tt> (optional).
             A custom label.  See <xref target="prop-label"/>.</li>
@@ -1532,19 +1531,19 @@ The actual information.  This is free-text, but future specifications MAY restri
 "personalInfo": {
   "pi2": {
     "@type": "PersonalInfo",
-    "type": "expertise",
+    "kind": "expertise",
     "value": "chemistry",
     "level": "high"
   },
   "pi1": {
     "@type": "PersonalInfo",
-    "type": "hobby",
+    "kind": "hobby",
     "value": "reading",
     "level": "high"
   },
   "pi6": {
     "@type": "PersonalInfo",
-    "type": "interest",
+    "kind": "interest",
     "value": "r&b music",
     "level": "medium"
   }
@@ -1602,7 +1601,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dd>jscontact+json</dd>
           <dt>Required parameters:</dt>
           <dd>
-            <t>type</t>
+            <t>kind</t>
             <t>This parameter conveys the type of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  This RFC specifies a single allowed parameter value, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
             <dl newline="false" spacing="normal">
               <dt><tt>card</tt>:</dt>
@@ -1925,6 +1924,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">
                   <xref target="kind" format="default"/>
                 </td>
+              </tr>
+              <tr>
+                <td align="left">kind</td>
+                <td align="left">String</td>
+                <td align="left">Anniversary, CalendarResource, Card, CryptoResource, DirectoryResource, LinkResource, MediaResource, NameComponent, OnlineService, PersonalInfo, StreetComponent, Title</td>
+                <td align="left"><xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">label</td>
@@ -2251,12 +2256,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">
                   <xref target="titles" format="default"/>
                 </td>
-              </tr>
-              <tr>
-                <td align="left">type</td>
-                <td align="left">String</td>
-                <td align="left">Anniversary, NameComponent, Title, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, StreetComponent, PersonalInfo</td>
-                <td align="left"><xref target="anniversaries" format="default"/>, <xref target="name" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="addresses" format="default"/>, <xref target="personalInfo" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">uid</td>
@@ -2883,13 +2882,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>StreetComponent</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-streetcomponent-type" align="left">
-                <name>JSContact Enum Values for type (Context: StreetComponent)</name>
+              <table anchor="tab-iana-enum-streetcomponent-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: StreetComponent)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -2969,13 +2968,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>NameComponent</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-namecomponent-type" align="left">
-                <name>JSContact Enum Values for type (Context: NameComponent)</name>
+              <table anchor="tab-iana-enum-namecomponent-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: NameComponent)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3025,13 +3024,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>Title</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-title-type" align="left">
-                <name>JSContact Enum Values for type (Context: Title)</name>
+              <table anchor="tab-iana-enum-title-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: Title)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3063,7 +3062,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-speaktoas-grammaticalgender" align="left">
-                <name>JSContact Enum Values for type (Context: SpeakToAs)</name>
+                <name>JSContact Enum Values for kind (Context: SpeakToAs)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3157,13 +3156,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>CalendarResource</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-calendarresource-type" align="left">
-                <name>JSContact Enum Values for type (Context: CalendarResource)</name>
+              <table anchor="tab-iana-enum-calendarresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: CalendarResource)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3189,13 +3188,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>DirectoryResource</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-directoryresource-type" align="left">
-                <name>JSContact Enum Values for type (Context: DirectoryResource)</name>
+              <table anchor="tab-iana-enum-directoryresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: DirectoryResource)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3221,13 +3220,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>LinkResource</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-linkresource-type" align="left">
-                <name>JSContact Enum Values for type (Context: LinkResource)</name>
+              <table anchor="tab-iana-enum-linkresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: LinkResource)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3247,13 +3246,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>MediaResource</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-mediaresource-type" align="left">
-                <name>JSContact Enum Values for type (Context: MediaResource)</name>
+              <table anchor="tab-iana-enum-mediaresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: MediaResource)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3285,13 +3284,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>Anniversary</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-anniversary-type" align="left">
-                <name>JSContact Enum Values for type (Context: Anniversary)</name>
+              <table anchor="tab-iana-enum-anniversary-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: Anniversary)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3323,13 +3322,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>OnlineService</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-onlineservice-type" align="left">
-                <name>JSContact Enum Values for type (Context: OnlineService)</name>
+              <table anchor="tab-iana-enum-onlineservice-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: OnlineService)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3361,13 +3360,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>type</dd>
+            <dd>kind</dd>
             <dt>Context:</dt>
             <dd>PersonalInfo</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-personalinformation-type" align="left">
-                <name>JSContact Enum Values for type (Context: PersonalInfo)</name>
+              <table anchor="tab-iana-enum-personalinformation-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: PersonalInfo)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>

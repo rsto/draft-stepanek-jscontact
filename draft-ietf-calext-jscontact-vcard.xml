@@ -352,7 +352,7 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
         </section>
         <section anchor="vcard-param-type">
           <name>TYPE</name>
-          <t>This converts to the <tt>contexts</tt> property as well as property-specific <tt>type</tt> property values defined in later sections. If not specified otherwise for a specific JSContact property, the vCard <tt>home</tt> and <tt>work</tt> parameter values convert to the JSContact <tt>private</tt> and <tt>work</tt> contexts, respectively.</t>
+          <t>This converts to the <tt>contexts</tt> property as well as property-specific <tt>kind</tt> property values defined in later sections. If not specified otherwise for a specific JSContact property, the vCard <tt>home</tt> and <tt>work</tt> parameter values convert to the JSContact <tt>private</tt> and <tt>work</tt> contexts, respectively.</t>
         </section>
         <section anchor="vcard-param-tz">
           <name>TZ</name>
@@ -384,7 +384,7 @@ KIND:individual
         </section>
         <section anchor="vcard-prop-source">
           <name>SOURCE</name>
-          <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
+          <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>kind</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
@@ -395,7 +395,7 @@ SOURCE:http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
 "directories": {
    "ENTRY-1": {
      "@type": "DirectoryResource",
-     "type": "entry",
+     "kind": "entry",
      "uri": "http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
    }
 }
@@ -414,14 +414,14 @@ SOURCE:http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
           <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, DEATHPLACE described in <xref target="RFC6474"/> are represented as <tt>Anniversary</tt> objects included in the <tt>anniversaries</tt> property (<xref target="anniversary_conversion"/>):</t>
           <ul spacing="compact">
             <li>
-              <t>BDAY and BIRTHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>type</tt> is set to "birth";</t>
+              <t>BDAY and BIRTHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>kind</tt> is set to "birth";</t>
               <t/>
             </li>
             <li>
-              <t>DEATHDATE and DEATHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>type</tt> is set to "death";</t>
+              <t>DEATHDATE and DEATHPLACE convert to <tt>date</tt> and <tt>place</tt> where <tt>kind</tt> is set to "death";</t>
               <t/>
             </li>
-            <li>ANNIVERSARY converts to <tt>date</tt> where <tt>type</tt> is "wedding".</li>
+            <li>ANNIVERSARY converts to <tt>date</tt> where <tt>kind</tt> is "wedding".</li>
           </ul>
           <t>Both birth and death places are represented as instances of the <tt>Address</tt> object.</t>
           <t>The BIRTHPLACE and DEATHPLACE properties that are represented as geo URIs convert to <tt>Address</tt> instances including only the <tt>coordinates</tt> property.  If the URI value is not a geo URI, the place is ignored.</t>
@@ -439,7 +439,7 @@ ANNIVERSARY:19860201
 "anniversaries": {
   "ANNIVERSARY-1" : {
     "@type": "Anniversary",
-    "type": "birth",
+    "kind": "birth",
     "date": {
       "@type": "Timestamp",
       "utc": "1953-10-15T23:10:00Z"
@@ -451,7 +451,7 @@ ANNIVERSARY:19860201
   },
   "ANNIVERSARY-2" : {
     "@type": "Anniversary",
-    "type": "death",
+    "kind": "death",
     "date": {
       "@type": "PartialDate",
       "year": 1996,
@@ -465,7 +465,7 @@ ANNIVERSARY:19860201
   },
   "ANNIVERSARY-3" : {
     "@type": "Anniversary",
-    "type": "wedding",
+    "kind": "wedding",
     "date": {
       "@type": "PartialDate",
       "year": 1986,
@@ -518,13 +518,13 @@ PRONOUNS;PREF=1:xe/xir
         <section anchor="vcard-prop-n">
           <name>N and NICKNAME</name>
           <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.  Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
-          <t>Each comma-separated item of the SORT-AS parameter value converts to an entry of the <tt>sortAs</tt> property where the key is the "type" value related to the sorted N component and the value is the corresponding item.  Absence of a key in the <tt>sortAs</tt> indicates that its related part in the SORT-AS parameter value <bcp14>MUST</bcp14> either the empty string followed by COMMA, or no further SORT-AS parts are defined.</t>
+          <t>Each comma-separated item of the SORT-AS parameter value converts to an entry of the <tt>sortAs</tt> property where the key is the "kind" value related to the sorted N component and the value is the corresponding item.  Absence of a key in the <tt>sortAs</tt> indicates that its related part in the SORT-AS parameter value <bcp14>MUST</bcp14> either the empty string followed by COMMA, or no further SORT-AS parts are defined.</t>
           <table anchor="n_components">
             <name>N components conversion</name>
             <thead>
               <tr>
                 <th align="left">N component</th>
-                <th align="left">"type" value</th>
+                <th align="left">"kind" value</th>
               </tr>
             </thead>
             <tbody>
@@ -559,11 +559,11 @@ PRONOUNS;PREF=1:xe/xir
 "name": {
     "@type": "Name",
     "components":[
-      { "@type": "NameComponent", "type": "prefix", "value": "Mr."  },
-      { "@type": "NameComponent", "type": "given", "value": "John" },
-      { "@type": "NameComponent", "type": "surname", "value": "Public" },
-      { "@type": "NameComponent", "type": "middle", "value": "Quinlan" },
-      { "@type": "NameComponent", "type": "suffix", "value": "Esq." }
+      { "@type": "NameComponent", "kind": "prefix", "value": "Mr."  },
+      { "@type": "NameComponent", "kind": "given", "value": "John" },
+      { "@type": "NameComponent", "kind": "surname", "value": "Public" },
+      { "@type": "NameComponent", "kind": "middle", "value": "Quinlan" },
+      { "@type": "NameComponent", "kind": "suffix", "value": "Esq." }
     ],
     "sortAs": {
         "surname": "Public",
@@ -581,7 +581,7 @@ PRONOUNS;PREF=1:xe/xir
         </section>
         <section anchor="vcard-prop-photo">
           <name>PHOTO</name>
-          <t>A PHOTO property converts to an entry in the <tt>media</tt> property (<xref target="photo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>photo</tt> and <tt>uri</tt> property is set to the PHOTO value.</t>
+          <t>A PHOTO property converts to an entry in the <tt>media</tt> property (<xref target="photo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>kind</tt> property is set to <tt>photo</tt> and <tt>uri</tt> property is set to the PHOTO value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="photo_conversion">
             <name>PHOTO conversion example</name>
@@ -592,7 +592,7 @@ PHOTO:http://www.example.com/pub/photos/jqpublic.gif
 "media": {
    "PHOTO-1": {
      "@type": "MediaResource",
-     "type": "photo",
+     "kind": "photo",
      "uri": "http://www.example.com/pub/photos/jqpublic.gif"
    }
 }
@@ -681,8 +681,8 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
     "contexts": { "work": true },
     "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
     "street": [
-       { "@type": "StreetComponent", "type": "name", "value": "Oak St" },
-       { "@type": "StreetComponent", "type": "number", "value": "54321" }
+       { "@type": "StreetComponent", "kind": "name", "value": "Oak St" },
+       { "@type": "StreetComponent", "kind": "number", "value": "54321" }
     ],
     "locality": "Reston",
     "region": "VA",
@@ -695,8 +695,8 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
     "contexts": { "private": true },
     "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
     "street": [
-       { "@type": "StreetComponent", "type": "name", "value": "Elm St" },
-       { "@type": "StreetComponent", "type": "number", "value": "12345" }
+       { "@type": "StreetComponent", "kind": "name", "value": "Elm St" },
+       { "@type": "StreetComponent", "kind": "number", "value": "12345" }
     ],
     "locality": "Reston",
     "region": "VA",
@@ -796,7 +796,7 @@ EMAIL;PREF=1:jane_doe@example.com
         </section>
         <section anchor="vcard-prop-impp">
           <name>IMPP</name>
-          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The <tt>type</tt> of the OnlineService is set to <tt>impp</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the IMPP value.  </t>
+          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The <tt>kind</tt> of the OnlineService is set to <tt>impp</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the IMPP value.  </t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
@@ -808,7 +808,7 @@ IMPP;PREF=1:xmpp:alice@example.com
   "OS-1": {
     "@type": "OnlineService",
     "user": "xmpp:alice@example.com",
-    "type": "impp",
+    "kind": "impp",
     "pref": 1
   },
 }
@@ -867,7 +867,7 @@ LOCALE:de-AT
         </section>
         <section anchor="vcard-prop-socialprofile">
           <name>SOCIALPROFILE</name>
-          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>type</tt> of the OnlineService is set to <tt>username</tt>. Otherwise, the <tt>type</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value.  </t>
+          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>kind</tt> of the OnlineService is set to <tt>username</tt>. Otherwise, the <tt>kind</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value.  </t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>
@@ -881,7 +881,7 @@ SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
     "@type": "OnlineService",
     "service": "Twitter",
     "user": "https://twitter.com/ietf",
-    "type": "uri"
+    "kind": "uri"
   }
 }
 ]]></artwork>
@@ -947,7 +947,7 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
         <name>Organizational Properties</name>
         <section anchor="vcard-prop-contact-uri">
           <name>CONTACT-URI</name>
-          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>type</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
+          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>kind</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="contact_uri_conversion">
             <name>CONTACT-URI conversion example</name>
@@ -958,7 +958,7 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
 "links": {
   "CONTACT-1": {
     "@type": "LinkResource",
-    "type": "contact",
+    "kind": "contact",
     "uri": "mailto:contact@example.com",
     "pref": 1
   }
@@ -968,7 +968,7 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
         </section>
         <section anchor="vcard-prop-logo">
           <name>LOGO</name>
-          <t>A LOGO property converts to an entry in the <tt>media</tt> property (<xref target="logo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>logo</tt> and <tt>uri</tt> property is set to the LOGO value.</t>
+          <t>A LOGO property converts to an entry in the <tt>media</tt> property (<xref target="logo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>kind</tt> property is set to <tt>logo</tt> and <tt>uri</tt> property is set to the LOGO value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="logo_conversion">
             <name>LOGO conversion example</name>
@@ -979,7 +979,7 @@ LOGO:http://www.example.com/pub/logos/abccorp.jpg
 "media": {
   "LOGO-1": {
     "@type": "MediaResource",
-    "type": "logo",
+    "kind": "logo",
     "uri": "http://www.example.com/pub/logos/abccorp.jpg"
   }
 }
@@ -1070,7 +1070,7 @@ RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
         </section>
         <section anchor="vcard-prop-title">
           <name>TITLE and ROLE</name>
-          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>type</tt> property is set to <tt>title</tt> or <tt>role</tt> for TITLE and ROLE vCard properties, respectively.  The <tt>name</tt> property is set to the vCard property value.</t>
+          <t>Both TITLE and ROLE properties are represented as entries of the <tt>titles</tt> property (<xref target="title_role_conversion"/>).  The entry value is a <tt>Title</tt> object whose <tt>kind</tt> property is set to <tt>title</tt> or <tt>role</tt> for TITLE and ROLE vCard properties, respectively.  The <tt>name</tt> property is set to the vCard property value.</t>
           <t>The value of the <tt>organization</tt> property can be derived if the TITLE or ROLE property is member of a vCard property group and exactly one other ORG property also is part of that group.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="title_role_conversion">
@@ -1084,12 +1084,12 @@ group1.ORG:ABC, Inc.
 "titles": {
   "TITLE-1": {
     "@type": "Title",
-    "type": "title",
+    "kind": "title",
     "name": "Project Leader"
   },
   "TITLE-2": {
     "@type": "Title",
-    "type": "role",
+    "kind": "role",
     "name": "Research Scientist",
     "organization": "ORG-1"
   }
@@ -1108,7 +1108,7 @@ group1.ORG:ABC, Inc.
         <name>Personal Information Properties</name>
         <section anchor="vcard-prop-expertise">
           <name>EXPERTISE</name>
-          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>type</tt> property is set to "expertise".</t>
+          <t>An EXPERTISE property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="expertise_conversion"/>).  The <tt>kind</tt> property is set to "expertise".</t>
           <t>The INDEX parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
@@ -1120,14 +1120,14 @@ EXPERTISE;INDEX=1;LEVEL=expert:chemistry
 "personalInfo": {
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
-    "type": "expertise",
+    "kind": "expertise",
     "value": "chinese literature",
      "level": "low",
      "position": 2
   },
   "PERSINFO-2" : {
     "@type": "PersonalInfo",
-    "type": "expertise",
+    "kind": "expertise",
     "value": "chemistry",
     "level": "high",
     "position": 1
@@ -1138,7 +1138,7 @@ EXPERTISE;INDEX=1;LEVEL=expert:chemistry
         </section>
         <section anchor="vcard-prop-hobby">
           <name>HOBBY</name>
-          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>type</tt> property is set to "hobby".</t>
+          <t>A HOBBY property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="hobby_conversion"/>).  The <tt>kind</tt> property is set to "hobby".</t>
           <t>The INDEX parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="hobby_conversion">
             <name>HOBBY conversion example</name>
@@ -1150,14 +1150,14 @@ HOBBY;INDEX=2;LEVEL=high:sewing
 "personalInfo": {
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
-    "type": "hobby",
+    "kind": "hobby",
     "value": "reading",
     "level": "high",
     "position": 1
   },
   "PERSINFO-2" : {
     "@type": "PersonalInfo",
-    "type": "hobby",
+    "kind": "hobby",
     "value": "sewing",
     "level": "high",
     "position": 2
@@ -1168,7 +1168,7 @@ HOBBY;INDEX=2;LEVEL=high:sewing
         </section>
         <section anchor="vcard-prop-interest">
           <name>INTEREST</name>
-          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>type</tt> property is set to "interest".</t>
+          <t>An INTEREST property as defined in <xref target="RFC6715"/> is represented as a <tt>PersonalInfo</tt> object in the <tt>personalInfo</tt> property (<xref target="interest_conversion"/>).  The <tt>kind</tt> property is set to "interest".</t>
           <t>The INDEX parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="interest_conversion">
             <name>INTEREST conversion example</name>
@@ -1180,14 +1180,14 @@ INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
 "personalInfo": {
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
-    "type": "interest",
+    "kind": "interest",
     "value": "r&b music",
     "level": "medium",
     "position": 1
   },
   "PERSINFO-2" : {
     "@type": "PersonalInfo",
-    "type": "interest",
+    "kind": "interest",
     "value": "rock ’n’ roll music",
     "level": "high",
     "position": 2
@@ -1198,7 +1198,7 @@ INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
         </section>
         <section anchor="vcard-prop-org-directory">
           <name>ORG-DIRECTORY</name>
-          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>type</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
+          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>kind</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
           <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY conversion example</name>
@@ -1210,13 +1210,13 @@ ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering
 "directories": {
   "DIRECTORY-1": {
     "@type": "DirectoryResource",
-    "type": "directory",
+    "kind": "directory",
     "uri": "http://directory.mycompany.example.com",
     "position": 1
   },
   "DIRECTORY-2": {
     "@type": "DirectoryResource",
-    "type": "directory",
+    "kind": "directory",
     "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
     "pref": 1
   }
@@ -1316,7 +1316,7 @@ REV:19951031T222710Z
         </section>
         <section anchor="vcard-prop-sound">
           <name>SOUND</name>
-          <t>A SOUND property converts to an entry in the <tt>media</tt> property (<xref target="sound_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>type</tt> property is set to <tt>sound</tt> and <tt>uri</tt> property is set to the SOUND value.</t>
+          <t>A SOUND property converts to an entry in the <tt>media</tt> property (<xref target="sound_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>kind</tt> property is set to <tt>sound</tt> and <tt>uri</tt> property is set to the SOUND value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="sound_conversion">
             <name>SOUND conversion example</name>
@@ -1328,7 +1328,7 @@ SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
   ...
   "SOUND-1": {
     "@type": "MediaResource",
-    "type": "sound",
+    "kind": "sound",
     "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
   }
 }
@@ -1444,7 +1444,7 @@ CALADRURI:http://example.com/calendar/jdoe
         </section>
         <section anchor="vcard-prop-caluri">
           <name>CALURI</name>
-          <t>A CALURI property converts to an entry in the <tt>calendars</tt> property (<xref target="caluri_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>calendar</tt> and <tt>uri</tt> property is set to the CALURI value.</t>
+          <t>A CALURI property converts to an entry in the <tt>calendars</tt> property (<xref target="caluri_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>kind</tt> property is set to <tt>calendar</tt> and <tt>uri</tt> property is set to the CALURI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caluri_conversion">
             <name>CALURI conversion example</name>
@@ -1457,13 +1457,13 @@ CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
 "calendars": {
   "CAL-1": {
     "@type": "CalendarResource",
-    "type": "calendar",
+    "kind": "calendar",
     "uri": "http://cal.example.com/calA",
     "pref": 1
   },
   "CAL-2": {
     "@type": "CalendarResource",
-    "type": "calendar",
+    "kind": "calendar",
     "uri": "ftp://ftp.example.com/calA.ics",
     "mediaType": "text/calendar"
   }
@@ -1473,7 +1473,7 @@ CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
         </section>
         <section anchor="vcard-prop-fburl">
           <name>FBURL</name>
-          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>type</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
+          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>kind</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="fburl_conversion">
             <name>FBURL conversion example</name>
@@ -1485,13 +1485,13 @@ FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
 "calendars": {
   "FBURL-1": {
     "@type": "CalendarResource",
-    "type": "freeBusy",
+    "kind": "freeBusy",
     "uri": "http://www.example.com/busy/janedoe",
     "pref": 1
   },
   "FBURL-2": {
     "@type": "CalendarResource",
-    "type": "freeBusy",
+    "kind": "freeBusy",
     "uri": "ftp://example.com/busy/project-a.ifb",
     "mediaType": "text/calendar"
   }
@@ -1690,14 +1690,14 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>Anniversary</td>
-              <td>place</td>
+              <td>kind</td>
               <td>
                 <xref target="vcard-prop-anniversary"/>
               </td>
             </tr>
             <tr>
               <td>Anniversary</td>
-              <td>type</td>
+              <td>place</td>
               <td>
                 <xref target="vcard-prop-anniversary"/>
               </td>
@@ -1735,6 +1735,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>CalendarResource</td>
+              <td>kind</td>
+              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
+            </tr>
+            <tr>
+              <td>CalendarResource</td>
               <td>label</td>
               <td>
                 <xref target="vcard-prop-xablabel"/>
@@ -1753,11 +1758,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>
                 <xref target="vcard-param-pref"/>
               </td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>type</td>
-              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
             </tr>
             <tr>
               <td>CalendarResource</td>
@@ -2007,6 +2007,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>CryptoResource</td>
+              <td>kind</td>
+              <td>not applicable</td>
+            </tr>
+            <tr>
+              <td>CryptoResource</td>
               <td>label</td>
               <td>
                 <xref target="vcard-prop-xablabel"/>
@@ -2028,11 +2033,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>CryptoResource</td>
-              <td>type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
               <td>uri</td>
               <td>
                 <xref target="vcard-prop-key"/>
@@ -2049,6 +2049,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>
                 <xref target="vcard-param-type"/>
               </td>
+            </tr>
+            <tr>
+              <td>DirectoryResource</td>
+              <td>kind</td>
+              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
             </tr>
             <tr>
               <td>DirectoryResource</td>
@@ -2077,11 +2082,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>
                 <xref target="vcard-param-pref"/>
               </td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>type</td>
-              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
             </tr>
             <tr>
               <td>DirectoryResource</td>
@@ -2154,6 +2154,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>LinkResource</td>
+              <td>kind</td>
+              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
+            </tr>
+            <tr>
+              <td>LinkResource</td>
               <td>label</td>
               <td>
                 <xref target="vcard-prop-xablabel"/>
@@ -2172,11 +2177,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>
                 <xref target="vcard-param-pref"/>
               </td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>type</td>
-              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
             </tr>
             <tr>
               <td>LinkResource</td>
@@ -2197,6 +2197,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>MediaResource</td>
+              <td>kind</td>
+              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
+            </tr>
+            <tr>
+              <td>MediaResource</td>
               <td>label</td>
               <td>
                 <xref target="vcard-prop-xablabel"/>
@@ -2215,11 +2220,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>
                 <xref target="vcard-param-pref"/>
               </td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>type</td>
-              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
             </tr>
             <tr>
               <td>MediaResource</td>
@@ -2252,16 +2252,16 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>NameComponent</td>
-              <td>rank</td>
+              <td>kind</td>
               <td>
-                <xref target="vcard-param-ranks"/>
+                <xref target="vcard-prop-n"/>
               </td>
             </tr>
             <tr>
               <td>NameComponent</td>
-              <td>type</td>
+              <td>rank</td>
               <td>
-                <xref target="vcard-prop-n"/>
+                <xref target="vcard-param-ranks"/>
               </td>
             </tr>
             <tr>
@@ -2335,6 +2335,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>OnlineService</td>
+              <td>kind</td>
+              <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
+            </tr>
+            <tr>
+              <td>OnlineService</td>
               <td>label</td>
               <td>
                 <xref target="vcard-prop-xablabel"/>
@@ -2353,11 +2358,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>
                 <xref target="vcard-param-service-type"/>
               </td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>type</td>
-              <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
             </tr>
             <tr>
               <td>OnlineService</td>
@@ -2461,6 +2461,11 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>PersonalInfo</td>
+              <td>kind</td>
+              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
+            </tr>
+            <tr>
+              <td>PersonalInfo</td>
               <td>listAs</td>
               <td>
                 <xref target="vcard-param-index"/>
@@ -2472,11 +2477,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <td>
                 <xref target="vcard-param-level"/>
               </td>
-            </tr>
-            <tr>
-              <td>PersonalInfo</td>
-              <td>type</td>
-              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
             </tr>
             <tr>
               <td>PersonalInfo</td>
@@ -2625,7 +2625,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>StreetComponent</td>
-              <td>type</td>
+              <td>kind</td>
               <td>
                 <xref target="vcard-prop-adr"/>
               </td>
@@ -2656,6 +2656,13 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </tr>
             <tr>
               <td>Title</td>
+              <td>kind</td>
+              <td>
+                <xref target="vcard-prop-title"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Title</td>
               <td>name</td>
               <td>
                 <xref target="vcard-prop-title"/>
@@ -2664,13 +2671,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <tr>
               <td>Title</td>
               <td>organization</td>
-              <td>
-                <xref target="vcard-prop-title"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>type</td>
               <td>
                 <xref target="vcard-prop-title"/>
               </td>
