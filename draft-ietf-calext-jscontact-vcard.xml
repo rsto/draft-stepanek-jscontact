@@ -77,7 +77,7 @@
     </section>
     <section anchor="vcard-jscontact-conversion">
       <name>Converting vCard to JSContact</name>
-      <t>This section contains the conversion rules from vCard to JSContact Card.  Its follows the same structure as the <xref target="RFC6350">vCard v4 RFC document</xref>.  Properties and parameters of vCard extension RFCs, including the <xref target="I-D.ietf-calext-vcard-jscontact-extensions">vCard JSContact Extension RFC</xref> are added to appropriate subsections.</t>
+      <t>This section contains the conversion rules from vCard to JSContact Card.  It follows the same structure as the <xref target="RFC6350">vCard v4 RFC document</xref>.  Properties and parameters of vCard extension RFCs, including the <xref target="I-D.ietf-calext-vcard-jscontact-extensions">vCard JSContact Extension RFC</xref> are added to appropriate subsections.</t>
       <section>
         <name>General rules</name>
         <section>
