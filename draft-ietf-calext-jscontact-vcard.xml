@@ -555,6 +555,11 @@ PRONOUNS;PREF=1:xe/xir
           <figure anchor="fn_n_nickname_conversion">
             <name>FN, N, NICKNAME conversion example</name>
             <artwork><![CDATA[
+FN:John Q. Public, Esq.
+N;SORT-AS="Public,John":Public;John;Quinlan;Mr.;Esq.
+NICKNAME:Johnny
+]]></artwork>
+            <artwork><![CDATA[
 "fullName": "Mr.  John Q.  Public, Esq.",
 "name": {
     "@type": "Name",
