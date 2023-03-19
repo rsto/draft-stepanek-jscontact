@@ -1209,7 +1209,8 @@ INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
             <name>ORG-DIRECTORY conversion example</name>
             <artwork><![CDATA[
 ORG-DIRECTORY;INDEX=1:http://directory.mycompany.example.com
-ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering
+ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
+ ou=Engineering
 ]]></artwork>
             <artwork><![CDATA[
 "directories": {
@@ -1681,7 +1682,8 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
 ]]></artwork>
                 <artwork><![CDATA[
 TEL:tel:+33-01-23-45-67
-JSCONTACT-PROP;VALUE=TEXT;JSPTR="phones/phone1/example.com:foo~1bar":"tux hux"
+JSCONTACT-PROP;VALUE=TEXT;JSPTR="phones/phone1/example.com:foo~1bar":
+ "tux hux"
 ]]></artwork>
               </figure>
             </dd>
