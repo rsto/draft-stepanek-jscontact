@@ -128,27 +128,28 @@
       </section>
       <section anchor="vcard-parameters">
         <name>vCard Parameters</name>
+        <t>This section contains the conversion rules for the vCard parameters.  Each rule refers to one or more vCard properties using the vCard parameter in question.  To convert the vCard parameter for other vCard properties than those referred by each rule, see <xref target="jscontact-prop-vcardparams"/>.</t>
         <section anchor="vcard-param-altid">
           <name>ALTID</name>
           <t>This does not convert to an IANA-registered property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact extension properties defined in <xref target="new-jscontact"/>.</t>
         </section>
         <section anchor="vcard-param-author">
           <name>AUTHOR</name>
-          <t>The AUTHOR parameter value of a vCard NOTE property converts to the <tt>uri</tt> property of the Author object for this note.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>The AUTHOR parameter value of a vCard NOTE property converts to the <tt>uri</tt> property of the Author object for this note.</t>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-author-name">
           <name>AUTHOR-NAME</name>
-          <t>The AUTHOR-NAME parameter value of a vCard NOTE property converts to the <tt>name</tt> property of the Author object for this note.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>The AUTHOR-NAME parameter value of a vCard NOTE property converts to the <tt>name</tt> property of the Author object for this note.</t>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-calscale">
           <name>CALSCALE</name>
-          <t>This parameter set on a BDAY, DEATHDATE or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on a BDAY, DEATHDATE or ANNIVERSARY property converts to the <tt>calendarScale</tt> property of the <tt>PartialDate</tt> object type.</t>
         </section>
         <section anchor="vcard-param-created">
           <name>CREATED</name>
-          <t>The CREATED parameter value of a vCard NOTE property converts to the <tt>created</tt> property of the Note object.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>The CREATED parameter value of a vCard NOTE property converts to the <tt>created</tt> property of the Note object.</t>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-derived">
@@ -157,7 +158,7 @@
         </section>
         <section anchor="vcard-param-geo">
           <name>GEO</name>
-          <t>This parameter set on an ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on an ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.</t>
         </section>
         <section anchor="vcard-param-group">
           <name>GROUP</name>
@@ -195,7 +196,7 @@ item2.X-FOO:bar
         </section>
         <section anchor="vcard-param-index">
           <name>INDEX</name>
-          <t>This parameter set on the EXPERTISE, HOBBY, INTEREST and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>listAs</tt> property of the <tt>PersonalInfo</tt> and <tt>DirectoryResource</tt> objects.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on the EXPERTISE, HOBBY, INTEREST and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>listAs</tt> property of the <tt>PersonalInfo</tt> and <tt>DirectoryResource</tt> objects.</t>
         </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
@@ -294,11 +295,10 @@ TITLE;LANGUAGE=fr:Patron
             <li>"average" converts to "medium";</li>
             <li>"expert" converts to "high".</li>
           </ul>
-          <t>To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-mediatype">
           <name>MEDIATYPE</name>
-          <t>This converts to the <tt>mediaType</tt> property of the <tt>Resource</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This converts to the <tt>mediaType</tt> property of the <tt>Resource</tt> object type.</t>
         </section>
         <section anchor="vcard-param-pid">
           <name>PID</name>
@@ -340,15 +340,15 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
         </section>
         <section anchor="vcard-param-ranks">
           <name>RANKS</name>
-          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
-          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
-          <t>This converts to the <tt>sortAs</tt> properties defined for the <tt>Name</tt>, <tt>Organization</tt> and <tt>OrgUnit</tt> object types.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This converts to the <tt>sortAs</tt> properties defined for the <tt>Name</tt>, <tt>Organization</tt> and <tt>OrgUnit</tt> object types.</t>
         </section>
         <section anchor="vcard-param-type">
           <name>TYPE</name>
@@ -356,7 +356,7 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
         </section>
         <section anchor="vcard-param-tz">
           <name>TZ</name>
-          <t>This parameter set on an ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.  To convert this parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This parameter set on an ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.</t>
         </section>
       </section>
       <section anchor="vcard-param-value">
