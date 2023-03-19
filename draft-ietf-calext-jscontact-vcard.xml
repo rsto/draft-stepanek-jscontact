@@ -2956,6 +2956,8 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
       <name>References</name>
       <references>
         <name>Normative References</name>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-vcard-jscontact-extensions.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6350.xml"/>
@@ -2970,8 +2972,6 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
       </references>
       <references>
         <name>Informative References</name>
-        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
-        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-vcard-jscontact-extensions.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
       </references>
     </references>
