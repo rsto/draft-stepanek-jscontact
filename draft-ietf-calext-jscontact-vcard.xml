@@ -1587,1101 +1587,12 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <name>Converting JSContact to vCard</name>
       <section>
         <name>Conversion Rules</name>
-        <t>A <tt>Card</tt> converts to vCard by applying the reverse rules of converting vCard to JSContact.  <xref target="table_convert_jscontact_to_vcard"/> lists the relevant document sections for each JSContact object type and property.  The following additional rules apply:</t>
+        <t>A <tt>Card</tt> converts to vCard by applying the reverse rules of converting vCard to JSContact.  In addition to those listed in <xref target="convert_jscontact_to_vcard-reverse-rules"/>, the following rules apply:</t>
         <ul>
           <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
           <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.  Otherwise, they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
           <li>Vendor-extension and unknown properties convert to vCard as outlined in section <xref target="convert-other-jscontact"/>.</li>
         </ul>
-        <table anchor="table_convert_jscontact_to_vcard">
-          <name>Conversion rules by JSContact property</name>
-          <thead>
-            <tr>
-              <th align="left">JSContact Type</th>
-              <th align="left">Property Name</th>
-              <th align="left">Relevant Section(s)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Address</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>coordinates</td>
-              <td><xref target="vcard-param-geo"/>, <xref target="vcard-prop-geo"/></td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>country</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>countryCode</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>fullAddress</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>locality</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>postcode</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>region</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>street</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>timeZone</td>
-              <td><xref target="vcard-param-tz"/>, <xref target="vcard-prop-tz"/></td>
-            </tr>
-            <tr>
-              <td>Anniversary</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Anniversary</td>
-              <td>date</td>
-              <td>
-                <xref target="vcard-prop-anniversary"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Anniversary</td>
-              <td>kind</td>
-              <td>
-                <xref target="vcard-prop-anniversary"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Anniversary</td>
-              <td>place</td>
-              <td>
-                <xref target="vcard-prop-anniversary"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Author</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Author</td>
-              <td>name</td>
-              <td>
-                <xref target="vcard-param-author-name"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Author</td>
-              <td>uri</td>
-              <td>
-                <xref target="vcard-param-author"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>kind</td>
-              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>mediaType</td>
-              <td>
-                <xref target="vcard-param-mediatype"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CalendarResource</td>
-              <td>uri</td>
-              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>@version</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>addresses</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>anniversaries</td>
-              <td>
-                <xref target="vcard-prop-anniversary"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>calendars</td>
-              <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>created</td>
-              <td>
-                <xref target="vcard-prop-created"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>directories</td>
-              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>emails</td>
-              <td>
-                <xref target="vcard-prop-email"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>fullName</td>
-              <td>
-                <xref target="vcard-prop-fn"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>keywords</td>
-              <td>
-                <xref target="vcard-prop-categories"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>kind</td>
-              <td>
-                <xref target="vcard-prop-kind"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>links</td>
-              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>locale</td>
-              <td>
-                <xref target="vcard-prop-locale"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>localizations</td>
-              <td>
-                <xref target="vcard-param-language"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>media</td>
-              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>members</td>
-              <td>
-                <xref target="vcard-prop-member"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>name</td>
-              <td>
-                <xref target="vcard-prop-n"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>nickNames</td>
-              <td>
-                <xref target="vcard-prop-n"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>notes</td>
-              <td>
-                <xref target="vcard-prop-note"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>onlineServices</td>
-              <td>
-                <xref target="vcard-prop-impp"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>organizations</td>
-              <td>
-                <xref target="vcard-prop-org"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>personalInfo</td>
-              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>phones</td>
-              <td>
-                <xref target="vcard-prop-tel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>preferredContactChannels</td>
-              <td>
-                <xref target="vcard-prop-contact-channel-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>preferredLanguages</td>
-              <td>
-                <xref target="vcard-prop-lang"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>prodId</td>
-              <td>
-                <xref target="vcard-prop-prodid"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>relatedTo</td>
-              <td>
-                <xref target="vcard-prop-related"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>schedulingAddresses</td>
-              <td>
-                <xref target="vcard-prop-caladruri"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>speakToAs</td>
-              <td>
-                <xref target="vcard-prop-grammatical-gender"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>titles</td>
-              <td>
-                <xref target="vcard-prop-title"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>uid</td>
-              <td>
-                <xref target="vcard-prop-uid"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Card</td>
-              <td>updated</td>
-              <td>
-                <xref target="vcard-prop-rev"/>
-              </td>
-            </tr>
-            <tr>
-              <td>ContactChannelPreference</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>ContactChannelPreference</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>ContactChannelPreference</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
-              <td>kind</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
-              <td>mediaType</td>
-              <td>
-                <xref target="vcard-param-mediatype"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>CryptoResource</td>
-              <td>uri</td>
-              <td>
-                <xref target="vcard-prop-key"/>
-              </td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>kind</td>
-              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>listAs</td>
-              <td>
-                <xref target="vcard-param-index"/>
-              </td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>mediaType</td>
-              <td>
-                <xref target="vcard-param-mediatype"/>
-              </td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>DirectoryResource</td>
-              <td>uri</td>
-              <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
-            </tr>
-            <tr>
-              <td>EmailAddress</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>EmailAddress</td>
-              <td>address</td>
-              <td>
-                <xref target="vcard-prop-email"/>
-              </td>
-            </tr>
-            <tr>
-              <td>EmailAddress</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>EmailAddress</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>EmailAddress</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>LanguagePreference</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>LanguagePreference</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>LanguagePreference</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>kind</td>
-              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>mediaType</td>
-              <td>
-                <xref target="vcard-param-mediatype"/>
-              </td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>LinkResource</td>
-              <td>uri</td>
-              <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/>&gt;</td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>kind</td>
-              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>mediaType</td>
-              <td>
-                <xref target="vcard-param-mediatype"/>
-              </td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>MediaResource</td>
-              <td>uri</td>
-              <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
-            </tr>
-            <tr>
-              <td>Name</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Name</td>
-              <td>components</td>
-              <td>
-                <xref target="vcard-prop-n"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Name</td>
-              <td>sortAs</td>
-              <td>
-                <xref target="vcard-param-sortas"/>
-              </td>
-            </tr>
-            <tr>
-              <td>NameComponent</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>NameComponent</td>
-              <td>kind</td>
-              <td>
-                <xref target="vcard-prop-n"/>
-              </td>
-            </tr>
-            <tr>
-              <td>NameComponent</td>
-              <td>rank</td>
-              <td>
-                <xref target="vcard-param-ranks"/>
-              </td>
-            </tr>
-            <tr>
-              <td>NameComponent</td>
-              <td>value</td>
-              <td>
-                <xref target="vcard-prop-n"/>
-              </td>
-            </tr>
-            <tr>
-              <td>NickName</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>NickName</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>NickName</td>
-              <td>name</td>
-              <td>
-                <xref target="vcard-prop-n"/>
-              </td>
-            </tr>
-            <tr>
-              <td>NickName</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Note</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Note</td>
-              <td>author</td>
-              <td><xref target="vcard-param-author"/>, <xref target="vcard-param-author-name"/></td>
-            </tr>
-            <tr>
-              <td>Note</td>
-              <td>created</td>
-              <td>
-                <xref target="vcard-param-created"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Note</td>
-              <td>note</td>
-              <td>
-                <xref target="vcard-prop-note"/>
-              </td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>kind</td>
-              <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>service</td>
-              <td>
-                <xref target="vcard-param-service-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>OnlineService</td>
-              <td>user</td>
-              <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
-            </tr>
-            <tr>
-              <td>OrgUnit</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>OrgUnit</td>
-              <td>name</td>
-              <td>
-                <xref target="vcard-prop-org"/>
-              </td>
-            </tr>
-            <tr>
-              <td>OrgUnit</td>
-              <td>sortAs</td>
-              <td>
-                <xref target="vcard-param-sortas"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Organization</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Organization</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Organization</td>
-              <td>name</td>
-              <td>
-                <xref target="vcard-prop-org"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Organization</td>
-              <td>sortAs</td>
-              <td>
-                <xref target="vcard-param-sortas"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Organization</td>
-              <td>units</td>
-              <td>
-                <xref target="vcard-prop-org"/>
-              </td>
-            </tr>
-            <tr>
-              <td>PartialDate</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>PartialDate</td>
-              <td>calendarScale</td>
-              <td>
-                <xref target="vcard-param-calscale"/>
-              </td>
-            </tr>
-            <tr>
-              <td>PartialDate</td>
-              <td>day</td>
-              <td>
-                <xref target="vcard-type-datetime"/>
-              </td>
-            </tr>
-            <tr>
-              <td>PartialDate</td>
-              <td>month</td>
-              <td>
-                <xref target="vcard-type-datetime"/>
-              </td>
-            </tr>
-            <tr>
-              <td>PartialDate</td>
-              <td>year</td>
-              <td>
-                <xref target="vcard-type-datetime"/>
-              </td>
-            </tr>
-            <tr>
-              <td>PatchObject</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>PersonalInfo</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>PersonalInfo</td>
-              <td>kind</td>
-              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
-            </tr>
-            <tr>
-              <td>PersonalInfo</td>
-              <td>listAs</td>
-              <td>
-                <xref target="vcard-param-index"/>
-              </td>
-            </tr>
-            <tr>
-              <td>PersonalInfo</td>
-              <td>level</td>
-              <td>
-                <xref target="vcard-param-level"/>
-              </td>
-            </tr>
-            <tr>
-              <td>PersonalInfo</td>
-              <td>value</td>
-              <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>features</td>
-              <td>
-                <xref target="vcard-prop-tel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>number</td>
-              <td>
-                <xref target="vcard-prop-tel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Pronouns</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Pronouns</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Pronouns</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Pronouns</td>
-              <td>pronouns</td>
-              <td>
-                <xref target="vcard-prop-grammatical-gender"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Relation</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Relation</td>
-              <td>relation</td>
-              <td>
-                <xref target="vcard-prop-related"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Resource</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>SchedulingAddress</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>SchedulingAddress</td>
-              <td>contexts</td>
-              <td>
-                <xref target="vcard-param-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>SchedulingAddress</td>
-              <td>label</td>
-              <td>
-                <xref target="vcard-prop-xablabel"/>
-              </td>
-            </tr>
-            <tr>
-              <td>SchedulingAddress</td>
-              <td>pref</td>
-              <td>
-                <xref target="vcard-param-pref"/>
-              </td>
-            </tr>
-            <tr>
-              <td>SchedulingAddress</td>
-              <td>uri</td>
-              <td>
-                <xref target="vcard-prop-caladruri"/>
-              </td>
-            </tr>
-            <tr>
-              <td>SpeakToAs</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>SpeakToAs</td>
-              <td>grammaticalGender</td>
-              <td>
-                <xref target="vcard-prop-grammatical-gender"/>
-              </td>
-            </tr>
-            <tr>
-              <td>SpeakToAs</td>
-              <td>pronouns</td>
-              <td>
-                <xref target="vcard-prop-grammatical-gender"/>
-              </td>
-            </tr>
-            <tr>
-              <td>StreetComponent</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>StreetComponent</td>
-              <td>kind</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>StreetComponent</td>
-              <td>value</td>
-              <td>
-                <xref target="vcard-prop-adr"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Timestamp</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Timestamp</td>
-              <td>utc</td>
-              <td>
-                <xref target="vcard-type-datetime"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>@type</td>
-              <td>not applicable</td>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>kind</td>
-              <td>
-                <xref target="vcard-prop-title"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>name</td>
-              <td>
-                <xref target="vcard-prop-title"/>
-              </td>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>organization</td>
-              <td>
-                <xref target="vcard-prop-title"/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </section>
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
@@ -2975,5 +1886,1098 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
       </references>
     </references>
+    <section anchor="convert_jscontact_to_vcard-reverse-rules">
+      <name>Reverse Rules of Converting vCard to JSContact Card</name>
+      <t><xref target="table_convert_jscontact_to_vcard"/> lists the relevant document sections for each JSContact object type and property.</t>
+      <table anchor="table_convert_jscontact_to_vcard">
+        <name>Conversion rules by JSContact property</name>
+        <thead>
+          <tr>
+            <th align="left">JSContact Type</th>
+            <th align="left">Property Name</th>
+            <th align="left">Relevant Section(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Address</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>coordinates</td>
+            <td><xref target="vcard-param-geo"/>, <xref target="vcard-prop-geo"/></td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>country</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>countryCode</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>fullAddress</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>locality</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>postcode</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>region</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>street</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>timeZone</td>
+            <td><xref target="vcard-param-tz"/>, <xref target="vcard-prop-tz"/></td>
+          </tr>
+          <tr>
+            <td>Anniversary</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Anniversary</td>
+            <td>date</td>
+            <td>
+              <xref target="vcard-prop-anniversary"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Anniversary</td>
+            <td>kind</td>
+            <td>
+              <xref target="vcard-prop-anniversary"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Anniversary</td>
+            <td>place</td>
+            <td>
+              <xref target="vcard-prop-anniversary"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Author</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Author</td>
+            <td>name</td>
+            <td>
+              <xref target="vcard-param-author-name"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Author</td>
+            <td>uri</td>
+            <td>
+              <xref target="vcard-param-author"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CalendarResource</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>CalendarResource</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CalendarResource</td>
+            <td>kind</td>
+            <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
+          </tr>
+          <tr>
+            <td>CalendarResource</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CalendarResource</td>
+            <td>mediaType</td>
+            <td>
+              <xref target="vcard-param-mediatype"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CalendarResource</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CalendarResource</td>
+            <td>uri</td>
+            <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>@version</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>addresses</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>anniversaries</td>
+            <td>
+              <xref target="vcard-prop-anniversary"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>calendars</td>
+            <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>created</td>
+            <td>
+              <xref target="vcard-prop-created"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>directories</td>
+            <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>emails</td>
+            <td>
+              <xref target="vcard-prop-email"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>fullName</td>
+            <td>
+              <xref target="vcard-prop-fn"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>keywords</td>
+            <td>
+              <xref target="vcard-prop-categories"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>kind</td>
+            <td>
+              <xref target="vcard-prop-kind"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>links</td>
+            <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>locale</td>
+            <td>
+              <xref target="vcard-prop-locale"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>localizations</td>
+            <td>
+              <xref target="vcard-param-language"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>media</td>
+            <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>members</td>
+            <td>
+              <xref target="vcard-prop-member"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>name</td>
+            <td>
+              <xref target="vcard-prop-n"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>nickNames</td>
+            <td>
+              <xref target="vcard-prop-n"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>notes</td>
+            <td>
+              <xref target="vcard-prop-note"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>onlineServices</td>
+            <td>
+              <xref target="vcard-prop-impp"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>organizations</td>
+            <td>
+              <xref target="vcard-prop-org"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>personalInfo</td>
+            <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>phones</td>
+            <td>
+              <xref target="vcard-prop-tel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>preferredContactChannels</td>
+            <td>
+              <xref target="vcard-prop-contact-channel-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>preferredLanguages</td>
+            <td>
+              <xref target="vcard-prop-lang"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>prodId</td>
+            <td>
+              <xref target="vcard-prop-prodid"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>relatedTo</td>
+            <td>
+              <xref target="vcard-prop-related"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>schedulingAddresses</td>
+            <td>
+              <xref target="vcard-prop-caladruri"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>speakToAs</td>
+            <td>
+              <xref target="vcard-prop-grammatical-gender"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>titles</td>
+            <td>
+              <xref target="vcard-prop-title"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>uid</td>
+            <td>
+              <xref target="vcard-prop-uid"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Card</td>
+            <td>updated</td>
+            <td>
+              <xref target="vcard-prop-rev"/>
+            </td>
+          </tr>
+          <tr>
+            <td>ContactChannelPreference</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>ContactChannelPreference</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>ContactChannelPreference</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CryptoResource</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>CryptoResource</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CryptoResource</td>
+            <td>kind</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>CryptoResource</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CryptoResource</td>
+            <td>mediaType</td>
+            <td>
+              <xref target="vcard-param-mediatype"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CryptoResource</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>CryptoResource</td>
+            <td>uri</td>
+            <td>
+              <xref target="vcard-prop-key"/>
+            </td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>kind</td>
+            <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>listAs</td>
+            <td>
+              <xref target="vcard-param-index"/>
+            </td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>mediaType</td>
+            <td>
+              <xref target="vcard-param-mediatype"/>
+            </td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>DirectoryResource</td>
+            <td>uri</td>
+            <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
+          </tr>
+          <tr>
+            <td>EmailAddress</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>EmailAddress</td>
+            <td>address</td>
+            <td>
+              <xref target="vcard-prop-email"/>
+            </td>
+          </tr>
+          <tr>
+            <td>EmailAddress</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>EmailAddress</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>EmailAddress</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>LanguagePreference</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>LanguagePreference</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>LanguagePreference</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>LinkResource</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>LinkResource</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>LinkResource</td>
+            <td>kind</td>
+            <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
+          </tr>
+          <tr>
+            <td>LinkResource</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>LinkResource</td>
+            <td>mediaType</td>
+            <td>
+              <xref target="vcard-param-mediatype"/>
+            </td>
+          </tr>
+          <tr>
+            <td>LinkResource</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>LinkResource</td>
+            <td>uri</td>
+            <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/>&gt;</td>
+          </tr>
+          <tr>
+            <td>MediaResource</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>MediaResource</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>MediaResource</td>
+            <td>kind</td>
+            <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
+          </tr>
+          <tr>
+            <td>MediaResource</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>MediaResource</td>
+            <td>mediaType</td>
+            <td>
+              <xref target="vcard-param-mediatype"/>
+            </td>
+          </tr>
+          <tr>
+            <td>MediaResource</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>MediaResource</td>
+            <td>uri</td>
+            <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>components</td>
+            <td>
+              <xref target="vcard-prop-n"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>sortAs</td>
+            <td>
+              <xref target="vcard-param-sortas"/>
+            </td>
+          </tr>
+          <tr>
+            <td>NameComponent</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>NameComponent</td>
+            <td>kind</td>
+            <td>
+              <xref target="vcard-prop-n"/>
+            </td>
+          </tr>
+          <tr>
+            <td>NameComponent</td>
+            <td>rank</td>
+            <td>
+              <xref target="vcard-param-ranks"/>
+            </td>
+          </tr>
+          <tr>
+            <td>NameComponent</td>
+            <td>value</td>
+            <td>
+              <xref target="vcard-prop-n"/>
+            </td>
+          </tr>
+          <tr>
+            <td>NickName</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>NickName</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>NickName</td>
+            <td>name</td>
+            <td>
+              <xref target="vcard-prop-n"/>
+            </td>
+          </tr>
+          <tr>
+            <td>NickName</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Note</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Note</td>
+            <td>author</td>
+            <td><xref target="vcard-param-author"/>, <xref target="vcard-param-author-name"/></td>
+          </tr>
+          <tr>
+            <td>Note</td>
+            <td>created</td>
+            <td>
+              <xref target="vcard-param-created"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Note</td>
+            <td>note</td>
+            <td>
+              <xref target="vcard-prop-note"/>
+            </td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>kind</td>
+            <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>service</td>
+            <td>
+              <xref target="vcard-param-service-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>user</td>
+            <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
+          </tr>
+          <tr>
+            <td>OrgUnit</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>OrgUnit</td>
+            <td>name</td>
+            <td>
+              <xref target="vcard-prop-org"/>
+            </td>
+          </tr>
+          <tr>
+            <td>OrgUnit</td>
+            <td>sortAs</td>
+            <td>
+              <xref target="vcard-param-sortas"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Organization</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Organization</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Organization</td>
+            <td>name</td>
+            <td>
+              <xref target="vcard-prop-org"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Organization</td>
+            <td>sortAs</td>
+            <td>
+              <xref target="vcard-param-sortas"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Organization</td>
+            <td>units</td>
+            <td>
+              <xref target="vcard-prop-org"/>
+            </td>
+          </tr>
+          <tr>
+            <td>PartialDate</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>PartialDate</td>
+            <td>calendarScale</td>
+            <td>
+              <xref target="vcard-param-calscale"/>
+            </td>
+          </tr>
+          <tr>
+            <td>PartialDate</td>
+            <td>day</td>
+            <td>
+              <xref target="vcard-type-datetime"/>
+            </td>
+          </tr>
+          <tr>
+            <td>PartialDate</td>
+            <td>month</td>
+            <td>
+              <xref target="vcard-type-datetime"/>
+            </td>
+          </tr>
+          <tr>
+            <td>PartialDate</td>
+            <td>year</td>
+            <td>
+              <xref target="vcard-type-datetime"/>
+            </td>
+          </tr>
+          <tr>
+            <td>PatchObject</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>PersonalInfo</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>PersonalInfo</td>
+            <td>kind</td>
+            <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
+          </tr>
+          <tr>
+            <td>PersonalInfo</td>
+            <td>listAs</td>
+            <td>
+              <xref target="vcard-param-index"/>
+            </td>
+          </tr>
+          <tr>
+            <td>PersonalInfo</td>
+            <td>level</td>
+            <td>
+              <xref target="vcard-param-level"/>
+            </td>
+          </tr>
+          <tr>
+            <td>PersonalInfo</td>
+            <td>value</td>
+            <td><xref target="vcard-prop-expertise"/>, <xref target="vcard-prop-hobby"/>, <xref target="vcard-prop-interest"/></td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>features</td>
+            <td>
+              <xref target="vcard-prop-tel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>number</td>
+            <td>
+              <xref target="vcard-prop-tel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Pronouns</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Pronouns</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Pronouns</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Pronouns</td>
+            <td>pronouns</td>
+            <td>
+              <xref target="vcard-prop-grammatical-gender"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Relation</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Relation</td>
+            <td>relation</td>
+            <td>
+              <xref target="vcard-prop-related"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Resource</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>SchedulingAddress</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>SchedulingAddress</td>
+            <td>contexts</td>
+            <td>
+              <xref target="vcard-param-type"/>
+            </td>
+          </tr>
+          <tr>
+            <td>SchedulingAddress</td>
+            <td>label</td>
+            <td>
+              <xref target="vcard-prop-xablabel"/>
+            </td>
+          </tr>
+          <tr>
+            <td>SchedulingAddress</td>
+            <td>pref</td>
+            <td>
+              <xref target="vcard-param-pref"/>
+            </td>
+          </tr>
+          <tr>
+            <td>SchedulingAddress</td>
+            <td>uri</td>
+            <td>
+              <xref target="vcard-prop-caladruri"/>
+            </td>
+          </tr>
+          <tr>
+            <td>SpeakToAs</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>SpeakToAs</td>
+            <td>grammaticalGender</td>
+            <td>
+              <xref target="vcard-prop-grammatical-gender"/>
+            </td>
+          </tr>
+          <tr>
+            <td>SpeakToAs</td>
+            <td>pronouns</td>
+            <td>
+              <xref target="vcard-prop-grammatical-gender"/>
+            </td>
+          </tr>
+          <tr>
+            <td>StreetComponent</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>StreetComponent</td>
+            <td>kind</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>StreetComponent</td>
+            <td>value</td>
+            <td>
+              <xref target="vcard-prop-adr"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Timestamp</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Timestamp</td>
+            <td>utc</td>
+            <td>
+              <xref target="vcard-type-datetime"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td>kind</td>
+            <td>
+              <xref target="vcard-prop-title"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td>name</td>
+            <td>
+              <xref target="vcard-prop-title"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td>organization</td>
+            <td>
+              <xref target="vcard-prop-title"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </back>
 </rfc>
