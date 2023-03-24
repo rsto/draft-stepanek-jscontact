@@ -232,7 +232,7 @@ TITLE;LANGUAGE=fr:Patron
 }
 ]]></artwork>
           </figure>
-          <t>As a special case, if one or more vCard properties of the same type do not have the LANGUAGE parameter set, then choose them to the non-localized Card.  Convert any with LANGUAGE parameters to the localizations property.<xref target="language-patch-no-language"/> illustrates this.</t>
+          <t>As a special case, if one or more vCard properties of the same type do not have the LANGUAGE parameter set, then choose them to the non-localized Card.  Convert any with LANGUAGE parameters to the localizations property.  <xref target="language-patch-no-language"/> illustrates this.</t>
           <figure anchor="language-patch-no-language">
             <name>LANGUAGE conversion example: property without language</name>
             <artwork><![CDATA[
@@ -1019,7 +1019,7 @@ MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
           <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name, and the <tt>units</tt> property is an array of <tt>OrgUnit</tt> objects each containing the organizational unit name in the <tt>name</tt> property.</t>
           <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational units without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.  ORG:;DepartmentA).</t>
           <t>The ALTID, LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>The first item of the comma-separated SORT-AS parameter value converts to the <tt>sortAs</tt> property of the <tt>Organization</tt> object.  The subsequent items convert to the <tt>sortAs</tt> property of the corresponding <tt>OrgUnit</tt> object</t>
+          <t>The first item of the comma-separated SORT-AS parameter value converts to the <tt>sortAs</tt> property of the <tt>Organization</tt> object.  The subsequent items convert to the <tt>sortAs</tt> property of the corresponding <tt>OrgUnit</tt> object.</t>
           <t>The TYPE parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_conversion">
             <name>ORG conversion example</name>
@@ -1272,7 +1272,7 @@ CREATED:19940930T143510Z
         </section>
         <section anchor="vcard-prop-note">
           <name>NOTE</name>
-          <t>A NOTE property converts to a <tt>Note</tt> object in the <tt>notes</tt> map (<xref target="notes_conversion"/>)</t>
+          <t>A NOTE property converts to a <tt>Note</tt> object in the <tt>notes</tt> map (<xref target="notes_conversion"/>).</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="notes_conversion">
             <name>NOTE conversion example</name>
@@ -1512,7 +1512,7 @@ FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
       </section>
       <section anchor="new-jscontact">
         <name>New JSContact properties</name>
-        <t>vCards may contain properties or parameters for which no IANA-registered JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purposes are unknown <xref target="RFC6350" section="6.10"/>.</t>
+        <t>vCards may contain properties or parameters for which no IANA-registered JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purposes are unknown; see <xref target="RFC6350" section="6.10"/>.</t>
         <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="jscontact-prop-vcardprops">
           <name>Property <tt>vCardProps</tt></name>
@@ -1592,7 +1592,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
         <ul>
           <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
           <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.  Otherwise, they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
-          <li>Vendor-extension and unknown properties convert to vCard as outlined in section <xref target="convert-other-jscontact"/>.</li>
+          <li>Vendor-extension and unknown properties convert to vCard as outlined in <xref target="convert-other-jscontact"/>.</li>
         </ul>
       </section>
       <section anchor="convert-other-jscontact">
