@@ -255,7 +255,7 @@ TITLE;LANGUAGE=fr:Patron
 }
 ]]></artwork>
           </figure>
-          <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.  Implementations <bcp14>SHOULD</bcp14> avoid this scenario as much as possible.</t>
+          <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.</t>
           <figure anchor="language-patch-no-dominant">
             <name>LANGUAGE conversion example: conflicting locale and language</name>
             <artwork><![CDATA[
