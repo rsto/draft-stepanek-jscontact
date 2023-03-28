@@ -167,8 +167,7 @@
             <name>An example how to preserve the group name in <tt>vCardParams</tt> during conversion.</name>
             <artwork><![CDATA[
 item1.TEL;VALUE=uri:tel:+1-555-555-5555
-]]></artwork>
-            <artwork><![CDATA[
+
 "phones": {
   "p1": {
     "@type": "Phone",
@@ -184,8 +183,7 @@ item1.TEL;VALUE=uri:tel:+1-555-555-5555
             <name>An example how to preserve the group name in <tt>vCardProps</tt> during conversion.</name>
             <artwork><![CDATA[
 item2.X-FOO:bar
-]]></artwork>
-            <artwork><![CDATA[
+
 "vCardProps": [
   ["x-foo", {
     "group": "item2"
@@ -215,8 +213,7 @@ item2.X-FOO:bar
 FN;LANGUAGE=EN:John Doe
 TITLE;LANGUAGE=EN:Boss
 TITLE;LANGUAGE=fr:Patron
-]]></artwork>
-            <artwork><![CDATA[
+
 "locale": "en",
 "fullName": "John Doe",
 "titles": {
@@ -239,8 +236,7 @@ TITLE;LANGUAGE=fr:Patron
 FN:John Doe
 TITLE:Boss
 TITLE;LANGUAGE=fr:Patron
-]]></artwork>
-            <artwork><![CDATA[
+
 "fullName": "John Doe",
 "titles": {
   "t1": {
@@ -263,8 +259,7 @@ LOCALE:es
 FN:Gabriel García Márquez
 TITLE;LANGUAGE=en:Boss
 TITLE;LANGUAGE=fr:Patron
-]]></artwork>
-            <artwork><![CDATA[
+
 "locale": "es",
 "fullName": "Gabriel García Márquez",
 "localizations": {
@@ -318,8 +313,7 @@ TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home"
   :tel:+1-555-555-5555;ext=5555
 TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
   :tel:+33-01-23-45-67
-]]></artwork>
-            <artwork><![CDATA[
+
 "phones": {
   "PHONE-A": {
     "@type": "Phone",
@@ -376,8 +370,7 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
             <name>KIND conversion example</name>
             <artwork><![CDATA[
 KIND:individual
-]]></artwork>
-            <artwork><![CDATA[
+
 "kind": "individual"
 ]]></artwork>
           </figure>
@@ -390,8 +383,7 @@ KIND:individual
             <name>SOURCE conversion example</name>
             <artwork><![CDATA[
 SOURCE:http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
-]]></artwork>
-            <artwork><![CDATA[
+
 "directories": {
    "ENTRY-1": {
      "@type": "DirectoryResource",
@@ -434,8 +426,7 @@ BIRTHPLACE:123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
 DEATHDATE:19960415
 DEATHPLACE:4445 Courtright Street\nNew England, ND 58647\nU.S.A.
 ANNIVERSARY:19860201
-]]></artwork>
-            <artwork><![CDATA[
+
 "anniversaries": {
   "ANNIVERSARY-1" : {
     "@type": "Anniversary",
@@ -491,8 +482,7 @@ ANNIVERSARY:19860201
 GRAMMATICAL-GENDER:NEUTER
 PRONOUNS;PREF=2:they/them
 PRONOUNS;PREF=1:xe/xir
-]]></artwork>
-            <artwork><![CDATA[
+
 "speakToAs": {
   "grammaticalGender": "neuter",
   "pronouns": {
@@ -558,8 +548,7 @@ PRONOUNS;PREF=1:xe/xir
 FN:John Q. Public, Esq.
 N;SORT-AS="Public,John":Public;John;Quinlan;Mr.;Esq.
 NICKNAME:Johnny
-]]></artwork>
-            <artwork><![CDATA[
+
 "fullName": "Mr.  John Q.  Public, Esq.",
 "name": {
     "@type": "Name",
@@ -592,8 +581,7 @@ NICKNAME:Johnny
             <name>PHOTO conversion example</name>
             <artwork><![CDATA[
 PHOTO:http://www.example.com/pub/photos/jqpublic.gif
-]]></artwork>
-            <artwork><![CDATA[
+
 "media": {
    "PHOTO-1": {
      "@type": "MediaResource",
@@ -678,8 +666,7 @@ PHOTO:http://www.example.com/pub/photos/jqpublic.gif
             <artwork><![CDATA[
 ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA
 ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
-]]></artwork>
-            <artwork><![CDATA[
+
 "addresses": {
   "ADDR-1" : {
     "@type": "Address",
@@ -753,8 +740,7 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
             <artwork><![CDATA[
 CONTACT-CHANNEL-PREF;PREF=1:EMAIL
 CONTACT-CHANNEL-PREF;PREF=2:TEL
-]]></artwork>
-            <artwork><![CDATA[
+
 "preferredContactChannels": {
   "emails":[
     {
@@ -782,8 +768,7 @@ CONTACT-CHANNEL-PREF;PREF=2:TEL
             <artwork><![CDATA[
 EMAIL;TYPE=work:jqpublic@xyz.example.com
 EMAIL;PREF=1:jane_doe@example.com
-]]></artwork>
-            <artwork><![CDATA[
+
 "emails": {
   "EMAIL-1": {
     "@type": "EmailAddress",
@@ -807,8 +792,7 @@ EMAIL;PREF=1:jane_doe@example.com
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
 IMPP;PREF=1:xmpp:alice@example.com
-]]></artwork>
-            <artwork><![CDATA[
+
 "onlineServices": {
   "OS-1": {
     "@type": "OnlineService",
@@ -831,8 +815,7 @@ IMPP;PREF=1:xmpp:alice@example.com
 LANG;TYPE=work;PREF=1:en
 LANG;TYPE=work;PREF=2:fr
 LANG;TYPE=home:fr
-]]></artwork>
-            <artwork><![CDATA[
+
 "preferredLanguages": {
   "en":[
     {
@@ -863,8 +846,7 @@ LANG;TYPE=home:fr
             <name>LOCALE conversion example</name>
             <artwork><![CDATA[
 LOCALE:de-AT
-]]></artwork>
-            <artwork><![CDATA[
+
 "locale": "de-AT"
 ]]></artwork>
           </figure>
@@ -878,8 +860,7 @@ LOCALE:de-AT
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
 SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
-]]></artwork>
-            <artwork><![CDATA[
+
 "onlineServices": {
   ...
   "OS-1": {
@@ -902,8 +883,7 @@ SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
             <artwork><![CDATA[
 TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
 TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
-]]></artwork>
-            <artwork><![CDATA[
+
 "phones": {
   "PHONE-1": {
     "@type": "Phone",
@@ -958,8 +938,7 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
             <name>CONTACT-URI conversion example</name>
             <artwork><![CDATA[
 CONTACT-URI;PREF=1:mailto:contact@example.com
-]]></artwork>
-            <artwork><![CDATA[
+
 "links": {
   "CONTACT-1": {
     "@type": "LinkResource",
@@ -979,8 +958,7 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
             <name>LOGO conversion example</name>
             <artwork><![CDATA[
 LOGO:http://www.example.com/pub/logos/abccorp.jpg
-]]></artwork>
-            <artwork><![CDATA[
+
 "media": {
   "LOGO-1": {
     "@type": "MediaResource",
@@ -1002,8 +980,7 @@ KIND:group
 FN:The Doe family
 MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
 MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
-]]></artwork>
-            <artwork><![CDATA[
+
 "kind": "group",
 "fullName": "The Doe family",
 "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
@@ -1025,8 +1002,7 @@ MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
             <name>ORG conversion example</name>
             <artwork><![CDATA[
 ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
-]]></artwork>
-            <artwork><![CDATA[
+
 "organizations": {
   "ORG-1": {
     "@type": "Organization",
@@ -1050,8 +1026,7 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
 RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 RELATED;TYPE=contact:http://example.com/directory/jdoe.vcf
 RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
-]]></artwork>
-            <artwork><![CDATA[
+
 "relatedTo" : {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
     "@type" : "Relation",
@@ -1084,8 +1059,7 @@ RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
 TITLE:Research Scientist
 group1.ROLE:Project Leader
 group1.ORG:ABC, Inc.
-]]></artwork>
-            <artwork><![CDATA[
+
 "titles": {
   "TITLE-1": {
     "@type": "Title",
@@ -1120,8 +1094,7 @@ group1.ORG:ABC, Inc.
             <artwork><![CDATA[
 EXPERTISE;LEVEL=beginner;INDEX=2:chinese literature
 EXPERTISE;INDEX=1;LEVEL=expert:chemistry
-]]></artwork>
-            <artwork><![CDATA[
+
 "personalInfo": {
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
@@ -1150,8 +1123,7 @@ EXPERTISE;INDEX=1;LEVEL=expert:chemistry
             <artwork><![CDATA[
 HOBBY;INDEX=1;LEVEL=high:reading
 HOBBY;INDEX=2;LEVEL=high:sewing
-]]></artwork>
-            <artwork><![CDATA[
+
 "personalInfo": {
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
@@ -1180,8 +1152,7 @@ HOBBY;INDEX=2;LEVEL=high:sewing
             <artwork><![CDATA[
 INTEREST;INDEX=1;LEVEL=medium:r&b music
 INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
-]]></artwork>
-            <artwork><![CDATA[
+
 "personalInfo": {
   "PERSINFO-1" : {
     "@type": "PersonalInfo",
@@ -1211,8 +1182,7 @@ INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
 ORG-DIRECTORY;INDEX=1:http://directory.mycompany.example.com
 ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
  ou=Engineering
-]]></artwork>
-            <artwork><![CDATA[
+
 "directories": {
   "DIRECTORY-1": {
     "@type": "DirectoryResource",
@@ -1241,8 +1211,7 @@ ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
             <name>CATEGORIES conversion example</name>
             <artwork><![CDATA[
 CATEGORIES:internet,IETF,Industry,Information Technology
-]]></artwork>
-            <artwork><![CDATA[
+
 "keywords": {
   "internet": true,
   "IETF": true,
@@ -1263,8 +1232,7 @@ CATEGORIES:internet,IETF,Industry,Information Technology
             <name>CREATED conversion example</name>
             <artwork><![CDATA[
 CREATED:19940930T143510Z
-]]></artwork>
-            <artwork><![CDATA[
+
 "created": "1994-09-30T14:35:10Z"
 ]]></artwork>
           </figure>
@@ -1279,8 +1247,7 @@ CREATED:19940930T143510Z
             <artwork><![CDATA[
 NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
   Office hours are from 0800 to 1715 EST\, Mon-Fri.
-]]></artwork>
-            <artwork><![CDATA[
+
 "notes": {
     "NOTE-1" : {
        "note": "Office hours are from 0800 to 1715 EST, Mon-Fri.",
@@ -1301,8 +1268,7 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
             <name>PRODID conversion example</name>
             <artwork><![CDATA[
 PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN
-]]></artwork>
-            <artwork><![CDATA[
+
 "prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN"
 ]]></artwork>
           </figure>
@@ -1314,8 +1280,7 @@ PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN
             <name>REV conversion example</name>
             <artwork><![CDATA[
 REV:19951031T222710Z
-]]></artwork>
-            <artwork><![CDATA[
+
 "updated": "1995-10-31T22:27:10Z"
 ]]></artwork>
           </figure>
@@ -1328,8 +1293,7 @@ REV:19951031T222710Z
             <name>SOUND conversion example</name>
             <artwork><![CDATA[
 SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
-]]></artwork>
-            <artwork><![CDATA[
+
 "media": {
   ...
   "SOUND-1": {
@@ -1348,8 +1312,7 @@ SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
             <name>UID conversion example</name>
             <artwork><![CDATA[
 UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-]]></artwork>
-            <artwork><![CDATA[
+
 "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
 ]]></artwork>
           </figure>
@@ -1362,8 +1325,7 @@ UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
             <name>URL conversion example</name>
             <artwork><![CDATA[
 URL:http://example.org/restaurant.french/~chezchic.html
-]]></artwork>
-            <artwork><![CDATA[
+
 "links": {
   "LINK-1": {
     "@type": "LinkResource",
@@ -1386,8 +1348,7 @@ URL:http://example.org/restaurant.french/~chezchic.html
             <artwork><![CDATA[
 item1.TEL;VALUE=uri:tel:+1-555-555-5555
 item1.X-ABLabel:foo
-]]></artwork>
-            <artwork><![CDATA[
+
 "phones": {
   "p1": {
     "@type": "Phone",
@@ -1409,8 +1370,7 @@ item1.X-ABLabel:foo
             <name>KEY conversion example</name>
             <artwork><![CDATA[
 KEY:http://www.example.com/keys/jdoe.cer
-]]></artwork>
-            <artwork><![CDATA[
+
 "cryptoKeys": {
   "KEY-1": {
     "@type": "CryptoResource",
@@ -1432,8 +1392,7 @@ KEY:http://www.example.com/keys/jdoe.cer
             <artwork><![CDATA[
 CALADRURI;PREF=1:mailto:janedoe@example.com
 CALADRURI:http://example.com/calendar/jdoe
-]]></artwork>
-            <artwork><![CDATA[
+
 "schedulingAddresses": {
   "SCHEDULING-1": {
     "@type": "SchedulingAddress",
@@ -1458,8 +1417,6 @@ CALADRURI:http://example.com/calendar/jdoe
 CALURI;PREF=1:http://cal.example.com/calA
 CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
 
-]]></artwork>
-            <artwork><![CDATA[
 "calendars": {
   "CAL-1": {
     "@type": "CalendarResource",
@@ -1486,8 +1443,7 @@ CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
             <artwork><![CDATA[
 FBURL;PREF=1:http://www.example.com/busy/janedoe
 FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
-]]></artwork>
-            <artwork><![CDATA[
+
 "calendars": {
   "FBURL-1": {
     "@type": "CalendarResource",
@@ -1531,17 +1487,16 @@ FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
               <t>This illustrates how to convert a vCard extension property:</t>
               <figure anchor="props_conversion">
                 <name>JSContact <tt>vCardProps</tt> example</name>
-                <sourcecode name=""><![CDATA[
+                <artwork><![CDATA[
 item1.X-FOO;X-BAR=Hello:World!
-]]></sourcecode>
-                <sourcecode name="" type="json"><![CDATA[
+
 "vCardProps": [
   ["x-foo", {
     "x-bar": "Hello",
     "group": "item1"
   }, "unknown", "World!"]
 ]
-]]></sourcecode>
+]]></artwork>
               </figure>
             </dd>
           </dl>
@@ -1564,10 +1519,9 @@ item1.X-FOO;X-BAR=Hello:World!
               <t>This illustrates how to convert a vCard extension parameter:</t>
               <figure anchor="params_conversion">
                 <name>JSContact <tt>vCardParams</tt> example</name>
-                <sourcecode><![CDATA[
+                <artwork><![CDATA[
 EMAIL;X-FOO=Bar:jane_doe@example.com
-]]></sourcecode>
-                <sourcecode><![CDATA[
+
 "emails": {
   "email1": {
     "@type": "EmailAddress",
@@ -1577,7 +1531,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
     }
   }
 }
-]]></sourcecode>
+]]></artwork>
               </figure>
             </dd>
           </dl>
@@ -1651,8 +1605,7 @@ jscontact-prop-param  = *(
                 <name>Unknown property example</name>
                 <artwork><![CDATA[
 "someUnknownProperty": true
-]]></artwork>
-                <artwork><![CDATA[
+
 JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
 ]]></artwork>
               </figure>
@@ -1663,8 +1616,7 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
 "example.com:foo": {
   "bar": 1234
 }
-]]></artwork>
-                <artwork><![CDATA[
+
 JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
 ]]></artwork>
               </figure>
@@ -1679,8 +1631,7 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
     "example.com:foo/bar": "tux hux"
  }
 }
-]]></artwork>
-                <artwork><![CDATA[
+
 TEL:tel:+33-01-23-45-67
 JSCONTACT-PROP;VALUE=TEXT;JSPTR="phones/phone1/example.com:foo~1bar":
  "tux hux"
