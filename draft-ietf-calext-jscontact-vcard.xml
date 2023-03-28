@@ -128,7 +128,7 @@
       </section>
       <section anchor="vcard-parameters">
         <name>vCard Parameters</name>
-        <t>This section contains the conversion rules for the vCard parameters.  Each rule refers to one or more vCard properties using the vCard parameter in question.  To convert the vCard parameter for other vCard properties, see <xref target="jscontact-prop-vcardparams"/>.</t>
+        <t>This section contains the conversion rules for vCard parameters.  A rule typically only applies for specific vCard properties.  To convert a vCard parameter on an arbitrary vCard property, see <xref target="jscontact-prop-vcardparams"/>.</t>
         <section anchor="vcard-param-altid">
           <name>ALTID</name>
           <t>This does not convert to an IANA-registered property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact extension properties defined in <xref target="new-jscontact"/>.</t>
