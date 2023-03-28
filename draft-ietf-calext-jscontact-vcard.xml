@@ -310,7 +310,7 @@ TITLE;LANGUAGE=fr:Patron
         </section>
         <section anchor="vcard-param-propid">
           <name>PROP-ID</name>
-          <t>The PROP-ID parameter value of a vCard property converts to the <tt>Id</tt> of the JSContact property to which the vCard property converts to.</t>
+          <t>The PROP-ID parameter value of a vCard property converts to the <tt>Id</tt> of the JSContact property to which the vCard property converts.</t>
           <figure anchor="propid_conversion">
             <name>PROP-ID conversion example</name>
             <artwork><![CDATA[
