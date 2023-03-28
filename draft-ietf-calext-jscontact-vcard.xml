@@ -131,7 +131,7 @@
         <t>This section contains the conversion rules for vCard parameters.  A rule typically only applies for specific vCard properties.  To convert a vCard parameter on an arbitrary vCard property, see <xref target="jscontact-prop-vcardparams"/>.</t>
         <section anchor="vcard-param-altid">
           <name>ALTID</name>
-          <t>This does not convert to an IANA-registered property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact extension properties defined in <xref target="new-jscontact"/>.</t>
+          <t>This does not convert to an IANA-registered property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact properties defined in <xref target="new-jscontact"/>.</t>
         </section>
         <section anchor="vcard-param-author">
           <name>AUTHOR</name>
@@ -162,7 +162,7 @@
         </section>
         <section anchor="vcard-param-group">
           <name>GROUP</name>
-          <t>This parameter exclusively is for use in jCard (see <xref target="RFC7095" section="7.1"/>).  It <bcp14>MUST NOT</bcp14> be set in a vCard.  Preserving the exact group name when converting from vCard to JSContact and back to vCard is not necessary.  Any group identifiers will do, as long as the resulting vCard groups its  properties equally to the original vCard.  Implementations that still wish to preserve the exact property group name of a vCard property <bcp14>MAY</bcp14> set the <tt>group</tt> parameter in the JSContact extension properties <tt>vCardProps</tt> or <tt>vCardParams</tt> defined in <xref target="new-jscontact"/>.</t>
+          <t>This parameter exclusively is for use in jCard (see <xref target="RFC7095" section="7.1"/>).  It <bcp14>MUST NOT</bcp14> be set in a vCard.  Preserving the exact group name when converting from vCard to JSContact and back to vCard is not necessary.  Any group identifiers will do, as long as the resulting vCard groups its  properties equally to the original vCard.  Implementations that still wish to preserve the exact property group name of a vCard property <bcp14>MAY</bcp14> set the <tt>group</tt> parameter in the JSContact properties <tt>vCardProps</tt> or <tt>vCardParams</tt> defined in <xref target="new-jscontact"/>.</t>
           <figure anchor="group_conversion_params">
             <name>An example how to preserve the group name in <tt>vCardParams</tt> during conversion.</name>
             <artwork><![CDATA[
@@ -1512,8 +1512,8 @@ FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
       </section>
       <section anchor="new-jscontact">
         <name>New JSContact properties</name>
-        <t>vCards may contain properties or parameters for which no IANA-registered JSContact property is defined.  For example, a vCard may contain extended properties and parameters of which the semantics or purposes are unknown; see <xref target="RFC6350" section="6.10"/>.</t>
-        <t>This section defines JSContact extension properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+        <t>vCards may contain properties or parameters for which no IANA-registered JSContact property is defined.  For example, a vCard may contain properties and parameters of which the semantics or purposes are unknown to the implementation; see <xref target="RFC6350" section="6.10"/>.</t>
+        <t>This section defines JSContact properties by which such vCard properties and parameters <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="jscontact-prop-vcardprops">
           <name>Property <tt>vCardProps</tt></name>
           <dl>
@@ -1592,7 +1592,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
         <ul>
           <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
           <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.  Otherwise, they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
-          <li>Vendor-extension and unknown properties convert to vCard as outlined in <xref target="convert-other-jscontact"/>.</li>
+          <li>Vendor-specific and unknown properties convert to vCard as outlined in <xref target="convert-other-jscontact"/>.</li>
         </ul>
       </section>
       <section anchor="convert-other-jscontact">
@@ -1656,9 +1656,9 @@ jscontact-prop-param  = *(
 JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
 ]]></artwork>
               </figure>
-              <t>This illustrates how to convert a vendor-extension property at the top-level of a Card object.  Note the required use of quoted string for the JSPTR value which allows the path to include the COLON (U+003A) character.</t>
-              <figure anchor="jscontact-prop-vendor-extension">
-                <name>Vendor-extension conversion example</name>
+              <t>This illustrates how to convert a vendor-specific property at the top-level of a Card object.  Note the required use of quoted string for the JSPTR value which allows the path to include the COLON (U+003A) character.</t>
+              <figure anchor="jscontact-prop-vendor-specific">
+                <name>Vendor-specific property conversion example</name>
                 <artwork><![CDATA[
 "example.com:foo": {
   "bar": 1234
@@ -1668,9 +1668,9 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
 JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
 ]]></artwork>
               </figure>
-              <t>This illustrates how to convert a vendor-extension property at a nested level in a Card object using a path relative to the Card object.  Although not recommended, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
+              <t>This illustrates how to convert a vendor-specific property at a nested level in a Card object using a path relative to the Card object.  Although not recommended, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
               <figure anchor="jscontact-prop-nested">
-                <name>Nested property example with path relative to Card</name>
+                <name>Nested vendor-specific property example with path relative to Card</name>
                 <artwork><![CDATA[
 "phones": {
   "phone1": {
