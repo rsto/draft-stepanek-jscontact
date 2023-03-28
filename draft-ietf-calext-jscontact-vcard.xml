@@ -994,7 +994,7 @@ LOGO:http://www.example.com/pub/logos/abccorp.jpg
         <section anchor="vcard-prop-member">
           <name>MEMBER</name>
           <t>The uids of the contact cards composing the group are included in the <tt>members</tt> property (<xref target="group_example"/>).</t>
-          <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementers <bcp14>MAY</bcp14> insert the map entries by order of preference.</t>
+          <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementors <bcp14>MAY</bcp14> insert the map entries by order of preference.</t>
           <figure anchor="group_example">
             <name>Group example</name>
             <artwork><![CDATA[
@@ -1236,7 +1236,7 @@ ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
         <section anchor="vcard-prop-categories">
           <name>CATEGORIES</name>
           <t>A CATEGORIES property converts to a set of entries of the <tt>keywords</tt> property (<xref target="categories_conversion"/>).  The keys are the comma-separated text values of the CATEGORIES property.</t>
-          <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementers <bcp14>MAY</bcp14> insert the map entries by order of preference.</t>
+          <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementors <bcp14>MAY</bcp14> insert the map entries by order of preference.</t>
           <figure anchor="categories_conversion">
             <name>CATEGORIES conversion example</name>
             <artwork><![CDATA[
