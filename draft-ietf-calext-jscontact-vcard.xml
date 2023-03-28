@@ -1254,7 +1254,7 @@ CATEGORIES:internet,IETF,Industry,Information Technology
         </section>
         <section anchor="vcard-prop-pid">
           <name>CLIENTPIDMAP and PID Parameter</name>
-          <t>The CLIENTPIDMAP property and the PDI parameter don't have a direct match with a Card feature.</t>
+          <t>These convert to the <xref target="jscontact-prop-vcardprops"><tt>vCardProps</tt></xref> and <xref target="jscontact-prop-vcardparams"><tt>vCardParams</tt></xref> properties.</t>
         </section>
         <section anchor="vcard-prop-created">
           <name>CREATED</name>
@@ -1375,7 +1375,7 @@ URL:http://example.org/restaurant.french/~chezchic.html
         </section>
         <section anchor="vcard-prop-version">
           <name>VERSION</name>
-          <t>The VERSION property doesn't have a direct match with a JSContact feature.</t>
+          <t>This converts to an entry in the <xref target="jscontact-prop-vcardprops"><tt>vCardProps</tt></xref> property.</t>
         </section>
         <section anchor="vcard-prop-xablabel">
           <name>X-ABLabel</name>
