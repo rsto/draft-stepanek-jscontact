@@ -653,8 +653,8 @@ PHOTO:http://www.example.com/pub/photos/jqpublic.gif
               </tr>
             </tbody>
           </table>
-            <t>Applications <bcp14>SHOULD</bcp14> separate the ADR "street address" component into street name, number and directions. If they can not determine the respective street components from the ADR "street address"", then they <bcp14>SHOULD</bcp14> convert these to a single <tt>name</tt> StreetComponent object.</t>
-            <t>The "street address" and "extended address" ADR components <bcp14>MAY</bcp14> be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
+          <t>Applications <bcp14>SHOULD</bcp14> separate the ADR "street address" component into street name, number and directions. If they can not determine the respective street components from the ADR "street address"", then they <bcp14>SHOULD</bcp14> convert these to a single <tt>name</tt> StreetComponent object.</t>
+          <t>The "street address" and "extended address" ADR components <bcp14>MAY</bcp14> be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
           <t>The LABEL parameter converts to the <tt>fullAddress</tt> property.</t>
           <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
           <t>The TZ parameter converts to the <tt>timeZone</tt> property.</t>
@@ -1545,7 +1545,14 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
         <t>A <tt>Card</tt> converts to vCard by applying the reverse rules of converting vCard to JSContact.  In addition to those listed in <xref target="convert_jscontact_to_vcard-reverse-rules"/>, the following rules apply:</t>
         <ul>
           <li>Multi-valued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
-          <li>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  If the <tt>fullName</tt> is not set but the <tt>name</tt> property is, then implementations <bcp14>MAY</bcp14> derive the value of the FN property from it.  In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.  Otherwise, they <bcp14>MUST</bcp14> set the FN property with an empty value.</li>
+          <li>
+            <t>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  The following rules apply:</t>
+            <ul>
+              <li>If the <tt>fullName</tt> property is set, then implementations <bcp14>MUST</bcp14> use its value for the vCard FN property.</li>
+              <li>If the <tt>fullName</tt> property is not set, but the <tt>name</tt> property is, then implementations <bcp14>MUST</bcp14> derive the full name of it by concatenating the name component values.  They <bcp14>MUST</bcp14> use the resulting string as the value of the vCard FN property.  In addition, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.</li>
+              <li>Otherwise, they <bcp14>MUST</bcp14> set the FN property to the empty value.</li>
+            </ul>
+          </li>
           <li>Vendor-specific and unknown properties convert to vCard as outlined in <xref target="convert-other-jscontact"/>.</li>
         </ul>
       </section>
