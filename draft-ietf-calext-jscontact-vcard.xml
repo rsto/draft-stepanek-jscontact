@@ -1573,10 +1573,8 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>The property can be specified multiple times in a vCard.</dd>
             <dt>Property parameters:</dt>
             <dd>
-          The JSPTR parameter <bcp14>MUST</bcp14> be set exactly once for this property.
-          The VALUE parameter <bcp14>MAY</bcp14> be set once, in which case its value
-          <bcp14>MUST</bcp14> be URI.  Other IANA-registered and experimental property parameters
-          can be specified on this property.
+          The JSPTR parameter <bcp14>MUST</bcp14> be set for this property.
+          Other IANA-registered and experimental property parameters can be specified on this property.
         </dd>
             <dt>Description:</dt>
             <dd>
@@ -1613,7 +1611,7 @@ jscontact-prop-param  = *(
                 <artwork><![CDATA[
 "someUnknownProperty": true
 
-JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
+JSCONTACT-PROP;JSPTR="someUnknownProperty":true
 ]]></artwork>
               </figure>
               <t>This illustrates how to convert a vendor-specific property at the top-level of a Card object.  Note the required use of quoted string for the JSPTR value which allows the path to include the COLON (U+003A) character.</t>
@@ -1624,7 +1622,7 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="someUnknownProperty":true
   "bar": 1234
 }
 
-JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
+JSCONTACT-PROP;JSPTR="example.com:foo":{"bar":1234}
 ]]></artwork>
               </figure>
               <t>This illustrates how to convert a vendor-specific property at a nested level in a Card object using a path relative to the Card object.  Although not recommended, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
@@ -1640,7 +1638,7 @@ JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":{"bar":1234}
 }
 
 TEL:tel:+33-01-23-45-67
-JSCONTACT-PROP;VALUE=TEXT;JSPTR="phones/phone1/example.com:foo~1bar":
+JSCONTACT-PROP;JSPTR="phones/phone1/example.com:foo~1bar":
  "tux hux"
 ]]></artwork>
               </figure>
@@ -1672,7 +1670,7 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
             <dd>
               <t>This illustrates a simple example.  For further examples see <xref target="vcard-prop-jscontact-prop-examples"/>.</t>
               <sourcecode name=""><![CDATA[
-JSCONTACT-PROP;VALUE=TEXT;JSPTR="example.com:foo":"bar"
+JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
 ]]></sourcecode>
             </dd>
           </dl>
