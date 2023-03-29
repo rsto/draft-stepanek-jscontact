@@ -1481,7 +1481,7 @@ FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
             <dd><tt>JCardProp[]</tt>, where <tt>JCardProp</tt> denotes a jCard-encoded vCard property as defined in <xref target="RFC7095" section="3.3"/>.
 </dd>
             <dt>Definition:</dt>
-            <dd>This property is set on a JSContact object that represents a vCard.  It contains properties that are set in the vCard represented by this JSContact object.  Each entry in this list typically represents a vCard property for which no conversion to an IANA-registered JSContact property is defined.  It <bcp14>MAY</bcp14> contain vCard IANA-registered properties which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
+            <dd>This property is set on a JSContact object that represents a vCard.  It contains properties that are set in the vCard represented by this JSContact object.  Each entry in this list typically represents a vCard property for which no conversion to an IANA-registered JSContact property is defined.</dd>
             <dt>Example:</dt>
             <dd>
               <t>This illustrates how to convert a vCard extension property:</t>
@@ -1513,7 +1513,7 @@ item1.X-FOO;X-BAR=Hello:World!
               <tt>String[String|String[]]</tt>
             </dd>
             <dt>Definition:</dt>
-            <dd>This property is set on a JSContact object that represents a vCard property.  Its value <bcp14>MUST</bcp14> be a JSON object containing vCard property parameters, defined as array element 2 in <xref target="RFC7095" section="3.3"/>.  Each entry represents a parameter of the vCard property that converts to the JSContact object.  Typically, these are parameters for which no IANA-registered property is defined in the JSContact object.  It <bcp14>MAY</bcp14> contain vCard IANA-registered parameters which also got converted to an IANA-registered property in the same JSContact object.  In case of conflict, the values of the JSContact property <bcp14>MUST</bcp14> be used.</dd>
+            <dd>This property is set on a JSContact object that represents a vCard property.  Its value <bcp14>MUST</bcp14> be a JSON object containing vCard property parameters, defined as array element 2 in <xref target="RFC7095" section="3.3"/>.  Each entry represents a parameter of the vCard property that converts to the JSContact object.</dd>
             <dt>Example:</dt>
             <dd>
               <t>This illustrates how to convert a vCard extension parameter:</t>
