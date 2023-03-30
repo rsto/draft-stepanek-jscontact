@@ -914,7 +914,7 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
           <t>A value of type UTC-OFFSET converts to the <tt>timeZone</tt> property in the <tt>Address</tt> object if the offset has zero minutes and the hour offset is in the range -12 &lt;= 14:</t>
           <ul>
             <li>If the hour offset is zero, use the time zone name <tt>Etc/UTC</tt>.</li>
-            <li>Otherwise construct the time zone name with <tt>ETC/GMT</tt> suffixed with the string representation of the reversed sign hour offset, including the sign but excluding leading zeros and minutes.  For example, the UTC offset value <tt>-0500</tt> converts to <tt>ETC/GMT+5</tt>.</li>
+            <li>Otherwise construct the time zone name with <tt>Etc/GMT</tt> suffixed with the string representation of the reversed sign hour offset, including the sign but excluding leading zeros and minutes.  For example, the UTC offset value <tt>-0500</tt> converts to <tt>Etc/GMT+5</tt>.</li>
           </ul>
           <t>For such property values, also see <xref target="combine-geo-props"/> to determine which <tt>Address</tt> object instance to convert to.</t>
           <t>Any other value of type UTC-OFFSET or URI does not convert to an IANA-registered property in JSContact.  To convert such property, see <xref target="jscontact-prop-vcardprops"/>.</t>
