@@ -1559,7 +1559,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
         <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain vendor-specific properties of which the semantics or purpose are unknown.</t>
-        <t>This section defines new vCard properties and parameters by which such JSContact properties <bcp14>MAY</bcp14> be represented in JSContact.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+        <t>This section defines new vCard properties and parameters by which such JSContact properties <bcp14>MAY</bcp14> be represented in vCard.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         <section anchor="vcard-prop-jscontact-prop">
           <name>Property <tt>JSCONTACT-PROP</tt></name>
           <dl>
