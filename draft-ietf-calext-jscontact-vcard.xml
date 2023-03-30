@@ -252,6 +252,7 @@ TITLE;LANGUAGE=fr:Patron
 ]]></artwork>
           </figure>
           <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.</t>
+          <t>The following example uses non-ASCII characters to demonstrate multi-lingual content.  The ASCII-formatted version of this specification might not show the correct characters.  Please refer to the HTML or PDF versions instead.</t>
           <figure anchor="language-patch-no-dominant">
             <name>LANGUAGE conversion example: conflicting locale and language</name>
             <artwork><![CDATA[
@@ -1151,7 +1152,7 @@ HOBBY;INDEX=2;LEVEL=high:sewing
             <name>INTEREST conversion example</name>
             <artwork><![CDATA[
 INTEREST;INDEX=1;LEVEL=medium:r&b music
-INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
+INTEREST;INDEX=2;LEVEL=high:rock&roll music
 
 "personalInfo": {
   "PERSINFO-1" : {
@@ -1164,7 +1165,7 @@ INTEREST;INDEX=2;LEVEL=high:rock ’n’ roll music
   "PERSINFO-2" : {
     "@type": "PersonalInfo",
     "kind": "interest",
-    "value": "rock ’n’ roll music",
+    "value": "rock&roll music",
     "level": "high",
     "position": 2
   }
