@@ -1688,7 +1688,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
         <name>New vCard Properties</name>
         <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
         <table anchor="new_properties">
-          <name>New VCARD Properties</name>
+          <name>New vCard Properties</name>
           <thead>
             <tr>
               <th align="left">Namespace</th>
@@ -1709,7 +1709,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
         <name>New vCard Parameters</name>
         <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
         <table anchor="new_parameters">
-          <name>New VCARD Parameters</name>
+          <name>New vCard Parameters</name>
           <thead>
             <tr>
               <th align="left">Namespace</th>
