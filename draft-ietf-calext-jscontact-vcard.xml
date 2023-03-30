@@ -423,9 +423,11 @@ SOURCE:http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
             <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, ANNIVERSARY conversion example</name>
             <artwork><![CDATA[
 BDAY:19531015T231000Z
-BIRTHPLACE:123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
+BIRTHPLACE:
+ 123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
 DEATHDATE:19960415
-DEATHPLACE:4445 Courtright Street\nNew England, ND 58647\nU.S.A.
+DEATHPLACE:
+ 4445 Courtright Street\nNew England, ND 58647\nU.S.A.
 ANNIVERSARY:19860201
 
 "anniversaries": {
@@ -438,7 +440,8 @@ ANNIVERSARY:19860201
     },
     "place": {
       "@type": "Address",
-      "fullAddress": "123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
+      "fullAddress":
+         "123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
     }
   },
   "ANNIVERSARY-2" : {
