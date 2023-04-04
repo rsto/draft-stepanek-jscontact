@@ -1648,6 +1648,10 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dd>IETF</dd>
         </dl>
       </section>
+      <section anchor="iana-jscontact-registry" numbered="true" toc="default">
+        <name>Creation of the "JSContact" Registry Group</name>
+        <t>IANA is asked to create the "JSContact" registry group.  The new registry definitions in the following sections all belong to that group.</t>
+      </section>
       <section anchor="iana-property-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Properties" Registry</name>
         <t>IANA has created the "JSContact Properties" registry to allow interoperability of extensions to JSContact objects.</t>
