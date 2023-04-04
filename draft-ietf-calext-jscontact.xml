@@ -1654,7 +1654,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-property-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Properties" Registry</name>
-        <t>IANA has created the "JSContact Properties" registry to allow interoperability of extensions to JSContact objects.</t>
+        <t>IANA is asked to create the "JSContact Properties" registry to allow interoperability of extensions to JSContact objects.</t>
         <t>This registry follows the Expert Review process (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>).  If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability.  Preliminary community review for this registry is optional but strongly encouraged.</t>
         <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>.</t>
         <t>A <tt>reserved</tt> registration reserves a property name without assigning semantics to avoid name collisions with future extensions or protocol use.</t>
@@ -2352,7 +2352,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-type-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Types" Registry</name>
-        <t>IANA has created the "JSContact Types" registry to avoid name collisions and provide a complete reference for all data types used for JSContact property values.  The registration process is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <t>IANA is asked to create the "JSContact Types" registry to avoid name collisions and provide a complete reference for all data types used for JSContact property values.  The registration process is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
         <section anchor="iana-type-registry-template" numbered="true" toc="default">
           <name>"JSContact Types" Registry Template</name>
           <dl newline="false">
@@ -2628,7 +2628,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-enum-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Enum Values" Registry</name>
-        <t>IANA has created the "JSContact Enum Values" registry to allow interoperable extension of semantics for properties with enumerable values.  Each such property will have a subregistry of allowed values.  The registration process for a new enum value or adding a new enumerable property is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <t>IANA is asked to create the "JSContact Enum Values" registry to allow interoperable extension of semantics for properties with enumerable values.  Each such property will have a subregistry of allowed values.  The registration process for a new enum value or adding a new enumerable property is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
         <section anchor="iana-enum-registry-registry-template" numbered="true" toc="default">
           <name>"JSContact Enum Values" Registry Property Template</name>
           <t>This template is for adding a subregistry for a new enumerable property to the "JSContact Enum" registry.</t>
