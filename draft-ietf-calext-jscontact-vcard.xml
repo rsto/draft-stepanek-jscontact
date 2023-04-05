@@ -1591,7 +1591,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode name="" type="abnf"><![CDATA[
-jscontact-prop = "JSCONTACT-PROP" jscontact-prop-param ":" TEXT CRLF
+jscontact-prop = "JSCONTACT-PROP" jscontact-prop-param ":" TEXT
 
 jscontact-prop-param  = *(
             ; The following are MANDATORY and MUST NOT

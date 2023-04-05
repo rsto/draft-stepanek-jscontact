@@ -93,7 +93,7 @@
             <sourcecode name="" type="abnf"><![CDATA[
 contact-channel-pref  = "CONTACT-CHANNEL-PREF"
                     *(";" contact-channel-pref-param )
-                      ":" contact-channel-pref-value CRLF
+                      ":" contact-channel-pref-value
 
 contact-channel-pref-param  = type-param / pref-param / any-param
 
@@ -134,8 +134,7 @@ CONTACT-CHANNEL-PREF;PREF=2:TEL
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-created       = "CREATED" createdparam
-                ":" timestamp CRLF
+created       = "CREATED" createdparam ":" timestamp
 
 createdparam  = *(
                  ;
@@ -200,7 +199,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
 gram-gender       = "GRAMMATICAL-GENDER" gram-gender-param
-                      ":" gram-gender-value CRLF
+                      ":" gram-gender-value
 
 gram-gender-param =
                 *(
@@ -260,7 +259,7 @@ GRAMMATICAL-GENDER:neuter
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-locale       = "LOCALE" any-param ":" Language-Tag CRLF
+locale       = "LOCALE" any-param ":" Language-Tag
                ; Language-Tag is defined in RFC6350, Section 4.
 ]]></sourcecode>
           </dd>
@@ -300,7 +299,7 @@ LOCALE:de-AT
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-pronouns       = "PRONOUNS" pronouns-param ":" text CRLF
+pronouns       = "PRONOUNS" pronouns-param ":" text
 
 pronouns-param =
                 *(
@@ -348,7 +347,7 @@ PRONOUNS;LANG=en:they/them
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
 socialpr       = "SOCIALPROFILE" socialpr-param ":"
-                                 socialpr-value CRLF
+                                 socialpr-value
 
 socialpr-param = "VALUE=uri" / "VALUE=text" /
                  service-type-param / any-param
