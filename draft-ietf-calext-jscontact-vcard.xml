@@ -427,7 +427,7 @@ BIRTHPLACE:
  123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
 DEATHDATE:19960415
 DEATHPLACE:
- 4445 Courtright Street\nNew England, ND 58647\nU.S.A.
+ 4445 Court Street\nNew England, ND 58647\nU.S.A.
 ANNIVERSARY:19860201
 
 "anniversaries": {
@@ -455,7 +455,7 @@ ANNIVERSARY:19860201
     },
     "place": {
       "@type": "Address",
-      "fullAddress": "4445 Courtright Street\nNew England, ND 58647\nU.S.A."
+      "fullAddress": "4445 Court Street\nNew England, ND 58647\nU.S.A."
     }
   },
   "ANNIVERSARY-3" : {
@@ -555,23 +555,23 @@ NICKNAME:Johnny
 
 "fullName": "Mr.  John Q.  Public, Esq.",
 "name": {
-    "@type": "Name",
-    "components":[
-      { "@type": "NameComponent", "kind": "prefix", "value": "Mr." },
-      { "@type": "NameComponent", "kind": "given", "value": "John" },
-      { "@type": "NameComponent", "kind": "surname", "value": "Public" },
-      { "@type": "NameComponent", "kind": "middle", "value": "Quinlan" },
-      { "@type": "NameComponent", "kind": "suffix", "value": "Esq." }
-    ],
-    "sortAs": {
-        "surname": "Public",
-        "given": "John"
-    }
+  "@type": "Name",
+  "components":[
+    { "@type": "NameComponent", "kind": "prefix", "value": "Mr." },
+    { "@type": "NameComponent", "kind": "given", "value": "John" },
+    { "@type": "NameComponent", "kind": "surname", "value": "Public" },
+    { "@type": "NameComponent", "kind": "middle", "value": "Quinlan" },
+    { "@type": "NameComponent", "kind": "suffix", "value": "Esq." }
+  ],
+  "sortAs": {
+    "surname": "Public",
+    "given": "John"
+  }
 },
 "nickNames": {
    "NICK-1": {
-      "@type": "NickName",
-      "name": "Johnny"
+    "@type": "NickName",
+    "name": "Johnny"
    }
 }
 ]]></artwork>
@@ -1028,8 +1028,8 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
 RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-RELATED;TYPE=contact:http://example.com/directory/jdoe.vcf
-RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
+RELATED;TYPE=contact:http://example.com/directory/john.vcf
+RELATED;VALUE=text:Please contact my assistant John for any inquiries.
 
 "relatedTo" : {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
@@ -1038,13 +1038,13 @@ RELATED;VALUE=text:Please contact my assistant Jane Doe for any inquiries.
       "friend" : true
     }
   },
-  "http://example.com/directory/jdoe.vcf" : {
+  "http://example.com/directory/john.vcf" : {
     "@type" : "Relation",
     "relation" : {
       "contact" : true
     }
   },
-  "Please contact my assistant Jane Doe for any inquiries." : {
+  "Please contact my assistant John for any inquiries." : {
     "@type" : "Relation",
     "relation" : { }
   }
@@ -1253,14 +1253,14 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
   Office hours are from 0800 to 1715 EST\, Mon-Fri.
 
 "notes": {
-    "NOTE-1" : {
-       "note": "Office hours are from 0800 to 1715 EST, Mon-Fri.",
-       "created": "2022-11-23T15:01:32Z",
-       "author": {
-         "@type": "Author",
-         "name": "John"
-       }
-    }
+  "NOTE-1" : {
+     "note": "Office hours are from 0800 to 1715 EST, Mon-Fri.",
+     "created": "2022-11-23T15:01:32Z",
+     "author": {
+     "@type": "Author",
+     "name": "John"
+     }
+  }
 }
 ]]></artwork>
           </figure>
@@ -1635,10 +1635,10 @@ JSCONTACT-PROP;JSPTR="example.com:foo":{"bar":1234}
                 <artwork><![CDATA[
 "phones": {
   "phone1": {
-   "@type": "Phone",
-   "number": "tel:+33-01-23-45-67"
+    "@type": "Phone",
+    "number": "tel:+33-01-23-45-67"
     "example.com:foo/bar": "tux hux"
- }
+  }
 }
 
 TEL:tel:+33-01-23-45-67
