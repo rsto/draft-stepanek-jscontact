@@ -220,7 +220,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
       </section>
       <section>
         <name>Vendor-Specific Extensions</name>
-        <t>Vendors may extend properties and values for experimentation or to store contacts data that only is useful for a single service or application.  Such extensions are not meant for interoperation and vendors <bcp14>MUST NOT</bcp14> expect other implementations to process their contents.  If instead interoperation is desired, vendors are strongly encouraged to define and register new properties, types and values at IANA.  Typically, sending a short description to the IETF working group mailing list is enough for Expert Review to make a decision.  Notably, publishing a new RFC document is not required in the general case.  <xref target="iana-considerations"/> defines how to register new properties, types or values at IANA.  <xref target="iana-registered-properties"/> defines the naming conventions for IANA-registered elements.</t>
+        <t>Vendors may extend properties and values for experimentation or to store contacts data that only is useful for a single service or application.  Such extensions are not meant for interoperation and vendors <bcp14>MUST NOT</bcp14> expect other implementations to process their contents.  If instead interoperation is desired, vendors are strongly encouraged to define and register new properties, types and values at IANA.  <xref target="iana-considerations"/> defines how to register new properties, types or values at IANA.  <xref target="iana-registered-properties"/> defines the naming conventions for IANA-registered elements.</t>
         <section anchor="vendor-specific-properties" numbered="true" toc="default">
           <name>Vendor-specific Properties</name>
           <t>
