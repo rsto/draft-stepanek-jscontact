@@ -1601,7 +1601,7 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
               <t>
             This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>SHOULD</bcp14> be compact, e.g.  without insignificant whitespace.
           </t>
-              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer always is the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and <bcp14>SHOULD</bcp14> be discarded from the vCard.</t>
+              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and <bcp14>SHOULD</bcp14> be discarded from the vCard.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
