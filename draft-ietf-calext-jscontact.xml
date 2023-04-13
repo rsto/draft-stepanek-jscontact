@@ -452,7 +452,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </li>
             <li>
               <t>components: <tt>NameComponent[]</tt> (mandatory).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
-              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  This specification does not mandate how to do this but recommends the following: If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character.  Otherwise, inserting a single Space character in between name component values is a good choice.</t>
+              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character.  Otherwise, inserting a single Space character in between name component values is a good choice.</t>
             </li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
