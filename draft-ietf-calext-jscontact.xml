@@ -971,14 +971,12 @@ Defines the preference of this language in relation to other languages of the sa
   "calA": {
     "@type": "CalendarResource",
     "kind": "calendar",
-    "uri": "ftp://ftp.example.com/calA.ics",
-    "mediaType": "text/calendar"
+    "uri": "webcal://calendar.example.com/calA.ics"
   },
   "project-a": {
     "@type": "CalendarResource",
     "kind": "freeBusy",
-    "uri": "ftp://example.com/busy/project-a.ifb",
-    "mediaType": "text/calendar"
+    "uri": "https://calendar.example.com/busy/project-a"
   }
 }
 ]]></sourcecode>
