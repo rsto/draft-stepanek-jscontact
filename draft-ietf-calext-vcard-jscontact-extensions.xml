@@ -502,14 +502,27 @@ rank            = (NONZERO-DIGIT *DIGIT) / ""
           </dd>
           <dt>Example(s):</dt>
           <dd>
+            <t>This example assigns ranks to two surnames. The culturally first surname is
+            Rodriguez but it appears at the second position in the N property.  Accordingly
+            the RANKS parameter assigns rank 1 to the second entry in the surname name
+            component.  It also assigns rank 2 to the first entry in the
+            same name component.  It does not assign any rank to the personal name or any other
+            name components.</t>
             <sourcecode name=""><![CDATA[
 N;RANKS="2,1":Gómez,Rodriguez;Pablo;;;
-             ; The culturally "first" surname is Rodriguez but it
-             ; appears at the second position in the N property.
-
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <t>This example assigns ranks to both the surname and personal name components.
+            The writer "Dame Mary Barbara Hamilton Cartland" published most of her work under
+            the "Barbara Cartland" and this is reflected in the ranks.  The RANKS parameter
+            assigns rank 1 to the second entry in the surname name component.  It leaves the rank
+            of "Hamilton" undefined.  Similarly, it assigns rank 1 to the second entry in the
+            personal name component and leaves "Mary" unranked.  There is no rank assigned to
+            the honorific prefix "Dame".</t>
+            <sourcecode name=""><![CDATA[
 N;RANKS=",1;,1":Hamilton,Cartland;Mary,Barbara;;Dame;
-             ; The writer Dame Mary Barbara Hamilton Cartland
-             ; published as "Barbara Cartland"
 ]]></sourcecode>
           </dd>
         </dl>
