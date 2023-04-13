@@ -1039,7 +1039,7 @@ The postal code, post code, ZIP code or other short code associated with the add
             <li>countryCode: <tt>String</tt> (optional).
 The Alpha-2 or Alpha-3 ISO-3166-1 country code <xref target="ISO.3166-1.2006"/>.</li>
             <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
-            <li>timeZone: <tt>String</tt> (optional).  Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <eref target="https://www.iana.org/time-zones">IANA Time Zone Database</eref></li>
+            <li>timeZone: <tt>String</tt> (optional).  Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <xref target="IANATZ">IANA Time Zone Database</xref></li>
             <li>
               <t>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  In addition to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
@@ -3458,6 +3458,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <date year="2006"/>
           </front>
           <seriesInfo name="ISO" value="Standard 3166-1"/>
+        </reference>
+        <reference anchor="IANATZ" target="https://www.iana.org/time-zones">
+          <front>
+            <title>IANA Time Zone Database</title>
+            <author/>
+          </front>
         </reference>
       </references>
       <references>
