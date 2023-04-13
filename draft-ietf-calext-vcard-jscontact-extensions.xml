@@ -98,7 +98,7 @@ contact-channel-pref  = "CONTACT-CHANNEL-PREF"
 contact-channel-pref-param  = type-param / pref-param / any-param
 
 contact-channel-pref-value = "ADR" / "EMAIL" / "IMPP" / "TEL" /
-                             x-value
+                             x-name
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
@@ -222,8 +222,8 @@ gram-gender-value = "animate" /
                     "inanimate" /
                     "masculine" /
                     "neuter" /
-                    iana-token
-                    x-value
+                    iana-token /
+                    x-name
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
