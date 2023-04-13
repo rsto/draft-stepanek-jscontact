@@ -386,8 +386,7 @@ SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=TEXT:peter94
           <dt>Format definition:</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
-author-param    = "AUTHOR" "=" DQUOTE 1*QSAFE-CHAR DQUOTE
-                ; a valid URI from Section 3 of [RFC3986]
+author-param    = "AUTHOR" "=" DQUOTE URI DQUOTE
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
