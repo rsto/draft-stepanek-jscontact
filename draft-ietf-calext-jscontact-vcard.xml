@@ -14,11 +14,11 @@
 <?rfc sortrefs="yes"?>
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" submissionType="IETF" category="std" consensus="true" docName="draft-ietf-calext-jscontact-vcard-07" ipr="trust200902" tocInclude="true" tocDepth="4" sortRefs="true" symRefs="true" updates="6350" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" submissionType="IETF" category="std" consensus="true" docName="draft-ietf-calext-jscontact-vcard-08" ipr="trust200902" tocInclude="true" tocDepth="4" sortRefs="true" symRefs="true" updates="6350" version="3">
   <!-- xml2rfc v2v3 conversion 3.12.10 -->
   <front>
     <title abbrev="jscontact-vcard">JSContact: Converting from and to vCard</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-vcard-07"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-vcard-08"/>
     <author fullname="Mario Loffredo" initials="M." surname="Loffredo">
       <organization>IIT-CNR/Registro.it</organization>
       <address>
