@@ -1160,13 +1160,33 @@ The value of this street component.</li>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt> (<xref target="iana-type-registry-contents"/>).</li>
             <li>The <tt>kind</tt> property value either is not set, is registered at IANA (<xref target="iana-enum-registry-value-template"/>) or vendor-specific.</li>
           </ul>
-          <figure anchor="example-cryptoKeys">
-            <name><tt>cryptoKeys</tt> example</name>
+          <t>The following example shows how refer to an external cryptograhic resource.</t>
+          <figure anchor="example-cryptoKeys-external">
+            <name><tt>cryptoKeys</tt> example with external data</name>
             <sourcecode name="" type="json"><![CDATA[
 "cryptoKeys": {
-  "mykey": {
+  "mykey1": {
     "@type": "CryptoResource",
     "uri": "http://www.example.com/keys/jdoe.cer"
+  }
+}
+]]></sourcecode>
+          </figure>
+          <t>The following example shows how to embed key data in the CryptoResource.  The key data is depicted in multiple lines only for demonstration purposes.</t>
+          <figure anchor="example-cryptoKeys-embedded">
+            <name><tt>cryptoKeys</tt> example with embedded data</name>
+            <sourcecode name="" type="json"><![CDATA[
+"cryptoKeys": {
+  "mykey2": {
+    "@type": "CryptoResource",
+    "uri": "data:,-----BEGIN RSA PUBLIC KEY-----\n
+MIIBCgKCAQEA+xGZ/wcz9ugFpP07Nspo6U17l0YhFiFpxxU4pTk3Lifz9R3zsIsu\n
+ERwta7+fWIfxOo208ett/jhskiVodSEt3QBGh4XBipyWopKwZ93HHaDVZAALi/2A\n
++xTBtWdEo7XGUujKDvC2/aZKukfjpOiUI8AhLAfjmlcD/UZ1QPh0mHsglRNCmpCw\n
+mwSXA9VNmhz+PiB+Dml4WWnKW/VHo2ujTXxq7+efMU4H2fny3Se3KYOsFPFGZ1TN\n
+QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
++0uj1CNlNN4JRZlC7xFfqiMbFRU9Z4N6YwIDAQAB\n
+-----END RSA PUBLIC KEY-----"
   }
 }
 ]]></sourcecode>
