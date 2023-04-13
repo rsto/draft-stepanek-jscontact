@@ -197,7 +197,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
       </section>
       <section>
         <name>Validating JSContact Properties</name>
-        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, while vendor-specific properties are defined in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any its properties are invalid.  If a JSContact object is valid, implementations <bcp14>MUST</bcp14> preserve all its properties.</t>
+        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, while vendor-specific properties are defined in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any its properties are invalid.</t>
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
