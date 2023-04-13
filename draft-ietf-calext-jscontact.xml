@@ -213,8 +213,8 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="unknown-properties" numbered="true" toc="default">
           <name>Unknown Properties</name>
           <t>
-      Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the restrictions of an IANA-registered property.</t>
-          <t>Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid.  Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties, but <bcp14>MUST</bcp14> preserve any already existing unknown properties.  This is to allow applications and services to interoperate without data loss, even if they do not implement the same set of JSContact extensions.
+          Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the syntactic restrictions of IANA-registered property names.
+          Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid.  Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties.  Preserving properties that are unknown to the implementation, is to allow applications and services to interoperate without data loss, even if not all of them implement the same set of JSContact extensions.
     </t>
         </section>
       </section>
