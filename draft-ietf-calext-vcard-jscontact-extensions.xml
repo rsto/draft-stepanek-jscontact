@@ -294,7 +294,9 @@ LOCALE:de-AT
             The value is free-form text.  These pronouns shall be used
             when addressing or referring to the contact.  Multiple occurrences of
             this property <bcp14>MAY</bcp14> define pronouns for multiple languages,
-            preferences and contexts.
+            preferences and contexts.  Multiple pronouns in the same language
+            <bcp14>SHOULD</bcp14> use the PREF parameter, otherwise the order of
+            preference is implementation-specific.
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -308,7 +310,7 @@ pronouns-param =
                  ; The following is OPTIONAL,
                  ; but MUST NOT occur more than once.
                  ;
-                 (";" language-param / pref-param / type-param) /
+                 (";" language-param / pref-param / type-param / altid-param) /
                  ;
                  ; The following is OPTIONAL,
                  ; and MAY occur more than once.
@@ -321,7 +323,8 @@ pronouns-param =
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-PRONOUNS;LANG=en:they/them
+PRONOUNS;LANG=en;PREF=1:xe/xir
+PRONOUNS;LANG=en;PREF=2:they/them
 ]]></sourcecode>
           </dd>
         </dl>
