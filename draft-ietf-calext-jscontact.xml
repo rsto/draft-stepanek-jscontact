@@ -1167,7 +1167,7 @@ The value of this street component.</li>
 "cryptoKeys": {
   "mykey1": {
     "@type": "CryptoResource",
-    "uri": "http://www.example.com/keys/jdoe.cer"
+    "uri": "https://www.example.com/keys/jdoe.cer"
   }
 }
 ]]></sourcecode>
@@ -1217,7 +1217,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
   "dir1": {
     "@type": "DirectoryResource",
     "kind": "entry",
-    "uri": "http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
+    "uri": "https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
   },
   "dir2": {
     "@type": "DirectoryResource",
@@ -1278,7 +1278,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
   "res47": {
     "@type": "MediaResource",
     "kind": "logo",
-    "uri": "http://www.example.com/pub/logos/abccorp.jpg"
+    "uri": "https://www.example.com/pub/logos/abccorp.jpg"
   },
   "res1": {
     "@type": "MediaResource",
