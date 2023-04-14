@@ -879,14 +879,14 @@ LOCALE:de-AT
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
-SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/notwitter
 
 "onlineServices": {
   ...
   "OS-1": {
     "@type": "OnlineService",
     "service": "Twitter",
-    "user": "https://twitter.com/ietf",
+    "user": "https://twitter.com/notwitter",
     "kind": "uri"
   }
 }
