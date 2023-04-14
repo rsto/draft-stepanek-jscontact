@@ -53,7 +53,7 @@
     <keyword>vCard</keyword>
     <keyword>jCard</keyword>
     <abstract>
-      <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.</t>
+      <t>This document defines how to convert contact information defined in the JSContact specification from and to vCard.  New JSContact properties are defined to represent vCard properties and parameters that don't have a direct match with a JSContact property.  Similarly, this document updates <xref target="RFC6350"/> by specifying new vCard elements to convert JSContact properties for which no IANA-registered vCard element is defined.</t>
     </abstract>
   </front>
   <middle>
