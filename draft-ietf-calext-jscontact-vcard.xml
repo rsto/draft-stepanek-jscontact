@@ -427,7 +427,7 @@ BIRTHPLACE:
  123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
 DEATHDATE:19960415
 DEATHPLACE:
- 4445 Court Street\nNew England, ND 58647\nU.S.A.
+ 5 Court Street\nNew England, ND 58647\nU.S.A.
 ANNIVERSARY:19860201
 
 "anniversaries": {
@@ -455,7 +455,7 @@ ANNIVERSARY:19860201
     },
     "place": {
       "@type": "Address",
-      "fullAddress": "4445 Court Street\nNew England, ND 58647\nU.S.A."
+      "fullAddress": "5 Court Street\nNew England, ND 58647\nU.S.A."
     }
   },
   "ANNIVERSARY-3" : {
@@ -557,11 +557,31 @@ NICKNAME:Johnny
 "name": {
   "@type": "Name",
   "components":[
-    { "@type": "NameComponent", "kind": "prefix", "value": "Mr." },
-    { "@type": "NameComponent", "kind": "given", "value": "John" },
-    { "@type": "NameComponent", "kind": "surname", "value": "Public" },
-    { "@type": "NameComponent", "kind": "middle", "value": "Quinlan" },
-    { "@type": "NameComponent", "kind": "suffix", "value": "Esq." }
+    {
+      "@type": "NameComponent",
+      "kind": "prefix",
+      "value": "Mr."
+    },
+    {
+      "@type": "NameComponent",
+      "kind": "given",
+      "value": "John"
+    },
+    {
+      "@type": "NameComponent",
+      "kind": "surname",
+      "value": "Public"
+    },
+    {
+      "@type": "NameComponent",
+      "kind": "middle",
+      "value": "Quinlan"
+    },
+    {
+      "@type": "NameComponent",
+      "kind": "suffix",
+      "value": "Esq."
+    }
   ],
   "sortAs": {
     "surname": "Public",
@@ -1045,7 +1065,7 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
             <artwork><![CDATA[
 RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 RELATED;TYPE=contact:https://example.com/directory/john.vcf
-RELATED;VALUE=text:Please contact my assistant John for any inquiries.
+RELATED;VALUE=text:Please contact my deputy John for any inquiries.
 
 "relatedTo" : {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
@@ -1060,7 +1080,7 @@ RELATED;VALUE=text:Please contact my assistant John for any inquiries.
       "contact" : true
     }
   },
-  "Please contact my assistant John for any inquiries." : {
+  "Please contact my deputy John for any inquiries." : {
     "@type" : "Relation",
     "relation" : { }
   }
@@ -1200,8 +1220,7 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
             <name>ORG-DIRECTORY conversion example</name>
             <artwork><![CDATA[
 ORG-DIRECTORY;INDEX=1:https://directory.mycompany.example.com
-ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
- ou=Engineering
+ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Tech,ou=Engineering
 
 "directories": {
   "DIRECTORY-1": {
@@ -1213,7 +1232,7 @@ ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
   "DIRECTORY-2": {
     "@type": "DirectoryResource",
     "kind": "directory",
-    "uri": "ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering",
+    "uri": "ldap://ldap.tech.example/o=Tech,ou=Engineering",
     "pref": 1
   }
 }
@@ -1312,14 +1331,14 @@ REV:19951031T222710Z
           <figure anchor="sound_conversion">
             <name>SOUND conversion example</name>
             <artwork><![CDATA[
-SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
+SOUND:CID:JOHNQPUBLIC.19960229T080000.xyzMail@example.com
 
 "media": {
   ...
   "SOUND-1": {
     "@type": "MediaResource",
     "kind": "sound",
-    "uri": "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
+    "uri": "CID:JOHNQPUBLIC.19960229T080000.xyzMail@example.com"
   }
 }
 ]]></artwork>
