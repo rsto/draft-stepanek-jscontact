@@ -1435,7 +1435,7 @@ CALADRURI:https://example.com/calendar/jdoe
             <name>CALURI conversion example</name>
             <artwork><![CDATA[
 CALURI;PREF=1:https://cal.example.com/calA
-CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
+CALURI;MEDIATYPE=text/calendar:ftps://ftp.example.com/calA.ics
 
 "calendars": {
   "CAL-1": {
@@ -1447,7 +1447,7 @@ CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
   "CAL-2": {
     "@type": "CalendarResource",
     "kind": "calendar",
-    "uri": "ftp://ftp.example.com/calA.ics",
+    "uri": "ftps://ftp.example.com/calA.ics",
     "mediaType": "text/calendar"
   }
 }
@@ -1462,7 +1462,7 @@ CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
             <name>FBURL conversion example</name>
             <artwork><![CDATA[
 FBURL;PREF=1:https://www.example.com/busy/janedoe
-FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
+FBURL;MEDIATYPE=text/calendar:ftps://example.com/busy/project-a.ifb
 
 "calendars": {
   "FBURL-1": {
@@ -1474,7 +1474,7 @@ FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
   "FBURL-2": {
     "@type": "CalendarResource",
     "kind": "freeBusy",
-    "uri": "ftp://example.com/busy/project-a.ifb",
+    "uri": "ftps://example.com/busy/project-a.ifb",
     "mediaType": "text/calendar"
   }
 }
