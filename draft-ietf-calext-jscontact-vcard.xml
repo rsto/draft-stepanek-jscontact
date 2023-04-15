@@ -383,13 +383,13 @@ KIND:individual
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
             <artwork><![CDATA[
-SOURCE:http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
+SOURCE:https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
 
 "directories": {
    "ENTRY-1": {
      "@type": "DirectoryResource",
      "kind": "entry",
-     "uri": "http://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
+     "uri": "https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
    }
 }
 ]]></artwork>
@@ -584,13 +584,13 @@ NICKNAME:Johnny
           <figure anchor="photo_conversion">
             <name>PHOTO conversion example</name>
             <artwork><![CDATA[
-PHOTO:http://www.example.com/pub/photos/jqpublic.gif
+PHOTO:https://www.example.com/pub/photos/jqpublic.gif
 
 "media": {
    "PHOTO-1": {
      "@type": "MediaResource",
      "kind": "photo",
-     "uri": "http://www.example.com/pub/photos/jqpublic.gif"
+     "uri": "https://www.example.com/pub/photos/jqpublic.gif"
    }
 }
 ]]></artwork>
@@ -977,13 +977,13 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
           <figure anchor="logo_conversion">
             <name>LOGO conversion example</name>
             <artwork><![CDATA[
-LOGO:http://www.example.com/pub/logos/abccorp.jpg
+LOGO:https://www.example.com/pub/logos/abccorp.jpg
 
 "media": {
   "LOGO-1": {
     "@type": "MediaResource",
     "kind": "logo",
-    "uri": "http://www.example.com/pub/logos/abccorp.jpg"
+    "uri": "https://www.example.com/pub/logos/abccorp.jpg"
   }
 }
 ]]></artwork>
@@ -1044,7 +1044,7 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
             <name>RELATED conversion example</name>
             <artwork><![CDATA[
 RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-RELATED;TYPE=contact:http://example.com/directory/john.vcf
+RELATED;TYPE=contact:https://example.com/directory/john.vcf
 RELATED;VALUE=text:Please contact my assistant John for any inquiries.
 
 "relatedTo" : {
@@ -1054,7 +1054,7 @@ RELATED;VALUE=text:Please contact my assistant John for any inquiries.
       "friend" : true
     }
   },
-  "http://example.com/directory/john.vcf" : {
+  "https://example.com/directory/john.vcf" : {
     "@type" : "Relation",
     "relation" : {
       "contact" : true
@@ -1199,7 +1199,7 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY conversion example</name>
             <artwork><![CDATA[
-ORG-DIRECTORY;INDEX=1:http://directory.mycompany.example.com
+ORG-DIRECTORY;INDEX=1:https://directory.mycompany.example.com
 ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
  ou=Engineering
 
@@ -1207,7 +1207,7 @@ ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Example%20Tech,
   "DIRECTORY-1": {
     "@type": "DirectoryResource",
     "kind": "directory",
-    "uri": "http://directory.mycompany.example.com",
+    "uri": "https://directory.mycompany.example.com",
     "position": 1
   },
   "DIRECTORY-2": {
@@ -1344,12 +1344,12 @@ UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
           <figure anchor="url_conversion">
             <name>URL conversion example</name>
             <artwork><![CDATA[
-URL:http://example.org/restaurant.french/~chezchic.html
+URL:https://example.org/restaurant.french/~chezchic.html
 
 "links": {
   "LINK-1": {
     "@type": "LinkResource",
-    "uri": "http://example.org/restaurant.french/~chezchic.html"
+    "uri": "https://example.org/restaurant.french/~chezchic.html"
   }
 }
 ]]></artwork>
@@ -1389,12 +1389,12 @@ item1.X-ABLabel:foo
           <figure anchor="key_conversion">
             <name>KEY conversion example</name>
             <artwork><![CDATA[
-KEY:http://www.example.com/keys/jdoe.cer
+KEY:https://www.example.com/keys/jdoe.cer
 
 "cryptoKeys": {
   "KEY-1": {
     "@type": "CryptoResource",
-    "uri": "http://www.example.com/keys/jdoe.cer"
+    "uri": "https://www.example.com/keys/jdoe.cer"
   }
 }
 ]]></artwork>
@@ -1411,7 +1411,7 @@ KEY:http://www.example.com/keys/jdoe.cer
             <name>CALADRURI conversion example</name>
             <artwork><![CDATA[
 CALADRURI;PREF=1:mailto:janedoe@example.com
-CALADRURI:http://example.com/calendar/jdoe
+CALADRURI:https://example.com/calendar/jdoe
 
 "schedulingAddresses": {
   "SCHEDULING-1": {
@@ -1421,7 +1421,7 @@ CALADRURI:http://example.com/calendar/jdoe
   },
   "SCHEDULING-2": {
     "@type": "SchedulingAddress",
-    "uri": "http://example.com/calendar/jdoe"
+    "uri": "https://example.com/calendar/jdoe"
   }
 }
 ]]></artwork>
@@ -1434,14 +1434,14 @@ CALADRURI:http://example.com/calendar/jdoe
           <figure anchor="caluri_conversion">
             <name>CALURI conversion example</name>
             <artwork><![CDATA[
-CALURI;PREF=1:http://cal.example.com/calA
+CALURI;PREF=1:https://cal.example.com/calA
 CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
 
 "calendars": {
   "CAL-1": {
     "@type": "CalendarResource",
     "kind": "calendar",
-    "uri": "http://cal.example.com/calA",
+    "uri": "https://cal.example.com/calA",
     "pref": 1
   },
   "CAL-2": {
@@ -1461,14 +1461,14 @@ CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
           <figure anchor="fburl_conversion">
             <name>FBURL conversion example</name>
             <artwork><![CDATA[
-FBURL;PREF=1:http://www.example.com/busy/janedoe
+FBURL;PREF=1:https://www.example.com/busy/janedoe
 FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
 
 "calendars": {
   "FBURL-1": {
     "@type": "CalendarResource",
     "kind": "freeBusy",
-    "uri": "http://www.example.com/busy/janedoe",
+    "uri": "https://www.example.com/busy/janedoe",
     "pref": 1
   },
   "FBURL-2": {
