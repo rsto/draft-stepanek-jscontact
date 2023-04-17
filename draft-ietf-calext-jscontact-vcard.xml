@@ -1767,7 +1767,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
       </section>
       <section>
         <name>New JSContact Properties</name>
-        <t>IANA is requested to add the following entries to the "JSContact Properties" registry.</t>
+        <t>IANA is requested to add the following entries to the "JSContact Properties" registry.  The Since Version for all properties is 1.0.  The Until Version for all properties is not set.  All RFC section references are for this document.  The change controller for all these properties is IETF.</t>
         <table anchor="tab-iana-property-registry" align="center">
           <name>Initial Contents of the "JSContact Properties" Registry</name>
           <thead>
@@ -1777,9 +1777,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
               <th align="left">Property Context</th>
               <th align="left">Reference or Description</th>
               <th align="left">Intended Usage</th>
-              <th align="left">Since Version</th>
-              <th align="left">Until Version</th>
-              <th align="left">Change Controller</th>
             </tr>
           </thead>
           <!-- Everything in here should be sorted alphabetically: table entries by property name, the references for each property alphabetically by the object type or property they refer to -->
@@ -1792,9 +1789,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
                 <xref target="jscontact-prop-vcardparams" format="default"/>
               </td>
               <td align="left">common</td>
-              <td align="left">1.0</td>
-              <td align="left"/>
-              <td align="left">IETF</td>
             </tr>
             <tr>
               <td align="left">vCardProps</td>
@@ -1804,16 +1798,13 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
                 <xref target="jscontact-prop-vcardprops" format="default"/>
               </td>
               <td align="left">common</td>
-              <td align="left">1.0</td>
-              <td align="left"/>
-              <td align="left">IETF</td>
             </tr>
           </tbody>
         </table>
       </section>
       <section>
         <name>New JSContact Types</name>
-        <t>IANA is requested to add the following entries to the "JSContact Types" registry.</t>
+        <t>IANA is requested to add the following entries to the "JSContact Types" registry.    The Since Version for all properties is 1.0.  The Until Version for all properties is not set.  All RFC section references are for this document.  The change controller for all these properties is IETF.</t>
         <table anchor="tab-iana-jscontact-type-registry" align="left">
           <name>Additional Contents of the "JSContact Types" Registry</name>
           <thead>
@@ -1821,9 +1812,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
               <th align="left">Type Name</th>
               <th align="left">Reference or Description</th>
               <th align="left">Intended Usage</th>
-              <th align="left">Since Version</th>
-              <th align="left">Until Version</th>
-              <th align="left">Change Controller</th>
             </tr>
           </thead>
           <tbody>
@@ -1833,9 +1821,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
                 <xref target="jscontact-prop-vcardprops" format="default"/>
               </td>
               <td align="left">common</td>
-              <td align="left">1.0</td>
-              <td align="left"/>
-              <td align="left">IETF</td>
             </tr>
           </tbody>
         </table>
