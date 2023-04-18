@@ -180,20 +180,13 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <name>Versioning</name>
         <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>@version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
         <t>Implementors are <bcp14>RECOMMENDED</bcp14> to always support the latest version.</t>
-        <section>
-          <name>Version Scheme</name>
-          <t>A JSContact version consists of a numeric major and minor version.  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
-          <sourcecode name="" type="abnf"><![CDATA[
+        <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
+        <sourcecode name="" type="abnf"><![CDATA[
 jsversion = 1*DIGIT "." 1*DIGIT
 ]]></sourcecode>
-          <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared that property definitions and other JSContact elements differ in a backwards-incompatible manner.</t>
-          <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.</t>
-        </section>
-        <section>
-          <name>Version Updates</name>
-          <t>If Expert Review or the IETF working group decides that a new major JSContact version is required, a new standard RFC document <bcp14>MUST</bcp14> be published.  Such an RFC document <bcp14>MUST</bcp14> specify all changes to the former JSContact version.  An RFC document is not required to change the minor JSContact version.</t>
-          <t>Every new JSContact version <bcp14>MUST</bcp14> be registered at IANA in the JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.</t>
-        </section>
+        <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared that property definitions and other JSContact elements differ in a backwards-incompatible manner.</t>
+        <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.</t>
+        <t>Every new JSContact version <bcp14>MUST</bcp14> be registered at IANA in the JSContact Enum Value registry <xref target="tab-iana-enum-card-version"/>.  Changing the major version number resets the minor version number to zero.</t>
       </section>
       <section>
         <name>Validating JSContact Properties</name>
@@ -1670,56 +1663,63 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <name>Creation of the "JSContact" Registry Group</name>
         <t>IANA is asked to create the "JSContact" registry group.  The new registry definitions in the following sections all belong to that group.</t>
       </section>
-      <section anchor="iana-property-registry" numbered="true" toc="default">
-        <name>Creation of the "JSContact Properties" Registry</name>
-        <t>IANA is asked to create the "JSContact Properties" registry.  The purpose of this new registry is to allow interoperability of extensions to JSContact objects.</t>
-        <t>This registry follows the Expert Review process (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>).  If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability.  Preliminary community review for this registry is optional but strongly encouraged.</t>
+      <section anchor="iana-registry-policy" numbered="true" toc="default">
+        <name>Registry Policy and Change Procedures</name>
+        <t>The registry policy for assignments that only require the JSContact minor version to change is Expert Review (<xref target="RFC8126" sectionFormat="comma" section="4.5"/>), optionally amended by Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>).  The registry policy for assignments that require the JSContact major version to change is Expert Review + Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The Designated Expert decides if a major version change is required.  They also decide if public formal documentation is required in addition to Expert Review.</t>
         <t>A registration can have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>.</t>
-        <t>A <tt>reserved</tt> registration reserves a property name without assigning semantics to avoid name collisions with future extensions or protocol use.</t>
-        <t>An <tt>obsolete</tt> registration denotes a property that is no longer expected to be added by up-to-date systems.  A new property has probably been defined covering the obsolete property's semantics.</t>
-        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on.  This typically is the latest specification version that is in effect when the property gets registered.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</t>
-        <t>The JSContact property registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay.  It is designed to encourage vendors to document and register new properties they add for use cases not covered by the original specification, leading to increased interoperability.</t>
-        <section anchor="iana-property-registry-preliminary-community-review" numbered="true" toc="default">
+        <ul>
+          <li>If the "Intended Usage" field is <tt>common</tt>, sufficient documentation is required to enable interoperability.  Preliminary community review for this registry is optional but strongly encouraged.</li>
+          <li>A <tt>reserved</tt> registration reserves an item in the registry without assigning semantics to avoid name collisions with future extensions or protocol use.</li>
+          <li>An <tt>obsolete</tt> registration denotes an item that is no longer expected to be added by up-to-date systems.  A new assignment has probably been defined covering the obsolete item's semantics.</li>
+        </ul>
+        <t>Every registration <bcp14>MUST</bcp14> define the version of the JSContact specification on which the definition of the newly registered, updated or obsoleted item is based on.  This typically is the latest specification version that is in effect when the item gets registered.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-enum-card-version"/>).</t>
+        <t>The registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay.  It is designed to encourage vendors to document and register new items they add for use cases not covered by the original specification, leading to increased interoperability.</t>
+        <section anchor="iana-registry-preliminary-community-review" numbered="true" toc="default">
           <name>Preliminary Community Review</name>
           <t>Notice of a potential new registration <bcp14>SHOULD</bcp14> be sent to the Calext mailing list
 	    &lt;calsify@ietf.org&gt; for review.  This mailing list is appropriate to solicit community feedback
 	      on a proposed new property.</t>
-          <t>Property registrations must be marked with their intended use: "common", "reserved", or
+          <t>New registrations must be marked with their intended use: "common", "reserved", or
 	    "obsolete".</t>
           <t>The intent of the public posting to this list is to solicit comments and feedback on the choice of
-	    the property name, the unambiguity of the specification document, and a review of any
+	    the item name or value, the unambiguity of the specification document, and a review of any
 	      interoperability or security considerations.  The submitter may submit a revised registration proposal
 	        or abandon the registration completely at any time.</t>
         </section>
-        <section anchor="iana-property-registry-submit-request-to-iana" numbered="true" toc="default">
+        <section anchor="iana-registry-submit-request-to-iana" numbered="true" toc="default">
           <name>Submit Request to IANA</name>
           <t>Registration requests can be sent to &lt;iana@iana.org&gt;.</t>
         </section>
-        <section anchor="iana-property-registry-designated-expert-review" numbered="true" toc="default">
+        <section anchor="iana-registry-designated-expert-review" numbered="true" toc="default">
           <name>Designated Expert Review</name>
           <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging
 	    the submitter to document security and privacy considerations.  For a common-use registration, the DE
 	      is expected to confirm that suitable documentation, as described in <xref target="RFC8126" sectionFormat="of" section="4.6"/>, is available to ensure interoperability.  That documentation will
 	        usually be in an RFC, but simple definitions are likely to use a web/wiki page, and if a sentence or
 		  two is deemed sufficient, it could be described in the registry itself.  The DE should also verify that
-		    the property name does not conflict with work that is active or already published within the IETF.  A
+		    the new assignment does not conflict with work that is active or already published within the IETF.  A
 		      published specification is not required for reserved or obsolete registrations.</t>
           <t>The DE will either approve or deny the registration request and publish a notice of the decision
 	    to the Calext WG mailing list or its successor, as well as inform IANA.  A denial notice must be
 	      justified by an explanation, and, in the cases where it is possible, concrete suggestions on how the
 	        request can be modified so as to become acceptable should be provided.</t>
         </section>
-        <section anchor="iana-property-registry-change-procedures" numbered="true" toc="default">
+        <section anchor="iana-registry-change-procedures" numbered="true" toc="default">
           <name>Change Procedures</name>
-          <t>Once a JSContact property has been published by IANA, the change controller may request a
+          <t>Once a JSContact registry group item has been published by IANA, the change controller may request a
 	    change to its definition.  The same procedure that would be appropriate for the original registration
 	      request is used to process a change request.</t>
-          <t>JSContact property registrations may not be deleted; properties that are no longer believed appropriate for use can be declared obsolete by a change to their "intended usage" field; such properties will be clearly marked in the IANA registry.</t>
-          <t>Significant changes to a JSContact property's definition should be requested only when there are
+          <t>JSContact registrations may not be deleted; items that are no longer believed appropriate for use can be declared obsolete by a change to their "intended usage" field; such items will be clearly marked in the IANA registry.</t>
+          <t>Significant changes to a JSContact registry item's definition should be requested only when there are
 	    serious omissions or errors in the published specification, as such changes may cause
 	      interoperability issues.  When review is required, a change request may be denied if it renders
 	        entities that were valid under the previous definition invalid under the new definition.</t>
         </section>
+      </section>
+      <section anchor="iana-property-registry" numbered="true" toc="default">
+        <name>Creation of the "JSContact Properties" Registry</name>
+        <t>IANA is asked to create the "JSContact Properties" registry.  The purpose of this new registry is to allow interoperability of extensions to JSContact objects</t>
+        <t>The registry process for a new property is outlined in <xref target="iana-registry-policy" format="default"/>.</t>
         <section anchor="iana-property-registry-template" numbered="true" toc="default">
           <name>"JSContact Properties" Registry Template</name>
           <dl newline="false">
@@ -2370,7 +2370,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-type-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Types" Registry</name>
-        <t>IANA is asked to create the "JSContact Types" registry.  The purpose of this new registry is to avoid name collisions for JSContact type names and provide a complete reference for all data types used for JSContact property values.  The registration process is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <t>IANA is asked to create the "JSContact Types" registry.  The purpose of this new registry is to avoid name collisions for JSContact type names and provide a complete reference for all data types used for JSContact property values.</t>
+        <t>The registry process for a new type is outlined in <xref target="iana-registry-policy" format="default"/>.</t>
         <section anchor="iana-type-registry-template" numbered="true" toc="default">
           <name>"JSContact Types" Registry Template</name>
           <dl newline="false">
@@ -2646,7 +2647,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-enum-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Enum Values" Registry</name>
-        <t>IANA is asked to create the "JSContact Enum Values" registry.  The purpose of the new registry is  to allow interoperable extension of semantics for JSContact properties with enumerable values.  Each such property will have a subregistry of allowed values.  The registration process for a new enum value or adding a new enumerable property is the same as for the "JSContact Properties" registry, as defined in <xref target="iana-property-registry" format="default"/>.</t>
+        <t>IANA is asked to create the "JSContact Enum Values" registry.  The purpose of the new registry is  to allow interoperable extension of semantics for JSContact properties with enumerable values.  Each such property will have a subregistry of allowed values.</t>
+        <t>The registry process for a new enum value or adding a new enumerable property is outlined in <xref target="iana-registry-policy" format="default"/>.</t>
         <section anchor="iana-enum-registry-registry-template" numbered="true" toc="default">
           <name>"JSContact Enum Values" Registry Property Template</name>
           <t>This template is for adding a subregistry for a new enumerable property to the "JSContact Enum" registry.</t>
