@@ -237,12 +237,9 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
 
 ]]></sourcecode>
           <t>
-        The value of vendor-specific properties can be any valid JSON value, and naming restrictions do not apply to such values.  Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-specific properties.
+            The value of vendor-specific properties can be any valid JSON value, and naming restrictions do not apply to such values.  Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-specific properties.  The example in <xref target="vendor-property-example"/> illustrates this:
       </t>
-          <t>
-        The following all are valid examples of vendor-specific properties.
-      </t>
-          <figure>
+          <figure anchor="vendor-property-example">
             <artwork><![CDATA[
 "example.com:foo": "bar",
 "example.com:foo2": {
@@ -254,11 +251,11 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="vendor-specific-values" numbered="true" toc="default">
           <name>Vendor-specific Values</name>
           <t>
-        Some JSContact IANA-registered properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-specific values.  Such vendor-specific values <bcp14>MUST</bcp14> be valid <tt>v-extension</tt> values as defined in <xref target="vendor-specific-properties"/>.  This is an example for a vendor-specific value:
+            Some JSContact IANA-registered properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-specific values.  Such vendor-specific values <bcp14>MUST</bcp14> be valid <tt>v-extension</tt> values as defined in <xref target="vendor-specific-properties"/>.  The example in <xref target="vendor-value-example"/> illustrates this:
       </t>
-          <figure>
+          <figure anchor="vendor-value-example">
             <artwork><![CDATA[
-"kind": "example.com:kind:foo"
+"kind": "example.com:baz"
 ]]></artwork>
           </figure>
           <t>
@@ -290,7 +287,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <figure anchor="example-version">
             <name><tt>@version</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"@version": "1.0",
+"@version": "1.0"
 ]]></sourcecode>
           </figure>
         </section>
@@ -301,7 +298,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
           <figure anchor="example-created">
             <name><tt>created</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"created": "1994-09-30T14:35:10Z",
+"created": "2022-09-30T14:35:10Z",
 ]]></sourcecode>
           </figure>
         </section>
@@ -413,7 +410,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <figure anchor="example-updated">
             <name><tt>updated</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"updated": "1995-10-31T22:27:10Z"
+"updated": "2021-10-31T22:27:10Z"
 ]]></sourcecode>
           </figure>
         </section>
@@ -846,7 +843,7 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
     "contexts": {
       "work": true
     },
-    "number": "tel:+33-01-23-45-67"
+    "number": "tel:+1-201-555-0123",
   }
 }
 ]]></sourcecode>
@@ -1433,7 +1430,7 @@ Specifies the kind of the anniversary.  This RFC defines a small set of common a
     "kind": "death",
     "date": {
       "@type": "Timestamp",
-      "utc": "1996-10-15T23:10:00Z"
+      "utc": "2019-10-15T23:10:00Z"
     },
     "place": {
       "@type": "Address",
