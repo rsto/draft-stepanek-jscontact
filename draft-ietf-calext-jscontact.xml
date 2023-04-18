@@ -179,7 +179,6 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
       <section>
         <name>Versioning</name>
         <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>@version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
-        <t>Implementors are <bcp14>RECOMMENDED</bcp14> to always support the latest version.</t>
         <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
         <sourcecode name="" type="abnf"><![CDATA[
 jsversion = 1*DIGIT "." 1*DIGIT
