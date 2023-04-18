@@ -76,7 +76,7 @@
           <li><tt>String</tt> - The JSON string type.</li>
           <li><tt>Number</tt> - The JSON number type.</li>
           <li><tt>Boolean</tt> - The JSON boolean type.</li>
-          <li><tt>A[B]</tt> - A JSON object where the keys are all of type <tt>A</tt>, and the values are all of type <tt>B</tt>.</li>
+          <li><tt>A[B]</tt> - A JSON object where the keys are all of the type <tt>A</tt>, and the values are all of the type <tt>B</tt>.</li>
           <li><tt>A[]</tt> - A JSON array of values of type <tt>A</tt>.</li>
           <li><tt>A|B</tt> - The value is either of type <tt>A</tt> or of type <tt>B</tt>.</li>
         </ul>
@@ -161,19 +161,19 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <section anchor="prop-label" numbered="true" toc="default">
           <name>The <tt>label</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property allows to associate contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
+          <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>The <tt>pref</tt> property</name>
           <t>Type: <tt>UnsignedInt</tt></t>
-          <t>This property allows to define a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>
+          <t>This property allows defining a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are independent of each other.</t>
         </section>
         <section anchor="prop-type" numbered="true" toc="default">
           <name>The <tt>@type</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property defines the JSContact type of a JSContact object.  It allows implementations to determine which JSContact type a given JSON object represents.  For example, the value of the <tt>@type</tt> property of a <xref target="card">Card</xref> is <tt>Card</tt>.  An implementation now knows to parse a JSON object with such a property to a JSContact Card.</t>
+          <t>This property defines which JSContact type a given JSON object represents.  For example, the value of the <tt>@type</tt> property of a <xref target="card">Card</xref> object is <tt>Card</tt>.  An implementation now knows to parse a JSON object with such a property to a JSContact Card.</t>
         </section>
       </section>
       <section>
@@ -188,7 +188,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
       </section>
       <section>
         <name>Validating JSContact Properties</name>
-        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties with regards to validation: IANA-registered properties and unknown properties are defined in this section, while vendor-specific properties are defined in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any its properties are invalid.</t>
+        <t>JSContact objects are represented as I-JSON objects <xref target="RFC7493"/> and the keys of such objects are called properties.  This specification distinguishes between three kinds of properties regarding validation: IANA-registered properties and unknown properties are defined in this section, while vendor-specific properties are defined in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any of its properties are invalid.</t>
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
@@ -198,7 +198,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card <tt>@version</tt> property (<xref target="prop-version"/>).
       </t>
           <t>
-            IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/>).  Notable exceptions of this rule are metadata properties such as <xref target="prop-type"><tt>@type</tt></xref> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
+            IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/>).  Notable exceptions to this rule are metadata properties such as <xref target="prop-type"><tt>@type</tt></xref> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
 </t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
@@ -215,7 +215,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="vendor-specific-properties" numbered="true" toc="default">
           <name>Vendor-specific Properties</name>
           <t>
-            Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix followed by a name, as produced by the <tt>v-extension</tt> ABNF below.  The vendor-specific prefix <bcp14>MUST</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its sub-domain names are reserved for IETF specifications.  The name <bcp14>SHOULD NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> for that property.
+            Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix followed by a name, as produced by the <tt>v-extension</tt> ABNF below.  The vendor-specific prefix <bcp14>MUST</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its subdomain names are reserved for IETF specifications.  The name <bcp14>SHOULD NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> for that property.
       </t>
           <t>
         Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property as outlined in the above paragraph.
@@ -262,7 +262,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
 ]]></artwork>
           </figure>
           <t>
-      Vendors are strongly encouraged to specify new standard values once a vendor-specific turns out to be useful also for other systems.
+      Vendors are strongly encouraged to specify a new standard value once a vendor-specific one turns out to be useful also for other systems.
       </t>
         </section>
       </section>
@@ -518,18 +518,18 @@ The kind of this name component.  The value <bcp14>MUST</bcp14> be either one of
         <section anchor="nickNames" numbered="true" toc="default">
           <name>nickNames</name>
           <t>Type: <tt>Id[NickName]</tt> (optional).</t>
-          <t>The nick names of the entity represented by this Card.  A NickName object has the following properties:</t>
+          <t>The nicknames of the entity represented by this Card.  A NickName object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NickName</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>name: <tt>String</tt> (mandatory).
-            The nick name.
+            The nickname.
         </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional)
-The contexts in which to use this nick name.  Also see <xref target="prop-contexts"/>.</li>
+The contexts in which to use this nickname.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
-            The preference of this nick name in relation to other nick names.  Also see <xref target="prop-pref"/>.</li>
+            The preference of this nickname in relation to other nicknames.  Also see <xref target="prop-pref"/>.</li>
           </ul>
           <figure anchor="example-nickNames">
             <name><tt>nickNames</tt> example</name>
@@ -629,7 +629,7 @@ The contexts in which association with this organization apply.  For example, me
                   <tt>neuter</tt>
                 </li>
               </ul>
-              <t>Note that the grammatical gender does not allow to infer the gender identities or assigned sex of the contact.</t>
+              <t>Note that the grammatical gender does not allow inferring the gender identities or assigned sex of the contact.</t>
             </li>
             <li>
               <t>pronouns: <tt>Id[Pronouns]</tt> (optional).
@@ -672,7 +672,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
         <section anchor="titles" numbered="true" toc="default">
           <name>titles</name>
           <t>Type : <tt>Id[Title]</tt> (optional).</t>
-          <t>The job titles or functional positions of the entity represented by this Card.  A Title has object the following properties:</t>
+          <t>The job titles or functional positions of the entity represented by this Card.  A Title object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt> (<xref target="iana-type-registry-contents"/>).
@@ -684,7 +684,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
           Describes the organizational or situational kind of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.  If set, the property value <bcp14>MUST</bcp14> either be one of <tt>title</tt> and <tt>role</tt>, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>).
                                     </li>
             <li>organization: <tt>Id</tt> (optional).
-            The id of the organization in which this title is held.
+            The identifier of the organization in which this title is held.
         </li>
           </ul>
           <figure anchor="example-titles">
@@ -762,7 +762,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt> (<xref target="iana-type-registry-contents"/>).
         </li>
             <li>service: <tt>String</tt> (optional).
-              The name of the online service or protocol.  This <bcp14>SHOULD</bcp14> be the service name including capitalization, but names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.  Typically the service name is the one which the providers of that service use on their web sites, in their apps or other publishing material.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
+              The name of the online service or protocol.  The name <bcp14>SHOULD</bcp14> be capitalized the same as on the service's website, app or publishing material, but names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>user: <tt>String</tt> (mandatory).
               This identifies the entity represented by this Card at this online service.  The <tt>kind</tt> property defines how to interpret the value.
         </li>
@@ -1009,7 +1009,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
         <section anchor="addresses" numbered="true" toc="default">
           <name>addresses</name>
           <t>Type: <tt>Id[Address]</tt> (optional).</t>
-          <t>A map of address ids to Address objects, containing physical locations.  An Address object has the following properties:</t>
+          <t>A map of address identifiers to Address objects, containing physical locations.  An Address object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Address</tt> (<xref target="iana-type-registry-contents"/>).
@@ -1020,7 +1020,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           </t>
             </li>
             <li>locality: <tt>String</tt> (optional).
-The city, town, village, post town, or other locality within which the street address may be found.</li>
+The city, town, village, post-town, or other locality within which the street address may be found.</li>
             <li>region: <tt>String</tt> (optional).
 The province, such as a state, county, or canton within which the locality may be found.</li>
             <li>country: <tt>String</tt> (optional).
@@ -1228,7 +1228,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           </ul>
           <t>The <tt>kind</tt> property value either is not set, or <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>) or vendor-specific (<xref target="vendor-specific-properties"/>):</t>
           <ul>
-            <li><tt>contact</tt> The resource is an URI by which the entity represented by this Card may be contacted, including web forms or other media that require user interaction.</li>
+            <li><tt>contact</tt> The resource is a URI by which the entity represented by this Card may be contacted, including web forms or other media that require user interaction.</li>
           </ul>
           <figure anchor="example-links">
             <name><tt>links</tt> example</name>
@@ -1288,7 +1288,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional).</t>
           <t>This property localizes property values in this Card to languages other than the main locale.  Its purpose is to provide language-specific alternatives to existing values, not to add new values.  In other words, a localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant.</t>
-          <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
+          <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the <tt>localizations</tt> property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
           <t>Conceptually, a Card is localized as follows:</t>
           <ul>
             <li>Determine the language tag in which this Card should be localized in.</li>
@@ -3423,7 +3423,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>Contact information is very privacy sensitive.  It can reveal the identity, location and credentials information, employment status, interests and hobbies, and social network of a user.  Its transmission and storage must be done carefully to protect it from possible threats, such as eavesdropping, replay, message insertion, deletion, modification, and on-path attacks.</t>
+      <t>Contact information is very privacy-sensitive.  It can reveal the identity, location and credentials information, employment status, interests and hobbies, and social network of a user.  Its transmission and storage must be done carefully to protect it from possible threats, such as eavesdropping, replay, message insertion, deletion, modification, and on-path attacks.</t>
       <t>The data being stored and transmitted may be used in systems with real-world consequences.  For example, a malicious actor might provide JSContact data that uses the name of another person but insert their contact details to impersonate the unknown victim.  Such systems must be careful to authenticate all data they receive to prevent them from being subverted and ensure the change comes from an authorized entity.</t>
       <t>This document only defines the data format; such considerations are primarily the concern of the API or method of storage and transmission of such files.</t>
       <section anchor="json-parsing" numbered="true" toc="default">
