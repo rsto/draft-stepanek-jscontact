@@ -435,7 +435,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="name" numbered="true" toc="default">
           <name>name</name>
           <t>Type: <tt>Name</tt> (optional).</t>
-          <t>The name of the entity represented by this Card.  This can be any type of name, e.g. it can but need not be the legal name of a person.</t>
+          <t>The name of the entity represented by this Card.  This can be any type of name, e.g. it can but need not be the legal name of a person.  The definition of the <xref target="fullName"><tt>fullName</tt></xref> property describes how the <tt>name</tt> and <tt>fullName</tt> properties relate.</t>
           <t>A Name object has the following properties</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (mandatory).
@@ -1016,7 +1016,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           </li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
-              The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.  The StreetComponent object type is defined in the paragraph below.
+              The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.  The StreetComponent object type is defined in the paragraph below.
           </t>
             </li>
             <li>locality: <tt>String</tt> (optional).
