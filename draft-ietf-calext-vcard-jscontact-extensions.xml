@@ -341,7 +341,7 @@ PRONOUNS;LANG=en;PREF=2:they/them
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI.  It <bcp14>MUST</bcp14> be assigned if the value type is TEXT.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
+          <dd>The SERVICE-TYPE parameter <bcp14>MUST</bcp14> be assigned to this property if the value type is TEXT, it <bcp14>MAY</bcp14> be assigned if the value type is URI.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
           <dt>Description:</dt>
           <dd>
             Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides an IANA-registered property for the same purpose.  In addition to the typical use of this property with URI values, it also allows setting usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.  Names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.
