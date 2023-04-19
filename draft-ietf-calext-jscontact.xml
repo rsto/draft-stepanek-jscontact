@@ -184,17 +184,17 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>@version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
         <section>
           <name>Version format and requirements</name>
-        <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
-        <sourcecode name="" type="abnf"><![CDATA[
+          <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
+          <sourcecode name="" type="abnf"><![CDATA[
 jsversion = 1*DIGIT "." 1*DIGIT
 ]]></sourcecode>
-        <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared that property definitions and other JSContact elements differ in a backwards-incompatible manner.</t>
-        <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
-      </section>
-      <section anchor="current-version">
-        <name>Current version</name>
-        <t>This specification registers JSContact version value <tt>1.0</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
-      </section>
+          <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared that property definitions and other JSContact elements differ in a backwards-incompatible manner.</t>
+          <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
+        </section>
+        <section anchor="current-version">
+          <name>Current version</name>
+          <t>This specification registers JSContact version value <tt>1.0</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
+        </section>
       </section>
       <section>
         <name>Validating JSContact Properties</name>
