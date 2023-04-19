@@ -362,7 +362,7 @@ socialpr-value = URI / text
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
 SOCIALPROFILE:https://github.com/github
 SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=TEXT:peter94
 ]]></sourcecode>
@@ -579,7 +579,7 @@ service-type-param    = param-value
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/ietf
+SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
 ]]></sourcecode>
           </dd>
         </dl>

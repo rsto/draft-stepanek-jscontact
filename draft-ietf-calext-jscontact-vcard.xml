@@ -899,14 +899,14 @@ LOCALE:de-AT
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
-SOCIALPROFILE;SERVICE-TYPE=Twitter:https://twitter.com/notwitter
+SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
 
 "onlineServices": {
   ...
   "OS-1": {
     "@type": "OnlineService",
-    "service": "Twitter",
-    "user": "https://twitter.com/notwitter",
+    "service": "Mastodon",
+    "user": "https://example.com/@foo",
     "kind": "uri"
   }
 }
