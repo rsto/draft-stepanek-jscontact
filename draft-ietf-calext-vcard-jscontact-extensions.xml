@@ -364,7 +364,7 @@ socialpr-value = URI / text
             <sourcecode name=""><![CDATA[
 SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
 SOCIALPROFILE:https://github.com/ietf
-SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=TEXT:peter94
+SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=text:peter94
 ]]></sourcecode>
           </dd>
         </dl>
