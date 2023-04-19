@@ -55,8 +55,11 @@
         <li>Extensions, such as new properties and components, <bcp14>MUST NOT</bcp14> lead to requiring an update to this document.</li>
       </ul>
       <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>.  Using JSON is mostly a pragmatic choice: its widespread use makes JSContact easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
-      <section anchor="relation-to-the-xcard-and-jcard-formats" numbered="true" toc="default">
-        <name>Relation to the xCard and jCard formats</name>
+      <section anchor="relation-to-vcard" numbered="true" toc="default">
+        <name>Motivation and Relation to vCard, jCard and xCard</name>
+        <t>The vCard data format <xref target="RFC6350"/> is an interchange format for contacts data between addressbook service providers and vendors.  However, this format has gone through multiple specifications iterations with only a subset of its deprecated <xref target="RFC2426">version 3</xref> being widely in use.  As a consequence, products and services internally use a richer contact data model than they expose when serialising that information to vCard.  In addition, service providers often use a proprietary JSON representation of contact data in their APIs.</t>
+        <t>JSContact provides a standard JSON-based data model and representation of contact data as an alternative to proprietary formats.</t>
+        <t>While writing this document, several features missing in vCard were brought to the attention of the authors, such as social media contacts, gender pronouns and others.  This highlights how vCard is not perceived as an evolving format and consequently hasn't been updated since close to ten years.  JSContact addresses these unmet demands and defines new vCard properties and parameters to allow interchanging them in both formats.</t>
         <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data, in XML and JSON format respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
       </section>
       <section anchor="notational-conventions" numbered="true" toc="default">
@@ -3448,6 +3451,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2046.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2426.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3339.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4122.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml"/>
