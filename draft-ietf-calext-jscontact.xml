@@ -164,7 +164,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <section anchor="prop-label" numbered="true" toc="default">
           <name>The <tt>label</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  Such labels <bcp14>SHOULD</bcp14> be succinct, so that they properly display on small graphical interfaces and screens.</t>
+          <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  Such labels best be succinct to properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>The <tt>pref</tt> property</name>
@@ -209,7 +209,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card <tt>@version</tt> property (<xref target="prop-version"/>).
       </t>
           <t>
-            IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>SHOULD</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/>).  Notable exceptions to this rule are metadata properties such as <xref target="prop-type"><tt>@type</tt></xref> and <tt>@version</tt> defined in later sections of this document.  IANA-registered property names <bcp14>SHOULD</bcp14> be notated in lower camel case.
+            IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>MUST</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/>) or the <tt>COMMERCIAL AT</tt> (U+0040) character.  IANA-registered property names <bcp14>MUST</bcp14> be notated in lower camel case.
 </t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
@@ -226,7 +226,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="vendor-specific-properties" numbered="true" toc="default">
           <name>Vendor-specific Properties</name>
           <t>
-            Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix followed by a name, as produced by the <tt>v-extension</tt> ABNF below.  The vendor-specific prefix <bcp14>MUST</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its subdomain names are reserved for IETF specifications.  The name <bcp14>SHOULD NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> for that property.
+            Vendor-specific property names <bcp14>MUST</bcp14> start with a vendor-specific prefix followed by a name, as produced by the <tt>v-extension</tt> ABNF below.  The vendor-specific prefix <bcp14>MUST</bcp14> be a domain name under control of the service or application that sets the property, but it need not resolve in the Domain Name System <xref target="RFC1034"/> and <xref target="RFC1035"/>.  The prefix <tt>ietf.org</tt> and its subdomain names are reserved for IETF specifications.  The name <bcp14>MUST NOT</bcp14> contain the <tt>TILDE</tt> (U+007E) and <tt>SOLIDUS</tt> (U+002F) characters, as these require special-escaping when encoding a JSON Pointer <xref target="RFC6901"/> for that property.
       </t>
           <t>
         Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property as outlined in the above paragraph.
@@ -242,9 +242,8 @@ v-label = alnum-int / alnum-int *(alnum-int / "-") alnum-int
 alnum-int = ALPHA / DIGIT / NON-ASCII
   ; see RFC 6350 Section 3.3
 
-v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
-  ; any characters except CTLs and DQUOTE
-  ; use of "/" (%x2f) and "~" (%x7e) is discouraged
+v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
+  ; any characters except CTLs, DQUOTE, SOLIDUS and TILDE
 
 ]]></sourcecode>
           <t>
@@ -432,7 +431,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="fullName" numbered="true" toc="default">
           <name>fullName</name>
           <t>Type: <tt>String</tt> (OPTIONAL).</t>
-          <t>This is the full name of the entity represented by this Card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>name</tt> property as the name of the entity represented by this Card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated name component values of the <tt>name</tt> property in the <tt>fullName</tt> property value.</t>
+          <t>This is the full name of the entity represented by this Card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set.</t>
           <figure anchor="example-fullName">
             <name><tt>fullName</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -451,7 +450,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </li>
             <li>
               <t>components: <tt>NameComponent[]</tt> (REQUIRED).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
-              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  If at least one of two adjacent name components is of type <tt>separator</tt> then implementations <bcp14>SHOULD</bcp14> join their values without any additional character.  Otherwise, inserting a single Space character in between name component values is a good choice.</t>
+              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  Joining a separator component with another name component typically does not require inserting any additional character. Otherwise, inserting a single Space character in between name component values is a good choice.</t>
             </li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (OPTIONAL).</t>
@@ -519,7 +518,7 @@ The kind of this name component.  The value <bcp14>MUST</bcp14> be either one of
               <t>rank: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
                 Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
               <t>For example, two name components of type <tt>surname</tt> may have their <tt>rank</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
-              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>SHOULD</bcp14> inspect the <tt>locale</tt> property of the Card to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
+              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>MAY</bcp14> inspect the <tt>locale</tt> property of the Card to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
           </ul>
         </section>
@@ -566,7 +565,7 @@ The contexts in which to use this nickname.  Also see <xref target="prop-context
             A list of organizational units.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
         </li>
             <li>sortAs: <tt>String</tt> (OPTIONAL).
-            This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+            This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>MAY</bcp14> be used for comparison.
         </li>
             <li>contexts: <tt>String[Boolean]</tt> (OPTIONAL).
 The contexts in which association with this organization apply.  For example, membership in a choir may only apply in a private context.  Also see <xref target="prop-contexts"/>.</li>
@@ -580,7 +579,7 @@ The contexts in which association with this organization apply.  For example, me
             The name of this organizational unit.
         </li>
             <li>sortAs: <tt>String</tt> (OPTIONAL).
-            This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name.  The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>SHOULD</bcp14> be used for comparison.
+            This defines how this organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by name.  The level is defined by the array index of this organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>MAY</bcp14> be used for comparison.
         </li>
           </ul>
           <figure anchor="example-organizations">
@@ -770,7 +769,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt> (<xref target="iana-type-registry-contents"/>).
         </li>
             <li>service: <tt>String</tt> (OPTIONAL).
-              The name of the online service or protocol.  The name <bcp14>SHOULD</bcp14> be capitalized the same as on the service's website, app or publishing material, but names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
+              The name of the online service or protocol.  The name <bcp14>MAY</bcp14> be capitalized the same as on the service's website, app or publishing material, but names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>user: <tt>String</tt> (REQUIRED).
               This identifies the entity represented by this Card at this online service.  The <tt>kind</tt> property defines how to interpret the value.
         </li>
@@ -1049,7 +1048,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               </ul>
             </li>
             <li>fullAddress: <tt>String</tt> (OPTIONAL).
-            This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.  If both properties are set, applications <bcp14>SHOULD</bcp14> display the contents of the <tt>street</tt> property as the street address of the entity represented by this Card.  Applications <bcp14>SHOULD NOT</bcp14> store the concatenated street component values of the <tt>street</tt> property in the <tt>fullAddress</tt> property value.
+              This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.</t>
             </li>
             <li>pref: <tt>UnsignedInt</tt> (OPTIONAL).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
@@ -1206,7 +1205,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <t>In addition, the DirectoryResource object has the following property:</t>
           <ul>
             <li>listAs: <tt>UnsignedInt</tt> (OPTIONAL).
-          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display the directories of a Card in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
         </li>
           </ul>
           <figure anchor="example-directories">
@@ -1537,7 +1536,7 @@ The actual information.  This is free-text, but future specifications MAY restri
             <li>level: <tt>String</tt> (OPTIONAL).
             Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>) or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (OPTIONAL).
-            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Applications that display personal information entries in a list <bcp14>SHOULD</bcp14> order them such that entries with a higher property value sort after lower ones.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
         </li>
             <li>label: <tt>String</tt> (OPTIONAL).
             A custom label.  See <xref target="prop-label"/>.</li>
@@ -1682,7 +1681,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <t>The registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check it is coherent without excessive time delay.  It is designed to encourage vendors to document and register new items they add for use cases not covered by the original specification, leading to increased interoperability.</t>
         <section anchor="iana-registry-preliminary-community-review" numbered="true" toc="default">
           <name>Preliminary Community Review</name>
-          <t>Notice of a potential new registration <bcp14>SHOULD</bcp14> be sent to the Calext mailing list
+          <t>Notice of a potential new registration <bcp14>MUST</bcp14> be sent to the Calext mailing list
 	    &lt;calsify@ietf.org&gt; for review.  This mailing list is appropriate to solicit community feedback
 	      on a proposed new property.</t>
           <t>New registrations must be marked with their intended use: "common", "reserved", or
@@ -1734,7 +1733,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
 		    registered for
 		        any of the object types listed in the "Property Context" field of this registration.  Other object
 			    types <bcp14>MAY</bcp14> already have registered a different property with the same name; however,
-			        the same name <bcp14>SHOULD</bcp14> only be used when the semantics are analogous.</dd>
+			        the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.</dd>
             <dt>Property Type:</dt>
             <dd> This is the type of this property, using type signatures, as specified in <xref target="type-signatures" format="default"/>.
 		    The property type <bcp14>MUST</bcp14> be registered in the "JSContact Types" registry.</dd>
