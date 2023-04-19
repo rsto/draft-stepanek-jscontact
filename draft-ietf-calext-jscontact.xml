@@ -1048,7 +1048,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               </ul>
             </li>
             <li>fullAddress: <tt>String</tt> (OPTIONAL).
-              This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.</t>
+              This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
             <li>pref: <tt>UnsignedInt</tt> (OPTIONAL).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
