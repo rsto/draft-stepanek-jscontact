@@ -105,8 +105,9 @@ contact-channel-pref-value = "ADR" / "EMAIL" / "IMPP" / "TEL" /
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-CONTACT-CHANNEL-PREF;PREF=1:EMAIL
-CONTACT-CHANNEL-PREF;PREF=2:TEL
+CONTACT-CHANNEL-PREF;TYPE=work;PREF=1:EMAIL
+CONTACT-CHANNEL-PREF;TYPE=work;PREF=2:TEL
+CONTACT-CHANNEL-PREF;TYPE=home:TEL
 ]]></sourcecode>
           </dd>
         </dl>
