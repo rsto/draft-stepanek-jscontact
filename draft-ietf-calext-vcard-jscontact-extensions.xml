@@ -183,8 +183,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
             <t>
               This property defines the grammatical gender that the contact prefers
               to be addressed by or referred at.  Multiple occurrences of this property
-              are allowed, but <bcp14>SHOULD</bcp14> be distinguished by the LANG
-              parameter.
+              <bcp14>MUST</bcp14> be distinguished by the LANG parameter.
             </t>
             <t>
               Many human languages use grammatical genders in salutations and other
