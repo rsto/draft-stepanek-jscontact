@@ -164,7 +164,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <section anchor="prop-label" numbered="true" toc="default">
           <name>The <tt>label</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  While this specification does not place further restrictions on the value, implementors <bcp14>SHOULD</bcp14> take in mind that labels best be succinct, so that they properly display on small graphical interfaces and screens.</t>
+          <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  Such labels <bcp14>SHOULD</bcp14> be succinct, so that they properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>The <tt>pref</tt> property</name>
@@ -179,15 +179,22 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>This property defines which JSContact type a given JSON object represents.  For example, the value of the <tt>@type</tt> property of a <xref target="card">Card</xref> object is <tt>Card</tt>.  An implementation now knows to parse a JSON object with such a property to a JSContact Card.</t>
         </section>
       </section>
-      <section>
+      <section anchor="versioning">
         <name>Versioning</name>
         <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>@version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
+        <section>
+          <name>Version format and requirements</name>
         <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
         <sourcecode name="" type="abnf"><![CDATA[
 jsversion = 1*DIGIT "." 1*DIGIT
 ]]></sourcecode>
         <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared that property definitions and other JSContact elements differ in a backwards-incompatible manner.</t>
         <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
+      </section>
+      <section anchor="current-version">
+        <name>Current version</name>
+        <t>This specification registers JSContact version value <tt>1.0</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
+      </section>
       </section>
       <section>
         <name>Validating JSContact Properties</name>
@@ -286,7 +293,7 @@ v-name = 1*(WSP / "!" / %x23-7e / NON-ASCII)
         <section anchor="prop-version" numbered="true" toc="default">
           <name>@version</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the JSContact version used to define this Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>@version</tt> property.  This specification registers the JSContact version value <tt>1.0</tt> (<xref target="tab-iana-enum-card-version"/>).</t>
+          <t>Specifies the JSContact version used to define this Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>@version</tt> property.  Also see <xref target="current-version"/>.</t>
           <figure anchor="example-version">
             <name><tt>@version</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
