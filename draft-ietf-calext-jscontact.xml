@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" submissionType="IETF" category="std" xml:lang="en" consensus="true" docName="draft-ietf-calext-jscontact-09" obsoletes="" updates="" tocInclude="true" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" submissionType="IETF" category="std" xml:lang="en" consensus="true" docName="draft-ietf-calext-jscontact-10" obsoletes="" updates="" tocInclude="true" symRefs="true" sortRefs="true" version="3">
   <!-- xml2rfc v2v3 conversion 3.6.0 -->
   <front>
     <title abbrev="JSContact">JSContact: A JSON representation of contact data</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-09"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-10"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>Fastmail</organization>
       <address>
@@ -31,7 +31,7 @@
         <email>mario.loffredo@iit.cnr.it</email>
       </address>
     </author>
-    <date year="2023" month="April" day="5"/>
+    <date year="2023" month="April" day="19"/>
     <area>Applications</area>
     <workgroup>Calendaring Extensions</workgroup>
     <keyword>JSON</keyword>
