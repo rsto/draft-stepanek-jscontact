@@ -140,12 +140,12 @@ created       = "CREATED" createdparam ":" timestamp
 
 createdparam  = *(
                  ;
-                 ; The following is OPTIONAL,
+                 ; The following are OPTIONAL,
                  ; but MUST NOT occur more than once.
                  ;
-                 (";" "VALUE" "=" "TIMESTAMP") /
+                 (";" "VALUE" "=" "timestamp") /
                  ;
-                 ; The following is OPTIONAL,
+                 ; The following are OPTIONAL,
                  ; and MAY occur more than once.
                  ;
                  (";" any-param)
@@ -205,12 +205,12 @@ gram-gender       = "GRAMMATICAL-GENDER" gram-gender-param
 gram-gender-param =
                 *(
                  ;
-                 ; The following is OPTIONAL,
+                 ; The following are OPTIONAL,
                  ; but MUST NOT occur more than once.
                  ;
                  (";" language-param) /
                  ;
-                 ; The following is OPTIONAL,
+                 ; The following are OPTIONAL,
                  ; and MAY occur more than once.
                  ;
                  (";" any-param)
@@ -307,12 +307,15 @@ pronouns       = "PRONOUNS" pronouns-param ":" text
 pronouns-param =
                 *(
                  ;
-                 ; The following is OPTIONAL,
+                 ; The following are OPTIONAL,
                  ; but MUST NOT occur more than once.
                  ;
-                 (";" language-param / pref-param / type-param / altid-param) /
+                 (";" language-param) /
+                 (";" pref-param) /
+                 (";" type-param) /
+                 (";" altid-param) /
                  ;
-                 ; The following is OPTIONAL,
+                 ; The following are OPTIONAL,
                  ; and MAY occur more than once.
                  ;
                  (";" any-param)
