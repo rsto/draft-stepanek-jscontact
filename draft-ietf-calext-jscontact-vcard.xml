@@ -86,7 +86,7 @@
         </section>
         <section>
           <name>Choosing identifiers</name>
-          <t>Multivalued properties in JSContact typically are represented as a JSON object where the object keys are of the <tt>Id</tt> type and the object values are the converted vCard property.  In absence of the PROP-ID parameter (see <xref target="vcard-param-propid"/>), implementations are free to choose any identifier for such entries.  Whatever identifier generation scheme implementations use, they <bcp14>SHOULD</bcp14> generate values of short character length.  For example, this could be an incrementing number across all <tt>Id</tt>s or only unique within one JSON object.</t>
+          <t>Multivalued properties in JSContact typically are represented as a JSON object where the object keys are of the <tt>Id</tt> type and the object values are the converted vCard property.  In absence of the PROP-ID parameter (see <xref target="vcard-param-propid"/>), implementations are free to choose any identifier for such entries.  Whatever identifier generation scheme implementations use, they <bcp14>MUST</bcp14> generate values that are valid according to the definition of the <tt>Id</tt> type in <xref target="I-D.ietf-calext-jscontact"/>.  For example, this could be an incrementing number across all <tt>Id</tt>s or only unique within one JSON object.</t>
         </section>
       </section>
       <section anchor="vcard-types">
