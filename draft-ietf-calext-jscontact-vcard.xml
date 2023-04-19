@@ -99,7 +99,7 @@
           <name>DATE, TIME, DATE-TIME, DATE-AND-OR-TIME, and TIMESTAMP</name>
           <t>The TIMESTAMP type generally converts to the <tt>UTCDateTime</tt>. It converts to the <tt>Timestamp</tt> type for anniversaries.</t>
           <t>The DATE type converts to the <tt>PartialDate</tt> type, which only is relevant for anniversaries.  This does not apply to DATE values that only define a month or a day.</t>
-          <t>The TIME, DATE-TIME, DATE-AND-OR-TIME types and DATE type values that only define a month or day do not convert to any JSContact type.  vCard properties or parameters having such values <bcp14>MAY</bcp14> convert as defined in <xref target="new-jscontact"/>.</t>
+          <t>The TIME, DATE-TIME, DATE-AND-OR-TIME types and DATE type values that only define a month or day do not convert to a JSContact datetime type.  Instead, vCard properties or parameters having such values convert to the properties defined in <xref target="new-jscontact"/>.</t>
         </section>
         <section>
           <name>INTEGER</name>
