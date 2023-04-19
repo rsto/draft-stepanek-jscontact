@@ -573,7 +573,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <dt>Format definition:</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
-service-type-param    = param-value
+service-type-param    = "SERVICE-TYPE" "=" param-value
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
