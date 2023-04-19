@@ -344,7 +344,7 @@ PRONOUNS;LANG=en;PREF=2:they/them
           <dd>The SERVICE-TYPE parameter <bcp14>SHOULD</bcp14> be assigned to this property if the value type is URI.  It <bcp14>MUST</bcp14> be assigned if the value type is TEXT.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
           <dt>Description:</dt>
           <dd>
-            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides an IANA-registered property for the same purpose.  In addition to the typical use of this property with URI values, it also allows to set usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.  Names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.
+            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides an IANA-registered property for the same purpose.  In addition to the typical use of this property with URI values, it also allows setting usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.  Names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -381,7 +381,7 @@ SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=text:peter94
           <dd>This parameter identifies the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows to name an author as free-text value (see <xref target="param-author-name"/>).</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows naming an author as free-text value (see <xref target="param-author-name"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -406,7 +406,7 @@ NOTE;AUTHOR="mailto:john@example.com":This is some note.
           <dd>This parameter names the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It names the author as a free-text value.  The parameter value <bcp14>MUST NOT</bcp14> be empty.  Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows to identify an author by URI (see <xref target="param-author"/>).</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It names the author as a free-text value.  The parameter value <bcp14>MUST NOT</bcp14> be empty.  Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows identifying an author by URI (see <xref target="param-author"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -432,7 +432,7 @@ NOTE;AUTHOR-NAME="_:l33tHckr:_":A note by an unusual author name.
           <dd>This parameter defines the date and time when a property was created in a vCard.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created.  The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" section="4.3.5"/>.  Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp.  It is up to implementations to decide if a property change resembles an update or rather a delete and create.</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created.  The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" section="4.3.5"/>.  Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -486,8 +486,8 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           <dd>This parameter specifies a ranking among the name components of a vCard N property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>The RANKS parameter on a N property assigns a rank among the same-typed name components of a N property value.  Some cultures assign ranks to name components, such as a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.  But the N property value 	does not allow to infer a culturally or otherwise significant rank from the order in which same-typed name components are stored in it.</t>
-            <t>The parameter value is structurally equivalent to the multivalued N property value: ranks of different name component types are separated by semi-colon, ranks among the same name component types are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined. If the RANKS parameter is set, its value <bcp14>MUST NOT</bcp14> be the empty string.</t>
+            <t>The RANKS parameter on an N property assigns a rank among the same-typed name components of an N property value.  Some cultures assign ranks to name components, such as a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.  But the N property value	does not allow inferring a culturally or otherwise significant rank from the order in which same-typed name components are stored in it.</t>
+            <t>The parameter value is structurally equivalent to the multivalued N property value: ranks of different name component types are separated by semicolon, ranks among the same name component types are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined. If the RANKS parameter is set, its value <bcp14>MUST NOT</bcp14> be the empty string.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
