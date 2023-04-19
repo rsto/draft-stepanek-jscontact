@@ -205,8 +205,7 @@ item2.X-FOO:bar
             <li>One Patch Per Property: For each vCard property with a LANGUAGE parameter, set the complete path in the PatchObject to the JSContact property that the vCard property converts to.  The value of the patch is the converted property value.  This is simple to process and adequate if the vCard only contains a few properties with LANGUAGE parameter.</li>
             <li>Bundle Patches by Parent: If a PatchObject contains multiple paths that have the same parent paths, then it might be possible to combine these patches into one patch that patches the parent property.  This is possible if the property in the Card is patched in its entirety.</li>
           </ul>
-          <t>A non-localized Card <bcp14>SHOULD NOT</bcp14> provide less information than any of its localizations.</t>
-          <t>As a general rule, an implementation <bcp14>SHOULD</bcp14> choose those vCard properties to convert to the non-localized card, that either all have the same LANGUAGE parameter value or none at all.  <xref target="language-patch-dominant-language"/> illustrates this.</t>
+          <t>As a general rule, localizations only localize properties that are present in the non-localized version of this Card.  <xref target="language-patch-dominant-language"/> illustrates this.</t>
           <figure anchor="language-patch-dominant-language">
             <name>LANGUAGE conversion example: one dominant language</name>
             <artwork><![CDATA[
@@ -511,7 +510,7 @@ PRONOUNS;PREF=1:xe/xir
         </section>
         <section anchor="vcard-prop-n">
           <name>N and NICKNAME</name>
-          <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.  Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined by whitespace produce a valid full name of this entity.</t>
+          <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.</t>
           <t>Each comma-separated item of the SORT-AS parameter value converts to an entry of the <tt>sortAs</tt> property where the key is the "kind" value related to the sorted N component and the value is the corresponding item.  Absence of a key in the <tt>sortAs</tt> indicates that its related part in the SORT-AS parameter value <bcp14>MUST</bcp14> either the empty string followed by COMMA, or no further SORT-AS parts are defined.</t>
           <table anchor="n_components">
             <name>N components conversion</name>
@@ -677,7 +676,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
               </tr>
             </tbody>
           </table>
-          <t>Applications <bcp14>SHOULD</bcp14> separate the ADR "street address" component into street name, number and directions. If they can not determine the respective street components from the ADR "street address"", then they <bcp14>SHOULD</bcp14> convert these to a single <tt>name</tt> StreetComponent object.</t>
+          <t>Applications <bcp14>SHOULD</bcp14> separate the ADR "street address" component into street name, number and directions. If they can not determine the respective street components from the ADR "street address", then they <bcp14>MUST</bcp14> convert all of it to a single <tt>name</tt> StreetComponent object.</t>
           <t>The "street address" and "extended address" ADR components <bcp14>MAY</bcp14> be converted into either a single StreetComponent item or a combination of StreetComponent items.</t>
           <t>The LABEL parameter converts to the <tt>fullAddress</tt> property.</t>
           <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
@@ -961,7 +960,7 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
         </section>
         <section anchor="combine-geo-props">
           <name>Combining geographical properties</name>
-          <t>In vCard the properties ADR, GEO and TZ occur independently of each other.  In JSContact, they all convert to properties of an <tt>Address</tt> object.  It is implementation-specific if these vCard properties convert to <em>separate</em> address instances in JSContact, or if some or all of them convert to the <em>same</em> address.  That being said, implementations <bcp14>SHOULD</bcp14> convert the properties to the <em>same</em> address for the following cases:</t>
+          <t>In vCard the properties ADR, GEO and TZ occur independently of each other.  In JSContact, they all convert to properties of an <tt>Address</tt> object.  It is implementation-specific if these vCard properties convert to <em>separate</em> address instances in JSContact, or if some or all of them convert to the <em>same</em> address.  That being said, implementations <bcp14>MUST</bcp14> convert the properties to the <em>same</em> address for the following cases:</t>
           <ul>
             <li>The ALTID parameter values of the properties match.</li>
             <li>The ALTID parameters are not set, but are set on any other ADR, GEO and TZ properties.</li>
@@ -1618,9 +1617,9 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             <dt>Description:</dt>
             <dd>
               <t>
-            This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>SHOULD</bcp14> be compact, e.g.  without insignificant whitespace.
+            This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>MUST</bcp14> be compact, e.g. without insignificant whitespace.
           </t>
-              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and <bcp14>SHOULD</bcp14> be discarded from the vCard.</t>
+              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and discarded from the vCard.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
