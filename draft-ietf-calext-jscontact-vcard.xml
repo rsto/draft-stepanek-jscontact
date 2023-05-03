@@ -53,7 +53,7 @@
     <keyword>vCard</keyword>
     <keyword>jCard</keyword>
     <abstract>
-      <t>This document defines how to convert contact information between the JSContact and vCard data formats.  To achieve this, it updates <xref target="I-D.ietf-calext-jscontact"/> by registering new JSContact properties.  Similarly, it updates <xref target="RFC6350"/> by registering new vCard properties and parameters.</t>
+      <t>This document defines how to convert contact information between the JSContact and vCard data formats.  To achieve this, it updates RFC I-D.ietf-calext-jscontact (JSContact) by registering new JSContact properties.  Similarly, it updates RFC 6350 (vCard) by registering new vCard properties and parameters.</t>
     </abstract>
   </front>
   <middle>

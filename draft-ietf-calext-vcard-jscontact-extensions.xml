@@ -43,7 +43,7 @@
         This document defines a set of new properties for vCard and extends the use of existing ones.
         Their primary purpose is to align the same set of features between the JSContact and vCard formats,
         but the new definitions also aim to be useful within just the vCard format.  This document updates
-        <xref target="RFC6350"/>.
+        RFC 6350 (vCard).
       </t>
     </abstract>
   </front>
