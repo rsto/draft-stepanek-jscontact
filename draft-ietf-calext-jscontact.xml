@@ -1317,7 +1317,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (OPTIONAL).</t>
-          <t>This property localizes property values in this Card to languages other than the main locale.  Its purpose is to provide language-specific alternatives to existing values, not to add new values.  In other words, a localized Card <bcp14>SHOULD NOT</bcp14> contain more information than its non-localized variant.</t>
+          <t>This localizes property values in this Card to languages other than the main locale.  Localizations provide locale-specific alternatives for existing property values and <bcp14>SHOULD NOT</bcp14> add new properties.</t>
           <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the <tt>localizations</tt> property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
           <t>Conceptually, a Card is localized as follows:</t>
           <ul>
