@@ -1107,13 +1107,13 @@ The value of this street component.</li>
     "street": [
       {
         "@type": "StreetComponent",
-        "kind": "name",
-        "value": "Oak St"
+        "kind": "number",
+        "value": "54321"
       },
       {
         "@type": "StreetComponent",
-        "kind": "number",
-        "value": "54321"
+        "kind": "name",
+        "value": "Oak St"
       }
     ],
     "locality": "Reston",
@@ -1127,24 +1127,43 @@ The value of this street component.</li>
     "contexts": {
       "private": true
     },
-    "fullAddress": "12345 Elm St\nReston\nVA\n20190\nUSA",
+    "fullAddress": "Irgendwostrasse 27/4/8\n1010\nVienna\nAustria"
     "street": [
       {
         "@type": "StreetComponent",
         "kind": "name",
-        "value": "Elm St"
+        "value": "Irgendwostrasse"
       },
       {
         "@type": "StreetComponent",
         "kind": "number",
-        "value": "12345"
+        "value": "27"
+      },
+      {
+        "@type": "StreetComponent",
+        "kind": "separator",
+        "value": "/"
+      },
+      {
+        "@type": "StreetComponent",
+        "kind": "building",
+        "value": "4"
+      }
+      {
+        "@type": "StreetComponent",
+        "kind": "separator",
+        "value": "/"
+      },
+      {
+        "@type": "StreetComponent",
+        "kind": "apartment",
+        "value": "8"
       }
     ],
-    "locality": "Reston",
-    "region": "VA",
-    "country": "USA",
-    "postcode": "20190",
-    "countryCode": "US"
+    "locality": "Vienna",
+    "country": "Austria",
+    "postcode": "1010",
+    "countryCode": "AT"
   }
 }
 ]]></sourcecode>
