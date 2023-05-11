@@ -566,7 +566,7 @@ The contexts in which to use this nickname.  Also see <xref target="prop-context
             The name of this organization.
         </li>
             <li>units: <tt>OrgUnit[]</tt> (OPTIONAL).
-            A list of organizational units.  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+            A list of organizational units, ordered descending by hierarchy (e.g. a geographic or functional division would sort before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
         </li>
             <li>sortAs: <tt>String</tt> (OPTIONAL).
             This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>MAY</bcp14> be used for comparison.
