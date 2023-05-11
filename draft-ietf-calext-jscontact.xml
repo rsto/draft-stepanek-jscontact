@@ -1557,7 +1557,7 @@ Specifies the kind of this personal information.  The value <bcp14>MUST</bcp14> 
               </ul>
             </li>
             <li>value: <tt>String</tt> (REQUIRED).
-The actual information.  This is free-text, but future specifications MAY restrict allowed values depending on the type of this PersonalInfo.</li>
+The actual information.</li>
             <li>level: <tt>String</tt> (OPTIONAL).
             Indicates the level of expertise, or engagement in hobby or interest.  The value <bcp14>MUST</bcp14> be one of the following, or be registered at IANA (<xref target="iana-enum-registry-value-template"/>) or vendor-specific (<xref target="vendor-specific-properties"/>): <tt>high</tt>, <tt>medium</tt> and <tt>low</tt>.</li>
             <li>listAs: <tt>UnsignedInt</tt> (OPTIONAL).
