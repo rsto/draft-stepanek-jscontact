@@ -231,8 +231,10 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <t>
         Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property as outlined in the above paragraph.
       </t>
-          <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-specific property names.  Note that the vendor prefix allows for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>.  This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
-          <sourcecode name="" type="abnf"><![CDATA[
+      <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-specific property names.  Note that the vendor prefix allows for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>.  This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
+          <figure anchor="vendor-property-abnf">
+            <name>ABNF rules for vendor-specific property names</name>
+            <sourcecode name="" type="abnf"><![CDATA[
 v-extension = v-prefix ":" v-name
 
 v-prefix = v-label *("." v-label)
@@ -244,12 +246,13 @@ alnum-int = ALPHA / DIGIT / NON-ASCII
 
 v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
   ; any characters except CTLs, DQUOTE, SOLIDUS and TILDE
-
 ]]></sourcecode>
+          </figure>
           <t>
             The value of vendor-specific properties can be any valid JSON value, and naming restrictions do not apply to such values.  Specifically, if the property value is a JSON object then the keys of such objects need not be named as vendor-specific properties.  The example in <xref target="vendor-property-example"/> illustrates this:
       </t>
           <figure anchor="vendor-property-example">
+            <name>Examples of vendor-specific properties</name>
             <artwork><![CDATA[
 "example.com:foo": "bar",
 "example.com:foo2": {
@@ -264,6 +267,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             Some JSContact IANA-registered properties allow their values to be vendor-specific.  One such example is the <tt>kind</tt> property <xref target="kind"/>, which enumerates its standard values but also allows for arbitrary vendor-specific values.  Such vendor-specific values <bcp14>MUST</bcp14> be valid <tt>v-extension</tt> values as defined in <xref target="vendor-specific-properties"/>.  The example in <xref target="vendor-value-example"/> illustrates this:
       </t>
           <figure anchor="vendor-value-example">
+            <name>Example of a vendor-specific value</name>
             <artwork><![CDATA[
 "kind": "example.com:baz"
 ]]></artwork>
@@ -1308,6 +1312,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <t>A patch in the PatchObject may patch a simple-typed property value, or a complex type.</t>
           <t><xref target="example-localizations-simple"/> shows how a single String property value is localized in the <tt>jp</tt> locale.</t>
           <figure anchor="example-localizations-simple">
+            <name>Example of localizing a String value</name>
             <artwork><![CDATA[
 "locale": "en",
 "addresses": {
@@ -1325,6 +1330,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           </figure>
           <t><xref target="example-localizations-complex"/> shows how a complete object property value is localized in the <tt>en</tt> locale.</t>
           <figure anchor="example-localizations-complex">
+            <name>Example of localizing an object value</name>
             <artwork><![CDATA[
 "locale": "ru",
 "name": {
