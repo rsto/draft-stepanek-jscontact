@@ -1027,7 +1027,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           </li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (OPTIONAL).
-              The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  Doing so, implementations <bcp14>MAY</bcp14> ignore any <tt>separator</tt> components.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.  The StreetComponent object type is defined in the paragraph below.
+              The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.  The StreetComponent object type is defined in the paragraph below.
           </t>
             </li>
             <li>locality: <tt>String</tt> (OPTIONAL).
