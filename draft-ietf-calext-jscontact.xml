@@ -566,7 +566,7 @@ The contexts in which to use this nickname.  Also see <xref target="prop-context
             The name of this organization.
         </li>
             <li>units: <tt>OrgUnit[]</tt> (OPTIONAL).
-            A list of organizational units, ordered descending by hierarchy (e.g. a geographic or functional division would sort before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+            A list of organizational units, ordered descending by hierarchy (e.g. a geographic or functional division sorts before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
         </li>
             <li>sortAs: <tt>String</tt> (OPTIONAL).
             This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>MAY</bcp14> be used for comparison.
@@ -825,7 +825,7 @@ The phone number, as either a URI or free-text.  Typical URI schemes are the <xr
                 <li><tt>fax</tt> The number is for sending faxes.</li>
                 <li><tt>pager</tt> The number is for a pager or beeper.</li>
                 <li><tt>text</tt> The number supports text messages (SMS).</li>
-                <li><tt>cell</tt> The number is for a cell phone.</li>
+                <li><tt>mobile</tt> The number is for a mobile phone.</li>
                 <li><tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
                 <li><tt>video</tt> The number supports video conferencing.</li>
               </ul>
@@ -2894,7 +2894,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">cell</td>
+                    <td align="left">mobile</td>
                     <td align="left">
                       <xref target="phones" format="default"/>
                     </td>
