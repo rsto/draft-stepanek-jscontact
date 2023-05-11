@@ -367,11 +367,11 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
         <section anchor="prodId" numbered="true" toc="default">
           <name>prodId</name>
           <t>Type: <tt>String</tt> (OPTIONAL).</t>
-          <t>The identifier for the product that created the Card.</t>
+          <t>The identifier for the product that created the Card.  If set, the value <bcp14>MUST</bcp14> be at least one character long.</t>
           <figure anchor="example-prodId">
             <name><tt>prodId</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN"
+"prodId": "ACME Addressbook App version 1.23.5"
 ]]></sourcecode>
           </figure>
         </section>
