@@ -962,8 +962,8 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
           <name>Combining geographical properties</name>
           <t>In vCard the properties ADR, GEO and TZ occur independently of each other.  In JSContact, they all convert to properties of an <tt>Address</tt> object.  It is implementation-specific if these vCard properties convert to <em>separate</em> address instances in JSContact, or if some or all of them convert to the <em>same</em> address.  That being said, implementations <bcp14>MUST</bcp14> convert the properties to the <em>same</em> address for the following cases:</t>
           <ul>
-            <li>The ALTID parameter values of the properties match.</li>
-            <li>The ALTID parameters are not set, but are set on any other ADR, GEO and TZ properties.</li>
+            <li>The GROUP parameter values of the properties match.</li>
+            <li>The GROUP parameters are not set, but are set on any other ADR, GEO and TZ properties.</li>
           </ul>
         </section>
       </section>
