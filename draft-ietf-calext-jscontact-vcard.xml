@@ -1288,6 +1288,7 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
 
 "notes": {
   "NOTE-1" : {
+     "@type": "Note",
      "note": "Office hours are from 0800 to 1715 EST, Mon-Fri.",
      "created": "2022-11-23T15:01:32Z",
      "author": {
