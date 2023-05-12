@@ -1140,14 +1140,14 @@ EXPERTISE;INDEX=1;LEVEL=expert:chemistry
     "kind": "expertise",
     "value": "chinese literature",
      "level": "low",
-     "position": 2
+     "listAs": 2
   },
   "PERSINFO-2" : {
     "@type": "PersonalInfo",
     "kind": "expertise",
     "value": "chemistry",
     "level": "high",
-    "position": 1
+    "listAs": 1
   }
 }
 ]]></artwork>
@@ -1169,14 +1169,14 @@ HOBBY;INDEX=2;LEVEL=high:sewing
     "kind": "hobby",
     "value": "reading",
     "level": "high",
-    "position": 1
+    "listAs": 1
   },
   "PERSINFO-2" : {
     "@type": "PersonalInfo",
     "kind": "hobby",
     "value": "sewing",
     "level": "high",
-    "position": 2
+    "listAs": 2
   }
 }
 ]]></artwork>
@@ -1198,14 +1198,14 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
     "kind": "interest",
     "value": "r&b music",
     "level": "medium",
-    "position": 1
+    "listAs": 1
   },
   "PERSINFO-2" : {
     "@type": "PersonalInfo",
     "kind": "interest",
     "value": "rock&roll music",
     "level": "high",
-    "position": 2
+    "listAs": 2
   }
 }
 ]]></artwork>
@@ -1226,7 +1226,7 @@ ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Tech,ou=Engineering
     "@type": "DirectoryResource",
     "kind": "directory",
     "uri": "https://directory.mycompany.example.com",
-    "position": 1
+    "listAs": 1
   },
   "DIRECTORY-2": {
     "@type": "DirectoryResource",
