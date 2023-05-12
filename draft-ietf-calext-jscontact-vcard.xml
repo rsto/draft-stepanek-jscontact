@@ -218,12 +218,12 @@ TITLE;LANGUAGE=fr:Patron
 "titles": {
   "t1": {
     "@type": "Title",
-    "title": "Boss"
+    "name": "Boss"
   }
 },
 "localizations": {
   "fr": {
-    "titles/t1/title": "Patron"
+    "titles/t1/name": "Patron"
   }
 }
 ]]></artwork>
@@ -240,12 +240,12 @@ TITLE;LANGUAGE=fr:Patron
 "titles": {
   "t1": {
     "@type": "Title",
-    "title": "Boss"
+    "name": "Boss"
   }
 },
 "localizations": {
   "fr": {
-    "titles/t1/title": "Patron"
+    "titles/t1/name": "Patron"
   }
 }
 ]]></artwork>
@@ -267,14 +267,14 @@ TITLE;LANGUAGE=fr:Patron
     "titles": {
       "t1": {
         "@type": "Title",
-        "title": "Novelist"
+        "name": "Novelist"
       }
   },
   "fr": {
     "titles": {
       "t1": {
         "@type": "Title",
-        "title": "Écrivain"
+        "name": "Écrivain"
       }
   }
 }
