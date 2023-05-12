@@ -1780,7 +1780,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <name>Initial Contents for the "JSContact Properties" Registry</name>
           <t>The following table lists the initial <tt>common</tt> usage entries of the "JSContact Properties" registry.  The Since Version for all properties is <tt>1.0</tt>.  The Until Version for all properties is not set.  All RFC section references are for <xref target="I-D.ietf-calext-jscontact"/>.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-property-registry" align="center">
-            <name>Initial Contents of the "JSContact Properties" Registry</name>
+            <name>JSContact Properties with "common" usage</name>
             <thead>
               <tr>
                 <th align="left">Property Name</th>
@@ -2373,7 +2373,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </table>
           <t>The following table lists the initial <tt>reserved</tt> usage entries of the "JSContact Properties" registry.  All RFC section references are for <xref target="I-D.ietf-calext-jscontact"/>.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-reserved-property-registry" align="center">
-            <name>Initial Contents of the "JSContact Properties" Registry</name>
+            <name>JSContact Properties with "reserved" usage</name>
             <thead>
               <tr>
                 <th align="left">Property Name</th>
@@ -2423,7 +2423,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <name>Initial Contents for the "JSContact Types" Registry</name>
           <t>The following table lists the initial <tt>common</tt> usage entries of the JSContact Types registry.  The Since Version for all types is <tt>1.0</tt>.  The Until Version for all types is not set.  All RFC section references are for <xref target="I-D.ietf-calext-jscontact"/>.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-type-registry-common" align="left">
-            <name>Initial Contents of the "JSContact Types" Registry</name>
+            <name>JSContact Types with "common" usage</name>
             <thead>
               <tr>
                 <th align="left">Type Name</th>
@@ -2657,7 +2657,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </table>
           <t>The following table lists the initial <tt>reserved</tt> usage entries of the JSContact Types registry.  All types are for version <tt>1.0</tt>.  All RFC section references are for <xref target="I-D.ietf-calext-jscontact"/>.  The change controller for all these properties is <tt>IETF</tt>.</t>
           <table anchor="tab-iana-type-registry-reserved" align="left">
-            <name>Initial Contents of the "JSContact Types" Registry</name>
+            <name>JSContact Types with "reserved" usage</name>
             <thead>
               <tr>
                 <th align="left">Type Name</th>
