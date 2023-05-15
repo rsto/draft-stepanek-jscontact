@@ -1306,9 +1306,9 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
           <figure anchor="prodid_conversion">
             <name>PRODID conversion example</name>
             <artwork><![CDATA[
-PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN
+PRODID:ACME Addressbook App version 1.23.5
 
-"prodId": "-//ONLINE DIRECTORY//NONSGML Version 1//EN"
+"prodId": "ACME Addressbook App version 1.23.5"
 ]]></artwork>
           </figure>
         </section>
