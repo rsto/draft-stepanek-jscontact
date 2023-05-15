@@ -284,8 +284,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
     </section>
     <section anchor="card" numbered="true" toc="default">
       <name>Card</name>
-      <t>Media type: <tt>application/jscontact+json;type=card</tt> (see <xref target="iana-media-type"/>).</t>
-      <t>A Card stores information about a person, organization or company.</t>
+      <t>This section defines the JSContact type Card. A Card stores contact information, typically that of a person, organization or company.</t>
+      <t>Its media type is defined in <xref target="iana-media-type"/>.</t>
       <section anchor="metadata-properties" numbered="true" toc="default">
         <name>Metadata properties</name>
         <t>This section defines properties about this particular instance of a Card, such as its unique identifier, its creation date, how it relates to other Cards and other metadata information.</t>
