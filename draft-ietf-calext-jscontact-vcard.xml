@@ -915,7 +915,7 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
         </section>
         <section anchor="vcard-prop-tel">
           <name>TEL</name>
-          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys.  The <tt>number</tt> property is set to the TEL value.</t>
+          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys: the vCard <tt>cell</tt> parameter value converts to the JSContact <tt>mobile</tt> phone feature, the other parameter values convert to analogous phone features.  The <tt>number</tt> property is set to the TEL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="tel_conversion">
             <name>TEL conversion example</name>
