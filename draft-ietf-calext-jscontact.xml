@@ -1695,10 +1695,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-registry-policy" numbered="true" toc="default">
         <name>Registry Policy and Change Procedures</name>
-        <t>Registry assignments require the JSContact version to change, except for assignments to the JSContact Version Registry.  An assignment may apply multiple changes and to more than one registry at once, in which case only a single version change is required.  The Designated Expert decides if a major or minor version change is required and assigns the new version.  Version numbers increment by one, a major version change resets the minor version to zero.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for assignments that only require the JSContact minor version to change is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>).</t>
+        <t>Registry assignments generally require the JSContact version to change, but ultimatelly this is up to the decision of the Designated Expert.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for other assignments is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>), where for very simple changes, it can be enough to describe the new assignment in the Description item of the respective registry.</t>
+        <t>The Designated Expert decides if a major or minor version change is required and assigns the new version to the <xref target="iana-version-registry">Version Registry</xref>.  Version numbers increment by one, and a major version change resets the minor version to zero.  An assignment may apply multiple changes and to more than one registry at once, in which case a single version change is sufficient.</t>
         <t>A registration <bcp14>MUST</bcp14> have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>.</t>
         <ul>
-          <li>A <tt>common</tt> usage denotes an item with shared semantics and syntax across systems.  Up-to-date systems <bcp14>MUST</bcp14> expect such items to occur in JSContact data.</li>
+          <li>A <tt>common</tt> usage denotes an item with shared semantics and syntax across systems. Up-to-date systems <bcp14>MUST</bcp14> expect such items to occur in JSContact data.</li>
           <li>A <tt>reserved</tt> usage reserves an item in the registry without assigning semantics to avoid name collisions with future extensions or protocol use.</li>
           <li>An <tt>obsolete</tt> usage denotes an item that is no longer expected to be added by up-to-date systems.  A new assignment has probably been defined covering the obsolete item's semantics.</li>
         </ul>
@@ -1707,9 +1708,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <name>Preliminary Community Review</name>
           <t>Notice of a potential new registration <bcp14>MUST</bcp14> be sent to the Calext mailing list
 	    &lt;calsify@ietf.org&gt; for review.  This mailing list is appropriate to solicit community feedback
-	      on a proposed new property.</t>
+	      on a proposed registry assignment.</t>
           <t>The intent of the public posting to this list is to solicit comments and feedback on the choice of
-	    the item name or value, the unambiguity of the specification document, and a review of any
+	    the item name or value, the unambiguity of its description, and a review of any
 	      interoperability or security considerations.  The submitter may submit a revised registration proposal
 	        or abandon the registration completely at any time.</t>
         </section>
@@ -1721,11 +1722,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <name>Designated Expert Review</name>
           <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging
 	    the submitter to document security and privacy considerations.  For a common-use registration, the DE
-	      is expected to confirm that suitable documentation, as described in <xref target="RFC8126" sectionFormat="of" section="4.6"/>, is available to ensure interoperability.  That documentation will
-	        usually be in an RFC, but simple definitions are likely to use a web/wiki page, and if a sentence or
-		  two is deemed sufficient, it could be described in the registry itself.  The DE should also verify that
-		    the new assignment does not conflict with work that is active or already published within the IETF.  A
-		      published specification is not required for reserved or obsolete registrations.</t>
+	      is expected to confirm that suitable documentation is available to ensure interoperability. 
+		  The DE should also verify that
+            the new assignment does not conflict with work that is active or already published within the IETF.</t>
           <t>The DE will either approve or deny the registration request and publish a notice of the decision
 	    to the Calext WG mailing list or its successor, as well as inform IANA.  A denial notice must be
 	      justified by an explanation, and, in the cases where it is possible, concrete suggestions on how the
@@ -1736,7 +1735,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <t>Once a JSContact registry group item has been published by IANA, the change controller may request a
 	    change to its definition.  The same procedure that would be appropriate for the original registration
 	      request is used to process a change request.</t>
-          <t>JSContact registrations may not be deleted; items that are no longer believed appropriate for use can be declared obsolete by a change to their "intended usage" field; such items will be clearly marked in the IANA registry.</t>
+          <t>JSContact registrations dot not get deleted; instead, items that are no longer believed appropriate for use are declared obsolete by a change to their "intended usage" field; such items will be clearly marked in the IANA registry.</t>
           <t>Significant changes to a JSContact registry item's definition should be requested only when there are
 	    serious omissions or errors in the published specification, as such changes may cause
 	      interoperability issues.  When review is required, a change request may be denied if it renders
@@ -1745,7 +1744,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-version-registry" numbered="true" toc="default">
         <name>Creation of the "JSContact Version" Registry</name>
-        <t>IANA is asked to create the "JSContact Version" registry.  The purpose of this new registry is to define the allowed value range of JSContact and minor version numbers.</t>
+        <t>IANA is asked to create the "JSContact Version" registry.  The purpose of this new registry is to define the allowed value range of JSContact major and minor version numbers.</t>
         <t>The registry process is outlined in <xref target="iana-registry-policy" format="default"/>.</t>
         <section anchor="iana-version-registry-template" numbered="true" toc="default">
           <name>"JSContact Version" Registry Template</name>
@@ -1753,7 +1752,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Major Version:</dt>
             <dd>This is the numeric value of a JSContact major version number.  It <bcp14>MUST</bcp14> be a positive integer.</dd>
             <dt>Highest Minor Version:</dt>
-            <dd> This is the maximum numeric value of a JSContact minor version for the given major version.  All numbers greater than or equal to zero and less than or equal this value are valid minor version values for the given major version.  It <bcp14>MUST</bcp14> be zero or a positive integer.</dd>
+            <dd> This is the maximum numeric value of a JSContact minor version for the given major version.  It <bcp14>MUST</bcp14> be zero or a positive integer.  All numbers less than or equal this value are valid minor version values for the given major version.</dd>
           </dl>
         </section>
         <section anchor="iana-version-registry-contents" numbered="true" toc="default">
