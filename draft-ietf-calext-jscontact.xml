@@ -767,24 +767,17 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
         <section anchor="onlineServices" numbered="true" toc="default">
           <name>onlineServices</name>
           <t>Type: <tt>Id[OnlineService]</tt> (OPTIONAL).</t>
-          <t>The online services that are associated with the entity represented by this Card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties:</t>
+          <t>The online services that are associated with the entity represented by this Card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties, of which at least the <tt>uri</tt> or <tt>user</tt> property <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt> (REQUIRED).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt> (<xref target="iana-type-registry-contents"/>).
         </li>
             <li>service: <tt>String</tt> (OPTIONAL).
               The name of the online service or protocol.  The name <bcp14>MAY</bcp14> be capitalized the same as on the service's website, app or publishing material, but names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
-            <li>user: <tt>String</tt> (REQUIRED).
-              This identifies the entity represented by this Card at this online service.  The <tt>kind</tt> property defines how to interpret the value.
-        </li>
-            <li>
-              <t>kind: <tt>String</tt> (REQUIRED). This defines the kind of the identifier in the <tt>user</tt> property.  The type <bcp14>MUST</bcp14> be either one of the following values, or registered at IANA (<xref target="tab-iana-enum-onlineservice-kind"/>), or a vendor-specific value (<xref target="vendor-specific-properties"/>):</t>
-              <ul spacing="normal">
-                <li><tt>impp</tt>: The value of the <tt>user</tt> property is a URI primarily used for instant messaging.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
-                <li><tt>uri</tt>: The value of the <tt>user</tt> property is a service-specific URI, such as for a social media service.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
-                <li><tt>username</tt>: The value of the <tt>user</tt> property is a service-specific username, such as for a social media service.  Any free-text value is allowed.  The <tt>service</tt> property <bcp14>MUST</bcp14> be set.</li>
-              </ul>
-            </li>
+            <li>uri: <tt>String</tt> (OPTIONAL).
+This identifies the entity represented by this card at the online service.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+            <li>user: <tt>String</tt> (OPTIONAL).
+              This names the entity represented by this Card at the online service.  Any free-text value is allowed.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
             <li>contexts: <tt>String[Boolean]</tt> (OPTIONAL).
 The contexts in which to use this service.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (OPTIONAL).
@@ -798,9 +791,13 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
 "onlineServices": {
   "x1": {
     "@type": "OnlineService",
-    "user": "xmpp:alice@example.com",
-    "kind": "impp",
-    "pref": 1
+    "uri": "xmpp:alice@example.com",
+  },
+  "x2": {
+    "@type": "OnlineService",
+    "service": "Mastodon",
+    "user": "@alice@example2.com",
+    "uri": "https://example2.com/@alice",
   }
 }
 ]]></sourcecode>
@@ -2009,8 +2006,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">kind</td>
                 <td align="left">String</td>
-                <td align="left">Anniversary, CalendarResource, Card, CryptoResource, DirectoryResource, LinkResource, MediaResource, NameComponent, OnlineService, PersonalInfo, StreetComponent, Title</td>
-                <td align="left"><xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
+                <td align="left">Anniversary, CalendarResource, Card, CryptoResource, DirectoryResource, LinkResource, MediaResource, NameComponent, PersonalInfo, StreetComponent, Title</td>
+                <td align="left"><xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">label</td>
@@ -2365,8 +2362,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">uri</td>
                 <td align="left">String</td>
-                <td align="left">Author, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
-                <td align="left"><xref target="notes" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Author, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, OnlineService, SchedulingAddress</td>
+                <td align="left"><xref target="notes" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">user</td>
@@ -3371,44 +3368,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">wedding</td>
                     <td align="left">
                       <xref target="anniversaries" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
-            <dd>OnlineService</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-onlineservice-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: OnlineService)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">impp</td>
-                    <td align="left">
-                      <xref target="onlineServices" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">uri</td>
-                    <td align="left">
-                      <xref target="onlineServices" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">username</td>
-                    <td align="left">
-                      <xref target="onlineServices" format="default"/>
                     </td>
                   </tr>
                 </tbody>
