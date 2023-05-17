@@ -199,15 +199,14 @@ DEFLANGUAGE:de-AT
           </dd>
         </dl>
       </section>
-      <section anchor="prop-grammatical-gender">
-        <name>GRAMMATICAL-GENDER Property</name>
+      <section anchor="prop-gramgender">
+        <name>GRAMGENDER Property</name>
         <dl>
           <dt>Property name:</dt>
-          <dd>GRAMMATICAL-GENDER</dd>
+          <dd>GRAMGENDER</dd>
           <dt>Purpose:</dt>
           <dd>
-            This property defines the grammatical gender that shall be used
-            to address the entity represented by this vCard.
+            This property defines which grammatical gender to use in salutations and other grammatical constructs.
           </dd>
           <dt>Value type:</dt>
           <dd>A single text value, restricted to an enumerated list of allowed values.</dd>
@@ -219,27 +218,20 @@ DEFLANGUAGE:de-AT
           <dd>
             <t>
               This property defines the grammatical gender that the contact prefers
-              to be addressed by or referred at.  Multiple occurrences of this property
+              to be addressed by or referred at in written or spoken form.
+              For example, the German language distinguishes by grammatical gender in saluations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
+              Multiple occurrences of this property
               <bcp14>MUST</bcp14> be distinguished by the LANG parameter.
-            </t>
-            <t>
-              Many human languages use grammatical genders in salutations and other
-              language constructs.  For example, the German language typically distinguishes
-              between the grammatical gender of the recipient in salutations.
-              The allowed values for this property aim to cover grammatical genders
-              for the majority of human languages.  This specification registers an <xref target="new_values">initial
-              list</xref> of allowed values at the IANA vCard Property Values Registry, but
-              this may be extended later.
             </t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-gram-gender       = "GRAMMATICAL-GENDER" gram-gender-param
-                      ":" gram-gender-value
+gramgender       = "GRAMGENDER" gramgender-param
+                      ":" gramgender-value
 
-gram-gender-param =
+gramgender-param =
                 *(
                  ;
                  ; The following are OPTIONAL,
@@ -254,20 +246,20 @@ gram-gender-param =
                  ;
                  )
 
-gram-gender-value = "animate" /
-                    "common" /
-                    "feminine" /
-                    "inanimate" /
-                    "masculine" /
-                    "neuter" /
-                    iana-token /
-                    x-name
+gramgender-value = "animate" /
+                   "common" /
+                   "feminine" /
+                   "inanimate" /
+                   "masculine" /
+                   "neuter" /
+                   iana-token /
+                   x-name
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-GRAMMATICAL-GENDER:neuter
+GRAMGENDER:neuter
 ]]></sourcecode>
           </dd>
         </dl>
@@ -623,8 +615,8 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
           </tr>
           <tr>
             <td/>
-            <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">GRAMGENDER</td>
+            <td align="left">This document, <xref target="prop-gramgender"/></td>
           </tr>
           <tr>
             <td/>
@@ -698,34 +690,34 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
         </thead>
         <tbody>
           <tr>
-            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">GRAMGENDER</td>
             <td align="left">animate</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">This document, <xref target="prop-gramgender"/></td>
           </tr>
           <tr>
-            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">GRAMGENDER</td>
             <td align="left">common</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">This document, <xref target="prop-gramgender"/></td>
           </tr>
           <tr>
-            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">GRAMGENDER</td>
             <td align="left">feminine</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">This document, <xref target="prop-gramgender"/></td>
           </tr>
           <tr>
-            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">GRAMGENDER</td>
             <td align="left">inanimate</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">This document, <xref target="prop-gramgender"/></td>
           </tr>
           <tr>
-            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">GRAMGENDER</td>
             <td align="left">masculine</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">This document, <xref target="prop-gramgender"/></td>
           </tr>
           <tr>
-            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">GRAMGENDER</td>
             <td align="left">neuter</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">This document, <xref target="prop-gramgender"/></td>
           </tr>
         </tbody>
       </table>

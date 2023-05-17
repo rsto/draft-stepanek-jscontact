@@ -619,7 +619,9 @@ The contexts in which association with this organization apply.  For example, me
           </li>
             <li>
               <t>grammaticalGender: <tt>String</tt> (OPTIONAL).
-                Defines which grammatical gender to use in salutations and other grammatical constructs.  This document defines the following grammatical genders.  Additional ones may be registered at IANA (<xref target="iana-enum-registry-value-template"/>), or be vendor-specific (<xref target="vendor-specific-properties"/>):</t>
+              Defines which grammatical gender to use in salutations and other grammatical constructs.
+              For example, the German language distinguishes by grammatical gender in saluations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
+                This document defines the following grammatical genders.  Additional ones may be registered at IANA (<xref target="iana-enum-registry-value-template"/>), or be vendor-specific (<xref target="vendor-specific-properties"/>):</t>
               <ul spacing="normal">
                 <li>
                   <tt>animate</tt>
