@@ -71,13 +71,13 @@
     </section>
     <section anchor="new-properties">
       <name>New Properties</name>
-      <section anchor="prop-contactchannelpref">
-        <name>CONTACT-CHANNEL-PREF Property</name>
+      <section anchor="prop-contactby">
+        <name>CONTACT-BY Property</name>
         <dl>
           <dt>Property name:</dt>
-          <dd>CONTACT-CHANNEL-PREF</dd>
+          <dd>CONTACT-BY</dd>
           <dt>Purpose:</dt>
-          <dd>This property defines which channels the entity associated with this vCard prefers to be contacted with.</dd>
+          <dd>This property defines which contact channels the entity associated with this vCard prefers to be contacted with.</dd>
           <dt>Value type:</dt>
           <dd>A single text value, restricted to an enumerated list of allowed values.</dd>
           <dt>Cardinality:</dt>
@@ -92,22 +92,22 @@
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-contact-channel-pref  = "CONTACT-CHANNEL-PREF"
-                    *(";" contact-channel-pref-param )
-                      ":" contact-channel-pref-value
+contactby  = "CONTACT-BY"
+                    *(";" contactby-param )
+                      ":" contactby-value
 
-contact-channel-pref-param  = type-param / pref-param / any-param
+contactby-param  = type-param / pref-param / any-param
 
-contact-channel-pref-value = "ADR" / "EMAIL" / "IMPP" / "TEL" /
+contactby-value = "ADR" / "EMAIL" / "IMPP" / "TEL" /
                              x-name
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-CONTACT-CHANNEL-PREF;TYPE=work;PREF=1:EMAIL
-CONTACT-CHANNEL-PREF;TYPE=work;PREF=2:TEL
-CONTACT-CHANNEL-PREF;TYPE=home:TEL
+CONTACT-BY;TYPE=work;PREF=1:EMAIL
+CONTACT-BY;TYPE=work;PREF=2:TEL
+CONTACT-BY;TYPE=home:TEL
 ]]></sourcecode>
           </dd>
         </dl>
@@ -600,8 +600,8 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
         <tbody>
           <tr>
             <td/>
-            <td align="left">CONTACT-CHANNEL-PREF</td>
-            <td align="left">This document, <xref target="prop-contactchannelpref"/></td>
+            <td align="left">CONTACT-BY</td>
+            <td align="left">This document, <xref target="prop-contactby"/></td>
           </tr>
           <tr>
             <td/>

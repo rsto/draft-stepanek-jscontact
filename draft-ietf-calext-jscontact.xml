@@ -738,6 +738,47 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
       <section anchor="contact-properties" numbered="true" toc="default">
         <name>Contact properties</name>
         <t>This section defines properties how to contact the entity represented by this Card.</t>
+        <section anchor="contactBy" numbered="true" toc="default">
+          <name>contactBy</name>
+          <t>Type : <tt>String[ContactBy[]]</tt> (OPTIONAL).</t>
+          <t>Defines which contact channel the entity represented by this Card prefers to be contacted with.  The <xref target="enumerated-values">enumerated</xref> keys are:</t>
+          <ul spacing="normal">
+            <li><tt>addresses</tt>.  The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
+            <li><tt>emails</tt>.  The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
+            <li><tt>onlineServices</tt>.  The entity prefers to be contacted by one of the entries in <xref target="onlineServices"><tt>onlineServices</tt></xref>.</li>
+            <li><tt>phones</tt>.  The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
+          </ul>
+          <t>The values in the object are a (possibly empty) list of preferences for this contact channel.  A valid ContactBy object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>A ContactBy object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (REQUIRED).
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>ContactBy</tt> (<xref target="iana-type-registry-contents"/>).
+          </li>
+            <li>contexts: <tt>String[Boolean]</tt> (OPTIONAL).
+Defines the contexts in which to use this contact channel.  Also see <xref target="prop-contexts"/>.</li>
+            <li>pref: <tt>UnsignedInt</tt> (OPTIONAL).
+Defines the preference of this contact channel in relation to other contact channels with the same contexts.  Also see <xref target="prop-pref"/>.</li>
+          </ul>
+          <figure anchor="example-contactBy">
+            <name><tt>contactBy</tt> example</name>
+            <sourcecode name="" type="json"><![CDATA[
+"contactBy": {
+  "emails": [
+    {
+      "@type": "ContactBy",
+      "pref": 1
+    }
+  ],
+  "phones": [
+    {
+      "@type": "ContactBy",
+      "pref": 2
+    }
+  ]
+}
+]]></sourcecode>
+          </figure>
+        </section>
         <section anchor="emails" numbered="true" toc="default">
           <name>emails</name>
           <t>Type: <tt>Id[EmailAddress]</tt> (OPTIONAL).</t>
@@ -867,47 +908,6 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
     },
     "number": "tel:+1-201-555-0123",
   }
-}
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="preferredContactChannels" numbered="true" toc="default">
-          <name>preferredContactChannels</name>
-          <t>Type : <tt>String[ContactChannelPreference[]]</tt> (OPTIONAL).</t>
-          <t>Defines which channel the entity represented by this Card prefers to be contacted with.  The <xref target="enumerated-values">enumerated</xref> keys are:</t>
-          <ul spacing="normal">
-            <li><tt>addresses</tt>.  The entity prefers to be contacted by postal delivery to one of the entries in <xref target="addresses"><tt>addresses</tt></xref>.</li>
-            <li><tt>emails</tt>.  The entity prefers to be contacted by one of the entries in <xref target="emails"><tt>emails</tt></xref>.</li>
-            <li><tt>onlineServices</tt>.  The entity prefers to be contacted by one of the entries in <xref target="onlineServices"><tt>onlineServices</tt></xref>.</li>
-            <li><tt>phones</tt>.  The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
-          </ul>
-          <t>The values in the object are a (possibly empty) list of preferences for this contact channel.  A valid ContactChannelPreference object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
-          <t>A ContactChannelPreference object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (REQUIRED).
-              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>ContactChannelPreference</tt> (<xref target="iana-type-registry-contents"/>).
-          </li>
-            <li>contexts: <tt>String[Boolean]</tt> (OPTIONAL).
-Defines the contexts in which to use this contact channel.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (OPTIONAL).
-Defines the preference of this contact channel in relation to other contact channels with the same contexts.  Also see <xref target="prop-pref"/>.</li>
-          </ul>
-          <figure anchor="example-preferredContactChannels">
-            <name><tt>preferredContactChannels</tt> example</name>
-            <sourcecode name="" type="json"><![CDATA[
-"preferredContactChannels": {
-  "emails": [
-    {
-      "@type": "ContactChannelPreference",
-      "pref": 1
-    }
-  ],
-  "phones": [
-    {
-      "@type": "ContactChannelPreference",
-      "pref": 2
-    }
-  ]
 }
 ]]></sourcecode>
           </figure>
@@ -1854,8 +1854,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactChannelPreference, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
-                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
+                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePreference, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
+                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr anchor="iana-property-registry-version">
                 <td align="left">@version</td>
@@ -1924,8 +1924,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
-                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, Organization, SchedulingAddress</td>
-                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="organizations" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, Organization, SchedulingAddress</td>
+                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="organizations" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">coordinates</td>
@@ -2230,15 +2230,15 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">pref</td>
                 <td align="left">UnsignedInt</td>
-                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
-                <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="preferredContactChannels" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/><xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
+                <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/><xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
-                <td align="left">preferredContactChannels</td>
-                <td align="left">String[ContactChannelPreference[]]</td>
+                <td align="left">contactBy</td>
+                <td align="left">String[ContactBy[]]</td>
                 <td align="left">Card</td>
                 <td align="left">
-                  <xref target="preferredContactChannels" format="default"/>
+                  <xref target="contactBy" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2528,9 +2528,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">ContactChannelPreference</td>
+                <td align="left">ContactBy</td>
                 <td align="left">
-                  <xref target="preferredContactChannels" format="default"/>
+                  <xref target="contactBy" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2776,13 +2776,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <t>For each subregistry created in this section, all RFC section references are for <xref target="I-D.ietf-calext-jscontact"/>.  For all entries, the Since Version is <tt>1.0</tt>, the Until Version is not set, the Change Controller is <tt>IETF</tt>.</t>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>kind</dd>
+            <dd>contactBy</dd>
             <dt>Context:</dt>
             <dd>Card</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-card-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: Card)</name>
+              <table anchor="tab-iana-enum-contactchannels" align="left">
+                <name>JSContact Enum Values for contactBy (Context: Card)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -2791,39 +2791,27 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
-                    <td align="left">individual</td>
+                    <td align="left">addresses</td>
                     <td align="left">
-                      <xref target="kind" format="default"/>
+                      <xref target="contactBy" format="default"/>
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">group</td>
+                    <td align="left">emails</td>
                     <td align="left">
-                      <xref target="kind" format="default"/>
+                      <xref target="contactBy" format="default"/>
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">org</td>
+                    <td align="left">onlineServices</td>
                     <td align="left">
-                      <xref target="kind" format="default"/>
+                      <xref target="contactBy" format="default"/>
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">location</td>
+                    <td align="left">phones</td>
                     <td align="left">
-                      <xref target="kind" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">device</td>
-                    <td align="left">
-                      <xref target="kind" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">application</td>
-                    <td align="left">
-                      <xref target="kind" format="default"/>
+                      <xref target="contactBy" format="default"/>
                     </td>
                   </tr>
                 </tbody>
@@ -2834,11 +2822,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>contexts</dd>
             <dt>Context:</dt>
-            <dd>NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</dd>
+            <dd>NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-contexts" align="left">
-                <name>JSContact Enum Values for contexts (Context: NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactChannelPreference, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress)</name>
+                <name>JSContact Enum Values for contexts (Context: NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePreference, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -2962,6 +2950,62 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">video</td>
                     <td align="left">
                       <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>Card</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-card-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: Card)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">individual</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">group</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">org</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">location</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">device</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">application</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
                     </td>
                   </tr>
                 </tbody>
@@ -3192,50 +3236,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">neuter</td>
                     <td align="left">
                       <xref target="speakToAs" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>preferredContactChannels</dd>
-            <dt>Context:</dt>
-            <dd>Card</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-preferredcontactchannels" align="left">
-                <name>JSContact Enum Values for preferredContactChannels (Context: Card)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">addresses</td>
-                    <td align="left">
-                      <xref target="preferredContactChannels" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">emails</td>
-                    <td align="left">
-                      <xref target="preferredContactChannels" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">onlineServices</td>
-                    <td align="left">
-                      <xref target="preferredContactChannels" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">phones</td>
-                    <td align="left">
-                      <xref target="preferredContactChannels" format="default"/>
                     </td>
                   </tr>
                 </tbody>
