@@ -1632,24 +1632,29 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       <section anchor="iana-media-type" numbered="true" toc="default">
         <name>Media Type Registration</name>
         <t><xref target="I-D.ietf-calext-jscontact"/> defines a media type for use with JSContact data formatted in JSON.</t>
-        <dl newline="false" spacing="normal">
+        <dl newline="true" spacing="normal">
           <dt>Type name:</dt>
           <dd>application</dd>
           <dt>Subtype name:</dt>
           <dd>jscontact+json</dd>
           <dt>Required parameters:</dt>
           <dd>
-            <t>kind</t>
-            <t>This parameter conveys the type of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  This RFC specifies a single allowed parameter value, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
-            <dl newline="false" spacing="normal">
-              <dt><tt>card</tt>:</dt>
-              <dd>The body part <bcp14>MUST</bcp14> consist of exactly one JSContact <xref target="card"><tt>Card</tt></xref> object.</dd>
-            </dl>
+            <t>None</t>
           </dd>
           <dt>Optional parameters:</dt>
           <dd>
-            <t>version</t>
-            <t>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>@version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</t>
+            <dl newline="false" spacing="normal">
+                <dt>type</dt>
+                <dd>
+                  <t>This parameter conveys the type of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  This RFC specifies a single allowed parameter value, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
+                <dl newline="false" spacing="normal">
+                  <dt><tt>card</tt>:</dt>
+                  <dd>The body part <bcp14>MUST</bcp14> consist of exactly one JSContact <xref target="card"><tt>Card</tt></xref> object.</dd>
+                </dl>
+              </dd>
+                <dt>version</dt>
+                <dd>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>@version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</dd>
+              </dl>
           </dd>
           <dt>Encoding considerations:</dt>
           <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.</dd>
