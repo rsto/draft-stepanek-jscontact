@@ -187,7 +187,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-locale       = "DEFLANGUAGE" any-param ":" Language-Tag
+deflanguage       = "DEFLANGUAGE" any-param ":" Language-Tag
                ; Language-Tag is defined in RFC6350, Section 4.
 ]]></sourcecode>
           </dd>
@@ -482,7 +482,7 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           <dt>Description:</dt>
           <dd>
             <t>The RANKS parameter on an N property assigns a rank among the same-typed name components of an N property value.  Some cultures assign ranks to name components, such as a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.  But the N property value	does not allow inferring a culturally or otherwise significant rank from the order in which same-typed name components are stored in it.</t>
-            <t>The parameter value is structurally equivalent to the multivalued N property value: ranks of different name component types are separated by semicolon, ranks among the same-typed name component are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined. If the RANKS parameter is set, its value <bcp14>MUST NOT</bcp14> be the empty string.</t>
+            <t>The parameter value is structurally equivalent to the multivalued N property value: ranks of different name component types are separated by semicolon, ranks among the same-typed name components are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined. If the RANKS parameter is set, its value <bcp14>MUST NOT</bcp14> be the empty string.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
