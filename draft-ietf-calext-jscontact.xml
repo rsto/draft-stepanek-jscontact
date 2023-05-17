@@ -1614,7 +1614,7 @@ The actual information.</li>
       <t>NOTE: Please remove this section and the reference to <xref target="RFC7942" format="default"/> prior
 to publication as an RFC.
 This section records the status of known implementations of the
-protocol defined by this specification at the time of posting of this
+format defined by this specification at the time of posting of this
 Internet-Draft, and is based on a proposal described in
 <xref target="RFC7942" format="default"/>.  The description of implementations in this section is
 intended to assist the IETF in its decision processes in progressing
@@ -1642,6 +1642,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <li>Level of Maturity: This is an "alpha" test implementation.</li>
           <li>Coverage: This implementation includes all of the features described in this specification.</li>
           <li>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</li>
+        </ul>
+      </section>
+      <section anchor="cyrus-imap-server" numbered="true" toc="default">
+        <name>Cyrus IMAP</name>
+        <ul spacing="normal">
+          <li>Responsible Organization: The Cyrus Team</li>
+          <li>Location: <eref target="https://github.com/cyrusimap/cyrus-imapd">https://github.com/cyrusimap/cyrus-imapd</eref></li>
+          <li>Description: This implementation includes support for JSContact in its experimental JMAP for Addressbooks implementation.</li>
+          <li>Level of Maturity: This is an "alpha" test implementation.</li>
+          <li>Coverage: This implementation includes all of the features described in this specification.</li>
+          <li>Contact Information: <eref target="https://cyrus.topicbox.com/groups/info">https://cyrus.topicbox.com/groups/info</eref></li>
         </ul>
       </section>
     </section>
