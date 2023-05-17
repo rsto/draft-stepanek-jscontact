@@ -1292,7 +1292,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <ul>
             <li><tt>photo</tt> The resource is a photograph or avatar.</li>
             <li><tt>sound</tt> The resource is audio media, e.g.  to specify the proper pronunciation of the name property contents.</li>
-            <li><tt>logo</tt> The resource is a graphic image or logo associated the with entity represented by this Card.</li>
+            <li><tt>logo</tt> The resource is a graphic image or logo associated with the entity represented by this Card.</li>
           </ul>
           <figure anchor="example-media">
             <name><tt>media</tt> example</name>
