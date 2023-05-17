@@ -213,7 +213,7 @@ FN;LANGUAGE=EN:John Doe
 TITLE;LANGUAGE=EN:Boss
 TITLE;LANGUAGE=fr:Patron
 
-"locale": "en",
+"language": "en",
 "fullName": "John Doe",
 "titles": {
   "t1": {
@@ -250,17 +250,17 @@ TITLE;LANGUAGE=fr:Patron
 }
 ]]></artwork>
           </figure>
-          <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the locale of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.</t>
+          <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the language of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.</t>
           <t>The following example uses non-ASCII characters to demonstrate multilingual content.  The ASCII-formatted version of this specification might not show the correct characters.  Please refer to the HTML or PDF versions instead.</t>
           <figure anchor="language-patch-no-dominant">
-            <name>LANGUAGE conversion example: conflicting locale and language</name>
+            <name>LANGUAGE conversion example: conflicting DEFLANGUAGE and LANGUAGE</name>
             <artwork><![CDATA[
-LOCALE:es
+DEFLANGUAGE:es
 FN:Gabriel García Márquez
 TITLE;LANGUAGE=en:Boss
 TITLE;LANGUAGE=fr:Patron
 
-"locale": "es",
+"language": "es",
 "fullName": "Gabriel García Márquez",
 "localizations": {
   "en": {
@@ -473,16 +473,16 @@ ANNIVERSARY:19860201
         </section>
         <section anchor="vcard-prop-gender">
           <name>GENDER</name>
-          <t>This does not map to an IANA-registered property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMMATICAL-GENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This does not map to an IANA-registered property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMGENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-        <section anchor="vcard-prop-grammatical-gender">
-          <name>GRAMMATICAL-GENDER and PRONOUNS</name>
-          <t>The GRAMMATICAL-GENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+        <section anchor="vcard-prop-gramgender">
+          <name>GRAMGENDER and PRONOUNS</name>
+          <t>The GRAMGENDER property converts to the <tt>grammaticalGender</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
           <t>The PRONOUNS property converts to an entry in the <tt>pronouns</tt> property of the <tt>SpeakToAs</tt> object (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
           <figure anchor="grammatical_gender_pronouns_conversion">
-            <name>GRAMMATICAL-GENDER and PRONOUNS conversion example</name>
+            <name>GRAMGENDER and PRONOUNS conversion example</name>
             <artwork><![CDATA[
-GRAMMATICAL-GENDER:NEUTER
+GRAMGENDER:NEUTER
 PRONOUNS;PREF=2:they/them
 PRONOUNS;PREF=1:xe/xir
 
@@ -878,15 +878,15 @@ LANG;TYPE=home:fr
 ]]></artwork>
           </figure>
         </section>
-        <section anchor="vcard-prop-locale">
-          <name>LOCALE</name>
-          <t>The LOCALE property converts to the <tt>locale</tt> property (<xref target="locale_conversion"/>).</t>
-          <figure anchor="locale_conversion">
-            <name>LOCALE conversion example</name>
+        <section anchor="vcard-prop-deflanguage">
+          <name>DEFLANGUAGE</name>
+          <t>The DEFLANGUAGE property converts to the <tt>language</tt> property (<xref target="deflanguage_conversion"/>).</t>
+          <figure anchor="deflanguage_conversion">
+            <name>DEFLANGUAGE conversion example</name>
             <artwork><![CDATA[
-LOCALE:de-AT
+DEFLANGUAGE:de-AT
 
-"locale": "de-AT"
+"language": "de-AT"
 ]]></artwork>
           </figure>
           <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
@@ -2123,9 +2123,9 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Card</td>
-            <td>locale</td>
+            <td>language</td>
             <td>
-              <xref target="vcard-prop-locale"/>
+              <xref target="vcard-prop-deflanguage"/>
             </td>
           </tr>
           <tr>
@@ -2233,7 +2233,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>Card</td>
             <td>speakToAs</td>
             <td>
-              <xref target="vcard-prop-grammatical-gender"/>
+              <xref target="vcard-prop-gramgender"/>
             </td>
           </tr>
           <tr>
@@ -2829,7 +2829,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>Pronouns</td>
             <td>pronouns</td>
             <td>
-              <xref target="vcard-prop-grammatical-gender"/>
+              <xref target="vcard-prop-gramgender"/>
             </td>
           </tr>
           <tr>
@@ -2891,14 +2891,14 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>SpeakToAs</td>
             <td>grammaticalGender</td>
             <td>
-              <xref target="vcard-prop-grammatical-gender"/>
+              <xref target="vcard-prop-gramgender"/>
             </td>
           </tr>
           <tr>
             <td>SpeakToAs</td>
             <td>pronouns</td>
             <td>
-              <xref target="vcard-prop-grammatical-gender"/>
+              <xref target="vcard-prop-gramgender"/>
             </td>
           </tr>
           <tr>
