@@ -742,15 +742,15 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
       </section>
       <section>
         <name>Communications Properties</name>
-        <section anchor="vcard-prop-contact-channel-pref">
-          <name>CONTACT-CHANNEL-PREF</name>
-          <t>A CONTACT-CHANNEL-PREF property converts to an entry in the <tt>preferredContactChannels</tt> property (<xref target="contact_channel_conversion"/>).  The entry key set is defined in <xref target="contact_channel_key_conversion"/>, the related entry values are arrays of <tt>ContactChannelPreference</tt> objects.</t>
-          <table anchor="contact_channel_key_conversion">
-            <name>CONTACT-CHANNEL-PREF values conversion</name>
+        <section anchor="vcard-prop-contact-by">
+          <name>CONTACT-BY</name>
+          <t>A CONTACT-BY property converts to an entry in the <tt>contactBy</tt> property (<xref target="contact_by_conversion"/>).  The entry key set is defined in <xref target="contact_by_key_conversion"/>, the related entry values are arrays of <tt>ContactBy</tt> objects.</t>
+          <table anchor="contact_by_key_conversion">
+            <name>CONTACT-BY values conversion</name>
             <thead>
               <tr>
-                <th align="left">CONTACT-CHANNEL-PREF value</th>
-                <th align="left">"preferredContactChannels" key</th>
+                <th align="left">CONTACT-BY value</th>
+                <th align="left">"contactBy" key</th>
               </tr>
             </thead>
             <tbody>
@@ -773,23 +773,23 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
             </tbody>
           </table>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactChannelPreference</tt> objects <bcp14>MUST</bcp14> be empty.</t>
-          <figure anchor="contact_channel_conversion">
+          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactBy</tt> objects <bcp14>MUST</bcp14> be empty.</t>
+          <figure anchor="contact_by_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
-CONTACT-CHANNEL-PREF;PREF=1:EMAIL
-CONTACT-CHANNEL-PREF;PREF=2:TEL
+CONTACT-BY;PREF=1:EMAIL
+CONTACT-BY;PREF=2:TEL
 
-"preferredContactChannels": {
+"contactBy": {
   "emails":[
     {
-      "@type": "ContactChannelPreference",
+      "@type": "ContactBy",
       "pref": 1
     }
   ],
   "phones":[
     {
-      "@type": "ContactChannelPreference",
+      "@type": "ContactBy",
       "pref": 2
     }
   ]
@@ -845,9 +845,9 @@ IMPP;PREF=1:xmpp:alice@example.com
         </section>
         <section anchor="vcard-prop-lang">
           <name>LANG</name>
-          <t>A LANG property converts to an entry in the <tt>preferredLanguages</tt> property (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of <tt>LanguagePreference</tt> objects.</t>
+          <t>A LANG property converts to an entry in the <tt>preferredLanguages</tt> property (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of <tt>LanguagePref</tt> objects.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>LanguagePreference</tt> objects <bcp14>MUST</bcp14> be empty.</t>
+          <t>If both PREF and TYPE parameters are missing, the array of <tt>LanguagePref</tt> objects <bcp14>MUST</bcp14> be empty.</t>
           <figure anchor="lang_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
@@ -858,19 +858,19 @@ LANG;TYPE=home:fr
 "preferredLanguages": {
   "en":[
     {
-      "@type": "LanguagePreference",
+      "@type": "LanguagePref",
       "contexts": { "work": true },
       "pref": 1
     }
   ],
   "fr":[
     {
-      "@type": "LanguagePreference",
+      "@type": "LanguagePref",
       "contexts": { "work": true },
       "pref": 2
     },
     {
-      "@type": "LanguagePreference",
+      "@type": "LanguagePref",
       "contexts": { "private": true }
     }
   ]
@@ -2196,9 +2196,9 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Card</td>
-            <td>preferredContactChannels</td>
+            <td>contactBy</td>
             <td>
-              <xref target="vcard-prop-contact-channel-pref"/>
+              <xref target="vcard-prop-contact-by"/>
             </td>
           </tr>
           <tr>
@@ -2258,19 +2258,19 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>ContactChannelPreference</td>
+            <td>ContactBy</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>ContactChannelPreference</td>
+            <td>ContactBy</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>ContactChannelPreference</td>
+            <td>ContactBy</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
@@ -2405,19 +2405,19 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>LanguagePreference</td>
+            <td>LanguagePref</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>LanguagePreference</td>
+            <td>LanguagePref</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>LanguagePreference</td>
+            <td>LanguagePref</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
