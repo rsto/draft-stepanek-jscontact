@@ -56,7 +56,7 @@
         data.  As such, it introduces new semantics that are not covered in the current
         definition of vCard and its various extensions.  Converting contact data between
         the two formats is defined in <xref target="I-D.ietf-calext-jscontact-vcard"/> with the goal of
-        not loosing any semantics during conversion.  In order to do so, this document
+        not losing any semantics during conversion.  In order to do so, this document
         defines a new set of properties for vCard and extends existing definitions.
       </t>
       <section anchor="notational-conventions" numbered="true" toc="default">
@@ -347,7 +347,7 @@ PRONOUNS;LANG=en;PREF=2:they/them
           <dd>The SERVICE-TYPE parameter <bcp14>MUST</bcp14> be assigned to this property if the value type is TEXT, it <bcp14>MAY</bcp14> be assigned if the value type is URI.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
           <dt>Description:</dt>
           <dd>
-            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides an IANA-registered property for the same purpose.  In addition to the typical use of this property with URI values, it also allows setting usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.  Names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.
+            Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides an IANA-registered property for the same purpose.  In addition to the typical use of this property with URI values, it also allows setting usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.  Names <bcp14>MUST</bcp14> be considered equal if they match case-insensitively.
           </dd>
           <dt>Format definition:</dt>
           <dd>
