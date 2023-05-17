@@ -162,6 +162,43 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           </dd>
         </dl>
       </section>
+      <section anchor="prop-deflanguage">
+        <name>DEFLANGUAGE Property</name>
+        <dl>
+          <dt>Property name:</dt>
+          <dd>DEFLANGUAGE</dd>
+          <dt>Purpose:</dt>
+          <dd>This property defines the default language that human-readable text values in this vCard should be assumed written in.</dd>
+          <dt>Value type:</dt>
+          <dd>A single Language-Tag value as defined in <xref target="RFC6350" section="4"/>.</dd>
+          <dt>Cardinality:</dt>
+          <dd>*1</dd>
+          <dt>Property parameters:</dt>
+          <dd>The LANGUAGE parameter <bcp14>MUST NOT</bcp14> be assigned to this property.</dd>
+          <dt>Description:</dt>
+          <dd>
+            This property defines the language in which property values of type
+            <tt>TEXT</tt> shall be assumed to be written for this vCard.
+            If a vCard property includes the <tt>LANGUAGE</tt> parameter, then the
+            parameter value has higher precedence than the <tt>DEFLANGUAGE</tt>
+            property value.
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <t>This property is defined by the following notation:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
+locale       = "DEFLANGUAGE" any-param ":" Language-Tag
+               ; Language-Tag is defined in RFC6350, Section 4.
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+DEFLANGUAGE:de-AT
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
       <section anchor="prop-grammatical-gender">
         <name>GRAMMATICAL-GENDER Property</name>
         <dl>
@@ -231,43 +268,6 @@ gram-gender-value = "animate" /
           <dd>
             <sourcecode name=""><![CDATA[
 GRAMMATICAL-GENDER:neuter
-]]></sourcecode>
-          </dd>
-        </dl>
-      </section>
-      <section anchor="prop-locale">
-        <name>LOCALE Property</name>
-        <dl>
-          <dt>Property name:</dt>
-          <dd>LOCALE</dd>
-          <dt>Purpose:</dt>
-          <dd>This property defines the default locale that human-readable text values in this vCard should be assumed written in.</dd>
-          <dt>Value type:</dt>
-          <dd>A single Language-Tag value as defined in <xref target="RFC6350" section="4"/>.</dd>
-          <dt>Cardinality:</dt>
-          <dd>*1</dd>
-          <dt>Property parameters:</dt>
-          <dd>The LANG parameter <bcp14>MUST NOT</bcp14> be assigned to this property.</dd>
-          <dt>Description:</dt>
-          <dd>
-            This property defines the locale in which property values of type
-            <tt>TEXT</tt> shall be assumed to be written for this vCard.
-            If a vCard property includes the <tt>LANG</tt> parameter, then the
-            parameter value has higher precedence than the <tt>LOCALE</tt>
-            property value.
-          </dd>
-          <dt>Format definition:</dt>
-          <dd>
-            <t>This property is defined by the following notation:</t>
-            <sourcecode name="" type="abnf"><![CDATA[
-locale       = "LOCALE" any-param ":" Language-Tag
-               ; Language-Tag is defined in RFC6350, Section 4.
-]]></sourcecode>
-          </dd>
-          <dt>Example(s):</dt>
-          <dd>
-            <sourcecode name=""><![CDATA[
-LOCALE:de-AT
 ]]></sourcecode>
           </dd>
         </dl>
@@ -618,13 +618,13 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
           </tr>
           <tr>
             <td/>
-            <td align="left">GRAMMATICAL-GENDER</td>
-            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
+            <td align="left">DEFLANGUAGE</td>
+            <td align="left">This document, <xref target="prop-deflanguage"/></td>
           </tr>
           <tr>
             <td/>
-            <td align="left">LOCALE</td>
-            <td align="left">This document, <xref target="prop-locale"/></td>
+            <td align="left">GRAMMATICAL-GENDER</td>
+            <td align="left">This document, <xref target="prop-grammatical-gender"/></td>
           </tr>
           <tr>
             <td/>
