@@ -335,14 +335,14 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="locale" numbered="true" toc="default">
-          <name>locale</name>
+        <section anchor="language" numbered="true" toc="default">
+          <name>language</name>
           <t>Type: <tt>String</tt> (OPTIONAL).</t>
-          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the locale used for text in the Card.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
-          <figure anchor="example-locale">
-            <name><tt>locale</tt> example</name>
+          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the language used for text in the Card.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
+          <figure anchor="example-language">
+            <name><tt>language</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"locale": "de-AT",
+"language": "de-AT",
 ]]></sourcecode>
           </figure>
         </section>
@@ -522,7 +522,7 @@ The kind of this name component.  The value <bcp14>MUST</bcp14> be either one of
               <t>rank: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
                 Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
               <t>For example, two name components of type <tt>surname</tt> may have their <tt>rank</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
-              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>MAY</bcp14> inspect the <tt>locale</tt> property of the Card to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
+              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>MAY</bcp14> inspect the <tt>language</tt> property of the Card to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
           </ul>
         </section>
@@ -1314,7 +1314,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
           <t>Type: String[PatchObject] (OPTIONAL).</t>
-          <t>This localizes property values in this Card to languages other than the main locale.  Localizations provide locale-specific alternatives for existing property values and <bcp14>SHOULD NOT</bcp14> add new properties.</t>
+          <t>This localizes property values in this Card to languages other than the main language.  Localizations provide language-specific alternatives for existing property values and <bcp14>SHOULD NOT</bcp14> add new properties.</t>
           <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects which localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the <tt>localizations</tt> property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
           <t>Conceptually, a Card is localized as follows:</t>
           <ul>
@@ -1322,15 +1322,15 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <li>If the localizations property includes a key for that language, obtain the PatchObject value.  If there is no such key, stop.</li>
             <li>Create a copy of the Card, but do not copy the localizations property.</li>
             <li>Apply all patches in the PatchObject to the copy of the Card.</li>
-            <li>Optionally, set the <tt>locale</tt> property in the copy of the Card.</li>
+            <li>Optionally, set the <tt>language</tt> property in the copy of the Card.</li>
             <li>Use the patched copy of the Card as the localized variant of the original Card.</li>
           </ul>
           <t>A patch in the PatchObject may patch a simple-typed property value, or a complex type.</t>
-          <t><xref target="example-localizations-simple"/> shows how a single String property value is localized in the <tt>jp</tt> locale.</t>
+          <t><xref target="example-localizations-simple"/> shows how a single String property value is localized in the <tt>jp</tt> language.</t>
           <figure anchor="example-localizations-simple">
             <name>Example of localizing a String value</name>
             <artwork><![CDATA[
-"locale": "en",
+"language": "en",
 "addresses": {
   "addr1": {
     "@type": "Address",
@@ -1344,11 +1344,11 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
 }
 ]]></artwork>
           </figure>
-          <t><xref target="example-localizations-complex"/> shows how a complete object property value is localized in the <tt>en</tt> locale.</t>
+          <t><xref target="example-localizations-complex"/> shows how a complete object property value is localized in the <tt>en</tt> language.</t>
           <figure anchor="example-localizations-complex">
             <name>Example of localizing an object value</name>
             <artwork><![CDATA[
-"locale": "ru",
+"language": "ru",
 "name": {
   "@type": "Name",
   "components": [
@@ -2021,6 +2021,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left"><xref target="prop-label" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
+                <td align="left">language</td>
+                <td align="left">String</td>
+                <td align="left">Card</td>
+                <td align="left">
+                  <xref target="language" format="default"/>
+                </td>
+              </tr>
+              <tr>
                 <td align="left">level</td>
                 <td align="left">String</td>
                 <td align="left">PersonalInfo</td>
@@ -2041,14 +2049,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">UnsignedInt</td>
                 <td align="left">DirectoryResource, PersonalInfo</td>
                 <td align="left"><xref target="directories" format="default"/>, <xref target="personalInfo" format="default"/></td>
-              </tr>
-              <tr>
-                <td align="left">locale</td>
-                <td align="left">String</td>
-                <td align="left">Card</td>
-                <td align="left">
-                  <xref target="locale" format="default"/>
-                </td>
               </tr>
               <tr>
                 <td align="left">locality</td>
