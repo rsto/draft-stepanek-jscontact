@@ -88,6 +88,7 @@
           <li><tt>mandatory</tt>: The property <bcp14>MUST</bcp14> be set for this object to conform with this specification.</li>
           <li><tt>optional</tt>: The property can but not need be set for this object to conform with this specification.  Any additional restrictions in the property definition still apply.</li>
           <li><tt>default</tt>: This is followed by a JSON value. That value will be used for this property if it is omitted.</li>
+          <li><tt>defaultType</tt>: This is followed by the name of a JSContact object type.  This name will be used as the value of the <xref target="prop-type">@type</xref> property, in case it is omitted in the property object value.  This is useful for parsing property values of form <tt>A|B</tt> where both types are JSContact object types, but the value omits the <tt>@type</tt> property.  The default type for properties with a single JSContact value type implicitly is the name of that JSContact object type.</li>
 				</ul>
       </section>
       <section anchor="data-types" numbered="true" toc="default">
@@ -129,7 +130,7 @@
           <t>A Resource object has the following properties:</t>
           <ul spacing="normal">
             <li>
-              <t>@type: <tt>String</tt> (mandatory).  Specifies the type of this resource object.  The allowed value is defined in later sections of this document for each concrete resource type (<xref target="resource-properties"/>).</t>
+              <t>@type: <tt>String</tt> (optional).  Specifies the type of this resource object.  The allowed value is defined in later sections of this document for each concrete resource type (<xref target="resource-properties"/>).</t>
             </li>
             <li>
               <t>kind: <tt>String</tt> (optional).
@@ -182,7 +183,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <section anchor="prop-type" numbered="true" toc="default">
           <name>The <tt>@type</tt> property</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property defines which JSContact type a given JSON object represents.  For example, the value of the <tt>@type</tt> property of a <xref target="card">Card</xref> object is <tt>Card</tt>.  An implementation now knows to parse a JSON object with such a property to a JSContact Card.</t>
+          <t>This property defines which JSContact type a given JSON object represents.  For example, the value of the <tt>@type</tt> property of a <xref target="card">Card</xref> object is <tt>Card</tt>.  An implementation now knows to parse a JSON object with such a property to a JSContact Card.  This property is optional for most JSContact objects, see the definition of the <xref target="type-signatures"><tt>defaultType</tt></xref> type signature attribute about how to disambiguate multi-typed property values.</t>
         </section>
       </section>
       <section anchor="versioning">
@@ -390,7 +391,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
           <t>Type: <tt>String[Relation]</tt> (optional).</t>
           <t>Relates the object to other Cards.  This is represented as a map, where each key is the <tt>uid</tt> of the related Card and the value defines the relation.  The Relation object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
             Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Relation</tt> (<xref target="iana-type-registry-contents"/>).
          </li>
             <li>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
@@ -403,13 +404,11 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
             <sourcecode name="" type="json"><![CDATA[
 "relatedTo": {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6": {
-    "@type": "Relation",
     "relation": {
       "friend": true
     }
   },
   "8cacdfb7d1ffdb59@example.com": {
-    "@type": "Relation",
     "relation": {}
   }
 }
@@ -459,7 +458,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           <t>The name of the entity represented by this Card.  This can be any type of name, e.g. it can but need not be the legal name of a person.  The definition of the <xref target="fullName"><tt>fullName</tt></xref> property describes how the <tt>name</tt> and <tt>fullName</tt> properties relate.</t>
           <t>A Name object has the following properties</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Name</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
@@ -475,25 +474,20 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
                 <name><tt>name</tt> example</name>
                 <sourcecode name="" type="json"><![CDATA[
 "name": {
-  "@type": "Name",
   "components": [
     {
-      "@type": "NameComponent",
       "kind": "given",
       "value": "Robert"
     },
     {
-      "@type": "NameComponent",
       "kind": "middle",
       "value": "Pau"
     },
     {
-      "@type": "NameComponent",
       "kind": "surname",
       "value": "Shou"
     },
     {
-      "@type": "NameComponent",
       "kind": "surname",
       "value": "Chang"
     }
@@ -509,7 +503,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </ul>
           <t>A NameComponent object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NameComponent</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>value: <tt>String</tt> (mandatory).
@@ -541,7 +535,7 @@ The value of this name component.</li>
           <t>Type: <tt>Id[NickName]</tt> (optional).</t>
           <t>The nicknames of the entity represented by this Card.  A NickName object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>NickName</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>name: <tt>String</tt> (mandatory).
@@ -557,7 +551,6 @@ The contexts in which to use this nickname.  Also see <xref target="prop-context
             <sourcecode name="" type="json"><![CDATA[
 "nickNames": {
   "k391": {
-    "@type": "NickName",
     "name": "Johnny"
   }
 }
@@ -569,7 +562,7 @@ The contexts in which to use this nickname.  Also see <xref target="prop-context
           <t>Type: <tt>Id[Organization]</tt> (optional).</t>
           <t>The companies or organization names and units associated with this Card.  An Organization object has the following properties, of which at least one of the <tt>name</tt> and <tt>units</tt> properties <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Organization</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>name: <tt>String</tt> (optional).
@@ -586,7 +579,7 @@ The contexts in which association with this organization apply.  For example, me
           </ul>
           <t>A OrgUnit object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OrgUnit</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>name: <tt>String</tt> (mandatory).
@@ -601,15 +594,12 @@ The contexts in which association with this organization apply.  For example, me
             <sourcecode name="" type="json"><![CDATA[
 "organizations": {
   "o1": {
-    "@type": "Organization",
     "name": "ABC, Inc.",
     "units": [
       {
-        "@type": "OrgUnit",
         "name": "North American Division"
       },
       {
-        "@type": "OrgUnit",
         "name": "Marketing"
       }
     ],
@@ -622,9 +612,9 @@ The contexts in which association with this organization apply.  For example, me
         <section anchor="speakToAs" numbered="true" toc="default">
           <name>speakToAs</name>
           <t>Type: <tt>SpeakToAs</tt> (optional).</t>
-          <t>Provides information how to address, speak to or refer to the entity that is represented by this Card.  A SpeakToAs object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
+          <t>Provides information how to address, speak to or refer to the entity that is represented by this Card.  A SpeakToAs object has the following properties, of which at least one of the <tt>grammaticalGender</tt> and <tt>pronouns</tt> properties <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SpeakToAs</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
@@ -661,7 +651,7 @@ The contexts in which association with this organization apply.  For example, me
           </ul>
           <t>A Pronouns object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Pronouns</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>pronouns: <tt>String</tt> (mandatory).
@@ -678,12 +668,10 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
   "grammaticalGender": "neuter",
   "pronouns": {
     "k19": {
-      "@type": "Pronouns",
       "pronouns": "they/them",
       "pref": 2
     },
     "k32": {
-      "@type": "Pronouns",
       "pronouns": "xe/xir",
       "pref": 1
     }
@@ -697,7 +685,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
           <t>Type : <tt>Id[Title]</tt> (optional).</t>
           <t>The job titles or functional positions of the entity represented by this Card.  A Title object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Title</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>name: <tt>String</tt> (mandatory).
@@ -720,12 +708,10 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
             <sourcecode name="" type="json"><![CDATA[
 "titles": {
   "le9": {
-    "@type": "Title",
     "kind": "title",
     "name": "Research Scientist"
   },
   "k2": {
-    "@type": "Title",
     "kind": "role",
     "name": "Project Leader",
     "organization": "o2"
@@ -733,7 +719,6 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
 },
 "organizations": {
   "o2": {
-    "@type": "Organization",
     "name": "ABC, Inc."
   }
 }
@@ -754,10 +739,10 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
             <li><tt>onlineServices</tt>.  The entity prefers to be contacted by one of the entries in <xref target="onlineServices"><tt>onlineServices</tt></xref>.</li>
             <li><tt>phones</tt>.  The entity prefers to be contacted by one of the entries in <xref target="phones"><tt>phones</tt></xref>.</li>
           </ul>
-          <t>The values in the object are a (possibly empty) list of preferences for this contact channel.  A valid ContactBy object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>The values in the object are a (possibly empty) list of preferences for this contact channel.  A valid ContactBy object <bcp14>MUST</bcp14> have at least one of its properties other than the <tt>@type</tt> property set.</t>
           <t>A ContactBy object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>ContactBy</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
@@ -771,13 +756,11 @@ Defines the preference of this contact channel in relation to other contact chan
 "contactBy": {
   "emails": [
     {
-      "@type": "ContactBy",
       "pref": 1
     }
   ],
   "phones": [
     {
-      "@type": "ContactBy",
       "pref": 2
     }
   ]
@@ -790,7 +773,7 @@ Defines the preference of this contact channel in relation to other contact chan
           <t>Type: <tt>Id[EmailAddress]</tt> (optional).</t>
           <t>The email addresses to contact the entity represented by this Card.  An EmailAddress object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>EmailAddress</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>address: <tt>String</tt> (mandatory).
@@ -807,14 +790,12 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <sourcecode name="" type="json"><![CDATA[
 "emails": {
   "e1": {
-    "@type": "EmailAddress",
     "contexts": {
       "work": true
     },
     "address": "jqpublic@xyz.example.com"
   },
   "e2": {
-    "@type": "EmailAddress",
     "address": "jane_doe@example.com",
     "pref": 1
   }
@@ -827,7 +808,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
           <t>Type: <tt>Id[OnlineService]</tt> (optional).</t>
           <t>The online services that are associated with the entity represented by this Card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties, of which at least the <tt>uri</tt> or <tt>user</tt> property <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>OnlineService</tt> (<xref target="iana-type-registry-contents"/>).
         </li>
             <li>service: <tt>String</tt> (optional).
@@ -848,11 +829,9 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
             <sourcecode name="" type="json"><![CDATA[
 "onlineServices": {
   "x1": {
-    "@type": "OnlineService",
     "uri": "xmpp:alice@example.com",
   },
   "x2": {
-    "@type": "OnlineService",
     "service": "Mastodon",
     "user": "@alice@example2.com",
     "uri": "https://example2.com/@alice",
@@ -866,7 +845,7 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
           <t>Type: <tt>Id[Phone]</tt> (optional).</t>
           <t>The phone numbers to contact the entity represented by this Card.  A Phone object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Phone</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>number: <tt>String</tt> (mandatory).
@@ -897,7 +876,6 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
             <sourcecode name="" type="json"><![CDATA[
 "phones": {
   "tel0": {
-    "@type": "Phone",
     "contexts": {
       "private": true
     },
@@ -908,7 +886,6 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
     "pref": 1
   },
   "tel3": {
-    "@type": "Phone",
     "contexts": {
       "work": true
     },
@@ -921,10 +898,10 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
         <section anchor="preferredLanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
           <t>Type : <tt>String[LanguagePref[]]</tt> (optional).</t>
-          <t>Defines the preferred languages for contacting the entity associated with this Card.  The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags.  The values are a (possibly empty) list of contact language preferences for this language.  A valid LanguagePref object <bcp14>MUST</bcp14> have at least one of its properties set in addition to the <tt>@type</tt> property.</t>
+          <t>Defines the preferred languages for contacting the entity associated with this Card.  The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags.  The values are a (possibly empty) list of contact language preferences for this language.  A valid LanguagePref object <bcp14>MUST</bcp14> have at least one of its properties other than the <tt>@type</tt> property set.</t>
           <t>A LanguagePref object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>LanguagePref</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
@@ -938,7 +915,6 @@ Defines the preference of this language in relation to other languages of the sa
 "preferredLanguages": {
   "en": [
     {
-      "@type": "LanguagePref",
       "contexts": {
         "work": true
       },
@@ -947,14 +923,12 @@ Defines the preference of this language in relation to other languages of the sa
   ],
   "fr": [
     {
-      "@type": "LanguagePref",
       "contexts": {
         "work": true
       },
       "pref": 2
     },
     {
-      "@type": "LanguagePref",
       "contexts": {
         "private": true
       }
@@ -985,12 +959,10 @@ Defines the preference of this language in relation to other languages of the sa
             <sourcecode name="" type="json"><![CDATA[
 "calendars": {
   "calA": {
-    "@type": "CalendarResource",
     "kind": "calendar",
     "uri": "webcal://calendar.example.com/calA.ics"
   },
   "project-a": {
-    "@type": "CalendarResource",
     "kind": "freeBusy",
     "uri": "https://calendar.example.com/busy/project-a"
   }
@@ -1004,7 +976,7 @@ Defines the preference of this language in relation to other languages of the sa
           <t>The scheduling addresses by which the entity may receive calendar scheduling invitations.  A SchedulingAddress object has the following properties:</t>
           <ul spacing="normal">
             <li>
-              <t>@type: <tt>String</tt> (mandatory).  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt> (<xref target="iana-type-registry-contents"/>).</t>
+              <t>@type: <tt>String</tt> (optional).  Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt> (<xref target="iana-type-registry-contents"/>).</t>
             </li>
             <li>uri: <tt>String</tt> (mandatory).
 The address to use for calendar scheduling with this contact.  This <bcp14>MUST</bcp14> be a URI as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
@@ -1020,7 +992,6 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
             <sourcecode name="" type="json"><![CDATA[
 "schedulingAddresses": {
   "sched1": {
-    "@type": "SchedulingAddress",
     "uri": "mailto:janedoe@example.com"
   }
 }
@@ -1036,7 +1007,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           <t>Type: <tt>Id[Address]</tt> (optional).</t>
           <t>A map of address identifiers to Address objects, containing physical locations.  An Address object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Address</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
@@ -1073,7 +1044,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
           </ul>
           <t>A StreetComponent object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
@@ -1113,19 +1084,16 @@ The value of this street component.</li>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k23": {
-    "@type": "Address",
     "contexts": {
       "work": true
     },
     "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
     "street": [
       {
-        "@type": "StreetComponent",
         "kind": "number",
         "value": "54321"
       },
       {
-        "@type": "StreetComponent",
         "kind": "name",
         "value": "Oak St"
       }
@@ -1137,39 +1105,32 @@ The value of this street component.</li>
     "countryCode": "US"
   },
   "k24": {
-    "@type": "Address",
     "contexts": {
       "private": true
     },
     "fullAddress": "Irgendwostrasse 27/4/8\n1010\nVienna\nAustria"
     "street": [
       {
-        "@type": "StreetComponent",
         "kind": "name",
         "value": "Irgendwostrasse"
       },
       {
-        "@type": "StreetComponent",
         "kind": "number",
         "value": "27"
       },
       {
-        "@type": "StreetComponent",
         "kind": "separator",
         "value": "/"
       },
       {
-        "@type": "StreetComponent",
         "kind": "building",
         "value": "4"
       }
       {
-        "@type": "StreetComponent",
         "kind": "separator",
         "value": "/"
       },
       {
-        "@type": "StreetComponent",
         "kind": "apartment",
         "value": "8"
       }
@@ -1200,7 +1161,6 @@ The value of this street component.</li>
             <sourcecode name="" type="json"><![CDATA[
 "cryptoKeys": {
   "mykey1": {
-    "@type": "CryptoResource",
     "uri": "https://www.example.com/keys/jdoe.cer"
   }
 }
@@ -1212,7 +1172,6 @@ The value of this street component.</li>
             <sourcecode name="" type="json"><![CDATA[
 "cryptoKeys": {
   "mykey2": {
-    "@type": "CryptoResource",
     "uri": "data:,-----BEGIN RSA PUBLIC KEY-----\n
 MIIBCgKCAQEA+xGZ/wcz9ugFpP07Nspo6U17l0YhFiFpxxU4pTk3Lifz9R3zsIsu\n
 ERwta7+fWIfxOo208ett/jhskiVodSEt3QBGh4XBipyWopKwZ93HHaDVZAALi/2A\n
@@ -1249,12 +1208,10 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <sourcecode name="" type="json"><![CDATA[
 "directories": {
   "dir1": {
-    "@type": "DirectoryResource",
     "kind": "entry",
     "uri": "https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
   },
   "dir2": {
-    "@type": "DirectoryResource",
     "kind": "directory",
     "uri": "ldap://ldap.example/o=Example%20Tech,ou=Engineering",
     "pref": 1
@@ -1278,7 +1235,6 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <sourcecode name="" type="json"><![CDATA[
 "links": {
   "link3": {
-    "@type": "LinkResource",
     "kind": "contact",
     "uri": "mailto:contact@example.com",
     "pref": 1
@@ -1305,17 +1261,14 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <sourcecode name="" type="json"><![CDATA[
 "media": {
   "res45": {
-    "@type": "MediaResource",
     "kind": "sound",
     "uri": "CID:JOHNQ.part8.19960229T080000.xyzMail@example.com"
   },
   "res47": {
-    "@type": "MediaResource",
     "kind": "logo",
     "uri": "https://www.example.com/pub/logos/abccorp.jpg"
   },
   "res1": {
-    "@type": "MediaResource",
     "kind": "photo",
     "uri": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4..."
   }
@@ -1349,7 +1302,6 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
 "language": "en",
 "addresses": {
   "addr1": {
-    "@type": "Address",
     "locality": "Tokyo"
   }
 },
@@ -1366,20 +1318,16 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <artwork><![CDATA[
 "language": "ru",
 "name": {
-  "@type": "Name",
   "components": [
     {
-      "@type": "NameComponent",
       "kind": "given",
       "value": "Фёдор"
     },
     {
-      "@type": "NameComponent",
       "kind": "surname",
       "value": "Михайлович"
     },
     {
-      "@type": "NameComponent",
       "kind": "surname",
       "value": "Достоевский"
     }
@@ -1388,20 +1336,16 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
 "localizations": {
   "en": {
     "name": {
-      "@type": "Name",
       "components": [
         {
-          "@type": "NameComponent",
           "kind": "given",
           "value": "Fyodor"
         },
         {
-          "@type": "NameComponent",
           "kind": "surname",
           "value": "Mikhailovich"
         },
         {
-          "@type": "NameComponent",
           "kind": "surname",
           "value": "Dostoevsky"
         }
@@ -1421,7 +1365,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <t>Type : Id[Anniversary] (optional).</t>
           <t>These are memorable dates and events for the entity represented by this Card.  An Anniversary object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Anniversary</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
@@ -1435,23 +1379,15 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
               </ul>
             </li>
             <li>
-              <t>date: <tt>Timestamp|PartialDate</tt> (mandatory).</t>
+              <t>date: <tt>PartialDate|Timestamp</tt> (mandatory, defaultType: <tt>PartialDate</tt>).</t>
               <t>The date of this anniversary in the Gregorian calendar.  This <bcp14>MUST</bcp14> either be a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
             </li>
             <li>place: Address (optional).
             An address associated with this anniversary, e.g.  the place of birth or death.</li>
           </ul>
-          <t>A Timestamp object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
-              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Timestamp</tt> (<xref target="iana-type-registry-contents"/>).
-          </li>
-            <li>utc: <tt>UTCDateTime</tt> (mandatory).  Specifies the point in time in UTC time.
-      </li>
-          </ul>
           <t>A PartialDate object represents a complete or partial calendar date in the Gregorian calendar.  It represents either a complete date, or a year, or a month in a year, or a day in a month.  It has the following properties, of which at least <tt>year</tt> or <tt>month</tt> and <tt>day</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PartialDate</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>year: <tt>UnsignedInt</tt> (optional).  This is the calendar year.</li>
@@ -1459,29 +1395,33 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <li>day: <tt>UnsignedInt</tt> (optional).  This is the calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set then <tt>month</tt> <bcp14>MUST</bcp14> be set.</li>
             <li>calendarScale: <tt>String</tt> (optional).  This is the calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a CLDR-registered calendar system name <xref target="RFC7529" format="default"/> or a vendor-specific value.  The year, month and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.  Note that the <tt>year</tt> property might be required to convert the date between the Gregorian calendar and the respective calendar system.</li>
           </ul>
+          <t>A Timestamp object has the following properties:</t>
+          <ul spacing="normal">
+            <li>@type: <tt>String</tt> (optional).
+              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Timestamp</tt> (<xref target="iana-type-registry-contents"/>).
+          </li>
+            <li>utc: <tt>UTCDateTime</tt> (mandatory).  Specifies the point in time in UTC time.
+      </li>
+          </ul>
           <figure anchor="example-anniversaries">
             <name><tt>anniversaries</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
 "anniversaries": {
   "k8": {
-    "@type": "Anniversary",
     "kind": "birth",
     "date": {
-      "@type": "PartialDate",
       "year": 1953,
       "month": 4,
       "day": 15
     }
   },
   "k9": {
-    "@type": "Anniversary",
     "kind": "death",
     "date": {
       "@type": "Timestamp",
       "utc": "2019-10-15T23:10:00Z"
     },
     "place": {
-      "@type": "Address",
       "fullAddress": "4445 Tree Street\nNew England, ND 58647\nUSA"
     }
   }
@@ -1508,7 +1448,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
           <t>Type: <tt>Id[Note]</tt> (optional).</t>
           <t>Free-text notes associated with this Card.  A Note object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Note</tt> (<xref target="iana-type-registry-contents"/>).
         </li>
             <li>
@@ -1521,9 +1461,9 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
               <t>author: <tt>Author</tt> (optional).  The author of this note.</t>
             </li>
           </ul>
-          <t>An Author object has the following properties, of which at least one other than <tt>@type</tt> <bcp14>MUST</bcp14> be defined:</t>
+          <t>An Author object has the following properties, of which at least one other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
              Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>Author</tt> (<xref target="iana-type-registry-contents"/>).
         </li>
             <li>
@@ -1538,11 +1478,9 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
             <sourcecode name="" type="json"><![CDATA[
 "notes": {
   "n1": {
-    "@type": "Note",
     "note": "Open office hours are 1600 to 1715 EST, Mon-Fri",
     "created": "2022-11-23T15:01:32Z",
     "author": {
-      "@type": "Author",
       "name": "John"
     }
   }
@@ -1556,7 +1494,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
           <t>Defines personal information about the entity represented by this Card.
 A PersonalInfo object has the following properties:</t>
           <ul spacing="normal">
-            <li>@type: <tt>String</tt> (mandatory).
+            <li>@type: <tt>String</tt> (optional).
               Specifies the type of this object.  This <bcp14>MUST</bcp14> be <tt>PersonalInfo</tt> (<xref target="iana-type-registry-contents"/>).
           </li>
             <li>
@@ -1592,19 +1530,16 @@ The actual information.</li>
             <sourcecode name="" type="json"><![CDATA[
 "personalInfo": {
   "pi2": {
-    "@type": "PersonalInfo",
     "kind": "expertise",
     "value": "chemistry",
     "level": "high"
   },
   "pi1": {
-    "@type": "PersonalInfo",
     "kind": "hobby",
     "value": "reading",
     "level": "high"
   },
   "pi6": {
-    "@type": "PersonalInfo",
     "kind": "interest",
     "value": "r&b music",
     "level": "medium"
@@ -1965,7 +1900,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
               <tr>
                 <td align="left">date</td>
-                <td align="left">Timestamp|PartialDate</td>
+                <td align="left">PartialDate|Timestamp</td>
                 <td align="left">Anniversary</td>
                 <td align="left">
                   <xref target="anniversaries" format="default"/>
