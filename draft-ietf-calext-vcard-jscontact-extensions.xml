@@ -497,7 +497,7 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
             <sourcecode name="" type="abnf"><![CDATA[
 NONZERO-DIGIT   = %x31-39 ; "1" to "9"
 
-ranks-param     = ranks-component 4(";" ranks-component)
+ranks-param     = ranks-component *4(";" ranks-component)
 ranks-component = rank *("," rank)
 rank            = (NONZERO-DIGIT *DIGIT) / ""
 
@@ -741,10 +741,6 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
-        <!-- The recommended and simplest way to include a well known reference -->
-      </references>
-      <references>
-        <name>Informative References</name>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact-vcard.xml"/>
       </references>
