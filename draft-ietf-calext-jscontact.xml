@@ -84,12 +84,12 @@
           <li><tt>A|B</tt> - The value is either of type <tt>A</tt> or of type <tt>B</tt>.</li>
         </ul>
         <t>Object properties may also have a set of attributes defined along with the type signature. These have the following meanings:</t>
-				<ul>
+        <ul>
           <li><tt>mandatory</tt>: The property <bcp14>MUST</bcp14> be set for this object to conform with this specification.</li>
           <li><tt>optional</tt>: The property can but not need be set for this object to conform with this specification.  Any additional restrictions in the property definition still apply.</li>
           <li><tt>default</tt>: This is followed by a JSON value. That value will be used for this property if it is omitted.</li>
           <li><tt>defaultType</tt>: This is followed by the name of a JSContact object type.  This name will be used as the value of the <xref target="prop-type">@type</xref> property, in case it is omitted in the property object value.  This is useful for parsing property values of form <tt>A|B</tt> where both types are JSContact object types, but the value omits the <tt>@type</tt> property.  The default type for properties with a single JSContact value type implicitly is the name of that JSContact object type.</li>
-				</ul>
+        </ul>
       </section>
       <section anchor="data-types" numbered="true" toc="default">
         <name>Data types</name>
@@ -225,7 +225,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the syntactic restrictions of IANA-registered property names.
           Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid.  Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties.  Preserving properties that are unknown to the implementation, is to allow applications and services to interoperate without data loss, even if not all of them implement the same set of JSContact extensions.
     </t>
-  </section>
+        </section>
         <section anchor="enumerated-values" numbered="true" toc="default">
           <name>Enumerated Values</name>
           <t>Several properties  in this document restrict their allowed values to be from a list of String values.  If not noted otherwise for a specific property, the initial list of values for such properties is registered at IANA in the <xref target="iana-enum-registry">JSContact Enum Values Registry</xref>.  Implementations <bcp14>MUST</bcp14> only set IANA-registered or <xref target="vendor-specific-values">vendor-specific</xref> values for such properties.</t>
@@ -242,7 +242,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <t>
         Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property as outlined in the above paragraph.
       </t>
-      <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-specific property names.  Note that the vendor prefix allows for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>.  This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
+          <t>The ABNF rule <tt>v-extension</tt> formally defines valid vendor-specific property names.  Note that the vendor prefix allows for more values than are allowed as Internationalized Domain Names (IDN) <xref target="RFC8499"/>.  This is to allow JSContact implementations simply validate property names without implementing the full set of rules that apply to domain names.</t>
           <figure anchor="vendor-property-abnf">
             <name>ABNF rules for vendor-specific property names</name>
             <sourcecode name="" type="abnf"><![CDATA[
@@ -691,14 +691,19 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
             <li>name: <tt>String</tt> (mandatory).
             The title or role name of the entity represented by this Card.
         </li>
-        <li><t>kind: <tt>String</tt> (optional, default <tt>title</tt>).
+            <li>
+              <t>kind: <tt>String</tt> (optional, default <tt>title</tt>).
           Describes the organizational or situational kind of this title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments, such as in project management.</t>
-        <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
-        <ul>
-          <li><tt>title</tt></li>
-          <li><tt>role</tt></li>
-          </ul>
-        </li>
+              <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
+              <ul>
+                <li>
+                  <tt>title</tt>
+                </li>
+                <li>
+                  <tt>role</tt>
+                </li>
+              </ul>
+            </li>
             <li>organization: <tt>Id</tt> (optional).
             The identifier of the organization in which this title is held.
         </li>
@@ -1514,9 +1519,15 @@ The actual information.</li>
               Indicates the level of expertise, or engagement in hobby or interest.
                 The <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
-                <li><tt>high</tt></li>
-                <li><tt>medium</tt></li>
-                <li><tt>low</tt></li>
+                <li>
+                  <tt>high</tt>
+                </li>
+                <li>
+                  <tt>medium</tt>
+                </li>
+                <li>
+                  <tt>low</tt>
+                </li>
               </ul>
             </li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
@@ -1614,17 +1625,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Optional parameters:</dt>
           <dd>
             <dl newline="false" spacing="normal">
-                <dt>type</dt>
-                <dd>
-                  <t>This parameter conveys the type of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  This RFC specifies a single allowed parameter value, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
+              <dt>type</dt>
+              <dd>
+                <t>This parameter conveys the type of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  This RFC specifies a single allowed parameter value, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
                 <dl newline="false" spacing="normal">
                   <dt><tt>card</tt>:</dt>
                   <dd>The body part <bcp14>MUST</bcp14> consist of exactly one JSContact <xref target="card"><tt>Card</tt></xref> object.</dd>
                 </dl>
               </dd>
-                <dt>version</dt>
-                <dd>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>@version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</dd>
-              </dl>
+              <dt>version</dt>
+              <dd>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>@version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</dd>
+            </dl>
           </dd>
           <dt>Encoding considerations:</dt>
           <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.</dd>
