@@ -836,7 +836,6 @@ IMPP;PREF=1:xmpp:alice@example.com
   "OS-1": {
     "@type": "OnlineService",
     "user": "xmpp:alice@example.com",
-    "kind": "impp",
     "pref": 1
   },
 }
@@ -905,8 +904,7 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
   "OS-1": {
     "@type": "OnlineService",
     "service": "Mastodon",
-    "user": "https://example.com/@foo",
-    "kind": "uri"
+    "user": "https://example.com/@foo"
   }
 }
 ]]></artwork>
@@ -1575,6 +1573,39 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
           </dl>
         </section>
+
+        <section anchor="jscontact-prop-vcardname">
+          <name>Property <tt>vCardName</tt></name>
+          <dl>
+            <dt>Name:</dt>
+            <dd>
+              <tt>vCardName</tt>
+            </dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>String</tt>
+            </dd>
+            <dt>Definition:</dt>
+            <dd>This property is set on a JSContact object that represents a vCard property or parameter and its value contains the name of that vCard element.  This allows to preserve the name of a vCard element when multiple elements convert the same JSContact object type.  The case-insensitive value <bcp14>MUST</bcp14> be valid according to the <tt>name</tt> ABNF defined in <xref target="RFC6350" section="3.3"/>.</dd>
+            <dt>Example:</dt>
+            <dd>
+              <t>Both vCard IMPP and SOCIALPROFILE convert to OnlineService in JSContact.  The <tt>vCardName</tt> property value indicates that the vCard source element was IMPP:</t>
+              <figure anchor="example-vcardname">
+                <name>JSContact <tt>vCardName</tt> example</name>
+                <artwork><![CDATA[
+IMPP:xmpp:alice@example.com
+
+"onlineServices": {
+  "os1": {
+    "user": "xmpp:alice@example.com",
+    "vCardName": "impp"
+  },
+}
+]]></artwork>
+              </figure>
+            </dd>
+          </dl>
+        </section>
       </section>
     </section>
     <section anchor="convert-jscontact-to-vcard">
@@ -1782,9 +1813,18 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           <!-- Everything in here should be sorted alphabetically: table entries by property name, the references for each property alphabetically by the object type or property they refer to -->
           <tbody>
             <tr>
+              <td align="left">vCardName</td>
+              <td align="left">String</td>
+              <td align="left">Any JSContact object</td>
+              <td align="left">
+                <xref target="jscontact-prop-vcardname" format="default"/>
+              </td>
+              <td align="left">common</td>
+            </tr>
+            <tr>
               <td align="left">vCardParams</td>
               <td align="left">String[String]</td>
-              <td align="left">Any JSContact object type that contains the <tt>@type</tt> property.</td>
+              <td align="left">Any JSContact object</td>
               <td align="left">
                 <xref target="jscontact-prop-vcardparams" format="default"/>
               </td>
