@@ -1071,13 +1071,12 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           </li>
             <li>
               <t>street: <tt>StreetComponent[]</tt> (optional).
-              The street address.  The concatenation of the component values, separated by whitespace, <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.  The StreetComponent object type is defined in the paragraph below.
-          </t>
+              The street address.  The concatenation of the component values <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  What characters to insert between street components is specific to the locale.  The <tt>defaultSeparator</tt> property and the <tt>separator</tt> StreetComponent kind give guidance what characters to insert, but implementations are free to choose any others.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.</t>
             </li>
             <li>locality: <tt>String</tt> (optional).
-The city, town, village, post-town, or other locality within which the street address may be found.</li>
+              The municipality, city, town, village, post-town, or other locality within which the street address may be found.</li>
             <li>region: <tt>String</tt> (optional).
-The province, such as a state, county, or canton within which the locality may be found.</li>
+              The administrative area, such as province, state, prefecture, county, canton, within which the locality may be found.</li>
             <li>country: <tt>String</tt> (optional).
 The country name.</li>
             <li>postcode: <tt>String</tt> (optional).
@@ -1098,6 +1097,8 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
             <li>fullAddress: <tt>String</tt> (optional).
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
+            <li>defaultSeparator: <tt>String</tt> (optional).
+              The default separator to insert between street component values when concatening all street component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the StreetComponent object.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
@@ -1111,42 +1112,42 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               The kind of this street component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
               <ul spacing="normal">
+                <li><tt>district</tt>. The district name this street is located in.</li>
+                <li><tt>block</tt>. The block name and number or subdistrict this street is located in.</li>
                 <li><tt>name</tt>.  The street name.
-            </li>
-                <li><tt>number</tt>.  The street number.
-            </li>
-                <li><tt>apartment</tt>.  The apartment number or identifier.
-            </li>
-                <li><tt>room</tt>.  The room number or identifier.
-            </li>
-                <li><tt>extension</tt>.  The extension designation or box number.
-            </li>
+              </li>
                 <li><tt>direction</tt>.  The Cardinal direction, e.g.  "North".
             </li>
-                <li><tt>building</tt>.  The building or building part this address is located in.
+                <li><tt>number</tt>.  The street number, including a number range, prefix and suffix.
+              </li>
+                <li><tt>building</tt>.  The building, tower, or condominium this address is located in.
             </li>
-                <li><tt>floor</tt>.  The floor this address is located on.
+                <li><tt>floor</tt>.  The floor or level this address is located on.
+              </li>
+                <li><tt>apartment</tt>.  The apartment house or unit number or identifier.
+              </li>
+                <li><tt>room</tt>.  The room or suite number or identifier.
+              </li>
+                <li><tt>extension</tt>.  The extension designation or box number.
             </li>
                 <li><tt>postOfficeBox</tt>.  The post office box number or identifier.
-            </li>
-                <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.
-            </li>
-                <li><tt>unknown</tt>.  A street component value for which no type is known.
-            </li>
+              </li>
+                <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g. White House, Taj Mahal.</li>
+                <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
               </ul>
             </li>
             <li>value: <tt>String</tt> (mandatory).
 The value of this street component.</li>
           </ul>
-          <figure anchor="example-addresses">
-            <name><tt>addresses</tt> example</name>
+          <figure anchor="example-address-us">
+            <name>Example: an address in the United States of America</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k23": {
     "contexts": {
       "work": true
     },
-    "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
+    "fullAddress": "54321 Oak St\nReston\nVA\n20190",
     "street": [
       {
         "kind": "number",
@@ -1162,7 +1163,14 @@ The value of this street component.</li>
     "country": "USA",
     "postcode": "20190",
     "countryCode": "US"
-  },
+  }
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="example-address-at">
+            <name>Example: an address in Austria</name>
+            <sourcecode name="" type="json"><![CDATA[
+"addresses": {
   "k24": {
     "contexts": {
       "private": true
@@ -1198,6 +1206,70 @@ The value of this street component.</li>
     "country": "Austria",
     "postcode": "1010",
     "countryCode": "AT"
+  }
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="example-address-th">
+            <name>Example: an address in Thailand</name>
+            <sourcecode name="" type="json"><![CDATA[
+"addresses": {
+  "fullAddress": "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"
+  "k25": {
+    "street": [
+      {
+        "kind": "number",
+         "value": "46"
+      },
+      {
+        "kind": "name",
+        "value": "1 Sukhumvit 51 Alley"
+      },
+      {
+        "kind": "block",
+        "value": "Khlong Tan Nuea"
+      },
+      {
+        "kind": "district",
+        "value": " Watthana"
+      }
+    ],
+    "locality": "Bangkok",
+    "region": "VA",
+    "country": "Thailand",
+    "postcode": "10110",
+    "defaultSeparator": ", "
+  }
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="example-address-jp">
+            <name>Example: an address in Japan</name>
+            <sourcecode name="" type="json"><![CDATA[
+"addresses": {
+  "fullAddress": "3 Chome-7-1 Nishishinjuku, Shinjuku City, Tokyo, Japan",
+  "k26": {
+    "street": [
+      {
+        "kind": "apartment",
+        "value": "3"
+      },
+      {
+        "kind": "separator",
+        "value": " "
+      },
+      {
+        "kind": "block",
+        "value": "Chome-7-1 Nishishinjuku"
+      },
+      {
+        "kind": "district",
+        "value": "Shinjuku City"
+      }
+    ],
+    "locality": "Tokyo",
+    "country": "Japan",
+    "defaultSeparator": ", "
   }
 }
 ]]></sourcecode>
@@ -1978,6 +2050,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">PartialDate</td>
                 <td align="left">
                   <xref target="anniversaries" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">defaultSeparator</td>
+                <td align="left">String</td>
+                <td align="left">Address</td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -3036,6 +3116,54 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
+                    <td align="left">apartment</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">block</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">building</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">direction</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">district</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">extension</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">floor</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">landmark</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
                     <td align="left">name</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
@@ -3048,7 +3176,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">apartment</td>
+                    <td align="left">postOfficeBox</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
@@ -3060,43 +3188,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">extension</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">direction</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">building</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">floor</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">postOfficeBox</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
                     <td align="left">separator</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">unknown</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
