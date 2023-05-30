@@ -77,7 +77,7 @@
           <ol>
             <li>Has a unique type name registered in the <xref target="iana-type-registry">IANA JSContact Types Registry</xref>.</li>
             <li>Has one or more object members for which the name and allowed value types are specified.  Such members are called "properties".</li>
-            <li>Has one property named <tt>@type</tt> with a string value that <bcp14>MUST</bcp14> match the type name of this JSContact object.</li>
+            <li>Has one property named <tt>@type</tt> with a string value that matches the type name of this JSContact object.  In general, this property does not need to be set explicitly as outlined in <xref target="prop-type"/>.</li>
           </ol>
           <t>The following sections specify how to define JSContact object types. <xref target="validating-jscontact"/> and <xref target="vendor-specific-extensions"/> then define the exact requirements for property names.</t>
           <t>The next paragraph illustrates how a JSContact object is defined:</t>
