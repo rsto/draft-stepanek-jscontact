@@ -790,7 +790,7 @@ EMAIL;PREF=1:jane_doe@example.com
         </section>
         <section anchor="vcard-prop-impp">
           <name>IMPP</name>
-          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The <tt>kind</tt> of the OnlineService is set to <tt>impp</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the IMPP value.  </t>
+          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The entry value is a <tt>OnlineService</tt> object and the <tt>uri</tt> property is set to the IMPP value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
@@ -799,9 +799,9 @@ IMPP;PREF=1:xmpp:alice@example.com
 
 "onlineServices": {
   "OS-1": {
-    "user": "xmpp:alice@example.com",
+    "uri": "xmpp:alice@example.com",
     "pref": 1
-  },
+  }
 }
 ]]></artwork>
           </figure>
@@ -853,8 +853,8 @@ DEFLANGUAGE:de-AT
         </section>
         <section anchor="vcard-prop-socialprofile">
           <name>SOCIALPROFILE</name>
-          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is TEXT, then the <tt>kind</tt> of the OnlineService is set to <tt>username</tt>. Otherwise, the <tt>kind</tt> is set to <tt>uri</tt>.  The entry value is a <tt>OnlineService</tt> object and the <tt>user</tt> property is set to the property value.  </t>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is URI, the <tt>uri</tt> property is set to the property value.  Otherwise, the <tt>user</tt> property is set to the property value.</t>
+          <t>The SERVICE-TYPE, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="socialprofile_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
