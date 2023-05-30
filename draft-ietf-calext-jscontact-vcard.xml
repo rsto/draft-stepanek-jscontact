@@ -1525,7 +1525,7 @@ IMPP:xmpp:alice@example.com
 
 "onlineServices": {
   "os1": {
-    "user": "xmpp:alice@example.com",
+    "uri": "xmpp:alice@example.com",
     "vCardName": "impp"
   },
 }
