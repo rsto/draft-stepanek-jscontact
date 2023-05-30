@@ -170,7 +170,6 @@ item1.TEL;VALUE=uri:tel:+1-555-555-5555
 
 "phones": {
   "p1": {
-    "@type": "Phone",
     "number": "tel:+1-555-555-5555",
     "vCardParams" : {
      "group" : "item1"
@@ -217,7 +216,6 @@ TITLE;LANGUAGE=fr:Patron
 "fullName": "John Doe",
 "titles": {
   "t1": {
-    "@type": "Title",
     "name": "Boss"
   }
 },
@@ -239,7 +237,6 @@ TITLE;LANGUAGE=fr:Patron
 "fullName": "John Doe",
 "titles": {
   "t1": {
-    "@type": "Title",
     "name": "Boss"
   }
 },
@@ -266,14 +263,12 @@ TITLE;LANGUAGE=fr:Patron
   "en": {
     "titles": {
       "t1": {
-        "@type": "Title",
         "name": "Novelist"
       }
   },
   "fr": {
     "titles": {
       "t1": {
-        "@type": "Title",
         "name": "Écrivain"
       }
   }
@@ -316,14 +311,12 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
 
 "phones": {
   "PHONE-A": {
-    "@type": "Phone",
     "contexts": { "private": true },
     "features": { "voice": true },
     "number": "tel:+1-555-555-5555;ext=5555",
     "pref": 1
   },
   "PHONE-B": {
-    "@type": "Phone",
     "contexts": { "private": true },
     "number": "tel:+33-01-23-45-67"
   }
@@ -386,7 +379,6 @@ SOURCE:https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
 
 "directories": {
    "ENTRY-1": {
-     "@type": "DirectoryResource",
      "kind": "entry",
      "uri": "https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf"
    }
@@ -431,37 +423,30 @@ ANNIVERSARY:19860201
 
 "anniversaries": {
   "ANNIVERSARY-1" : {
-    "@type": "Anniversary",
     "kind": "birth",
     "date": {
       "@type": "Timestamp",
       "utc": "1953-10-15T23:10:00Z"
     },
     "place": {
-      "@type": "Address",
       "fullAddress":
          "123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
     }
   },
   "ANNIVERSARY-2" : {
-    "@type": "Anniversary",
     "kind": "death",
     "date": {
-      "@type": "PartialDate",
       "year": 1996,
       "month": 4,
       "year": 15
     },
     "place": {
-      "@type": "Address",
       "fullAddress": "5 Court Street\nNew England, ND 58647\nU.S.A."
     }
   },
   "ANNIVERSARY-3" : {
-    "@type": "Anniversary",
     "kind": "wedding",
     "date": {
-      "@type": "PartialDate",
       "year": 1986,
       "month": 2,
       "day": 1
@@ -490,12 +475,10 @@ PRONOUNS;PREF=1:xe/xir
   "grammaticalGender": "neuter",
   "pronouns": {
     "PRONOUNS-1": {
-      "@type": "Pronouns",
       "pronouns": "they/them",
       "pref": 2
     },
     "PRONOUNS-2": {
-      "@type": "Pronouns",
       "pronouns": "xe/xir",
       "pref": 1
     }
@@ -554,30 +537,24 @@ NICKNAME:Johnny
 
 "fullName": "Mr.  John Q.  Public, Esq.",
 "name": {
-  "@type": "Name",
   "components":[
     {
-      "@type": "NameComponent",
       "kind": "prefix",
       "value": "Mr."
     },
     {
-      "@type": "NameComponent",
       "kind": "given",
       "value": "John"
     },
     {
-      "@type": "NameComponent",
       "kind": "surname",
       "value": "Public"
     },
     {
-      "@type": "NameComponent",
       "kind": "middle",
       "value": "Quinlan"
     },
     {
-      "@type": "NameComponent",
       "kind": "suffix",
       "value": "Esq."
     }
@@ -589,7 +566,6 @@ NICKNAME:Johnny
 },
 "nickNames": {
    "NICK-1": {
-    "@type": "NickName",
     "name": "Johnny"
    }
 }
@@ -607,7 +583,6 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
 
 "media": {
    "PHOTO-1": {
-     "@type": "MediaResource",
      "kind": "photo",
      "uri": "https://www.example.com/pub/photos/jqpublic.gif"
    }
@@ -692,17 +667,14 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
 
 "addresses": {
   "ADDR-1" : {
-    "@type": "Address",
     "contexts": { "work": true },
     "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
     "street": [
        {
-         "@type": "StreetComponent",
          "kind": "name",
          "value": "Oak St"
        },
        {
-         "@type": "StreetComponent",
          "kind": "number",
          "value": "54321"
        }
@@ -714,17 +686,14 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
     "countryCode": "US"
   },
   "ADDR-2": {
-    "@type": "Address",
     "contexts": { "private": true },
     "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
     "street": [
        {
-         "@type": "StreetComponent",
          "kind": "name",
          "value": "Elm St"
        },
        {
-         "@type": "StreetComponent",
          "kind": "number",
          "value": "12345"
        }
@@ -783,13 +752,11 @@ CONTACT-BY;PREF=2:TEL
 "contactBy": {
   "emails":[
     {
-      "@type": "ContactBy",
       "pref": 1
     }
   ],
   "phones":[
     {
-      "@type": "ContactBy",
       "pref": 2
     }
   ]
@@ -810,12 +777,10 @@ EMAIL;PREF=1:jane_doe@example.com
 
 "emails": {
   "EMAIL-1": {
-    "@type": "EmailAddress",
     "contexts": { "work": true },
     "address": "jqpublic@xyz.example.com"
   },
   "EMAIL-2": {
-    "@type": "EmailAddress",
     "address": "jane_doe@example.com",
     "pref": 1
   }
@@ -834,7 +799,6 @@ IMPP;PREF=1:xmpp:alice@example.com
 
 "onlineServices": {
   "OS-1": {
-    "@type": "OnlineService",
     "user": "xmpp:alice@example.com",
     "pref": 1
   },
@@ -857,19 +821,16 @@ LANG;TYPE=home:fr
 "preferredLanguages": {
   "en":[
     {
-      "@type": "LanguagePref",
       "contexts": { "work": true },
       "pref": 1
     }
   ],
   "fr":[
     {
-      "@type": "LanguagePref",
       "contexts": { "work": true },
       "pref": 2
     },
     {
-      "@type": "LanguagePref",
       "contexts": { "private": true }
     }
   ]
@@ -902,7 +863,6 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
 "onlineServices": {
   ...
   "OS-1": {
-    "@type": "OnlineService",
     "service": "Mastodon",
     "user": "https://example.com/@foo"
   }
@@ -923,14 +883,12 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
 
 "phones": {
   "PHONE-1": {
-    "@type": "Phone",
     "contexts": { "private": true },
     "features": { "voice": true },
     "number": "tel:+1-555-555-5555;ext=5555",
     "pref": 1
   },
   "PHONE-2": {
-    "@type": "Phone",
     "contexts": { "private": true },
     "number": "tel:+33-01-23-45-67"
   }
@@ -978,7 +936,6 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
 
 "links": {
   "CONTACT-1": {
-    "@type": "LinkResource",
     "kind": "contact",
     "uri": "mailto:contact@example.com",
     "pref": 1
@@ -998,7 +955,6 @@ LOGO:https://www.example.com/pub/logos/abccorp.jpg
 
 "media": {
   "LOGO-1": {
-    "@type": "MediaResource",
     "kind": "logo",
     "uri": "https://www.example.com/pub/logos/abccorp.jpg"
   }
@@ -1042,11 +998,10 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
 
 "organizations": {
   "ORG-1": {
-    "@type": "Organization",
     "name": "ABC, Inc.",
     "units":[
-      {"@type": "OrgUnit", "name": "North American Division"},
-      {"@type": "OrgUnit", "name": "Marketing"}
+      {"name": "North American Division"},
+      {"name": "Marketing"}
     ],
     "sortAs": "ABC"
   }
@@ -1066,19 +1021,16 @@ RELATED;VALUE=text:Please contact my deputy John for any inquiries.
 
 "relatedTo" : {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
-    "@type" : "Relation",
     "relation" : {
       "friend" : true
     }
   },
   "https://example.com/directory/john.vcf" : {
-    "@type" : "Relation",
     "relation" : {
       "contact" : true
     }
   },
   "Please contact my deputy John for any inquiries." : {
-    "@type" : "Relation",
     "relation" : { }
   }
 }
@@ -1099,12 +1051,10 @@ group1.ORG:ABC, Inc.
 
 "titles": {
   "TITLE-1": {
-    "@type": "Title",
     "kind": "title",
     "name": "Project Leader"
   },
   "TITLE-2": {
-    "@type": "Title",
     "kind": "role",
     "name": "Research Scientist",
     "organization": "ORG-1"
@@ -1112,7 +1062,6 @@ group1.ORG:ABC, Inc.
 },
 "organizations": {
   "ORG-1": {
-    "@type": "Organization",
     "name": "ABC, Inc."
   }
 }
@@ -1134,14 +1083,12 @@ EXPERTISE;INDEX=1;LEVEL=expert:chemistry
 
 "personalInfo": {
   "PERSINFO-1" : {
-    "@type": "PersonalInfo",
     "kind": "expertise",
     "value": "chinese literature",
      "level": "low",
      "listAs": 2
   },
   "PERSINFO-2" : {
-    "@type": "PersonalInfo",
     "kind": "expertise",
     "value": "chemistry",
     "level": "high",
@@ -1163,14 +1110,12 @@ HOBBY;INDEX=2;LEVEL=high:sewing
 
 "personalInfo": {
   "PERSINFO-1" : {
-    "@type": "PersonalInfo",
     "kind": "hobby",
     "value": "reading",
     "level": "high",
     "listAs": 1
   },
   "PERSINFO-2" : {
-    "@type": "PersonalInfo",
     "kind": "hobby",
     "value": "sewing",
     "level": "high",
@@ -1192,14 +1137,12 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
 
 "personalInfo": {
   "PERSINFO-1" : {
-    "@type": "PersonalInfo",
     "kind": "interest",
     "value": "r&b music",
     "level": "medium",
     "listAs": 1
   },
   "PERSINFO-2" : {
-    "@type": "PersonalInfo",
     "kind": "interest",
     "value": "rock&roll music",
     "level": "high",
@@ -1221,13 +1164,11 @@ ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Tech,ou=Engineering
 
 "directories": {
   "DIRECTORY-1": {
-    "@type": "DirectoryResource",
     "kind": "directory",
     "uri": "https://directory.mycompany.example.com",
     "listAs": 1
   },
   "DIRECTORY-2": {
-    "@type": "DirectoryResource",
     "kind": "directory",
     "uri": "ldap://ldap.tech.example/o=Tech,ou=Engineering",
     "pref": 1
@@ -1286,12 +1227,10 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
 
 "notes": {
   "NOTE-1" : {
-     "@type": "Note",
      "note": "Office hours are from 0800 to 1715 EST, Mon-Fri.",
      "created": "2022-11-23T15:01:32Z",
      "author": {
-     "@type": "Author",
-     "name": "John"
+       "name": "John"
      }
   }
 }
@@ -1334,7 +1273,6 @@ SOUND:CID:JOHNQPUBLIC.19960229T080000.xyzMail@example.com
 "media": {
   ...
   "SOUND-1": {
-    "@type": "MediaResource",
     "kind": "sound",
     "uri": "CID:JOHNQPUBLIC.19960229T080000.xyzMail@example.com"
   }
@@ -1365,7 +1303,6 @@ URL:https://example.org/restaurant.french/~chezchic.html
 
 "links": {
   "LINK-1": {
-    "@type": "LinkResource",
     "uri": "https://example.org/restaurant.french/~chezchic.html"
   }
 }
@@ -1388,7 +1325,6 @@ item1.X-ABLabel:foo
 
 "phones": {
   "p1": {
-    "@type": "Phone",
     "number": "tel:+1-555-555-5555",
     "label": "foo"
   }
@@ -1410,7 +1346,6 @@ KEY:https://www.example.com/keys/jdoe.cer
 
 "cryptoKeys": {
   "KEY-1": {
-    "@type": "CryptoResource",
     "uri": "https://www.example.com/keys/jdoe.cer"
   }
 }
@@ -1432,12 +1367,10 @@ CALADRURI:https://example.com/calendar/jdoe
 
 "schedulingAddresses": {
   "SCHEDULING-1": {
-    "@type": "SchedulingAddress",
     "uri": "mailto:janedoe@example.com",
     "pref": 1
   },
   "SCHEDULING-2": {
-    "@type": "SchedulingAddress",
     "uri": "https://example.com/calendar/jdoe"
   }
 }
@@ -1456,13 +1389,11 @@ CALURI;MEDIATYPE=text/calendar:https://ftp.example.com/calA.ics
 
 "calendars": {
   "CAL-1": {
-    "@type": "CalendarResource",
     "kind": "calendar",
     "uri": "https://cal.example.com/calA",
     "pref": 1
   },
   "CAL-2": {
-    "@type": "CalendarResource",
     "kind": "calendar",
     "uri": "https://ftp.example.com/calA.ics",
     "mediaType": "text/calendar"
@@ -1483,13 +1414,11 @@ FBURL;MEDIATYPE=text/calendar:https://example.com/busy/project-a.ifb
 
 "calendars": {
   "FBURL-1": {
-    "@type": "CalendarResource",
     "kind": "freeBusy",
     "uri": "https://www.example.com/busy/janedoe",
     "pref": 1
   },
   "FBURL-2": {
-    "@type": "CalendarResource",
     "kind": "freeBusy",
     "uri": "https://example.com/busy/project-a.ifb",
     "mediaType": "text/calendar"
@@ -1561,7 +1490,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
 
 "emails": {
   "email1": {
-    "@type": "EmailAddress",
     "address": "jane_doe@example.com",
     "vCardParams": {
       "x-foo": "Bar"
@@ -1701,7 +1629,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":{"bar":1234}
                 <artwork><![CDATA[
 "phones": {
   "phone1": {
-    "@type": "Phone",
     "number": "tel:+33-01-23-45-67"
     "example.com:foo/bar": "tux hux"
   }
