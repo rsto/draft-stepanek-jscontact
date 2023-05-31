@@ -1235,7 +1235,6 @@ The value of this street component.</li>
       }
     ],
     "locality": "Bangkok",
-    "region": "VA",
     "country": "Thailand",
     "postcode": "10110",
     "defaultSeparator": ", "
