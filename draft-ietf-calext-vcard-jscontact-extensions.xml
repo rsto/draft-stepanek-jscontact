@@ -579,6 +579,31 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
           </dd>
         </dl>
       </section>
+      <section anchor="param-username">
+        <name>USERNAME Parameter</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>USERNAME</dd>
+          <dt>Purpose:</dt>
+          <dd>To define a user name, such as the user of a messaging or social media service.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the user with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.  The IMPP or SOCIALPROFILE value type <bcp14>MUST</bcp14> be URI.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+username-param    = "USERNAME" "=" param-value
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+SOCIALPROFILE;USERNAME="The Foo":https://example.com/@foo
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
@@ -675,6 +700,11 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
             <td/>
             <td align="left">SERVICE-TYPE</td>
             <td align="left">This document, <xref target="param-service-type"/></td>
+          </tr>
+          <tr>
+            <td/>
+            <td align="left">USERNAME</td>
+            <td align="left">This document, <xref target="param-username"/></td>
           </tr>
         </tbody>
       </table>
