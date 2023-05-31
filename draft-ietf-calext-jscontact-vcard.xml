@@ -345,6 +345,10 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
           <name>TZ</name>
           <t>This parameter set on an ADR property converts to the JSContact <tt>timeZone</tt> property of the <tt>Address</tt> object that represents the vCard ADR.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.</t>
         </section>
+        <section anchor="vcard-param-username">
+          <name>USERNAME</name>
+          <t>This converts to the <tt>user</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
       </section>
       <section anchor="vcard-param-value">
         <name>VALUE</name>
@@ -642,12 +646,12 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
               <tr>
                 <td align="left">extended address</td>
                 <td align="left">extension</td>
-                <td align="left">extension, building, floor, room, apartment</td>
+                <td align="left">extension, building, floor, room, apartment, landmark</td>
               </tr>
               <tr>
                 <td align="left">street address</td>
                 <td align="left">name</td>
-                <td align="left">name, number, direction</td>
+                <td align="left">district, block, name, number, direction</td>
               </tr>
             </tbody>
           </table>
@@ -790,8 +794,8 @@ EMAIL;PREF=1:jane_doe@example.com
         </section>
         <section anchor="vcard-prop-impp">
           <name>IMPP</name>
-          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The entry value is a <tt>OnlineService</tt> object and the <tt>uri</tt> property is set to the IMPP value.</t>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>An IMPP property converts to an entry in the <tt>onlineServices</tt> property (<xref target="impp_conversion"/>).  The entry value is an <tt>OnlineService</tt> object.  The <tt>vCardName</tt> property is set to "impp" and the <tt>uri</tt> property is set to the IMPP value.</t>
+          <t>The SERVICE-TYPE, USERNAME, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP conversion example</name>
             <artwork><![CDATA[
@@ -800,7 +804,8 @@ IMPP;PREF=1:xmpp:alice@example.com
 "onlineServices": {
   "OS-1": {
     "uri": "xmpp:alice@example.com",
-    "pref": 1
+    "pref": 1,
+    "vCardName": "impp"
   }
 }
 ]]></artwork>
@@ -853,10 +858,10 @@ DEFLANGUAGE:de-AT
         </section>
         <section anchor="vcard-prop-socialprofile">
           <name>SOCIALPROFILE</name>
-          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  If the value type of the SOCIALPROFILE is URI, the <tt>uri</tt> property is set to the property value.  Otherwise, the <tt>user</tt> property is set to the property value.</t>
-          <t>The SERVICE-TYPE, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>A SOCIALPROFILE property converts to an entry in the <tt>onlineServices</tt> property (<xref target="socialprofile_conversion"/>).  The entry value is an <tt>OnlineService</tt> object.  The <tt>vCardName</tt> property is set to "socialprofile" or can be omitted.  If the value type of the SOCIALPROFILE is URI, the <tt>uri</tt> property is set to the SOCIALPROFILE value.  Otherwise, the <tt>user</tt> property is set to the SOCIALPROFILE value.</t>
+          <t>The SERVICE-TYPE, USERNAME, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="socialprofile_conversion">
-            <name>IMPP conversion example</name>
+            <name>SOCIALPROFILE conversion example</name>
             <artwork><![CDATA[
 SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
 
@@ -864,7 +869,7 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
   ...
   "OS-1": {
     "service": "Mastodon",
-    "user": "https://example.com/@foo"
+    "uri": "https://example.com/@foo"
   }
 }
 ]]></artwork>
@@ -2611,8 +2616,15 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>OnlineService</td>
-            <td>user</td>
+            <td>uri</td>
             <td><xref target="vcard-prop-impp"/>, <xref target="vcard-prop-socialprofile"/></td>
+          </tr>
+          <tr>
+            <td>OnlineService</td>
+            <td>user</td>
+            <td>
+              <xref target="vcard-param-username"/>
+            </td>
           </tr>
           <tr>
             <td>OrgUnit</td>
