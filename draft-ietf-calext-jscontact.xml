@@ -1140,7 +1140,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
 The value of this street component.</li>
           </ul>
           <figure anchor="example-address-us">
-            <name>Example: an address in the United States of America</name>
+            <name>Example of an address in the United States of America</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k23": {
@@ -1168,7 +1168,7 @@ The value of this street component.</li>
 ]]></sourcecode>
           </figure>
           <figure anchor="example-address-at">
-            <name>Example: an address in Austria</name>
+            <name>Example of an address in Austria</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k24": {
@@ -1211,7 +1211,7 @@ The value of this street component.</li>
 ]]></sourcecode>
           </figure>
           <figure anchor="example-address-th">
-            <name>Example: an address in Thailand</name>
+            <name>Example of an address in Thailand</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "fullAddress": "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"
@@ -1243,7 +1243,7 @@ The value of this street component.</li>
 ]]></sourcecode>
           </figure>
           <figure anchor="example-address-jp">
-            <name>Example: an address in Japan</name>
+            <name>Example of an address in Japan</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "fullAddress": "3 Chome-7-1 Nishishinjuku, Shinjuku City, Tokyo, Japan",
