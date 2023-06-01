@@ -292,7 +292,7 @@ TITLE;LANGUAGE=fr:Patron
         </section>
         <section anchor="vcard-param-pid">
           <name>PID</name>
-          <t>This does not convert to an IANA-registered property in JSContact.  To convert this parameter, see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>This converts to an entry in the <tt>vCardParams</tt> property, see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-pref">
           <name>PREF</name>
@@ -392,7 +392,7 @@ SOURCE:https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
         </section>
         <section anchor="vcard-prop-xml">
           <name>XML</name>
-          <t>This does not convert to an IANA-registered property in JSContact.</t>
+          <t>This converts to an entry in the <tt>vCardProps</tt> property, see <xref target="jscontact-prop-vcardprops"/>.</t>
         </section>
       </section>
       <section>
