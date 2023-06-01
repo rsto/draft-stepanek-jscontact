@@ -920,6 +920,7 @@ The phone number, as either a URI or free-text.  Typical URI schemes are the <xr
                 <li><tt>mobile</tt> The number is for a mobile phone.</li>
                 <li><tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
                 <li><tt>video</tt> The number supports video conferencing.</li>
+                <li><tt>main-number</tt> This number is the main phone number, such as the number of the front-desk at a company, as opposed to a direct-dial number of an individual employee.</li>
               </ul>
             </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
@@ -3002,6 +3003,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <tbody>
                   <tr>
                     <td align="left">fax</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">main-number</td>
                     <td align="left">
                       <xref target="phones" format="default"/>
                     </td>
