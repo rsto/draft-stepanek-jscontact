@@ -605,6 +605,47 @@ SOCIALPROFILE;USERNAME="The Foo":https://example.com/@foo
         </dl>
       </section>
     </section>
+    <section anchor="new-values">
+      <name>New Values</name>
+      <section anchor="value-adr-type-billing">
+        <name>Billing Address Type Value</name>
+        <dl>
+          <dt>Value:</dt>
+          <dd>billing</dd>
+          <dt>Purpose:</dt>
+          <dd>This indicates to use this address for billing, e.g. to send invoices to.</dd>
+          <dt>Conformance:</dt>
+          <dd>
+            <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+ADR;TYPE=billing:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="value-adr-type-delivery">
+        <name>Delivery Address Type Value</name>
+        <dl>
+          <dt>Value:</dt>
+          <dd>delivery</dd>
+          <dt>Purpose:</dt>
+          <dd>This indicates to use this address for delivery, e.g. to send packages to.</dd>
+          <dt>Conformance:</dt>
+          <dd>
+            <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+    </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
       <t>This specification extends the vCard Format Specification.  The same security considerations as outlined in <xref target="RFC6350" section="9"/> apply.</t>
@@ -748,6 +789,32 @@ SOCIALPROFILE;USERNAME="The Foo":https://example.com/@foo
             <td align="left">GRAMGENDER</td>
             <td align="left">neuter</td>
             <td align="left">This document, <xref target="prop-gramgender"/></td>
+          </tr>
+        </tbody>
+      </table>
+      <t>IANA is requested to add the following entries to the "vCard Parameter Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
+      <table anchor="new_param_values">
+        <name>New VCARD Property Values</name>
+        <thead>
+          <tr>
+            <th align="left">Property</th>
+            <th align="left">Parameter</th>
+            <th align="left">Value</th>
+            <th align="left">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left">ADR</td>
+            <td align="left">TYPE</td>
+            <td align="left">billing</td>
+            <td align="left">This document, <xref target="value-adr-type-billing"/></td>
+          </tr>
+          <tr>
+            <td align="left">ADR</td>
+            <td align="left">TYPE</td>
+            <td align="left">delivery</td>
+            <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
           </tr>
         </tbody>
       </table>
