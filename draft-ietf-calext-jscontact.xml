@@ -1831,7 +1831,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <name>Designated Expert Review</name>
           <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging
 	    the submitter to document security and privacy considerations.  For a common-use registration, the DE
-	      is expected to confirm that suitable documentation is available to ensure interoperability. 
+	      is expected to confirm that suitable documentation is available to ensure interoperability.
 		  The DE should also verify that
             the new assignment does not conflict with work that is active or already published within the IETF.</t>
           <t>The DE will either approve or deny the registration request and publish a notice of the decision
@@ -2004,8 +2004,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
-                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePref, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, Organization, SchedulingAddress</td>
-                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="organizations" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Address, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Organization, Phone, Pronouns, SchedulingAddress</td>
+                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/> <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">coordinates</td>
@@ -2134,8 +2134,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">label</td>
                 <td align="left">String</td>
-                <td align="left">EmailAddress, OnlineService, Phone, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, PersonalInfo, SchedulingAddress</td>
-                <td align="left"><xref target="prop-label" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">CalendarResource, CryptoResource, DirectoryResource, EmailAddress, LinkResource, MediaResource, OnlineService, PersonalInfo, Phone, SchedulingAddress</td>
+                <td align="left"><xref target="prop-label" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">language</td>
@@ -2318,8 +2318,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">pref</td>
                 <td align="left">UnsignedInt</td>
-                <td align="left">Address, NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePref, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</td>
-                <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="emails" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/><xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
+                <td align="left">Address, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</td>
+               <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">contactBy</td>
@@ -2506,8 +2506,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">value</td>
                 <td align="left">String</td>
-                <td align="left">NameComponent, StreetComponent, PersonalInfo</td>
-                <td align="left"><xref target="name" format="default"/>, <xref target="addresses" format="default"/>, <xref target="personalInfo" format="default"/></td>
+                <td align="left">NameComponent, PersonalInfo, StreetComponent</td>
+                <td align="left"><xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">year</td>
@@ -2912,11 +2912,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>contexts</dd>
             <dt>Context:</dt>
-            <dd>NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePref, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress</dd>
+            <dd>Address</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-contexts" align="left">
-                <name>JSContact Enum Values for contexts (Context: NickName, Pronouns, EmailAddress, OnlineService, Phone, ContactBy, LanguagePref, CalendarResource, CryptoResource, DirectoryResource, LinkResource, MediaResource, SchedulingAddress)</name>
+              <table anchor="tab-iana-enum-addr-contexts" align="left">
+                <name>JSContact Enum Values for contexts (Context: Address)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -2924,6 +2924,18 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td align="left">billing</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">delivery</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
                   <tr>
                     <td align="left">private</td>
                     <td align="left">
@@ -2944,11 +2956,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>contexts</dd>
             <dt>Context:</dt>
-            <dd>Address</dd>
+            <dd>CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-addr-contexts" align="left">
-                <name>JSContact Enum Values for contexts (Context: Address)</name>
+              <table anchor="tab-iana-enum-contexts" align="left">
+                <name>JSContact Enum Values for contexts (Context: CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Phone, Pronouns, SchedulingAddress)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -2966,18 +2978,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">work</td>
                     <td align="left">
                       <xref target="prop-contexts" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">billing</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">delivery</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
                     </td>
                   </tr>
                 </tbody>
@@ -3001,13 +3001,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
-                    <td align="left">voice</td>
+                    <td align="left">fax</td>
                     <td align="left">
                       <xref target="phones" format="default"/>
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">fax</td>
+                    <td align="left">mobile</td>
                     <td align="left">
                       <xref target="phones" format="default"/>
                     </td>
@@ -3025,12 +3025,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">mobile</td>
-                    <td align="left">
-                      <xref target="phones" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
                     <td align="left">textphone</td>
                     <td align="left">
                       <xref target="phones" format="default"/>
@@ -3040,6 +3034,138 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">video</td>
                     <td align="left">
                       <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">voice</td>
+                    <td align="left">
+                      <xref target="phones" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>grammaticalGender</dd>
+            <dt>Context:</dt>
+            <dd>SpeakToAs</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-speaktoas-grammaticalgender" align="left">
+                <name>JSContact Enum Values for kind (Context: SpeakToAs)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">animate</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">common</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">feminine</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">inanimate</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">masculine</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">neuter</td>
+                    <td align="left">
+                      <xref target="speakToAs" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>Anniversary</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-anniversary-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: Anniversary)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">birth</td>
+                    <td align="left">
+                      <xref target="anniversaries" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">death</td>
+                    <td align="left">
+                      <xref target="anniversaries" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">wedding</td>
+                    <td align="left">
+                      <xref target="anniversaries" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>CalendarResource</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-calendarresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: CalendarResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">calendar</td>
+                    <td align="left">
+                      <xref target="calendars" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">freeBusy</td>
+                    <td align="left">
+                      <xref target="calendars" format="default"/>
                     </td>
                   </tr>
                 </tbody>
@@ -3063,25 +3189,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
-                    <td align="left">individual</td>
-                    <td align="left">
-                      <xref target="kind" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">group</td>
-                    <td align="left">
-                      <xref target="kind" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">org</td>
-                    <td align="left">
-                      <xref target="kind" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">location</td>
+                    <td align="left">application</td>
                     <td align="left">
                       <xref target="kind" format="default"/>
                     </td>
@@ -3093,9 +3201,217 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">application</td>
+                    <td align="left">group</td>
                     <td align="left">
                       <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">individual</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">location</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">org</td>
+                    <td align="left">
+                      <xref target="kind" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>DirectoryResource</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-directoryresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: DirectoryResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">directory</td>
+                    <td align="left">
+                      <xref target="directories" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">entry</td>
+                    <td align="left">
+                      <xref target="directories" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>LinkResource</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-linkresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: LinkResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">contact</td>
+                    <td align="left">
+                      <xref target="links" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>MediaResource</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-mediaresource-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: MediaResource)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">logo</td>
+                    <td align="left">
+                      <xref target="media" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">photo</td>
+                    <td align="left">
+                      <xref target="media" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">sound</td>
+                    <td align="left">
+                      <xref target="media" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>NameComponent</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-namecomponent-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: NameComponent)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">given</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">middle</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">prefix</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">separator</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">suffix</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">surname</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
+            <dd>PersonalInfo</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-personalinformation-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: PersonalInfo)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">expertise</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">hobby</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">interest</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
                     </td>
                   </tr>
                 </tbody>
@@ -3204,62 +3520,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>kind</dd>
             <dt>Context:</dt>
-            <dd>NameComponent</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-namecomponent-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: NameComponent)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">prefix</td>
-                    <td align="left">
-                      <xref target="name" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">given</td>
-                    <td align="left">
-                      <xref target="name" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">surname</td>
-                    <td align="left">
-                      <xref target="name" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">middle</td>
-                    <td align="left">
-                      <xref target="name" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">suffix</td>
-                    <td align="left">
-                      <xref target="name" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">separator</td>
-                    <td align="left">
-                      <xref target="name" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
             <dd>Title</dd>
             <dt>Initial Contents:</dt>
             <dd>
@@ -3273,275 +3533,15 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
-                    <td align="left">title</td>
-                    <td align="left">
-                      <xref target="titles" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
                     <td align="left">role</td>
                     <td align="left">
                       <xref target="titles" format="default"/>
                     </td>
                   </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>grammaticalGender</dd>
-            <dt>Context:</dt>
-            <dd>SpeakToAs</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-speaktoas-grammaticalgender" align="left">
-                <name>JSContact Enum Values for kind (Context: SpeakToAs)</name>
-                <thead>
                   <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">animate</td>
+                    <td align="left">title</td>
                     <td align="left">
-                      <xref target="speakToAs" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">common</td>
-                    <td align="left">
-                      <xref target="speakToAs" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">feminine</td>
-                    <td align="left">
-                      <xref target="speakToAs" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">inanimate</td>
-                    <td align="left">
-                      <xref target="speakToAs" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">masculine</td>
-                    <td align="left">
-                      <xref target="speakToAs" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">neuter</td>
-                    <td align="left">
-                      <xref target="speakToAs" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
-            <dd>CalendarResource</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-calendarresource-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: CalendarResource)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">calendar</td>
-                    <td align="left">
-                      <xref target="calendars" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">freeBusy</td>
-                    <td align="left">
-                      <xref target="calendars" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
-            <dd>DirectoryResource</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-directoryresource-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: DirectoryResource)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">directory</td>
-                    <td align="left">
-                      <xref target="directories" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">entry</td>
-                    <td align="left">
-                      <xref target="directories" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
-            <dd>LinkResource</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-linkresource-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: LinkResource)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">contact</td>
-                    <td align="left">
-                      <xref target="links" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
-            <dd>MediaResource</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-mediaresource-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: MediaResource)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">photo</td>
-                    <td align="left">
-                      <xref target="media" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">sound</td>
-                    <td align="left">
-                      <xref target="media" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">logo</td>
-                    <td align="left">
-                      <xref target="media" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
-            <dd>Anniversary</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-anniversary-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: Anniversary)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">birth</td>
-                    <td align="left">
-                      <xref target="anniversaries" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">death</td>
-                    <td align="left">
-                      <xref target="anniversaries" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">wedding</td>
-                    <td align="left">
-                      <xref target="anniversaries" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
-            <dd>PersonalInfo</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-personalinformation-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: PersonalInfo)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">expertise</td>
-                    <td align="left">
-                      <xref target="personalInfo" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">hobby</td>
-                    <td align="left">
-                      <xref target="personalInfo" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">interest</td>
-                    <td align="left">
-                      <xref target="personalInfo" format="default"/>
+                      <xref target="titles" format="default"/>
                     </td>
                   </tr>
                 </tbody>
