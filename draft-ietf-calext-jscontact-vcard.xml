@@ -349,10 +349,10 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
           <name>USERNAME</name>
           <t>This converts to the <tt>user</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-      </section>
-      <section anchor="vcard-param-value">
-        <name>VALUE</name>
-        <t>This does not convert to an IANA-registered property in JSContact.  To preserve properties with experimental values, see <xref target="jscontact-prop-vcardparams"/> and <xref target="jscontact-prop-vcardprops"/>.</t>
+        <section anchor="vcard-param-value">
+          <name>VALUE</name>
+          <t>This does not convert to an IANA-registered property in JSContact.  To preserve properties with experimental values, see <xref target="jscontact-prop-vcardparams"/> and <xref target="jscontact-prop-vcardprops"/>.</t>
+        </section>
       </section>
       <section>
         <name>General Properties</name>
