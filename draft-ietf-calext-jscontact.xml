@@ -114,7 +114,7 @@
           </ul>
         </section>
         <section anchor="prop-type" numbered="true" toc="default">
-          <name>The <tt>@type</tt> property</name>
+          <name>The <tt>@type</tt> Property</name>
           <t>This property is defined as:</t>
           <ul>
             <li><tt>@type</tt>: String.  Specifies the type of this object.  This <bcp14>MUST</bcp14> match the type name of the JSContact object of which this JSON object is an instance of.</li>
@@ -129,7 +129,7 @@
         </section>
       </section>
       <section anchor="common-data-types" numbered="true" toc="default">
-        <name>Common Data types</name>
+        <name>Common Data Types</name>
         <t>In addition to the standard JSON data types, a couple of additional data types are common to the definitions of JSContact objects and properties.</t>
         <section anchor="id" numbered="true" toc="default">
           <name>Id</name>
@@ -193,10 +193,10 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         </section>
       </section>
       <section anchor="comon-properties">
-        <name>Common properties</name>
+        <name>Common Properties</name>
         <t>Most of the properties in this document are specific to a single JSContact object type.  Such properties are defined along with the respective object type.  The properties in this section are common to multiple data types and are defined here to avoid repetition.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSContact object if they are explicitly mentioned to be allowed for this object type.</t>
         <section anchor="prop-contexts" numbered="true" toc="default">
-          <name>The <tt>contexts</tt> property</name>
+          <name>The <tt>contexts</tt> Property</name>
           <t>Type: <tt>String[Boolean]</tt></t>
           <t>This property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts, and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
           <t>This section defines common contexts.  Additional contexts may be defined in the properties or data types that make use of this property.  The <xref target="enumerated-values">enumerated</xref> common context values are:</t>
@@ -206,12 +206,12 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           </ul>
         </section>
         <section anchor="prop-label" numbered="true" toc="default">
-          <name>The <tt>label</tt> property</name>
+          <name>The <tt>label</tt> Property</name>
           <t>Type: <tt>String</tt></t>
           <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  Such labels best be succinct to properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
-          <name>The <tt>pref</tt> property</name>
+          <name>The <tt>pref</tt> Property</name>
           <t>Type: <tt>UnsignedInt</tt></t>
           <t>This property allows defining a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
@@ -222,7 +222,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <name>Versioning</name>
         <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>@version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
         <section>
-          <name>Version format and requirements</name>
+          <name>Version Format and Requirements</name>
           <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
           <sourcecode name="" type="abnf"><![CDATA[
 jsversion = 1*DIGIT "." 1*DIGIT
@@ -231,7 +231,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
         </section>
         <section anchor="current-version">
-          <name>Current version</name>
+          <name>Current Version</name>
           <t>This specification registers JSContact version value <tt>1.0</tt> (<xref target="tab-iana-version-registry"/>).</t>
         </section>
       </section>
@@ -331,7 +331,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
       <t>Its media type is defined in <xref target="iana-media-type"/>.</t>
       <t><xref target="example-card"/>  basic Card for the person "John Doe".  As the object is the topmost object in the JSON data it has the <tt>@type</tt> property set according to the rules defined <xref target="prop-type"/>.</t>
       <figure anchor="example-card">
-        <name>A basic <tt>Card</tt> example</name>
+        <name>Example of a basic <tt>Card</tt></name>
         <sourcecode name="" type="json"><![CDATA[
 {
   "@type": "Card",
@@ -351,7 +351,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 ]]></sourcecode>
       </figure>
       <section anchor="metadata-properties" numbered="true" toc="default">
-        <name>Metadata properties</name>
+        <name>Metadata Properties</name>
         <t>This section defines properties about this particular instance of a Card, such as its unique identifier, its creation date, how it relates to other Cards and other metadata information.</t>
         <section anchor="cardtype" numbered="true" toc="default">
           <name>@type</name>
@@ -492,7 +492,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         </section>
       </section>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
-        <name>Name and Organization properties</name>
+        <name>Name and Organization Properties</name>
         <t>This section defines properties that name the entity represented by this Card, its related organizations and roles, as well as how to refer the entity represented by this Card in spoken or written language.</t>
         <section anchor="fullName" numbered="true" toc="default">
           <name>fullName</name>
@@ -785,7 +785,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
         </section>
       </section>
       <section anchor="contact-properties" numbered="true" toc="default">
-        <name>Contact properties</name>
+        <name>Contact Properties</name>
         <t>This section defines properties how to contact the entity represented by this Card.</t>
         <section anchor="contactBy" numbered="true" toc="default">
           <name>contactBy</name>
@@ -998,7 +998,7 @@ Defines the preference of this language in relation to other languages of the sa
         </section>
       </section>
       <section anchor="calendaring-and-scheduling-properties" numbered="true" toc="default">
-        <name>Calendaring and Scheduling properties</name>
+        <name>Calendaring and Scheduling Properties</name>
         <t>This section defines properties how to schedule calendar events with the entity represented by this Card.</t>
         <section anchor="calendars" numbered="true" toc="default">
           <name>calendars</name>
@@ -1059,7 +1059,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
         </section>
       </section>
       <section anchor="address-and-location-properties" numbered="true" toc="default">
-        <name>Address and Location properties</name>
+        <name>Address and Location Properties</name>
         <t>This section defines properties for postal addresses and geographical locations associated with the entity represented by this Card.</t>
         <section anchor="addresses" numbered="true" toc="default">
           <name>addresses</name>
@@ -1276,7 +1276,7 @@ The value of this street component.</li>
         </section>
       </section>
       <section anchor="resource-properties" numbered="true" toc="default">
-        <name>Resource properties</name>
+        <name>Resource Properties</name>
         <t>This section defines properties for digital resources associated with the entity represented by this Card.</t>
         <section anchor="cryptoKeys" numbered="true" toc="default">
           <name>cryptoKeys</name>
@@ -1408,7 +1408,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
         </section>
       </section>
       <section anchor="multilingual-properties" numbered="true" toc="default">
-        <name>Multilingual properties</name>
+        <name>Multilingual Properties</name>
         <t>This section defines properties how to localize the content of this Card in human languages.</t>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
@@ -1488,7 +1488,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
         </section>
       </section>
       <section anchor="additional-properties" numbered="true" toc="default">
-        <name>Additional properties</name>
+        <name>Additional Properties</name>
         <t>This section defines properties for which none of the previous sections is appropriate.</t>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
