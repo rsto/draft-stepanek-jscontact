@@ -516,8 +516,10 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
           </li>
             <li>
               <t>components: <tt>NameComponent[]</tt> (mandatory).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
-              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  Joining a separator component with another name component typically does not require inserting any additional character. Otherwise, inserting a single Space character in between name component values is a good choice.</t>
+              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  The <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
             </li>
+            <li>defaultSeparator: <tt>String</tt> (optional).
+              The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.</li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
@@ -571,8 +573,7 @@ The value of this name component.</li>
                 <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
                 <li><tt>middle</tt>.  The value is a middle name, also known as "additional name".</li>
                 <li><tt>suffix</tt>.  The value is an honorific suffix, e.g.  "B.A.", "Esq.".</li>
-                <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character.
-            </li>
+                <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.</li>
               </ul>
             </li>
             <li>
@@ -1134,7 +1135,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                 <li><tt>postOfficeBox</tt>.  The post office box number or identifier.
               </li>
                 <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g. White House, Taj Mahal.</li>
-                <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
+                <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
               </ul>
             </li>
             <li>value: <tt>String</tt> (mandatory).
