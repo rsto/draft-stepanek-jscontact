@@ -219,7 +219,7 @@ DEFLANGUAGE:de-AT
             <t>
               This property defines the grammatical gender that the contact prefers
               to be addressed by or referred at in written or spoken form.
-              For example, the German language distinguishes by grammatical gender in saluations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
+              For example, the German language distinguishes by grammatical gender in salutations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
               Multiple occurrences of this property
               <bcp14>MUST</bcp14> be distinguished by the LANG parameter.
             </t>

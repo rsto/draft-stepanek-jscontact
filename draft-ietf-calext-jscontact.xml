@@ -57,7 +57,7 @@
       <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>.  Using JSON is mostly a pragmatic choice: its widespread use makes JSContact easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
       <section anchor="relation-to-vcard" numbered="true" toc="default">
         <name>Motivation and Relation to vCard, jCard and xCard</name>
-        <t>The vCard data format <xref target="RFC6350"/> is an interchange format for contacts data between addressbook service providers and vendors.  However, this format has gone through multiple specifications iterations with only a subset of its deprecated <xref target="RFC2426">version 3</xref> being widely in use.  As a consequence, products and services internally use a richer contact data model than they expose when serialising that information to vCard.  In addition, service providers often use a proprietary JSON representation of contact data in their APIs.</t>
+        <t>The vCard data format <xref target="RFC6350"/> is an interchange format for contacts data between address book service providers and vendors.  However, this format has gone through multiple specifications iterations with only a subset of its deprecated <xref target="RFC2426">version 3</xref> being widely in use.  As a consequence, products and services internally use a richer contact data model than they expose when serializing that information to vCard.  In addition, service providers often use a proprietary JSON representation of contact data in their APIs.</t>
         <t>JSContact provides a standard JSON-based data model and representation of contact data as an alternative to proprietary formats.</t>
         <t>While writing this document, several features missing in vCard were brought to the attention of the authors, such as social media contacts, gender pronouns and others.  This highlights how vCard is not perceived as an evolving format and consequently hasn't been updated since close to ten years.  JSContact addresses these unmet demands and defines new vCard properties and parameters to allow interchanging them in both formats.</t>
         <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data, in XML and JSON format respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
@@ -70,7 +70,7 @@
       <section anchor="data-type-notations">
         <name>Data Type Notations</name>
         <t>This section introduces the notations and terminology used to define data types in JSContact.</t>
-        <t>The underlying format for JSContact is JSON and so also its data types build on JSON values.  The terms "object" and "array" as well as the four primitive types ("strings", "numbers", "booleans", and "null") are to be interpreted as described in <xref target="RFC8259" section="1"/>.  All JSContact data <bcp14>MUST</bcp14> be valid according to the constraints given in <xref target="RFC7493">I-JSON</xref>.  Unless otherwise noted, all member names in JSON objects are case sensitive.  Within context of JSON objects, the term "key" is synonumous with "member name" as defined in <xref target="RFC8259" section="1"/>.</t>
+        <t>The underlying format for JSContact is JSON and so also its data types build on JSON values.  The terms "object" and "array" as well as the four primitive types ("strings", "numbers", "booleans", and "null") are to be interpreted as described in <xref target="RFC8259" section="1"/>.  All JSContact data <bcp14>MUST</bcp14> be valid according to the constraints given in <xref target="RFC7493">I-JSON</xref>.  Unless otherwise noted, all member names in JSON objects are case sensitive.  Within context of JSON objects, the term "key" is synonymous with "member name" as defined in <xref target="RFC8259" section="1"/>.</t>
         <section anchor="objects-and-properties" numbered="true" toc="default">
           <name>Objects and Properties</name>
           <t>JSContact defines data types for contact information such as addresses or names.  This information typically consists of multiple related elements, for example a personal name and surname together form a name.  These related elements are organized in JSContact objects.  A JSContact object is a JSON object which:</t>
@@ -435,7 +435,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
           <figure anchor="example-prodId">
             <name><tt>prodId</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"prodId": "ACME Addressbook App version 1.23.5"
+"prodId": "ACME Contacts App version 1.23.5"
 ]]></sourcecode>
           </figure>
         </section>
@@ -673,7 +673,7 @@ The contexts in which association with this organization apply.  For example, me
             <li>
               <t>grammaticalGender: <tt>String</tt> (optional).
               Defines which grammatical gender to use in salutations and other grammatical constructs.
-              For example, the German language distinguishes by grammatical gender in saluations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
+              For example, the German language distinguishes by grammatical gender in salutations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
               The <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
                 <li>
@@ -1099,7 +1099,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
             <li>defaultSeparator: <tt>String</tt> (optional).
-              The default separator to insert between street component values when concatening all street component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the StreetComponent object.</li>
+              The default separator to insert between street component values when concatenating all street component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the StreetComponent object.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
@@ -1286,7 +1286,7 @@ The value of this street component.</li>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>, if set.</li>
           </ul>
-          <t>The following example shows how refer to an external cryptograhic resource.</t>
+          <t>The following example shows how refer to an external cryptographic resource.</t>
           <figure anchor="example-cryptoKeys-external">
             <name><tt>cryptoKeys</tt> example with external data</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -1805,7 +1805,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
       </section>
       <section anchor="iana-registry-policy" numbered="true" toc="default">
         <name>Registry Policy and Change Procedures</name>
-        <t>Registry assignments generally require the JSContact version to change, but ultimatelly this is up to the decision of the Designated Expert.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for other assignments is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>), where for very simple changes, it can be enough to describe the new assignment in the Description item of the respective registry.</t>
+        <t>Registry assignments generally require the JSContact version to change, but ultimately this is up to the decision of the Designated Expert.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for other assignments is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>), where for very simple changes, it can be enough to describe the new assignment in the Description item of the respective registry.</t>
         <t>The Designated Expert decides if a major or minor version change is required and assigns the new version to the <xref target="iana-version-registry">Version Registry</xref>.  Version numbers increment by one, and a major version change resets the minor version to zero.  An assignment may apply multiple changes and to more than one registry at once, in which case a single version change is sufficient.</t>
         <t>A registration <bcp14>MUST</bcp14> have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>.</t>
         <ul>

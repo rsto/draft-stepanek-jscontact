@@ -1248,9 +1248,9 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
           <figure anchor="prodid_conversion">
             <name>PRODID conversion example</name>
             <artwork><![CDATA[
-PRODID:ACME Addressbook App version 1.23.5
+PRODID:ACME Contacts App version 1.23.5
 
-"prodId": "ACME Addressbook App version 1.23.5"
+"prodId": "ACME Contacts App version 1.23.5"
 ]]></artwork>
           </figure>
         </section>
