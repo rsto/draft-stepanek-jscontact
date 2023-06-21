@@ -472,56 +472,6 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           </dd>
         </dl>
       </section>
-      <section anchor="param-ranks">
-        <name>RANKS Parameter</name>
-        <dl>
-          <dt>Parameter name:</dt>
-          <dd>RANKS</dd>
-          <dt>Purpose:</dt>
-          <dd>This parameter specifies a ranking among the name components of a vCard N property value.</dd>
-          <dt>Description:</dt>
-          <dd>
-            <t>The RANKS parameter on an N property assigns a rank among the same-typed name components of an N property value.  Some cultures assign ranks to name components, such as a <em>first</em> and a <em>second</em> surname, or people might prefer to go by their second given name.  But the N property value	does not allow inferring a culturally or otherwise significant rank from the order in which same-typed name components are stored in it.</t>
-            <t>The parameter value is structurally equivalent to the multivalued N property value: ranks of different name component types are separated by semicolon, ranks among the same-typed name components are separated by comma.  The rank is an integer number larger than or equal to 1 and indicates the first or nth rank.  Its location within the RANKS parameter value ranks the name component value at that same position within the N property value.  An empty or absent rank indicates that the rank of its related name component value is undefined. If the RANKS parameter is set, its value <bcp14>MUST NOT</bcp14> be the empty string.</t>
-          </dd>
-          <dt>Format definition:</dt>
-          <dd>
-            <sourcecode name="" type="abnf"><![CDATA[
-NONZERO-DIGIT   = %x31-39 ; "1" to "9"
-
-ranks-param     = ranks-component *4(";" ranks-component)
-ranks-component = rank *("," rank)
-rank            = (NONZERO-DIGIT *DIGIT) / ""
-
-]]></sourcecode>
-          </dd>
-          <dt>Example(s):</dt>
-          <dd>
-            <t>This example assigns ranks to two surnames. The culturally first surname is
-            Rodriguez but it appears at the second position in the N property.  Accordingly
-            the RANKS parameter assigns rank 1 to the second entry in the surname name
-            component.  It also assigns rank 2 to the first entry in the
-            same name component.  It does not assign any rank to the personal name or any other
-            name components.</t>
-            <sourcecode name=""><![CDATA[
-N;RANKS="2,1":Gómez,Rodriguez;Pablo;;;
-]]></sourcecode>
-          </dd>
-          <dt>Example(s):</dt>
-          <dd>
-            <t>This example assigns ranks to both the surname and personal name components.
-            The writer "Dame Mary Barbara Hamilton Cartland" published most of her work under
-            the "Barbara Cartland" and this is reflected in the ranks.  The RANKS parameter
-            assigns rank 1 to the second entry in the surname name component.  It leaves the rank
-            of "Hamilton" undefined.  Similarly, it assigns rank 1 to the second entry in the
-            personal name component and leaves "Mary" unranked.  There is no rank assigned to
-            the honorific prefix "Dame".</t>
-            <sourcecode name=""><![CDATA[
-N;RANKS=",1;,1":Hamilton,Cartland;Mary,Barbara;;Dame;
-]]></sourcecode>
-          </dd>
-        </dl>
-      </section>
       <section anchor="param-propid">
         <name>PROP-ID Parameter</name>
         <dl>
@@ -731,11 +681,6 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
             <td/>
             <td align="left">PROP-ID</td>
             <td align="left">This document, <xref target="param-propid"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">RANKS</td>
-            <td align="left">This document, <xref target="param-ranks"/></td>
           </tr>
           <tr>
             <td/>

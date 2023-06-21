@@ -325,10 +325,6 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
           </figure>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-        <section anchor="vcard-param-ranks">
-          <name>RANKS</name>
-          <t>The values of this parameter convert to the <tt>rank</tt> property of the NameComponent objects inferred from the N property value.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-        </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
           <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
@@ -505,28 +501,34 @@ PRONOUNS;PREF=1:xe/xir
               <tr>
                 <th align="left">N component</th>
                 <th align="left">"kind" value</th>
+                <th align="left">Remarks</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td align="left">Honorific Prefixes</td>
-                <td align="left">prefix</td>
+                <td align="left">title</td>
+                <td align="left"/>
               </tr>
               <tr>
                 <td align="left">Given Names</td>
                 <td align="left">given</td>
+                <td align="left"/>
               </tr>
               <tr>
                 <td align="left">Family Names</td>
-                <td align="left">surname</td>
+                <td align="left">surname, surname2</td>
+                <td align="left">The first Family Names item converts to the "surname" NameComponent kind, any additional items to the "surname2" kind.</td>
               </tr>
               <tr>
                 <td align="left">Additional Names</td>
                 <td align="left">middle</td>
+                <td align="left"/>
               </tr>
               <tr>
                 <td align="left">Honorific Suffixes</td>
-                <td align="left">suffix</td>
+                <td align="left">credential, generation</td>
+                <td align="left">vCard does not distinguish between generation qualifiers (such as "Jr.") and credentials (such as "Esq.").  Distinguishing these is language-specific and left to implementations. For example, United States names uses generational qualifiers such as "Jr.", "Sr.", French uses "père" (father) and "fils" (son).  Roman numerals such as "III" and "XIV" typically also are generational qualifiers.</td>
               </tr>
             </tbody>
           </table>
@@ -2510,13 +2512,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>kind</td>
             <td>
               <xref target="vcard-prop-n"/>
-            </td>
-          </tr>
-          <tr>
-            <td>NameComponent</td>
-            <td>rank</td>
-            <td>
-              <xref target="vcard-param-ranks"/>
             </td>
           </tr>
           <tr>

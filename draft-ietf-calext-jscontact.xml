@@ -568,19 +568,15 @@ The value of this name component.</li>
               The kind of this name component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
               <ul spacing="normal">
-                <li><tt>prefix</tt>.  The value is an honorific title(s), e.g.  "Mr", "Ms", "Dr".</li>
+                <li><tt>title</tt>.  The value is a honorific title or prefix, e.g.  "Mr", "Ms", "Dr".</li>
                 <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
                 <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
-                <li><tt>middle</tt>.  The value is a middle name, also known as "additional name".</li>
-                <li><tt>suffix</tt>.  The value is an honorific suffix, e.g.  "B.A.", "Esq.".</li>
+                <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
+                <li><tt>middle</tt>.  The value is a middle name, also known as "additional given name".</li>
+                <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.  "B.A.", "Esq.".</li>
+                <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g  “Jr.” or “III”.</li>
                 <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.</li>
               </ul>
-            </li>
-            <li>
-              <t>rank: <tt>UnsignedInt</tt> (optional, default: <tt>1</tt>).
-                Defines the rank of this name component to other name components of the same type.  If set, the property value <bcp14>MUST</bcp14> be higher than or equal to 1.</t>
-              <t>For example, two name components of type <tt>surname</tt> may have their <tt>rank</tt> property value set to <tt>1</tt> and <tt>2</tt>, respectively.  In this case, the first name component defines the surname, and the second name component the secondary surname.</t>
-              <t>Note that this property value does not indicate the order in which to print name components of the same type.  Some cultures print the secondary surname before the first surname, others the first before the second.  Implementations <bcp14>MAY</bcp14> inspect the <tt>language</tt> property of the Card to determine the appropriate formatting.  They <bcp14>MAY</bcp14> print name components in order of appearance in the <tt>components</tt> property of the Name object.</t>
             </li>
           </ul>
         </section>
@@ -2364,14 +2360,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">rank</td>
-                <td align="left">UnsignedInt</td>
-                <td align="left">NameComponent</td>
-                <td align="left">
-                  <xref target="name" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">region</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
@@ -3349,6 +3337,18 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </thead>
                 <tbody>
                   <tr>
+                    <td align="left">credential</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">generation</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
                     <td align="left">given</td>
                     <td align="left">
                       <xref target="name" format="default"/>
@@ -3361,25 +3361,26 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">prefix</td>
-                    <td align="left">
-                      <xref target="name" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
                     <td align="left">separator</td>
                     <td align="left">
                       <xref target="name" format="default"/>
                     </td>
                   </tr>
+
                   <tr>
-                    <td align="left">suffix</td>
+                    <td align="left">surname</td>
                     <td align="left">
                       <xref target="name" format="default"/>
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">surname</td>
+                    <td align="left">surname2</td>
+                    <td align="left">
+                      <xref target="name" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">title</td>
                     <td align="left">
                       <xref target="name" format="default"/>
                     </td>
