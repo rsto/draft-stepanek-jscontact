@@ -1068,17 +1068,9 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
               This <bcp14>MUST</bcp14> be <tt>Address</tt>, if set.
           </li>
             <li>
-              <t>street: <tt>StreetComponent[]</tt> (optional).
-              The street address.  The concatenation of the component values <bcp14>SHOULD</bcp14> result in a valid street address for the address locale.  What characters to insert between street components is specific to the locale.  The <tt>defaultSeparator</tt> property and the <tt>separator</tt> StreetComponent kind give guidance what characters to insert, but implementations are free to choose any others.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.</t>
+              <t>components: <tt>AddressComponent[]</tt> (optional).
+              The components of this address.  The concatenation of the component values <bcp14>SHOULD</bcp14> result in a valid address for the Card language.  What characters to insert between address components is specific to the language.  The <tt>defaultSeparator</tt> property and the <tt>separator</tt> AddressComponent kind give guidance what characters to insert, but implementations are free to choose any others.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.</t>
             </li>
-            <li>locality: <tt>String</tt> (optional).
-              The municipality, city, town, village, post-town, or other locality within which the street address may be found.</li>
-            <li>region: <tt>String</tt> (optional).
-              The administrative area, such as province, state, prefecture, county, canton, within which the locality may be found.</li>
-            <li>country: <tt>String</tt> (optional).
-The country name.</li>
-            <li>postcode: <tt>String</tt> (optional).
-The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
             <li>countryCode: <tt>String</tt> (optional).
 The Alpha-2 or Alpha-3 ISO-3166-1 country code <xref target="ISO.3166-1.2006"/>.</li>
             <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
@@ -1096,14 +1088,14 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
             <li>defaultSeparator: <tt>String</tt> (optional).
-              The default separator to insert between street component values when concatenating all street component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the StreetComponent object.</li>
+              The default separator to insert between street component values when concatenating all street component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
-          <t>A StreetComponent object has the following properties:</t>
+          <t>An AddressComponent object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt>.
-              This <bcp14>MUST</bcp14> be <tt>StreetComponent</tt>, if set.
+              This <bcp14>MUST</bcp14> be <tt>AddressComponent</tt>, if set.
           </li>
             <li>
               <t>kind: <tt>String</tt> (mandatory).
@@ -1119,6 +1111,10 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                 <li><tt>block</tt>. The block name or number.</li>
                 <li><tt>subdistrict</tt>. The sub district, ward or other subunit of a district.</li>
                 <li><tt>district</tt>. The district name.</li>
+                <li><tt>locality</tt>. The municipality, city, town, village, post-town, or other locality.</li>
+                <li><tt>region</tt>. The administrative area, such as province, state, prefecture, county, canton.</li>
+                <li><tt>postcode</tt> The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
+                <li><tt>country</tt> The country name.</li>
                 <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.  "North".</li>
                 <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g. White House, Taj Mahal.</li>
                 <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
@@ -1983,7 +1979,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, StreetComponent, Timestamp, Title</td>
+                <td align="left">Address, Anniversary, Author, Card, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, AddressComponent, Timestamp, Title</td>
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr anchor="iana-property-registry-version">
@@ -2051,6 +2047,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
+                <td align="left">contactBy</td>
+                <td align="left">String[ContactBy[]]</td>
+                <td align="left">Card</td>
+                <td align="left">
+                  <xref target="contactBy" format="default"/>
+                </td>
+              </tr>
+              <tr>
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
                 <td align="left">Address, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Organization, Phone, Pronouns, SchedulingAddress</td>
@@ -2058,14 +2062,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
               <tr>
                 <td align="left">coordinates</td>
-                <td align="left">String</td>
-                <td align="left">Address</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>
-                </td>
-              </tr>
-              <tr>
-                <td align="left">country</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
                 <td align="left">
@@ -2177,7 +2173,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">kind</td>
                 <td align="left">String</td>
-                <td align="left">Anniversary, CalendarResource, Card, CryptoResource, DirectoryResource, LinkResource, MediaResource, NameComponent, PersonalInfo, StreetComponent, Title</td>
+                <td align="left">Anniversary, CalendarResource, Card, CryptoResource, DirectoryResource, LinkResource, MediaResource, NameComponent, PersonalInfo, AddressComponent, Title</td>
                 <td align="left"><xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
@@ -2215,14 +2211,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">UnsignedInt</td>
                 <td align="left">DirectoryResource, PersonalInfo</td>
                 <td align="left"><xref target="directories" format="default"/>, <xref target="personalInfo" format="default"/></td>
-              </tr>
-              <tr>
-                <td align="left">locality</td>
-                <td align="left">String</td>
-                <td align="left">Address</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>
-                </td>
               </tr>
               <tr>
                 <td align="left">localizations</td>
@@ -2371,14 +2359,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
-                <td align="left">contactBy</td>
-                <td align="left">String[ContactBy[]]</td>
-                <td align="left">Card</td>
-                <td align="left">
-                  <xref target="contactBy" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">preferredLanguages</td>
                 <td align="left">String[LanguagePref[]]</td>
                 <td align="left">Card</td>
@@ -2408,14 +2388,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Pronouns</td>
                 <td align="left">
                   <xref target="speakToAs" format="default"/>
-                </td>
-              </tr>
-              <tr>
-                <td align="left">region</td>
-                <td align="left">String</td>
-                <td align="left">Address</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2476,7 +2448,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
               <tr>
                 <td align="left">street</td>
-                <td align="left">StreetComponent[]</td>
+                <td align="left">AddressComponent[]</td>
                 <td align="left">Address</td>
                 <td align="left">
                   <xref target="addresses" format="default"/>
@@ -2547,7 +2519,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">value</td>
                 <td align="left">String</td>
-                <td align="left">NameComponent, PersonalInfo, StreetComponent</td>
+                <td align="left">NameComponent, PersonalInfo, AddressComponent</td>
                 <td align="left"><xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/></td>
               </tr>
               <tr>
@@ -2808,7 +2780,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">StreetComponent</td>
+                <td align="left">AddressComponent</td>
                 <td align="left">
                   <xref target="addresses" format="default"/>
                 </td>
@@ -3481,11 +3453,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>kind</dd>
             <dt>Context:</dt>
-            <dd>StreetComponent</dd>
+            <dd>AddressComponent</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-streetcomponent-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: StreetComponent)</name>
+                <name>JSContact Enum Values for kind (Context: AddressComponent)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3507,6 +3479,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                   <tr>
                     <td align="left">building</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">country</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
@@ -3536,6 +3514,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
+                    <td align="left">locality</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
                     <td align="left">name</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
@@ -3549,6 +3533,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                   <tr>
                     <td align="left">postOfficeBox</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">region</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
