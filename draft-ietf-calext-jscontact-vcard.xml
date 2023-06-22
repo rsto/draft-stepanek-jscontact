@@ -637,6 +637,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
                 <th align="left">ADR component</th>
                 <th align="left">Single StreetComponent item</th>
                 <th align="left">Combination of StreetComponent items</th>
+                <th align="left">Remarks</th>
               </tr>
             </thead>
             <tbody>
@@ -644,16 +645,81 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
                 <td align="left">post office box</td>
                 <td align="left">postOfficeBox</td>
                 <td align="left"/>
+                <td align="left"/>
               </tr>
               <tr>
                 <td align="left">extended address</td>
-                <td align="left">extension</td>
-                <td align="left">extension, building, floor, room, apartment, landmark</td>
+                <td align="left">apartment</td>
+                <td align="left">apartment, building, floor, room</td>
+                <td align="left"><xref target="RFC6350" section="6.3.1"/> recommends this ADR component to be empty.</td>
               </tr>
               <tr>
                 <td align="left">street address</td>
                 <td align="left">name</td>
-                <td align="left">district, block, name, number, direction</td>
+                <td align="left">name, district, subdistrict, block, name, number, landmark, direction, apartment, building, floor, room</td>
+                <td align="left"/>
+              </tr>
+              <tr>
+                <td align="left">apartment</td>
+                <td align="left">apartment</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>. Prefer this over the extended address ADR component.</td>
+              </tr>
+                            <tr>
+                <td align="left">block</td>
+                <td align="left">block</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
+              </tr>
+
+              <tr>
+                <td align="left">building</td>
+                <td align="left">building</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
+              </tr>
+              <tr>
+                <td align="left">direction</td>
+                <td align="left">direction</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
+              </tr>
+                            <tr>
+                <td align="left">district</td>
+                <td align="left">district</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
+              </tr>
+                           <tr>
+                <td align="left">floor</td>
+                <td align="left">floor</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>. Prefer this over the extended address ADR component.</td>
+              </tr>
+                            <tr>
+                <td align="left">landmark</td>
+                <td align="left">landmark</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
+              </tr>
+              <tr>
+                <td align="left">room</td>
+                <td align="left">room</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.  Prefer this over the extended address ADR component.</td>
+              </tr>
+
+              <tr>
+                <td align="left">street number</td>
+                <td align="left">number</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
+              </tr>
+                                          <tr>
+                <td align="left">subdistrict</td>
+                <td align="left">subdistrict</td>
+                <td align="left"/>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
             </tbody>
           </table>

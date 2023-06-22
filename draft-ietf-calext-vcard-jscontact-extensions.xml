@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc>
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="pre5378Trust200902" submissionType="IETF" category="std" xml:lang="en" consensus="true" docName="draft-ietf-calext-vcard-jscontact-extensions-07" obsoletes="" updates="6350" tocInclude="true" symRefs="true" sortRefs="true" version="3">
   <front>
@@ -36,7 +36,7 @@
     <keyword>addressbook</keyword>
     <keyword>contacts</keyword>
     <keyword>cards</keyword>
-    <keyword>VCARD</keyword>
+    <keyword>vCard</keyword>
     <keyword>JSContact</keyword>
     <abstract>
       <t>
@@ -67,6 +67,77 @@
         <name>ABNF Notations</name>
         <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document either are defined in <xref target="RFC5234"/> (such as the ABNF for CRLF, WSP, DQUOTE, VCHAR, ALPHA, and DIGIT) or <xref target="RFC6350"/>.
         </t>
+      </section>
+    </section>
+    <section>
+      <name>Updated Properties</name>
+      <section anchor="prop-adr">
+        <name>ADR Property</name>
+        <t>This specification modifies the definition of the "ADR" property.  It extends its structured value with additional address components to better support the variety of international addresses.  It separates the address parts that currently typically are combined in street address component values into distinct components, such as street names, street numbers, apartment numbers, floors.  Implementations <bcp14>SHOULD</bcp14> write a combined value of these components in the street address component for backwards compatibility, but <bcp14>SHOULD</bcp14> ignore it during read if applicable new component values are available.</t>
+        <t>The following change is made to the first paragraph in the "Special Notes" section, originally specified in <xref target="RFC6350" section="6.3.1"/>.  All remaining paragraphs of that section in the original specification still apply.</t>
+        <dl>
+          <dt>Special notes:</dt>
+          <dd>The structured type value consists of a sequence of
+             address components.  The component values MUST be specified in
+             their corresponding position.  The structured type value
+             corresponds, in sequence, to<br/>
+                the post office box;<br/>
+                the extended address (e.g., apartment or suite number);<br/>
+                the street address;<br/>
+                the locality (e.g., city);<br/>
+                the region (e.g., state or province);<br/>
+                the postal code;<br/>
+                the country name (full name in the language specified in
+                <xref target="RFC6350" section="5.1"/>);<br/>
+                the room or suite number or identifier<br/>
+                the apartment number, extension designation or box number.<br/>
+                the building floor or level;<br/>
+                the street name;<br/>
+                the street number;<br/>
+                the building, tower, condominium;<br/>
+                the block name or number;<br/>
+                the subdistrict;<br/>
+                the district;<br/>
+                the landmark or another publicly known prominent feature that can substitute the street name and number, e.g. "White House"", "Taj Mahal"";<br/>
+                the cardinal direction or quadrant, e.g. "North"<br/>
+            </dd>
+        </dl>
+        <t>The following change is made to the definition of "ADR-value" in the "ABNF" section, originally specified in <xref target="RFC6350" section="6.3.1"/>.</t>
+        <dl>
+          <dt>ABNF</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+ADR-value = ADR-component-pobox ";" ADR-component-ext ";"
+            ADR-component-street ";" ADR-component-locality ";"
+            ADR-component-region ";" ADR-component-code ";"
+            ADR-component-country ";"
+            ; above components are defined in RFC 6350, section 6.3.1
+            ADR-component-room ";" ADR-component-apartment ";"
+            ADR-component-floor ";"
+            ADR-component-streetnumber ";" ADR-component-streetname ";"
+            ADR-component-building ";" ADR-component-block ";"
+            ADR-component-subdistrict ";" ADR-component-district ";"
+            ADR-component-landmark ";" ADR-component-direction
+ADR-component-pobox    = list-component
+ADR-component-ext      = list-component
+ADR-component-street   = list-component
+ADR-component-locality = list-component
+ADR-component-region   = list-component
+ADR-component-code     = list-component
+ADR-component-country  = list-component
+ADR-component-room     = list-component
+ADR-component-apartment = list-component
+ADR-component-floor    = list-component
+ADR-component-streetname = list-component
+ADR-component-streetnumber = list-component
+ADR-component-building = list-component
+ADR-component-block    = list-component
+ADR-component-subdistrict = list-component
+ADR-component-district = list-component
+ADR-component-landmark = list-component
+]]></sourcecode>
+          </dd>
+        </dl>
       </section>
     </section>
     <section anchor="new-properties">
@@ -603,166 +674,185 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
-      <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
-      <table anchor="new_properties">
-        <name>New VCARD Properties</name>
-        <thead>
-          <tr>
-            <th align="left">Namespace</th>
-            <th align="left">Property</th>
-            <th align="left">Reference</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td/>
-            <td align="left">CONTACT-BY</td>
-            <td align="left">This document, <xref target="prop-contactby"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">CREATED</td>
-            <td align="left">This document, <xref target="prop-created"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">DEFLANGUAGE</td>
-            <td align="left">This document, <xref target="prop-deflanguage"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">GRAMGENDER</td>
-            <td align="left">This document, <xref target="prop-gramgender"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">PRONOUNS</td>
-            <td align="left">This document, <xref target="prop-pronouns"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">SOCIALPROFILE</td>
-            <td align="left">This document, <xref target="prop-socialprofile"/></td>
-          </tr>
-        </tbody>
-      </table>
-      <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
-      <table anchor="new_parameters">
-        <name>New VCARD Parameters</name>
-        <thead>
-          <tr>
-            <th align="left">Namespace</th>
-            <th align="left">Parameter</th>
-            <th align="left">Reference</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td/>
-            <td align="left">AUTHOR</td>
-            <td align="left">This document, <xref target="param-author"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">AUTHOR-NAME</td>
-            <td align="left">This document, <xref target="param-author-name"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">CREATED</td>
-            <td align="left">This document, <xref target="param-created"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">DERIVED</td>
-            <td align="left">This document, <xref target="param-derived"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">PROP-ID</td>
-            <td align="left">This document, <xref target="param-propid"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">SERVICE-TYPE</td>
-            <td align="left">This document, <xref target="param-service-type"/></td>
-          </tr>
-          <tr>
-            <td/>
-            <td align="left">USERNAME</td>
-            <td align="left">This document, <xref target="param-username"/></td>
-          </tr>
-        </tbody>
-      </table>
-      <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
-      <table anchor="new_values">
-        <name>New VCARD Property Values</name>
-        <thead>
-          <tr>
-            <th align="left">Property</th>
-            <th align="left">Value</th>
-            <th align="left">Reference</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td align="left">GRAMGENDER</td>
-            <td align="left">animate</td>
-            <td align="left">This document, <xref target="prop-gramgender"/></td>
-          </tr>
-          <tr>
-            <td align="left">GRAMGENDER</td>
-            <td align="left">common</td>
-            <td align="left">This document, <xref target="prop-gramgender"/></td>
-          </tr>
-          <tr>
-            <td align="left">GRAMGENDER</td>
-            <td align="left">feminine</td>
-            <td align="left">This document, <xref target="prop-gramgender"/></td>
-          </tr>
-          <tr>
-            <td align="left">GRAMGENDER</td>
-            <td align="left">inanimate</td>
-            <td align="left">This document, <xref target="prop-gramgender"/></td>
-          </tr>
-          <tr>
-            <td align="left">GRAMGENDER</td>
-            <td align="left">masculine</td>
-            <td align="left">This document, <xref target="prop-gramgender"/></td>
-          </tr>
-          <tr>
-            <td align="left">GRAMGENDER</td>
-            <td align="left">neuter</td>
-            <td align="left">This document, <xref target="prop-gramgender"/></td>
-          </tr>
-        </tbody>
-      </table>
-      <t>IANA is requested to add the following entries to the "vCard Parameter Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
-      <table anchor="new_param_values">
-        <name>New VCARD Property Values</name>
-        <thead>
-          <tr>
-            <th align="left">Property</th>
-            <th align="left">Parameter</th>
-            <th align="left">Value</th>
-            <th align="left">Reference</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td align="left">ADR</td>
-            <td align="left">TYPE</td>
-            <td align="left">billing</td>
-            <td align="left">This document, <xref target="value-adr-type-billing"/></td>
-          </tr>
-          <tr>
-            <td align="left">ADR</td>
-            <td align="left">TYPE</td>
-            <td align="left">delivery</td>
-            <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
-          </tr>
-        </tbody>
-      </table>
+      <section>
+        <name>Changes to the "vCard Properties" registry</name>
+        <section>
+          <name>New property definitions</name>
+          <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
+          <table anchor="new_properties">
+            <name>New vCard Properties</name>
+            <thead>
+              <tr>
+                <th align="left">Namespace</th>
+                <th align="left">Property</th>
+                <th align="left">Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td/>
+                <td align="left">CONTACT-BY</td>
+                <td align="left">This document, <xref target="prop-contactby"/></td>
+              </tr>
+              <tr>
+                <td/>
+                <td align="left">CREATED</td>
+                <td align="left">This document, <xref target="prop-created"/></td>
+              </tr>
+              <tr>
+                <td/>
+                <td align="left">DEFLANGUAGE</td>
+                <td align="left">This document, <xref target="prop-deflanguage"/></td>
+              </tr>
+              <tr>
+                <td/>
+                <td align="left">GRAMGENDER</td>
+                <td align="left">This document, <xref target="prop-gramgender"/></td>
+              </tr>
+              <tr>
+                <td/>
+                <td align="left">PRONOUNS</td>
+                <td align="left">This document, <xref target="prop-pronouns"/></td>
+              </tr>
+              <tr>
+                <td/>
+                <td align="left">SOCIALPROFILE</td>
+                <td align="left">This document, <xref target="prop-socialprofile"/></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <name>Updated vCard properties</name>
+          <t>IANA is requested to add <xref target="prop-adr"/> of this document as reference for the ADR property.</t>
+        </section>
+      </section>
+      <section>
+        <name>Changes to the "vCard Parameters" registry</name>
+        <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
+        <table anchor="new_parameters">
+          <name>New vCard Parameters</name>
+          <thead>
+            <tr>
+              <th align="left">Namespace</th>
+              <th align="left">Parameter</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td/>
+              <td align="left">AUTHOR</td>
+              <td align="left">This document, <xref target="param-author"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">AUTHOR-NAME</td>
+              <td align="left">This document, <xref target="param-author-name"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">CREATED</td>
+              <td align="left">This document, <xref target="param-created"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">DERIVED</td>
+              <td align="left">This document, <xref target="param-derived"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">PROP-ID</td>
+              <td align="left">This document, <xref target="param-propid"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SERVICE-TYPE</td>
+              <td align="left">This document, <xref target="param-service-type"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">USERNAME</td>
+              <td align="left">This document, <xref target="param-username"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <name>Changes to the "vCard Property Values" registry</name>
+        <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
+        <table anchor="new_values">
+          <name>New vCard Property Values</name>
+          <thead>
+            <tr>
+              <th align="left">Property</th>
+              <th align="left">Value</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left">GRAMGENDER</td>
+              <td align="left">animate</td>
+              <td align="left">This document, <xref target="prop-gramgender"/></td>
+            </tr>
+            <tr>
+              <td align="left">GRAMGENDER</td>
+              <td align="left">common</td>
+              <td align="left">This document, <xref target="prop-gramgender"/></td>
+            </tr>
+            <tr>
+              <td align="left">GRAMGENDER</td>
+              <td align="left">feminine</td>
+              <td align="left">This document, <xref target="prop-gramgender"/></td>
+            </tr>
+            <tr>
+              <td align="left">GRAMGENDER</td>
+              <td align="left">inanimate</td>
+              <td align="left">This document, <xref target="prop-gramgender"/></td>
+            </tr>
+            <tr>
+              <td align="left">GRAMGENDER</td>
+              <td align="left">masculine</td>
+              <td align="left">This document, <xref target="prop-gramgender"/></td>
+            </tr>
+            <tr>
+              <td align="left">GRAMGENDER</td>
+              <td align="left">neuter</td>
+              <td align="left">This document, <xref target="prop-gramgender"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <name>Changes to the "vCard Parameter Values" registry</name>
+        <t>IANA is requested to add the following entries to the "vCard Parameter Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
+        <table anchor="new_param_values">
+          <name>New vCard Property Values</name>
+          <thead>
+            <tr>
+              <th align="left">Property</th>
+              <th align="left">Parameter</th>
+              <th align="left">Value</th>
+              <th align="left">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left">ADR</td>
+              <td align="left">TYPE</td>
+              <td align="left">billing</td>
+              <td align="left">This document, <xref target="value-adr-type-billing"/></td>
+            </tr>
+            <tr>
+              <td align="left">ADR</td>
+              <td align="left">TYPE</td>
+              <td align="left">delivery</td>
+              <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </section>
   </middle>
   <back>

@@ -1110,27 +1110,18 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               The kind of this street component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
               <ul spacing="normal">
-                <li><tt>district</tt>. The district name this street is located in.</li>
-                <li><tt>block</tt>. The block name and number or subdistrict this street is located in.</li>
-                <li><tt>name</tt>.  The street name.
-              </li>
-                <li><tt>direction</tt>.  The Cardinal direction, e.g.  "North".
-            </li>
-                <li><tt>number</tt>.  The street number, including a number range, prefix and suffix.
-              </li>
-                <li><tt>building</tt>.  The building, tower, or condominium this address is located in.
-            </li>
-                <li><tt>floor</tt>.  The floor or level this address is located on.
-              </li>
-                <li><tt>apartment</tt>.  The apartment house or unit number or identifier.
-              </li>
-                <li><tt>room</tt>.  The room or suite number or identifier.
-              </li>
-                <li><tt>extension</tt>.  The extension designation or box number.
-            </li>
-                <li><tt>postOfficeBox</tt>.  The post office box number or identifier.
-              </li>
+                <li><tt>room</tt>.  The room or suite number or identifier.</li>
+                <li><tt>apartment</tt>.  The extension designation, such as apartment number or unit or box number.</li>
+                <li><tt>floor</tt>.  The floor or level this address is located on.</li>
+                <li><tt>building</tt>.  The building, tower, or condominium this address is located in.</li>
+                <li><tt>number</tt>.  The street number, including a number range, prefix and suffix.</li>
+                <li><tt>name</tt>.  The street name.</li>
+                <li><tt>block</tt>. The block name or number.</li>
+                <li><tt>subdistrict</tt>. The sub district, ward or other subunit of a district.</li>
+                <li><tt>district</tt>. The district name.</li>
+                <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.  "North".</li>
                 <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g. White House, Taj Mahal.</li>
+                <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
                 <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
               </ul>
             </li>
@@ -1173,11 +1164,11 @@ The value of this street component.</li>
     "contexts": {
       "private": true
     },
-    "fullAddress": "Irgendwostrasse 27/4/8\n1010\nVienna\nAustria"
+    "fullAddress": "Irgendwostraße 27/4/8\n1010\nVienna\nAustria"
     "street": [
       {
         "kind": "name",
-        "value": "Irgendwostrasse"
+        "value": "Irgendwostraße"
       },
       {
         "kind": "number",
@@ -1212,8 +1203,8 @@ The value of this street component.</li>
             <name>Example of an address in Thailand</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
-  "fullAddress": "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"
   "k25": {
+    "fullAddress": "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand",
     "street": [
       {
         "kind": "number",
@@ -1224,7 +1215,7 @@ The value of this street component.</li>
         "value": "1 Sukhumvit 51 Alley"
       },
       {
-        "kind": "block",
+        "kind": "subdistrict",
         "value": "Khlong Tan Nuea"
       },
       {
@@ -1241,32 +1232,92 @@ The value of this street component.</li>
 ]]></sourcecode>
           </figure>
           <figure anchor="example-address-jp">
-            <name>Example of an address in Japan</name>
+            <name>Example of an internationalized address in Japan and its <xref target="localizations">localization</xref> in Japanese.</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
-  "fullAddress": "3 Chome-7-1 Nishishinjuku, Shinjuku City, Tokyo, Japan",
   "k26": {
+    "fullAddress": "2-7-2 Marunouchi, Chiyoda-ku, Tokyo\n100-8994\nJapan",
     "street": [
       {
-        "kind": "apartment",
-        "value": "3"
+        "kind": "block",
+        "value": "2"
+      },
+      {
+        "kind": "separator",
+        "value": "-"
+      },
+      {
+        "kind": "building",
+        "value": "7"
+      },
+      {
+        "kind": "separator",
+        "value": "-"
+      },
+      {
+        "kind": "number",
+        "value": "2"
       },
       {
         "kind": "separator",
         "value": " "
       },
       {
-        "kind": "block",
-        "value": "Chome-7-1 Nishishinjuku"
+        "kind": "subdistrict",
+        "value": "Marunouchi"
       },
       {
         "kind": "district",
-        "value": "Shinjuku City"
-      }
+        "value": "Chiyoda-ku"
+      },
+      {
+         "kind": "locality",
+         "value": "Tokyo"
+      },
     ],
     "locality": "Tokyo",
     "country": "Japan",
+    "postcode": "100-8994",
     "defaultSeparator": ", "
+  }
+},
+"localizations": {
+  "jp": {
+    "k26": {
+    "fullAddress": "〒100-8994\n東京都千代田区丸ノ内2-7-2",
+    "street": [
+      {
+        "kind": "locality",
+        "value": "東京"
+      },
+      {
+        "kind": "separator",
+        "value": "都"
+      },
+      {
+        "kind": "district",
+        "value": "千代田区"
+      },
+      {
+        "kind": "subdistrict",
+        "value": "丸ノ内"
+      },
+      {
+        "kind": "block",
+        "value": "2"
+      },
+      {
+        "kind": "building",
+        "value": "7"
+      },
+      {
+        "kind": "number",
+        "value": "2"
+      }
+    ],
+    "postcode": "〒100-8994",
+    "defaultSeparator": ""
+    }
   }
 }
 ]]></sourcecode>
@@ -2003,7 +2054,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
                 <td align="left">Address, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Organization, Phone, Pronouns, SchedulingAddress</td>
-                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/> <xref target="resource" format="default"/></td>
+                <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/><xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">coordinates</td>
@@ -2317,7 +2368,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">pref</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">Address, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</td>
-               <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="resource" format="default"/></td>
+                <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="contactBy" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">contactBy</td>
@@ -3366,7 +3417,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                       <xref target="name" format="default"/>
                     </td>
                   </tr>
-
                   <tr>
                     <td align="left">surname</td>
                     <td align="left">
@@ -3443,7 +3493,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                                  <tr>
                     <td align="left">apartment</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
@@ -3469,12 +3519,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                   <tr>
                     <td align="left">district</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">extension</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
@@ -3517,6 +3561,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                   <tr>
                     <td align="left">separator</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">subdistrict</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
