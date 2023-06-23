@@ -601,10 +601,10 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
         <name>Delivery Addressing Properties</name>
         <section anchor="vcard-prop-adr">
           <name>ADR</name>
-          <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.</t>
-          <t>The ADR components convert into the <tt>Address</tt> properties as presented in <xref target="adr_components_vs_address_members"/> and <xref target="adr_components_vs_street_component_items"/>.</t>
+          <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.  The components of the structured ADR value type convert to AddressComponent objects.</t>
+          <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines additional components of the ADR property value, originally defined in <xref target="RFC6350" section="6.3.1"/>.  Applications <bcp14>SHOULD</bcp14> prefer converting these new address components over any entries in the ADR "street address" and "extended address" components.  If only the original address components defined in <xref target="RFC6350"/> are available, then implementations <bcp14>SHOULD</bcp14> attempt to split the values of the "street address" and "extended address" components into their constituent parts.  Otherwise they <bcp14>MUST</bcp14> convert all of "street address" to AddressComponent kind <tt>name</tt>, and "extended address" to AddressComponent kind "apartment".</t>
           <table anchor="adr_components_vs_street_component_items">
-            <name>ADR components vs.  AddressComponent conversion</name>
+            <name>ADR component to AddressComponent conversion</name>
             <thead>
               <tr>
                 <th align="left">ADR component</th>
@@ -714,8 +714,6 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
               </tr>
             </tbody>
           </table>
-          <t>Applications <bcp14>SHOULD</bcp14> separate the ADR "street address" component into street name, number and directions. If they can not determine the respective street components from the ADR "street address", then they <bcp14>MUST</bcp14> convert all of it to a single <tt>name</tt> AddressComponent object.</t>
-          <t>The "street address" and "extended address" ADR components <bcp14>MAY</bcp14> be converted into either a single AddressComponent item or a combination of AddressComponent items.</t>
           <t>The LABEL parameter converts to the <tt>fullAddress</tt> property.</t>
           <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
           <t>The TZ parameter converts to the <tt>timeZone</tt> property.</t>
