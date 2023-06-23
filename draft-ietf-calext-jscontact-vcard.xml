@@ -156,6 +156,13 @@
           <name>DERIVED</name>
           <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
+        <section anchor="vcard-param-fmt">
+          <name>FMT</name>
+          <t>This parameter set on an N or ADR property converts to the <tt>defaultSeparator</tt> and <tt>components</tt> properties of the Name and Address object types, respectively.</t>
+          <t>If the first FMT parameter value is a separator formatting instruction (possibly having the empty string as separator), then this separator value converts to the value <tt>defaultSeparator</tt> property.  Otherwise the <tt>defaultSeparator</tt> property is not set.</t>
+          <t>The remaining formatting instructions define the order and kind of the <tt>components</tt> property entries.  The kind of a NameComponent or AddressComponent is determined by the type of the name or address component at the position of the positional formatting instruction, the separator formatting instruction converts to a component of kind <tt>separator</tt>.</t>
+          <t>In absence of the FMT parameter, implementations <bcp14>MUST</bcp14> convert all property component values of the N or ADR property in the Name or Address components, but their order is implementation-specific.</t>
+        </section>
         <section anchor="vcard-param-geo">
           <name>GEO</name>
           <t>This parameter set on an ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.</t>
@@ -494,6 +501,7 @@ PRONOUNS;PREF=1:xe/xir
         <section anchor="vcard-prop-n">
           <name>N and NICKNAME</name>
           <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.</t>
+          <t>The order of entries in the <tt>components</tt> property is defined by the <xref target="vcard-param-fmt">FMT</xref> parameter.</t>
           <t>Each comma-separated item of the SORT-AS parameter value converts to an entry of the <tt>sortAs</tt> property where the key is the "kind" value related to the sorted N component and the value is the corresponding item.  Absence of a key in the <tt>sortAs</tt> indicates that its related part in the SORT-AS parameter value <bcp14>MUST</bcp14> either the empty string followed by COMMA, or no further SORT-AS parts are defined.</t>
           <table anchor="n_components">
             <name>N components conversion</name>
@@ -602,6 +610,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
         <section anchor="vcard-prop-adr">
           <name>ADR</name>
           <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.  The components of the structured ADR value type convert to AddressComponent objects.</t>
+          <t>The order of entries in the <tt>components</tt> property is defined by the <xref target="vcard-param-fmt">FMT</xref> parameter.</t>
           <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines additional components of the ADR property value, originally defined in <xref target="RFC6350" section="6.3.1"/>.  Applications <bcp14>SHOULD</bcp14> prefer converting these new address components over any entries in the ADR "street address" and "extended address" components.  If only the original address components defined in <xref target="RFC6350"/> are available, then implementations <bcp14>SHOULD</bcp14> attempt to split the values of the "street address" and "extended address" components into their constituent parts.  Otherwise they <bcp14>MUST</bcp14> convert all of "street address" to AddressComponent kind <tt>name</tt>, and "extended address" to AddressComponent kind "apartment".</t>
           <table anchor="adr_components_vs_street_component_items">
             <name>ADR component to AddressComponent conversion</name>
@@ -1917,6 +1926,14 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Address</td>
+            <td>components</td>
+            <td>
+              <xref target="vcard-prop-adr"/>,
+              <xref target="vcard-param-fmt"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
@@ -1972,13 +1989,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           <tr>
             <td>Address</td>
             <td>region</td>
-            <td>
-              <xref target="vcard-prop-adr"/>
-            </td>
-          </tr>
-          <tr>
-            <td>Address</td>
-            <td>street</td>
             <td>
               <xref target="vcard-prop-adr"/>
             </td>
@@ -2547,7 +2557,8 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>Name</td>
             <td>components</td>
             <td>
-              <xref target="vcard-prop-n"/>
+              <xref target="vcard-prop-n"/>,
+              <xref target="vcard-param-fmt"/>
             </td>
           </tr>
           <tr>
