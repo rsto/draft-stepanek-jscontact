@@ -619,9 +619,9 @@ The value of this name component.</li>
                 <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.  "B.A.", "Esq.".</li>
                 <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g  “Jr.” or “III”.</li>
                 <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.</li>
-                <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name component.  Also see <xref target="prop-pronounce"/>.</li>
               </ul>
             </li>
+            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name component.  Also see <xref target="prop-pronounce"/>.</li>
           </ul>
         </section>
         <section anchor="nickNames" numbered="true" toc="default">
