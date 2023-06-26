@@ -419,7 +419,9 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <name><tt>members</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
 "kind": "group",
-"fullName": "The Doe family",
+"name": {
+  "full": "The Doe family"
+},
 "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
 "members": {
   "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
@@ -494,32 +496,31 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
         <name>Name and Organization Properties</name>
         <t>This section defines properties that name the entity represented by this Card, its related organizations and roles, as well as how to refer the entity represented by this Card in spoken or written language.</t>
-        <section anchor="fullName" numbered="true" toc="default">
-          <name>fullName</name>
-          <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the full name of the entity represented by this Card.  The purpose of this property is to define a name even if the individual name components are not known.  If the <tt>name</tt> property is set, the <tt>fullName</tt> property <bcp14>SHOULD NOT</bcp14> be set.</t>
-          <figure anchor="example-fullName">
-            <name><tt>fullName</tt> example</name>
-            <sourcecode name="" type="json"><![CDATA[
-"fullName": "Mr. John Q. Public, Esq."
-]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="name" numbered="true" toc="default">
           <name>name</name>
           <t>Type: <tt>Name</tt> (optional).</t>
-          <t>The name of the entity represented by this Card.  This can be any type of name, e.g. it can but need not be the legal name of a person.  The definition of the <xref target="fullName"><tt>fullName</tt></xref> property describes how the <tt>name</tt> and <tt>fullName</tt> properties relate.</t>
+          <t>The name of the entity represented by this Card.  This can be any type of name, e.g. it can but need not be the legal name of a person.</t>
           <t>A Name object has the following properties</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Name</tt>, if set.
           </li>
             <li>
-              <t>components: <tt>NameComponent[]</tt> (mandatory).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.</t>
+              <t>components: <tt>NameComponent[]</tt> (optional).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.  This property <bcp14>SHOULD</bcp14> be set, and it <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set.</t>
               <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  The <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
             </li>
             <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.</li>
+            <li>
+              <t>full: <tt>String</tt> (optional).
+            This is the full name representation of this Name.  The purpose of this property is to define a name even if the individual name components are not known.  This property <bcp14>SHOULD NOT</bcp14> be set, but it <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is not set.</t>
+              <figure anchor="example-full">
+                <name><tt>full</tt> example</name>
+                <sourcecode name="" type="json"><![CDATA[
+"full": "Mr. John Q. Public, Esq."
+]]></sourcecode>
+              </figure>
+            </li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
@@ -2139,14 +2140,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">fullName</td>
-                <td align="left">String</td>
-                <td align="left">Card</td>
-                <td align="left">
-                  <xref target="fullName" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">grammaticalGender</td>
                 <td align="left">String</td>
                 <td align="left">SpeakToAs</td>
@@ -3465,7 +3458,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                 </thead>
                 <tbody>
-                                  <tr>
+                  <tr>
                     <td align="left">apartment</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>

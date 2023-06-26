@@ -220,7 +220,9 @@ TITLE;LANGUAGE=EN:Boss
 TITLE;LANGUAGE=fr:Patron
 
 "language": "en",
-"fullName": "John Doe",
+"name": {
+  "full": "John Doe"
+},
 "titles": {
   "t1": {
     "name": "Boss"
@@ -241,7 +243,9 @@ FN:John Doe
 TITLE:Boss
 TITLE;LANGUAGE=fr:Patron
 
-"fullName": "John Doe",
+"name": {
+  "full": "John Doe"
+},
 "titles": {
   "t1": {
     "name": "Boss"
@@ -265,7 +269,9 @@ TITLE;LANGUAGE=en:Boss
 TITLE;LANGUAGE=fr:Patron
 
 "language": "es",
-"fullName": "Gabriel García Márquez",
+"name" {
+  "full": "Gabriel García Márquez"
+},
 "localizations": {
   "en": {
     "titles": {
@@ -496,7 +502,7 @@ PRONOUNS;PREF=1:xe/xir
         </section>
         <section anchor="vcard-prop-fn">
           <name>FN</name>
-          <t>All the FN instances are represented through the <tt>fullName</tt> property (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <t>All the FN instances are represented through the Name object <tt>full</tt> property (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
         </section>
         <section anchor="vcard-prop-n">
           <name>N and NICKNAME</name>
@@ -549,8 +555,8 @@ FN:John Q. Public, Esq.
 N;SORT-AS="Public,John":Public;John;Quinlan;Mr.;Esq.
 NICKNAME:Johnny
 
-"fullName": "Mr.  John Q.  Public, Esq.",
 "name": {
+  "full": "Mr.  John Q.  Public, Esq.",
   "components":[
     {
       "kind": "prefix",
@@ -1046,7 +1052,9 @@ MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
 MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
 
 "kind": "group",
-"fullName": "The Doe family",
+"name": {
+  "full": "The Doe family"
+},
 "uid": "urn:uuid:ab4310aa-fa43-11e9-8f0b-362b9e155667",
 "members": {
   "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af": true,
@@ -1615,10 +1623,10 @@ IMPP:xmpp:alice@example.com
         <ul>
           <li>Multivalued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
           <li>
-            <t>The <tt>fullName</tt> property in JSContact is optional, but it is mandatory in vCard.  The following rules apply:</t>
+            <t>The <tt>full</tt> property in JSContact is optional, but it is mandatory in vCard.  The following rules apply:</t>
             <ul>
-              <li>If the <tt>fullName</tt> property is set, then implementations <bcp14>MUST</bcp14> use its value for the vCard FN property.</li>
-              <li>If the <tt>fullName</tt> property is not set, but the <tt>name</tt> property is, then implementations <bcp14>MUST</bcp14> derive the full name of it by concatenating the name component values.  They <bcp14>MUST</bcp14> use the resulting string as the value of the vCard FN property.  In addition, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.</li>
+              <li>If the <tt>full</tt> property is set, then implementations <bcp14>MUST</bcp14> use its value for the vCard FN property.</li>
+              <li>If the <tt>full</tt> property is not set, but the <tt>name</tt> property is, then implementations <bcp14>MUST</bcp14> derive the full name of it by concatenating the name component values.  They <bcp14>MUST</bcp14> use the resulting string as the value of the vCard FN property.  In addition, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.</li>
               <li>Otherwise, they <bcp14>MUST</bcp14> set the FN property to the empty value.</li>
             </ul>
           </li>
@@ -2136,13 +2144,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Card</td>
-            <td>fullName</td>
-            <td>
-              <xref target="vcard-prop-fn"/>
-            </td>
-          </tr>
-          <tr>
-            <td>Card</td>
             <td>keywords</td>
             <td>
               <xref target="vcard-prop-categories"/>
@@ -2559,6 +2560,13 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>
               <xref target="vcard-prop-n"/>,
               <xref target="vcard-param-fmt"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>full</td>
+            <td>
+              <xref target="vcard-prop-fn"/>
             </td>
           </tr>
           <tr>
