@@ -1315,7 +1315,7 @@ The value of this address component.</li>
       {
          "kind": "locality",
          "value": "Tokyo"
-      },
+      }
     ],
     "locality": "Tokyo",
     "country": "Japan",
