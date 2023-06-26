@@ -1632,6 +1632,11 @@ IMPP:xmpp:alice@example.com
           </li>
           <li>Vendor-specific and unknown properties convert to vCard as outlined in <xref target="convert-other-jscontact"/>.</li>
         </ul>
+        <section anchor="jscontact-pronounce">
+          <name>Converting the <tt>Pronounce</tt> object</name>
+          <t>The Pronounce type has no standard vCard element to convert to.  An initial RFC draft <xref target="I-D.calconnect-vobject-i18n"/> for adding phonetics to vCard exists but has not been further developed.  In lack of standard vCard support, any JSContact property of type Pronounce converts to a vCard JSCONTACT-PROP as outlined in <xref target="convert-other-jscontact"/>.</t>
+        </section>
+
       </section>
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
@@ -1911,6 +1916,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
       </references>
       <references>
         <name>Informative References</name>
+        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-calconnect-vobject-i18n.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
       </references>
     </references>
@@ -1996,6 +2002,13 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Address</td>
+            <td>pronounce</td>
+            <td>
+              <xref target="jscontact-pronounce"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
             <td>region</td>
             <td>
               <xref target="vcard-prop-adr"/>
@@ -2005,6 +2018,13 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>Address</td>
             <td>timeZone</td>
             <td><xref target="vcard-param-tz"/>, <xref target="vcard-prop-tz"/></td>
+          </tr>
+          <tr>
+            <td>AddressComponent</td>
+            <td>pronounce</td>
+            <td>
+              <xref target="jscontact-pronounce"/>
+            </td>
           </tr>
           <tr>
             <td>Anniversary</td>
@@ -2571,6 +2591,13 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Name</td>
+            <td>pronounce</td>
+            <td>
+              <xref target="jscontact-pronounce"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Name</td>
             <td>sortAs</td>
             <td>
               <xref target="vcard-param-sortas"/>
@@ -2586,6 +2613,13 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>kind</td>
             <td>
               <xref target="vcard-prop-n"/>
+            </td>
+          </tr>
+          <tr>
+            <td>NameComponent</td>
+            <td>pronounce</td>
+            <td>
+              <xref target="jscontact-pronounce"/>
             </td>
           </tr>
           <tr>

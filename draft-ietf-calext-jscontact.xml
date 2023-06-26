@@ -217,6 +217,47 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are independent of each other.</t>
         </section>
+        <section anchor="prop-pronounce" numbered="true" toc="default">
+          <name>The <tt>pronounce</tt> Property</name>
+          <t>Type: <tt>Pronounce</tt></t>
+          <t>This property defines how to pronounce a value in the language indicated in the Card <xref target="language">language</xref> property or the language tag of its <xref target="localizations">localizations</xref>.  Exemplary uses are to define how to pronounce Japanese names, or for romanization of Mandarin or Cantonese name and address components.  A Pronounce object has the following properties:</t>
+          <ul spacing="normal">
+            <li>
+              <t>@type: <tt>String</tt>.  This <bcp14>MUST</bcp14> be "Pronounce"", if set.</t>
+            </li>
+            <li>
+              <t>phonetics: <tt>String</tt> (mandatory).
+Contains the phonetic representation of a value.  The script or phonetic system used <bcp14>SHOULD</bcp14> be indicated in the <tt>script</tt> or <tt>system</tt> property.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetics</tt> property.</t>
+            </li>
+            <li>
+              <t>script: <tt>String</tt> (optional).
+The script used for value of the <tt>phonetics</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
+            </li>
+            <li>
+              <t>system: <tt>String</tt> (optional).
+The phonetic system used for the value of the <tt>phonetics</tt> property.  This <bcp14>MAY</bcp14> be any string, but this specification reserves the following <xref target="enumerated-values">enumerated values</xref>:</t>
+              <ul>
+                <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
+                <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
+                <li><tt>jyut</tt>: denotes the Cantonese romanization system "Jyutping".</li>
+              </ul>
+            </li>
+          </ul>
+          <t>The following example shows how to define pronunication for a <xref target="name">surname</xref>:</t>
+          <figure anchor="example-pronounce">
+            <name>Example of a <tt>Pronounce</tt> object for the name "Smith" in English</name>
+            <sourcecode name="" type="json"><![CDATA[
+{
+  "kind": "surname",
+  "value": "Smith",
+  "pronounce": {
+    "phonetics": "/smɪθ/",
+    "system": "ipa"
+  }
+}
+]]></sourcecode>
+          </figure>
+        </section>
       </section>
       <section anchor="versioning">
         <name>Versioning</name>
@@ -521,6 +562,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
 ]]></sourcecode>
               </figure>
             </li>
+            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name. e.g. as full name.  Also see <xref target="prop-pronounce"/>.</li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
@@ -577,6 +619,7 @@ The value of this name component.</li>
                 <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.  "B.A.", "Esq.".</li>
                 <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g  “Jr.” or “III”.</li>
                 <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.</li>
+                <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name component.  Also see <xref target="prop-pronounce"/>.</li>
               </ul>
             </li>
           </ul>
@@ -1088,6 +1131,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
             <li>fullAddress: <tt>String</tt> (optional).
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
+            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g. the full address.  Also see <xref target="prop-pronounce"/>.</li>
             <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between street component values when concatenating all street component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -1097,7 +1141,9 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
           <ul spacing="normal">
             <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>AddressComponent</tt>, if set.
-          </li>
+            </li>
+            <li>value: <tt>String</tt> (mandatory).
+The value of this address component.</li>
             <li>
               <t>kind: <tt>String</tt> (mandatory).
               The kind of this street component.  The <xref target="enumerated-values">enumerated</xref> values are:
@@ -1122,8 +1168,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                 <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
               </ul>
             </li>
-            <li>value: <tt>String</tt> (mandatory).
-The value of this street component.</li>
+              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
           </ul>
           <figure anchor="example-address-us">
             <name>Example of an address in the United States of America</name>
@@ -2330,6 +2375,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
+                <td align="left">phonetics</td>
+                <td align="left">String</td>
+                <td align="left">Pronounce</td>
+                <td align="left">
+                  <xref target="prop-pronounce" format="default"/>
+                </td>
+              </tr>
+              <tr>
                 <td align="left">place</td>
                 <td align="left">Address</td>
                 <td align="left">Anniversary</td>
@@ -2368,17 +2421,18 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">pronouns</td>
-                <td align="left">Id[Pronouns]</td>
-                <td align="left">SpeakToAs</td>
+                <td align="left">pronounce</td>
+                <td align="left">Pronounce</td>
+                <td align="left">Address, AddressComponent, Name, NameComponent</td>
                 <td align="left">
-                  <xref target="speakToAs" format="default"/>
+                  <xref target="addresses" format="default"/>,
+                  <xref target="name" format="default"/>
                 </td>
               </tr>
               <tr>
                 <td align="left">pronouns</td>
-                <td align="left">String</td>
-                <td align="left">Pronouns</td>
+                <td align="left">Id[Pronouns]</td>
+                <td align="left">SpeakToAs</td>
                 <td align="left">
                   <xref target="speakToAs" format="default"/>
                 </td>
@@ -2405,6 +2459,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Card</td>
                 <td align="left">
                   <xref target="schedulingAddresses" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">script</td>
+                <td align="left">String</td>
+                <td align="left">Pronounce</td>
+                <td align="left">
+                  <xref target="prop-pronounce" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2445,6 +2507,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Address</td>
                 <td align="left">
                   <xref target="addresses" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">system</td>
+                <td align="left">String</td>
+                <td align="left">Pronounce</td>
+                <td align="left">
+                  <xref target="prop-pronounce" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2746,6 +2816,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Phone</td>
                 <td align="left">
                   <xref target="phones" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">Pronounce</td>
+                <td align="left">
+                  <xref target="prop-pronounce" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -3590,6 +3666,44 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </table>
             </dd>
           </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>system</dd>
+            <dt>Context:</dt>
+            <dd>Pronounce</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-pronounce-system" align="left">
+                <name>JSContact Enum Values for system (Context: Pronounce)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">ipa</td>
+                    <td align="left">
+                      <xref target="prop-pronounce" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">jyut</td>
+                    <td align="left">
+                      <xref target="prop-pronounce" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">piny</td>
+                    <td align="left">
+                      <xref target="prop-pronounce" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
         </section>
       </section>
     </section>
@@ -3680,6 +3794,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-uuidrev-rfc4122bis.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-calext-jscontact.xml"/>
+        <reference anchor="IPA" target="https://www.internationalphoneticalphabet.org/">
+          <front>
+            <title>International Phonetic Alphabet</title>
+            <author/>
+          </front>
+        </reference>
       </references>
     </references>
   </back>
