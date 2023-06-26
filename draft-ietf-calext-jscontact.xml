@@ -1113,7 +1113,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           </li>
             <li>
               <t>components: <tt>AddressComponent[]</tt> (optional).
-              The components of this address.  The concatenation of the component values <bcp14>SHOULD</bcp14> result in a valid address for the Card language.  What characters to insert between address components is specific to the language.  The <tt>defaultSeparator</tt> property and the <tt>separator</tt> AddressComponent kind give guidance what characters to insert, but implementations are free to choose any others.  The definition of the <tt>fullAddress</tt> property describes how the <tt>street</tt> and <tt>fullAddress</tt> properties relate.</t>
+                The components of this address.  The concatenation of the component values <bcp14>SHOULD</bcp14> result in a valid address for the Card language.  What characters to insert between address components is specific to the language.  The <tt>defaultSeparator</tt> property and the <tt>separator</tt> AddressComponent kind give guidance what characters to insert, but implementations are free to choose any others.</t>
             </li>
             <li>countryCode: <tt>String</tt> (optional).
 The Alpha-2 or Alpha-3 ISO-3166-1 country code <xref target="ISO.3166-1.2006"/>.</li>
@@ -1128,12 +1128,12 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                 <li><tt>delivery</tt> An address to be used for delivering physical items.</li>
               </ul>
             </li>
-            <li>fullAddress: <tt>String</tt> (optional).
-              This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>fullAddress</tt> property <bcp14>SHOULD NOT</bcp14> be set.
+            <li>full: <tt>String</tt> (optional).
+              This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>full</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
             <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g. the full address.  Also see <xref target="prop-pronounce"/>.</li>
             <li>defaultSeparator: <tt>String</tt> (optional).
-              The default separator to insert between street component values when concatenating all street component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.</li>
+              The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
           </ul>
@@ -1146,7 +1146,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
 The value of this address component.</li>
             <li>
               <t>kind: <tt>String</tt> (mandatory).
-              The kind of this street component.  The <xref target="enumerated-values">enumerated</xref> values are:
+              The kind of this address component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
               <ul spacing="normal">
                 <li><tt>room</tt>.  The room or suite number or identifier.</li>
@@ -1165,7 +1165,7 @@ The value of this address component.</li>
                 <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.  "North".</li>
                 <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g. White House, Taj Mahal.</li>
                 <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
-                <li><tt>separator</tt>.  A separator for two street components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
+                <li><tt>separator</tt>.  A separator for two address components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
               </ul>
             </li>
               <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
@@ -1178,7 +1178,7 @@ The value of this address component.</li>
     "contexts": {
       "work": true
     },
-    "fullAddress": "54321 Oak St\nReston\nVA\n20190",
+    "full": "54321 Oak St\nReston\nVA\n20190",
     "street": [
       {
         "kind": "number",
@@ -1206,7 +1206,7 @@ The value of this address component.</li>
     "contexts": {
       "private": true
     },
-    "fullAddress": "Irgendwostraße 27/4/8\n1010\nVienna\nAustria"
+    "full": "Irgendwostraße 27/4/8\n1010\nVienna\nAustria"
     "street": [
       {
         "kind": "name",
@@ -1246,7 +1246,7 @@ The value of this address component.</li>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k25": {
-    "fullAddress": "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand",
+    "full": "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand",
     "street": [
       {
         "kind": "number",
@@ -1278,7 +1278,7 @@ The value of this address component.</li>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k26": {
-    "fullAddress": "2-7-2 Marunouchi, Chiyoda-ku, Tokyo\n100-8994\nJapan",
+    "full": "2-7-2 Marunouchi, Chiyoda-ku, Tokyo\n100-8994\nJapan",
     "street": [
       {
         "kind": "block",
@@ -1326,7 +1326,7 @@ The value of this address component.</li>
 "localizations": {
   "jp": {
     "k26": {
-    "fullAddress": "〒100-8994\n東京都千代田区丸ノ内2-7-2",
+    "full": "〒100-8994\n東京都千代田区丸ノ内2-7-2",
     "street": [
       {
         "kind": "locality",
@@ -1644,7 +1644,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
       "utc": "2019-10-15T23:10:00Z"
     },
     "place": {
-      "fullAddress": "4445 Tree Street\nNew England, ND 58647\nUSA"
+      "full": "4445 Tree Street\nNew England, ND 58647\nUSA"
     }
   }
 }
@@ -2177,10 +2177,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">fullAddress</td>
+                <td align="left">full</td>
                 <td align="left">String</td>
-                <td align="left">Address</td>
+                <td align="left">Address, Name</td>
                 <td align="left">
+                  <xref target="name" format="default"/>,
                   <xref target="addresses" format="default"/>
                 </td>
               </tr>

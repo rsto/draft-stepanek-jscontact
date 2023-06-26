@@ -442,7 +442,7 @@ ANNIVERSARY:19860201
       "utc": "1953-10-15T23:10:00Z"
     },
     "place": {
-      "fullAddress":
+      "full":
          "123 Main Street\nAny Town, CA 91921-1234\nU.S.A."
     }
   },
@@ -454,7 +454,7 @@ ANNIVERSARY:19860201
       "year": 15
     },
     "place": {
-      "fullAddress": "5 Court Street\nNew England, ND 58647\nU.S.A."
+      "full": "5 Court Street\nNew England, ND 58647\nU.S.A."
     }
   },
   "ANNIVERSARY-3" : {
@@ -729,12 +729,12 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
               </tr>
             </tbody>
           </table>
-          <t>The LABEL parameter converts to the <tt>fullAddress</tt> property.</t>
+          <t>The LABEL parameter converts to the <tt>full</tt> property.</t>
           <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
           <t>The TZ parameter converts to the <tt>timeZone</tt> property.</t>
           <t>The CC parameter as defined in <xref target="RFC8605"/> converts to the <tt>countryCode</tt> property.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.  Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the <tt>fullAddress</tt> property.</t>
+          <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.  Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the <tt>full</tt> property.</t>
           <figure anchor="adr_conversion">
             <name>ADR conversion example</name>
             <artwork><![CDATA[
@@ -744,7 +744,7 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
 "addresses": {
   "ADDR-1" : {
     "contexts": { "work": true },
-    "fullAddress": "54321 Oak St\nReston\nVA\n20190\nUSA",
+    "full": "54321 Oak St\nReston\nVA\n20190\nUSA",
     "street": [
        {
          "kind": "name",
@@ -763,7 +763,7 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
   },
   "ADDR-2": {
     "contexts": { "private": true },
-    "fullAddress":  "12345 Elm St\nReston\nVA\n20190\nUSA",
+    "full":  "12345 Elm St\nReston\nVA\n20190\nUSA",
     "street": [
        {
          "kind": "name",
@@ -1974,7 +1974,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Address</td>
-            <td>fullAddress</td>
+            <td>full</td>
             <td>
               <xref target="vcard-prop-adr"/>
             </td>
