@@ -2656,6 +2656,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
+                <td align="left">AddressComponent</td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
+              </tr>
+              <tr>
                 <td align="left">Anniversary</td>
                 <td align="left">
                   <xref target="anniversaries" format="default"/>
@@ -2839,12 +2845,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">SpeakToAs</td>
                 <td align="left">
                   <xref target="speakToAs" format="default"/>
-                </td>
-              </tr>
-              <tr>
-                <td align="left">AddressComponent</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>
                 </td>
               </tr>
               <tr>
