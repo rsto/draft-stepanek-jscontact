@@ -2392,14 +2392,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">postcode</td>
-                <td align="left">String</td>
-                <td align="left">Address</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">pref</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">Address, CalendarResource, ContactBy, CryptoResource, DirectoryResource, EmailAddress, LanguagePref, LinkResource, MediaResource, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</td>
@@ -3597,6 +3589,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   </tr>
                   <tr>
                     <td align="left">number</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">postcode</td>
                     <td align="left">
                       <xref target="addresses" format="default"/>
                     </td>
