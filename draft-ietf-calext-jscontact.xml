@@ -1116,7 +1116,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
                 The components of this address.  The concatenation of the component values <bcp14>SHOULD</bcp14> result in a valid address for the Card language.  What characters to insert between address components is specific to the language.  The <tt>defaultSeparator</tt> property and the <tt>separator</tt> AddressComponent kind give guidance what characters to insert, but implementations are free to choose any others.</t>
             </li>
             <li>countryCode: <tt>String</tt> (optional).
-The Alpha-2 or Alpha-3 ISO-3166-1 country code <xref target="ISO.3166-1.2006"/>.</li>
+The Alpha-2 country code <xref target="ISO.3166-1.2006"/>.</li>
             <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
             <li>timeZone: <tt>String</tt> (optional).  Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <xref target="IANATZ">IANA Time Zone Database</xref></li>
             <li>
