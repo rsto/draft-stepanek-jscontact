@@ -1153,7 +1153,7 @@ The value of this address component.</li>
                 <li><tt>apartment</tt>.  The extension designation, such as apartment number or unit or box number.</li>
                 <li><tt>floor</tt>.  The floor or level this address is located on.</li>
                 <li><tt>building</tt>.  The building, tower, or condominium this address is located in.</li>
-                <li><tt>number</tt>.  The street number, including a number range, prefix and suffix.</li>
+                <li><tt>number</tt>.  The street number, e.g. "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
                 <li><tt>name</tt>.  The street name.</li>
                 <li><tt>block</tt>. The block name or number.</li>
                 <li><tt>subdistrict</tt>. The sub district, ward or other subunit of a district.</li>
