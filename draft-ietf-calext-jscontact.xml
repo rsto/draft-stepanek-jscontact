@@ -301,7 +301,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         </section>
         <section anchor="enumerated-values" numbered="true" toc="default">
           <name>Enumerated Values</name>
-          <t>Several properties  in this document restrict their allowed values to be from a list of String values.  If not noted otherwise for a specific property, the initial list of values for such properties is registered at IANA in the <xref target="iana-enum-registry">JSContact Enum Values Registry</xref>.  Implementations <bcp14>MUST</bcp14> only set IANA-registered or <xref target="vendor-specific-values">vendor-specific</xref> values for such properties.</t>
+          <t>Several properties  in this document restrict their allowed values to be from a list of String values.  These values are case-sensitive.  If not noted otherwise for a specific property, the initial list of values for such properties is registered at IANA in the <xref target="iana-enum-registry">JSContact Enum Values Registry</xref>.  Implementations <bcp14>MUST</bcp14> only set IANA-registered or <xref target="vendor-specific-values">vendor-specific</xref> values for such properties.</t>
         </section>
       </section>
       <section anchor="vendor-specific-extensions">
