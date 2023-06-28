@@ -1524,7 +1524,6 @@ EMAIL;X-FOO=Bar:jane_doe@example.com
             </dd>
           </dl>
         </section>
-
         <section anchor="jscontact-prop-vcardname">
           <name>Property <tt>vCardName</tt></name>
           <dl>
@@ -1580,7 +1579,6 @@ IMPP:xmpp:alice@example.com
           <name>Converting the <tt>Pronounce</tt> object</name>
           <t>The Pronounce type has no standard vCard element to convert to.  An initial RFC draft <xref target="I-D.calconnect-vobject-i18n"/> for adding phonetics to vCard exists but has not been further developed.  In lack of standard vCard support, any JSContact property of type Pronounce converts to a vCard JSCONTACT-PROP as outlined in <xref target="convert-other-jscontact"/>.</t>
         </section>
-
       </section>
       <section anchor="convert-other-jscontact">
         <name>New vCard Properties and Parameters</name>
@@ -1885,10 +1883,8 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           <tr>
             <td>Address</td>
             <td>components</td>
-            <td>
-              <xref target="vcard-prop-adr"/>,
-              <xref target="vcard-param-fmt"/>
-            </td>
+            <td><xref target="vcard-prop-adr"/>,
+              <xref target="vcard-param-fmt"/></td>
           </tr>
           <tr>
             <td>Address</td>
@@ -2514,10 +2510,8 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           <tr>
             <td>Name</td>
             <td>components</td>
-            <td>
-              <xref target="vcard-prop-n"/>,
-              <xref target="vcard-param-fmt"/>
-            </td>
+            <td><xref target="vcard-prop-n"/>,
+              <xref target="vcard-param-fmt"/></td>
           </tr>
           <tr>
             <td>Name</td>

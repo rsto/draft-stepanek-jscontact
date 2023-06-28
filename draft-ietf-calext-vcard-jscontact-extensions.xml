@@ -512,18 +512,17 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           <dt>Description:</dt>
           <dd>
             <t>The N and ADR properties use structured value types to define the constituent components of a name or address.  In contrast, the FN property and LABEL parameter contain full names or addresses as a single TEXT value, which might redundantly redefine the information in their structured value counterparts and bears the risk of their values going out of sync.  Instead, implementations should be guided how to form a full name or address of a given N or ADR property.  This is what the FMT parameter aims to achieve.  In addition to the component values, it also allows to define what values implementations <bcp14>SHOULD</bcp14> insert <em>in between</em> components, such that the resulting name or address is formatted appropriately and locale-specific.</t>
-          <t>The FMT parameter value is a structured type value. It consists of a sequence of formatting instructions, where a formatting instruction defines what value to concatenate to the result TEXT value.  There are two kinds of formatting instruction:</t>
-          <ol>
-            <li>
-            <t>A positional.  This instructs to concatenate to the result the value of a structured property component value at a specified position.  A position consists of a numeric index of a component in the structured value, optionally followed by a COMMA (U+002C) character and the index of a value within that component.  The zero index selects the first component or value, respectively.  The second index by default is zero, in which case it <bcp14>MAY</bcp14> be omitted, otherwise it <bcp14>MUST NOT</bcp14> be omitted.</t>
-            <t>If a positional instruction contains a position of a non-existent or empty component value, then the entire FMT parameter <bcp14>MUST</bcp14> be considered invalid and <bcp14>MUST</bcp14> be ignored.</t>
-            </li>
-            <li>A separator.  This instructs to concatenate to the result a verbatim value defined in this formatting instruction. It starts with the LATIN SMALL LETTER S (U+0073) character, followed by COMMA (U+002C), followed by zero or more <xref target="RFC6350" section="3.3"><tt>param-value</tt></xref> characters, where the COMMA (U+002c) and SEMICOLON (U+003B) character <bcp14>MUST</bcp14> be escaped according to the rules defined in <xref target="RFC6350" section="3.4"/>.</li>
-          </ol>
-          <t>The first entry in the sequence of formatting instructions either <bcp14>MUST</bcp14> be the empty string or it <bcp14>MUST</bcp14> be a separator formatting instruction.  If the first entry is a separator formatting instruction, then this defines the default separator value to insert in between the values indicated by two consecutive positional formatting instructions.  Any separator formatting instruction in later entries has higher precedence than this default separator.  If the first entry is the empty string, the default separator is undefined and implementation-specific.  The FMT parameter value either includes exactly one separator formatting instruction for the default separator, or an optional default separator followed by at least one formatting instruction (see Format definition).</t>
-          <t>Some implementations might not support the FMT parameter.  For backwards compatibility, implementations <bcp14>SHOULD</bcp14> generate the FN property based on the N property and FMT instructions.  In this case, they <bcp14>SHOULD</bcp14> set the <xref target="param-derived">DERIVED</xref> parameter on the FN property.  They <bcp14>MAY</bcp14> generate a LABEL parameter for the ADR property.</t>
+            <t>The FMT parameter value is a structured type value. It consists of a sequence of formatting instructions, where a formatting instruction defines what value to concatenate to the result TEXT value.  There are two kinds of formatting instruction:</t>
+            <ol>
+              <li>
+                <t>A positional.  This instructs to concatenate to the result the value of a structured property component value at a specified position.  A position consists of a numeric index of a component in the structured value, optionally followed by a COMMA (U+002C) character and the index of a value within that component.  The zero index selects the first component or value, respectively.  The second index by default is zero, in which case it <bcp14>MAY</bcp14> be omitted, otherwise it <bcp14>MUST NOT</bcp14> be omitted.</t>
+                <t>If a positional instruction contains a position of a non-existent or empty component value, then the entire FMT parameter <bcp14>MUST</bcp14> be considered invalid and <bcp14>MUST</bcp14> be ignored.</t>
+              </li>
+              <li>A separator.  This instructs to concatenate to the result a verbatim value defined in this formatting instruction. It starts with the LATIN SMALL LETTER S (U+0073) character, followed by COMMA (U+002C), followed by zero or more <xref target="RFC6350" section="3.3"><tt>param-value</tt></xref> characters, where the COMMA (U+002c) and SEMICOLON (U+003B) character <bcp14>MUST</bcp14> be escaped according to the rules defined in <xref target="RFC6350" section="3.4"/>.</li>
+            </ol>
+            <t>The first entry in the sequence of formatting instructions either <bcp14>MUST</bcp14> be the empty string or it <bcp14>MUST</bcp14> be a separator formatting instruction.  If the first entry is a separator formatting instruction, then this defines the default separator value to insert in between the values indicated by two consecutive positional formatting instructions.  Any separator formatting instruction in later entries has higher precedence than this default separator.  If the first entry is the empty string, the default separator is undefined and implementation-specific.  The FMT parameter value either includes exactly one separator formatting instruction for the default separator, or an optional default separator followed by at least one formatting instruction (see Format definition).</t>
+            <t>Some implementations might not support the FMT parameter.  For backwards compatibility, implementations <bcp14>SHOULD</bcp14> generate the FN property based on the N property and FMT instructions.  In this case, they <bcp14>SHOULD</bcp14> set the <xref target="param-derived">DERIVED</xref> parameter on the FN property.  They <bcp14>MAY</bcp14> generate a LABEL parameter for the ADR property.</t>
           </dd>
-
           <dt>Format definition:</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
@@ -541,23 +540,23 @@ fmt-inst-verb = *QSAFE-CHAR     ; note: the ";" character MUST be escaped as "\;
           </dd>
           <dt>Example(s):</dt>
           <dd>
-<t>The following examples demonstrates how to generate the same value as the FN property value using the FMT parameter.  The first format instruction defines a single SPACE (U+0020) character as default to separate two component values.  The next format instructions select the first value of the second component of the N property value (the given name), followed by the first value of the first component in the N property value (the surname).</t>
-   <sourcecode name="" type="abnf"><![CDATA[
+            <t>The following examples demonstrates how to generate the same value as the FN property value using the FMT parameter.  The first format instruction defines a single SPACE (U+0020) character as default to separate two component values.  The next format instructions select the first value of the second component of the N property value (the given name), followed by the first value of the first component in the N property value (the surname).</t>
+            <sourcecode name="" type="abnf"><![CDATA[
 FN;DERIVED=TRUE::Rene van der Harten
 N;FMT="s, ;1,0;0,0":van der Harten;Rene,J.;Sir;R.D.O.N.
 ]]></sourcecode>
-<t>where the positions can be reduced to shorter form</t>
-   <sourcecode name="" type="abnf"><![CDATA[
+            <t>where the positions can be reduced to shorter form</t>
+            <sourcecode name="" type="abnf"><![CDATA[
 FN;DERIVED=TRUE::Rene van der Harten
 N;FMT="s, ;1;0":van der Harten;Rene,J.;Sir;R.D.O.N.
 ]]></sourcecode>
-          <t>An implementation may decide to not explicitly define a default separator.  Assuming that the implementation uses space to separate name components, the FMT parameter value would then be for example:</t>
-   <sourcecode name="" type="abnf"><![CDATA[
+            <t>An implementation may decide to not explicitly define a default separator.  Assuming that the implementation uses space to separate name components, the FMT parameter value would then be for example:</t>
+            <sourcecode name="" type="abnf"><![CDATA[
 FN;DERIVED=TRUE:Rene van der Harten
 N;FMT=";1;0":van der Harten;Rene,J.;Sir;R.D.O.N.
 ]]></sourcecode>
-          <t>The following example demonstrates how the honorific suffix could be preceded by the SEMICOLON (U+003B) and SPACE (U+0020) characters.</t>
-          <sourcecode name="" type="abnf"><![CDATA[
+            <t>The following example demonstrates how the honorific suffix could be preceded by the SEMICOLON (U+003B) and SPACE (U+0020) characters.</t>
+            <sourcecode name="" type="abnf"><![CDATA[
 FN;DERIVED=TRUE:Rene van der Harten; R.D.O.N.
 N;FMT=";1;0;s,\; ;3":van der Harten;Rene,J.;Sir;R.D.O.N.
 ]]></sourcecode>

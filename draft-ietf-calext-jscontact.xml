@@ -547,7 +547,6 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               <t>components: <tt>NameComponent[]</tt> (optional).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.  This property <bcp14>SHOULD</bcp14> be set, and it <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set.</t>
               <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  The <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
               <t><xref target="example-name-twoword"/> is an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.  <xref target="example-name-surname2"/> illustrates a name with a second surname, such as a Spanish name.  Additional examples are <xref target="example-name-sortas"/> and <xref target="example-localizations-replace"/>.</t>
-
               <figure anchor="example-name-twoword">
                 <name>Example for a surname with two words</name>
                 <sourcecode name="" type="json"><![CDATA[
@@ -1130,7 +1129,7 @@ The value of this address component.</li>
                 <li><tt>separator</tt>.  A separator for two address components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
               </ul>
             </li>
-              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
+            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
           </ul>
           <t>The following examples illustrate the use of this property.</t>
           <figure anchor="example-address-us">
@@ -2022,10 +2021,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">full</td>
                 <td align="left">String</td>
                 <td align="left">Address, Name</td>
-                <td align="left">
-                  <xref target="name" format="default"/>,
-                  <xref target="addresses" format="default"/>
-                </td>
+                <td align="left"><xref target="name" format="default"/>,
+                  <xref target="addresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">grammaticalGender</td>
@@ -2259,10 +2256,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">pronounce</td>
                 <td align="left">Pronounce</td>
                 <td align="left">Address, AddressComponent, Name, NameComponent</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>,
-                  <xref target="name" format="default"/>
-                </td>
+                <td align="left"><xref target="addresses" format="default"/>,
+                  <xref target="name" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">pronouns</td>
