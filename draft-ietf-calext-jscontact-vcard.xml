@@ -731,7 +731,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
           <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
           <t>The TZ parameter converts to the <tt>timeZone</tt> property.</t>
           <t>The CC parameter as defined in <xref target="RFC8605"/> converts to the <tt>countryCode</tt> property.</t>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.  The ADR-specific values of the TYPE parameter defined in Sections 4.1 and 4.2 of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> convert to the corresponding entries of the <tt>contexts</tt> property as defined in Section 2.5.1 of <xref target="I-D.ietf-calext-jscontact"/>.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.  The ADR-specific values of the TYPE parameter defined in Sections 5.1 and 5.2 of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> convert to the corresponding entries of the <tt>contexts</tt> property as defined in Section 2.5.1 of <xref target="I-D.ietf-calext-jscontact"/>.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.  Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the <tt>full</tt> property.</t>
           <figure anchor="adr_conversion">
             <name>ADR conversion example</name>
