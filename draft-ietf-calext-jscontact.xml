@@ -380,13 +380,10 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
   "uid": "22B2C7DF-9120-4969-8460-05956FE6B065",
   "kind": "individual",
   "name": {
-    "components": [{
-      "kind": "given",
-      "value": "John"
-    }, {
-      "kind": "surname",
-      "value": "Doe"
-    }]
+    "components": [
+      { "kind": "given", "value": "John" },
+      { "kind": "surname", "value": "Doe" }
+    ]
   }
 }
 ]]></sourcecode>
@@ -573,22 +570,9 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
                 <sourcecode name="" type="json"><![CDATA[
 "name": {
   "components": [
-    {
-      "kind": "given",
-      "value": "Robert"
-    },
-    {
-      "kind": "middle",
-      "value": "Pau"
-    },
-    {
-      "kind": "surname",
-      "value": "Shou"
-    },
-    {
-      "kind": "surname",
-      "value": "Chang"
-    }
+    { "kind": "given", "value": "Robert" },
+    { "kind": "middle", "value": "Pau" },
+    { "kind": "surname", "value": "Shou Chang" }
   ],
   "sortAs": {
     "surname": "Pau Shou Chang",
@@ -690,12 +674,8 @@ The contexts in which association with this organization apply.  For example, me
   "o1": {
     "name": "ABC, Inc.",
     "units": [
-      {
-        "name": "North American Division"
-      },
-      {
-        "name": "Marketing"
-      }
+      { "name": "North American Division" },
+      { "name": "Marketing" }
     ],
     "sortAs": "ABC"
   }
@@ -854,14 +834,10 @@ Defines the preference of this contact channel in relation to other contact chan
             <sourcecode name="" type="json"><![CDATA[
 "contactBy": {
   "emails": [
-    {
-      "pref": 1
-    }
+    { "pref": 1 }
   ],
   "phones": [
-    {
-      "pref": 2
-    }
+    { "pref": 2 }
   ]
 }
 ]]></sourcecode>
@@ -1171,194 +1147,82 @@ The value of this address component.</li>
               <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
           </ul>
           <figure anchor="example-address-us">
-            <name>Example of an address in the United States of America</name>
+            <name>Example of the address "54321 Oak St, Reston, VA 20190, USA"</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k23": {
     "contexts": {
       "work": true
     },
-    "full": "54321 Oak St\nReston\nVA\n20190",
-    "street": [
-      {
-        "kind": "number",
-        "value": "54321"
-      },
-      {
-        "kind": "name",
-        "value": "Oak St"
-      }
+    "components": [
+      { "kind": "number", "value": "54321" },
+      { "kind": "separator", "value": " " },
+      { "kind": "name", "value": "Oak St" },
+      { "kind": "locality", "value": "Reston" },
+      { "kind": "region", "value": "VA" },
+      { "kind": "separator", "value": " " },
+      { "kind": "postcode", "value": "20190" },
+      { "kind": "country", "value": "USA" }
     ],
-    "locality": "Reston",
-    "region": "VA",
-    "country": "USA",
-    "postcode": "20190",
-    "countryCode": "US"
-  }
-}
-]]></sourcecode>
-          </figure>
-          <figure anchor="example-address-at">
-            <name>Example of an address in Austria</name>
-            <sourcecode name="" type="json"><![CDATA[
-"addresses": {
-  "k24": {
-    "contexts": {
-      "private": true
-    },
-    "full": "Irgendwostraße 27/4/8\n1010\nVienna\nAustria"
-    "street": [
-      {
-        "kind": "name",
-        "value": "Irgendwostraße"
-      },
-      {
-        "kind": "number",
-        "value": "27"
-      },
-      {
-        "kind": "separator",
-        "value": "/"
-      },
-      {
-        "kind": "building",
-        "value": "4"
-      }
-      {
-        "kind": "separator",
-        "value": "/"
-      },
-      {
-        "kind": "apartment",
-        "value": "8"
-      }
-    ],
-    "locality": "Vienna",
-    "country": "Austria",
-    "postcode": "1010",
-    "countryCode": "AT"
+    "countryCode": "US",
+    "defaultSeparator": ", "
   }
 }
 ]]></sourcecode>
           </figure>
           <figure anchor="example-address-th">
-            <name>Example of an address in Thailand</name>
+            <name>Example of the address "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k25": {
-    "full": "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand",
-    "street": [
-      {
-        "kind": "number",
-         "value": "46"
-      },
-      {
-        "kind": "name",
-        "value": "1 Sukhumvit 51 Alley"
-      },
-      {
-        "kind": "subdistrict",
-        "value": "Khlong Tan Nuea"
-      },
-      {
-        "kind": "district",
-        "value": " Watthana"
-      }
+    "components": [
+      { "kind": "number", "value": "46" },
+      { "kind": "name", "value": "1 Sukhumvit 51 Alley" },
+      { "kind": "subdistrict", "value": "Khlong Tan Nuea" },
+      { "kind": "district", "value": " Watthana" },
+      { "kind": "locality", "value": "Bangkok" },
+      { "kind": "country", "value": "Thailand" },
+      { "kind": "postcode", "value": "10110" }
     ],
-    "locality": "Bangkok",
-    "country": "Thailand",
-    "postcode": "10110",
     "defaultSeparator": ", "
   }
 }
 ]]></sourcecode>
           </figure>
           <figure anchor="example-address-jp">
-            <name>Example of an internationalized address in Japan and its <xref target="localizations">localization</xref> in Japanese.</name>
+            <name>Example of an address in Tokyo and its localization <xref target="localizations"/> in Japanese.</name>
             <sourcecode name="" type="json"><![CDATA[
 "addresses": {
-  "k26": {
-    "full": "2-7-2 Marunouchi, Chiyoda-ku, Tokyo\n100-8994\nJapan",
-    "street": [
-      {
-        "kind": "block",
-        "value": "2"
-      },
-      {
-        "kind": "separator",
-        "value": "-"
-      },
-      {
-        "kind": "building",
-        "value": "7"
-      },
-      {
-        "kind": "separator",
-        "value": "-"
-      },
-      {
-        "kind": "number",
-        "value": "2"
-      },
-      {
-        "kind": "separator",
-        "value": " "
-      },
-      {
-        "kind": "subdistrict",
-        "value": "Marunouchi"
-      },
-      {
-        "kind": "district",
-        "value": "Chiyoda-ku"
-      },
-      {
-         "kind": "locality",
-         "value": "Tokyo"
-      }
-    ],
-    "locality": "Tokyo",
-    "country": "Japan",
-    "postcode": "100-8994",
-    "defaultSeparator": ", "
-  }
+   "k26": {
+     "components": [
+       { "kind": "block", "value": "2-7" },
+       { "kind": "separator", "value": "-" },
+       { "kind": "number", "value": "2" },
+       { "kind": "separator", "value": " " },
+       { "kind": "district", "value": "Marunouchi" },
+       { "kind": "locality", "value": "Chiyoda-ku" },
+       { "kind": "region", "value": "Tokyo" },
+       { "kind": "separator", "value": " " },
+       { "kind": "postcode", "value": "100-8994" }
+     ],
+     "defaultSeparator": ", ",
+     "full": "2-7-2 Marunouchi, Chiyoda-ku, Tokyo 100-8994"
+   }
 },
 "localizations": {
   "jp": {
     "k26": {
-    "full": "〒100-8994\n東京都千代田区丸ノ内2-7-2",
-    "street": [
-      {
-        "kind": "locality",
-        "value": "東京"
-      },
-      {
-        "kind": "separator",
-        "value": "都"
-      },
-      {
-        "kind": "district",
-        "value": "千代田区"
-      },
-      {
-        "kind": "subdistrict",
-        "value": "丸ノ内"
-      },
-      {
-        "kind": "block",
-        "value": "2"
-      },
-      {
-        "kind": "building",
-        "value": "7"
-      },
-      {
-        "kind": "number",
-        "value": "2"
-      }
-    ],
-    "postcode": "〒100-8994",
-    "defaultSeparator": ""
+      "components": [
+        { "kind": "region", "value": "東京都" },
+        { "kind": "locality", "value": "千代田区" },
+        { "kind": "district", "value": "丸ノ内" },
+        { "kind": "block", "value": "2-7" },
+        { "kind": "separator", "value": "-" },
+        { "kind": "number", "value": "2" },
+        { "kind": "postcode", "value": "〒100-8994" }
+      ],
+      "defaultSeparator": "",
+      "full": "〒100-8994東京都千代田区丸ノ内2-7-2"
     }
   }
 }
@@ -1515,63 +1379,54 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <li>Optionally, set the <tt>language</tt> property in the copy of the Card.</li>
             <li>Use the patched copy of the Card as the localized variant of the original Card.</li>
           </ul>
-          <t>A patch in the PatchObject may patch a simple-typed property value, or a complex type.</t>
-          <t><xref target="example-localizations-simple"/> shows how a single String property value is localized in the <tt>jp</tt> language.</t>
-          <figure anchor="example-localizations-simple">
-            <name>Example of localizing a String value</name>
+          <t>A patch in the PatchObject may contain any value type.  Its value <bcp14>MUST</bcp14> be a valid value according to the definition of the patched property.</t>
+          <t><xref target="example-localizations-replace"/> localizes the <tt>name</tt> property by completely replacing its contents in Ukrainian language with Cyrillic script.</t>
+          <figure anchor="example-localizations-replace">
+            <name>Example for localizing a top-level property</name>
             <artwork><![CDATA[
-"language": "en",
-"addresses": {
-  "addr1": {
-    "locality": "Tokyo"
-  }
-},
-"localizations": {
-  "jp": {
-    "addresses/addr1/locality": "東京"
+{
+  "@type": "Card",
+  "uid": "F918F30B-91E4-4DB8-B221-28AE7D28984D",
+  "version": "1.0",
+  "name": {
+    "components": [
+      { "kind": "title", "value": "Mr." },
+      { "kind": "given", "value": "Ivan" },
+      { "kind": "middle", "value": "Petrovich" },
+      { "kind": "surname", "value": "Vasiliev" }
+    ]
+  },
+  "localizations": {
+    "uk-Cyrl": {
+      "name": {
+        "components": [
+          { "kind": "title", "value": "г-н" },
+          { "kind": "given", "value": "Иван" },
+          { "kind": "middle", "value": "Петрович" },
+          { "kind": "surname", "value": "Васильев" }
+        ]
+      }
+    }
   }
 }
 ]]></artwork>
           </figure>
-          <t><xref target="example-localizations-complex"/> shows how a complete object property value is localized in the <tt>en</tt> language.</t>
-          <figure anchor="example-localizations-complex">
-            <name>Example of localizing an object value</name>
+          <t><xref target="example-localizations-patch"/> localizes the title name by patching <em>inside</em> the <tt>titles</tt> property.  All properties but the <tt>name</tt> property in the Title object are left as-is.</t>
+          <figure anchor="example-localizations-patch">
+            <name>Example for localizing a nested property</name>
             <artwork><![CDATA[
-"language": "ru",
-"name": {
-  "components": [
-    {
-      "kind": "given",
-      "value": "Фёдор"
-    },
-    {
-      "kind": "surname",
-      "value": "Михайлович"
-    },
-    {
-      "kind": "surname",
-      "value": "Достоевский"
+"name" {
+  "full": "Gabriel García Márquez"
+  "titles": {
+    "t1": {
+      "kind": "title",
+      "name": "novelist"
     }
-  ]
+  }
 },
 "localizations": {
-  "en": {
-    "name": {
-      "components": [
-        {
-          "kind": "given",
-          "value": "Fyodor"
-        },
-        {
-          "kind": "surname",
-          "value": "Mikhailovich"
-        },
-        {
-          "kind": "surname",
-          "value": "Dostoevsky"
-        }
-      ]
-    }
+  "es": {
+    "titles/t1/name": "autor"
   }
 }
 ]]></artwork>
@@ -2086,6 +1941,14 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               </tr>
               <tr>
                 <td align="left">components</td>
+                <td align="left">AddressComponent[]</td>
+                <td align="left">Address</td>
+                <td align="left">
+                  <xref target="addresses" format="default"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="left">components</td>
                 <td align="left">NameComponent[]</td>
                 <td align="left">Name</td>
                 <td align="left">
@@ -2492,14 +2355,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Card</td>
                 <td align="left">
                   <xref target="speakToAs" format="default"/>
-                </td>
-              </tr>
-              <tr>
-                <td align="left">street</td>
-                <td align="left">AddressComponent[]</td>
-                <td align="left">Address</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -3518,7 +3373,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dd>AddressComponent</dd>
             <dt>Initial Contents:</dt>
             <dd>
-              <table anchor="tab-iana-enum-streetcomponent-kind" align="left">
+              <table anchor="tab-iana-enum-addresscomponent-kind" align="left">
                 <name>JSContact Enum Values for kind (Context: AddressComponent)</name>
                 <thead>
                   <tr>
