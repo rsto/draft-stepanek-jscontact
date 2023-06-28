@@ -559,7 +559,7 @@ NICKNAME:Johnny
   "full": "Mr.  John Q.  Public, Esq.",
   "components":[
     {
-      "kind": "prefix",
+      "kind": "title",
       "value": "Mr."
     },
     {
@@ -575,7 +575,7 @@ NICKNAME:Johnny
       "value": "Quinlan"
     },
     {
-      "kind": "suffix",
+      "kind": "credential",
       "value": "Esq."
     }
   ],
