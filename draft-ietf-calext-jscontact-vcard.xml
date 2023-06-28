@@ -558,26 +558,11 @@ NICKNAME:Johnny
 "name": {
   "full": "Mr.  John Q.  Public, Esq.",
   "components":[
-    {
-      "kind": "title",
-      "value": "Mr."
-    },
-    {
-      "kind": "given",
-      "value": "John"
-    },
-    {
-      "kind": "surname",
-      "value": "Public"
-    },
-    {
-      "kind": "middle",
-      "value": "Quinlan"
-    },
-    {
-      "kind": "credential",
-      "value": "Esq."
-    }
+    { "kind": "title", "value": "Mr." },
+    { "kind": "given", "value": "John Q." },
+    { "kind": "surname", "value": "Public" },
+    { "kind": "middle", "value": "Quinlan" },
+    { "kind": "credential", "value": "Esq." }
   ],
   "sortAs": {
     "surname": "Public",
@@ -743,40 +728,31 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
   "ADDR-1" : {
     "contexts": { "work": true },
     "full": "54321 Oak St\nReston\nVA\n20190\nUSA",
-    "street": [
-       {
-         "kind": "name",
-         "value": "Oak St"
-       },
-       {
-         "kind": "number",
-         "value": "54321"
-       }
+    "components": [
+      { "kind": "number", "value": "54321" },
+      { "kind": "separator", "value": " " },
+      { "kind": "name", "value": "Oak St" },
+      { "kind": "locality", "value": "Reston" },
+      { "kind": "region", "value": "VA" },
+      { "kind": "postcode", "value": "20190" },
+      { "kind": "country", "value": "USA" }
     ],
-    "locality": "Reston",
-    "region": "VA",
-    "country": "USA",
-    "postcode": "20190",
-    "countryCode": "US"
+    "countryCode": "US",
+    "defaultSeparator": "\n"
   },
   "ADDR-2": {
     "contexts": { "private": true },
-    "full":  "12345 Elm St\nReston\nVA\n20190\nUSA",
-    "street": [
-       {
-         "kind": "name",
-         "value": "Elm St"
-       },
-       {
-         "kind": "number",
-         "value": "12345"
-       }
+    "full":  "12345 Elm St Reston VA 20190 USA",
+    "components": [
+      { "kind": "number", "value": "12345" },
+      { "kind": "name", "value": "Elm St" },
+      { "kind": "locality", "value": "Reston" },
+      { "kind": "region", "value": "VA" },
+      { "kind": "postcode", "value": "20190" },
+      { "kind": "country", "value": "USA" }
     ],
-    "locality": "Reston",
-    "region": "VA",
-    "country": "USA",
-    "postcode": "20190",
-    "countryCode": "US"
+    "countryCode": "US",
+    "defaultSeparator": " "
   }
 }
 ]]></artwork>
@@ -1023,8 +999,8 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
   "ORG-1": {
     "name": "ABC, Inc.",
     "units":[
-      {"name": "North American Division"},
-      {"name": "Marketing"}
+      { "name": "North American Division" },
+      { "name": "Marketing" }
     ],
     "sortAs": "ABC"
   }
