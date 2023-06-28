@@ -2227,25 +2227,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>ContactBy</td>
-            <td>@type</td>
-            <td>not applicable</td>
-          </tr>
-          <tr>
-            <td>ContactBy</td>
-            <td>contexts</td>
-            <td>
-              <xref target="vcard-param-type"/>
-            </td>
-          </tr>
-          <tr>
-            <td>ContactBy</td>
-            <td>pref</td>
-            <td>
-              <xref target="vcard-param-pref"/>
-            </td>
-          </tr>
-          <tr>
             <td>CryptoResource</td>
             <td>@type</td>
             <td>not applicable</td>
