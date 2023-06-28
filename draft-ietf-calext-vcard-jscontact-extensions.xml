@@ -142,47 +142,6 @@ ADR-component-landmark = list-component
     </section>
     <section anchor="new-properties">
       <name>New Properties</name>
-      <section anchor="prop-contactby">
-        <name>CONTACT-BY Property</name>
-        <dl>
-          <dt>Property name:</dt>
-          <dd>CONTACT-BY</dd>
-          <dt>Purpose:</dt>
-          <dd>This property defines which contact channels the entity associated with this vCard prefers to be contacted with.</dd>
-          <dt>Value type:</dt>
-          <dd>A single text value, restricted to an enumerated list of allowed values.</dd>
-          <dt>Cardinality:</dt>
-          <dd>*</dd>
-          <dt>Property parameters:</dt>
-          <dd>The PREF parameter defines the preference of this contact channel in relation to other contact channels.  The TYPE parameter defines when to use this preference.</dd>
-          <dt>Description:</dt>
-          <dd>
-            This defines an order of preferences for contact channels.  The contact channels supported in this specification are phone numbers, email, instant messaging and postal delivery.  They are identified by the name of the respective vCard property.
-          </dd>
-          <dt>Format definition:</dt>
-          <dd>
-            <t>This property is defined by the following notation:</t>
-            <sourcecode name="" type="abnf"><![CDATA[
-contactby  = "CONTACT-BY"
-                    *(";" contactby-param )
-                      ":" contactby-value
-
-contactby-param  = type-param / pref-param / any-param
-
-contactby-value = "ADR" / "EMAIL" / "IMPP" / "TEL" /
-                             x-name
-]]></sourcecode>
-          </dd>
-          <dt>Example(s):</dt>
-          <dd>
-            <sourcecode name=""><![CDATA[
-CONTACT-BY;TYPE=work;PREF=1:EMAIL
-CONTACT-BY;TYPE=work;PREF=2:TEL
-CONTACT-BY;TYPE=home:TEL
-]]></sourcecode>
-          </dd>
-        </dl>
-      </section>
       <section anchor="prop-created">
         <name>CREATED Property</name>
         <dl>
@@ -751,11 +710,6 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td/>
-                <td align="left">CONTACT-BY</td>
-                <td align="left">This document, <xref target="prop-contactby"/></td>
-              </tr>
               <tr>
                 <td/>
                 <td align="left">CREATED</td>

@@ -785,60 +785,6 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
       </section>
       <section>
         <name>Communications Properties</name>
-        <section anchor="vcard-prop-contact-by">
-          <name>CONTACT-BY</name>
-          <t>A CONTACT-BY property converts to an entry in the <tt>contactBy</tt> property (<xref target="contact_by_conversion"/>).  The entry key set is defined in <xref target="contact_by_key_conversion"/>, the related entry values are arrays of <tt>ContactBy</tt> objects.</t>
-          <table anchor="contact_by_key_conversion">
-            <name>CONTACT-BY values conversion</name>
-            <thead>
-              <tr>
-                <th align="left">CONTACT-BY value</th>
-                <th align="left">"contactBy" key</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td align="left">ADR</td>
-                <td align="left">addresses</td>
-              </tr>
-              <tr>
-                <td align="left">EMAIL</td>
-                <td align="left">emails</td>
-              </tr>
-              <tr>
-                <td align="left">IMPP</td>
-                <td align="left">onlineServices</td>
-              </tr>
-              <tr>
-                <td align="left">TEL</td>
-                <td align="left">phones</td>
-              </tr>
-            </tbody>
-          </table>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>ContactBy</tt> objects <bcp14>MUST</bcp14> be empty.</t>
-          <figure anchor="contact_by_conversion">
-            <name>LANG conversion example</name>
-            <artwork><![CDATA[
-CONTACT-BY;PREF=1:EMAIL
-CONTACT-BY;PREF=2:TEL
-
-"contactBy": {
-  "emails":[
-    {
-      "pref": 1
-    }
-  ],
-  "phones":[
-    {
-      "pref": 2
-    }
-  ]
-}
-]]></artwork>
-          </figure>
-          <t>Note: This property is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
-        </section>
         <section anchor="vcard-prop-email">
           <name>EMAIL</name>
           <t>An EMAIL property converts to an entry in the <tt>emails</tt> property (<xref target="email_conversion"/>).  The entry value is an <tt>EmailAddress</tt> object.  The <tt>address</tt> property is set to the EMAIL value.</t>
@@ -2250,13 +2196,6 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td>phones</td>
             <td>
               <xref target="vcard-prop-tel"/>
-            </td>
-          </tr>
-          <tr>
-            <td>Card</td>
-            <td>contactBy</td>
-            <td>
-              <xref target="vcard-prop-contact-by"/>
             </td>
           </tr>
           <tr>
