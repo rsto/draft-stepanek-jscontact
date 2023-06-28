@@ -546,6 +546,27 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
             <li>
               <t>components: <tt>NameComponent[]</tt> (optional).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.  This property <bcp14>SHOULD</bcp14> be set, and it <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set.</t>
               <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  The <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
+              <t><xref target="example-name-twoword"/> is an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.  <xref target="example-name-surname2"/> illustrates a name with a second surname, such as a Spanish name.  Additional examples are <xref target="example-name-sortas"/> and <xref target="example-localizations-replace"/>.</t>
+
+              <figure anchor="example-name-twoword">
+                <name>Example for a surname with two words</name>
+                <sourcecode name="" type="json"><![CDATA[
+"components": [
+  { "kind": "given", "value": "Vincent" },
+  { "kind": "surname", "value": "van Gogh" }
+]
+]]></sourcecode>
+              </figure>
+              <figure anchor="example-name-surname2">
+                <name>Example for a second surname</name>
+                <sourcecode name="" type="json"><![CDATA[
+"components": [
+  { "kind": "given", "value": "Diego" },
+  { "kind": "surname", "value": "Rivera" },
+  { "kind": "surname2", "value": "Barrientos" }
+]
+]]></sourcecode>
+              </figure>
             </li>
             <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.</li>
@@ -564,8 +585,8 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
               <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>kind</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
-              <t><xref target="example-name"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
-              <figure anchor="example-name">
+              <t><xref target="example-name-sortas"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
+              <figure anchor="example-name-sortas">
                 <name><tt>name</tt> example</name>
                 <sourcecode name="" type="json"><![CDATA[
 "name": {
@@ -589,7 +610,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
               This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>, if set.
           </li>
             <li>value: <tt>String</tt> (mandatory).
-The value of this name component.</li>
+The value of this name component.  This can be composed of one or multiple words, such as "Poe" or "van Gogh".</li>
             <li>
               <t>kind: <tt>String</tt> (mandatory).
               The kind of this name component.  The <xref target="enumerated-values">enumerated</xref> values are:
@@ -1111,6 +1132,7 @@ The value of this address component.</li>
             </li>
               <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
           </ul>
+          <t>The following examples illustrate the use of this property.</t>
           <figure anchor="example-address-us">
             <name>Example of the address "54321 Oak St, Reston, VA 20190, USA"</name>
             <sourcecode name="" type="json"><![CDATA[
