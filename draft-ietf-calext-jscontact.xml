@@ -243,7 +243,7 @@ The phonetic system used for the value of the <tt>phonetics</tt> property.  This
               </ul>
             </li>
           </ul>
-          <t>The following example shows how to define pronunication for a <xref target="name">surname</xref>:</t>
+          <t>The following example shows how to define pronunciation for a <xref target="name">surname</xref>:</t>
           <figure anchor="example-pronounce">
             <name>Example of a <tt>Pronounce</tt> object for the name "Smith" in English</name>
             <sourcecode name="" type="json"><![CDATA[
