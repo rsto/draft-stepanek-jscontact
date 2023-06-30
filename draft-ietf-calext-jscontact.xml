@@ -579,7 +579,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
 ]]></sourcecode>
               </figure>
             </li>
-            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name, e.g. as full name.  Also see <xref target="prop-pronounce"/>.</li>
+            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name, e.g. a full name.  Also see <xref target="prop-pronounce"/>.</li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
