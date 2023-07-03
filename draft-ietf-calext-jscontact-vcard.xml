@@ -579,7 +579,7 @@ NICKNAME:Johnny
         </section>
         <section anchor="vcard-prop-photo">
           <name>PHOTO</name>
-          <t>A PHOTO property converts to an entry in the <tt>media</tt> property (<xref target="photo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>kind</tt> property is set to <tt>photo</tt> and <tt>uri</tt> property is set to the PHOTO value.</t>
+          <t>A PHOTO property converts to an entry in the <tt>media</tt> property (<xref target="photo_conversion"/>).  The entry value is a <tt>Media</tt> object whose <tt>kind</tt> property is set to <tt>photo</tt> and <tt>uri</tt> property is set to the PHOTO value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="photo_conversion">
             <name>PHOTO conversion example</name>
@@ -943,7 +943,7 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
         </section>
         <section anchor="vcard-prop-logo">
           <name>LOGO</name>
-          <t>A LOGO property converts to an entry in the <tt>media</tt> property (<xref target="logo_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>kind</tt> property is set to <tt>logo</tt> and <tt>uri</tt> property is set to the LOGO value.</t>
+          <t>A LOGO property converts to an entry in the <tt>media</tt> property (<xref target="logo_conversion"/>).  The entry value is a <tt>Media</tt> object whose <tt>kind</tt> property is set to <tt>logo</tt> and <tt>uri</tt> property is set to the LOGO value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="logo_conversion">
             <name>LOGO conversion example</name>
@@ -1262,7 +1262,7 @@ REV:19951031T222710Z
         </section>
         <section anchor="vcard-prop-sound">
           <name>SOUND</name>
-          <t>A SOUND property converts to an entry in the <tt>media</tt> property (<xref target="sound_conversion"/>).  The entry value is a <tt>MediaResource</tt> object whose <tt>kind</tt> property is set to <tt>sound</tt> and <tt>uri</tt> property is set to the SOUND value.</t>
+          <t>A SOUND property converts to an entry in the <tt>media</tt> property (<xref target="sound_conversion"/>).  The entry value is a <tt>Media</tt> object whose <tt>kind</tt> property is set to <tt>sound</tt> and <tt>uri</tt> property is set to the SOUND value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="sound_conversion">
             <name>SOUND conversion example</name>
@@ -2417,45 +2417,45 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/>&gt;</td>
           </tr>
           <tr>
-            <td>MediaResource</td>
+            <td>Media</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>MediaResource</td>
+            <td>Media</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>MediaResource</td>
+            <td>Media</td>
             <td>kind</td>
             <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
           </tr>
           <tr>
-            <td>MediaResource</td>
+            <td>Media</td>
             <td>label</td>
             <td>
               <xref target="vcard-prop-xablabel"/>
             </td>
           </tr>
           <tr>
-            <td>MediaResource</td>
+            <td>Media</td>
             <td>mediaType</td>
             <td>
               <xref target="vcard-param-mediatype"/>
             </td>
           </tr>
           <tr>
-            <td>MediaResource</td>
+            <td>Media</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
             </td>
           </tr>
           <tr>
-            <td>MediaResource</td>
+            <td>Media</td>
             <td>uri</td>
             <td><xref target="vcard-prop-photo"/>, <xref target="vcard-prop-logo"/>, <xref target="vcard-prop-sound"/></td>
           </tr>
