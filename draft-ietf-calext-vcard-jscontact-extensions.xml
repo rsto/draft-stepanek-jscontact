@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="pre5378Trust200902" submissionType="IETF" category="std" xml:lang="en" consensus="true" docName="draft-ietf-calext-vcard-jscontact-extensions-07" obsoletes="" updates="6350" tocInclude="true" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="pre5378Trust200902" submissionType="IETF" category="std" xml:lang="en" consensus="true" docName="draft-ietf-calext-vcard-jscontact-extensions-08" obsoletes="" updates="6350" tocInclude="true" symRefs="true" sortRefs="true" version="3">
   <front>
     <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-07"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-08"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>Fastmail</organization>
       <address>
@@ -30,7 +30,7 @@
         <email>mario.loffredo@iit.cnr.it</email>
       </address>
     </author>
-    <date year="2023" month="June" day="2"/>
+    <date year="2023" month="July" day="3"/>
     <area>Applications</area>
     <workgroup>Calendaring Extensions</workgroup>
     <keyword>addressbook</keyword>
