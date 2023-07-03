@@ -915,14 +915,14 @@ The phone number, as either a URI or free-text.  Typical URI schemes are the <xr
               The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The <xref target="enumerated-values">enumerated</xref> method type values are:
 </t>
               <ul spacing="normal">
-                <li><tt>voice</tt> The number is for calling by voice.</li>
-                <li><tt>fax</tt> The number is for sending faxes.</li>
-                <li><tt>pager</tt> The number is for a pager or beeper.</li>
-                <li><tt>text</tt> The number supports text messages (SMS).</li>
                 <li><tt>mobile</tt> The number is for a mobile phone.</li>
-                <li><tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
+                <li><tt>voice</tt> The number is for calling by voice.</li>
+                <li><tt>text</tt> The number supports text messages (SMS).</li>
                 <li><tt>video</tt> The number supports video conferencing.</li>
                 <li><tt>main-number</tt> This number is the main phone number, such as the number of the front-desk at a company, as opposed to a direct-dial number of an individual employee.</li>
+                <li><tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
+                <li><tt>fax</tt> The number is for sending faxes.</li>
+                <li><tt>pager</tt> The number is for a pager or beeper.</li>
               </ul>
             </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
@@ -1010,7 +1010,7 @@ Defines the preference of this language in relation to other languages of the sa
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Calendar</tt>, if set.</li>
           </ul>
-          <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
+          <t>The <xref target="enumerated-values">enumerated</xref> values of the <tt>kind</tt> property are:</t>
           <ul>
             <li><tt>calendar</tt> The resource is a calendar that contains entries such as calendar events or tasks.</li>
             <li><tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
@@ -1297,7 +1297,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Link</tt>, if set.</li>
           </ul>
-          <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
+          <t>The <xref target="enumerated-values">enumerated</xref> values of the <tt>kind</tt> property are:</t>
           <ul>
             <li><tt>contact</tt> The resource is a URI by which the entity represented by this Card may be contacted, including web forms or other media that require user interaction.</li>
           </ul>
@@ -1321,7 +1321,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Media</tt>, if set.</li>
           </ul>
-          <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
+          <t>The <xref target="enumerated-values">enumerated</xref> values of the <tt>kind</tt> property are:</t>
           <ul>
             <li><tt>photo</tt> The resource is a photograph or avatar.</li>
             <li><tt>sound</tt> The resource is audio media, e.g.,  to specify the proper pronunciation of the name property contents.</li>
@@ -1877,7 +1877,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Address, Anniversary, Author, Card, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, AddressComponent, Timestamp, Title</td>
+                <td align="left">Address, AddressComponent, Anniversary, Author, Card, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, Timestamp, Title</td>
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr anchor="iana-property-registry-version">
@@ -1999,10 +1999,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">defaultSeparator</td>
                 <td align="left">String</td>
-                <td align="left">Address</td>
-                <td align="left">
-                  <xref target="addresses" format="default"/>
-                </td>
+                <td align="left">Address, Name</td>
+                <td align="left"><xref target="addresses" format="default"/>,
+                  <xref target="name" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">directories</td>
@@ -2032,8 +2031,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">full</td>
                 <td align="left">String</td>
                 <td align="left">Address, Name</td>
-                <td align="left"><xref target="name" format="default"/>,
-                  <xref target="addresses" format="default"/></td>
+                <td align="left"><xref target="addresses" format="default"/>,
+                  <xref target="name" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">grammaticalGender</td>
@@ -2415,8 +2414,10 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">value</td>
                 <td align="left">String</td>
-                <td align="left">NameComponent, PersonalInfo, AddressComponent</td>
-                <td align="left"><xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/></td>
+                <td align="left">AddressComponent, NameComponent, PersonalInfo</td>
+                <td align="left"><xref target="addresses" format="default"/>,
+                  <xref target="name" format="default"/>,
+                  <xref target="personalInfo" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">year</td>
@@ -2977,6 +2978,128 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>kind</dd>
             <dt>Context:</dt>
+            <dd>AddressComponent</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-addresscomponent-kind" align="left">
+                <name>JSContact Enum Values for kind (Context: AddressComponent)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">apartment</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">block</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">building</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">country</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">direction</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">district</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">floor</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">landmark</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">locality</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">name</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">number</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">postcode</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">postOfficeBox</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">region</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">room</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">separator</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">subdistrict</td>
+                    <td align="left">
+                      <xref target="addresses" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>kind</dd>
+            <dt>Context:</dt>
             <dd>Anniversary</dd>
             <dt>Initial Contents:</dt>
             <dd>
@@ -3305,128 +3428,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>kind</dd>
             <dt>Context:</dt>
-            <dd>AddressComponent</dd>
-            <dt>Initial Contents:</dt>
-            <dd>
-              <table anchor="tab-iana-enum-addresscomponent-kind" align="left">
-                <name>JSContact Enum Values for kind (Context: AddressComponent)</name>
-                <thead>
-                  <tr>
-                    <th align="left">Enum Value</th>
-                    <th align="left">Reference or Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td align="left">apartment</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">block</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">building</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">country</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">direction</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">district</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">floor</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">landmark</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">locality</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">name</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">number</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">postcode</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">postOfficeBox</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">region</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">room</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">separator</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">subdistrict</td>
-                    <td align="left">
-                      <xref target="addresses" format="default"/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-          <dl spacing="compact" newline="false" indent="20">
-            <dt>Property Name:</dt>
-            <dd>kind</dd>
-            <dt>Context:</dt>
             <dd>Title</dd>
             <dt>Initial Contents:</dt>
             <dd>
@@ -3449,6 +3450,44 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">title</td>
                     <td align="left">
                       <xref target="titles" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>level</dd>
+            <dt>Context:</dt>
+            <dd>PersonalInfo</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-personalinformation-level" align="left">
+                <name>JSContact Enum Values for level (Context: PersonalInfo)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">high</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">low</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">medium</td>
+                    <td align="left">
+                      <xref target="personalInfo" format="default"/>
                     </td>
                   </tr>
                 </tbody>
