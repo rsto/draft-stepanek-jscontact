@@ -1641,7 +1641,7 @@ running code, which may serve as evidence of valuable experimentation
 and feedback that have made the implemented protocols more mature.
 It is up to the individual working groups to use this information as
 they see fit".</t>
-      <section anchor="iit-cnr-registro-it-rdap-server" numbered="true" toc="default">
+      <section anchor="implementation-iit-cnr-registro-it-rdap-server" numbered="true" toc="default">
         <name>IIT-CNR/Registro.it</name>
         <ul spacing="normal">
           <li>Responsible Organization: Institute of Informatics and Telematics
@@ -1654,7 +1654,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <li>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</li>
         </ul>
       </section>
-      <section anchor="cyrus-imap-server" numbered="true" toc="default">
+      <section anchor="implementation-cyrus-imap-server" numbered="true" toc="default">
         <name>Cyrus IMAP</name>
         <ul spacing="normal">
           <li>Responsible Organization: The Cyrus Team</li>
@@ -1663,6 +1663,17 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <li>Level of Maturity: This is an "alpha" test implementation.</li>
           <li>Coverage: This implementation includes all of the features described in this specification.</li>
           <li>Contact Information: <eref target="https://cyrus.topicbox.com/groups/info">https://cyrus.topicbox.com/groups/info</eref></li>
+        </ul>
+      </section>
+      <section anchor="implementation-audriga" numbered="true" toc="default">
+        <name>OpenXPort JMAP iCalendar/vCard library</name>
+        <ul spacing="normal">
+          <li>Responsible Organization: audriga GmbH</li>
+          <li>Location: <eref target="https://github.com/audriga/jmap-php-icalendar_vcard/">https://github.com/audriga/jmap-php-icalendar_vcard/</eref></li>
+          <li>Description: This implementation includes support for converting vCard and JSContact.</li>
+          <li>Level of Maturity: This is used in production systems.</li>
+          <li>Coverage: This implementation includes some of the features described in this specification.</li>
+          <li>Contact Information: <eref target="https://www.audriga.com">https://www.audriga.com</eref></li>
         </ul>
       </section>
     </section>
