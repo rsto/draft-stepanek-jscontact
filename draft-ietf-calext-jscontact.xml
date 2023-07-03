@@ -1221,10 +1221,10 @@ The value of this address component.</li>
         <t>This section defines properties for digital resources associated with the entity represented by this Card.</t>
         <section anchor="cryptoKeys" numbered="true" toc="default">
           <name>cryptoKeys</name>
-          <t>Type: <tt>Id[CryptoResource]</tt> (optional).</t>
-          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this Card.  A CryptoResource object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>Type: <tt>Id[CryptoKey]</tt> (optional).</t>
+          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by this Card.  A CryptoKey object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoResource</tt>, if set.</li>
+            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoKey</tt>, if set.</li>
           </ul>
           <t>The following example shows how refer to an external cryptographic resource.</t>
           <figure anchor="example-cryptoKeys-external">
@@ -1237,7 +1237,7 @@ The value of this address component.</li>
 }
 ]]></sourcecode>
           </figure>
-          <t>The following example shows how to embed key data in the CryptoResource.  The key data is depicted in multiple lines only for demonstration purposes.</t>
+          <t>The following example shows how to embed key data in the CryptoKey.  The key data is depicted in multiple lines only for demonstration purposes.</t>
           <figure anchor="example-cryptoKeys-embedded">
             <name><tt>cryptoKeys</tt> example with embedded data</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -1877,7 +1877,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">@type</td>
                 <td align="left">String</td>
-                <td align="left">Address, Anniversary, Author, Card, Calendar,  CryptoResource, Directory, EmailAddress, LanguagePref, Link, Media, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, AddressComponent, Timestamp, Title</td>
+                <td align="left">Address, Anniversary, Author, Card, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Name, NameComponent, NickName, Note, OnlineService, Organization, OrgUnit, PartialDate,PersonalInfo, Phone, Pronouns, Relation, Resource, SchedulingAddress, SpeakToAs, AddressComponent, Timestamp, Title</td>
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr anchor="iana-property-registry-version">
@@ -1955,7 +1955,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
-                <td align="left">Address, Calendar,  CryptoResource, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Organization, Phone, Pronouns, SchedulingAddress</td>
+                <td align="left">Address, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Organization, Phone, Pronouns, SchedulingAddress</td>
                 <td align="left"><xref target="prop-contexts" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/><xref target="resource" format="default"/></td>
               </tr>
               <tr>
@@ -2062,13 +2062,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">kind</td>
                 <td align="left">String</td>
-                <td align="left">Anniversary, Calendar, Card, CryptoResource, Directory, Link, Media, NameComponent, PersonalInfo, AddressComponent, Title</td>
+                <td align="left">Anniversary, Calendar, Card, CryptoKey, Directory, Link, Media, NameComponent, PersonalInfo, AddressComponent, Title</td>
                 <td align="left"><xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">label</td>
                 <td align="left">String</td>
-                <td align="left">Calendar, CryptoResource, Directory, EmailAddress, Link, Media, OnlineService, PersonalInfo, Phone, SchedulingAddress</td>
+                <td align="left">Calendar, CryptoKey, Directory, EmailAddress, Link, Media, OnlineService, PersonalInfo, Phone, SchedulingAddress</td>
                 <td align="left"><xref target="prop-label" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
@@ -2120,7 +2120,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">mediaType</td>
                 <td align="left">String</td>
-                <td align="left">Calendar, CryptoResource, Directory, Link, Media</td>
+                <td align="left">Calendar, CryptoKey, Directory, Link, Media</td>
                 <td align="left"><xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/></td>
               </tr>
               <tr>
@@ -2244,7 +2244,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">pref</td>
                 <td align="left">UnsignedInt</td>
-                <td align="left">Address, Calendar,  CryptoResource, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</td>
+                <td align="left">Address, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</td>
                 <td align="left"><xref target="prop-pref" format="default"/>, <xref target="addresses" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
@@ -2393,7 +2393,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">uri</td>
                 <td align="left">String</td>
-                <td align="left">Author, Calendar, CryptoResource, Directory, Link, Media, OnlineService, SchedulingAddress</td>
+                <td align="left">Author, Calendar, CryptoKey, Directory, Link, Media, OnlineService, SchedulingAddress</td>
                 <td align="left"><xref target="notes" format="default"/>, <xref target="resource" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="schedulingAddresses" format="default"/></td>
               </tr>
               <tr>
@@ -2532,7 +2532,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">CryptoResource</td>
+                <td align="left">CryptoKey</td>
                 <td align="left">
                   <xref target="cryptoKeys" format="default"/>
                 </td>
@@ -2821,11 +2821,11 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Property Name:</dt>
             <dd>contexts</dd>
             <dt>Context:</dt>
-            <dd>Calendar,  CryptoResource, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</dd>
+            <dd>Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Phone, Pronouns, SchedulingAddress</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-contexts" align="left">
-                <name>JSContact Enum Values for contexts (Context: Calendar,  CryptoResource, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Phone, Pronouns, SchedulingAddress)</name>
+                <name>JSContact Enum Values for contexts (Context: Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, NickName, OnlineService, Phone, Pronouns, SchedulingAddress)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>

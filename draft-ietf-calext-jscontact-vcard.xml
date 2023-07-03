@@ -1336,7 +1336,7 @@ item1.X-ABLabel:foo
         <name>Security Properties</name>
         <section anchor="vcard-prop-key">
           <name>KEY</name>
-          <t>A KEY property converts to an entry in the <tt>cryptoKeys</tt> property (<xref target="key_conversion"/>).  The entry value is a <tt>CryptoResource</tt> object whose <tt>uri</tt> property is set to the KEY value.</t>
+          <t>A KEY property converts to an entry in the <tt>cryptoKeys</tt> property (<xref target="key_conversion"/>).  The entry value is a <tt>CryptoKey</tt> object whose <tt>uri</tt> property is set to the KEY value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="key_conversion">
             <name>KEY conversion example</name>
@@ -2227,45 +2227,45 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>CryptoResource</td>
+            <td>CryptoKey</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>CryptoResource</td>
+            <td>CryptoKey</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>CryptoResource</td>
+            <td>CryptoKey</td>
             <td>kind</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>CryptoResource</td>
+            <td>CryptoKey</td>
             <td>label</td>
             <td>
               <xref target="vcard-prop-xablabel"/>
             </td>
           </tr>
           <tr>
-            <td>CryptoResource</td>
+            <td>CryptoKey</td>
             <td>mediaType</td>
             <td>
               <xref target="vcard-param-mediatype"/>
             </td>
           </tr>
           <tr>
-            <td>CryptoResource</td>
+            <td>CryptoKey</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
             </td>
           </tr>
           <tr>
-            <td>CryptoResource</td>
+            <td>CryptoKey</td>
             <td>uri</td>
             <td>
               <xref target="vcard-prop-key"/>
