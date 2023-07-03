@@ -440,7 +440,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
         <section anchor="language" numbered="true" toc="default">
           <name>language</name>
           <t>Type: <tt>String</tt> (optional).</t>
-          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the language used for text in the Card.  Note that such values  <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.</t>
+          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the language used for text in the Card, optionally including additional information such as the script.  Note that values <bcp14>MAY</bcp14> be localized in the <tt>localizations</tt> property <xref target="localizations"/>.  How to render text is out of scope of this specification, e.g., refer to <xref target="UnicodeBiDi"/> how to deal with different writing directions.</t>
           <figure anchor="example-language">
             <name><tt>language</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -3828,6 +3828,12 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <reference anchor="IPA" target="https://www.internationalphoneticalphabet.org/">
           <front>
             <title>International Phonetic Alphabet</title>
+            <author/>
+          </front>
+        </reference>
+        <reference anchor="UnicodeBiDi" target="https://www.unicode.org/reports/tr9/">
+          <front>
+            <title>Unicode® Standard Annex #9: Unicode Bidirectional Algorithm</title>
             <author/>
           </front>
         </reference>
