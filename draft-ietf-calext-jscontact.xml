@@ -261,7 +261,7 @@ The phonetic system used for the value of the <tt>phonetics</tt> property.  This
       </section>
       <section anchor="versioning">
         <name>Versioning</name>
-        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>@version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
+        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
         <section>
           <name>Version Format and Requirements</name>
           <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
@@ -286,7 +286,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
          An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <xref target="iana-considerations"/>.  All properties defined in this specification, including their object value types and enumerated values, are registered at IANA.
       </t>
           <t>
-        Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card <tt>@version</tt> property (<xref target="prop-version"/>).
+        Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (see <xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card <tt>version</tt> property (<xref target="prop-version"/>).
       </t>
           <t>
             IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A) or <tt>QUOTATION MARK</tt> (U+0022) characters.  They <bcp14>MUST</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/>) or the <tt>COMMERCIAL AT</tt> (U+0040) character.  IANA-registered property names <bcp14>MUST</bcp14> be notated in lower camel case.
@@ -376,7 +376,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
         <sourcecode name="" type="json"><![CDATA[
 {
   "@type": "Card",
-  "@version": "1.0",
+  "version": "1.0",
   "uid": "22B2C7DF-9120-4969-8460-05956FE6B065",
   "kind": "individual",
   "name": {
@@ -397,13 +397,13 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
           <t>This <bcp14>MUST</bcp14> be <tt>Card</tt>, if set.</t>
         </section>
         <section anchor="prop-version" numbered="true" toc="default">
-          <name>@version</name>
+          <name>version</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
-          <t>Specifies the JSContact version used to define this Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>@version</tt> property.  Also see <xref target="current-version"/>.</t>
+          <t>Specifies the JSContact version used to define this Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>version</tt> property.  Also see <xref target="current-version"/>.</t>
           <figure anchor="example-version">
-            <name><tt>@version</tt> example</name>
+            <name><tt>version</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"@version": "1.0"
+"version": "1.0"
 ]]></sourcecode>
           </figure>
         </section>
@@ -1766,7 +1766,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </dl>
               </dd>
               <dt>version</dt>
-              <dd>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>@version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</dd>
+              <dd>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</dd>
             </dl>
           </dd>
           <dt>Encoding considerations:</dt>
@@ -1915,9 +1915,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Intended Usage:</dt>
             <dd>This may be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
-            <dd>This defines the JSContact version on which this property definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>This defines the JSContact version on which this property definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>This defines the JSContact version after which this property got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set, or be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>This defines the JSContact version after which this property got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set, or be one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
@@ -1944,7 +1944,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="cardtype" format="default"/>, <xref target="calendars" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="emails" format="default"/>, <xref target="preferredLanguages" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="nickNames" format="default"/>, <xref target="notes" format="default"/>, <xref target="onlineServices" format="default"/>, <xref target="organizations" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="phones" format="default"/>, <xref target="speakToAs" format="default"/>, <xref target="relatedTo" format="default"/>, <xref target="schedulingAddresses" format="default"/>, <xref target="titles" format="default"/></td>
               </tr>
               <tr anchor="iana-property-registry-version">
-                <td align="left">@version</td>
+                <td align="left">version</td>
                 <td align="left">String</td>
                 <td align="left">Card</td>
                 <td align="left">
@@ -2534,9 +2534,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Intended Usage:</dt>
             <dd>common, reserved, or obsolete</dd>
             <dt>Since Version:</dt>
-            <dd>This defines the JSContact version on which this type definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>This defines the JSContact version on which this type definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>This defines the JSContact version after which this type definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>This defines the JSContact version after which this type definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
           </dl>
@@ -2811,9 +2811,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Context:</dt>
             <dd>This is the list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry.  This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
             <dt>Since Version:</dt>
-            <dd>This defines the JSContact version on which this enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>This defines the JSContact version on which this enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>This defines the JSContact version after which this enum value definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>This defines the JSContact version after which this enum value definition got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to this entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
@@ -2829,9 +2829,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
             <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference for the semantics of this value</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which the enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version on which the enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which this enum value got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>@version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which this enum value got obsoleted and <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST</bcp14> be not set, or one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
           </dl>
         </section>
         <section anchor="iana-enum-registry-contents" numbered="true" toc="default">
