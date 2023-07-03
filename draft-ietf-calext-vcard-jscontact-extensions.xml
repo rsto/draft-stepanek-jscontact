@@ -483,7 +483,7 @@ NOTE;CREATED=20221122T151823Z:This is some note.
           <dd>This parameter specifies that the value of the associated property is derived from some other property values in the same vCard.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>SHOULD</bcp14> be specified on an property when the property value is derived from some other properties in the same vCard.  When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
+            <t>This property parameter <bcp14>SHOULD</bcp14> be specified on an property if the property value is derived from some other properties in the same vCard.  When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
             <t>For an example, an implementation may derive the value of the FN property from the name components of the N property by use of the <xref target="param-fmt">FMT</xref> parameter.  It indicates this fact by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
           </dd>
           <dt>Format definition:</dt>

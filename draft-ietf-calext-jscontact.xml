@@ -487,10 +487,73 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <li>@type: <tt>String</tt>.
             This <bcp14>MUST</bcp14> be <tt>Relation</tt>, if set.
          </li>
-            <li>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
-            Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  If empty, the relationship between the two objects is unspecified.
-            The keys in the set <bcp14>MUST</bcp14> be IANA-registered TYPE parameter values for the vCard RELATED property in the <xref target="IANAvCard">vCard Parameter Values</xref> registry, or a vendor-specific value (<xref target="vendor-specific-properties"/>).
-The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
+            <li>
+              <t>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
+           Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  The key in the set defines the relation type, the value for each key in the set <bcp14>MUST</bcp14> be true.  The relationship between the two objects is undefined if the set is empty.</t>
+              <t>The initial list of <xref target="enumerated-values">enumerated</xref> relation types matches the IANA-registered <xref target="IANAvCard">TYPE parameter</xref> values of the vCard RELATED property (<xref target="RFC6350" section="6.6.6"/>):</t>
+              <ul>
+                <li>
+                  <tt>acquaintance</tt>
+                </li>
+                <li>
+                  <tt>agent</tt>
+                </li>
+                <li>
+                  <tt>child</tt>
+                </li>
+                <li>
+                  <tt>colleague</tt>
+                </li>
+                <li>
+                  <tt>contact</tt>
+                </li>
+                <li>
+                  <tt>co-resident</tt>
+                </li>
+                <li>
+                  <tt>co-worker</tt>
+                </li>
+                <li>
+                  <tt>crush</tt>
+                </li>
+                <li>
+                  <tt>date</tt>
+                </li>
+                <li>
+                  <tt>emergency</tt>
+                </li>
+                <li>
+                  <tt>friend</tt>
+                </li>
+                <li>
+                  <tt>kin</tt>
+                </li>
+                <li>
+                  <tt>me</tt>
+                </li>
+                <li>
+                  <tt>met</tt>
+                </li>
+                <li>
+                  <tt>muse</tt>
+                </li>
+                <li>
+                  <tt>neighbor</tt>
+                </li>
+                <li>
+                  <tt>parent</tt>
+                </li>
+                <li>
+                  <tt>sibling</tt>
+                </li>
+                <li>
+                  <tt>spouse</tt>
+                </li>
+                <li>
+                  <tt>sweetheart</tt>
+                </li>
+              </ul>
+            </li>
           </ul>
           <figure anchor="example-relatedto">
             <name><tt>relatedTo</tt> example</name>
@@ -3488,6 +3551,146 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     <td align="left">medium</td>
                     <td align="left">
                       <xref target="personalInfo" format="default"/>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <dl spacing="compact" newline="false" indent="20">
+            <dt>Property Name:</dt>
+            <dd>relation</dd>
+            <dt>Context:</dt>
+            <dd>Relation</dd>
+            <dt>Initial Contents:</dt>
+            <dd>
+              <table anchor="tab-iana-enum-relation-relation" align="left">
+                <name>JSContact Enum Values for relation (Context: Relation)</name>
+                <thead>
+                  <tr>
+                    <th align="left">Enum Value</th>
+                    <th align="left">Reference or Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="left">acquaintance</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">agent</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">child</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">colleague</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">contact</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">co-resident</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">co-worker</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">crush</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">date</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">emergency</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">friend</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">kin</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">me</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">met</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">muse</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">neighbor</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">parent</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">sibling</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">spouse</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left">sweetheart</td>
+                    <td align="left">
+                      <xref target="relatedTo" format="default"/>
                     </td>
                   </tr>
                 </tbody>
