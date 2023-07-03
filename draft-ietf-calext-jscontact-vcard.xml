@@ -1378,7 +1378,7 @@ CALADRURI:https://example.com/calendar/jdoe
         </section>
         <section anchor="vcard-prop-caluri">
           <name>CALURI</name>
-          <t>A CALURI property converts to an entry in the <tt>calendars</tt> property (<xref target="caluri_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>kind</tt> property is set to <tt>calendar</tt> and <tt>uri</tt> property is set to the CALURI value.</t>
+          <t>A CALURI property converts to an entry in the <tt>calendars</tt> property (<xref target="caluri_conversion"/>).  The entry value is a <tt>Calendar</tt> object whose <tt>kind</tt> property is set to <tt>calendar</tt> and <tt>uri</tt> property is set to the CALURI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caluri_conversion">
             <name>CALURI conversion example</name>
@@ -1403,7 +1403,7 @@ CALURI;MEDIATYPE=text/calendar:https://ftp.example.com/calA.ics
         </section>
         <section anchor="vcard-prop-fburl">
           <name>FBURL</name>
-          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>CalendarResource</tt> object whose <tt>kind</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
+          <t>An FBURL property converts to an entry in the <tt>calendars</tt> property (<xref target="fburl_conversion"/>).  The entry value is a <tt>Calendar</tt> object whose <tt>kind</tt> property is set to <tt>freeBusy</tt> and <tt>uri</tt> property is set to the FBURL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="fburl_conversion">
             <name>FBURL conversion example</name>
@@ -1988,45 +1988,45 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>CalendarResource</td>
+            <td>Calendar</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>CalendarResource</td>
+            <td>Calendar</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>CalendarResource</td>
+            <td>Calendar</td>
             <td>kind</td>
             <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
           </tr>
           <tr>
-            <td>CalendarResource</td>
+            <td>Calendar</td>
             <td>label</td>
             <td>
               <xref target="vcard-prop-xablabel"/>
             </td>
           </tr>
           <tr>
-            <td>CalendarResource</td>
+            <td>Calendar</td>
             <td>mediaType</td>
             <td>
               <xref target="vcard-param-mediatype"/>
             </td>
           </tr>
           <tr>
-            <td>CalendarResource</td>
+            <td>Calendar</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
             </td>
           </tr>
           <tr>
-            <td>CalendarResource</td>
+            <td>Calendar</td>
             <td>uri</td>
             <td><xref target="vcard-prop-caladruri"/>, <xref target="vcard-prop-fburl"/></td>
           </tr>
