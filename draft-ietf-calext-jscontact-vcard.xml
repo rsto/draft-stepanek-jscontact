@@ -200,7 +200,7 @@ item2.X-FOO:bar
         </section>
         <section anchor="vcard-param-index">
           <name>INDEX</name>
-          <t>This parameter set on the EXPERTISE, HOBBY, INTEREST and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>listAs</tt> property of the <tt>PersonalInfo</tt> and <tt>DirectoryResource</tt> objects.</t>
+          <t>This parameter set on the EXPERTISE, HOBBY, INTEREST and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the JSContact <tt>listAs</tt> property of the <tt>PersonalInfo</tt> and <tt>Directory</tt> objects.</t>
         </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
@@ -383,7 +383,7 @@ KIND:individual
         </section>
         <section anchor="vcard-prop-source">
           <name>SOURCE</name>
-          <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>kind</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
+          <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>Directory</tt> object whose <tt>kind</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
@@ -1153,7 +1153,7 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
         </section>
         <section anchor="vcard-prop-org-directory">
           <name>ORG-DIRECTORY</name>
-          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>DirectoryResource</tt> object whose <tt>kind</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
+          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>Directory</tt> object whose <tt>kind</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
           <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY conversion example</name>
@@ -2272,52 +2272,52 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>kind</td>
             <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>label</td>
             <td>
               <xref target="vcard-prop-xablabel"/>
             </td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>listAs</td>
             <td>
               <xref target="vcard-param-index"/>
             </td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>mediaType</td>
             <td>
               <xref target="vcard-param-mediatype"/>
             </td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
             </td>
           </tr>
           <tr>
-            <td>DirectoryResource</td>
+            <td>Directory</td>
             <td>uri</td>
             <td><xref target="vcard-prop-source"/>, <xref target="vcard-prop-org-directory"/></td>
           </tr>
