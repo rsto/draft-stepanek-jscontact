@@ -56,7 +56,7 @@
         data.  As such, it introduces new semantics that are not covered in the current
         definition of vCard and its various extensions.  Converting contact data between
         the two formats is defined in <xref target="I-D.ietf-calext-jscontact-vcard"/> with the goal of
-        not losing any semantics during conversion.  In order to do so, this document
+        not losing any semantics during conversion.  To do so, this document
         defines a new set of properties for vCard and extends existing definitions.
       </t>
       <section anchor="notational-conventions" numbered="true" toc="default">
@@ -98,8 +98,8 @@
                 the block name or number;<br/>
                 the subdistrict;<br/>
                 the district;<br/>
-                the landmark or another publicly known prominent feature that can substitute the street name and number, e.g. "White House"", "Taj Mahal"";<br/>
-                the cardinal direction or quadrant, e.g. "North"<br/>
+                the landmark or another publicly known prominent feature that can substitute the street name and number, e.g., "White House"", "Taj Mahal"";<br/>
+                the cardinal direction or quadrant, e.g., "North"<br/>
             </dd>
         </dl>
         <t>The following change is made to the definition of "ADR-value" in the "ABNF" section, originally specified in <xref target="RFC6350" section="6.3.1"/>.</t>
@@ -317,7 +317,7 @@ GRAMGENDER:neuter
             when addressing or referring to the contact.  Multiple occurrences of
             this property <bcp14>MAY</bcp14> define pronouns for multiple languages,
             preferences and contexts.  Multiple pronouns in the same language
-            <bcp14>SHOULD</bcp14> use the PREF parameter, otherwise the order of
+            <bcp14>SHOULD</bcp14> use the PREF parameter, otherwise, the order of
             preference is implementation-specific.
           </dd>
           <dt>Format definition:</dt>
@@ -654,7 +654,7 @@ SOCIALPROFILE;USERNAME="The Foo":https://example.com/@foo
           <dt>Value:</dt>
           <dd>billing</dd>
           <dt>Purpose:</dt>
-          <dd>This indicates to use this address for billing, e.g. to send invoices to.</dd>
+          <dd>This indicates to use this address for billing, e.g., to send invoices to.</dd>
           <dt>Conformance:</dt>
           <dd>
             <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>
@@ -673,7 +673,7 @@ ADR;TYPE=billing:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
           <dt>Value:</dt>
           <dd>delivery</dd>
           <dt>Purpose:</dt>
-          <dd>This indicates to use this address for delivery, e.g. to send packages to.</dd>
+          <dd>This indicates to use this address for delivery, e.g., to send packages to.</dd>
           <dt>Conformance:</dt>
           <dd>
             <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>

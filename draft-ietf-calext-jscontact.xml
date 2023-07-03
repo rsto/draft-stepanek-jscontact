@@ -57,7 +57,7 @@
       <t>The representation of this data model is defined in the I-JSON format <xref target="RFC7493" format="default"/>, which is a strict subset of the JavaScript Object Notation (JSON) Data Interchange Format <xref target="RFC8259" format="default"/>.  Using JSON is mostly a pragmatic choice: its widespread use makes JSContact easier to adopt, and the availability of production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.</t>
       <section anchor="relation-to-vcard" numbered="true" toc="default">
         <name>Motivation and Relation to vCard, jCard and xCard</name>
-        <t>The vCard data format <xref target="RFC6350"/> is an interchange format for contacts data between address book service providers and vendors.  However, this format has gone through multiple specifications iterations with only a subset of its deprecated <xref target="RFC2426">version 3</xref> being widely in use.  As a consequence, products and services internally use a richer contact data model than they expose when serializing that information to vCard.  In addition, service providers often use a proprietary JSON representation of contact data in their APIs.</t>
+        <t>The vCard data format <xref target="RFC6350"/> is an interchange format for contacts data between address book service providers and vendors.  However, this format has gone through multiple specifications iterations with only a subset of its deprecated <xref target="RFC2426">version 3</xref> being widely in use.  Consequently, products and services internally use a richer contact data model than they expose when serializing that information to vCard.  In addition, service providers often use a proprietary JSON representation of contact data in their APIs.</t>
         <t>JSContact provides a standard JSON-based data model and representation of contact data as an alternative to proprietary formats.</t>
         <t>While writing this document, several features missing in vCard were brought to the attention of the authors, such as social media contacts, gender pronouns and others.  This highlights how vCard is not perceived as an evolving format and consequently hasn't been updated since close to ten years.  JSContact addresses these unmet demands and defines new vCard properties and parameters to allow interchanging them in both formats.</t>
         <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data, in XML and JSON format respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
@@ -122,7 +122,7 @@
           <t>The purpose of this property is to help implementations identify which JSContact object type a given JSON object represents.  Implementations <bcp14>MUST</bcp14> validate that JSON objects with this property conform to the specification of the JSContact object type of that name.</t>
           <t>In many cases the <tt>@type</tt> property value is implied by where its object occurs in JSContact data. Assuming that both <tt>A</tt> and <tt>B</tt> are JSContact object types:</t>
           <ul>
-            <li>An object that is set as the value for a property with type signature <tt>A</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set.  If the <tt>@type</tt> property is not set, its value is implied to be <tt>A</tt> by the property definition.</li>
+            <li>An object that is set as the value for a property with type signature <tt>A</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set.  If the <tt>@type</tt> property is not set then its value is implied to be <tt>A</tt> by the property definition.</li>
             <li>An object that is set as the value for a property with type signature <tt>A|B (defaultType: A)</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>A</tt>.  It <bcp14>MUST</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>B</tt>.  If instead the <tt>defaultType</tt> attribute is not defined then the <tt>@type</tt> property <bcp14>MUST</bcp14> also be set for <tt>A</tt>.</li>
             <li>An object that is not the value of a property, such at the root of JSON data (directly or as member of an array), <bcp14>MUST</bcp14> have the <tt>@type</tt> property set.</li>
           </ul>
@@ -390,7 +390,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
       </figure>
       <section anchor="metadata-properties" numbered="true" toc="default">
         <name>Metadata Properties</name>
-        <t>This section defines properties about this particular instance of a Card, such as its unique identifier, its creation date, how it relates to other Cards and other metadata information.</t>
+        <t>This section defines properties about this instance of a Card, such as its unique identifier, its creation date, how it relates to other Cards and other metadata information.</t>
         <section anchor="cardtype" numbered="true" toc="default">
           <name>@type</name>
           <t>Type: <tt>String</tt> (mandatory).</t>
@@ -452,7 +452,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (optional).</t>
           <t>This identifies the set of Cards that are members of this group Card.  Each key in the set is the <tt>uid</tt> property value of the member, each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
-          <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g.  "IETF Participants").</t>
+          <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping, or one whose members are known empirically (e.g.,  "IETF Participants").</t>
           <figure anchor="example-members">
             <name><tt>members</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -537,7 +537,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
         <section anchor="name" numbered="true" toc="default">
           <name>name</name>
           <t>Type: <tt>Name</tt> (optional).</t>
-          <t>The name of the entity represented by this Card.  This can be any type of name, e.g. it can but need not be the legal name of a person.</t>
+          <t>The name of the entity represented by this Card.  This can be any type of name, e.g., it can but need not be the legal name of a person.</t>
           <t>A Name object has the following properties</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt>.
@@ -579,7 +579,7 @@ The value for each key in the set <bcp14>MUST</bcp14> be true.</li>
 ]]></sourcecode>
               </figure>
             </li>
-            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name, e.g. a full name.  Also see <xref target="prop-pronounce"/>.</li>
+            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name, e.g., a full name.  Also see <xref target="prop-pronounce"/>.</li>
             <li>
               <t>sortAs: <tt>String[String]</tt> (optional).</t>
               <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
@@ -615,13 +615,13 @@ The value of this name component.  This can be composed of one or multiple words
               The kind of this name component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
               <ul spacing="normal">
-                <li><tt>title</tt>.  The value is a honorific title or prefix, e.g.  "Mr", "Ms", "Dr".</li>
+                <li><tt>title</tt>.  The value is an honorific title or prefix, e.g.,  "Mr", "Ms", "Dr".</li>
                 <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
                 <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
                 <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
                 <li><tt>middle</tt>.  The value is a middle name, also known as "additional given name".</li>
-                <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.  "B.A.", "Esq.".</li>
-                <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g  “Jr.” or “III”.</li>
+                <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
+                <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g.,  “Jr.” or “III”.</li>
                 <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.</li>
               </ul>
             </li>
@@ -667,7 +667,7 @@ The contexts in which to use this nickname.  Also see <xref target="prop-context
             The name of this organization.
         </li>
             <li>units: <tt>OrgUnit[]</tt> (optional).
-            A list of organizational units, ordered descending by hierarchy (e.g. a geographic or functional division sorts before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+            A list of organizational units, ordered descending by hierarchy (e.g., a geographic or functional division sorts before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
         </li>
             <li>sortAs: <tt>String</tt> (optional).
             This defines how this organization name lexicographically sorts in relation to other organizations when compared by name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>MAY</bcp14> be used for comparison.
@@ -1092,7 +1092,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
             <li>full: <tt>String</tt> (optional).
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>full</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
-            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g. the full address.  Also see <xref target="prop-pronounce"/>.</li>
+            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g., the full address.  Also see <xref target="prop-pronounce"/>.</li>
             <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -1114,17 +1114,17 @@ The value of this address component.</li>
                 <li><tt>apartment</tt>.  The extension designation, such as apartment number or unit or box number.</li>
                 <li><tt>floor</tt>.  The floor or level this address is located on.</li>
                 <li><tt>building</tt>.  The building, tower, or condominium this address is located in.</li>
-                <li><tt>number</tt>.  The street number, e.g. "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
+                <li><tt>number</tt>.  The street number, e.g., "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
                 <li><tt>name</tt>.  The street name.</li>
                 <li><tt>block</tt>. The block name or number.</li>
                 <li><tt>subdistrict</tt>. The sub district, ward or other subunit of a district.</li>
                 <li><tt>district</tt>. The district name.</li>
-                <li><tt>locality</tt>. The municipality, city, town, village, post-town, or other locality.</li>
+                <li><tt>locality</tt>. The municipality, city, town, village, post-town, or another locality.</li>
                 <li><tt>region</tt>. The administrative area, such as province, state, prefecture, county, canton.</li>
                 <li><tt>postcode</tt> The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
                 <li><tt>country</tt> The country name.</li>
-                <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.  "North".</li>
-                <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g. White House, Taj Mahal.</li>
+                <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.,  "North".</li>
+                <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g., White House, Taj Mahal.</li>
                 <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
                 <li><tt>separator</tt>.  A separator for two address components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
               </ul>
@@ -1265,13 +1265,13 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           </ul>
           <t>The <xref target="enumerated-values">enumerated</xref> values of the <tt>kind</tt> property are:</t>
           <ul>
-            <li><tt>directory</tt> The resource is a directory service where the entity represented by this Card is part of.  This typically is an organizational directory that also contains associated entities, e.g.  co-workers and management in a company directory.</li>
+            <li><tt>directory</tt> The resource is a directory service where the entity represented by this Card is part of.  This typically is an organizational directory that also contains associated entities, e.g.,  co-workers and management in a company directory.</li>
             <li><tt>entry</tt> The resource is a directory entry of the entity represented by this Card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
           </ul>
           <t>In addition, the DirectoryResource object has the following property:</t>
           <ul>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+          This defines the position of this directory resource in the list of all DirectoryResource objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none.  Sorting such entries is implementation-specific.
         </li>
           </ul>
           <figure anchor="example-directories">
@@ -1324,7 +1324,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
           <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
           <ul>
             <li><tt>photo</tt> The resource is a photograph or avatar.</li>
-            <li><tt>sound</tt> The resource is audio media, e.g.  to specify the proper pronunciation of the name property contents.</li>
+            <li><tt>sound</tt> The resource is audio media, e.g.,  to specify the proper pronunciation of the name property contents.</li>
             <li><tt>logo</tt> The resource is a graphic image or logo associated with the entity represented by this Card.</li>
           </ul>
           <figure anchor="example-media">
@@ -1421,7 +1421,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
       </section>
       <section anchor="additional-properties" numbered="true" toc="default">
         <name>Additional Properties</name>
-        <t>This section defines properties for which none of the previous sections is appropriate.</t>
+        <t>This section defines properties for which none of the previous sections are appropriate.</t>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
           <t>Type : Id[Anniversary] (optional).</t>
@@ -1445,7 +1445,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
               <t>The date of this anniversary in the Gregorian calendar.  This <bcp14>MUST</bcp14> either be a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
             </li>
             <li>place: Address (optional).
-            An address associated with this anniversary, e.g.  the place of birth or death.</li>
+            An address associated with this anniversary, e.g.,  the place of birth or death.</li>
           </ul>
           <t>A PartialDate object represents a complete or partial calendar date in the Gregorian calendar.  It represents either a complete date, or a year, or a month in a year, or a day in a month.  It has the following properties, of which at least <tt>year</tt> or <tt>month</tt> and <tt>day</tt> <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
@@ -1589,7 +1589,7 @@ The actual information.</li>
               </ul>
             </li>
             <li>listAs: <tt>UnsignedInt</tt> (optional).
-            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none at all.  Sorting such entries is implementation-specific.
+            This defines the position of this personal information in the list of all PersonalInfo objects having the same <tt>kind</tt> in this Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value, or none.  Sorting such entries is implementation-specific.
         </li>
             <li>label: <tt>String</tt> (optional).
             A custom label.  See <xref target="prop-label"/>.</li>
@@ -1780,7 +1780,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <t>The DE will either approve or deny the registration request and publish a notice of the decision
 	    to the Calext WG mailing list or its successor, as well as inform IANA.  A denial notice must be
 	      justified by an explanation, and, in the cases where it is possible, concrete suggestions on how the
-	        request can be modified so as to become acceptable should be provided.</t>
+	        request can be modified to become acceptable should be provided.</t>
         </section>
         <section anchor="iana-registry-change-procedures" numbered="true" toc="default">
           <name>Change Procedures</name>

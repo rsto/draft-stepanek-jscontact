@@ -159,7 +159,7 @@
         <section anchor="vcard-param-fmt">
           <name>FMT</name>
           <t>This parameter set on an N or ADR property converts to the <tt>defaultSeparator</tt> and <tt>components</tt> properties of the Name and Address object types, respectively.</t>
-          <t>If the first FMT parameter value is a separator formatting instruction (possibly having the empty string as separator), then this separator value converts to the value <tt>defaultSeparator</tt> property.  Otherwise the <tt>defaultSeparator</tt> property is not set.</t>
+          <t>If the first FMT parameter value is a separator formatting instruction (possibly having the empty string as separator), then this separator value converts to the value <tt>defaultSeparator</tt> property.  Otherwise, the <tt>defaultSeparator</tt> property is not set.</t>
           <t>The remaining formatting instructions define the order and kind of the <tt>components</tt> property entries.  The kind of a NameComponent or AddressComponent is determined by the type of the name or address component at the position of the positional formatting instruction, the separator formatting instruction converts to a component of kind <tt>separator</tt>.</t>
           <t>In absence of the FMT parameter, implementations <bcp14>MUST</bcp14> convert all property component values of the N or ADR property in the Name or Address components, but their order is implementation-specific.</t>
         </section>
@@ -211,7 +211,7 @@ item2.X-FOO:bar
             <li>One Patch Per Property: For each vCard property with a LANGUAGE parameter, set the complete path in the PatchObject to the JSContact property that the vCard property converts to.  The value of the patch is the converted property value.  This is simple to process and adequate if the vCard only contains a few properties with LANGUAGE parameter.</li>
             <li>Bundle Patches by Parent: If a PatchObject contains multiple paths that have the same parent paths, then it might be possible to combine these patches into one patch that patches the parent property.  This is possible if the property in the Card is patched in its entirety.</li>
           </ul>
-          <t>As a general rule, localizations only localize properties that are present in the non-localized version of this Card.  <xref target="language-patch-dominant-language"/> illustrates this.</t>
+          <t>Generally, localizations only localize properties that are present in the non-localized version of this Card.  <xref target="language-patch-dominant-language"/> illustrates this.</t>
           <figure anchor="language-patch-dominant-language">
             <name>LANGUAGE conversion example: one dominant language</name>
             <artwork><![CDATA[
@@ -602,7 +602,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
           <name>ADR</name>
           <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.  The components of the structured ADR value type convert to AddressComponent objects.</t>
           <t>The order of entries in the <tt>components</tt> property is defined by the <xref target="vcard-param-fmt">FMT</xref> parameter.</t>
-          <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines additional components of the ADR property value, originally defined in <xref target="RFC6350" section="6.3.1"/>.  Applications <bcp14>SHOULD</bcp14> prefer converting these new address components over any entries in the ADR "street address" and "extended address" components.  If only the original address components defined in <xref target="RFC6350"/> are available, then implementations <bcp14>SHOULD</bcp14> attempt to split the values of the "street address" and "extended address" components into their constituent parts.  Otherwise they <bcp14>MUST</bcp14> convert all of "street address" to AddressComponent kind <tt>name</tt>, and "extended address" to AddressComponent kind "apartment".</t>
+          <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines additional components of the ADR property value, originally defined in <xref target="RFC6350" section="6.3.1"/>.  Applications <bcp14>SHOULD</bcp14> prefer converting these new address components over any entries in the ADR "street address" and "extended address" components.  If only the original address components defined in <xref target="RFC6350"/> are available, then implementations <bcp14>SHOULD</bcp14> attempt to split the values of the "street address" and "extended address" components into their constituent parts.  Otherwise, they <bcp14>MUST</bcp14> convert all of "street address" to AddressComponent kind <tt>name</tt>, and "extended address" to AddressComponent kind "apartment".</t>
           <table anchor="adr_components_vs_street_component_items">
             <name>ADR component to AddressComponent conversion</name>
             <thead>
@@ -986,7 +986,7 @@ MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
         <section anchor="vcard-prop-org">
           <name>ORG</name>
           <t>An ORG property converts to an entry in the <tt>organizations</tt> property (<xref target="org_conversion"/>).  The entry value is an <tt>Organization</tt> object whose <tt>name</tt> property contains the organizational name, and the <tt>units</tt> property is an array of <tt>OrgUnit</tt> objects each containing the organizational unit name in the <tt>name</tt> property.</t>
-          <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational units without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.  ORG:;DepartmentA).</t>
+          <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational units without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.,  ORG:;DepartmentA).</t>
           <t>The ALTID, LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <t>The first item of the comma-separated SORT-AS parameter value converts to the <tt>sortAs</tt> property of the <tt>Organization</tt> object.  The subsequent items convert to the <tt>sortAs</tt> property of the corresponding <tt>OrgUnit</tt> object.</t>
           <t>The TYPE parameter converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
@@ -1077,13 +1077,13 @@ group1.ORG:ABC, Inc.
           <figure anchor="expertise_conversion">
             <name>EXPERTISE conversion example</name>
             <artwork><![CDATA[
-EXPERTISE;LEVEL=beginner;INDEX=2:chinese literature
+EXPERTISE;LEVEL=beginner;INDEX=2:Chinese literature
 EXPERTISE;INDEX=1;LEVEL=expert:chemistry
 
 "personalInfo": {
   "PERSINFO-1" : {
     "kind": "expertise",
-    "value": "chinese literature",
+    "value": "Chinese literature",
      "level": "low",
      "listAs": 2
   },
@@ -1579,7 +1579,7 @@ IMPP:xmpp:alice@example.com
             <dt>Description:</dt>
             <dd>
               <t>
-            This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>MUST</bcp14> be compact, e.g. without insignificant whitespace.
+            This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>MUST</bcp14> be compact, e.g., without insignificant whitespace.
           </t>
               <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and discarded from the vCard.</t>
             </dd>
@@ -1807,7 +1807,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           <li>Location: https://github.com/consiglionazionaledellericerche/jscontact-tools</li>
           <li>Description: This implementation includes tools for JSContact creation, validation, serialization/deserialization, and conversion from vCard, xCard and jCard.</li>
           <li>Level of Maturity: This is an "alpha" test implementation.</li>
-          <li>Coverage: This implementation includes all of the features described in this specification.</li>
+          <li>Coverage: This implementation includes all features described in this specification.</li>
           <li>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</li>
         </ul>
       </section>
