@@ -1757,14 +1757,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <dt>Optional parameters:</dt>
           <dd>
             <dl newline="false" spacing="normal">
-              <dt>type</dt>
-              <dd>
-                <t>This parameter conveys the type of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  This RFC specifies a single allowed parameter value, but future RFC documents <bcp14>MAY</bcp14> extend this list:</t>
-                <dl newline="false" spacing="normal">
-                  <dt><tt>card</tt>:</dt>
-                  <dd>The body part <bcp14>MUST</bcp14> consist of exactly one JSContact <xref target="card"><tt>Card</tt></xref> object.</dd>
-                </dl>
-              </dd>
               <dt>version</dt>
               <dd>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version"><tt>version</tt></xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</dd>
             </dl>
