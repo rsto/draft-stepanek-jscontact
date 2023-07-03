@@ -924,7 +924,7 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
         <name>Organizational Properties</name>
         <section anchor="vcard-prop-contact-uri">
           <name>CONTACT-URI</name>
-          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose  <tt>kind</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
+          <t>A CONTACT-URI property as defined in <xref target="RFC8605"/> is represented as an entry of the <tt>links</tt> property (<xref target="contact_uri_conversion"/>).  The entry value is a <tt>Link</tt> object whose  <tt>kind</tt> property is set to <tt>contact</tt> and <tt>uri</tt> property is set to the CONTACT-URI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="contact_uri_conversion">
             <name>CONTACT-URI conversion example</name>
@@ -1293,7 +1293,7 @@ UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
         </section>
         <section anchor="vcard-prop-url">
           <name>URL</name>
-          <t>A URL property converts to an entry in the <tt>links</tt> property (<xref target="url_conversion"/>).  The entry value is a <tt>LinkResource</tt> object whose <tt>uri</tt> property is set to the URL value.</t>
+          <t>A URL property converts to an entry in the <tt>links</tt> property (<xref target="url_conversion"/>).  The entry value is a <tt>Link</tt> object whose <tt>uri</tt> property is set to the URL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="url_conversion">
             <name>URL conversion example</name>
@@ -2374,45 +2374,45 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>LinkResource</td>
+            <td>Link</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>LinkResource</td>
+            <td>Link</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>LinkResource</td>
+            <td>Link</td>
             <td>kind</td>
             <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
           </tr>
           <tr>
-            <td>LinkResource</td>
+            <td>Link</td>
             <td>label</td>
             <td>
               <xref target="vcard-prop-xablabel"/>
             </td>
           </tr>
           <tr>
-            <td>LinkResource</td>
+            <td>Link</td>
             <td>mediaType</td>
             <td>
               <xref target="vcard-param-mediatype"/>
             </td>
           </tr>
           <tr>
-            <td>LinkResource</td>
+            <td>Link</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
             </td>
           </tr>
           <tr>
-            <td>LinkResource</td>
+            <td>Link</td>
             <td>uri</td>
             <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/>&gt;</td>
           </tr>
