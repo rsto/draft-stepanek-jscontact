@@ -72,7 +72,7 @@
     <section>
       <name>Updated Properties</name>
       <section anchor="prop-adr">
-        <name>ADR Property</name>
+        <name>ADR</name>
         <t>This specification modifies the definition of the "ADR" property.  It extends its structured value with additional address components to better support the variety of international addresses.  It separates the address parts that currently typically are combined in street address component values into distinct components, such as street names, street numbers, apartment numbers, floors.  Implementations <bcp14>SHOULD</bcp14> write a combined value of these components in the street address component for backwards compatibility, but <bcp14>SHOULD</bcp14> ignore it during read if applicable new component values are available.</t>
         <t>The following change is made to the first paragraph in the "Special Notes" section, originally specified in <xref target="RFC6350" section="6.3.1"/>.  All remaining paragraphs of that section in the original specification still apply.</t>
         <dl>
@@ -143,7 +143,7 @@ ADR-component-landmark = list-component
     <section anchor="new-properties">
       <name>New Properties</name>
       <section anchor="prop-created">
-        <name>CREATED Property</name>
+        <name>CREATED</name>
         <dl>
           <dt>Property name:</dt>
           <dd>CREATED</dd>
@@ -193,7 +193,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
         </dl>
       </section>
       <section anchor="prop-deflanguage">
-        <name>DEFLANGUAGE Property</name>
+        <name>DEFLANGUAGE</name>
         <dl>
           <dt>Property name:</dt>
           <dd>DEFLANGUAGE</dd>
@@ -230,7 +230,7 @@ DEFLANGUAGE:de-AT
         </dl>
       </section>
       <section anchor="prop-gramgender">
-        <name>GRAMGENDER Property</name>
+        <name>GRAMGENDER</name>
         <dl>
           <dt>Property name:</dt>
           <dd>GRAMGENDER</dd>
@@ -295,7 +295,7 @@ GRAMGENDER:neuter
         </dl>
       </section>
       <section anchor="prop-pronouns">
-        <name>PRONOUNS Property</name>
+        <name>PRONOUNS</name>
         <dl>
           <dt>Property name:</dt>
           <dd>PRONOUNS</dd>
@@ -355,7 +355,7 @@ PRONOUNS;LANG=en;PREF=2:they/them
         </dl>
       </section>
       <section anchor="prop-socialprofile">
-        <name>SOCIALPROFILE Property</name>
+        <name>SOCIALPROFILE</name>
         <dl>
           <dt>Property name:</dt>
           <dd>SOCIALPROFILE</dd>
@@ -398,7 +398,7 @@ SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=text:peter94
     <section anchor="new-parameters">
       <name>New Parameters</name>
       <section anchor="param-author">
-        <name>AUTHOR Parameter</name>
+        <name>AUTHOR</name>
         <dl>
           <dt>Parameter name:</dt>
           <dd>AUTHOR</dd>
@@ -423,7 +423,7 @@ NOTE;AUTHOR="mailto:john@example.com":This is some note.
         </dl>
       </section>
       <section anchor="param-author-name">
-        <name>AUTHOR-NAME Parameter</name>
+        <name>AUTHOR-NAME</name>
         <dl>
           <dt>Parameter name:</dt>
           <dd>AUTHOR-NAME</dd>
@@ -449,7 +449,7 @@ NOTE;AUTHOR-NAME="_:l33tHckr:_":A note by an unusual author name.
         </dl>
       </section>
       <section anchor="param-created">
-        <name>CREATED Parameter</name>
+        <name>CREATED</name>
         <dl>
           <dt>Parameter name:</dt>
           <dd>CREATED</dd>
@@ -475,7 +475,7 @@ NOTE;CREATED=20221122T151823Z:This is some note.
         </dl>
       </section>
       <section anchor="param-derived">
-        <name>DERIVED Parameter</name>
+        <name>DERIVED</name>
         <dl>
           <dt>Parameter name:</dt>
           <dd>DERIVED</dd>
@@ -503,7 +503,7 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
         </dl>
       </section>
       <section anchor="param-propid">
-        <name>PROP-ID Parameter</name>
+        <name>PROP-ID</name>
         <dl>
           <dt>Parameter name:</dt>
           <dd>PROP-ID</dd>
@@ -534,7 +534,7 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
         </dl>
       </section>
       <section anchor="param-service-type">
-        <name>SERVICE-TYPE Parameter</name>
+        <name>SERVICE-TYPE</name>
         <dl>
           <dt>Parameter name:</dt>
           <dd>SERVICE-TYPE</dd>
@@ -560,7 +560,7 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
         </dl>
       </section>
       <section anchor="param-username">
-        <name>USERNAME Parameter</name>
+        <name>USERNAME</name>
         <dl>
           <dt>Parameter name:</dt>
           <dd>USERNAME</dd>
