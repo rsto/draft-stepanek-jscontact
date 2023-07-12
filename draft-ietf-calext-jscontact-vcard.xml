@@ -1555,11 +1555,15 @@ IMPP:xmpp:alice@example.com
           <name>Converting the <tt>Pronounce</tt> object</name>
           <t>The Pronounce type has no standard vCard element to convert to.  An initial RFC draft <xref target="I-D.calconnect-vobject-i18n"/> for adding phonetics to vCard exists but has not been further developed.  In lack of standard vCard support, any JSContact property of type Pronounce converts to a vCard JSCONTACT-PROP as outlined in <xref target="convert-other-jscontact"/>.</t>
         </section>
+        <section anchor="convert-other-jscontact">
+          <name>Converting unknown properties</name>
+          <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain vendor-specific properties of which the semantics or purpose are unknown.</t>
+          <t>This specification defines the new <xref target="vcard-prop-jscontact-prop"><tt>JSCONTACT-PROP</tt></xref> vCard property and <xref target="vcard-param-jsptr"><tt>JSPTR</tt></xref> vCard parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in vCard.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+        </section>
       </section>
-      <section anchor="convert-other-jscontact">
+      <section anchor="new-vcard-props-and-params">
         <name>New vCard Properties and Parameters</name>
-        <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain vendor-specific properties of which the semantics or purpose are unknown.</t>
-        <t>This section defines new vCard properties and parameters by which such JSContact properties <bcp14>MAY</bcp14> be represented in vCard.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+        <t>This section defines new vCard properties and parameters for converting JSContact from and to vCard.</t>
         <section anchor="vcard-prop-jscontact-prop">
           <name>Property <tt>JSCONTACT-PROP</tt></name>
           <dl>
