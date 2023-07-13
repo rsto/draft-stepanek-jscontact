@@ -139,6 +139,50 @@ ADR-component-landmark = list-component
           </dd>
         </dl>
       </section>
+      <section anchor="prop-n">
+        <name>N</name>
+        <t>This specification modifies the definition of the "N" property.  It extends its structured value with additional name components to better support international names and generation markers.  Doing so, this also facilitates formatting N property values using the <xref target="CLDRPersonName">Unicode CLDR Person Name</xref> formatting standard.</t>
+        <t>One new component is a Secondary Surname, as in some cultures, two surnames are used to indicate the paternal and maternal family names or generational names indicating father, grandfather.  Another new component is Generation, which indicates a generation ("II", "XVI") or parental relation ("Jr.", "Sr.").</t>
+        <t>Currently, implementations typically place secondary surnames in the Family Name and generational markers in the Honorific Suffixes component.  For backwards compatibility, implementations <bcp14>SHOULD</bcp14> add such values to both the newly defined components and their backwards-compatible counterpart.  Reading N property values, implementations <bcp14>SHOULD</bcp14> ignore any value in the backward-compatible component if an equal value is set in the according new component.  For example, a "Jr." that occurs in both Honorific Suffixes and Generation should only be handled as a generational marker.</t>
+        <t>The following change is made to the first paragraph in the "Special Notes" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.  All remaining text of this and the following paragraphs of that section in the original specification still apply.</t>
+        <dl>
+          <dt>Special notes:</dt>
+          <dd>
+      The structured property value corresponds, in
+      sequence, to the<br/>
+      Family Names (also known as surnames),<br/>
+      Given Names,<br/>
+      Additional Names,<br/>
+      Honorific Prefixes,<br/>
+      Honorific Suffixes,<br/>
+      Secondary Surname,<br/>
+      and Generation.<br/>
+          </dd>
+        </dl>
+        <t>The following change is made to the "ABNF" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
+        <dl>
+          <dt>ABNF</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+N-param = "VALUE=text" / sort-as-param / language-param
+             / altid-param / any-param
+N-value = list-component 6(";" list-component)
+]]></sourcecode>
+          </dd>
+        </dl>
+        <t>The following change is made to the "Example" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
+        <dl>
+          <dt>ABNF</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+N:Public;John;Quinlan;Mr.;Esq.
+
+N:Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.
+]]></sourcecode>
+          </dd>
+        </dl>
+        <t>No change is required for the definition of the SORT-AS parameter, but the new components also apply for use with this parameter.</t>
+      </section>
     </section>
     <section anchor="new-properties">
       <name>New Properties</name>
@@ -679,6 +723,7 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
         <section>
           <name>Updated vCard properties</name>
           <t>IANA is requested to add <xref target="prop-adr"/> of this document as reference for the ADR property.</t>
+          <t>IANA is requested to add <xref target="prop-n"/> of this document as reference for the N property.</t>
         </section>
       </section>
       <section>
@@ -822,6 +867,33 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact-vcard.xml"/>
       </references>
+    </references>
+    <references>
+      <name>Informative References</name>
+      <reference anchor="CLDRPersonName" target="https://www.unicode.org/reports/tr35/tr35-personNames.html">
+        <front>
+          <title>Technical Standard #35: Unicode Locale Data Markup Language (LDML) Part 8: Person Names, Version 43.1</title>
+          <author fullname="M. Davis">
+            <organization/>
+          </author>
+          <author fullname="P. Edberg">
+            <organization/>
+          </author>
+          <author fullname="R. Gillam">
+            <organization/>
+          </author>
+          <author fullname="A. Kolisnychenko">
+            <organization/>
+          </author>
+          <author fullname="M. McKenna">
+            <organization/>
+          </author>
+          <author fullname="others">
+            <organization/>
+          </author>
+          <date year="2023" month="July"/>
+        </front>
+      </reference>
     </references>
   </back>
 </rfc>
