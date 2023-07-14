@@ -196,7 +196,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         <name>Common Properties</name>
         <t>Most of the properties in this document are specific to a single JSContact object type.  Such properties are defined along with the respective object type.  The properties in this section are common to multiple data types and are defined here to avoid repetition.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSContact object if they are explicitly mentioned to be allowed for this object type.</t>
         <section anchor="prop-contexts" numbered="true" toc="default">
-          <name>The <tt>contexts</tt> Property</name>
+          <name>contexts</name>
           <t>Type: <tt>String[Boolean]</tt></t>
           <t>This property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts, and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
           <t>This section defines common contexts.  Additional contexts may be defined in the properties or data types that make use of this property.  The <xref target="enumerated-values">enumerated</xref> common context values are:</t>
@@ -206,19 +206,19 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           </ul>
         </section>
         <section anchor="prop-label" numbered="true" toc="default">
-          <name>The <tt>label</tt> Property</name>
+          <name>label</name>
           <t>Type: <tt>String</tt></t>
           <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces.  Such labels best be succinct to properly display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
-          <name>The <tt>pref</tt> Property</name>
+          <name>pref</name>
           <t>Type: <tt>UnsignedInt</tt></t>
           <t>This property allows defining a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are independent of each other.</t>
         </section>
         <section anchor="prop-pronounce" numbered="true" toc="default">
-          <name>The <tt>pronounce</tt> Property</name>
+          <name>pronounce</name>
           <t>Type: <tt>Pronounce</tt></t>
           <t>This property defines how to pronounce a value in the language indicated in the Card <xref target="language">language</xref> property or the language tag of its <xref target="localizations">localizations</xref>.  Exemplary uses are to define how to pronounce Japanese names, or for romanization of Mandarin or Cantonese name and address components.  A Pronounce object has the following properties:</t>
           <ul spacing="normal">
