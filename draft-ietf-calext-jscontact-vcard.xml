@@ -1549,26 +1549,25 @@ IMPP:xmpp:alice@example.com
               <li>Otherwise, they <bcp14>MUST</bcp14> set the FN property to the empty value.</li>
             </ul>
           </li>
-          <li>Vendor-specific and unknown properties convert to vCard as outlined in <xref target="convert-other-jscontact"/>.</li>
+          <li>Vendor-specific and unknown properties convert to vCard as outlined in <xref target="jscontact-convert-unknown"/>.</li>
         </ul>
         <section anchor="jscontact-pronounce">
           <name>Converting the <tt>Pronounce</tt> object</name>
-          <t>The Pronounce type has no standard vCard element to convert to.  An initial RFC draft <xref target="I-D.calconnect-vobject-i18n"/> for adding phonetics to vCard exists but has not been further developed.  In lack of standard vCard support, any JSContact property of type Pronounce converts to a vCard JSCONTACT-PROP as outlined in <xref target="convert-other-jscontact"/>.</t>
+          <t>The Pronounce type has no standard vCard element to convert to.  An initial RFC draft <xref target="I-D.calconnect-vobject-i18n"/> for adding phonetics to vCard exists but has not been further developed.  In lack of standard vCard support, any JSContact property of type Pronounce converts to a vCard JSPROP as outlined in <xref target="jscontact-convert-unknown"/>.</t>
         </section>
-        <section anchor="convert-other-jscontact">
+        <section anchor="jscontact-convert-unknown">
           <name>Converting unknown properties</name>
           <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain vendor-specific properties of which the semantics or purpose are unknown.</t>
-          <t>This specification defines the new <xref target="vcard-prop-jscontact-prop"><tt>JSCONTACT-PROP</tt></xref> vCard property and <xref target="vcard-param-jsptr"><tt>JSPTR</tt></xref> vCard parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in vCard.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
+          <t>This specification defines the new <xref target="vcard-prop-jsprop"><tt>JSPROP</tt></xref> vCard property and <xref target="vcard-param-jsptr"><tt>JSPTR</tt></xref> vCard parameter by which such JSContact properties <bcp14>MAY</bcp14> be represented in vCard.  Implementations <bcp14>MAY</bcp14> choose to convert differently if they deem that more appropriate.</t>
         </section>
       </section>
-      <section anchor="new-vcard-props-and-params">
-        <name>New vCard Properties and Parameters</name>
-        <t>This section defines new vCard properties and parameters for converting JSContact from and to vCard.</t>
-        <section anchor="vcard-prop-jscontact-prop">
-          <name>Property <tt>JSCONTACT-PROP</tt></name>
+      <section anchor="new-vcard-props">
+        <name>New vCard Properties</name>
+        <section anchor="vcard-prop-jsprop">
+          <name>JSPROP</name>
           <dl>
             <dt>Property name:</dt>
-            <dd>JSCONTACT-PROP</dd>
+            <dd>JSPROP</dd>
             <dt>Purpose:</dt>
             <dd>This property represents a JSContact property in vCard.</dd>
             <dt>Value type:</dt>
@@ -1585,13 +1584,13 @@ IMPP:xmpp:alice@example.com
               <t>
             This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>MUST</bcp14> be compact, e.g., without insignificant whitespace.
           </t>
-              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSCONTACT-PROP property <bcp14>MUST</bcp14> be ignored and discarded from the vCard.</t>
+              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSPROP property <bcp14>MUST</bcp14> be ignored and discarded from the vCard.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode name="" type="abnf"><![CDATA[
-jscontact-prop = "JSCONTACT-PROP" jscontact-prop-param ":" TEXT
+jscontact-prop = "JSPROP" jscontact-prop-param ":" TEXT
 
 jscontact-prop-param  = *(
             ; The following are MANDATORY and MUST NOT
@@ -1607,7 +1606,7 @@ jscontact-prop-param  = *(
             )
 ]]></sourcecode>
             </dd>
-            <dt anchor="vcard-prop-jscontact-prop-examples">Example(s):</dt>
+            <dt anchor="vcard-prop-jsprop-examples">Example(s):</dt>
             <dd>
               <t>This illustrates how to convert a property at the top-level in a Card object that is unknown to the implementation.</t>
               <figure anchor="jscontact-prop-unknown">
@@ -1615,7 +1614,7 @@ jscontact-prop-param  = *(
                 <artwork><![CDATA[
 "someUnknownProperty": true
 
-JSCONTACT-PROP;JSPTR="someUnknownProperty":true
+JSPROP;JSPTR="someUnknownProperty":true
 ]]></artwork>
               </figure>
               <t>This illustrates how to convert a vendor-specific property at the top-level of a Card object.  Note the required use of quoted string for the JSPTR value which allows the path to include the COLON (U+003A) character.</t>
@@ -1626,7 +1625,7 @@ JSCONTACT-PROP;JSPTR="someUnknownProperty":true
   "bar": 1234
 }
 
-JSCONTACT-PROP;JSPTR="example.com:foo":{"bar":1234}
+JSPROP;JSPTR="example.com:foo":{"bar":1234}
 ]]></artwork>
               </figure>
               <t>This illustrates how to convert a vendor-specific property at a nested level in a Card object using a path relative to the Card object.  Although not recommended, the property name includes the SOLIDUS (U+002F) character which requires escaping in the JSON pointer.</t>
@@ -1641,7 +1640,7 @@ JSCONTACT-PROP;JSPTR="example.com:foo":{"bar":1234}
 }
 
 TEL:tel:+33-01-23-45-67
-JSCONTACT-PROP;JSPTR="phones/phone1/example.com:foo~1bar":
+JSPROP;JSPTR="phones/phone1/example.com:foo~1bar":
  "tux hux"
 ]]></artwork>
               </figure>
@@ -1649,7 +1648,7 @@ JSCONTACT-PROP;JSPTR="phones/phone1/example.com:foo~1bar":
           </dl>
         </section>
         <section anchor="vcard-param-jsptr">
-          <name>Parameter <tt>JSPTR</tt></name>
+          <name><tt>JSPTR</tt></name>
           <dl>
             <dt>Parameter name:</dt>
             <dd>JSPTR</dd>
@@ -1659,7 +1658,7 @@ JSCONTACT-PROP;JSPTR="phones/phone1/example.com:foo~1bar":
         </dd>
             <dt>Description:</dt>
             <dd>
-              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>.  Currently, its semantics only are defined for the JSCONTACT-PROP property (see <xref target="vcard-prop-jscontact-prop"/>), but it may also be used for other use cases in the future.</t>
+              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>.  Currently, its semantics only are defined for the JSPROP property (see <xref target="vcard-prop-jsprop"/>), but it may also be used for other use cases in the future.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
@@ -1671,9 +1670,9 @@ jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
             </dd>
             <dt>Example(s):</dt>
             <dd>
-              <t>This illustrates a simple example.  For further examples see <xref target="vcard-prop-jscontact-prop-examples"/>.</t>
+              <t>This illustrates a simple example.  For further examples see <xref target="vcard-prop-jsprop-examples"/>.</t>
               <sourcecode name=""><![CDATA[
-JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
+JSPROP;JSPTR="example.com:foo":"bar"
 ]]></sourcecode>
             </dd>
           </dl>
@@ -1702,8 +1701,8 @@ JSCONTACT-PROP;JSPTR="example.com:foo":"bar"
           <tbody>
             <tr>
               <td/>
-              <td align="left">JSCONTACT-PROP</td>
-              <td align="left">This document, <xref target="vcard-prop-jscontact-prop"/></td>
+              <td align="left">JSPROP</td>
+              <td align="left">This document, <xref target="vcard-prop-jsprop"/></td>
             </tr>
           </tbody>
         </table>
