@@ -156,13 +156,6 @@
           <name>DERIVED</name>
           <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
-        <section anchor="vcard-param-fmt">
-          <name>FMT</name>
-          <t>This parameter set on an N or ADR property converts to the <tt>defaultSeparator</tt> and <tt>components</tt> properties of the Name and Address object types, respectively.</t>
-          <t>If the first FMT parameter value is a separator formatting instruction (possibly having the empty string as separator), then this separator value converts to the value <tt>defaultSeparator</tt> property.  Otherwise, the <tt>defaultSeparator</tt> property is not set.</t>
-          <t>The remaining formatting instructions define the order and kind of the <tt>components</tt> property entries.  The kind of a NameComponent or AddressComponent is determined by the type of the name or address component at the position of the positional formatting instruction, the separator formatting instruction converts to a component of kind <tt>separator</tt>.</t>
-          <t>In absence of the FMT parameter, implementations <bcp14>MUST</bcp14> convert all property component values of the N or ADR property in the Name or Address components, but their order is implementation-specific.</t>
-        </section>
         <section anchor="vcard-param-geo">
           <name>GEO</name>
           <t>This parameter set on an ADR property converts to the JSContact <tt>coordinates</tt> property of the <tt>Address</tt> object that represents the vCard ADR.</t>
@@ -507,7 +500,7 @@ PRONOUNS;PREF=1:xe/xir
         <section anchor="vcard-prop-n">
           <name>N and NICKNAME</name>
           <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.</t>
-          <t>The order of entries in the <tt>components</tt> property is defined by the <xref target="vcard-param-fmt">FMT</xref> parameter.</t>
+          <t>The order of entries in the <tt>components</tt> property and the values of the <tt>defaultSeparator</tt> and <tt>isOrdered</tt> properties are defined by the value (or absence) of the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter.</t>
           <t>Each comma-separated item of the SORT-AS parameter value converts to an entry of the <tt>sortAs</tt> property where the key is the "kind" value related to the sorted N component and the value is the corresponding item.  Absence of a key in the <tt>sortAs</tt> indicates that its related part in the SORT-AS parameter value <bcp14>MUST</bcp14> either the empty string followed by COMMA, or no further SORT-AS parts are defined.</t>
           <table anchor="n_components">
             <name>N components conversion</name>
@@ -601,7 +594,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
         <section anchor="vcard-prop-adr">
           <name>ADR</name>
           <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.  The components of the structured ADR value type convert to AddressComponent objects.</t>
-          <t>The order of entries in the <tt>components</tt> property is defined by the <xref target="vcard-param-fmt">FMT</xref> parameter.</t>
+          <t>The order of entries in the <tt>components</tt> property and the values of the <tt>defaultSeparator</tt> and <tt>isOrdered</tt> properties are defined by the value (or absence) of the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter.</t>
           <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines additional components of the ADR property value, originally defined in <xref target="RFC6350" section="6.3.1"/>.  Applications <bcp14>SHOULD</bcp14> prefer converting these new address components over any entries in the ADR "street address" and "extended address" components.  If only the original address components defined in <xref target="RFC6350"/> are available, then implementations <bcp14>SHOULD</bcp14> attempt to split the values of the "street address" and "extended address" components into their constituent parts.  Otherwise, they <bcp14>MUST</bcp14> convert all of "street address" to AddressComponent kind <tt>name</tt>, and "extended address" to AddressComponent kind "apartment".</t>
           <table anchor="adr_components_vs_street_component_items">
             <name>ADR component to AddressComponent conversion</name>
@@ -1647,8 +1640,123 @@ JSPROP;JSPTR="phones/phone1/example.com:foo~1bar":
             </dd>
           </dl>
         </section>
+      </section>
+      <section>
+        <name>New vCard Parameter</name>
+        <section anchor="vcard-param-jscomps">
+          <name>JSCOMPS</name>
+          <dl>
+            <dt>Parameter name:</dt>
+            <dd>JSCOMPS</dd>
+            <dt>Purpose:</dt>
+            <dd>This parameter defines the order and separators for the elements of a structured property value.</dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>The JSCOMPS parameter value facilitates converting name and address components between JSContact and vCard.  It preserves the order of the components the JSContact property and contains the verbatim values of separator components.</t>
+              <t>If this parameter is set and its value is valid (see later), then implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property of the Name or Address object to "true".  Otherwise, they <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to "false".</t>
+              <t>The JSCOMPS parameter value is a structured type value. It consists of a sequence of entries, separated by the SEMICOLON character (U+003B).  The first entry defines the value of the <tt>defaultSeparator</tt> property.  If it is the empty string then no default separator is defined.  Otherwise, the first entry <bcp14>MUST</bcp14> be a separator entry.  All following entries processed in order result in an ordered list of JSContact components, and <bcp14>MUST</bcp14> be one of two following two kinds:</t>
+              <ol>
+                <li>
+                  <t>A positional.  This refers to a component value in the vCard structured value   A position consists of the numeric index of a component in the structured value, optionally followed by a COMMA (U+002C) character and the non-zero index of a value within that component.  The zero index selects the first component or value, respectively.  The second index by default is zero, in which case it <bcp14>MUST</bcp14> be omitted (as well as the leading COMMA).</t>
+                  <t>The resulting JSContact component is formed by determining its kind by the position in the vCard structured value.  The component value is the verbatim value of the vCard component.  <xref target="vcard-param-jscomps-example-positional"/> and <xref target="vcard-param-jscomps-example-secondary-index"/> illustrate this by example.</t>
+                </li>
+                <li>
+                  <t>A separator.  This contains the verbatim value of a separator component.  It starts with the LATIN SMALL LETTER S (U+0073) character, followed by COMMA (U+002C), followed by zero or more <xref target="RFC6350" section="3.3"><tt>param-value</tt></xref> characters, where the COMMA (U+002c) and SEMICOLON (U+003B) character <bcp14>MUST</bcp14> be escaped according to the rules defined in <xref target="RFC6350" section="3.4"/>.  <xref target="vcard-param-jscomps-example-separator"/> illustrates this by example.</t>
+                  <t>The resulting JSContact component is formed by setting its kind to <tt>separator</tt> and its value to the verbatim value of the entry.</t>
+                </li>
+              </ol>
+              <t>A JSCOMPS parameter value is valid if and only if:</t>
+              <ul>
+                <li>All indexes in the positional entries refer to an existing component value in the vCard property value.</li>
+                <li>
+                  <t>The count of positional entries equals the count of deduplicated component values.  Deduplication is required because some values may occur in both their designated and backwards-compatible components in the vCard property value:</t>
+                  <ul>
+                    <li>A value that occurs in both the N property secondary surname component and the family name component only counts once.</li>
+                    <li>A value that occurs in both the N property generation component and the honorifix suffix component only counts once.</li>
+                    <li>A value in the ADR property street address component does not count if the ADR property value contains a value in one of the new components defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</li>
+                    <li>All other values count once each.</li>
+                  </ul>
+                </li>
+              </ul>
+            </dd>
+            <dt>Format definition:</dt>
+            <dd>
+              <sourcecode name="" type="abnf"><![CDATA[
+jscomps-param     = "JSCOMPS" "="
+                      DQUOTE (
+                        (jscomps-entry-sep / "") ";" jscomps-entrylist
+                      ) DQUOTE
+
+jscomps-entrylist  = jscomps-entry *(";" jscomps-entry)
+jscomps-entry      = jscomps-entry-pos / jscomps-entry-sep
+jscomps-entry-pos  = 1*DIGIT [ "," 1*DIGIT ]
+jscomps-entry-sep  = "s" "," jscomps-entry-verb
+jscomps-entry-verb = *QSAFE-CHAR
+]]></sourcecode>
+            </dd>
+            <dt>Example(s):</dt>
+            <dd>
+              <t>The following example demonstrates the use of positional entries for the name "Jane Doe".  The given name is ordered before the surname.  No secondary index is required for either positional because both are zero.</t>
+              <figure anchor="vcard-param-jscomps-example-positional">
+                <name>Example for positional entries</name>
+                <sourcecode name=""><![CDATA[
+"name": {
+  "components": [{
+    "kind": "given", "value": "Jane",
+    "kind": "surname", "value": "Doe"
+  }],
+  "isOrdered": true
+}
+
+N;JSCOMPS=";1;0":Doe;Jane;;;;;;
+FN;DERIVED=TRUE:Jane Doe
+]]></sourcecode>
+              </figure>
+              <t>The following example demonstrates a secondary positional index.  The "Jr." generation marker only counts once because it occurs in both the designated generation component and the backwards-compatible honorifix suffixes component.</t>
+              <figure anchor="vcard-param-jscomps-example-secondary-index">
+                <name>Example for positional entries</name>
+                <sourcecode name=""><![CDATA[
+"name": {
+  "components": [{
+    "kind": "given", "value": "John",
+    "kind": "given2", "value": "Philip",
+    "kind": "given2", "value": "Paul",
+    "kind": "surname", "value": "Stevenson",
+    "kind": "generation", "value": "Jr.",
+    "kind": "credential, "value": "M.D."
+  }],
+  "isOrdered": true
+}
+
+N;JSCOMPS=";1;2;2,1;0;6;4,1":Stevenson;John;Philip,Paul;;Jr.,M.D.;;Jr.
+FN;DERIVED=TRUE:John Philip Paul Stevenson Jr. M.D.
+]]></sourcecode>
+              </figure>
+              <t>The following example demonstrates the use of separator entries for the (shortened for brevity) address "54321 Oak St, Reston". The first entry defines the default separator to be ", ".  The second and fourth positional entries are separated with the separator value " ".  For backwards-compatibility, the street address component of the ADR property contains both the street number and name, but it is not referred to in the JSCOMPS parameter and does not contribute to the count of values.</t>
+              <figure anchor="vcard-param-jscomps-example-separator">
+                <name>Example for separator entries</name>
+                <sourcecode name=""><![CDATA[
+"addresses": {
+  "a1": {
+    "components": [
+      { "kind": "number", "value": "54321" },
+      { "kind": "separator", "value": " " },
+      { "kind": "name", "value": "Oak St" },
+      { "kind": "locality", "value": "Reston" }
+    ],
+    "defaultSeparator": ", ",
+    "isOrdered": true
+  }
+}
+
+ADR;JSCOMPS="s,\, ;11;s, ;10":;;54321 Oak St;Reston;;;;;;;Oak St;54321;;;;;;
+]]></sourcecode>
+              </figure>
+            </dd>
+          </dl>
+        </section>
         <section anchor="vcard-param-jsptr">
-          <name><tt>JSPTR</tt></name>
+          <name>JSPTR</name>
           <dl>
             <dt>Parameter name:</dt>
             <dd>JSPTR</dd>
@@ -1863,7 +1971,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
             <td>Address</td>
             <td>components</td>
             <td><xref target="vcard-prop-adr"/>,
-              <xref target="vcard-param-fmt"/></td>
+              <xref target="vcard-param-jscomps"/></td>
           </tr>
           <tr>
             <td>Address</td>
@@ -1893,10 +2001,22 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Address</td>
+            <td>defaultSeparator</td>
+            <td><xref target="vcard-prop-adr"/>,
+              <xref target="vcard-param-jscomps"/></td>
+          </tr>
+          <tr>
+            <td>Address</td>
             <td>full</td>
             <td>
               <xref target="vcard-prop-adr"/>
             </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>isOrdered</td>
+            <td><xref target="vcard-prop-adr"/>,
+              <xref target="vcard-param-jscomps"/></td>
           </tr>
           <tr>
             <td>Address</td>
@@ -2471,7 +2591,13 @@ JSPROP;JSPTR="example.com:foo":"bar"
             <td>Name</td>
             <td>components</td>
             <td><xref target="vcard-prop-n"/>,
-              <xref target="vcard-param-fmt"/></td>
+              <xref target="vcard-param-jscomps"/></td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>defaultSeparator</td>
+            <td><xref target="vcard-prop-n"/>,
+              <xref target="vcard-param-jscomps"/></td>
           </tr>
           <tr>
             <td>Name</td>
@@ -2479,6 +2605,12 @@ JSPROP;JSPTR="example.com:foo":"bar"
             <td>
               <xref target="vcard-prop-fn"/>
             </td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>isOrdered</td>
+            <td><xref target="vcard-prop-n"/>,
+              <xref target="vcard-param-jscomps"/></td>
           </tr>
           <tr>
             <td>Name</td>
