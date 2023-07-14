@@ -383,7 +383,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
     "components": [
       { "kind": "given", "value": "John" },
       { "kind": "surname", "value": "Doe" }
-    ]
+    ],
+    "isOrdered": true
   }
 }
 ]]></sourcecode>
@@ -601,56 +602,67 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
           <name>name</name>
           <t>Type: <tt>Name</tt> (optional).</t>
           <t>The name of the entity represented by this Card.  This can be any type of name, e.g., it can but need not be the legal name of a person.</t>
-          <t>A Name object has the following properties</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt>.
+          <section>
+            <name>Name object</name>
+            <t>A Name object has the following properties</t>
+            <ul spacing="normal">
+              <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Name</tt>, if set.
           </li>
-            <li>
-              <t>components: <tt>NameComponent[]</tt> (optional).  The components making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.  This property <bcp14>SHOULD</bcp14> be set, and it <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set.</t>
-              <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  The <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
-              <t><xref target="example-name-twoword"/> is an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.  <xref target="example-name-surname2"/> illustrates a name with a second surname, such as a Spanish name.  Additional examples are <xref target="example-name-sortas"/> and <xref target="example-localizations-replace"/>.</t>
-              <figure anchor="example-name-twoword">
-                <name>Example for a surname with two words</name>
-                <sourcecode name="" type="json"><![CDATA[
-"components": [
-  { "kind": "given", "value": "Vincent" },
-  { "kind": "surname", "value": "van Gogh" }
-]
+              <li>
+                <t>components: <tt>NameComponent[]</tt> (optional).  The <xref target="namecomponent">components</xref> making up the name.  The component list <bcp14>MUST</bcp14> have at least one entry.  This property <bcp14>SHOULD</bcp14> be set, and it <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set.</t>
+                <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to "true".</t>
+                <t>If the name components are ordered, then the <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
+                <t>If instead the name components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be "false", the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a NameComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
+                <t><xref target="example-name-twoword"/> is an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.  <xref target="example-name-surname2"/> illustrates a name with a second surname, such as a Spanish name.  Additional examples are shown in <xref target="example-name-sortas"/> and <xref target="example-localizations-replace"/>.</t>
+                <figure anchor="example-name-twoword">
+                  <name>Example for a surname with two words</name>
+                  <sourcecode name="" type="json"><![CDATA[
+"name": {
+  "components": [
+    { "kind": "given", "value": "Vincent" },
+    { "kind": "surname", "value": "van Gogh" }
+  ],
+  "isOrdered": true
+}
 ]]></sourcecode>
-              </figure>
-              <figure anchor="example-name-surname2">
-                <name>Example for a second surname</name>
-                <sourcecode name="" type="json"><![CDATA[
-"components": [
-  { "kind": "given", "value": "Diego" },
-  { "kind": "surname", "value": "Rivera" },
-  { "kind": "surname2", "value": "Barrientos" }
-]
+                </figure>
+                <figure anchor="example-name-surname2">
+                  <name>Example for a second surname</name>
+                  <sourcecode name="" type="json"><![CDATA[
+"name": {
+  "components": [
+    { "kind": "given", "value": "Diego" },
+    { "kind": "surname", "value": "Rivera" },
+    { "kind": "surname2", "value": "Barrientos" }
+  ],
+  "isOrdered": true
+}
 ]]></sourcecode>
-              </figure>
-            </li>
-            <li>defaultSeparator: <tt>String</tt> (optional).
+                </figure>
+              </li>
+              <li>isOrdered: <tt>Boolean</tt> (optional).  This indicates if the name component sequence in the <tt>components</tt> property is ordered.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is set.</li>
+              <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.</li>
-            <li>
-              <t>full: <tt>String</tt> (optional).
-            This is the full name representation of this Name.  The purpose of this property is to define a name even if the individual name components are not known.  This property <bcp14>SHOULD NOT</bcp14> be set, but it <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is not set.</t>
-              <figure anchor="example-full">
-                <name><tt>full</tt> example</name>
-                <sourcecode name="" type="json"><![CDATA[
+              <li>
+                <t>full: <tt>String</tt> (optional).
+            This is the full name representation of this Name.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is not set.</t>
+                <figure anchor="example-full">
+                  <name><tt>full</tt> example</name>
+                  <sourcecode name="" type="json"><![CDATA[
 "full": "Mr. John Q. Public, Esq."
 ]]></sourcecode>
-              </figure>
-            </li>
-            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name, e.g., a full name.  Also see <xref target="prop-pronounce"/>.</li>
-            <li>
-              <t>sortAs: <tt>String[String]</tt> (optional).</t>
-              <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
-              <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>kind</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
-              <t><xref target="example-name-sortas"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
-              <figure anchor="example-name-sortas">
-                <name><tt>name</tt> example</name>
-                <sourcecode name="" type="json"><![CDATA[
+                </figure>
+              </li>
+              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name, e.g., a full name.  Also see <xref target="prop-pronounce"/>.</li>
+              <li>
+                <t>sortAs: <tt>String[String]</tt> (optional).</t>
+                <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.</t>
+                <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>kind</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
+                <t><xref target="example-name-sortas"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
+                <figure anchor="example-name-sortas">
+                  <name><tt>name</tt> example</name>
+                  <sourcecode name="" type="json"><![CDATA[
 "name": {
   "components": [
     { "kind": "given", "value": "Robert" },
@@ -660,63 +672,68 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
   "sortAs": {
     "surname": "Pau Shou Chang",
     "given": "Robert"
-  }
+  },
+  "isOrdered": "true"
 }
 ]]></sourcecode>
-              </figure>
-            </li>
-          </ul>
-          <t>A NameComponent object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt>.
+                </figure>
+              </li>
+            </ul>
+          </section>
+          <section anchor="namecomponent">
+            <name>NameComponent</name>
+            <t>A NameComponent object has the following properties:</t>
+            <ul spacing="normal">
+              <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>NameComponent</tt>, if set.
           </li>
-            <li>value: <tt>String</tt> (mandatory).
+              <li>value: <tt>String</tt> (mandatory).
 The value of this name component.  This can be composed of one or multiple words, such as "Poe" or "van Gogh".</li>
-            <li>
-              <t>kind: <tt>String</tt> (mandatory).
+              <li>
+                <t>kind: <tt>String</tt> (mandatory).
               The kind of this name component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
-              <ul spacing="normal">
-                <li><tt>title</tt>.  The value is an honorific title or prefix, e.g.,  "Mr", "Ms", "Dr".</li>
-                <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
-                <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
-                <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
-                <li><tt>middle</tt>.  The value is a middle name, also known as "additional given name".</li>
-                <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
-                <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g.,  “Jr.” or “III”.</li>
-                <li><tt>separator</tt>.  A formatting separator for two name components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.</li>
-              </ul>
-            </li>
-            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name component.  Also see <xref target="prop-pronounce"/>.</li>
-          </ul>
-        </section>
-        <section anchor="nickNames" numbered="true" toc="default">
-          <name>nickNames</name>
-          <t>Type: <tt>Id[NickName]</tt> (optional).</t>
-          <t>The nicknames of the entity represented by this Card.  A NickName object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt>.
+                <ul spacing="normal">
+                  <li><tt>title</tt>.  The value is an honorific title or prefix, e.g.,  "Mr", "Ms", "Dr".</li>
+                  <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
+                  <li><tt>middle</tt>.  The value is a middle name, also known as "additional given name".</li>
+                  <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
+                  <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
+                  <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
+                  <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g.,  “Jr.” or “III”.</li>
+                  <li><tt>separator</tt>.  A formatting separator between two name non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.</li>
+                </ul>
+              </li>
+              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name component.  Also see <xref target="prop-pronounce"/>.</li>
+            </ul>
+          </section>
+          <section anchor="nickNames" numbered="true" toc="default">
+            <name>nickNames</name>
+            <t>Type: <tt>Id[NickName]</tt> (optional).</t>
+            <t>The nicknames of the entity represented by this Card.  A NickName object has the following properties:</t>
+            <ul spacing="normal">
+              <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>NickName</tt>, if set.
           </li>
-            <li>name: <tt>String</tt> (mandatory).
+              <li>name: <tt>String</tt> (mandatory).
             The nickname.
         </li>
-            <li>contexts: <tt>String[Boolean]</tt> (optional)
+              <li>contexts: <tt>String[Boolean]</tt> (optional)
 The contexts in which to use this nickname.  Also see <xref target="prop-contexts"/>.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional).
+              <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this nickname in relation to other nicknames.  Also see <xref target="prop-pref"/>.</li>
-          </ul>
-          <figure anchor="example-nickNames">
-            <name><tt>nickNames</tt> example</name>
-            <sourcecode name="" type="json"><![CDATA[
+            </ul>
+            <figure anchor="example-nickNames">
+              <name><tt>nickNames</tt> example</name>
+              <sourcecode name="" type="json"><![CDATA[
 "nickNames": {
   "k391": {
     "name": "Johnny"
   }
 }
 ]]></sourcecode>
-          </figure>
+            </figure>
+          </section>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
@@ -1130,74 +1147,48 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
         <section anchor="addresses" numbered="true" toc="default">
           <name>addresses</name>
           <t>Type: <tt>Id[Address]</tt> (optional).</t>
-          <t>A map of address identifiers to Address objects, containing physical locations.  An Address object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt>.
+          <t>A map of address identifiers to Address objects, containing physical locations.</t>
+          <section>
+            <name>Address object</name>
+            <t>An Address object has the following properties:</t>
+            <ul spacing="normal">
+              <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Address</tt>, if set.
           </li>
-            <li>
-              <t>components: <tt>AddressComponent[]</tt> (optional).
-                The components of this address.  The concatenation of the component values <bcp14>SHOULD</bcp14> result in a valid address for the Card language.  What characters to insert between address components is specific to the language.  The <tt>defaultSeparator</tt> property and the <tt>separator</tt> AddressComponent kind give guidance what characters to insert, but implementations are free to choose any others.</t>
-            </li>
-            <li>countryCode: <tt>String</tt> (optional).
+              <li>
+                <t>components: <tt>AddressComponent[]</tt> (optional).
+                The <xref target="addresscomponent">components</xref> making up this address.  The component list <bcp14>MUST</bcp14> have at least one entry.  This property <bcp14>SHOULD</bcp14> be set, and it <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set.</t>
+                <t>Address components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full address.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to "true".</t>
+                <t>If the address components are ordered, then the <tt>defaultSeparator</tt> property and address components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between address component values is a good choice.</t>
+                <t>If instead the address components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be "false", the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a AddressComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
+              </li>
+              <li>isOrdered: <tt>Boolean</tt> (optional).  This indicates if the address component sequence in the <tt>components</tt> property is ordered.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is set.</li>
+              <li>countryCode: <tt>String</tt> (optional).
 The Alpha-2 country code <xref target="ISO.3166-1.2006"/>.</li>
-            <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
-            <li>timeZone: <tt>String</tt> (optional).  Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <xref target="IANATZ">IANA Time Zone Database</xref></li>
-            <li>
-              <t>contexts: <tt>String[Boolean]</tt> (optional).
+              <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
+              <li>timeZone: <tt>String</tt> (optional).  Identifies the time zone this address is located in.  This <bcp14>MUST</bcp14> be a time zone name registered in the <xref target="IANATZ">IANA Time Zone Database</xref></li>
+              <li>
+                <t>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  In addition to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
 </t>
-              <ul spacing="normal">
-                <li><tt>billing</tt> An address to be used for billing.</li>
-                <li><tt>delivery</tt> An address to be used for delivering physical items.</li>
-              </ul>
-            </li>
-            <li>full: <tt>String</tt> (optional).
+                <ul spacing="normal">
+                  <li><tt>billing</tt> An address to be used for billing.</li>
+                  <li><tt>delivery</tt> An address to be used for delivering physical items.</li>
+                </ul>
+              </li>
+              <li>full: <tt>String</tt> (optional).
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>full</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
-            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g., the full address.  Also see <xref target="prop-pronounce"/>.</li>
-            <li>defaultSeparator: <tt>String</tt> (optional).
+              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g., the full address.  Also see <xref target="prop-pronounce"/>.</li>
+              <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.</li>
-            <li>pref: <tt>UnsignedInt</tt> (optional).
+              <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
-          </ul>
-          <t>An AddressComponent object has the following properties:</t>
-          <ul spacing="normal">
-            <li>@type: <tt>String</tt>.
-              This <bcp14>MUST</bcp14> be <tt>AddressComponent</tt>, if set.
-            </li>
-            <li>value: <tt>String</tt> (mandatory).
-The value of this address component.</li>
-            <li>
-              <t>kind: <tt>String</tt> (mandatory).
-              The kind of this address component.  The <xref target="enumerated-values">enumerated</xref> values are:
-</t>
-              <ul spacing="normal">
-                <li><tt>room</tt>.  The room or suite number or identifier.</li>
-                <li><tt>apartment</tt>.  The extension designation, such as apartment number or unit or box number.</li>
-                <li><tt>floor</tt>.  The floor or level this address is located on.</li>
-                <li><tt>building</tt>.  The building, tower, or condominium this address is located in.</li>
-                <li><tt>number</tt>.  The street number, e.g., "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
-                <li><tt>name</tt>.  The street name.</li>
-                <li><tt>block</tt>. The block name or number.</li>
-                <li><tt>subdistrict</tt>. The sub district, ward or other subunit of a district.</li>
-                <li><tt>district</tt>. The district name.</li>
-                <li><tt>locality</tt>. The municipality, city, town, village, post-town, or another locality.</li>
-                <li><tt>region</tt>. The administrative area, such as province, state, prefecture, county, canton.</li>
-                <li><tt>postcode</tt> The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
-                <li><tt>country</tt> The country name.</li>
-                <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.,  "North".</li>
-                <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g., White House, Taj Mahal.</li>
-                <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
-                <li><tt>separator</tt>.  A separator for two address components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a newline character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.</li>
-              </ul>
-            </li>
-            <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
-          </ul>
-          <t>The following examples illustrate the use of this property.</t>
-          <figure anchor="example-address-us">
-            <name>Example of the address "54321 Oak St, Reston, VA 20190, USA"</name>
-            <sourcecode name="" type="json"><![CDATA[
+            </ul>
+            <t>The following example illustrates the use of the <tt>address</tt> property.  Additional examples are in <xref target="address-examples"/>.</t>
+            <figure anchor="example-address-us">
+              <name>Example of the address "54321 Oak St, Reston, VA 20190, USA"</name>
+              <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k23": {
     "contexts": {
@@ -1214,14 +1205,55 @@ The value of this address component.</li>
       { "kind": "country", "value": "USA" }
     ],
     "countryCode": "US",
-    "defaultSeparator": ", "
+    "defaultSeparator": ", ",
+    "isOrdered": true
   }
 }
 ]]></sourcecode>
-          </figure>
-          <figure anchor="example-address-th">
-            <name>Example of the address "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"</name>
-            <sourcecode name="" type="json"><![CDATA[
+            </figure>
+          </section>
+          <section anchor="addresscomponent">
+            <name>AddressComponent object</name>
+            <t>An AddressComponent object has the following properties:</t>
+            <ul spacing="normal">
+              <li>@type: <tt>String</tt>.
+              This <bcp14>MUST</bcp14> be <tt>AddressComponent</tt>, if set.
+            </li>
+              <li>value: <tt>String</tt> (mandatory).
+The value of this address component.</li>
+              <li>
+                <t>kind: <tt>String</tt> (mandatory).
+              The kind of this address component.  The <xref target="enumerated-values">enumerated</xref> values are:
+</t>
+                <ul spacing="normal">
+                  <li><tt>room</tt>.  The room or suite number or identifier.</li>
+                  <li><tt>apartment</tt>.  The extension designation, such as apartment number or unit or box number.</li>
+                  <li><tt>floor</tt>.  The floor or level this address is located on.</li>
+                  <li><tt>building</tt>.  The building, tower, or condominium this address is located in.</li>
+                  <li><tt>number</tt>.  The street number, e.g., "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
+                  <li><tt>name</tt>.  The street name.</li>
+                  <li><tt>block</tt>. The block name or number.</li>
+                  <li><tt>subdistrict</tt>. The sub district, ward or other subunit of a district.</li>
+                  <li><tt>district</tt>. The district name.</li>
+                  <li><tt>locality</tt>. The municipality, city, town, village, post-town, or another locality.</li>
+                  <li><tt>region</tt>. The administrative area, such as province, state, prefecture, county, canton.</li>
+                  <li><tt>postcode</tt> The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
+                  <li><tt>country</tt> The country name.</li>
+                  <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.,  "North".</li>
+                  <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g., White House, Taj Mahal.</li>
+                  <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
+                  <li><tt>separator</tt>.  A formatting separator between two address non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.</li>
+                </ul>
+              </li>
+              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
+            </ul>
+          </section>
+          <section anchor="address-examples">
+            <name>Address examples</name>
+            <t>The following are examples of addresses, in addition to <xref target="example-address-us"/>.</t>
+            <figure anchor="example-address-th">
+              <name>Example of the address "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"</name>
+              <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k25": {
     "components": [
@@ -1233,14 +1265,15 @@ The value of this address component.</li>
       { "kind": "country", "value": "Thailand" },
       { "kind": "postcode", "value": "10110" }
     ],
-    "defaultSeparator": ", "
+    "defaultSeparator": ", ",
+    "isOrdered": true
   }
 }
 ]]></sourcecode>
-          </figure>
-          <figure anchor="example-address-jp">
-            <name>Example of an address in Tokyo and its localization <xref target="localizations"/> in Japanese.</name>
-            <sourcecode name="" type="json"><![CDATA[
+            </figure>
+            <figure anchor="example-address-jp">
+              <name>Example of an address in Tokyo and its localization <xref target="localizations"/> in Japanese.</name>
+              <sourcecode name="" type="json"><![CDATA[
 "addresses": {
    "k26": {
      "components": [
@@ -1255,7 +1288,8 @@ The value of this address component.</li>
        { "kind": "postcode", "value": "100-8994" }
      ],
      "defaultSeparator": ", ",
-     "full": "2-7-2 Marunouchi, Chiyoda-ku, Tokyo 100-8994"
+     "full": "2-7-2 Marunouchi, Chiyoda-ku, Tokyo 100-8994",
+     "isOrdered": true
    }
 },
 "localizations": {
@@ -1271,12 +1305,15 @@ The value of this address component.</li>
         { "kind": "postcode", "value": "〒100-8994" }
       ],
       "defaultSeparator": "",
-      "full": "〒100-8994東京都千代田区丸ノ内2-7-2"
+      "isOrdered": true,
+      "full": "〒100-8994東京都千代田区丸ノ内2-7-2",
+      "isOrdered": true
     }
   }
 }
 ]]></sourcecode>
-          </figure>
+            </figure>
+          </section>
         </section>
       </section>
       <section anchor="resource-properties" numbered="true" toc="default">
@@ -2096,6 +2133,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">
                   <xref target="speakToAs" format="default"/>
                 </td>
+              </tr>
+              <tr>
+                <td align="left">isOrdered</td>
+                <td align="left">Boolean</td>
+                <td align="left">Address, Name</td>
+                <td align="left"><xref target="addresses" format="default"/>,
+                  <xref target="name" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">keywords</td>
