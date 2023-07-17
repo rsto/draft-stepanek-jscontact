@@ -529,7 +529,7 @@ PRONOUNS;PREF=1:xe/xir
               </tr>
               <tr>
                 <td align="left">Additional Names</td>
-                <td align="left">middle</td>
+                <td align="left">given2</td>
                 <td align="left"/>
               </tr>
               <tr>
@@ -554,7 +554,7 @@ NICKNAME:Johnny
     { "kind": "title", "value": "Mr." },
     { "kind": "given", "value": "John Q." },
     { "kind": "surname", "value": "Public" },
-    { "kind": "middle", "value": "Quinlan" },
+    { "kind": "given2", "value": "Quinlan" },
     { "kind": "credential", "value": "Esq." }
   ],
   "sortAs": {
