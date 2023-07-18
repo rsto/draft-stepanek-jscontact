@@ -1535,10 +1535,10 @@ IMPP:xmpp:alice@example.com
         <ul>
           <li>Multivalued JSContact properties convert to separate instances of their equivalent vCard property, and for each the PROP-ID parameter <bcp14>MUST</bcp14> be set to the <tt>Id</tt> of the converted value (see <xref target="vcard-param-propid"/>).</li>
           <li>
-            <t>The <tt>full</tt> property in JSContact is optional, but it is mandatory in vCard.  The following rules apply:</t>
+            <t>The <tt>full</tt> property of the <tt>name</tt> property in JSContact is optional, but the FN property is mandatory in vCard.  The following rules apply:</t>
             <ul>
-              <li>If the <tt>full</tt> property is set, then implementations <bcp14>MUST</bcp14> use its value for the vCard FN property.</li>
-              <li>If the <tt>full</tt> property is not set, but the <tt>name</tt> property is, then implementations <bcp14>MUST</bcp14> derive the full name of it by concatenating the name component values.  They <bcp14>MUST</bcp14> use the resulting string as the value of the vCard FN property.  In addition, they <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.</li>
+              <li>If the Name <tt>full</tt> property is set, then implementations <bcp14>MUST</bcp14> use its value for the vCard FN property.</li>
+              <li>If the Name <tt>full</tt> property is not set, then implementations <bcp14>SHOULD</bcp14> derive the full name from the Name <tt>components</tt> values.  If the <tt>isOrdered</tt> property is true, then this can be done by concatenating the name component values.  Otherwise, or alternatively, an implementation can choose any other heuristic to generate the full name from its components, such as <xref target="CLDRPersonName"/>.  Implementations <bcp14>MUST</bcp14> set the DERIVED parameter on the FN property.</li>
               <li>Otherwise, they <bcp14>MUST</bcp14> set the FN property to the empty value.</li>
             </ul>
           </li>
@@ -1947,6 +1947,30 @@ JSPROP;JSPTR="example.com:foo":"bar"
         <name>Informative References</name>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-calconnect-vobject-i18n.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
+      <reference anchor="CLDRPersonName" target="https://www.unicode.org/reports/tr35/tr35-personNames.html">
+        <front>
+          <title>Technical Standard #35: Unicode Locale Data Markup Language (LDML) Part 8: Person Names, Version 43.1</title>
+          <author fullname="M. Davis">
+            <organization/>
+          </author>
+          <author fullname="P. Edberg">
+            <organization/>
+          </author>
+          <author fullname="R. Gillam">
+            <organization/>
+          </author>
+          <author fullname="A. Kolisnychenko">
+            <organization/>
+          </author>
+          <author fullname="M. McKenna">
+            <organization/>
+          </author>
+          <author fullname="others">
+            <organization/>
+          </author>
+          <date year="2023" month="July"/>
+        </front>
+      </reference>
       </references>
     </references>
     <section anchor="convert_jscontact_to_vcard-reverse-rules">
