@@ -622,7 +622,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
               <tr>
                 <td align="left">street address</td>
                 <td align="left">name</td>
-                <td align="left">name, district, subdistrict, block, name, number, landmark, direction, apartment, building, floor, room</td>
+                <td align="left">district, subdistrict, block, name, number, landmark, direction, apartment, building, floor, room</td>
                 <td align="left"/>
               </tr>
               <tr>
