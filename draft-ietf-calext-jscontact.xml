@@ -666,7 +666,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 "name": {
   "components": [
     { "kind": "given", "value": "Robert" },
-    { "kind": "middle", "value": "Pau" },
+    { "kind": "given2", "value": "Pau" },
     { "kind": "surname", "value": "Shou Chang" }
   ],
   "sortAs": {
@@ -696,7 +696,7 @@ The value of this name component.  This can be composed of one or multiple words
                 <ul spacing="normal">
                   <li><tt>title</tt>.  The value is an honorific title or prefix, e.g.,  "Mr", "Ms", "Dr".</li>
                   <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
-                  <li><tt>middle</tt>.  The value is a middle name, also known as "additional given name".</li>
+                  <li><tt>given2</tt>.  The value is a name that appears between the given and surname, such as a middle name or patronymic name</li>
                   <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
                   <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
                   <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
@@ -1478,7 +1478,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
     "components": [
       { "kind": "title", "value": "Mr." },
       { "kind": "given", "value": "Ivan" },
-      { "kind": "middle", "value": "Petrovich" },
+      { "kind": "given2", "value": "Petrovich" },
       { "kind": "surname", "value": "Vasiliev" }
     ]
   },
@@ -1488,7 +1488,7 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
         "components": [
           { "kind": "title", "value": "г-н" },
           { "kind": "given", "value": "Иван" },
-          { "kind": "middle", "value": "Петрович" },
+          { "kind": "given2", "value": "Петрович" },
           { "kind": "surname", "value": "Васильев" }
         ]
       }
@@ -3452,7 +3452,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                     </td>
                   </tr>
                   <tr>
-                    <td align="left">middle</td>
+                    <td align="left">given2</td>
                     <td align="left">
                       <xref target="name" format="default"/>
                     </td>
