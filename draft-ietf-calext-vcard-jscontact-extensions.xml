@@ -230,7 +230,7 @@ createdparam  = *(
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-CREATED:20220705093412Z
+CREATED:20220705T093412Z
 CREATED;VALUE=TIMESTAMP:20211022T140000-05
 ]]></sourcecode>
           </dd>
