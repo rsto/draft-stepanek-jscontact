@@ -641,9 +641,9 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 ]]></sourcecode>
                 </figure>
               </li>
-              <li>isOrdered: <tt>Boolean</tt> (optional).  This indicates if the name component sequence in the <tt>components</tt> property is ordered.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is set.</li>
+              <li>isOrdered: <tt>Boolean</tt> (optional, default: <tt>false</tt>).  This indicates if the name component sequence in the <tt>components</tt> property is ordered.</li>
               <li>defaultSeparator: <tt>String</tt> (optional).
-              The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.</li>
+                The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
               <li>
                 <t>full: <tt>String</tt> (optional).
             This is the full name representation of this Name.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is not set.</t>
@@ -701,7 +701,7 @@ The value of this name component.  This can be composed of one or multiple words
                   <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
                   <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
                   <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g.,  “Jr.” or “III”.</li>
-                  <li><tt>separator</tt>.  A formatting separator between two name non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.</li>
+                  <li><tt>separator</tt>.  A formatting separator between two ordered name non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </li>
               <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name component.  Also see <xref target="prop-pronounce"/>.</li>
@@ -1162,7 +1162,7 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
                 <t>If the address components are ordered, then the <tt>defaultSeparator</tt> property and address components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between address component values is a good choice.</t>
                 <t>If instead the address components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be "false", the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a AddressComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
               </li>
-              <li>isOrdered: <tt>Boolean</tt> (optional).  This indicates if the address component sequence in the <tt>components</tt> property is ordered.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is set.</li>
+              <li>isOrdered: <tt>Boolean</tt> (optional, default: <tt>false</tt>).  This indicates if the address component sequence in the <tt>components</tt> property is ordered.</li>
               <li>countryCode: <tt>String</tt> (optional).
 The Alpha-2 country code <xref target="ISO.3166-1.2006"/>.</li>
               <li>coordinates: <tt>String</tt> (optional).  A <xref target="RFC5870" format="default"/> "geo:" URI for the address.</li>
@@ -1181,7 +1181,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
             </li>
               <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g., the full address.  Also see <xref target="prop-pronounce"/>.</li>
               <li>defaultSeparator: <tt>String</tt> (optional).
-              The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.</li>
+              The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
               <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
             </ul>
@@ -1242,7 +1242,7 @@ The value of this address component.</li>
                   <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.,  "North".</li>
                   <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g., White House, Taj Mahal.</li>
                   <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
-                  <li><tt>separator</tt>.  A formatting separator between two address non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.</li>
+                  <li><tt>separator</tt>.  A formatting separator between two ordered address non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </li>
               <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
