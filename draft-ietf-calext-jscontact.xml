@@ -1038,13 +1038,14 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
         </section>
         <section anchor="preferredLanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
-          <t>Type : <tt>String[LanguagePref[]]</tt> (optional).</t>
-          <t>Defines the preferred languages for contacting the entity associated with this Card.  The keys in the object <bcp14>MUST</bcp14> be <xref target="RFC5646" format="default"/> language tags.  The values are a (possibly empty) list of contact language preferences for this language.  A valid LanguagePref object <bcp14>MUST</bcp14> have at least one of its properties other than the <tt>@type</tt> property set.</t>
+          <t>Type : <tt>Id[LanguagePref]</tt> (optional).</t>
+          <t>Defines the preferred languages for contacting the entity associated with this Card.</t>
           <t>A LanguagePref object has the following properties:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>LanguagePref</tt>, if set.
           </li>
+            <li>language: <tt>String</tt> (mandatory).  The preferred language.  This <bcp14>MUST</bcp14> a language tag as defined in <xref target="RFC5646"/>.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 Defines the contexts in which to use this language.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -1054,27 +1055,26 @@ Defines the preference of this language in relation to other languages of the sa
             <name><tt>preferredLanguages</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
 "preferredLanguages": {
-  "en": [
-    {
-      "contexts": {
-        "work": true
-      },
-      "pref": 1
-    }
-  ],
-  "fr": [
-    {
-      "contexts": {
-        "work": true
-      },
-      "pref": 2
+  "l1": {
+    "language": "en",
+    "contexts": {
+      "work": true
     },
-    {
-      "contexts": {
-        "private": true
-      }
+    "pref": 1
+  },
+  "l2": {
+    "language": "fr",
+    "contexts": {
+      "work": true
+    },
+    "pref": 2
+  },
+  "l3": {
+    "language": "fr",
+    "contexts": {
+      "private": true
     }
-  ]
+  }
 }
 ]]></sourcecode>
           </figure>
@@ -2172,9 +2172,10 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">language</td>
                 <td align="left">String</td>
-                <td align="left">Card</td>
+                <td align="left">Card, LanguagePref</td>
                 <td align="left">
-                  <xref target="language" format="default"/>
+                  <xref target="language" format="default"/>,
+                  <xref target="preferredLanguages" format="default"/>
                 </td>
               </tr>
               <tr>

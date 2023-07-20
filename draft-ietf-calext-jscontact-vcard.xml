@@ -798,9 +798,8 @@ IMPP;PREF=1:xmpp:alice@example.com
         </section>
         <section anchor="vcard-prop-lang">
           <name>LANG</name>
-          <t>A LANG property converts to an entry in the <tt>preferredLanguages</tt> property (<xref target="lang_conversion"/>).  The entry keys correspond to the language tags, the related entry values are arrays of <tt>LanguagePref</tt> objects.</t>
+          <t>A LANG property converts to an entry in the <tt>preferredLanguages</tt> property (<xref target="lang_conversion"/>).  The entry value is an <tt>LanguagePref</tt> object.  The LanguagePref <tt>language</tt> property value is the LANG property value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <t>If both PREF and TYPE parameters are missing, the array of <tt>LanguagePref</tt> objects <bcp14>MUST</bcp14> be empty.</t>
           <figure anchor="lang_conversion">
             <name>LANG conversion example</name>
             <artwork><![CDATA[
@@ -809,21 +808,20 @@ LANG;TYPE=work;PREF=2:fr
 LANG;TYPE=home:fr
 
 "preferredLanguages": {
-  "en":[
-    {
-      "contexts": { "work": true },
-      "pref": 1
-    }
-  ],
-  "fr":[
-    {
-      "contexts": { "work": true },
-      "pref": 2
-    },
-    {
-      "contexts": { "private": true }
-    }
-  ]
+  "LANG-1": {
+    "language": "en",
+    "contexts": { "work": true },
+    "pref": 1
+  },
+  "LANG-2": {
+    "language": "fr",
+    "contexts": { "work": true },
+    "pref": 2
+  },
+  "LANG-3": {
+    "language": "fr",
+    "contexts": { "private": true }
+  }
 }
 ]]></artwork>
           </figure>
