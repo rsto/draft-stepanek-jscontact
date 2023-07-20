@@ -1572,21 +1572,20 @@ IMPP:xmpp:alice@example.com
         </dd>
             <dt>Description:</dt>
             <dd>
-              <t>
-            This property converts a JSContact property to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>MUST</bcp14> be compact, e.g., without insignificant whitespace.
-          </t>
-              <t>The value of the JSPTR parameter defines the path to that JSContact value within the Card.  The last segment of the JSON pointer either defines the property name or array position of the JSContact value.  The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  If any but the last segment of the JSON pointer points to a non-existent JSContact property or array entry in the Card, then the JSPROP property <bcp14>MUST</bcp14> be ignored and discarded from the vCard.</t>
+              <t>This property converts an arbitrary JSContact property from and to vCard.  The vCard property value is the JSON-encoded value of the JSContact property, represented as a TEXT value.  The format of the JSON value <bcp14>MUST</bcp14> be compact, e.g., without insignificant whitespace.  The value of the JSPTR parameter points to the JSContact property within the Card.</t>
+                <t>The root of the JSON pointer is always the Card object that this vCard converts to, irrespective if the JSON pointer starts with the SOLIDUS (U+002F) character.  The pointer <bcp14>MUST NOT</bcp14> reference into an array.</t>
+                <t>All JSPROP properties in a vCard together form a PatchObject as defined in <xref target="I-D.ietf-calext-jscontact"/>.  The value of its JSPTR parameter corresponds to a key in the PatchObject, the value of the JSPROP property corresponds to the value for that key.  When converting from vCard to JSContact, the PatchObject <bcp14>MUST</bcp14> only be applied after all other vCard properties have already been converted.  The PatchObject <bcp14>MUST</bcp14> be valid, including the restriction that an invalid PatchObject <bcp14>MUST NOT</bcp14> be applied.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode name="" type="abnf"><![CDATA[
-jscontact-prop = "JSPROP" jscontact-prop-param ":" TEXT
+jsprop = "JSPROP" jsprop-param ":" TEXT
 
-jscontact-prop-param  = *(
+jsprop-param  = *(
             ; The following are MANDATORY and MUST NOT
             ; occur more than once
-            ( ";" jspath-param ) /    ; see next section
+            ( ";" jsptr-param ) /    ; see next section
             ( ";" "VALUE" "=" "TEXT")
             ;
             ; The following is OPTIONAL,
@@ -1769,7 +1768,7 @@ ADR;JSCOMPS="s,\, ;11;s, ;10":;;54321 Oak St;Reston;;;;;;;Oak St;54321;;;;;;
             <dt>Format definition:</dt>
             <dd>
               <sourcecode name="" type="abnf"><![CDATA[
-jspath-param  = "JSPTR" "=" param-value
+jsptr-param  = "JSPTR" "=" param-value
              ; also see param-value in RFC 6350, section 3.3
 
 ]]></sourcecode>
