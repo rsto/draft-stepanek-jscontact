@@ -1760,16 +1760,16 @@ ADR;JSCOMPS="s,\, ;11;s, ;10":;;54321 Oak St;Reston;;;;;;;Oak St;54321;;;;;;
             <dd>JSPTR</dd>
             <dt>Purpose:</dt>
             <dd>
-        This parameter contains a JSON pointer <xref target="RFC6901"/> that relates its vCard property to some JSON data.  Its exact semantics depend on the definition of the property where this parameter is set on.
+              This parameter contains a JSON pointer <xref target="RFC6901"/> that relates the vCard <xref target="vcard-prop-jsprop">JSPROP</xref> property to a JSContact property.
         </dd>
             <dt>Description:</dt>
             <dd>
-              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>.  Currently, its semantics only are defined for the JSPROP property (see <xref target="vcard-prop-jsprop"/>), but it may also be used for other use cases in the future.</t>
+              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>.  Note that the value <bcp14>MUST</bcp14> be quoted according to the <tt>param-value</tt> ABNF in <xref target="RFC6350"/>.</t>
             </dd>
             <dt>Format definition:</dt>
             <dd>
               <sourcecode name="" type="abnf"><![CDATA[
-jspath-param  = "JSPTR" "=" DQUOTE *QSAFE-CHAR DQUOTE
+jspath-param  = "JSPTR" "=" param-value
              ; also see param-value in RFC 6350, section 3.3
 
 ]]></sourcecode>
