@@ -236,11 +236,11 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           </dd>
         </dl>
       </section>
-      <section anchor="prop-deflanguage">
-        <name>DEFLANGUAGE</name>
+      <section anchor="prop-language">
+        <name>LANGUAGE</name>
         <dl>
           <dt>Property name:</dt>
-          <dd>DEFLANGUAGE</dd>
+          <dd>LANGUAGE</dd>
           <dt>Purpose:</dt>
           <dd>This property defines the default language that human-readable text values in this vCard should be assumed written in.</dd>
           <dt>Value type:</dt>
@@ -254,21 +254,21 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
             This property defines the language in which property values of type
             <tt>TEXT</tt> shall be assumed to be written for this vCard.
             If a vCard property includes the <tt>LANGUAGE</tt> parameter, then the
-            parameter value has higher precedence than the <tt>DEFLANGUAGE</tt>
+            parameter value has higher precedence than the <tt>LANGUAGE</tt>
             property value.
           </dd>
           <dt>Format definition:</dt>
           <dd>
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
-deflanguage       = "DEFLANGUAGE" any-param ":" Language-Tag
+language-prop       = "LANGUAGE" any-param ":" Language-Tag
                ; Language-Tag is defined in RFC6350, Section 4.
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-DEFLANGUAGE:de-AT
+LANGUAGE:de-AT
 ]]></sourcecode>
           </dd>
         </dl>
@@ -699,13 +699,13 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
               </tr>
               <tr>
                 <td/>
-                <td align="left">DEFLANGUAGE</td>
-                <td align="left">This document, <xref target="prop-deflanguage"/></td>
+                <td align="left">GRAMGENDER</td>
+                <td align="left">This document, <xref target="prop-gramgender"/></td>
               </tr>
               <tr>
                 <td/>
-                <td align="left">GRAMGENDER</td>
-                <td align="left">This document, <xref target="prop-gramgender"/></td>
+                <td align="left">LANGUAGE</td>
+                <td align="left">This document, <xref target="prop-language"/></td>
               </tr>
               <tr>
                 <td/>

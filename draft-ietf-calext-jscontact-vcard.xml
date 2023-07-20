@@ -254,9 +254,9 @@ TITLE;LANGUAGE=fr:Patron
           <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the language of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.</t>
           <t>The following example uses non-ASCII characters to demonstrate multilingual content.  The ASCII-formatted version of this specification might not show the correct characters.  Please refer to the HTML or PDF versions instead.</t>
           <figure anchor="language-patch-no-dominant">
-            <name>LANGUAGE conversion example: conflicting DEFLANGUAGE and LANGUAGE</name>
+            <name>LANGUAGE conversion example: conflicting LANGUAGE and LANGUAGE</name>
             <artwork><![CDATA[
-DEFLANGUAGE:es
+LANGUAGE:es
 FN:Gabriel García Márquez
 TITLE;LANGUAGE=en:Boss
 TITLE;LANGUAGE=fr:Patron
@@ -826,13 +826,13 @@ LANG;TYPE=home:fr
 ]]></artwork>
           </figure>
         </section>
-        <section anchor="vcard-prop-deflanguage">
-          <name>DEFLANGUAGE</name>
-          <t>The DEFLANGUAGE property converts to the <tt>language</tt> property (<xref target="deflanguage_conversion"/>).</t>
-          <figure anchor="deflanguage_conversion">
-            <name>DEFLANGUAGE conversion example</name>
+        <section anchor="vcard-prop-language">
+          <name>LANGUAGE</name>
+          <t>The LANGUAGE property converts to the <tt>language</tt> property (<xref target="languageprop_conversion"/>).</t>
+          <figure anchor="languageprop_conversion">
+            <name>LANGUAGE conversion example</name>
             <artwork><![CDATA[
-DEFLANGUAGE:de-AT
+LANGUAGE:de-AT
 
 "language": "de-AT"
 ]]></artwork>
@@ -2239,15 +2239,15 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Card</td>
-            <td>links</td>
-            <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
+            <td>language</td>
+            <td>
+              <xref target="vcard-prop-language"/>
+            </td>
           </tr>
           <tr>
             <td>Card</td>
-            <td>language</td>
-            <td>
-              <xref target="vcard-prop-deflanguage"/>
-            </td>
+            <td>links</td>
+            <td><xref target="vcard-prop-contact-uri"/>, <xref target="vcard-prop-url"/></td>
           </tr>
           <tr>
             <td>Card</td>
