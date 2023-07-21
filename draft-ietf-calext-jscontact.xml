@@ -656,7 +656,6 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 ]]></sourcecode>
                 </figure>
               </li>
-              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name, e.g., a full name.  Also see <xref target="prop-pronounce"/>.</li>
               <li>
                 <t>sortAs: <tt>String[String]</tt> (optional).</t>
                 <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.  This property <bcp14>MUST NOT</bcp14> be set if the <tt>components</tt> property is not set.</t>
@@ -1181,7 +1180,6 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               <li>full: <tt>String</tt> (optional).
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>full</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
-              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address, e.g., the full address.  Also see <xref target="prop-pronounce"/>.</li>
               <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
               <li>pref: <tt>UnsignedInt</tt> (optional).
@@ -2367,7 +2365,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">pronounce</td>
                 <td align="left">Pronounce</td>
-                <td align="left">Address, AddressComponent, Name, NameComponent</td>
+                <td align="left">AddressComponent, NameComponent</td>
                 <td align="left"><xref target="addresses" format="default"/>,
                   <xref target="name" format="default"/></td>
               </tr>
