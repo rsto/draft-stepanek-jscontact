@@ -239,8 +239,8 @@ Contains the phonetic representation of a value.  The script or phonetic system 
 The phonetic system used for the value of the <tt>phonetic</tt> property.  This <bcp14>MAY</bcp14> be any string, but this specification reserves the following <xref target="enumerated-values">enumerated values</xref>:</t>
               <ul>
                 <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
-                <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
                 <li><tt>jyut</tt>: denotes the Cantonese romanization system "Jyutping".</li>
+                <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
               </ul>
               <t>This property <bcp14>MUST</bcp14> be set if the <tt>script</tt> property is not set.</t>
             </li>
