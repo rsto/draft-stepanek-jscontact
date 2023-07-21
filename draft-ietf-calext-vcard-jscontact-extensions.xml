@@ -73,7 +73,8 @@
       <name>Updated Properties</name>
       <section anchor="prop-adr">
         <name>ADR</name>
-        <t>This specification modifies the definition of the "ADR" property.  It extends its structured value with additional address components to better support the variety of international addresses.  It separates the address parts that currently typically are combined in street address component values into distinct components, such as street names, street numbers, apartment numbers, floors.  Implementations <bcp14>SHOULD</bcp14> write a combined value of these components in the street address component for backwards compatibility, but <bcp14>SHOULD</bcp14> ignore it during read if applicable new component values are available.</t>
+        <t>This specification modifies the definition of the "ADR" property.  It extends its structured value with additional address components to better support the variety of international addresses.  It separates the address parts that currently typically are combined in street address component values into distinct components.</t>
+				<t>Implementations <bcp14>SHOULD</bcp14> write a combined value of these components in the street address component for backwards compatibility, but <bcp14>SHOULD</bcp14> ignore the street component during read if the ADR property value contains any of the new components.</t>
         <t>The following change is made to the first paragraph in the "Special Notes" section, originally specified in <xref target="RFC6350" section="6.3.1"/>.  All remaining paragraphs of that section in the original specification still apply.</t>
         <dl>
           <dt>Special notes:</dt>
@@ -135,6 +136,20 @@ ADR-component-block    = list-component
 ADR-component-subdistrict = list-component
 ADR-component-district = list-component
 ADR-component-landmark = list-component
+]]></sourcecode>
+          </dd>
+        </dl>
+        <t>The following change is made to the "Example" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
+        <dl>
+
+
+          <dt>Example: In this example, the post office box and the extended address are absent.  The street number and name are added both as separate components, as well as combined in the street component for backwards-compatibility.</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
+  Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
+  U.S.A.":
+  ;;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;123;Main Street;;;;;;;
 ]]></sourcecode>
           </dd>
         </dl>
