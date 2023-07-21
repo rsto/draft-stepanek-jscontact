@@ -1698,10 +1698,10 @@ jscomps-entry-verb = *QSAFE-CHAR
                 <name>Example for positional entries</name>
                 <sourcecode name=""><![CDATA[
 "name": {
-  "components": [{
-    "kind": "given", "value": "Jane",
-    "kind": "surname", "value": "Doe"
-  }],
+  "components": [
+    { "kind": "given", "value": "Jane" },
+    { "kind": "surname", "value": "Doe" }
+  ],
   "isOrdered": true
 }
 
@@ -1714,14 +1714,14 @@ FN;DERIVED=TRUE:Jane Doe
                 <name>Example for positional entries</name>
                 <sourcecode name=""><![CDATA[
 "name": {
-  "components": [{
-    "kind": "given", "value": "John",
-    "kind": "given2", "value": "Philip",
-    "kind": "given2", "value": "Paul",
-    "kind": "surname", "value": "Stevenson",
-    "kind": "generation", "value": "Jr.",
-    "kind": "credential, "value": "M.D."
-  }],
+  "components": [
+    { "kind": "given", "value": "John" },
+    { "kind": "given2", "value": "Philip" },
+    { "kind": "given2", "value": "Paul" },
+    { "kind": "surname", "value": "Stevenson" },
+    { "kind": "generation", "value": "Jr." },
+    { "kind": "credential, "value": "M.D." }
+  ],
   "isOrdered": true
 }
 
