@@ -254,7 +254,7 @@ TITLE;LANGUAGE=fr:Patron
           <t>As the least preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the language of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.</t>
           <t>The following example uses non-ASCII characters to demonstrate multilingual content.  The ASCII-formatted version of this specification might not show the correct characters.  Please refer to the HTML or PDF versions instead.</t>
           <figure anchor="language-patch-no-dominant">
-            <name>LANGUAGE conversion example: conflicting LANGUAGE and LANGUAGE</name>
+            <name>LANGUAGE conversion example: conflicting LANGUAGE property and parameter values</name>
             <artwork><![CDATA[
 LANGUAGE:es
 FN:Gabriel García Márquez
