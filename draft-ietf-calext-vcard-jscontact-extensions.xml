@@ -172,7 +172,7 @@ N-value = list-component 6(";" list-component)
         </dl>
         <t>The following change is made to the "Example" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
         <dl>
-          <dt>ABNF</dt>
+          <dt>Example</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
 N:Public;John;Quinlan;Mr.;Esq.
