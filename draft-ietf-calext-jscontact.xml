@@ -1237,8 +1237,8 @@ The value of this address component.</li>
                   <li><tt>district</tt>. The district name.</li>
                   <li><tt>locality</tt>. The municipality, city, town, village, post-town, or another locality.</li>
                   <li><tt>region</tt>. The administrative area, such as province, state, prefecture, county, canton.</li>
-                  <li><tt>postcode</tt> The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
-                  <li><tt>country</tt> The country name.</li>
+                  <li><tt>postcode</tt>. The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
+                  <li><tt>country</tt>. The country name.</li>
                   <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.,  "North".</li>
                   <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g., White House, Taj Mahal.</li>
                   <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
