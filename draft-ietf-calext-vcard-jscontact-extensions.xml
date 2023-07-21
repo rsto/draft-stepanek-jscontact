@@ -561,6 +561,49 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           </dd>
         </dl>
       </section>
+      <section anchor="param-phonetic">
+        <name>PHONETIC</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>PHONETIC</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter defines how to pronounce the value of another property in the same vCard.</dd>
+          <dt>Description:</dt>
+          <dd>
+              <t>This property parameter indicates that the value of its property contains the phonetic representation of a same-named other property in the same vCard.  Exemplary uses are to define how pronounce a Japanese name, or for romanization of Mandarin or Cantonese name and address components.</t>
+              <t>The parameter value indicates the phonetic system and <bcp14>MUST</bcp14> be one of the values enumerated in the IANA <xref target="iana-vcard-param-values">vCard Parameter Values</xref> registry.  This specification defines the following values:</t>
+              <ul>
+                <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
+                <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
+                <li><tt>jyut</tt>: denotes the Cantonese romanization system "Jyutping".</li>
+                <li><tt>script</tt>: denotes the unknown phonetic system.  The <xref target="param-script">SCRIPT</xref> parameter <bcp14>MUST</bcp14> be set in addition to the PHONETIC parameter.</li>
+              </ul>
+              <t>The value type of the property on which the PHONETIC parameter is set <bcp14>MUST</bcp14> be of the same type as its related property.  If a component value is set in the property on which the PHONETIC parameter is set, then a component value also <bcp14>MUST</bcp14> be set at that same position in the related property.  On the other hand, not every component value in the related property needs to have a phonetic representation.</t>
+              <t>The related property is defined as follows:</t>
+              <ul>
+                <li>If only a single same-named property does not have the PHONETIC parameter set in this vCard, then this is the related property.</li>
+                <li>Otherwise, the related property is the one which has the same ALTID parameter value as the property with the PHONETIC property.</li>
+              </ul>
+              <t>If more than one property with the PHONETIC parameter relates to the same property, then the LANGUAGE parameter <bcp14>MUST</bcp14> be set on all the properties having the PHONETIC parameter.  The LANGUAGE parameter value <bcp14>SHOULD NOT</bcp14> contain a script subtag in its Language-Tag value and any such subtag <bcp14>MUST</bcp14> be ignored in favor of the <xref target="param-script">SCRIPT</xref> parameter value.</t>
+              <t>This specification defines the PHONETIC parameter for use with the ADR and N properties.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+phonetic-param = "PHONETIC=" phonetic-value
+
+phonetic-value = "ipa" / "piny" / "jyut" / "script" / iana-token / x-name
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+N;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;;;
+N;PHONETIC=jyut;SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;;;
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
       <section anchor="param-propid">
         <name>PROP-ID</name>
         <dl>
@@ -588,6 +631,31 @@ prop-id-param  = "PROP-ID" "=" 1*255(ALPHA / DIGIT / "-"/ "_")
             <sourcecode name=""><![CDATA[
 PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
         <...remainder of base64-encoded data...>
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="param-script">
+        <name>SCRIPT</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>SCRIPT</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter defines the script in which a property value is written in.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t>This parameter allows defining a script for a property value without also defining a language as the LANGUAGE parameter would.  The value <bcp14>MUST</bcp14> be a Script Subtag as defined in <xref target="RFC5646" section="2.2.3"/>.  This specification makes use of the SCRIPT parameter in combination with the <xref target="param-phonetic">PHONETIC</xref> parameter. </t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+script-param = 4ALPHA
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+SCRIPT=Latn
 ]]></sourcecode>
           </dd>
         </dl>
@@ -667,6 +735,25 @@ ADR;TYPE=billing:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
       </section>
       <section anchor="value-adr-type-delivery">
         <name>Delivery Address Type Value</name>
+        <dl>
+          <dt>Value:</dt>
+          <dd>delivery</dd>
+          <dt>Purpose:</dt>
+          <dd>This indicates to use this address for delivery, e.g., to send packages to.</dd>
+          <dt>Conformance:</dt>
+          <dd>
+            <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <sourcecode name=""><![CDATA[
+ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
+      <section anchor="value-pronounce">
+        <name>Pronounce Value</name>
         <dl>
           <dt>Value:</dt>
           <dd>delivery</dd>
@@ -776,8 +863,18 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
             </tr>
             <tr>
               <td/>
+              <td align="left">PHONETIC</td>
+              <td align="left">This document, <xref target="param-phonetic"/></td>
+            </tr>
+            <tr>
+              <td/>
               <td align="left">PROP-ID</td>
               <td align="left">This document, <xref target="param-propid"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">SCRIPT</td>
+              <td align="left">This document, <xref target="param-script"/></td>
             </tr>
             <tr>
               <td/>
@@ -838,7 +935,7 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
           </tbody>
         </table>
       </section>
-      <section>
+      <section anchor="iana-vcard-param-values">
         <name>Changes to the "vCard Parameter Values" registry</name>
         <t>IANA is requested to add the following entries to the "vCard Parameter Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
         <table anchor="new_param_values">
@@ -864,9 +961,43 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
               <td align="left">delivery</td>
               <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
             </tr>
+            <tr>
+              <td align="left">ADR</td>
+              <td align="left">TYPE</td>
+              <td align="left">delivery</td>
+              <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
+            </tr>
+            <tr>
+              <td align="left">ADR, N</td>
+              <td align="left">PHONETIC</td>
+              <td align="left">ipa</td>
+              <td align="left">This document, <xref target="param-phonetic"/></td>
+            </tr>
+            <tr>
+              <td align="left">ADR, N</td>
+              <td align="left">PHONETIC</td>
+              <td align="left">jyut</td>
+              <td align="left">This document, <xref target="param-phonetic"/></td>
+            </tr>
+            <tr>
+              <td align="left">ADR, N</td>
+              <td align="left">PHONETIC</td>
+              <td align="left">piny</td>
+              <td align="left">This document, <xref target="param-phonetic"/></td>
+            </tr>
+            <tr>
+              <td align="left">ADR, N</td>
+              <td align="left">PHONETIC</td>
+              <td align="left">script</td>
+              <td align="left">This document, <xref target="param-phonetic"/></td>
+            </tr>
           </tbody>
         </table>
       </section>
+    </section>
+    <section>
+      <name>Acknowledgements</name>
+      <t>The definition and examples of the <xref target="param-phonetic">PHONETIC</xref> and <xref target="param-script">SCRIPT</xref> parameters are based on the initial version of <xref target="I-D.calconnect-vobject-i18n"/>.</t>
     </section>
   </middle>
   <back>
@@ -877,6 +1008,7 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.5234.xml"/>
+        <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
@@ -885,6 +1017,7 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
     </references>
     <references>
       <name>Informative References</name>
+      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-calconnect-vobject-i18n.xml"/>
       <reference anchor="CLDRPersonName" target="https://www.unicode.org/reports/tr35/tr35-personNames.html">
         <front>
           <title>Technical Standard #35: Unicode Locale Data Markup Language (LDML) Part 8: Person Names, Version 43.1</title>
@@ -909,6 +1042,12 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
           <date year="2023" month="July"/>
         </front>
       </reference>
+        <reference anchor="IPA" target="https://www.internationalphoneticalphabet.org/">
+          <front>
+            <title>International Phonetic Alphabet</title>
+            <author/>
+          </front>
+        </reference>
     </references>
   </back>
 </rfc>
