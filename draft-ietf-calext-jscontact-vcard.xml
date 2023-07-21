@@ -557,7 +557,7 @@ PRONOUNS;PREF=1:xe/xir
               </tr>
             </tbody>
           </table>
-          <t>If the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter is set, then the Name <tt>isOrdered</tt> property value is "true", and the <tt>defaultSeparator</tt> set and any separator name components according to the parameter value.  The <tt>components</tt> list <bcp14>MUST</bcp14> adhere to the order of the JSCOMPS parameter value.</t>
+          <t>If the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter is set, then the Name <tt>isOrdered</tt> property value is "true", and the <tt>defaultSeparator</tt> and any separator name components are set according to the parameter value.  The <tt>components</tt> list <bcp14>MUST</bcp14> adhere to the order of the JSCOMPS parameter value.</t>
           <t>If the JSCOMPS parameter is not set, then the Name <tt>isOrdered</tt> property value is "false" and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.  The <tt>components</tt> list <bcp14>MUST</bcp14> follow the order of values in the N structured value when read from left to right.</t>
           <t>If the SORT-AS parameter is set, then its structured value converts to the Name <tt>sortAs</tt> property according to <xref target="n_kind_conversion"/>.  An empty or non-existent component value indicates that no sort is defined for this kind.</t>
           <figure anchor="n_conversion">
@@ -583,7 +583,7 @@ N;SORT-AS="Stevenson,John Philip":Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.
 }
 ]]></artwork>
           </figure>
-<t>See <xref target="vcard-param-jscomps-example-n-secondary-index"/> for an example illustrating the JSCOMPS parameter.</t>
+          <t>See <xref target="vcard-param-jscomps-examples"/> for examples of using the JSCOMPS parameter for vCard structured property values.</t>
         </section>
         <section anchor="vcard-prop-nickname">
           <name>NICKNAME</name>
@@ -625,16 +625,15 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
         <name>Delivery Addressing Properties</name>
         <section anchor="vcard-prop-adr">
           <name>ADR</name>
-          <t>An ADR property converts to an entry in the <tt>addresses</tt> property (<xref target="adr_conversion"/>).  The entry value is an <tt>Address</tt> object.  The components of the structured ADR value type convert to AddressComponent objects.</t>
-          <t>The order of entries in the <tt>components</tt> property and the values of the <tt>defaultSeparator</tt> and <tt>isOrdered</tt> properties are defined by the value (or absence) of the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter.</t>
-          <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines additional components of the ADR property value, originally defined in <xref target="RFC6350" section="6.3.1"/>.  Applications <bcp14>SHOULD</bcp14> prefer converting these new address components over any entries in the ADR "street address" and "extended address" components.  If only the original address components defined in <xref target="RFC6350"/> are available, then implementations <bcp14>SHOULD</bcp14> attempt to split the values of the "street address" and "extended address" components into their constituent parts.  Otherwise, they <bcp14>MUST</bcp14> convert all of "street address" to AddressComponent kind <tt>name</tt>, and "extended address" to AddressComponent kind "apartment".</t>
-          <table anchor="adr_components_vs_street_component_items">
-            <name>ADR component to AddressComponent conversion</name>
+          <t>The ADR property converts to an Address object in the <tt>addresses</tt> property.  Each component in the ADR property structured value converts to an AddressComponent in the Address <tt>components</tt> property.</t>
+          <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines new component for the ADR property.  Implementations <bcp14>SHOULD</bcp14> set these new components, even if all of their values are the empty string.</t>
+          <t>The following table shows how ADR component and AddressComponent kind relate:</t>
+          <table anchor="adr_kind_conversion">
+            <name>ADR components conversion</name>
             <thead>
               <tr>
                 <th align="left">ADR component</th>
-                <th align="left">Single AddressComponent</th>
-                <th align="left">Combination of AddressComponent</th>
+                <th align="left">AddressComponent kind</th>
                 <th align="left">Remarks</th>
               </tr>
             </thead>
@@ -642,120 +641,117 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
               <tr>
                 <td align="left">post office box</td>
                 <td align="left">postOfficeBox</td>
-                <td align="left"/>
-                <td align="left"><xref target="RFC6350" section="6.3.1"/> recommends this ADR component to be empty.</td>
+                <td align="left"><xref target="RFC6350"/> recommends this component not be set, but this now is disputable given the new components.  Instead, set this component and use the new ADR value format defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">extended address</td>
-                <td align="left">apartment</td>
-                <td align="left">apartment, building, floor, room</td>
-                <td align="left"><xref target="RFC6350" section="6.3.1"/> recommends this ADR component to be empty.</td>
+                <td align="left">apartment (see Remarks)</td>
+                <td align="left"><t>To vCard: Do not set this component.</t><t>From vCard: Ignore if the ADR structured value is of the format defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.  Otherwise convert to <tt>apartment</tt>.</t></td>
               </tr>
               <tr>
                 <td align="left">street address</td>
-                <td align="left">name</td>
-                <td align="left">district, subdistrict, block, name, number, landmark, direction, apartment, building, floor, room</td>
-                <td align="left"/>
-              </tr>
+                <td align="left">name (see Remarks)</td>
+                <td align="left"><t>To vCard: Set the values of the following components:</t>
+                <ul>
+                  <li>room</li>
+                  <li>floor</li>
+                  <li>apartment</li>
+                  <li>number</li>
+                  <li>building</li>
+                  <li>name</li>
+                  <li>block</li>
+                  <li>direction</li>
+                  <li>landmark</li>
+                  <li>subdistrict</li>
+                  <li>district</li>
+                </ul>
+                <t>From vCard: Ignore if the ADR structured value is of the format defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.  Otherwise convert to <tt>name</tt>.</t></td>
+            </tr>
               <tr>
                 <td align="left">locality</td>
                 <td align="left">locality</td>
-                <td align="left"/>
                 <td align="left"/>
               </tr>
               <tr>
                 <td align="left">region</td>
                 <td align="left">region</td>
-                <td align="left"/>
                 <td align="left"/>
               </tr>
               <tr>
                 <td align="left">postal code</td>
                 <td align="left">postcode</td>
                 <td align="left"/>
-                <td align="left"/>
               </tr>
               <tr>
                 <td align="left">apartment</td>
                 <td align="left">apartment</td>
-                <td align="left"/>
-                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>. Prefer this over the extended address ADR component.</td>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">block</td>
                 <td align="left">block</td>
-                <td align="left"/>
                 <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">building</td>
                 <td align="left">building</td>
-                <td align="left"/>
                 <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">direction</td>
                 <td align="left">direction</td>
-                <td align="left"/>
                 <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">district</td>
                 <td align="left">district</td>
-                <td align="left"/>
                 <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">floor</td>
                 <td align="left">floor</td>
-                <td align="left"/>
-                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>. Prefer this over the extended address ADR component.</td>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">landmark</td>
                 <td align="left">landmark</td>
-                <td align="left"/>
                 <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">room</td>
                 <td align="left">room</td>
-                <td align="left"/>
-                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.  Prefer this over the extended address ADR component.</td>
+                <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">street number</td>
                 <td align="left">number</td>
-                <td align="left"/>
                 <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
               <tr>
                 <td align="left">subdistrict</td>
                 <td align="left">subdistrict</td>
-                <td align="left"/>
                 <td>Defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</td>
               </tr>
             </tbody>
           </table>
-          <t>The LABEL parameter converts to the <tt>full</tt> property.</t>
-          <t>The GEO parameter converts to the <tt>coordinates</tt> property.</t>
-          <t>The TZ parameter converts to the <tt>timeZone</tt> property.</t>
-          <t>The CC parameter as defined in <xref target="RFC8605"/> converts to the <tt>countryCode</tt> property.</t>
+          <t>If the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter is set, then the Address <tt>isOrdered</tt> property value is "true", and the <tt>defaultSeparator</tt> and any separator name components are set according to the parameter value.  The <tt>components</tt> list <bcp14>MUST</bcp14> adhere to the order of the JSCOMPS parameter value.</t>
+          <t>If the JSCOMPS parameter is not set, then the Address <tt>isOrdered</tt> property value is "false" and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.  The <tt>components</tt> list <bcp14>MUST</bcp14> follow the order of values in the ADR structured value when read from left to right.</t>
+          <t>The LABEL parameter converts to the Address <tt>full</tt> property.</t>
+          <t>The GEO parameter converts to the Address <tt>coordinates</tt> property.</t>
+          <t>The TZ parameter converts to the Address <tt>timeZone</tt> property.</t>
+          <t>The CC parameter as defined in <xref target="RFC8605"/> converts to the Address <tt>countryCode</tt> property.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.  The ADR-specific values of the TYPE parameter defined in Sections 5.1 and 5.2 of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> convert to the corresponding entries of the <tt>contexts</tt> property as defined in Section 2.5.1 of <xref target="I-D.ietf-calext-jscontact"/>.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.  Each possible language-dependent alternative is represented as an entry of the PatchObject map where the key references the <tt>full</tt> property.</t>
           <figure anchor="adr_conversion">
             <name>ADR conversion example</name>
             <artwork><![CDATA[
-ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA
-ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
+ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA;;;;Oak St;54321;;;;;
 
 "addresses": {
   "ADDR-1" : {
     "contexts": { "work": true },
-    "full": "54321 Oak St\nReston\nVA\n20190\nUSA",
     "components": [
       { "kind": "number", "value": "54321" },
-      { "kind": "separator", "value": " " },
       { "kind": "name", "value": "Oak St" },
       { "kind": "locality", "value": "Reston" },
       { "kind": "region", "value": "VA" },
@@ -763,25 +759,11 @@ ADR;TYPE=home;CC=US:;;12345 Elm St;Reston;VA;20190;USA
       { "kind": "country", "value": "USA" }
     ],
     "countryCode": "US",
-    "defaultSeparator": "\n"
-  },
-  "ADDR-2": {
-    "contexts": { "private": true },
-    "full":  "12345 Elm St Reston VA 20190 USA",
-    "components": [
-      { "kind": "number", "value": "12345" },
-      { "kind": "name", "value": "Elm St" },
-      { "kind": "locality", "value": "Reston" },
-      { "kind": "region", "value": "VA" },
-      { "kind": "postcode", "value": "20190" },
-      { "kind": "country", "value": "USA" }
-    ],
-    "countryCode": "US",
-    "defaultSeparator": " "
   }
 }
 ]]></artwork>
           </figure>
+          <t>See <xref target="vcard-param-jscomps-examples"/> for examples of using the JSCOMPS parameter for vCard structured property values.</t>
         </section>
       </section>
       <section>
@@ -1723,7 +1705,7 @@ jscomps-entry-sep  = "s" "," jscomps-entry-verb
 jscomps-entry-verb = *QSAFE-CHAR
 ]]></sourcecode>
             </dd>
-            <dt>Example(s):</dt>
+            <dt anchor="vcard-param-jscomps-examples">Example(s):</dt>
             <dd>
               <t>The following example demonstrates the use of positional entries for the name "Jane Doe".  The given name is ordered before the surname.  No secondary index is required for either positional because both are zero.</t>
               <figure anchor="vcard-param-jscomps-example-positional">
