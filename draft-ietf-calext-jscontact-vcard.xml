@@ -296,6 +296,73 @@ TITLE;LANGUAGE=fr:Patron
           <name>MEDIATYPE</name>
           <t>This converts to the <tt>mediaType</tt> property of the <tt>Resource</tt> object type.</t>
         </section>
+        <section anchor="vcard-param-phonetic">
+          <name>PHONETIC</name>
+          <t>This converts to the <tt>pronounce</tt> property of a NameComponent or AddressComponent.  The conversion rules for the <xref target="vcard-prop-n">N</xref> and <xref target="vcard-prop-adr">ADR</xref> properties define how the vCard components convert to JSContact.</t>
+          <t>The value of the PHONETIC parameter converts the Pronounce <tt>system</tt> property unless it is <tt>script</tt>.  If it is <tt>script</tt>, then the <tt>system</tt> property is not set.</t>
+          <t>The value of the SCRIPT parameter converts to the Pronounce <tt>script</tt> property.</t>
+          <t>The value of the component in the property value converts to the Pronounce <tt>phonetic</tt> property.</t>
+          <t>If more than one property having the PHONETIC parameter set relates to the same property, then they convert to the Card <tt>localizations</tt> property according their LANGUAGE parameter values as outlined in <xref target="vcard-param-language"/>.</t>
+          <figure anchor="phonetic_conversion">
+            <name>PHONETIC conversion example</name>
+            <artwork><![CDATA[
+N;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;
+N;PHONETIC=jyut;SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;
+
+"language": "zho-Hant",
+"name": {
+  "components": [
+    { "kind": "surname", "value": "孫" },
+    { "kind": "given", "value": "中山" },
+    { "kind": "given2", "value": "文" },
+    { "kind": "given2", "value": "逸仙" }
+  ]
+},
+"localizations": {
+  "yue": {
+    "name/components": [
+      {
+        "kind": "surname",
+        "value": "孫",
+        "pronounce": {
+          "phonetic": "syun1",
+          "system": "jyut",
+          "script": "Latn"
+        }
+      },
+      {
+        "kind": "given",
+        "value": "中山",
+        "pronounce": {
+          "phonetic": "zung1saan1",
+          "system": "jyut",
+          "script": "Latn"
+        }
+      },
+      {
+        "kind": "given2",
+        "value": "文",
+        "pronounce": {
+          "phonetic": "man4",
+          "system": "jyut",
+          "script": "Latn"
+        }
+      },
+      {
+        "kind": "given2",
+        "value": "逸仙",
+        "pronounce": {
+          "phonetic": "jat6sin1",
+          "system": "jyut",
+          "script": "Latn"
+        }
+      }
+    ]
+  }
+}
+]]></artwork>
+          </figure>
+        </section>
         <section anchor="vcard-param-pid">
           <name>PID</name>
           <t>This converts to an entry in the <tt>vCardParams</tt> property, see <xref target="jscontact-prop-vcardparams"/>.</t>
@@ -330,6 +397,10 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
 ]]></artwork>
           </figure>
           <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+        </section>
+        <section anchor="vcard-param-script">
+          <name>SCRIPT</name>
+          <t>See <xref target="vcard-param-phonetic"/>.</t>
         </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
@@ -1556,10 +1627,6 @@ IMPP:xmpp:alice@example.com
           </li>
           <li>Vendor-specific and unknown properties convert to vCard as outlined in <xref target="jscontact-convert-unknown"/>.</li>
         </ul>
-        <section anchor="jscontact-pronounce">
-          <name>Converting the <tt>Pronounce</tt> object</name>
-          <t>The Pronounce type has no standard vCard element to convert to.  An initial RFC draft <xref target="I-D.calconnect-vobject-i18n"/> for adding phonetics to vCard exists but has not been further developed.  In lack of standard vCard support, any JSContact property of type Pronounce converts to a vCard JSPROP as outlined in <xref target="jscontact-convert-unknown"/>.</t>
-        </section>
         <section anchor="jscontact-convert-unknown">
           <name>Converting unknown properties</name>
           <t>JSContact object types may contain properties for which no IANA-registered vCard property is defined.  For example, a JSContact object may contain vendor-specific properties of which the semantics or purpose are unknown.</t>
@@ -1800,6 +1867,10 @@ JSPROP;JSPTR="example.com:foo":"bar"
     <section anchor="security-considerations">
       <name>Security Considerations</name>
       <t>This specification defines how to convert between the JSContact and vCard formats.  The security considerations for parsing and formatting such data apply and are outlined in <xref target="I-D.ietf-calext-jscontact" section="5"/> and <xref target="RFC6350" section="9"/>.</t>
+    </section>
+    <section>
+      <name>Acknowledgements</name>
+      <t>The definition and examples of the <xref target="vcard-param-phonetic">PHONETIC</xref> and <xref target="vcard-param-script">SCRIPT</xref> parameters are based on the initial version of <xref target="I-D.calconnect-vobject-i18n"/>.</t>
     </section>
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
@@ -2075,13 +2146,6 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Address</td>
-            <td>pronounce</td>
-            <td>
-              <xref target="jscontact-pronounce"/>
-            </td>
-          </tr>
-          <tr>
-            <td>Address</td>
             <td>region</td>
             <td>
               <xref target="vcard-prop-adr"/>
@@ -2096,7 +2160,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
             <td>AddressComponent</td>
             <td>pronounce</td>
             <td>
-              <xref target="jscontact-pronounce"/>
+              <xref target="vcard-param-phonetic"/>
             </td>
           </tr>
           <tr>
@@ -2648,13 +2712,6 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Name</td>
-            <td>pronounce</td>
-            <td>
-              <xref target="jscontact-pronounce"/>
-            </td>
-          </tr>
-          <tr>
-            <td>Name</td>
             <td>sortAs</td>
             <td>
               <xref target="vcard-param-sortas"/>
@@ -2676,7 +2733,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
             <td>NameComponent</td>
             <td>pronounce</td>
             <td>
-              <xref target="jscontact-pronounce"/>
+              <xref target="vcard-param-phonetic"/>
             </td>
           </tr>
           <tr>
@@ -2944,6 +3001,29 @@ JSPROP;JSPTR="example.com:foo":"bar"
             <td>
               <xref target="vcard-param-pref"/>
             </td>
+          </tr>
+          <tr>
+            <td>Pronounce</td>
+            <td>@type</td>
+            <td>not applicable</td>
+          </tr>
+          <tr>
+            <td>Pronounce</td>
+            <td>phonetic</td>
+            <td><xref target="vcard-param-phonetic"/></td>
+          </tr>
+          <tr>
+            <td>Pronounce</td>
+            <td>script</td>
+            <td>
+<xref target="vcard-param-phonetic"/>,
+<xref target="vcard-param-script"/>
+</td>
+          </tr>
+          <tr>
+            <td>Pronounce</td>
+            <td>system</td>
+            <td><xref target="vcard-param-phonetic"/></td>
           </tr>
           <tr>
             <td>Pronouns</td>
