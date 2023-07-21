@@ -227,11 +227,12 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
             </li>
             <li>
               <t>phonetics: <tt>String</tt> (mandatory).
-Contains the phonetic representation of a value.  The script or phonetic system used <bcp14>SHOULD</bcp14> be indicated in the <tt>script</tt> or <tt>system</tt> property.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetics</tt> property.</t>
+Contains the phonetic representation of a value.  The script or phonetic system used <bcp14>MUST</bcp14> be indicated in the <tt>script</tt> or <tt>system</tt> property.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetics</tt> property.</t>
             </li>
             <li>
               <t>script: <tt>String</tt> (optional).
-The script used for value of the <tt>phonetics</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
+                The script used for value of the <tt>phonetics</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
+              <t>This property <bcp14>MUST</bcp14> be set, if the <tt>system</tt> property is not set.</t>
             </li>
             <li>
               <t>system: <tt>String</tt> (optional).
@@ -241,6 +242,7 @@ The phonetic system used for the value of the <tt>phonetics</tt> property.  This
                 <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
                 <li><tt>jyut</tt>: denotes the Cantonese romanization system "Jyutping".</li>
               </ul>
+              <t>This property <bcp14>MUST</bcp14> be set if the <tt>script</tt> property is not set.</t>
             </li>
           </ul>
           <t>The following example shows how to define pronunciation for a <xref target="name">surname</xref>:</t>
