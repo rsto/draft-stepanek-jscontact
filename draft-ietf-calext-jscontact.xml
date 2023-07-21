@@ -226,17 +226,17 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
               <t>@type: <tt>String</tt>.  This <bcp14>MUST</bcp14> be "Pronounce"", if set.</t>
             </li>
             <li>
-              <t>phonetics: <tt>String</tt> (mandatory).
-Contains the phonetic representation of a value.  The script or phonetic system used <bcp14>MUST</bcp14> be indicated in the <tt>script</tt> or <tt>system</tt> property.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetics</tt> property.</t>
+              <t>phonetic: <tt>String</tt> (mandatory).
+Contains the phonetic representation of a value.  The script or phonetic system used <bcp14>MUST</bcp14> be indicated in the <tt>script</tt> or <tt>system</tt> property.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetic</tt> property.</t>
             </li>
             <li>
               <t>script: <tt>String</tt> (optional).
-                The script used for value of the <tt>phonetics</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
+                The script used for value of the <tt>phonetic</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
               <t>This property <bcp14>MUST</bcp14> be set, if the <tt>system</tt> property is not set.</t>
             </li>
             <li>
               <t>system: <tt>String</tt> (optional).
-The phonetic system used for the value of the <tt>phonetics</tt> property.  This <bcp14>MAY</bcp14> be any string, but this specification reserves the following <xref target="enumerated-values">enumerated values</xref>:</t>
+The phonetic system used for the value of the <tt>phonetic</tt> property.  This <bcp14>MAY</bcp14> be any string, but this specification reserves the following <xref target="enumerated-values">enumerated values</xref>:</t>
               <ul>
                 <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
                 <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
@@ -253,7 +253,7 @@ The phonetic system used for the value of the <tt>phonetics</tt> property.  This
   "kind": "surname",
   "value": "Smith",
   "pronounce": {
-    "phonetics": "/smɪθ/",
+    "phonetic": "/smɪθ/",
     "system": "ipa"
   }
 }
@@ -2327,7 +2327,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">phonetics</td>
+                <td align="left">phonetic</td>
                 <td align="left">String</td>
                 <td align="left">Pronounce</td>
                 <td align="left">
