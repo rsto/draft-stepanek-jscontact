@@ -462,6 +462,20 @@ ANNIVERSARY:19860201
 ]]></artwork>
           </figure>
         </section>
+        <section anchor="vcard-prop-fn">
+          <name>FN</name>
+          <t>The FN property converts to the Name object <tt>full</tt> property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case that the vCard contains more than one FN property without LANGUAGE parameter, then convert the FN property that has the least amount of parameters set to the <tt>full</tt> property.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops"><tt>vCardProps</tt></xref> property.</t>
+          <figure anchor="fn_conversion">
+            <name>FN conversion example</name>
+            <artwork><![CDATA[
+FN:John Q. Public, Esq.
+
+"name": {
+  "full": "John Q. Public, Esq.",
+}
+]]></artwork>
+          </figure>
+        </section>
         <section anchor="vcard-prop-gender">
           <name>GENDER</name>
           <t>This does not map to an IANA-registered property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Note the alternative JSContact <tt>speakToAs</tt> property which defines how to address and refer to an individual represented by the card, as do the newly defined vCard GRAMGENDER and PRONOUNS properties of <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
@@ -493,75 +507,93 @@ PRONOUNS;PREF=1:xe/xir
 ]]></artwork>
           </figure>
         </section>
-        <section anchor="vcard-prop-fn">
-          <name>FN</name>
-          <t>All the FN instances are represented through the Name object <tt>full</tt> property (<xref target="fn_n_nickname_conversion"/>).  The presence of multiple instances is implicitly associated with the full name translation in various languages regardless of the presence of the ALTID parameter.  Each translation converts according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-        </section>
         <section anchor="vcard-prop-n">
-          <name>N and NICKNAME</name>
-          <t>The N instances convert to equivalent items of the <tt>components</tt> array of the <tt>name</tt> property (<xref target="fn_n_nickname_conversion"/>): the N components convert into related <tt>NameComponent</tt> objects as presented in <xref target="n_components"/>.</t>
-          <t>The order of entries in the <tt>components</tt> property and the values of the <tt>defaultSeparator</tt> and <tt>isOrdered</tt> properties are defined by the value (or absence) of the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter.</t>
-          <t>Each comma-separated item of the SORT-AS parameter value converts to an entry of the <tt>sortAs</tt> property where the key is the "kind" value related to the sorted N component and the value is the corresponding item.  Absence of a key in the <tt>sortAs</tt> indicates that its related part in the SORT-AS parameter value <bcp14>MUST</bcp14> either the empty string followed by COMMA, or no further SORT-AS parts are defined.</t>
-          <table anchor="n_components">
+          <name>N</name>
+          <t>The N property converts to the Name object <tt>components</tt> property.  Each component in the N property structured value relates to a NameComponent kind.  The following table shows this relation:</t>
+          <table anchor="n_kind_conversion">
             <name>N components conversion</name>
             <thead>
               <tr>
                 <th align="left">N component</th>
-                <th align="left">"kind" value</th>
+                <th align="left">NameComponent kind</th>
                 <th align="left">Remarks</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td align="left">Honorific Prefixes</td>
-                <td align="left">title</td>
-                <td align="left"/>
+                <td align="left">Family name</td>
+                <td align="left">surname</td>
+                <td align="left">To vCard: add any <tt>surname2</tt> NameComponent value in here, after all <tt>surname</tt> values.<br/>From vCard: ignore any value that also occurs in the Secondary surname component.</td>
               </tr>
               <tr>
-                <td align="left">Given Names</td>
+                <td align="left">Given name</td>
                 <td align="left">given</td>
                 <td align="left"/>
               </tr>
               <tr>
-                <td align="left">Family Names</td>
-                <td align="left">surname, surname2</td>
-                <td align="left">The first Family Names item converts to the "surname" NameComponent kind, any additional items to the "surname2" kind.</td>
-              </tr>
-              <tr>
-                <td align="left">Additional Names</td>
+                <td align="left">Additional name</td>
                 <td align="left">given2</td>
                 <td align="left"/>
               </tr>
               <tr>
-                <td align="left">Honorific Suffixes</td>
-                <td align="left">credential, generation</td>
-                <td align="left">vCard does not distinguish between generation qualifiers (such as "Jr.") and credentials (such as "Esq.").  Distinguishing these is language-specific and left to implementations. For example, United States names uses generational qualifiers such as "Jr.", "Sr.", French uses "père" (father) and "fils" (son).  Roman numerals such as "III" and "XIV" typically also are generational qualifiers.</td>
+                <td align="left">Honorific prefix</td>
+                <td align="left">title</td>
+                <td align="left"/>
+              </tr>
+              <tr>
+                <td align="left">Honorific suffix</td>
+                <td align="left">credential</td>
+                <td align="left">To vCard: add any <tt>generation</tt> NameComponent value also in here.<br/>From vCard: ignore any value that also occurs in the Generation component.</td>
+              </tr>
+              <tr>
+                <td align="left">Secondary surname</td>
+                <td align="left">surname2</td>
+                <td align="left"/>
+              </tr>
+              <tr>
+                <td align="left">Generation</td>
+                <td align="left">generation</td>
+                <td align="left"/>
               </tr>
             </tbody>
           </table>
-          <t>A NICKNAME property converts to an entry in the <tt>nickNames</tt> property (<xref target="fn_n_nickname_conversion"/>).  The entry value is a <tt>NickName</tt> object.  The <tt>name</tt> property is set to the NICKNAME value.</t>
-          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
-          <figure anchor="fn_n_nickname_conversion">
-            <name>FN, N, NICKNAME conversion example</name>
+          <t>If the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter is set, then the Name <tt>isOrdered</tt> property value is "true", and the <tt>defaultSeparator</tt> set and any separator name components according to the parameter value.  The <tt>components</tt> list <bcp14>MUST</bcp14> adhere to the order of the JSCOMPS parameter value.</t>
+          <t>If the JSCOMPS parameter is not set, then the Name <tt>isOrdered</tt> property value is "false" and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.  The <tt>components</tt> list <bcp14>MUST</bcp14> follow the order of values in the N structured value when read from left to right.</t>
+          <t>If the SORT-AS parameter is set, then its structured value converts to the Name <tt>sortAs</tt> property according to <xref target="n_kind_conversion"/>.  An empty or non-existent component value indicates that no sort is defined for this kind.</t>
+          <figure anchor="n_conversion">
+            <name>N conversion example</name>
             <artwork><![CDATA[
-FN:John Q. Public, Esq.
-N;SORT-AS="Public,John":Public;John;Quinlan;Mr.;Esq.
-NICKNAME:Johnny
+N;SORT-AS="Stevenson,John Philip":Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.
 
 "name": {
-  "full": "Mr.  John Q.  Public, Esq.",
   "components":[
-    { "kind": "title", "value": "Mr." },
-    { "kind": "given", "value": "John Q." },
-    { "kind": "surname", "value": "Public" },
-    { "kind": "given2", "value": "Quinlan" },
-    { "kind": "credential", "value": "Esq." }
+    { "kind": "surname", "value": "Stevenson" },
+    { "kind": "given", "value": "John" },
+    { "kind": "given2", "value": "Philip" },
+    { "kind": "given2", "value": "Paul" },
+    { "kind": "title", "value": "Dr." },
+    { "kind": "credential", "value": "M.D." },
+    { "kind": "credential", "value": "A.C.P." },
+    { "kind": "generation", "value": "Jr." }
   ],
   "sortAs": {
-    "surname": "Public",
-    "given": "John"
+    "surname": "Stevenson",
+    "given": "John Philip"
   }
-},
+}
+]]></artwork>
+          </figure>
+<t>See <xref target="vcard-param-jscomps-example-n-secondary-index"/> for an example illustrating the JSCOMPS parameter.</t>
+        </section>
+        <section anchor="vcard-prop-nickname">
+          <name>NICKNAME</name>
+          <t>A NICKNAME property converts to Nickname object in the <tt>nickNames</tt> property (<xref target="nickname_conversion"/>).  The <tt>name</tt> property is set to the NICKNAME property value.</t>
+          <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
+          <figure anchor="nickname_conversion">
+            <name>NICKNAME conversion example</name>
+            <artwork><![CDATA[
+NICKNAME:Johnny
+
 "nickNames": {
    "NICK-1": {
     "name": "Johnny"
@@ -1655,7 +1687,7 @@ JSPROP;JSPTR="phones/phone1/example.com:foo~1bar":
               <ol>
                 <li>
                   <t>A positional.  This refers to a component value in the vCard structured value   A position consists of the numeric index of a component in the structured value, optionally followed by a COMMA (U+002C) character and the non-zero index of a value within that component.  The zero index selects the first component or value, respectively.  The second index by default is zero, in which case it <bcp14>MUST</bcp14> be omitted (as well as the leading COMMA).</t>
-                  <t>The resulting JSContact component is formed by determining its kind by the position in the vCard structured value.  The component value is the verbatim value of the vCard component.  <xref target="vcard-param-jscomps-example-positional"/> and <xref target="vcard-param-jscomps-example-secondary-index"/> illustrate this by example.</t>
+                  <t>The resulting JSContact component is formed by determining its kind by the position in the vCard structured value.  The component value is the verbatim value of the vCard component.  <xref target="vcard-param-jscomps-example-positional"/> and <xref target="vcard-param-jscomps-example-n-secondary-index"/> illustrate this by example.</t>
                 </li>
                 <li>
                   <t>A separator.  This contains the verbatim value of a separator component.  It starts with the LATIN SMALL LETTER S (U+0073) character, followed by COMMA (U+002C), followed by zero or more <xref target="RFC6350" section="3.3"><tt>param-value</tt></xref> characters, where the COMMA (U+002c) and SEMICOLON (U+003B) character <bcp14>MUST</bcp14> be escaped according to the rules defined in <xref target="RFC6350" section="3.4"/>.  <xref target="vcard-param-jscomps-example-separator"/> illustrates this by example.</t>
@@ -1710,7 +1742,7 @@ FN;DERIVED=TRUE:Jane Doe
 ]]></sourcecode>
               </figure>
               <t>The following example demonstrates a secondary positional index.  The "Jr." generation marker only counts once because it occurs in both the designated generation component and the backwards-compatible honorifix suffixes component.</t>
-              <figure anchor="vcard-param-jscomps-example-secondary-index">
+              <figure anchor="vcard-param-jscomps-example-n-secondary-index">
                 <name>Example for positional entries</name>
                 <sourcecode name=""><![CDATA[
 "name": {
@@ -1726,7 +1758,6 @@ FN;DERIVED=TRUE:Jane Doe
 }
 
 N;JSCOMPS=";1;2;2,1;0;6;4,1":Stevenson;John;Philip,Paul;;Jr.,M.D.;;Jr.
-FN;DERIVED=TRUE:John Philip Paul Stevenson Jr. M.D.
 ]]></sourcecode>
               </figure>
               <t>The following example demonstrates the use of separator entries for the (shortened for brevity) address "54321 Oak St, Reston". The first entry defines the default separator to be ", ".  The second and fourth positional entries are separated with the separator value " ".  For backwards-compatibility, the street address component of the ADR property contains both the street number and name, but it is not referred to in the JSCOMPS parameter and does not contribute to the count of values.</t>
