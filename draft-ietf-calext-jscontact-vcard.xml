@@ -464,7 +464,7 @@ ANNIVERSARY:19860201
         </section>
         <section anchor="vcard-prop-fn">
           <name>FN</name>
-          <t>The FN property converts to the Name object <tt>full</tt> property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case that the vCard contains more than one FN property without LANGUAGE parameter, then convert the FN property that has the least amount of parameters set to the <tt>full</tt> property.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops"><tt>vCardProps</tt></xref> property.</t>
+          <t>The FN property converts to the Name object in the <tt>name</tt> property.  Its value converts to the Name object <tt>full</tt> property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case that the vCard contains more than one FN property without LANGUAGE parameter, then convert the FN property that has the least amount of parameters set to the <tt>full</tt> property.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops"><tt>vCardProps</tt></xref> property.</t>
           <figure anchor="fn_conversion">
             <name>FN conversion example</name>
             <artwork><![CDATA[
@@ -509,7 +509,7 @@ PRONOUNS;PREF=1:xe/xir
         </section>
         <section anchor="vcard-prop-n">
           <name>N</name>
-          <t>The N property converts to the Name object <tt>components</tt> property.  Each component in the N property structured value relates to a NameComponent kind.  The following table shows this relation:</t>
+          <t>The N property converts to the Name object in the <tt>name</tt> property.  Each component in the N property structured value converts to a NameComponent in the Name <tt>components</tt> property.  The following table shows this relation:</t>
           <table anchor="n_kind_conversion">
             <name>N components conversion</name>
             <thead>
