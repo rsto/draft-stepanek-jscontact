@@ -217,45 +217,44 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>Its value <bcp14>MUST</bcp14> be in the range 1 and 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference only is defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are independent of each other.</t>
         </section>
-        <section anchor="prop-pronounce" numbered="true" toc="default">
-          <name>pronounce</name>
-          <t>Type: <tt>Pronounce</tt></t>
-          <t>This property defines how to pronounce a value in the language indicated in the Card <xref target="language">language</xref> property or the language tag of its <xref target="localizations">localizations</xref>.  Exemplary uses are to define how to pronounce Japanese names, or for romanization of Mandarin or Cantonese name and address components.  A Pronounce object has the following properties:</t>
+        <section anchor="prop-phonetic" numbered="true" toc="default">
+          <name>phonetic</name>
+          <t>This property defines how to pronounce a value in the language indicated in the Card <xref target="language">language</xref> property or the language tag of its <xref target="localizations">localizations</xref>.  Exemplary uses are to define how to pronounce Japanese names, or for romanization of Mandarin or Cantonese name and address components.  The properties are defined as follows:</t>
           <ul spacing="normal">
             <li>
-              <t>@type: <tt>String</tt>.  This <bcp14>MUST</bcp14> be "Pronounce"", if set.</t>
+              <t>phonetic: <tt>String</tt>.
+                Contains the phonetic representation of a value.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetic</tt> property.  If this property is set, then at least one of the <tt>phoneticScript</tt> or <tt>phoneticSystem</tt> properties that relate to this value <bcp14>MUST</bcp14> be set.</t>
             </li>
             <li>
-              <t>phonetic: <tt>String</tt> (mandatory).
-Contains the phonetic representation of a value.  The script or phonetic system used <bcp14>MUST</bcp14> be indicated in the <tt>script</tt> or <tt>system</tt> property.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetic</tt> property.</t>
+              <t>phoneticScript: <tt>String</tt> (optional).
+                The script used in the value of the related <tt>phonetic</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
             </li>
             <li>
-              <t>script: <tt>String</tt> (optional).
-                The script used for value of the <tt>phonetic</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
-              <t>This property <bcp14>MUST</bcp14> be set, if the <tt>system</tt> property is not set.</t>
-            </li>
-            <li>
-              <t>system: <tt>String</tt> (optional).
-The phonetic system used for the value of the <tt>phonetic</tt> property.  This <bcp14>MAY</bcp14> be any string, but this specification reserves the following <xref target="enumerated-values">enumerated values</xref>:</t>
+              <t>phoneticSystem: <tt>String</tt> (optional).
+              The phonetic system used in the related value of the <tt>phonetic</tt> property.  The <xref target="enumerated-values">enumerated values</xref> are:</t>
               <ul>
                 <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
                 <li><tt>jyut</tt>: denotes the Cantonese romanization system "Jyutping".</li>
                 <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
               </ul>
-              <t>This property <bcp14>MUST</bcp14> be set if the <tt>script</tt> property is not set.</t>
             </li>
           </ul>
-          <t>The following example shows how to define pronunciation for a <xref target="name">surname</xref>:</t>
-          <figure anchor="example-pronounce">
-            <name>Example of a <tt>Pronounce</tt> object for the name "Smith" in English</name>
+          <t>The relation between the <tt>phoneticSystem</tt>, <tt>phoneticScript</tt> and <tt>phonetic</tt> properties is type-specific.  This specification defines this relation in the <xref target="name">Name</xref> and <xref target="addresses">Address</xref> object types, respectively.</t>
+          <t>The following example illustrates the <tt>phonetic</tt> property for a <xref target="name">name</xref>:</t>
+          <figure anchor="example-phonetic">
+            <name>Example of <tt>phonetic</tt> for the name "John Smith" as pronounced in the USA.</name>
             <sourcecode name="" type="json"><![CDATA[
-{
-  "kind": "surname",
-  "value": "Smith",
-  "pronounce": {
-    "phonetic": "/smɪθ/",
-    "system": "ipa"
-  }
+"name": {
+  "components": [{
+    "kind": "given",
+    "value": "John",
+    "phonetic": "/ˈdʒɑːn/"
+  }, {
+    "kind": "surname",
+    "value": "Smith",
+    "phonetic": "/smɪθ/"
+  }],
+  "phoneticSystem": "ipa"
 }
 ]]></sourcecode>
           </figure>
@@ -679,6 +678,14 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 ]]></sourcecode>
                 </figure>
               </li>
+              <li>
+                <t>phoneticScript: <tt>String</tt> (optional).
+                The script used in the value of the NameComponent <tt>phonetic</tt> property.  Also see <xref target="prop-phonetic"/>.</t>
+              </li>
+              <li>
+                <t>phoneticSystem: <tt>String</tt> (optional).
+              The phonetic system used in the NameComponent <tt>phonetic</tt> property.  Also      see <xref target="prop-phonetic"/>.</t>
+              </li>
             </ul>
           </section>
           <section anchor="namecomponent">
@@ -705,7 +712,7 @@ The value of this name component.  This can be composed of one or multiple words
                   <li><tt>separator</tt>.  A formatting separator between two ordered name non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </li>
-              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this name component.  Also see <xref target="prop-pronounce"/>.</li>
+              <li>phonetic: <tt>String</tt> (optional).  This defines how to pronounce this name component.  If this property is set, then at least one of the Name object <tt>phoneticSystem</tt> or <tt>phoneticScript</tt> properties <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</li>
             </ul>
           </section>
           <section anchor="nickNames" numbered="true" toc="default">
@@ -1184,6 +1191,14 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
               <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
+              <li>
+                <t>phoneticScript: <tt>String</tt> (optional).
+                The script used in the value of the AddressComponent <tt>phonetic</tt> property.  Also see <xref target="prop-phonetic"/>.</t>
+              </li>
+              <li>
+                <t>phoneticSystem: <tt>String</tt> (optional).
+              The phonetic system used in the AddressComponent <tt>phonetic</tt> property.  Also      see <xref target="prop-phonetic"/>.</t>
+              </li>
             </ul>
             <t>The following example illustrates the use of the <tt>address</tt> property.  Additional examples are in <xref target="address-examples"/>.</t>
             <figure anchor="example-address-us">
@@ -1245,7 +1260,7 @@ The value of this address component.</li>
                   <li><tt>separator</tt>.  A formatting separator between two ordered address non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </li>
-              <li>pronounce: <tt>Pronounce</tt> (optional).  This defines how to pronounce this address component.  Also see <xref target="prop-pronounce"/>.</li>
+              <li>phonetic: <tt>String</tt> (optional).  This defines how to pronounce this name component.  If this property is set, then at least one of the Address object <tt>phoneticSystem</tt> or <tt>phoneticScript</tt> properties <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</li>
             </ul>
           </section>
           <section anchor="address-examples">
@@ -2173,10 +2188,8 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">language</td>
                 <td align="left">String</td>
                 <td align="left">Card, LanguagePref</td>
-                <td align="left">
-                  <xref target="language" format="default"/>,
-                  <xref target="preferredLanguages" format="default"/>
-                </td>
+                <td align="left"><xref target="language" format="default"/>,
+                  <xref target="preferredLanguages" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">level</td>
@@ -2327,10 +2340,23 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
               <tr>
                 <td align="left">phonetic</td>
                 <td align="left">String</td>
-                <td align="left">Pronounce</td>
-                <td align="left">
-                  <xref target="prop-pronounce" format="default"/>
-                </td>
+                <td align="left">AddressComponent, NameComponent</td>
+                <td align="left"><xref target="addresscomponent" format="default"/>,
+                  <xref target="namecomponent" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">phoneticScript</td>
+                <td align="left">String</td>
+                <td align="left">Address, Name</td>
+                <td align="left"><xref target="name" format="default"/>,
+                  <xref target="addresses" format="default"/></td>
+              </tr>
+              <tr>
+                <td align="left">phoneticSystem</td>
+                <td align="left">String</td>
+                <td align="left">Address, Name</td>
+                <td align="left"><xref target="name" format="default"/>,
+                  <xref target="addresses" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">place</td>
@@ -2361,13 +2387,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">
                   <xref target="prodId" format="default"/>
                 </td>
-              </tr>
-              <tr>
-                <td align="left">pronounce</td>
-                <td align="left">Pronounce</td>
-                <td align="left">AddressComponent, NameComponent</td>
-                <td align="left"><xref target="addresses" format="default"/>,
-                  <xref target="name" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">pronouns</td>
@@ -2402,14 +2421,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 </td>
               </tr>
               <tr>
-                <td align="left">script</td>
-                <td align="left">String</td>
-                <td align="left">Pronounce</td>
-                <td align="left">
-                  <xref target="prop-pronounce" format="default"/>
-                </td>
-              </tr>
-              <tr>
                 <td align="left">service</td>
                 <td align="left">String</td>
                 <td align="left">OnlineService</td>
@@ -2439,14 +2450,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Card</td>
                 <td align="left">
                   <xref target="speakToAs" format="default"/>
-                </td>
-              </tr>
-              <tr>
-                <td align="left">system</td>
-                <td align="left">String</td>
-                <td align="left">Pronounce</td>
-                <td align="left">
-                  <xref target="prop-pronounce" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2750,12 +2753,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">Phone</td>
                 <td align="left">
                   <xref target="phones" format="default"/>
-                </td>
-              </tr>
-              <tr>
-                <td align="left">Pronounce</td>
-                <td align="left">
-                  <xref target="prop-pronounce" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -3736,13 +3733,13 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
-            <dd>system</dd>
+            <dd>phoneticSystem</dd>
             <dt>Context:</dt>
-            <dd>Pronounce</dd>
+            <dd>Address, Name</dd>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-pronounce-system" align="left">
-                <name>JSContact Enum Values for system (Context: Pronounce)</name>
+                <name>JSContact Enum Values for system (Context: Address, Name)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
@@ -3753,19 +3750,19 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                   <tr>
                     <td align="left">ipa</td>
                     <td align="left">
-                      <xref target="prop-pronounce" format="default"/>
+                      <xref target="prop-phonetic" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">jyut</td>
                     <td align="left">
-                      <xref target="prop-pronounce" format="default"/>
+                      <xref target="prop-phonetic" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">piny</td>
                     <td align="left">
-                      <xref target="prop-pronounce" format="default"/>
+                      <xref target="prop-phonetic" format="default"/>
                     </td>
                   </tr>
                 </tbody>
