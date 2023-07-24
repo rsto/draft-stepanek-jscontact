@@ -298,16 +298,18 @@ TITLE;LANGUAGE=fr:Patron
         </section>
         <section anchor="vcard-param-phonetic">
           <name>PHONETIC</name>
-          <t>This converts to the <tt>pronounce</tt> property of a NameComponent or AddressComponent.  The conversion rules for the <xref target="vcard-prop-n">N</xref> and <xref target="vcard-prop-adr">ADR</xref> properties define how the vCard components convert to JSContact.</t>
-          <t>The value of the PHONETIC parameter converts the Pronounce <tt>system</tt> property unless it is <tt>script</tt>.  If it is <tt>script</tt>, then the <tt>system</tt> property is not set.</t>
-          <t>The value of the SCRIPT parameter converts to the Pronounce <tt>script</tt> property.</t>
-          <t>The value of the component in the property value converts to the Pronounce <tt>phonetic</tt> property.</t>
+          <t>This parameter as well as the <xref target="vcard-param-script">SCRIPT</xref> parameter set on a N or ADR property convert to JSContact as follows:</t>
+          <t>the values of the <tt>phonetic</tt>, <tt>phoneticScript</tt> and <tt>phoneticSystem</tt> properties of the NameComponent and Name or AddressComponent and Address object types, respectively.</t>
+          <t>The related N or ADR property is defined by the vCard ALTID parameter. The conversion rules for the <xref target="vcard-prop-n">N</xref> and <xref target="vcard-prop-adr">ADR</xref> properties define how the vCard components convert to JSContact.</t>
+          <t>The value of the PHONETIC parameter converts to the <tt>phoneticSystem</tt> property unless it is <tt>script</tt>, in which case the <tt>phoneticSystem</tt> property is not set.  The value of the SCRIPT parameter converts to the <tt>phoneticScript</tt> property.</t>
+          <t>The values of the components in the property value convert to values the <tt>phonetic</tt> properties for the respective NameComponent or AddressComponent.</t>
           <t>If more than one property having the PHONETIC parameter set relates to the same property, then they convert to the Card <tt>localizations</tt> property according their LANGUAGE parameter values as outlined in <xref target="vcard-param-language"/>.</t>
           <figure anchor="phonetic_conversion">
             <name>PHONETIC conversion example</name>
             <artwork><![CDATA[
-N;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;
-N;PHONETIC=jyut;SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;
+N;ALTID=1;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;
+N;ALTID=1;PHONETIC=jyut;
+  SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;
 
 "language": "zho-Hant",
 "name": {
@@ -320,44 +322,12 @@ N;PHONETIC=jyut;SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;
 },
 "localizations": {
   "yue": {
-    "name/components": [
-      {
-        "kind": "surname",
-        "value": "孫",
-        "pronounce": {
-          "phonetic": "syun1",
-          "system": "jyut",
-          "script": "Latn"
-        }
-      },
-      {
-        "kind": "given",
-        "value": "中山",
-        "pronounce": {
-          "phonetic": "zung1saan1",
-          "system": "jyut",
-          "script": "Latn"
-        }
-      },
-      {
-        "kind": "given2",
-        "value": "文",
-        "pronounce": {
-          "phonetic": "man4",
-          "system": "jyut",
-          "script": "Latn"
-        }
-      },
-      {
-        "kind": "given2",
-        "value": "逸仙",
-        "pronounce": {
-          "phonetic": "jat6sin1",
-          "system": "jyut",
-          "script": "Latn"
-        }
-      }
-    ]
+    "name/phoneticSystem": "jyut",
+    "name/phoneticScript": "Latn",
+    "name/components/0/phonetic": "syun1",
+    "name/components/1/phonetic": "zung1saan1",
+    "name/components/2/phonetic": "man4",
+    "name/components/3/phonetic": "jat6sin1"
   }
 }
 ]]></artwork>
@@ -2132,6 +2102,19 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Address</td>
+            <td>phoneticScript</td>
+            <td>
+<xref target="vcard-param-phonetic"/>,
+<xref target="vcard-param-script"/>
+</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>phoneticSystem</td>
+            <td><xref target="vcard-param-phonetic"/></td>
+          </tr>
+          <tr>
+            <td>Address</td>
             <td>postcode</td>
             <td>
               <xref target="vcard-prop-adr"/>
@@ -2158,10 +2141,8 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>AddressComponent</td>
-            <td>pronounce</td>
-            <td>
-              <xref target="vcard-param-phonetic"/>
-            </td>
+            <td>phonetic</td>
+            <td><xref target="vcard-param-phonetic"/></td>
           </tr>
           <tr>
             <td>Anniversary</td>
@@ -2706,6 +2687,19 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Name</td>
+            <td>phoneticScript</td>
+            <td>
+<xref target="vcard-param-phonetic"/>,
+<xref target="vcard-param-script"/>
+</td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>phoneticSystem</td>
+            <td><xref target="vcard-param-phonetic"/></td>
+          </tr>
+          <tr>
+            <td>Name</td>
             <td>isOrdered</td>
             <td><xref target="vcard-prop-n"/>,
               <xref target="vcard-param-jscomps"/></td>
@@ -2731,10 +2725,8 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>NameComponent</td>
-            <td>pronounce</td>
-            <td>
-              <xref target="vcard-param-phonetic"/>
-            </td>
+            <td>phonetic</td>
+            <td><xref target="vcard-param-phonetic"/></td>
           </tr>
           <tr>
             <td>NameComponent</td>
@@ -3001,29 +2993,6 @@ JSPROP;JSPTR="example.com:foo":"bar"
             <td>
               <xref target="vcard-param-pref"/>
             </td>
-          </tr>
-          <tr>
-            <td>Pronounce</td>
-            <td>@type</td>
-            <td>not applicable</td>
-          </tr>
-          <tr>
-            <td>Pronounce</td>
-            <td>phonetic</td>
-            <td><xref target="vcard-param-phonetic"/></td>
-          </tr>
-          <tr>
-            <td>Pronounce</td>
-            <td>script</td>
-            <td>
-<xref target="vcard-param-phonetic"/>,
-<xref target="vcard-param-script"/>
-</td>
-          </tr>
-          <tr>
-            <td>Pronounce</td>
-            <td>system</td>
-            <td><xref target="vcard-param-phonetic"/></td>
           </tr>
           <tr>
             <td>Pronouns</td>
