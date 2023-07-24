@@ -505,7 +505,7 @@ ANNIVERSARY:19860201
         </section>
         <section anchor="vcard-prop-fn">
           <name>FN</name>
-          <t>The FN property converts to the Name object in the <tt>name</tt> property.  Its value converts to the Name object <tt>full</tt> property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case that the vCard contains more than one FN property without LANGUAGE parameter, then convert the FN property that has the least amount of parameters set to the <tt>full</tt> property.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops"><tt>vCardProps</tt></xref> property.</t>
+          <t>The FN property converts to the Name object in the <tt>name</tt> property.  Its value converts to the Name object <tt>full</tt> property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case that the vCard contains more than one FN property without LANGUAGE parameter, then convert the FN property that has the least parameters set to the <tt>full</tt> property.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops"><tt>vCardProps</tt></xref> property.</t>
           <figure anchor="fn_conversion">
             <name>FN conversion example</name>
             <artwork><![CDATA[
@@ -667,7 +667,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
         <section anchor="vcard-prop-adr">
           <name>ADR</name>
           <t>The ADR property converts to an Address object in the <tt>addresses</tt> property.  Each component in the ADR property structured value converts to an AddressComponent in the Address <tt>components</tt> property.</t>
-          <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines new component for the ADR property.  Implementations <bcp14>SHOULD</bcp14> set these new components, even if all of their values are the empty string.</t>
+          <t><xref target="I-D.ietf-calext-vcard-jscontact-extensions"/> defines new component for the ADR property.  Implementations <bcp14>SHOULD</bcp14> set these new components, even if all their values are the empty string.</t>
           <t>The following table shows how ADR component and AddressComponent kind relate:</t>
           <table anchor="adr_kind_conversion">
             <name>ADR components conversion</name>
@@ -1720,7 +1720,7 @@ JSPROP;JSPTR="phones/phone1/example.com:foo~1bar":
                   <t>The count of positional entries equals the count of deduplicated component values.  Deduplication is required because some values may occur in both their designated and backwards-compatible components in the vCard property value:</t>
                   <ul>
                     <li>A value that occurs in both the N property secondary surname component and the family name component only counts once.</li>
-                    <li>A value that occurs in both the N property generation component and the honorifix suffix component only counts once.</li>
+                    <li>A value that occurs in both the N property generation component and the honorific suffix component only counts once.</li>
                     <li>A value in the ADR property street address component does not count if the ADR property value contains a value in one of the new components defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</li>
                     <li>All other values count once each.</li>
                   </ul>
@@ -1760,7 +1760,7 @@ N;JSCOMPS=";1;0":Doe;Jane;;;;;;
 FN;DERIVED=TRUE:Jane Doe
 ]]></sourcecode>
               </figure>
-              <t>The following example demonstrates a secondary positional index.  The "Jr." generation marker only counts once because it occurs in both the designated generation component and the backwards-compatible honorifix suffixes component.</t>
+              <t>The following example demonstrates a secondary positional index.  The "Jr." generation marker only counts once because it occurs in both the designated generation component and the backwards-compatible honorific suffixes component.</t>
               <figure anchor="vcard-param-jscomps-example-n-secondary-index">
                 <name>Example for positional entries</name>
                 <sourcecode name=""><![CDATA[

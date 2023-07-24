@@ -1794,7 +1794,7 @@ of National Research Council (IIT-CNR)/Registro.it</li>
           <li>Description: This implementation includes support for RDAP queries
 using data from the public test environment of .it ccTLD.  The RDAP server returns responses including JSContact Card in place of jCard when queries contain the parameter jscard=1.</li>
           <li>Level of Maturity: This is an "alpha" test implementation.</li>
-          <li>Coverage: This implementation includes all of the features described in this specification.</li>
+          <li>Coverage: This implementation includes all features described in this specification.</li>
           <li>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</li>
         </ul>
       </section>
@@ -1805,7 +1805,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
           <li>Location: <eref target="https://github.com/cyrusimap/cyrus-imapd">https://github.com/cyrusimap/cyrus-imapd</eref></li>
           <li>Description: This implementation includes support for JSContact in its experimental JMAP for Addressbooks implementation.</li>
           <li>Level of Maturity: This is an "alpha" test implementation.</li>
-          <li>Coverage: This implementation includes all of the features described in this specification.</li>
+          <li>Coverage: This implementation includes all features described in this specification.</li>
           <li>Contact Information: <eref target="https://cyrus.topicbox.com/groups/info">https://cyrus.topicbox.com/groups/info</eref></li>
         </ul>
       </section>

@@ -143,7 +143,7 @@ ADR-component-landmark = list-component
         <dl>
 
 
-          <dt>Example: In this example, the post office box and the extended address are absent.  The street number and name are added both as separate components, as well as combined in the street component for backwards-compatibility.</dt>
+          <dt>Example: In this example, the post office box and the extended address components are absent.  The street number and name are added both as separate components, as well as combined in the street component for backwards-compatibility.</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
 ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
@@ -688,7 +688,7 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
           <dt>Parameter name:</dt>
           <dd>USERNAME</dd>
           <dt>Purpose:</dt>
-          <dd>To define a user name, such as the user of a messaging or social media service.</dd>
+          <dd>To define a username, such as the user of a messaging or social media service.</dd>
           <dt>Description:</dt>
           <dd>
             <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the user with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.  The IMPP or SOCIALPROFILE value type <bcp14>MUST</bcp14> be URI.</t>
