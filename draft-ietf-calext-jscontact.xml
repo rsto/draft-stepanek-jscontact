@@ -660,8 +660,19 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
                 <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.  This property <bcp14>MUST NOT</bcp14> be set if the <tt>components</tt> property is not set.</t>
                 <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>kind</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
                 <t><xref target="example-name-sortas"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
+              </li>
+              <li>
+                <t>phoneticScript: <tt>String</tt> (optional).
+                The script used in the value of the NameComponent <tt>phonetic</tt> property.  Also see <xref target="prop-phonetic"/>.  See <xref target="example-name-phonetic"/> for an example.</t>
+              </li>
+              <li>
+                <t>phoneticSystem: <tt>String</tt> (optional).
+              The phonetic system used in the NameComponent <tt>phonetic</tt> property.  Also      see <xref target="prop-phonetic"/>.  See <xref target="example-name-phonetic"/> for an example.</t>
+              </li>
+            </ul>
+
                 <figure anchor="example-name-sortas">
-                  <name><tt>name</tt> example</name>
+                  <name>Example for <tt>sortAs</tt></name>
                   <sourcecode name="" type="json"><![CDATA[
 "name": {
   "components": [
@@ -677,16 +688,34 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 }
 ]]></sourcecode>
                 </figure>
-              </li>
-              <li>
-                <t>phoneticScript: <tt>String</tt> (optional).
-                The script used in the value of the NameComponent <tt>phonetic</tt> property.  Also see <xref target="prop-phonetic"/>.</t>
-              </li>
-              <li>
-                <t>phoneticSystem: <tt>String</tt> (optional).
-              The phonetic system used in the NameComponent <tt>phonetic</tt> property.  Also      see <xref target="prop-phonetic"/>.</t>
-              </li>
-            </ul>
+
+          <figure anchor="example-name-phonetic">
+            <name>Example for <tt>phonetic</tt> and <tt>localizations</tt></name>
+            <artwork><![CDATA[
+{
+  "@type": "Card",
+  "language": "zho-Hant",
+  "name": {
+    "components": [
+      { "kind": "surname", "value": "孫" },
+      { "kind": "given", "value": "中山" },
+      { "kind": "given2", "value": "文" },
+      { "kind": "given2", "value": "逸仙" }
+    ]
+  },
+  "localizations": {
+    "yue": {
+      "name/phoneticSystem": "jyut",
+      "name/phoneticScript": "Latn",
+      "name/components/0/phonetic": "syun1",
+      "name/components/1/phonetic": "zung1saan1",
+      "name/components/2/phonetic": "man4",
+      "name/components/3/phonetic": "jat6sin1"
+    }
+  }
+}
+]]></artwork>
+          </figure>
           </section>
           <section anchor="namecomponent">
             <name>NameComponent</name>
