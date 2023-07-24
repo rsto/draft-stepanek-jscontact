@@ -579,12 +579,7 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
                 <li><tt>script</tt>: denotes the unknown phonetic system.  The <xref target="param-script">SCRIPT</xref> parameter <bcp14>MUST</bcp14> be set in addition to the PHONETIC parameter.</li>
               </ul>
               <t>The value type of the property on which the PHONETIC parameter is set <bcp14>MUST</bcp14> be of the same type as its related property.  If a component value is set in the property on which the PHONETIC parameter is set, then a component value also <bcp14>MUST</bcp14> be set at that same position in the related property.  On the other hand, not every component value in the related property needs to have a phonetic representation.</t>
-              <t>The related property is defined as follows:</t>
-              <ul>
-                <li>If only a single same-named property does not have the PHONETIC parameter set in this vCard, then this is the related property.</li>
-                <li>Otherwise, the related property is the one which has the same ALTID parameter value as the property with the PHONETIC property.</li>
-              </ul>
-              <t>If more than one property with the PHONETIC parameter relates to the same property, then the LANGUAGE parameter <bcp14>MUST</bcp14> be set on all the properties having the PHONETIC parameter.  The LANGUAGE parameter value <bcp14>SHOULD NOT</bcp14> contain a script subtag in its Language-Tag value and any such subtag <bcp14>MUST</bcp14> be ignored in favor of the <xref target="param-script">SCRIPT</xref> parameter value.</t>
+              <t>The ALTID parameter (<xref target="RFC6350" section="5.4"/>) <bcp14>MUST</bcp14> be set with equal values on both the related property and the property having the PHONETIC parameter set.  If more than one same-named property has both the PHONETIC parameter set and an equal ALTID parameter value, then at most one of these properties <bcp14>MAY</bcp14> not have the LANGUAGE parameter set and all others <bcp14>MUST</bcp14> have the LANGUAGE parameter set.  The LANGUAGE parameters <bcp14>MUST NOT</bcp14> have equal values.  The LANGUAGE parameter value <bcp14>SHOULD NOT</bcp14> contain a script subtag in its Language-Tag value and any such subtag <bcp14>MUST</bcp14> be ignored in favor of the <xref target="param-script">SCRIPT</xref> parameter value.</t>
               <t>This specification defines the PHONETIC parameter for use with the ADR and N properties.</t>
           </dd>
           <dt>Format definition:</dt>
@@ -598,8 +593,9 @@ phonetic-value = "ipa" / "piny" / "jyut" / "script" / iana-token / x-name
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-N;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;;;
-N;PHONETIC=jyut;SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;;;
+N;ALTID=1;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;;;
+N;ALTID=1;PHONETIC=jyut;
+  SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;;;
 ]]></sourcecode>
           </dd>
         </dl>
