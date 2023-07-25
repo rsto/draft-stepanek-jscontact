@@ -748,25 +748,6 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
           </dd>
         </dl>
       </section>
-      <section anchor="value-pronounce">
-        <name>Pronounce Value</name>
-        <dl>
-          <dt>Value:</dt>
-          <dd>delivery</dd>
-          <dt>Purpose:</dt>
-          <dd>This indicates to use this address for delivery, e.g., to send packages to.</dd>
-          <dt>Conformance:</dt>
-          <dd>
-            <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>
-          </dd>
-          <dt>Example(s):</dt>
-          <dd>
-            <sourcecode name=""><![CDATA[
-ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
-]]></sourcecode>
-          </dd>
-        </dl>
-      </section>
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
