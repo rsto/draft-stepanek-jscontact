@@ -629,14 +629,14 @@ N;SORT-AS="Stevenson,John Philip":Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.
         </section>
         <section anchor="vcard-prop-nickname">
           <name>NICKNAME</name>
-          <t>A NICKNAME property converts to Nickname object in the <tt>nickNames</tt> property (<xref target="nickname_conversion"/>).  The <tt>name</tt> property is set to the NICKNAME property value.</t>
+          <t>A NICKNAME property converts to Nickname object in the <tt>nicknames</tt> property (<xref target="nickname_conversion"/>).  The <tt>name</tt> property is set to the NICKNAME property value.</t>
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="nickname_conversion">
             <name>NICKNAME conversion example</name>
             <artwork><![CDATA[
 NICKNAME:Johnny
 
-"nickNames": {
+"nicknames": {
    "NICK-1": {
     "name": "Johnny"
    }
@@ -2335,7 +2335,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
           </tr>
           <tr>
             <td>Card</td>
-            <td>nickNames</td>
+            <td>nicknames</td>
             <td>
               <xref target="vcard-prop-n"/>
             </td>
@@ -2737,26 +2737,26 @@ JSPROP;JSPTR="example.com:foo":"bar"
             </td>
           </tr>
           <tr>
-            <td>NickName</td>
+            <td>Nickname</td>
             <td>@type</td>
             <td>not applicable</td>
           </tr>
           <tr>
-            <td>NickName</td>
+            <td>Nickname</td>
             <td>contexts</td>
             <td>
               <xref target="vcard-param-type"/>
             </td>
           </tr>
           <tr>
-            <td>NickName</td>
+            <td>Nickname</td>
             <td>name</td>
             <td>
               <xref target="vcard-prop-n"/>
             </td>
           </tr>
           <tr>
-            <td>NickName</td>
+            <td>Nickname</td>
             <td>pref</td>
             <td>
               <xref target="vcard-param-pref"/>
