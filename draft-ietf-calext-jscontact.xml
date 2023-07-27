@@ -1349,7 +1349,6 @@ The value of this address component.</li>
         { "kind": "postcode", "value": "〒100-8994" }
       ],
       "defaultSeparator": "",
-      "isOrdered": true,
       "full": "〒100-8994東京都千代田区丸ノ内2-7-2",
       "isOrdered": true
     }
