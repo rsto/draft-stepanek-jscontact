@@ -1772,7 +1772,7 @@ FN;DERIVED=TRUE:Jane Doe
     { "kind": "given2", "value": "Paul" },
     { "kind": "surname", "value": "Stevenson" },
     { "kind": "generation", "value": "Jr." },
-    { "kind": "credential, "value": "M.D." }
+    { "kind": "credential", "value": "M.D." }
   ],
   "isOrdered": true
 }
