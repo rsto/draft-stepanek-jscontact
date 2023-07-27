@@ -593,7 +593,7 @@ phonetic-value = "ipa" / "piny" / "jyut" / "script" / iana-token / x-name
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-N;ALTID=1;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;;;
+N;ALTID=1;LANGUAGE=zh-Hant:孫;中山;文,逸仙;;;;
 N;ALTID=1;PHONETIC=jyut;
   SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;;;
 ]]></sourcecode>

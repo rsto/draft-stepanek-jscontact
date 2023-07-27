@@ -694,7 +694,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <artwork><![CDATA[
 {
   "@type": "Card",
-  "language": "zho-Hant",
+  "language": "zh-Hant",
   "name": {
     "components": [
       { "kind": "surname", "value": "孫" },

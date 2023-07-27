@@ -307,12 +307,12 @@ TITLE;LANGUAGE=fr:Patron
           <figure anchor="phonetic_conversion">
             <name>PHONETIC conversion example</name>
             <artwork><![CDATA[
-LANGUAGE=zho-Hant
-N;ALTID=1;LANGUAGE=zho-Hant:孫;中山;文,逸仙;;
+LANGUAGE=zh-Hant
+N;ALTID=1;LANGUAGE=zh-Hant:孫;中山;文,逸仙;;
 N;ALTID=1;PHONETIC=jyut;
   SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;
 
-"language": "zho-Hant",
+"language": "zh-Hant",
 "name": {
   "components": [
     { "kind": "surname", "value": "孫" },
