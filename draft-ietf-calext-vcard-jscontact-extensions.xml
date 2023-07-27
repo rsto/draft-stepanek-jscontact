@@ -136,6 +136,7 @@ ADR-component-block    = list-component
 ADR-component-subdistrict = list-component
 ADR-component-district = list-component
 ADR-component-landmark = list-component
+ADR-component-direction = list-component
 ]]></sourcecode>
           </dd>
         </dl>
