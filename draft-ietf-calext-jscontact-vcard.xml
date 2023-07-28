@@ -1797,7 +1797,7 @@ N;JSCOMPS=";1;2;2,1;0;6;4,1":Stevenson;John;Philip,Paul;;Jr.,M.D.;;Jr.
   }
 }
 
-ADR;JSCOMPS="s,\, ;11;s, ;10":;;54321 Oak St;Reston;;;;;;;Oak St;54321;;;;;;
+ADR;JSCOMPS="s,\, ;11;s, ;10;3":;;54321 Oak St;Reston;;;;;;;Oak St;54321;;;;;;
 ]]></sourcecode>
               </figure>
             </dd>
