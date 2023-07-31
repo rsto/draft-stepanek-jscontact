@@ -688,18 +688,21 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
               <tr>
                 <td align="left">extended address</td>
                 <td align="left">apartment (see Remarks)</td>
-                <td align="left"><t>To vCard: Do not set this component.</t><t>From vCard: Ignore if the ADR structured value is of the format defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.  Otherwise convert to <tt>apartment</tt>.</t></td>
+                <td align="left"><t>To vCard: Set the values of the following components:</t>
+                <ul>
+                  <li>room</li>
+                  <li>floor</li>
+                  <li>apartment</li>
+                  <li>building</li>
+                </ul>
+                <t>From vCard: Ignore if the ADR structured value is of the format defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.  Otherwise convert to <tt>apartment</tt>.</t></td>
               </tr>
               <tr>
                 <td align="left">street address</td>
                 <td align="left">name (see Remarks)</td>
                 <td align="left"><t>To vCard: Set the values of the following components:</t>
                 <ul>
-                  <li>room</li>
-                  <li>floor</li>
-                  <li>apartment</li>
                   <li>number</li>
-                  <li>building</li>
                   <li>name</li>
                   <li>block</li>
                   <li>direction</li>
