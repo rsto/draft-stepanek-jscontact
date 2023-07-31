@@ -147,9 +147,7 @@ ADR-component-direction = list-component
           <dt>Example: In this example, the post office box and the extended address components are absent.  The street number and name are added both as separate components, as well as combined in the street component for backwards-compatibility.</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
-ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
-  Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
-  U.S.A.":
+ADR;GEO="geo:12.3457,78.910":
   ;;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;123;Main Street;;;;;;;
 ]]></sourcecode>
           </dd>
@@ -562,6 +560,34 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           </dd>
         </dl>
       </section>
+      <section anchor="param-label">
+        <name>LABEL</name>
+        <dl>
+          <dt>Parameter name:</dt>
+          <dd>LABEL</dd>
+          <dt>Purpose:</dt>
+          <dd>This parameter is used with the ADR property.  Its value contains a formatted text representation of that address, e.g. for delivery.</dd>
+          <dt>Description:</dt>
+          <dd>
+            <t><xref target="RFC6350" section="6.3.1"/> defines the ADR property, noting that the property can also include a LABEL parameter to present a delivery address label for the address.  But this parameter was not included in the IANA Parameters Registry <xref target="RFC6350" section="10.3.2"/> and accordingly is not a registered standard vCard element.  This specification defines and registers the LABEL parameter for use with the ADR property as originally intended.</t>
+          </dd>
+          <dt>Format definition:</dt>
+          <dd>
+            <sourcecode name="" type="abnf"><![CDATA[
+label-param    = "LABEL" "=" param-value
+]]></sourcecode>
+          </dd>
+          <dt>Example(s):</dt>
+          <dd>
+            <t>The LABEL parameter as illustrated the ADR property example in <xref target="RFC6350" section="6.3.1"/>.</t>
+            <sourcecode name=""><![CDATA[
+ADR;LABEL="Mr. John Q. Public, Esq.\nMail Drop: TNE QB\n123
+  Main Street\nAny Town, CA  91921-1234\nU.S.A.":
+  ;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
+]]></sourcecode>
+          </dd>
+        </dl>
+      </section>
       <section anchor="param-phonetic">
         <name>PHONETIC</name>
         <dl>
@@ -838,6 +864,14 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
               <td/>
               <td align="left">DERIVED</td>
               <td align="left">This document, <xref target="param-derived"/></td>
+            </tr>
+            <tr>
+              <td/>
+              <td align="left">LABEL</td>
+              <td align="left">
+                  <xref target="RFC6350" section="6.3.1"/> and
+                  this document, <xref target="param-label"/>
+              </td>
             </tr>
             <tr>
               <td/>
