@@ -418,7 +418,7 @@ KIND:individual
         </section>
         <section anchor="vcard-prop-source">
           <name>SOURCE</name>
-          <t>A SOURCE property converts to an entry in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The entry value is a <tt>Directory</tt> object whose <tt>kind</tt> property is set to <tt>entry</tt> and <tt>uri</tt> property is set to the SOURCE value.</t>
+          <t>The SOURCE property converts to a Directory object in the <tt>directories</tt> property (<xref target="source_conversion"/>).  The <tt>kind</tt> property is set to <tt>entry</tt>.  The <tt>uri</tt> property is set to the SOURCE property value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="source_conversion">
             <name>SOURCE conversion example</name>
@@ -1203,7 +1203,7 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
         </section>
         <section anchor="vcard-prop-org-directory">
           <name>ORG-DIRECTORY</name>
-          <t>An ORG-DIRECTORY property as defined in <xref target="RFC6715"/> is represented as an entry of the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The entry value is a <tt>Directory</tt> object whose <tt>kind</tt> property is set to <tt>directory</tt> and <tt>uri</tt> property is set to the ORG-DIRECTORY value.</t>
+          <t>The ORG-DIRECTORY property <xref target="RFC6715"/> converts to a Directory object in the <tt>directories</tt> property (<xref target="org_directory_conversion"/>).  The <tt>kind</tt> property is set to <tt>directory</tt>.  The <tt>uri</tt> property is set to the ORG-DIRECTORY property value.</t>
           <t>The INDEX, PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY conversion example</name>
