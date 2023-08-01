@@ -93,8 +93,8 @@
                 the room or suite number or identifier<br/>
                 the apartment number, extension designation or box number.<br/>
                 the building floor or level;<br/>
-                the street name;<br/>
                 the street number;<br/>
+                the street name;<br/>
                 the building, tower, condominium;<br/>
                 the block name or number;<br/>
                 the subdistrict;<br/>
@@ -129,8 +129,8 @@ ADR-component-country  = list-component
 ADR-component-room     = list-component
 ADR-component-apartment = list-component
 ADR-component-floor    = list-component
-ADR-component-streetname = list-component
 ADR-component-streetnumber = list-component
+ADR-component-streetname = list-component
 ADR-component-building = list-component
 ADR-component-block    = list-component
 ADR-component-subdistrict = list-component
