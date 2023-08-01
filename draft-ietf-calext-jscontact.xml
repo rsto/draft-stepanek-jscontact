@@ -1514,9 +1514,6 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <name>Example for localizing a top-level property</name>
             <artwork><![CDATA[
 {
-  "@type": "Card",
-  "uid": "F918F30B-91E4-4DB8-B221-28AE7D28984D",
-  "version": "1.0",
   "name": {
     "components": [
       { "kind": "title", "value": "Mr." },
