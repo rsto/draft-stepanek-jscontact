@@ -1542,12 +1542,12 @@ QSYlFuShWrHPtiLmUdPoP6CV2mML1tk+l7DIIqXrQhLUKDACeM5roMx0kLhUWB8P\n
             <name>Example for localizing a nested property</name>
             <artwork><![CDATA[
 "name": {
-  "full": "Gabriel García Márquez",
-  "titles": {
-    "t1": {
-      "kind": "title",
-      "name": "novelist"
-    }
+  "full": "Gabriel García Márquez"
+},
+"titles": {
+  "t1": {
+    "kind": "title",
+    "name": "novelist"
   }
 },
 "localizations": {
