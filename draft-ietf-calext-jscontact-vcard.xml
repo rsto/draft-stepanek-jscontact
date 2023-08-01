@@ -284,13 +284,14 @@ TITLE;LANGUAGE=fr:Patron
         </section>
         <section anchor="vcard-param-level">
           <name>LEVEL</name>
-          <t>The LEVEL parameter as defined in <xref target="RFC6715"/> is directly converted to the <tt>level</tt> property of the <tt>PersonalInfo</tt> type apart from when LEVEL is used in the EXPERTISE property; in this case, the values convert as in the following:
+          <t>The LEVEL parameter <xref target="RFC6715"/> converts to the <tt>level</tt> property of the <tt>PersonalInfo</tt> type.  If this parameter is set on the EXPERTISE property, then its values convert as:
       </t>
           <ul spacing="compact">
             <li>"beginner" converts to "low";</li>
             <li>"average" converts to "medium";</li>
             <li>"expert" converts to "high".</li>
           </ul>
+          <t>In all other cases the values convert verbatim, but lowercase <bcp14>MUST</bcp14> be used for the JSContact value.</t>
         </section>
         <section anchor="vcard-param-mediatype">
           <name>MEDIATYPE</name>
