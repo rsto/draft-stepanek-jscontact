@@ -1338,7 +1338,7 @@ The value of this address component.</li>
 },
 "localizations": {
   "jp": {
-    "k26": {
+    "addresses/k26": {
       "components": [
         { "kind": "region", "value": "東京都" },
         { "kind": "locality", "value": "千代田区" },
