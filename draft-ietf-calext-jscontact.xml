@@ -226,11 +226,11 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
                 Contains the phonetic representation of a value.  Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetic</tt> property.  If this property is set, then at least one of the <tt>phoneticScript</tt> or <tt>phoneticSystem</tt> properties that relate to this value <bcp14>MUST</bcp14> be set.</t>
             </li>
             <li>
-              <t>phoneticScript: <tt>String</tt> (optional).
+              <t>phoneticScript: <tt>String</tt>.
                 The script used in the value of the related <tt>phonetic</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>.</t>
             </li>
             <li>
-              <t>phoneticSystem: <tt>String</tt> (optional).
+              <t>phoneticSystem: <tt>String</tt>.
               The phonetic system used in the related value of the <tt>phonetic</tt> property.  The <xref target="enumerated-values">enumerated values</xref> are:</t>
               <ul>
                 <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
