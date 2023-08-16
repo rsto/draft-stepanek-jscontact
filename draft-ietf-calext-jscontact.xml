@@ -281,6 +281,10 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <name>Validating JSContact</name>
         <t>This specification distinguishes between three kinds of properties regarding validation: IANA-registered properties and unknown properties are defined in this section, while vendor-specific properties are defined in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any of its properties are invalid.</t>
         <t>This document defines for each property if it is mandatory or optional.  A mandatory property <bcp14>MUST</bcp14> be present for a JSContact object to be valid.  An optional property does not need to be present.  The values of both required and optional properties <bcp14>MUST</bcp14> adhere to the data type and definition of that property.</t>
+        <section anchor="case-sensitivity">
+          <name>Case-Sensitivity</name>
+          <t>All property names, object type names and enumerated values are case-sensitive, if not explicitly stated otherwise in their according definition.  Implementations <bcp14>MUST</bcp14> handle a JSContact object as invalid if a type name, property name or enumerated value only differs in case from one defined for any JSContact version known to that implementation.  This applies regardless of what JSContact version the Card object defines in its <xref target="prop-version"><tt>version</tt></xref> property.  <xref target="unknown-properties"/> defines how to handle unknown properties.</t>
+        </section>
         <section anchor="iana-registered-properties" numbered="true" toc="default">
           <name>IANA-registered Properties</name>
           <t>
@@ -296,8 +300,8 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="unknown-properties" numbered="true" toc="default">
           <name>Unknown Properties</name>
           <t>
-          Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the syntactic restrictions of IANA-registered property names.
-          Implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid.  Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.  Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties.  Preserving properties that are unknown to the implementation, is to allow applications and services to interoperate without data loss, even if not all of them implement the same set of JSContact extensions.
+            Implementations may encounter JSContact data where a property name is unknown to that implementation, but the name adheres to the syntactic restrictions of IANA-registered property names.  Implementations <bcp14>MUST</bcp14> make sure that such a name does not violate the case-sensitivity rules defined in <xref target="case-sensitivity"/>.  If the property name is valid, then implementations <bcp14>MUST NOT</bcp14> treat such properties as invalid.  Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact object.</t>
+          <t>Implementations that create or update JSContact data <bcp14>MUST</bcp14> only set IANA-registered properties or vendor-specific properties.  Preserving properties that are unknown to the implementation, is to allow applications and services to interoperate without data loss, even if not all of them implement the same set of JSContact extensions.
     </t>
         </section>
         <section anchor="enumerated-values" numbered="true" toc="default">
@@ -1905,8 +1909,9 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         </section>
         <section anchor="iana-registry-designated-expert-review" numbered="true" toc="default">
           <name>Designated Expert Review</name>
-          <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging
-	    the submitter to document security and privacy considerations.  For a common-use registration, the DE
+          <t>The primary concern of the designated expert (DE) is preventing name collisions and encouraging the submitter to document security and privacy considerations.</t>
+          <t>A new type name, property name or enumerated value <bcp14>MUST NOT</bcp14> differ only in case from an already registered name or value.</t>
+        <t>For a common-use registration, the DE
 	      is expected to confirm that suitable documentation is available to ensure interoperability.
 		  The DE should also verify that
             the new assignment does not conflict with work that is active or already published within the IETF.</t>
