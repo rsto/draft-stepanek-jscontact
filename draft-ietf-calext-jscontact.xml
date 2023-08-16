@@ -644,7 +644,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
               </li>
               <li>isOrdered: <tt>Boolean</tt> (optional, default: <tt>false</tt>).  This indicates if the name component sequence in the <tt>components</tt> property is ordered.</li>
               <li>defaultSeparator: <tt>String</tt> (optional).
-                The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
+                The default separator to insert between name component values when concatenating all name component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the NameComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt> or if the <tt>components</tt> property is not set.</li>
               <li>
                 <t>full: <tt>String</tt> (optional).
             This is the full name representation of this Name.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is not set.</t>
@@ -1217,7 +1217,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>full</tt> property <bcp14>SHOULD NOT</bcp14> be set.
             </li>
               <li>defaultSeparator: <tt>String</tt> (optional).
-              The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
+              The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt> or if the <tt>components</tt> property is not set.</li>
               <li>pref: <tt>UnsignedInt</tt> (optional).
             The preference of this address in relation to other addresses.  Also see <xref target="prop-pref"/>.</li>
               <li>
