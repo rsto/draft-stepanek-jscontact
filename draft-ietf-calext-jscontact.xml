@@ -426,7 +426,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
         </section>
         <section anchor="kind" numbered="true" toc="default">
           <name>kind</name>
-          <t>Type: <tt>String</tt> (optional).  The kind of the entity the Card represents.</t>
+          <t>Type: <tt>String</tt> (optional, default: <tt>individual</tt>).  The kind of the entity the Card represents.</t>
           <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
           <ul spacing="normal">
             <li><tt>individual</tt>: a single person</li>
