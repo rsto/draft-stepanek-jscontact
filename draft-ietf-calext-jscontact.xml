@@ -205,6 +205,11 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
             <li><tt>work</tt>: The contact information may be used to contact in a professional context.</li>
           </ul>
         </section>
+        <section anchor="prop-extra" numbered="true" toc="default">
+          <name>extra</name>
+          <t>This is a reserved property name. Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name is invalid.</t>
+          <t>The purpose of this reserved property name is to provide implementors with a name which is certain to never occur as a property name in a JSContact object.  Implementations might want to map unknown or vendor-specific properties to a variable with this name, but this is implementation-specific.</t>
+        </section>
         <section anchor="prop-label" numbered="true" toc="default">
           <name>label</name>
           <t>Type: <tt>String</tt></t>
@@ -258,23 +263,6 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
 }
 ]]></sourcecode>
           </figure>
-        </section>
-      </section>
-      <section anchor="versioning">
-        <name>Versioning</name>
-        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
-        <section>
-          <name>Version Format and Requirements</name>
-          <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
-          <sourcecode name="" type="abnf"><![CDATA[
-jsversion = 1*DIGIT "." 1*DIGIT
-]]></sourcecode>
-          <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared that property definitions and other JSContact elements differ in a backwards-incompatible manner.</t>
-          <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
-        </section>
-        <section anchor="current-version">
-          <name>Current Version</name>
-          <t>This specification registers JSContact version value <tt>1.0</tt> (<xref target="tab-iana-version-registry"/>).</t>
         </section>
       </section>
       <section anchor="validating-jscontact">
@@ -366,9 +354,22 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
       </t>
         </section>
       </section>
-      <section anchor="reserved-prop-names">
-        <name>Reserved Property Names</name>
-        <t>This specification reserves the property name <tt>extra</tt> at IANA.  Its sole purpose is to provide implementors with an internal variable name which is certain to never occur as a property name in a JSContact object.  Implementations might want to map unknown or vendor-specific properties to a variable with this name, but this is implementation-specific.  Any JSContact object including a property with this name is invalid.</t>
+      <section anchor="versioning">
+        <name>Versioning</name>
+        <t>Every instance of a JSContact <xref target="card">Card</xref> indicates which JSContact version its IANA-registered properties and values are based on.  The version is indicated both in the <xref target="prop-version"><tt>version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact MIME content type. All IANA-registered elements indicate the version at which they got introduced or obsoleted.</t>
+        <section>
+          <name>Version Format and Requirements</name>
+          <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the ABNF</t>
+          <sourcecode name="" type="abnf"><![CDATA[
+jsversion = 1*DIGIT "." 1*DIGIT
+]]></sourcecode>
+          <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared that property definitions and other JSContact elements differ in a backwards-incompatible manner.</t>
+          <t>Differing minor version values indicate additions that enrich JSContact data, but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
+        </section>
+        <section anchor="current-version">
+          <name>Current Version</name>
+          <t>This specification registers JSContact version value <tt>1.0</tt> (<xref target="tab-iana-version-registry"/>).</t>
+        </section>
       </section>
     </section>
     <section anchor="card" numbered="true" toc="default">
@@ -2582,7 +2583,7 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
                 <td align="left">not applicable</td>
                 <td align="left">not applicable</td>
                 <td align="left">
-                  <xref target="reserved-prop-names" format="default"/>
+                  <xref target="prop-extra" format="default"/>
                 </td>
                 <td align="left">reserved</td>
               </tr>
