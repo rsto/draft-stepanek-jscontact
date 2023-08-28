@@ -192,7 +192,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>For example, <tt>2010-10-10T10:10:10.003Z</tt> is conformant, but <tt>2010-10-10T10:10:10.000Z</tt> is invalid and is correctly encoded as <tt>2010-10-10T10:10:10Z</tt>.</t>
         </section>
       </section>
-      <section anchor="comon-properties">
+      <section anchor="common-properties">
         <name>Common Properties</name>
         <t>Most of the properties in this document are specific to a single JSContact object type.  Such properties are defined along with the respective object type.  The properties in this section are common to multiple data types and are defined here to avoid repetition.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSContact object if they are explicitly mentioned to be allowed for this object type.</t>
         <section anchor="prop-contexts" numbered="true" toc="default">
