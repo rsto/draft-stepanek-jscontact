@@ -265,6 +265,18 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           </figure>
         </section>
       </section>
+      <section anchor="internationalization">
+        <name>Internationalization</name>
+        <t>JSContact aims to be used for international contacts and addressbook data. Notably text values such as names and addresses are likely to cover a wide range of languages and cultures.  This section describes internationalization for free-form text values, as well as for Uniform Resource Identifiers (URIs).</t>
+        <section>
+          <name>Free-form text</name>
+          <t>Properties having free-form text values <bcp14>MAY</bcp14> contain any valid sequence of Unicode characters encoded as a JSON string.  Such values can contain unidirectional left-to-right and right-to-left text, as well as bidirectional text using Unicode Directional Formatting Characters described in Section 2 of <xref target="UBiDi"/>. Implementations setting bidirectional text <bcp14>MUST</bcp14> make sure that each property value complies with the requirements of the Unicode Bidirectional Algorithm.  Implementations <bcp14>MUST NOT</bcp14> assume that text values of adjacent properties are processed or displayed as a combined string, for example the values of a given name component and a surname component may or may not to be rendered together.</t>
+        </section>
+        <section>
+          <name>URIs</name>
+          <t>Several properties require their string value to be a URI as defined in <xref target="RFC3986"/>.  Implementations <bcp14>MUST</bcp14> make sure to use proper percent-encoding for URIs that can not be represented using unreserved URI characters.  JSContact makes no recommendation how to display such URIs, but section "4.8.3 Internationalization and special characters" of the <xref target="W3C-URL">W3C URL Standard</xref> provides guidance for URLs found in context of a web browser.</t>
+        </section>
+      </section>
       <section anchor="validating-jscontact">
         <name>Validating JSContact</name>
         <t>This specification distinguishes between three kinds of properties regarding validation: IANA-registered properties and unknown properties are defined in this section, while vendor-specific properties are defined in <xref target="vendor-specific-properties"/>.  A JSContact object is invalid if any of its properties are invalid.</t>
@@ -3894,6 +3906,18 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <reference anchor="IPA" target="https://www.internationalphoneticalphabet.org/">
           <front>
             <title>International Phonetic Alphabet</title>
+            <author/>
+          </front>
+        </reference>
+        <reference anchor="UBiDi" target="https://www.unicode.org/reports/tr9/">
+          <front>
+            <title>Unicode® Standard Annex #9: Unicode Bidirectional Algorithm</title>
+            <author/>
+          </front>
+        </reference>
+        <reference anchor="W3C-URL" target="https://url.spec.whatwg.org">
+          <front>
+            <title>W3C WG URL - Living Standard — Last Updated 21 August 2023</title>
             <author/>
           </front>
         </reference>
