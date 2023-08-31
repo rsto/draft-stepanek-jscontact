@@ -175,7 +175,7 @@ The kind of the resource.  The allowed values are defined in the property defini
 </t>
             </li>
             <li>uri: <tt>String</tt> (mandatory).
-The resource value.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+The resource value.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/>.</li>
             <li>mediaType: <tt>String</tt> (optional).
 Used for URI resource values.  Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
@@ -996,7 +996,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <li>service: <tt>String</tt> (optional).
               The name of the online service or protocol.  The name <bcp14>MAY</bcp14> be capitalized the same as on the service's website, app or publishing material, but names <bcp14>MUST</bcp14> be considered equal is they match case-insensitively.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, <tt>Mastodon</tt>.</li>
             <li>uri: <tt>String</tt> (optional).
-This identifies the entity represented by this card at the online service.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+This identifies the entity represented by this card at the online service.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in Section 3 of <xref target="RFC3986" format="default"/>.</li>
             <li>user: <tt>String</tt> (optional).
               This names the entity represented by this Card at the online service.  Any free-text value is allowed.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
@@ -1163,7 +1163,7 @@ Defines the preference of this language in relation to other languages of the sa
               This <bcp14>MUST</bcp14> be <tt>SchedulingAddress</tt>, if set.</t>
             </li>
             <li>uri: <tt>String</tt> (mandatory).
-The address to use for calendar scheduling with this contact.  This <bcp14>MUST</bcp14> be a URI as defined in Section 3 of <xref target="RFC3986" format="default"/> and updates.</li>
+The address to use for calendar scheduling with this contact.  This <bcp14>MUST</bcp14> be a URI as defined in Section 3 of <xref target="RFC3986" format="default"/>.</li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
 The contexts in which to use this scheduling address.  Also see <xref target="prop-contexts"/>.</li>
             <li>pref: <tt>UnsignedInt</tt> (optional).
