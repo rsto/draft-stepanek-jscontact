@@ -1777,64 +1777,6 @@ The actual information.</li>
         </section>
       </section>
     </section>
-    <section anchor="implementation-status" numbered="true" toc="default">
-      <name>Implementation Status</name>
-      <t>NOTE: Please remove this section and the reference to <xref target="RFC7942" format="default"/> prior
-to publication as an RFC.
-This section records the status of known implementations of the
-format defined by this specification at the time of posting of this
-Internet-Draft, and is based on a proposal described in
-<xref target="RFC7942" format="default"/>.  The description of implementations in this section is
-intended to assist the IETF in its decision processes in progressing
-drafts to RFCs.  Please note that the listing of any individual
-implementation here does not imply endorsement by the IETF.
-Furthermore, no effort has been spent to verify the information
-presented here that was supplied by IETF contributors.  This is not
-intended as, and must not be construed to be, a catalog of available
-implementations or their features.  Readers are advised to note that
-other implementations may exist.
-According to <xref target="RFC7942" format="default"/>, "this will allow reviewers and working groups
-to assign due consideration to documents that have the benefit of
-running code, which may serve as evidence of valuable experimentation
-and feedback that have made the implemented protocols more mature.
-It is up to the individual working groups to use this information as
-they see fit".</t>
-      <section anchor="implementation-iit-cnr-registro-it-rdap-server" numbered="true" toc="default">
-        <name>IIT-CNR/Registro.it</name>
-        <ul spacing="normal">
-          <li>Responsible Organization: Institute of Informatics and Telematics
-of National Research Council (IIT-CNR)/Registro.it</li>
-          <li>Location: <eref target="https://rdap.pubtest.nic.it/domain/nic.it?jscard=1">https://rdap.pubtest.nic.it/</eref></li>
-          <li>Description: This implementation includes support for RDAP queries
-using data from the public test environment of .it ccTLD.  The RDAP server returns responses including JSContact Card in place of jCard when queries contain the parameter jscard=1.</li>
-          <li>Level of Maturity: This is an "alpha" test implementation.</li>
-          <li>Coverage: This implementation includes all features described in this specification.</li>
-          <li>Contact Information: Mario Loffredo, mario.loffredo@iit.cnr.it</li>
-        </ul>
-      </section>
-      <section anchor="implementation-cyrus-imap-server" numbered="true" toc="default">
-        <name>Cyrus IMAP</name>
-        <ul spacing="normal">
-          <li>Responsible Organization: The Cyrus Team</li>
-          <li>Location: <eref target="https://github.com/cyrusimap/cyrus-imapd">https://github.com/cyrusimap/cyrus-imapd</eref></li>
-          <li>Description: This implementation includes support for JSContact in its experimental JMAP for Addressbooks implementation.</li>
-          <li>Level of Maturity: This is an "alpha" test implementation.</li>
-          <li>Coverage: This implementation includes all features described in this specification.</li>
-          <li>Contact Information: <eref target="https://cyrus.topicbox.com/groups/info">https://cyrus.topicbox.com/groups/info</eref></li>
-        </ul>
-      </section>
-      <section anchor="implementation-audriga" numbered="true" toc="default">
-        <name>OpenXPort JMAP iCalendar/vCard library</name>
-        <ul spacing="normal">
-          <li>Responsible Organization: audriga GmbH</li>
-          <li>Location: <eref target="https://github.com/audriga/jmap-php-icalendar_vcard/">https://github.com/audriga/jmap-php-icalendar_vcard/</eref></li>
-          <li>Description: This implementation includes support for converting vCard and JSContact.</li>
-          <li>Level of Maturity: This is used in production systems.</li>
-          <li>Coverage: This implementation includes some of the features described in this specification.</li>
-          <li>Contact Information: <eref target="https://www.audriga.com">https://www.audriga.com</eref></li>
-        </ul>
-      </section>
-    </section>
     <section anchor="iana-considerations" numbered="true" toc="default">
       <name>IANA Considerations</name>
       <section anchor="iana-media-type" numbered="true" toc="default">
@@ -3858,7 +3800,6 @@ using data from the public test environment of .it ccTLD.  The RDAP server retur
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7493.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7529.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7942.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8141.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
