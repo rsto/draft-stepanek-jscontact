@@ -274,7 +274,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         </section>
         <section>
           <name>URIs</name>
-          <t>Several properties require their string value to be a URI as defined in <xref target="RFC3986"/>.  Implementations <bcp14>MUST</bcp14> make sure to use proper percent-encoding for URIs that can not be represented using unreserved URI characters.  JSContact makes no recommendation how to display such URIs, but section "4.8.3 Internationalization and special characters" of the <xref target="W3C-URL">W3C URL Standard</xref> provides guidance for URLs found in context of a web browser.</t>
+          <t>Several properties require their string value to be a URI as defined in <xref target="RFC3986"/>.  Implementations <bcp14>MUST</bcp14> make sure to use proper percent-encoding for URIs that can not be represented using unreserved URI characters.  <xref target="RFC3987" section="3.1"/> defines how to convert Internationalized Resource Identifiers to URIs.  JSContact makes no recommendation how to display URIs, but section "4.8.3 Internationalization and special characters" of the <xref target="W3C-URL">W3C URL Standard</xref> provides guidance for URLs found in context of a web browser.</t>
         </section>
       </section>
       <section anchor="validating-jscontact">
@@ -3834,6 +3834,7 @@ The actual information.</li>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3966.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3987.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6351.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6473.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6474.xml"/>
