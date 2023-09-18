@@ -921,7 +921,53 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
         </section>
         <section anchor="vcard-prop-tel">
           <name>TEL</name>
-          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.  The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys: the vCard <tt>cell</tt> parameter value converts to the JSContact <tt>mobile</tt> phone feature, the other parameter values convert to analogous phone features.  If no TEL-specific TYPE value is specified, the <tt>features</tt> property MUST include the <tt>voice</tt> key.  The <tt>number</tt> property is set to the TEL value.</t>
+          <t>A TEL property converts to an entry in the <tt>phones</tt> property (<xref target="tel_conversion"/>).  The entry value is a <tt>Phone</tt> object.</t>
+          <t>The TEL-specific values of the TYPE parameter convert to the <tt>features</tt> property keys as outlined in table <xref target="tel_type_conversion"/>.  Note that <xref target="RFC6350" section="6.4.1"/> defines the default TYPE of TEL to be <tt>voice</tt>, but the default Phone features property is absent by default.  Accordingly, an implementation <bcp14>SHOULD</bcp14> only set the Phone <tt>features</tt> property if the TEL property actually has a TEL-specific TYPE parameter set.</t>
+          <table anchor="tel_type_conversion">
+            <name>TEL TYPE conversion</name>
+            <thead>
+              <tr>
+                <th align="left">TYPE value</th>
+                <th align="left">Phone feature</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="left">cell</td>
+                <td align="left">mobile</td>
+              </tr>
+              <tr>
+                <td align="left">fax</td>
+                <td align="left">fax</td>
+              </tr>
+              <tr>
+                <td align="left">main-number</td>
+                <td align="left">main-number</td>
+              </tr>
+              <tr>
+                <td align="left">pager</td>
+                <td align="left">pager</td>
+              </tr>
+              <tr>
+                <td align="left">text</td>
+                <td align="left">text</td>
+              </tr>
+              <tr>
+                <td align="left">textphone</td>
+                <td align="left">textphone</td>
+              </tr>
+              <tr>
+                <td align="left">video</td>
+                <td align="left">video</td>
+              </tr>
+              <tr>
+                <td align="left">voice</td>
+                <td align="left">voice</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>The value of the TEL property converts to the Phone <tt>number</tt> property.</t>
+
           <t>The PREF and TYPE parameters convert according to the rules as defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="tel_conversion">
             <name>TEL conversion example</name>
