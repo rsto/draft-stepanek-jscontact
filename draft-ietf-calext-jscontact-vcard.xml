@@ -514,7 +514,7 @@ ANNIVERSARY:19860201
 FN:John Q. Public, Esq.
 
 "name": {
-  "full": "John Q. Public, Esq.",
+  "full": "John Q. Public, Esq."
 }
 ]]></artwork>
           </figure>
@@ -804,7 +804,7 @@ ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA;;;;Oak St;54321;;;;;
       { "kind": "postcode", "value": "20190" },
       { "kind": "country", "value": "USA" }
     ],
-    "countryCode": "US",
+    "countryCode": "US"
   }
 }
 ]]></artwork>
@@ -1726,7 +1726,7 @@ JSPROP;JSPTR="example.com:foo":{"bar":1234}
                 <artwork><![CDATA[
 "phones": {
   "phone1": {
-    "number": "tel:+33-01-23-45-67"
+    "number": "tel:+33-01-23-45-67",
     "example.com:foo/bar": "tux hux"
   }
 }

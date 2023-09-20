@@ -1023,12 +1023,12 @@ The contexts in which to use this service.  Also see <xref target="prop-contexts
             <sourcecode name="" type="json"><![CDATA[
 "onlineServices": {
   "x1": {
-    "uri": "xmpp:alice@example.com",
+    "uri": "xmpp:alice@example.com"
   },
   "x2": {
     "service": "Mastodon",
     "user": "@alice@example2.com",
-    "uri": "https://example2.com/@alice",
+    "uri": "https://example2.com/@alice"
   }
 }
 ]]></sourcecode>
@@ -1084,7 +1084,7 @@ The contexts in which to use this number.  Also see <xref target="prop-contexts"
     "contexts": {
       "work": true
     },
-    "number": "tel:+1-201-555-0123",
+    "number": "tel:+1-201-555-0123"
   }
 }
 ]]></sourcecode>
