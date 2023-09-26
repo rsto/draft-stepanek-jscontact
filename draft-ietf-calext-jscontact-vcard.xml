@@ -154,7 +154,8 @@
         </section>
         <section anchor="vcard-param-derived">
           <name>DERIVED</name>
-          <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>If this parameter is set to <tt>true</tt> on a vCard property, then implementations <bcp14>MAY</bcp14> choose to not convert that property.</t>
+          <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-geo">
           <name>GEO</name>
@@ -376,7 +377,8 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
         </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
-          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This converts to the <tt>service</tt> property of the <tt>OnlineService</tt> object type.</t>
+          <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
@@ -392,7 +394,8 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
         </section>
         <section anchor="vcard-param-username">
           <name>USERNAME</name>
-          <t>This converts to the <tt>user</tt> property of the <tt>OnlineService</tt> object type.  Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
+          <t>This converts to the <tt>user</tt> property of the <tt>OnlineService</tt> object type.</t>
+          <t>Note: This parameter is defined in <xref target="I-D.ietf-calext-vcard-jscontact-extensions"/>.</t>
         </section>
         <section anchor="vcard-param-value">
           <name>VALUE</name>
