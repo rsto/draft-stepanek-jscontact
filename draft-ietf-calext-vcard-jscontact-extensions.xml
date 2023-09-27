@@ -974,12 +974,6 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
               <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
             </tr>
             <tr>
-              <td align="left">ADR</td>
-              <td align="left">TYPE</td>
-              <td align="left">delivery</td>
-              <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
-            </tr>
-            <tr>
               <td align="left">ADR, N</td>
               <td align="left">PHONETIC</td>
               <td align="left">ipa</td>
