@@ -433,7 +433,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <figure anchor="example-created">
             <name><tt>created</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"created": "2022-09-30T14:35:10Z",
+"created": "2022-09-30T14:35:10Z"
 ]]></sourcecode>
           </figure>
         </section>
@@ -452,7 +452,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <figure anchor="example-kind">
             <name><tt>kind</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"kind": "individual",
+"kind": "individual"
 ]]></sourcecode>
           </figure>
         </section>
@@ -463,7 +463,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <figure anchor="example-language">
             <name><tt>language</tt> example</name>
             <sourcecode name="" type="json"><![CDATA[
-"language": "de-AT",
+"language": "de-AT"
 ]]></sourcecode>
           </figure>
         </section>
