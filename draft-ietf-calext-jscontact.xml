@@ -124,7 +124,7 @@
           <ul>
             <li>An object that is set as the value for a property with type signature <tt>A</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set.  If the <tt>@type</tt> property is not set then its value is implied to be <tt>A</tt> by the property definition.</li>
             <li>An object that is set as the value for a property with type signature <tt>A|B (defaultType: A)</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>A</tt>.  It <bcp14>MUST</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>B</tt>.  If instead the <tt>defaultType</tt> attribute is not defined then the <tt>@type</tt> property <bcp14>MUST</bcp14> also be set for <tt>A</tt>.</li>
-            <li>An object that is not the value of a property, such at the root of JSON data (directly or as member of an array), <bcp14>MUST</bcp14> have the <tt>@type</tt> property set.</li>
+            <li>An object that is not the value of a property, such as the root of JSON data (directly or as member of an array), <bcp14>MUST</bcp14> have the <tt>@type</tt> property set.</li>
           </ul>
         </section>
       </section>
@@ -155,7 +155,7 @@
           </ol>
           <t>The value associated with each pointer determines how to apply that patch:</t>
           <ul>
-            <li>If null, remove the property from the patched object.  If the key is not present in the parent, this a no-op.</li>
+            <li>If null, remove the property from the patched object.  If the key is not present in the parent, this is a no-op.</li>
             <li>If non-null, set the value given as the value for this property (this may be a replacement or addition to the object being patched).</li>
           </ul>
           <t>A PatchObject does not define its own <xref target="prop-type"><tt>@type</tt></xref> property.  Instead, a <tt>@type</tt> property in a patch <bcp14>MUST</bcp14> be handled as any other patched property value.</t>
@@ -630,7 +630,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
               <li>
                 <t>components: <tt>NameComponent[]</tt> (optional).  The <xref target="namecomponent">components</xref> making up this name.  This property <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set, otherwise it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different <tt>kind</tt> than <tt>separator</tt>.</t>
                 <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to "true".</t>
-                <t>If the name components are ordered, then the <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
+                <t>If the name components are ordered, then the <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance on what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
                 <t>If instead the name components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be "false", the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a NameComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
                 <t><xref target="example-name-twoword"/> is an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.  <xref target="example-name-surname2"/> illustrates a name with a second surname, such as a Spanish name.  Additional examples are shown in <xref target="example-name-sortas"/> and <xref target="example-localizations-replace"/>.</t>
                 <figure anchor="example-name-twoword">
@@ -674,7 +674,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
               </li>
               <li>
                 <t>sortAs: <tt>String[String]</tt> (optional).</t>
-                <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type should not be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.  This property <bcp14>MUST NOT</bcp14> be set if the <tt>components</tt> property is not set.</t>
+                <t>This defines how this name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by this name component type.  Absence of a key indicates that this name component type <bcp14>SHOULD NOT</bcp14> be considered during sort.  Sorting by that missing name component type or if the <tt>sortAs</tt> property is not set is implementation-specific.  This property <bcp14>MUST NOT</bcp14> be set if the <tt>components</tt> property is not set.</t>
                 <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>kind</tt> property of the NameComponent object (see below).  For each key in the map there <bcp14>MUST</bcp14> exist at least one NameComponent object having that type in the <tt>components</tt> property of this name.</t>
                 <t><xref target="example-name-sortas"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting this name by surname.  The absence of the <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by given name as otherwise sorting by it would be undefined.</t>
               </li>
@@ -750,7 +750,7 @@ The value of this name component.  This can be composed of one or multiple words
                 <ul spacing="normal">
                   <li><tt>title</tt>.  The value is an honorific title or prefix, e.g.,  "Mr", "Ms", "Dr".</li>
                   <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
-                  <li><tt>given2</tt>.  The value is a name that appears between the given and surname, such as a middle name or patronymic name</li>
+                  <li><tt>given2</tt>.  The value is a name that appears between the given and surname, such as a middle name or patronymic name.</li>
                   <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
                   <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
                   <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
@@ -792,7 +792,7 @@ The contexts in which to use this nickname.  Also see <xref target="prop-context
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
           <t>Type: <tt>Id[Organization]</tt> (optional).</t>
-          <t>The companies or organization names and units associated with this Card.  An Organization object has the following properties, of which at least one of the <tt>name</tt> and <tt>units</tt> properties <bcp14>MUST</bcp14> be set:</t>
+          <t>The companies or organizations names and units associated with this Card.  An Organization object has the following properties, of which at least one of the <tt>name</tt> and <tt>units</tt> properties <bcp14>MUST</bcp14> be set:</t>
           <ul spacing="normal">
             <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Organization</tt>, if set.
