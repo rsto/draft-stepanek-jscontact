@@ -2853,9 +2853,9 @@ The actual information.</li>
           <t>This template is for adding a new enum value to a subregistry in the JSContact Enum registry.</t>
           <dl newline="false">
             <dt>Enum Value:</dt>
-            <dd>The verbatim value of the enum</dd>
+            <dd>The verbatim value of the enum.</dd>
             <dt>Reference or Description:</dt>
-            <dd>A brief description or RFC number and section reference for the semantics of this value</dd>
+            <dd>A brief description or RFC number and section reference for the semantics of this value.</dd>
             <dt>Since Version:</dt>
             <dd>The JSContact version on which the enum value definition is based on.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the JSContact Enum Value registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
