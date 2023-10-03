@@ -508,7 +508,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
          </li>
             <li>
               <t>relation: <tt>String[Boolean]</tt> (optional, default: empty Object)
-           Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  The key in the set defines the relation type, the value for each key in the set <bcp14>MUST</bcp14> be true.  The relationship between the two objects is undefined if the set is empty.</t>
+                Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  The key in the set defines the relation type, the value for each key in the set <bcp14>MUST</bcp14> be <tt>true</tt>.  The relationship between the two objects is undefined if the set is empty.</t>
               <t>The initial list of <xref target="enumerated-values">enumerated</xref> relation types matches the IANA-registered <xref target="IANAvCard">TYPE parameter</xref> values of the vCard RELATED property (<xref target="RFC6350" section="6.6.6"/>):</t>
               <ul>
                 <li>
@@ -629,9 +629,9 @@ jsversion = 1*DIGIT "." 1*DIGIT
           </li>
               <li>
                 <t>components: <tt>NameComponent[]</tt> (optional).  The <xref target="namecomponent">components</xref> making up this name.  This property <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set, otherwise it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different <tt>kind</tt> than <tt>separator</tt>.</t>
-                <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to "true".</t>
+                <t>Name components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full name of this entity.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to <tt>true</tt>.</t>
                 <t>If the name components are ordered, then the <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance on what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between name component values is a good choice.</t>
-                <t>If instead the name components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be "false", the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a NameComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
+                <t>If instead the name components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be <tt>false</tt>, the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a NameComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
                 <t><xref target="example-name-twoword"/> is an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.  <xref target="example-name-surname2"/> illustrates a name with a second surname, such as a Spanish name.  Additional examples are shown in <xref target="example-name-sortas"/> and <xref target="example-localizations-replace"/>.</t>
                 <figure anchor="example-name-twoword">
                   <name>Example for a surname with two words</name>
@@ -701,7 +701,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
     "surname": "Pau Shou Chang",
     "given": "Robert"
   },
-  "isOrdered": "true"
+  "isOrdered": true
 }
 ]]></sourcecode>
                 </figure>
@@ -1214,9 +1214,9 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           </li>
               <li>
                 <t>components: <tt>AddressComponent[]</tt> (optional).  The <xref target="addresscomponent">components</xref> making up this address.  This property <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set, otherwise it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different <tt>kind</tt> than <tt>separator</tt>.</t>
-                <t>Address components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full address.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to "true".</t>
+                <t>Address components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full address.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to <tt>true</tt>.</t>
                 <t>If the address components are ordered, then the <tt>defaultSeparator</tt> property and address components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between address component values is a good choice.</t>
-                <t>If instead the address components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be "false", the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a AddressComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
+                <t>If instead the address components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be <tt>false</tt>, the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a AddressComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
               </li>
               <li>isOrdered: <tt>Boolean</tt> (optional, default: <tt>false</tt>).  This indicates if the address component sequence in the <tt>components</tt> property is ordered.</li>
               <li>countryCode: <tt>String</tt> (optional).
