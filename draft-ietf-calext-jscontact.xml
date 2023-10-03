@@ -201,8 +201,8 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
           <t>This property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts, and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
           <t>This section defines common contexts.  Additional contexts may be defined in the properties or data types that make use of this property.  The <xref target="enumerated-values">enumerated</xref> common context values are:</t>
           <ul spacing="normal">
-            <li><tt>private</tt>: The contact information may be used to contact in a private context.</li>
-            <li><tt>work</tt>: The contact information may be used to contact in a professional context.</li>
+            <li><tt>private</tt>: the contact information may be used in a private context.</li>
+            <li><tt>work</tt>: the contact information may be used in a professional context.</li>
           </ul>
         </section>
         <section anchor="prop-extra" numbered="true" toc="default">
@@ -748,14 +748,14 @@ The value of this name component.  This can be composed of one or multiple words
               The kind of this name component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
                 <ul spacing="normal">
-                  <li><tt>title</tt>.  The value is an honorific title or prefix, e.g.,  "Mr", "Ms", "Dr".</li>
-                  <li><tt>given</tt>.  The value is a given name, also known as "first name", "personal name".</li>
-                  <li><tt>given2</tt>.  The value is a name that appears between the given and surname, such as a middle name or patronymic name.</li>
-                  <li><tt>surname</tt>.  The value is a surname, also known as "last name", "family name".</li>
-                  <li><tt>surname2</tt>.  The value is a secondary surname (used in some cultures), also known as "maternal surname".</li>
-                  <li><tt>credential</tt>.  The value is a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
-                  <li><tt>generation</tt>.  The value is a generation marker or qualifier, e.g.,  “Jr.” or “III”.</li>
-                  <li><tt>separator</tt>.  A formatting separator between two ordered name non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
+                  <li><tt>title</tt>: an honorific title or prefix, e.g.,  "Mr", "Ms", "Dr".</li>
+                  <li><tt>given</tt>: a given name, also known as "first name", "personal name".</li>
+                  <li><tt>given2</tt>: a name that appears between the given and surname, such as a middle name or patronymic name.</li>
+                  <li><tt>surname</tt>: a surname, also known as "last name", "family name".</li>
+                  <li><tt>surname2</tt>: a secondary surname (used in some cultures), also known as "maternal surname".</li>
+                  <li><tt>credential</tt>: a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
+                  <li><tt>generation</tt>: a generation marker or qualifier, e.g.,  “Jr.” or “III”.</li>
+                  <li><tt>separator</tt>: a formatting separator between two ordered name non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </li>
               <li>phonetic: <tt>String</tt> (optional).  This defines how to pronounce this name component.  If this property is set, then at least one of the Name object <tt>phoneticSystem</tt> or <tt>phoneticScript</tt> properties <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</li>
@@ -1049,14 +1049,14 @@ The phone number, as either a URI or free-text.  Typical URI schemes are the <xr
               The set of contact features that this phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The <xref target="enumerated-values">enumerated</xref> method type values are:
 </t>
               <ul spacing="normal">
-                <li><tt>mobile</tt> The number is for a mobile phone.</li>
-                <li><tt>voice</tt> The number is for calling by voice.</li>
-                <li><tt>text</tt> The number supports text messages (SMS).</li>
-                <li><tt>video</tt> The number supports video conferencing.</li>
-                <li><tt>main-number</tt> This number is the main phone number, such as the number of the front-desk at a company, as opposed to a direct-dial number of an individual employee.</li>
-                <li><tt>textphone</tt> The number is for a device for people with hearing or speech difficulties.</li>
-                <li><tt>fax</tt> The number is for sending faxes.</li>
-                <li><tt>pager</tt> The number is for a pager or beeper.</li>
+                <li><tt>mobile</tt>: the number is for a mobile phone.</li>
+                <li><tt>voice</tt>: the number is for calling by voice.</li>
+                <li><tt>text</tt>: the number supports text messages (SMS).</li>
+                <li><tt>video</tt>: the number supports video conferencing.</li>
+                <li><tt>main-number</tt>: this number is the main phone number, such as the number of the front-desk at a company, as opposed to a direct-dial number of an individual employee.</li>
+                <li><tt>textphone</tt>: the number is for a device for people with hearing or speech difficulties.</li>
+                <li><tt>fax</tt>: the number is for sending faxes.</li>
+                <li><tt>pager</tt>: the number is for a pager or beeper.</li>
               </ul>
             </li>
             <li>contexts: <tt>String[Boolean]</tt> (optional).
@@ -1146,9 +1146,9 @@ Defines the preference of this language in relation to other languages of the sa
             <li><t>The <tt>kind</tt> property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
                 <li>
-                  <tt>calendar</tt> The resource is a calendar that contains entries such as calendar events or tasks.</li>
+                  <tt>calendar</tt>: the resource is a calendar that contains entries such as calendar events or tasks.</li>
                 <li>
-                  <tt>freeBusy</tt> The resource allows for free-busy lookups, for example to schedule group events.</li>
+                  <tt>freeBusy</tt>: the resource allows for free-busy lookups, for example to schedule group events.</li>
               </ul>
             </li>
           </ul>
@@ -1228,8 +1228,8 @@ The Alpha-2 country code <xref target="ISO.3166-1.2006"/>.</li>
 The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  In addition to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
 </t>
                 <ul spacing="normal">
-                  <li><tt>billing</tt> An address to be used for billing.</li>
-                  <li><tt>delivery</tt> An address to be used for delivering physical items.</li>
+                  <li><tt>billing</tt>: an address to be used for billing.</li>
+                  <li><tt>delivery</tt>: an address to be used for delivering physical items.</li>
                 </ul>
               </li>
               <li>full: <tt>String</tt> (optional).
@@ -1289,23 +1289,23 @@ The value of this address component.</li>
               The kind of this address component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
                 <ul spacing="normal">
-                  <li><tt>room</tt>.  The room or suite number or identifier.</li>
-                  <li><tt>apartment</tt>.  The extension designation, such as apartment number or unit or box number.</li>
-                  <li><tt>floor</tt>.  The floor or level this address is located on.</li>
-                  <li><tt>building</tt>.  The building, tower, or condominium this address is located in.</li>
-                  <li><tt>number</tt>.  The street number, e.g., "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
-                  <li><tt>name</tt>.  The street name.</li>
-                  <li><tt>block</tt>. The block name or number.</li>
-                  <li><tt>subdistrict</tt>. The sub district, ward or other subunit of a district.</li>
-                  <li><tt>district</tt>. The district name.</li>
-                  <li><tt>locality</tt>. The municipality, city, town, village, post-town, or another locality.</li>
-                  <li><tt>region</tt>. The administrative area, such as province, state, prefecture, county, canton.</li>
-                  <li><tt>postcode</tt>. The postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
-                  <li><tt>country</tt>. The country name.</li>
-                  <li><tt>direction</tt>.  The Cardinal direction or quadrant, e.g.,  "North".</li>
-                  <li><tt>landmark</tt>. The publicly known prominent feature that can substitute the street name and number, e.g., White House, Taj Mahal.</li>
-                  <li><tt>postOfficeBox</tt>.  The post office box number or identifier.</li>
-                  <li><tt>separator</tt>.  A formatting separator between two ordered address non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
+                  <li><tt>room</tt>: the room or suite number or identifier.</li>
+                  <li><tt>apartment</tt>: the extension designation, such as apartment number or unit or box number.</li>
+                  <li><tt>floor</tt>: the floor or level this address is located on.</li>
+                  <li><tt>building</tt>: the building, tower, or condominium this address is located in.</li>
+                  <li><tt>number</tt>: the street number, e.g., "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
+                  <li><tt>name</tt>: the street name.</li>
+                  <li><tt>block</tt>: the block name or number.</li>
+                  <li><tt>subdistrict</tt>: the sub district, ward or other subunit of a district.</li>
+                  <li><tt>district</tt>: the district name.</li>
+                  <li><tt>locality</tt>: the municipality, city, town, village, post-town, or another locality.</li>
+                  <li><tt>region</tt>: the administrative area, such as province, state, prefecture, county, canton.</li>
+                  <li><tt>postcode</tt>: the postal code, post code, ZIP code or other short code associated with the address by the relevant country's postal system.</li>
+                  <li><tt>country</tt>: the country name.</li>
+                  <li><tt>direction</tt>: the Cardinal direction or quadrant, e.g.,  "North".</li>
+                  <li><tt>landmark</tt>: the publicly known prominent feature that can substitute the street name and number, e.g., White House, Taj Mahal.</li>
+                  <li><tt>postOfficeBox</tt>: the post office box number or identifier.</li>
+                  <li><tt>separator</tt>: a formatting separator between two ordered address non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components, instead they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </li>
               <li>phonetic: <tt>String</tt> (optional).  This defines how to pronounce this name component.  If this property is set, then at least one of the Address object <tt>phoneticSystem</tt> or <tt>phoneticScript</tt> properties <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</li>
@@ -1429,8 +1429,8 @@ The value of this address component.</li>
             <li>
               <t>The <tt>kind</tt> property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
-                <li><tt>directory</tt> The resource is a directory service where the entity represented by this Card is part of.  This typically is an organizational directory that also contains associated entities, e.g.,  co-workers and management in a company directory.</li>
-                <li><tt>entry</tt> The resource is a directory entry of the entity represented by this Card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
+                <li><tt>directory</tt>: the resource is a directory service where the entity represented by this Card is part of.  This typically is an organizational directory that also contains associated entities, e.g.,  co-workers and management in a company directory.</li>
+                <li><tt>entry</tt>: the resource is a directory entry of the entity represented by this Card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
               </ul>
             </li>
           </ul>
@@ -1464,7 +1464,7 @@ The value of this address component.</li>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Link</tt>, if set.</li>
             <li><t>The <tt>kind</tt> property is optional.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
-                <li><tt>contact</tt> The resource is a URI by which the entity represented by this Card may be contacted, including web forms or other media that require user interaction.</li>
+                <li><tt>contact</tt>: the resource is a URI by which the entity represented by this Card may be contacted, including web forms or other media that require user interaction.</li>
               </ul>
             </li>
           </ul>
@@ -1490,9 +1490,9 @@ The value of this address component.</li>
             <li>
               <t>The <tt>kind</tt> property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
-                <li><tt>photo</tt> The resource is a photograph or avatar.</li>
-                <li><tt>sound</tt> The resource is audio media, e.g.,  to specify the proper pronunciation of the name property contents.</li>
-                <li><tt>logo</tt> The resource is a graphic image or logo associated with the entity represented by this Card.</li>
+                <li><tt>photo</tt>: the resource is a photograph or avatar.</li>
+                <li><tt>sound</tt>: the resource is audio media, e.g.,  to specify the proper pronunciation of the name property contents.</li>
+                <li><tt>logo</tt>: the resource is a graphic image or logo associated with the entity represented by this Card.</li>
               </ul>
             </li>
           </ul>
