@@ -207,7 +207,7 @@ The contexts in which to use this resource.  Also see <xref target="prop-context
         </section>
         <section anchor="prop-extra" numbered="true" toc="default">
           <name>extra</name>
-          <t>This is a reserved property name. Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name is invalid.</t>
+          <t>This is a reserved property name. Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.</t>
           <t>The purpose of this reserved property name is to provide implementors with a name which is certain to never occur as a property name in a JSContact object.  Implementations might want to map unknown or vendor-specific properties to a variable with this name, but this is implementation-specific.</t>
         </section>
         <section anchor="prop-label" numbered="true" toc="default">
