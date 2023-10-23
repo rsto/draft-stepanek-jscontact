@@ -1296,7 +1296,7 @@ The value of this address component.</li>
                   <li><tt>number</tt>: the street number, e.g., "123".  This value is not restricted to numeric values, and can include any value such as number ranges ("112–10"), grid style ("39.2 RD"), alphanumerics ("N6W23001") or fractionals ("123 1/2").</li>
                   <li><tt>name</tt>: the street name.</li>
                   <li><tt>block</tt>: the block name or number.</li>
-                  <li><tt>subdistrict</tt>: the sub district, ward or other subunit of a district.</li>
+                  <li><tt>subdistrict</tt>: the subdistrict, ward or other subunit of a district.</li>
                   <li><tt>district</tt>: the district name.</li>
                   <li><tt>locality</tt>: the municipality, city, town, village, post-town, or another locality.</li>
                   <li><tt>region</tt>: the administrative area, such as province, state, prefecture, county, canton.</li>
