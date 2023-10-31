@@ -3733,7 +3733,7 @@ The actual information.</li>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-pronounce-system" align="left">
-                <name>JSContact Enum Values for system (Context: Address, Name)</name>
+                <name>JSContact Enum Values for phoneticSystem (Context: Address, Name)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
