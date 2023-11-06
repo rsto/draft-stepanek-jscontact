@@ -2169,8 +2169,8 @@ The actual information.</li>
               <tr>
                 <td align="left">kind</td>
                 <td align="left">String</td>
-                <td align="left">Anniversary, Calendar, Card, CryptoKey, Directory, Link, Media, NameComponent, PersonalInfo, AddressComponent, Title</td>
-                <td align="left"><xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="addresses" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
+                <td align="left">AddressComponent, Anniversary, Calendar, Card, CryptoKey, Directory, Link, Media, NameComponent, PersonalInfo, AddressComponent, Title</td>
+                <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
               <tr>
                 <td align="left">label</td>
