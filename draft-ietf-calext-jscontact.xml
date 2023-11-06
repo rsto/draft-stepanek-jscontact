@@ -932,7 +932,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
                 </li>
               </ul>
             </li>
-            <li>organization: <tt>Id</tt> (optional).
+            <li>organizationId: <tt>Id</tt> (optional).
             The identifier of the organization in which this title is held.
         </li>
           </ul>
@@ -947,7 +947,7 @@ The contexts in which to use these pronouns.  Also see <xref target="prop-contex
   "k2": {
     "kind": "role",
     "name": "Project Leader",
-    "organization": "o2"
+    "organizationId": "o2"
   }
 },
 "organizations": {
@@ -2161,14 +2161,6 @@ The actual information.</li>
               <tr>
                 <td align="left">kind</td>
                 <td align="left">String</td>
-                <td align="left">Card</td>
-                <td align="left">
-                  <xref target="kind" format="default"/>
-                </td>
-              </tr>
-              <tr>
-                <td align="left">kind</td>
-                <td align="left">String</td>
                 <td align="left">AddressComponent, Anniversary, Calendar, Card, CryptoKey, Directory, Link, Media, NameComponent, PersonalInfo, AddressComponent, Title</td>
                 <td align="left"><xref target="addresses" format="default"/>, <xref target="anniversaries" format="default"/>, <xref target="calendars" format="default"/>, <xref target="kind" format="default"/>, <xref target="cryptoKeys" format="default"/>, <xref target="directories" format="default"/>, <xref target="links" format="default"/>, <xref target="media" format="default"/>, <xref target="name" format="default"/>, <xref target="personalInfo" format="default"/>, <xref target="titles" format="default"/>, <xref target="resource" format="default"/></td>
               </tr>
@@ -2300,7 +2292,7 @@ The actual information.</li>
                 </td>
               </tr>
               <tr>
-                <td align="left">organization</td>
+                <td align="left">organizationId</td>
                 <td align="left">String</td>
                 <td align="left">Title</td>
                 <td align="left">
@@ -2368,7 +2360,7 @@ The actual information.</li>
               </tr>
               <tr>
                 <td align="left">preferredLanguages</td>
-                <td align="left">String[LanguagePref[]]</td>
+                <td align="left">String[LanguagePref]</td>
                 <td align="left">Card</td>
                 <td align="left">
                   <xref target="preferredLanguages" format="default"/>
