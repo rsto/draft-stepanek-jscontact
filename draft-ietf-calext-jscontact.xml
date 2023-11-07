@@ -2909,7 +2909,7 @@ The actual information.</li>
             <dt>Initial Contents:</dt>
             <dd>
               <table anchor="tab-iana-enum-contexts" align="left">
-                <name>JSContact Enum Values for contexts (Context: Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Nickname, OnlineService, Phone, Pronouns, SchedulingAddress)</name>
+                <name>JSContact Enum Values for contexts (Context: Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Nickname, OnlineService, Organization, Phone, Pronouns, SchedulingAddress)</name>
                 <thead>
                   <tr>
                     <th align="left">Enum Value</th>
