@@ -1968,7 +1968,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
             </tr>
             <tr>
               <td align="left">vCardParams</td>
-              <td align="left">String[String]</td>
+              <td align="left">String[String|String[]]</td>
               <td align="left">Any JSContact object</td>
               <td align="left">
                 <xref target="jscontact-prop-vcardparams" format="default"/>
