@@ -1207,13 +1207,13 @@ The contexts in which to use this scheduling address.  Also see <xref target="pr
           <t>A map of address identifiers to Address objects, containing physical locations.</t>
           <section>
             <name>Address object</name>
-            <t>An Address object has the following properties:</t>
+            <t>An Address object has the following properties, of which at least one of <tt>components</tt>, <tt>coordinates</tt>, <tt>countryCode</tt>, <tt>full</tt> or <tt>timeZone</tt> <bcp14>MUST</bcp14> be set:</t>
             <ul spacing="normal">
               <li>@type: <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Address</tt>, if set.
           </li>
               <li>
-                <t>components: <tt>AddressComponent[]</tt> (optional).  The <xref target="addresscomponent">components</xref> making up this address.  This property <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set, otherwise it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different <tt>kind</tt> than <tt>separator</tt>.</t>
+                <t>components: <tt>AddressComponent[]</tt> (optional).  The <xref target="addresscomponent">components</xref> making up this address.  The component list <bcp14>MUST</bcp14> have at least one entry having a different <tt>kind</tt> than <tt>separator</tt>.</t>
                 <t>Address components <bcp14>SHOULD</bcp14> be ordered such that their values joined as a String produce a valid full address.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to <tt>true</tt>.</t>
                 <t>If the address components are ordered, then the <tt>defaultSeparator</tt> property and address components of kind <tt>separator</tt> give guidance what characters to insert between components, but implementations are free to choose any others.  In lack of a separator, inserting a single Space character in between address component values is a good choice.</t>
                 <t>If instead the address components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be <tt>false</tt>, the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a AddressComponent of kind <tt>separator</tt> and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
@@ -1233,7 +1233,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                 </ul>
               </li>
               <li>full: <tt>String</tt> (optional).
-              This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.  If the <tt>street</tt> property is set, the <tt>full</tt> property <bcp14>SHOULD NOT</bcp14> be set.
+              This is the full address, including street, region or country.  The purpose of this property is to define an address, even if the individual address components are not known.
             </li>
               <li>defaultSeparator: <tt>String</tt> (optional).
               The default separator to insert between address component values when concatenating all address component values to a single String.  Also see the definition of the <tt>separator</tt> kind for the AddressComponent object.  This property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt> or if the <tt>components</tt> property is not set.</li>
