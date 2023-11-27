@@ -259,8 +259,8 @@ TITLE;LANGUAGE=fr:Patron
             <artwork><![CDATA[
 LANGUAGE:es
 FN:Gabriel García Márquez
-TITLE;LANGUAGE=en:Boss
-TITLE;LANGUAGE=fr:Patron
+TITLE;LANGUAGE=en:Novelist
+TITLE;LANGUAGE=fr:Écrivain
 
 "language": "es",
 "name" {
@@ -1151,11 +1151,11 @@ group1.ORG:ABC, Inc.
 "titles": {
   "TITLE-1": {
     "kind": "title",
-    "name": "Project Leader"
+    "name": "Research Scientist"
   },
   "TITLE-2": {
     "kind": "role",
-    "name": "Research Scientist",
+    "name": "Project Leader",
     "organizationId": "ORG-1"
   }
 },
