@@ -264,7 +264,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>LANG</dd>
+          <dd>LANG, ALTID</dd>
           <dt>Description:</dt>
           <dd>
             <t>
@@ -289,6 +289,7 @@ gramgender-param =
                  ; but MUST NOT occur more than once.
                  ;
                  (";" language-param) /
+                 (";" altid-param) /
                  ;
                  ; The following are OPTIONAL,
                  ; and MAY occur more than once.
@@ -367,7 +368,7 @@ LANGUAGE:de-AT
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>LANG, PREF, TYPE</dd>
+          <dd>LANG, PREF, TYPE, ALTID</dd>
           <dt>Description:</dt>
           <dd>
             This property contains the pronouns that the contact chooses to use for themselves.
