@@ -1944,12 +1944,11 @@ The actual information.</li>
 			    types <bcp14>MAY</bcp14> already have registered a different property with the same name; however,
 			        the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.</dd>
             <dt>Property Type:</dt>
-            <dd> This is the type of this property, using type signatures, as specified in <xref target="type-signatures" format="default"/>.
-		    The property type <bcp14>MUST</bcp14> be registered in the "JSContact Types" registry.</dd>
+            <dd>For properties with intended usage other than "reserved", this is the type of this property, using type signatures as specified in <xref target="type-signatures" format="default"/>.  The property type <bcp14>MUST</bcp14> be registered in the "JSContact Types" registry.  For reserved property names, the value <bcp14>MUST</bcp14> be the verbatim string "not applicable".</dd>
             <dt>Property Context:</dt>
-            <dd>This is a comma-separated list of JSContact object types (<xref target="iana-type-registry-contents"/>) that contain this property.</dd>
+            <dd>This is a comma-separated list of JSContact object types (<xref target="iana-type-registry-contents"/>) that contain this property.  For reserved property names, the value <bcp14>MAY</bcp14> be the verbatim string "not applicable".</dd>
             <dt>Reference or Description:</dt>
-            <dd>This is a brief description or RFC number and section reference where the property is specified (omitted for "reserved" property names). This must include references to all RFC documents where this property is introduced or updated.</dd>
+            <dd>This is a brief description or RFC number and section reference where the property is specified. This must include references to all RFC documents where this property is introduced or updated.  For reserved property names, the reference or description <bcp14>MAY</bcp14> be omitted.</dd>
             <dt>Intended Usage:</dt>
             <dd>This may be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
@@ -2556,7 +2555,7 @@ The actual information.</li>
             <dt>Type Name:</dt>
             <dd>the name of the type</dd>
             <dt>Reference or Description:</dt>
-            <dd>a brief description or RFC number and section reference where the Type is specified (may be omitted for "reserved" type names)</dd>
+            <dd>This is a brief description or RFC number and section reference where the Type is specified.  For reserved types names, the reference or description <bcp14>MAY</bcp14> be omitted.</dd>
             <dt>Intended Usage:</dt>
             <dd>common, reserved, or obsolete</dd>
             <dt>Since Version:</dt>
