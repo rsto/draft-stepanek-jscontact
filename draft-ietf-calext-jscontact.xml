@@ -1852,9 +1852,10 @@ The actual information.</li>
         <t>A registration <bcp14>MUST</bcp14> have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>.</t>
         <ul>
           <li>A <tt>common</tt> usage denotes an item with shared semantics and syntax across systems. Up-to-date systems <bcp14>MUST</bcp14> expect such items to occur in JSContact data.</li>
-          <li>A <tt>reserved</tt> usage reserves an item in the registry without assigning semantics to avoid name collisions with future extensions or protocol use.</li>
-          <li>An <tt>obsolete</tt> usage denotes an item that is no longer expected to be added by up-to-date systems.  A new assignment has probably been defined covering the obsolete item's semantics.</li>
+          <li>A <tt>reserved</tt> usage reserves an item in the registry without assigning semantics to avoid name collisions with future extensions or protocol use.  Implementations <bcp14>MUST NOT</bcp14> expect or add items with such names outside the protocol or extension that uses them, otherwise any such JSContact data is invalid.</li>
+          <li>An <tt>obsolete</tt> usage denotes an item that is no longer expected to be added by up-to-date systems.  A new assignment has probably been defined covering the obsolete item's semantics. Implementations <bcp14>MUST</bcp14> expect such items to occur in JSContact data up to the "Until Version" registry field, inclusively. They <bcp14>MUST NOT</bcp14> add such items for any version after which the item got obsolete, otherwise any such JSContact data is invalid.</li>
         </ul>
+        <t>The intended usage of registry items may change between versions, but the Designated Expert must carefully consider the impact on existing implementations and standards before doing so.</t>
         <t>The registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comment and check whether it is coherent without excessive time delay.  It is designed to encourage vendors to document and register new items they add for use cases not covered by the original specification, leading to increased interoperability.</t>
         <section anchor="iana-registry-preliminary-community-review" numbered="true" toc="default">
           <name>Preliminary Community Review</name>
