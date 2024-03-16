@@ -199,7 +199,7 @@ Original:
             <dt><tt>A[B]</tt>:</dt><dd> A JSON object where all keys are of type <tt>A</tt> and all values are of type <tt>B</tt>.</dd>
             <dt><tt>A[]</tt>:</dt><dd> A JSON array of values of type <tt>A</tt>.</dd>
             <dt><tt>A|B</tt>:</dt><dd> The value is either of type <tt>A</tt> or of type <tt>B</tt>.</dd>
-            <dt><tt>* *</tt>:</dt><dd> The type is undefined (the value could be any type, although permitted values may be constrained by the context of this value).</dd>
+            <dt><tt>*</tt>:</dt><dd> The type is undefined (the value could be any type, although permitted values may be constrained by the context of this value).</dd>
           </dl>
           <t><xref target="common-data-types"/> defines common data types, including signed or unsigned integers and dates.</t>
         </section>
