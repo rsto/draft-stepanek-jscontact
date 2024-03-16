@@ -1368,14 +1368,14 @@ The phone number as either a URI or free text.  Typical URI schemes are <tt>tel<
               The set of contact features that the phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be <tt>true</tt>.  The <xref target="enumerated-values">enumerated</xref> method type values are:
 </t>
               <ul spacing="compact">
-                <li><tt>mobile</tt>: the number for a mobile phone.</li>
-                <li><tt>voice</tt>: the number for calling by voice.</li>
-                <li><tt>text</tt>: the number that supports text messages (SMS).</li>
-                <li><tt>video</tt>: the number that supports video conferencing.</li>
-                <li><tt>main-number</tt>: the main phone number such as the number of the front desk at a company, as opposed to a direct-dial number of an individual employee.</li>
-                <li><tt>textphone</tt>: the number is for a device for people with hearing or speech difficulties.</li>
-                <li><tt>fax</tt>: the number for sending faxes.</li>
-                <li><tt>pager</tt>: the number for a pager or beeper.</li>
+                <li><tt>mobile</tt>: this number is for a mobile phone.</li>
+                <li><tt>voice</tt>: this number supports calling by voice.</li>
+                <li><tt>text</tt>: this number supports text messages (SMS).</li>
+                <li><tt>video</tt>: this number supports video conferencing.</li>
+                <li><tt>main-number</tt>: this number is a main phone number such as the number of the front desk at a company, as opposed to a direct-dial number of an individual employee.</li>
+                <li><tt>textphone</tt>: this number is for a device for people with hearing or speech difficulties.</li>
+                <li><tt>fax</tt>: this number supports sending faxes.</li>
+                <li><tt>pager</tt>: this number is for a pager or beeper.</li>
               </ul>
             </dd>
             <dt>contexts:</dt><dd> <tt>String[Boolean]</tt> (optional).
