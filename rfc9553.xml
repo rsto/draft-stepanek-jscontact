@@ -1357,7 +1357,7 @@ The contexts in which to use the service.  Also see <xref target="prop-contexts"
         <section anchor="phones" numbered="true" toc="default">
           <name>phones</name>
           <t>Type: <tt>Id[Phone]</tt> (optional)</t>
-          <t>The phone numbers in which to contact the entity represented by the Card.  A Phone object has the following properties:</t>
+          <t>The phone numbers by which to contact the entity represented by the Card.  A Phone object has the following properties:</t>
           <dl spacing="normal">
             <dt>@type:</dt><dd> <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Phone</tt>, if set.
