@@ -1459,7 +1459,7 @@ Defines the preference of the language in relation to other languages of the sam
         <section anchor="calendars" numbered="true" toc="default">
           <name>calendars</name>
           <t>Type: <tt>Id[Calendar]</tt> (optional)</t>
-          <t>These are resources for calendaring such as using calendars to look up free-busy information for the entity represented by the Card.  A Calendar object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <t>These are resources for calendaring such as to look up free-busy information for the entity represented by the Card.  A Calendar object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Calendar</tt>, if set.</li>
             <li><t>The <tt>kind</tt> property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
