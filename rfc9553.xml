@@ -165,7 +165,14 @@ updates are needed for consistency.
             <li>One property named <tt>@type</tt> with a string value that matches the type name of the JSContact object.  In general, this property does not need to be set explicitly as outlined in <xref target="prop-type"/>.</li>
           </ol>
           <t>The following sections specify how to define JSContact object types. Sections <xref target="validating-jscontact" format="counter"/> and <xref target="vendor-specific-extensions"  format="counter"/> then define the exact requirements for property names.</t>
-          <t>The next paragraph illustrates how a JSContact object is defined.</t>
+          <t>Subsection <xref target="example-foo-object"/> illustrates the definition of a JSContact object type.  The names <em>Foo</em> and <em>baz</em> are only for demonstration and have no meaning outside the example.  The example illustrates the following:</t>
+          <ul>
+            <li>It defines a JSContact object type named <tt>Foo</tt> having two properties, named <tt>@type</tt> and <tt>baz</tt>.</li>
+            <li>The <tt>@type</tt> property adheres to the rules outlined in <xref target="prop-type"/>.  Because of this, it is neither defined to be mandatory nor optional, as this depends on how the Foo object type is used.</li>
+            <li>The <tt>baz</tt> property value <bcp14>MUST</bcp14> be valid according to the definition of the <tt>Number</tt> type.</li>
+            <li>The property has one attribute, <tt>mandatory</tt>, which specifies that the property <bcp14>MUST</bcp14> be present for a value of the Foo object type to be valid.</li>
+            <li>The free-text description of the <tt>baz</tt> property describes the semantics and further restrictions for its values.</li>
+          </ul>
 
 <!--[rfced] Section 1.3.1. Please clarify the meaning of "qux-ishness"
 as no other RFCs contain this term. Is it a well-known term, or
@@ -182,12 +189,14 @@ Original:
       The value MUST be an integer greater than 0 and less than 10.
 -->
 
+          <section anchor="example-foo-object">
+            <name>Example of a JSContact Object Definition</name>
             <t>A Foo object has the following properties:</t>
             <dl spacing="normal">
-              <dt><tt>qux</tt>:</dt><dd> Number (mandatory).  Defines the qux-ishness of this contact.  The value <bcp14>MUST</bcp14> be an integer greater than 0 and less than 10.</dd>
+              <dt><tt>@type</tt>:</dt><dd> String. This <bcp14>MUST</bcp14> be <tt>Foo</tt>, if set.</dd>
+              <dt><tt>baz</tt>:</dt><dd> Number (mandatory).  This is the baz of the contact.  The value <bcp14>MUST</bcp14> be an integer greater than 0 and less than 10.</dd>
             </dl>
-
-          <t>Here, a JSContact object type named <tt>Foo</tt> is defined.  In addition to its <tt>@type</tt> property, it has a property named <tt>qux</tt> for which values <bcp14>MUST</bcp14> be valid according to the definition of the <tt>Number</tt> type.  The property has one attribute, <tt>mandatory</tt>, which specifies that the property <bcp14>MUST</bcp14> be present for an instance of this JSContact object to be valid.  Finally, a free-text description describes the semantics and further restrictions.</t>
+          </section>
         </section>
         <section anchor="type-signatures" numbered="true" toc="default">
           <name>Type Signatures</name>
