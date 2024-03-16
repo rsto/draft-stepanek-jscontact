@@ -1326,7 +1326,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
               This <bcp14>MUST</bcp14> be <tt>OnlineService</tt>, if set.
         </dd>
             <dt>service:</dt><dd> <tt>String</tt> (optional).
-              The name of the online service or protocol.  The name <bcp14>MAY</bcp14> be capitalized the same as on the service's website, app, or publishing material, but names <bcp14>MUST</bcp14> be considered equal if they match case-insensitively.  Examples are <tt>GitHub</tt>, <tt>Kakao</tt>, and <tt>Mastodon</tt>.</dd>
+              The name of the online service or protocol.  The name <bcp14>MAY</bcp14> be capitalized the same as on the service's website, app, or publishing material, but names <bcp14>MUST</bcp14> be considered equal if they match case-insensitively.  Examples are <tt>GitHub</tt>, <tt>kakao</tt>, and <tt>Mastodon</tt>.</dd>
             <dt>uri:</dt><dd> <tt>String</tt> (optional).
 Identifies the entity represented by the Card at the online service.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in <xref target="RFC3986" sectionFormat="of" section="3"/>.</dd>
             <dt>user:</dt><dd> <tt>String</tt> (optional).
