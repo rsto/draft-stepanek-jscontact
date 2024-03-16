@@ -1852,7 +1852,7 @@ Current:
           <t>In addition, the Directory object has the following property:</t>
           <dl>
             <dt>listAs:</dt><dd> <tt>UnsignedInt</tt> (optional).
-          Defines the position of the directory resource in the list of all Directory objects having the same <tt>kind</tt> in the Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value or none.  Sorting such entries is implementation-specific.
+          Defines the position of the directory resource in the list of all Directory objects having the same <tt>kind</tt> in the Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple directory resources <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value or none.  Sorting such same-valued entries is implementation-specific.
         </dd>
           </dl>
           <figure anchor="example-directories">
@@ -2176,7 +2176,7 @@ The actual information.</dd>
               </ul>
             </dd>
             <dt>listAs:</dt><dd> <tt>UnsignedInt</tt> (optional).
-            Defines the position of the personal information in the list of all PersonalInfo objects that have the same <tt>kind</tt> in the Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value or none.  Sorting such entries is implementation-specific.
+            Defines the position of the personal information in the list of all PersonalInfo objects that have the same <tt>kind</tt> in the Card.  If set, the <tt>listAs</tt> value <bcp14>MUST</bcp14> be higher than zero.  Multiple personal information entries <bcp14>MAY</bcp14> have the same <tt>listAs</tt> property value or none.  Sorting such same-valued entries is implementation-specific.
         </dd>
             <dt>label:</dt><dd> <tt>String</tt> (optional).
             A custom label.  See <xref target="prop-label"/>.</dd>
