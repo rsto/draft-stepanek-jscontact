@@ -115,7 +115,7 @@ B) The attributes of the card data must be described as simple
    of the card data.
 -->
 	
-        <li>The attributes of the card data represented must be described as simple key-value pairs, reducing complexity of their representation.</li>
+        <li>The attributes of the card data must be described as simple key-value pairs to reduce the complexity of the representation of the card data.</li>
         <li>The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.</li>
         <li>Extensions, such as new properties and components, <bcp14>MUST NOT</bcp14> lead to a required update of this document.</li>
       </ul>
