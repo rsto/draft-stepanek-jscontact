@@ -223,7 +223,7 @@ Original:
           <ul>
             <li>An object that is set as the value for a property with type signature <tt>A</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set.  If the <tt>@type</tt> property is not set, then its value is implied to be <tt>A</tt> by the property definition.</li>
             <li>An object that is set as the value for a property with type signature <tt>A|B (defaultType: A)</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>A</tt>.  It <bcp14>MUST</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>B</tt>.  If, instead, the <tt>defaultType</tt> attribute is not defined, then the <tt>@type</tt> property <bcp14>MUST</bcp14> also be set for <tt>A</tt>.</li>
-            <li>An object that is not the value of a property, such as the root of JSON data (directly or as a member of an array), <bcp14>MUST</bcp14> have the <tt>@type</tt> property set.</li>
+            <li>An object that is not the value of a property, such as the topmost object in JSON data (directly or as a member of an array), <bcp14>MUST</bcp14> have the <tt>@type</tt> property set.</li>
           </ul>
         </section>
       </section>
