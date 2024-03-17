@@ -3621,103 +3621,103 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                   <tr>
                     <td align="left">apartment</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">block</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">building</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">country</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">direction</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">district</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">floor</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">landmark</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">locality</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">name</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">number</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">postcode</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">postOfficeBox</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">region</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">room</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">separator</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">subdistrict</td>
                     <td align="left">
-                      <xref target="address" format="default"/>
+                      <xref target="addresscomponent" format="default"/>
                     </td>
                   </tr>
                 </tbody>
@@ -3965,49 +3965,49 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                   <tr>
                     <td align="left">credential</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">generation</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">given</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">given2</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">separator</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">surname</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">surname2</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">title</td>
                     <td align="left">
-                      <xref target="name" format="default"/>
+                      <xref target="namecomponent" format="default"/>
                     </td>
                   </tr>
                 </tbody>
