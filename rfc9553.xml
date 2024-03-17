@@ -82,7 +82,7 @@ be moved to AUTH48 shortly.
     <keyword>cards</keyword>
     <keyword>VCARD</keyword>
     <abstract>
-      <t>This specification defines a data model and JavaScript Object Notation (JSON) representation of contact card information that can be used for data storage and exchange in address book or directory applications.  It aims to be an alternative to the vCard data format and to be unambiguous, extendable, and simple to process.  In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.</t>
+      <t>This specification defines a data model and JavaScript Object Notation (JSON) representation of contact card information that can be used for data storage and exchange in address book or directory applications.  It aims to be an alternative to the vCard data format and to be unambiguous, extendable, and simple to process.  In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.  Additionally to this specification, two additional documents define new vCard elements and how to convert between JSContact and vCard.</t>
     </abstract>
   </front>
   <middle>
@@ -124,7 +124,8 @@ B) The attributes of the card data must be described as simple
         <name>Motivation and Relation to vCard, jCard, and xCard</name>
         <t>The vCard data format <xref target="RFC6350"/> is an interchange format for contacts data between address book service providers and vendors.  However, this format has gone through multiple specification iterations with only a subset of its deprecated <xref target="RFC2426">version 3</xref> being widely in use.  Consequently, products and services use an internal contact data model that is richer than what they expose when serializing that information to vCard.  In addition, service providers often use a proprietary JSON representation of contact data in their APIs.</t>
         <t>JSContact provides a standard JSON-based data model and representation of contact data as an alternative to proprietary formats.</t>
-        <t>At the time of writing this document, several missing features in vCard were brought to the attention of the authors such as social media contacts, gender pronouns, and others.  This highlights how vCard is not perceived as an evolving format and, consequently, hasn't been updated for about ten years.  JSContact addresses these unmet demands and defines new vCard properties and parameters to allow interchanging them in both formats.</t>
+	<t>At the time of writing this document, several missing features in vCard were brought to the attention of the authors such as social media contacts, gender pronouns, and others.  This highlights how vCard is not perceived as an evolving format and, consequently, hasn't been updated for about ten years.  JSContact addresses these unmet demands and defines new vCard properties and parameters to allow interchanging them in both formats.</t>
+	<t>Two additional documents define the relation of JSContact and vCard: <xref target="I-D.ietf-calext-vcard-jscontact-extensions" format="default"/> defines new vCard properties and parameters.  <xref target="I-D.ietf-calext-jscontact-vcard" format="default"/> defines how to convert JSContact data from and to vCard.</t>
         <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data in XML and JSON formats, respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
       </section>
       <section anchor="notational-conventions" numbered="true" toc="default">
@@ -4427,6 +4428,38 @@ Current:
     <date day="6" month="November" year="2023"/>
   </front>
   <seriesInfo name="Internet-Draft" value="draft-ietf-uuidrev-rfc4122bis-14"/>
+</reference>
+
+<!--[I-D.ietf-calext-vcard-jscontact-extensions] in AUTH48 state; entered the long way to include the correct initials-->
+<!-- This is going to be RFC 9554 -->
+<reference anchor="I-D.ietf-calext-vcard-jscontact-extensions" target="https://datatracker.ietf.org/doc/html/ietf-calext-vcard-jscontact-extensions-12">
+  <front>
+    <title>vCard Format Extension for JSContact</title>
+    <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
+      <organization>Fastmail</organization>
+    </author>
+    <author fullname="Mario Loffredo" initials="M. L." surname="Loffredo">
+      <organization>IIT-CNR</organization>
+    </author>
+    <date day="4" month="March" year="2024"/>
+  </front>
+  <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-12"/>
+</reference>
+
+<!--[I-D.ietf-calext-jscontact-vcard] in AUTH48 state; entered the long way to include the correct initials-->
+<!-- This is going to be RFC 9555 -->
+<reference anchor="I-D.ietf-calext-jscontact-vcard" target="https://datatracker.ietf.org/doc/html/ietf-calext-jscontact-vcard-15">
+  <front>
+    <title>vCard Format Extension for JSContact</title>
+    <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
+      <organization>Fastmail</organization>
+    </author>
+    <author fullname="Mario Loffredo" initials="M. L." surname="Loffredo">
+      <organization>IIT-CNR</organization>
+    </author>
+    <date day="4" month="March" year="2024"/>
+  </front>
+  <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-vcard-15"/>
 </reference>
 	
 
