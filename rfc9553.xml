@@ -169,9 +169,9 @@ updates are needed for consistency.
           <ul>
             <li>It defines a JSContact object type named <tt>Foo</tt> having two properties, named <tt>@type</tt> and <tt>baz</tt>.</li>
             <li>The <tt>@type</tt> property adheres to the rules outlined in <xref target="prop-type"/>.  Because of this, it is neither defined to be mandatory nor optional, as this depends on how the Foo object type is used.</li>
-            <li>The <tt>baz</tt> property value <bcp14>MUST</bcp14> be valid according to the definition of the <tt>Number</tt> type.</li>
+            <li>The baz property value <bcp14>MUST</bcp14> be valid according to the definition of the <tt>Number</tt> type.</li>
             <li>The property has one attribute, <tt>mandatory</tt>, which specifies that the property <bcp14>MUST</bcp14> be present for a value of the Foo object type to be valid.</li>
-            <li>The free-text description of the <tt>baz</tt> property describes the semantics and further restrictions for its values.</li>
+            <li>The free-text description of the baz property describes the semantics and further restrictions for its values.</li>
           </ul>
 
 <!--[rfced] Section 1.3.1. Please clarify the meaning of "qux-ishness"
@@ -380,7 +380,7 @@ Perhaps:
         <section anchor="prop-contexts" numbered="true" toc="default">
           <name>contexts</name>
           <t>Type: <tt>String[Boolean]</tt></t>
-          <t>This property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
+          <t>The contexts property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts and may set the desired context on the respective phone number in the <xref target="phones"><tt>phones</tt></xref> property.</t>
           <t>This section defines common contexts.  Additional contexts may be defined in the properties or data types that make use of this property.  The <xref target="enumerated-values">enumerated</xref> common context values are:</t>
           <ul spacing="normal">
             <li><tt>private</tt>: the contact information that may be used in a private context.</li>
@@ -389,18 +389,18 @@ Perhaps:
         </section>
         <section anchor="prop-extra" numbered="true" toc="default">
           <name>extra</name>
-          <t><tt>extra</tt> is a reserved property name. Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.</t>
+          <t>The extra property name is reserved.  Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.</t>
           <t>The purpose of this reserved property name is to provide implementors with a name that is certain to never occur as a property name in a JSContact object.  Implementations might want to map unknown or vendor-specific properties to a variable with this name, but this is implementation-specific.</t>
         </section>
         <section anchor="prop-label" numbered="true" toc="default">
           <name>label</name>
           <t>Type: <tt>String</tt></t>
-          <t>This property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses, and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces. Note that succinct labels are best for proper display on small graphical interfaces and screens.</t>
+          <t>The label property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses, and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces. Note that succinct labels are best for proper display on small graphical interfaces and screens.</t>
         </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>pref</name>
           <t>Type: <tt>UnsignedInt</tt></t>
-          <t>This property allows defining a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>	  
+          <t>The pref property allows defining a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>
           <t>Its value <bcp14>MUST</bcp14> be in the range of 1 to 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
           <t>Note that the preference is only defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are independent of each other.</t>
         </section>
@@ -423,11 +423,11 @@ Perhaps:
    property MUST be ignored and not used with the phonetic property.
 -->
 
-	    Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the <tt>phonetic</tt> property.  If this property is set, then at least one of the <tt>phoneticScript</tt> or <tt>phoneticSystem</tt> properties that relate to this value <bcp14>MUST</bcp14> be set.</dd>
+	    Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the phonetic property.  If this property is set, then at least one of the <tt>phoneticScript</tt> or <tt>phoneticSystem</tt> properties that relate to this value <bcp14>MUST</bcp14> be set.</dd>
             <dt>phoneticScript:</dt><dd> <tt>String</tt>.
             The script used in the value of the related <tt>phonetic</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>. </dd>	    
             <dt>phoneticSystem:</dt><dd><t> <tt>String</tt>.
-              The phonetic system used in the related value of the <tt>phonetic</tt> property.  The <xref target="enumerated-values">enumerated</xref> values are:</t>
+              The phonetic system used in the related value of the phonetic property.  The <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
                 <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
                 <li><tt>jyut</tt>: denotes the Cantonese romanization system "Jyutping".</li>
@@ -436,7 +436,7 @@ Perhaps:
             </dd>
           </dl>
           <t>The relation between the <tt>phoneticSystem</tt>, <tt>phoneticScript</tt>, and <tt>phonetic</tt> properties is type-specific.  This specification defines this relation in the <xref target="name">Name</xref> and <xref target="addresses">Address</xref> object types, respectively.</t>
-          <t>The following example illustrates the <tt>phonetic</tt> property for a <xref target="name">name</xref>:</t>
+          <t>The following example illustrates the phonetic property for a <xref target="name">name</xref>:</t>
           <figure anchor="example-phonetic">
             <name>Example of a <tt>phonetic</tt> Property for the Name "John Smith" as Pronounced in the USA</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -687,7 +687,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="prop-version" numbered="true" toc="default">
           <name>version</name>
           <t>Type: <tt>String</tt> (mandatory)</t>
-          <t>This specifies the JSContact version used to define the Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the <tt>version</tt> property.  Also see <xref target="current-version"/>.</t>
+          <t>This specifies the JSContact version used to define the Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the version property.  Also see <xref target="current-version"/>.</t>
           <figure anchor="example-version">
             <name><tt>version</tt> Example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -753,8 +753,8 @@ Current:
         <section anchor="members" numbered="true" toc="default">
           <name>members</name>
           <t>Type: <tt>String[Boolean]</tt> (optional)</t>
-          <t>This identifies the set of Cards that are members of this group Card.  Each key in the set is the <tt>uid</tt> property value of the member, and each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the <tt>kind</tt> property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
-          <t>The opposite is not true.  A group Card will usually contain the <tt>members</tt> property to specify the members of the group, but it is not required to.  A group Card without the <tt>members</tt> property can be considered an abstract grouping or one whose members are known empirically (e.g.,  "IETF Participants").</t>
+          <t>This identifies the set of Cards that are members of this group Card.  Each key in the set is the uid property value of the member, and each boolean value <bcp14>MUST</bcp14> be <tt>true</tt>. If this property is set, then the value of the kind property <bcp14>MUST</bcp14> be <tt>group</tt>.</t>
+          <t>The opposite is not true.  A group Card will usually contain the members property to specify the members of the group, but it is not required to.  A group Card without the members property can be considered an abstract grouping or one whose members are known empirically (e.g.,  "IETF Participants").</t>
           <figure anchor="example-members">
             <name><tt>members</tt> Example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -934,10 +934,10 @@ As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref>
               <dt>@type:</dt><dd> <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Name</tt>, if set.
           </dd>
-              <dt>components:</dt><dd><t> <tt>NameComponent[]</tt> (optional).  The <xref target="namecomponent">components</xref> making up this name.  This property <bcp14>MUST</bcp14> be set if the <tt>full</tt> property is not set; otherwise, it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different <tt>kind</tt> than <tt>separator</tt>.</t>
-                <t>Name components <bcp14>SHOULD</bcp14> be ordered such that when their values are joined as a String, a valid full name of the entity is produced.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to <tt>true</tt>.</t>
-                <t>If the name components are ordered, then the <tt>defaultSeparator</tt> property and name components of kind <tt>separator</tt> give guidance on what characters to insert between components, but implementations are free to choose any others.  When lacking a separator, inserting a single space character  in between the name component values is a good choice.</t>
-                <t>If, instead, the name components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be <tt>false</tt>, the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain a NameComponent of kind <tt>separator</tt>, and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
+              <dt>components:</dt><dd><t> <tt>NameComponent[]</tt> (optional).  The <xref target="namecomponent">components</xref> making up this name.  The components property <bcp14>MUST</bcp14> be set if the full property is not set; otherwise, it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different <tt>kind</tt> than <tt>separator</tt>.</t>
+                <t>Name components <bcp14>SHOULD</bcp14> be ordered such that when their values are joined as a String, a valid full name of the entity is produced.  If so, implementations <bcp14>MUST</bcp14> set the isOrdered property value to <tt>true</tt>.</t>
+                <t>If the name components are ordered, then the defaultSeparator property and name components of kind <tt>separator</tt> give guidance on what characters to insert between components, but implementations are free to choose any others.  When lacking a separator, inserting a single space character  in between the name component values is a good choice.</t>
+                <t>If, instead, the name components follow no particular order, then the isOrdered property value <bcp14>MUST</bcp14> be <tt>false</tt>, the components property <bcp14>MUST NOT</bcp14> contain a NameComponent of kind <tt>separator</tt>, and the defaultSeparator property <bcp14>MUST NOT</bcp14> be set.</t>
                 <t><xref target="example-name-twoword"/> shows an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.</t>  
                 <figure anchor="example-name-twoword">
                   <name>Example of a Surname with Two Words</name>
@@ -973,7 +973,7 @@ shown in Section 2.2.1.1.
 ]]></sourcecode>
                 </figure>
               </dd>
-              <dt>isOrdered:</dt><dd> <tt>Boolean</tt> (optional; default: <tt>false</tt>).  Indicates if the name component sequence in the <tt>components</tt> property is ordered.</dd>
+              <dt>isOrdered:</dt><dd> <tt>Boolean</tt> (optional; default: <tt>false</tt>).  Indicates if the name component sequence in the components property is ordered.</dd>
               <dt>defaultSeparator:</dt><dd> <tt>String</tt> (optional).
               The default separator to insert between name component values when concatenating all name component values to a single String.
 
@@ -1000,9 +1000,9 @@ Current:
    Also see the definition of the separator kind 
    for the AddressComponent (Section 2.5.1.2) object.
 -->
-	      Also see the definition of the <tt>separator</tt> kind for the <xref target="namecomponent">NameComponent</xref> object.  This property <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt> or if the <tt>components</tt> property is not set.</dd>
+	      Also see the definition of the <tt>separator</tt> kind for the <xref target="namecomponent">NameComponent</xref> object.  The defaultSeparator property <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt> or if the components property is not set.</dd>
               <dt>full:</dt><dd><t><tt>String</tt> (optional).
-            The full name representation of the Name.  This property <bcp14>MUST</bcp14> be set if the <tt>components</tt> property is not set.</t>
+            The full name representation of the Name.  The full property <bcp14>MUST</bcp14> be set if the components property is not set.</t>
                 <figure anchor="example-full">
                   <name><tt>full</tt> Example</name>
                   <sourcecode name="" type="json"><![CDATA[
@@ -1011,9 +1011,9 @@ Current:
                 </figure>
               </dd>
               <dt>
-                sortAs:</dt><dd><t> <tt>String[String]</tt> (optional). Defines how the name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by the name component type.  Absence of a key indicates that the name component type <bcp14>SHOULD NOT</bcp14> be considered during sort.  Sorting by that missing name component type, or if the <tt>sortAs</tt> property is not set, is implementation-specific.  This property <bcp14>MUST NOT</bcp14> be set if the <tt>components</tt> property is not set.</t>
-                <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the <tt>kind</tt> property of the NameComponent object (see below).  For each key in the map, there <bcp14>MUST</bcp14> exist at least one NameComponent object that has the type in the <tt>components</tt> property of the name.</t>
-                <t><xref target="example-name-sortas"/> illustrates the use of sortAs.  The property value indicates that the middle name followed by both surnames should be used when sorting the name by surname.  The absence of <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by the given name; otherwise, sorting by it would be undefined.</t>
+                sortAs:</dt><dd><t> <tt>String[String]</tt> (optional). Defines how the name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by the name component type.  Absence of a key indicates that the name component type <bcp14>SHOULD NOT</bcp14> be considered during sort.  Sorting by that missing name component type, or if the sortAs property is not set, is implementation-specific.  The sortAs property <bcp14>MUST NOT</bcp14> be set if the components property is not set.</t>
+                <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the kind property of the NameComponent object (see below).  For each key in the map, there <bcp14>MUST</bcp14> exist at least one NameComponent object that has the type in the components property of the name.</t>
+                <t><xref target="example-name-sortas"/> illustrates the use of <tt>sortAs</tt>.  The property value indicates that the middle name followed by both surnames should be used when sorting the name by surname.  The absence of <tt>middle</tt> indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by the given name; otherwise, sorting by it would be undefined.</t>
               </dd>
               <dt>
                 phoneticScript:</dt><dd> <tt>String</tt> (optional).
@@ -1090,7 +1090,7 @@ The value of the name component.  This can be composed of one or multiple words 
                   <li><tt>surname2</tt>: a secondary surname (used in some cultures), also known as "maternal surname".</li>
                   <li><tt>credential</tt>: a  credential, also known as "accreditation qualifier" or "honorific suffix", e.g.,  "B.A.", "Esq.".</li>
                   <li><tt>generation</tt>: a generation marker or qualifier, e.g.,  "Jr." or "III".</li>
-                  <li><tt>separator</tt>: a formatting separator between two ordered name non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example, a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components; instead, they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
+                  <li><tt>separator</tt>: a formatting separator between two ordered name non-separator components.  The value property of the component includes the verbatim separator, for example, a hyphen character or even an empty string.  This value has higher precedence than the defaultSeparator property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components; instead, they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Name <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </dd>
               <dt>phonetic:</dt><dd> <tt>String</tt> (optional).  Defines how to pronounce the name component.  If this property is set, then at least one of the Name object properties, <tt>phoneticSystem</tt> or <tt>phoneticScript</tt>, <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</dd>
@@ -1139,7 +1139,7 @@ The contexts in which to use the nickname.  Also see <xref target="prop-contexts
             A list of organizational units, ordered as descending by hierarchy (e.g., a geographic or functional division sorts before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
         </dd>
             <dt>sortAs:</dt><dd> <tt>String</tt> (optional).
-            Defines how the organization name lexicographically sorts in relation to other organizations when compared by the name.  The value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>MAY</bcp14> be used for comparison.
+            Defines how the organization name lexicographically sorts in relation to other organizations when compared by the name.  The value defines the verbatim string value to compare.  In absence of this property, the name property value <bcp14>MAY</bcp14> be used for comparison.
         </dd>
             <dt>contexts:</dt><dd> <tt>String[Boolean]</tt> (optional).
 The contexts in which association with the organization apply.  For example, membership in a choir may only apply in a private context.  Also see <xref target="prop-contexts"/>.</dd>
@@ -1153,7 +1153,7 @@ The contexts in which association with the organization apply.  For example, mem
             The name of the organizational unit.
         </dd>
             <dt>sortAs:</dt><dd> <tt>String</tt> (optional).
-            Defines how the organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by the name.  The level is defined by the array index of the organizational unit in the <tt>units</tt> property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the <tt>name</tt> property value <bcp14>MAY</bcp14> be used for comparison.
+            Defines how the organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by the name.  The level is defined by the array index of the organizational unit in the units property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the name property value <bcp14>MAY</bcp14> be used for comparison.
         </dd>
           </dl>
           <figure anchor="example-organizations">
@@ -1339,7 +1339,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             <dt>uri:</dt><dd> <tt>String</tt> (optional).
 Identifies the entity represented by the Card at the online service.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in <xref target="RFC3986" sectionFormat="of" section="3"/>.</dd>
             <dt>user:</dt><dd> <tt>String</tt> (optional).
-              Names the entity represented by the Card at the online service.  Any free-text value is allowed.  The <tt>service</tt> property <bcp14>SHOULD</bcp14> be set.</dd>
+              Names the entity represented by the Card at the online service.  Any free-text value is allowed.  The service property <bcp14>SHOULD</bcp14> be set.</dd>
             <dt>contexts:</dt><dd> <tt>String[Boolean]</tt> (optional).
 The contexts in which to use the service.  Also see <xref target="prop-contexts"/>.</dd>
             <dt>pref:</dt><dd> <tt>UnsignedInt</tt> (optional).
@@ -1471,7 +1471,7 @@ Defines the preference of the language in relation to other languages of the sam
           <t>These are resources for calendaring such as to look up free-busy information for the entity represented by the Card.  A Calendar object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Calendar</tt>, if set.</li>
-            <li><t>The <tt>kind</tt> property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
+            <li><t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
                 <li>
                   <tt>calendar</tt>: The resource is a calendar that contains entries such as calendar events or tasks.</li>
@@ -1541,11 +1541,11 @@ The contexts in which to use the scheduling address.  Also see <xref target="pro
           </dd>
               <dt>
                 components:</dt><dd><t> <tt>AddressComponent[]</tt> (optional).  The <xref target="addresscomponent">components</xref> that make up the address. The component list <bcp14>MUST</bcp14> have at least one entry that has a <tt>kind</tt> other than <tt>separator</tt>.</t>
-                <t>Address components <bcp14>SHOULD</bcp14> be ordered such that when their values are joined as a String, a valid full address is produced.  If so, implementations <bcp14>MUST</bcp14> set the <tt>isOrdered</tt> property value to <tt>true</tt>.</t>
-                <t>If the address components are ordered, then the <tt>defaultSeparator</tt> property and address components of kind <tt>separator</tt> give guidance on what characters to insert between components, but implementations are free to choose any others.  When lacking a separator, inserting a single space character in between address component values is a good choice.</t>
-                <t>If, instead, the address components follow no particular order, then the <tt>isOrdered</tt> property value <bcp14>MUST</bcp14> be <tt>false</tt>, the <tt>components</tt> property <bcp14>MUST NOT</bcp14> contain an AddressComponent of kind <tt>separator</tt>, and the <tt>defaultSeparator</tt> property <bcp14>MUST NOT</bcp14> be set.</t>
+                <t>Address components <bcp14>SHOULD</bcp14> be ordered such that when their values are joined as a String, a valid full address is produced.  If so, implementations <bcp14>MUST</bcp14> set the isOrdered property value to <tt>true</tt>.</t>
+                <t>If the address components are ordered, then the defaultSeparator property and address components of kind <tt>separator</tt> give guidance on what characters to insert between components, but implementations are free to choose any others.  When lacking a separator, inserting a single space character in between address component values is a good choice.</t>
+                <t>If, instead, the address components follow no particular order, then the isOrdered property value <bcp14>MUST</bcp14> be <tt>false</tt>, the components property <bcp14>MUST NOT</bcp14> contain an AddressComponent of kind <tt>separator</tt>, and the defaultSeparator property <bcp14>MUST NOT</bcp14> be set.</t>
               </dd>
-              <dt>isOrdered:</dt><dd> <tt>Boolean</tt> (optional; default: <tt>false</tt>).  Indicates if the address component sequence in the <tt>components</tt> property is ordered.</dd>
+              <dt>isOrdered:</dt><dd> <tt>Boolean</tt> (optional; default: <tt>false</tt>).  Indicates if the address component sequence in the components property is ordered.</dd>
               <dt>countryCode:</dt><dd> <tt>String</tt> (optional).
 The Alpha-2 country code <xref target="ISO.3166-1"/>.</dd>
               <dt>coordinates:</dt><dd> <tt>String</tt> (optional).  A "geo:" URI  <xref target="RFC5870" format="default"/> for the address.</dd>
@@ -1563,7 +1563,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
               The full address, including street, region, or country.  The purpose of this property is to define an address, even if the individual address components are not known.
             </dd>
               <dt>defaultSeparator:</dt><dd> <tt>String</tt> (optional).
-              The default separator to insert between address component values when concatenating all address component values to a single String. Also see the definition of the <tt>separator</tt> kind for the <xref target="addresscomponent">AddressComponent</xref> object.  This property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt> or if the <tt>components</tt> property is not set.</dd>
+              The default separator to insert between address component values when concatenating all address component values to a single String. Also see the definition of the <tt>separator</tt> kind for the <xref target="addresscomponent">AddressComponent</xref> object.  The defaultSeparator property <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt> or if the components property is not set.</dd>
               <dt>pref:</dt><dd> <tt>UnsignedInt</tt> (optional).
             The preference of the address in relation to other addresses.  Also see <xref target="prop-pref"/>.</dd>
               <dt>
@@ -1574,7 +1574,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                phoneticSystem:</dt><dd> <tt>String</tt> (optional).
               The phonetic system used in the AddressComponent <tt>phonetic</tt> property.  Also      see <xref target="prop-phonetic"/>.</dd>
             </dl> 
-            <t>The following example illustrates the use of the <tt>address</tt> property.  Additional examples are shown in <xref target="address-examples"/>.</t>
+            <t>The following example illustrates the use of the address property.  Additional examples are shown in <xref target="address-examples"/>.</t>
             <figure anchor="example-address-us">
 
 
@@ -1684,7 +1684,7 @@ The value of the address component.</dd>
                   <li><tt>direction</tt>: the cardinal direction or quadrant, e.g., "north".</li>
                   <li><tt>landmark</tt>: the publicly known prominent feature that can substitute the street name and number, e.g., "White House" or "Taj Mahal".</li>
                   <li><tt>postOfficeBox</tt>: the post office box number or identifier.</li>
-                  <li><tt>separator</tt>: a formatting separator between two ordered address non-separator components.  The <tt>value</tt> property of the component includes the verbatim separator, for example, a hyphen character or even an empty string.  This value has higher precedence than the <tt>defaultSeparator</tt> property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components; instead, they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
+                  <li><tt>separator</tt>: a formatting separator between two ordered address non-separator components.  The value property of the component includes the verbatim separator, for example, a hyphen character or even an empty string.  This value has higher precedence than the defaultSeparator property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components; instead, they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Address <tt>isOrdered</tt> property value is <tt>false</tt>.</li>
                 </ul>
               </dd>
               <dt>phonetic:</dt><dd> <tt>String</tt> (optional).  Defines how to pronounce the name component.  If this property is set, then at least one of the Address object <tt>phoneticSystem</tt> or <tt>phoneticScript</tt> properties <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</dd>
@@ -1850,7 +1850,7 @@ Current:
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Directory</tt>, if set.</li>
             <li>
-              <t>The <tt>kind</tt> property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
+              <t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
                 <li><tt>directory</tt>: the resource is a directory service that the entity represented by the Card is a part of.  This typically is an organizational directory that also contains associated entities, e.g., co-workers and management in a company directory.</li>
                 <li><tt>entry</tt>: the resource is a directory entry of the entity represented by the Card.  In contrast to the <tt>directory</tt> type, this is the specific URI for the entity <em>within</em> a directory.</li>
@@ -1886,7 +1886,7 @@ Current:
           <t>These are links to resources that do not fit any of the other use-case-specific resource properties.  A Link object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Link</tt>, if set.</li>
-            <li><t>The <tt>kind</tt> property is optional.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
+            <li><t>The kind property is optional.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
                 <li><tt>contact</tt>: the resource is a URI by which the entity represented by the Card may be contacted; this includes web forms or other media that require user interaction.</li>
               </ul>
@@ -1912,10 +1912,10 @@ Current:
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Media</tt>, if set.</li>
             <li>
-              <t>The <tt>kind</tt> property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
+              <t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
                 <li><tt>photo</tt>: the resource is a photograph or avatar.</li>
-                <li><tt>sound</tt>: the resource is audio media, e.g.,  to specify the proper pronunciation of the name property contents.</li>
+                <li><tt>sound</tt>: the resource is audio media, e.g., to specify the proper pronunciation of the name property contents.</li>
                 <li><tt>logo</tt>: the resource is a graphic image or logo associated with the entity represented by the Card.</li>
               </ul>
             </li>
@@ -1948,18 +1948,18 @@ Current:
           <name>localizations</name>
           <t>Type: String[PatchObject] (optional)</t>
           <t>This localizes property values to languages (other than the main language) in the Card.  Localizations provide language-specific alternatives for existing property values and <bcp14>SHOULD NOT</bcp14> add new properties.</t>
-          <t>The keys in the localizations property object are language tags <xref target="RFC5646"/>. The values are patch objects that localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the <tt>localizations</tt> property.  A patch <bcp14>MUST NOT</bcp14> target the <tt>localizations</tt> property.</t>
+          <t>The object keys in the localizations property value are language tags <xref target="RFC5646"/>. The object values are patch objects that localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the localizations property.</t>
           <t>Conceptually, a Card is localized as follows:</t>
           <ul>
             <li>Determine the language tag in which the Card should be localized.</li>
             <li>If the localizations property includes a key for that language, obtain the PatchObject value.  If there is no such key, stop.</li>
             <li>Create a copy of the Card, but do not copy the localizations property.</li>
             <li>Apply all patches in the PatchObject to the copy of the Card.</li>
-            <li>Optionally, set the <tt>language</tt> property in the copy of the Card.</li>
+            <li>Optionally, set the language property in the copy of the Card.</li>
             <li>Use the patched copy of the Card as the localized variant of the original Card.</li>
           </ul>
           <t>A patch in the PatchObject may contain any value type.  Its value <bcp14>MUST</bcp14> be a valid value according to the definition of the patched property.</t>
-          <t><xref target="example-localizations-replace"/> localizes the <tt>name</tt> property by completely replacing its contents in Ukrainian language with Cyrillic script.</t>
+          <t><xref target="example-localizations-replace"/> localizes the name property by completely replacing its contents in Ukrainian language with Cyrillic script.</t>
           <figure anchor="example-localizations-replace">
             <name>Example of Localizing a Top-Level Property</name>
             <sourcecode type=""><![CDATA[
@@ -1987,7 +1987,7 @@ Current:
 }
 ]]></sourcecode>
           </figure>
-          <t><xref target="example-localizations-patch"/> localizes the title name by patching <em>inside</em> the <tt>titles</tt> property.  All properties, except the <tt>name</tt> property in the Title object, are left as is.</t>
+          <t><xref target="example-localizations-patch"/> localizes the title name by patching <em>inside</em> the titles property.  All properties, except the name property in the Title object, are left as is.</t>
           <figure anchor="example-localizations-patch">
             <name>Example of Localizing a Nested Property</name>
 
@@ -2052,7 +2052,7 @@ Original:
             <dt>month:</dt><dd> <tt>UnsignedInt</tt> (optional).  The calendar month, represented as the integers 1 &lt;= month &lt;= 12.  If this property is set, then either <tt>year</tt> or <tt>day</tt> <bcp14>MUST</bcp14> be set.</dd>
             <dt>day:</dt><dd> <tt>UnsignedInt</tt> (optional).  The calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set,
  then <tt>month</tt> <bcp14>MUST</bcp14> be set.</dd>
-            <dt>calendarScale:</dt><dd> <tt>String</tt> (optional).  The calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a calendar system name registered as a Common Locale Data Repository (CLDR) <xref target="RFC7529" format="default"/> or a vendor-specific value.  The year, month, and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.  Note that the <tt>year</tt> property might be required to convert the date between the Gregorian calendar and the respective calendar system.</dd>
+            <dt>calendarScale:</dt><dd> <tt>String</tt> (optional).  The calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a calendar system name registered as a Common Locale Data Repository (CLDR) <xref target="RFC7529" format="default"/> or a vendor-specific value.  The year, month, and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.  Note that the year property might be required to convert the date between the Gregorian calendar and the respective calendar system.</dd>
           </dl>
           <t>A Timestamp object has the following properties:</t>
           <dl spacing="normal">
@@ -2496,9 +2496,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Intended Usage:</dt>
             <dd>May be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which the property definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>	    
+            <dd>The JSContact version on which the property definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the property was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the property was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
@@ -3103,9 +3103,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Intended Usage:</dt>
             <dd>May be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which this type definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version on which this type definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the type definition was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the type definition was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
@@ -3376,9 +3376,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Context:</dt>
             <dd>The list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry.  This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>	    
+            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>	    
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the enum value definition was obsoleted; therefore, the enum value definition <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the enum value definition was obsoleted; therefore, the enum value definition <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Change Controller:</dt>
             <dd>This is who may request a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
@@ -3392,9 +3392,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Enum Value:</dt>
             <dd>The verbatim value of the enum.</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the enum value was obsoleted; therefore, the enum value <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the <tt>version</tt> property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the enum value was obsoleted; therefore, the enum value <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
 	       <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference for the semantics of the value.</dd>
           </dl>
