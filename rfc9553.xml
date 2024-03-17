@@ -435,8 +435,8 @@ Perhaps:
               </ul>
             </dd>
           </dl>
-          <t>The relation between the <tt>phoneticSystem</tt>, <tt>phoneticScript</tt>, and <tt>phonetic</tt> properties is type-specific.  This specification defines this relation in the <xref target="name">Name</xref> and <xref target="addresses">Address</xref> object types, respectively.</t>
-          <t>The following example illustrates the phonetic property for a <xref target="name">name</xref>:</t>
+          <t>The relation between the <tt>phoneticSystem</tt>, <tt>phoneticScript</tt>, and <tt>phonetic</tt> properties is type-specific.  This specification defines this relation in the <xref target="name">Name</xref> and <xref target="address">Address</xref> object types, respectively.</t>
+          <t>The following example illustrates the phonetic property for a <xref target="name-prop">name</xref>:</t>
           <figure anchor="example-phonetic">
             <name>Example of a <tt>phonetic</tt> Property for the Name "John Smith" as Pronounced in the USA</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -924,11 +924,11 @@ As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref>
       <section anchor="name-and-organization-properties" numbered="true" toc="default">
         <name>Name and Organization Properties</name>
         <t>This section defines properties that name the entity represented by the Card and its related organizations and roles. It also describes how to refer to the entity represented by the Card in spoken or written language.</t>
-        <section anchor="name" numbered="true" toc="default">
+        <section anchor="name-prop" numbered="true" toc="default">
           <name>name</name>
           <t>Type: <tt>Name</tt> (optional)</t>
           <t>The name of the entity represented by the Card.  This can be any type of name, e.g., it can, but need not, be the legal name of a person.</t>
-          <section>
+          <section anchor="name">
             <name>Name Object</name>
             <t>A Name object has the following properties:</t>
             <dl spacing="normal">
@@ -1529,11 +1529,11 @@ The contexts in which to use the scheduling address.  Also see <xref target="pro
       <section anchor="address-and-location-properties" numbered="true" toc="default">
         <name>Address and Location Properties</name>
         <t>This section defines properties for postal addresses and geographical locations associated with the entity represented by the Card.</t>
-        <section anchor="addresses" numbered="true" toc="default">
+        <section anchor="addresses-prop" numbered="true" toc="default">
           <name>addresses</name>
           <t>Type: <tt>Id[Address]</tt> (optional)</t>
           <t>A map of address identifiers to Address objects, containing physical locations.</t>
-          <section>
+          <section anchor="address">
             <name>Address Object</name>
             <t>An Address object has the following properties, of which at least one of components, coordinates, countryCode, full or timeZone <bcp14>MUST</bcp14> be set:</t>
             <dl spacing="normal">
@@ -2524,7 +2524,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">@type</td>
                 <td align="left">String</td>
                 <td align="left">Address, AddressComponent, Anniversary, Author, Card, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Name, NameComponent, Nickname, Note, OnlineService, Organization, OrgUnit, PartialDate, PersonalInfo, Phone, Pronouns, Relation, SchedulingAddress, SpeakToAs, Timestamp, Title</td>
-                <td align="left">Sections <xref target="addresses" format="counter"/>, <xref target="anniversaries" format="counter"/>, <xref target="cardtype" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="name" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="notes" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="organizations" format="counter"/>, <xref target="personalInfo" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="relatedTo" format="counter"/>, <xref target="schedulingAddresses" format="counter"/>, <xref target="titles" format="counter"/></td>
+		<td align="left">Sections <xref target="address" format="counter"/>, <xref target="addresscomponent" format="counter"/>, <xref target="anniversaries" format="counter"/>, <xref target="cardtype" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="name" format="counter"/>, <xref target="namecomponent" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="notes" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="organizations" format="counter"/>, <xref target="personalInfo" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="relatedTo" format="counter"/>, <xref target="schedulingAddresses" format="counter"/>, <xref target="titles" format="counter"/></td>
               </tr>
               <tr>
                 <td align="left">address</td>
@@ -2539,7 +2539,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">Id[Address]</td>
                 <td align="left">Card</td>
                 <td align="left">
-                  <xref target="addresses" format="default"/>
+                  <xref target="address" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2579,7 +2579,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">AddressComponent[]</td>
                 <td align="left">Address</td>
                 <td align="left">
-                  <xref target="addresses" format="default"/>
+                  <xref target="address" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2587,21 +2587,21 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">NameComponent[]</td>
                 <td align="left">Name</td>
                 <td align="left">
-                  <xref target="name" format="default"/>
+                  <xref target="namecomponent" format="default"/>
                 </td>
               </tr>
               <tr>
                 <td align="left">contexts</td>
                 <td align="left">String[Boolean]</td>
                 <td align="left">Address, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Nickname, OnlineService, Organization, Phone, Pronouns, SchedulingAddress</td>
-                <td align="left">Sections  <xref target="resource" format="counter"/>, <xref target="prop-contexts" format="counter"/>, <xref target="addresses" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="organizations" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="schedulingAddresses" format="counter"/></td>
+                <td align="left">Sections  <xref target="resource" format="counter"/>, <xref target="prop-contexts" format="counter"/>, <xref target="address" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="organizations" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="schedulingAddresses" format="counter"/></td>
               </tr>
               <tr>
                 <td align="left">coordinates</td>
                 <td align="left">String</td>
                 <td align="left">Address</td>
                 <td align="left">
-                  <xref target="addresses" format="default"/>
+                  <xref target="address" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2609,7 +2609,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">String</td>
                 <td align="left">Address</td>
                 <td align="left">
-                  <xref target="addresses" format="default"/>
+                  <xref target="address" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -2638,7 +2638,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">defaultSeparator</td>
                 <td align="left">String</td>
                 <td align="left">Address, Name</td>
-                <td align="left">Sections <xref target="addresses" format="counter"/>,
+                <td align="left">Sections <xref target="address" format="counter"/>,
                   <xref target="name" format="counter"/></td>
               </tr>
               <tr>
@@ -2669,7 +2669,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">full</td>
                 <td align="left">String</td>
                 <td align="left">Address, Name</td>
-                <td align="left">Sections <xref target="addresses" format="counter"/>,
+                <td align="left">Sections <xref target="address" format="counter"/>,
                   <xref target="name" format="counter"/></td>
               </tr>
               <tr>
@@ -2684,7 +2684,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">isOrdered</td>
                 <td align="left">Boolean</td>
                 <td align="left">Address, Name</td>
-                <td align="left">Sections <xref target="addresses" format="counter"/>,
+                <td align="left">Sections <xref target="address" format="counter"/>,
                   <xref target="name" format="counter"/></td>
               </tr>
               <tr>
@@ -2699,7 +2699,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">kind</td>
                 <td align="left">String</td>
                 <td align="left">AddressComponent, Anniversary, Calendar, Card, CryptoKey, Directory, Link, Media, NameComponent, PersonalInfo, Title</td>
-                <td align="left">Sections <xref target="addresses" format="counter"/>, <xref target="anniversaries" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="kind" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="name" format="counter"/>, <xref target="personalInfo" format="counter"/>, <xref target="titles" format="counter"/></td>
+                <td align="left">Sections <xref target="addresscomponent" format="counter"/>, <xref target="anniversaries" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="kind" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="namecomponent" format="counter"/>, <xref target="personalInfo" format="counter"/>, <xref target="titles" format="counter"/></td>
               </tr>
               <tr>
                 <td align="left">label</td>
@@ -2872,14 +2872,14 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">String</td>
                 <td align="left">Address, Name</td>
                 <td align="left">Sections <xref target="name" format="counter"/>,
-                  <xref target="addresses" format="counter"/></td>
+                  <xref target="address" format="counter"/></td>
               </tr>
               <tr>
                 <td align="left">phoneticSystem</td>
                 <td align="left">String</td>
                 <td align="left">Address, Name</td>
                 <td align="left">Sections <xref target="name" format="counter"/>,
-                  <xref target="addresses" format="counter"/></td>
+                  <xref target="address" format="counter"/></td>
               </tr>
               <tr>
                 <td align="left">place</td>
@@ -2893,7 +2893,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">pref</td>
                 <td align="left">UnsignedInt</td>
                 <td align="left">Address, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Nickname, OnlineService, Phone, Pronouns, SchedulingAddress</td>
-                <td align="left">Sections <xref target="resource" format="counter"/>, <xref target="prop-pref" format="counter"/>, <xref target="addresses" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="schedulingAddresses" format="counter"/></td>
+                <td align="left">Sections <xref target="resource" format="counter"/>, <xref target="prop-pref" format="counter"/>, <xref target="address" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="schedulingAddresses" format="counter"/></td>
               </tr>
               <tr>
                 <td align="left">preferredLanguages</td>
@@ -2980,7 +2980,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">String</td>
                 <td align="left">Address</td>
                 <td align="left">
-                  <xref target="addresses" format="default"/>
+                  <xref target="address" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -3041,8 +3041,8 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">value</td>
                 <td align="left">String</td>
                 <td align="left">AddressComponent, NameComponent, PersonalInfo</td>
-                <td align="left">Sections <xref target="addresses" format="counter"/>,
-                  <xref target="name" format="counter"/>,
+                <td align="left">Sections <xref target="addresscomponent" format="counter"/>,
+                  <xref target="namecomponent" format="counter"/>,
                   <xref target="personalInfo" format="counter"/></td>
               </tr>
               <tr anchor="iana-property-registry-version">
@@ -3127,13 +3127,13 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
               <tr>
                 <td align="left">Address</td>
                 <td align="left">
-                  <xref target="addresses" format="default"/>
+                  <xref target="address" format="default"/>
                 </td>
               </tr>
               <tr>
                 <td align="left">AddressComponent</td>
                 <td align="left">
-                  <xref target="addresses" format="default"/>
+                  <xref target="addresscomponent" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -3223,7 +3223,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
               <tr>
                 <td align="left">NameComponent</td>
                 <td align="left">
-                  <xref target="name" format="default"/>
+                  <xref target="namecomponent" format="default"/>
                 </td>
               </tr>
               <tr>
@@ -3421,13 +3421,13 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                   <tr>
                     <td align="left">billing</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">delivery</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
@@ -3621,103 +3621,103 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                   <tr>
                     <td align="left">apartment</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">block</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">building</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">country</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">direction</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">district</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">floor</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">landmark</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">locality</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">name</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">number</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">postcode</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">postOfficeBox</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">region</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">room</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">separator</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                   <tr>
                     <td align="left">subdistrict</td>
                     <td align="left">
-                      <xref target="addresses" format="default"/>
+                      <xref target="address" format="default"/>
                     </td>
                   </tr>
                 </tbody>
