@@ -225,7 +225,7 @@ Original:
         <section anchor="prop-type" numbered="true" toc="default">
           <name>The @type Property</name>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> <tt>String</tt>.  Specifies the type of the object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
+            <dt>@type:</dt><dd> <tt>String</tt>.  The @type property names the JSContact object type of a JSON object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
           </dl>
           <t>The purpose of the @type property is to help implementations identify which JSContact object type a given JSON object represents.  Implementations <bcp14>MUST</bcp14> validate that JSON objects with this property conform to the specification of the JSContact object type of that name.</t>
           <t>In many cases, the @type property value is implied by where its object occurs in JSContact data. Assuming that both <tt>A</tt> and <tt>B</tt> are JSContact object types:</t>
