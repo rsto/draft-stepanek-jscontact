@@ -166,7 +166,7 @@ updates are needed for consistency.
             <li>One property named @type with a string value that matches the type name of the JSContact object.  In general, this property does not need to be set explicitly as outlined in <xref target="prop-type"/>.</li>
           </ol>
           <t>The following sections specify how to define JSContact object types. Sections <xref target="validating-jscontact" format="counter"/> and <xref target="vendor-specific-extensions"  format="counter"/> then define the exact requirements for property names.</t>
-          <t>Subsection <xref target="example-foo-object"/> illustrates the definition of a JSContact object type.  The names <em>Foo</em> and <em>baz</em> are only for demonstration and have no meaning outside the example.  The example illustrates the following:</t>
+          <t><xref target="example-foo-object"/> illustrates the definition of a JSContact object type.  The names <em>Foo</em> and <em>baz</em> are only for demonstration and have no meaning outside the example.  The example illustrates the following:</t>
           <ul>
             <li>It defines a JSContact object type named <tt>Foo</tt> having two properties, named @type and <tt>baz</tt>.</li>
             <li>The @type property adheres to the rules outlined in <xref target="prop-type"/>.  Because of this, it is neither defined to be mandatory nor optional, as this depends on how the Foo object type is used.</li>
@@ -226,7 +226,7 @@ Original:
         <section anchor="prop-type" numbered="true" toc="default">
           <name>The @type Property</name>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> <tt>String</tt>.  The @type property names the JSContact object type of a JSON object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
+            <dt>@type:</dt><dd> <tt>String</tt>.  The @type property defines the JSContact object type of a JSON object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
           </dl>
           <t>The purpose of the @type property is to help implementations identify which JSContact object type a given JSON object represents.  Implementations <bcp14>MUST</bcp14> validate that JSON objects with this property conform to the specification of the JSContact object type of that name.</t>
           <t>In many cases, the @type property value is implied by where its object occurs in JSContact data. Assuming that both <tt>A</tt> and <tt>B</tt> are JSContact object types:</t>
@@ -290,12 +290,12 @@ Current:
    modified.
 -->
  
-          <t>The <tt>Resource</tt> data type defines a resource associated with the entity represented by the Card, identified by a URI <xref target="RFC3986" format="default"/>.  Later in this document, several property definitions refer to the Resource data type as the basis for their property-specific value types.  The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
+          <t>The <tt>Resource</tt> data type defines a resource associated with the entity represented by the Card, identified by a URI <xref target="RFC3986" format="default"/>.  Later in this document, several property definitions refer to the Resource type as the basis for their property-specific value types.  The Resource type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
           <t>The @type property value <bcp14>MUST NOT</bcp14> be <tt>Resource</tt>; instead, it <bcp14>MUST</bcp14> be the name of a concrete resource type (see <xref target="resource-properties"/>).  A Resource object has the following properties.</t>
           <dl spacing="normal">
             <dt>@type:</dt><dd> <tt>String</tt>.  Specifies the type of this Resource object.  The allowed value is defined in later sections of this document for each concrete resource type (<xref target="resource-properties"/>).</dd>
             <dt>kind:</dt><dd> <tt>String</tt> (optional).
-The kind of the resource.  The allowed values are defined in the property definition that makes use of the Resource data type.  Some property definitions may change this property from being optional to mandatory. </dd>
+The kind of the resource.  The allowed values are defined in the property definition that makes use of the Resource type.  Some property definitions may change this property from being optional to mandatory. </dd>
             <dt>uri:</dt><dd> <tt>String</tt> (mandatory).
 The resource value.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in <xref target="RFC3986" sectionFormat="of" section="3"/>.</dd>
             <dt>mediaType:</dt><dd> <tt>String</tt> (optional).
