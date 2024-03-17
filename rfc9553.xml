@@ -640,6 +640,7 @@ a title if desired.
 -->    
 
 	  <figure>
+	    <name>The ABNF for JSContact Version Values</name>
           <sourcecode name="" type="abnf"><![CDATA[
 jsversion = 1*DIGIT "." 1*DIGIT
 ]]></sourcecode>
