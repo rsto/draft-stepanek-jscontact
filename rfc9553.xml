@@ -630,10 +630,13 @@ Perhaps:
    of the JSContact media type.
 -->   
 
-	The version is indicated both in the <xref target="prop-version"><tt>version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact media type.  All IANA-registered elements indicate the version at which they were introduced or obsoleted.</t>
-        <section>
+		The version is indicated both in the <xref target="prop-version"><tt>version</tt></xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact media type.  All IANA-registered elements indicate the version at which they were introduced or obsoleted.</t>
+	<t>A JSContact version consists of a major and minor version.</t>
+	<t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared for property definitions and other JSContact elements that differ in a backwards-incompatible manner.</t>
+	<t>Differing minor version values indicate additions that enrich JSContact data but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with a narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
+        <section anchor="version-format-and-reqs">
           <name>Version Format and Requirements</name>
-          <t>A JSContact version consists of a numeric major and minor version, separated by the <tt>FULL STOP</tt> character (U+002E).  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the following ABNF:</t>
+          <t>A version value starts with the numeric major version, followed by the <tt>FULL STOP</tt> character (U+002E), followed by the numeric minor version.  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the following ABNF:</t>
 
 <!--[rfced] Should Figure 5 have a title? Please review, and provide
 a title if desired.
@@ -645,8 +648,6 @@ a title if desired.
 jsversion = 1*DIGIT "." 1*DIGIT
 ]]></sourcecode>
 	  </figure>
-          <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared for property definitions and other JSContact elements that differ in a backwards-incompatible manner.</t>
-          <t>Differing minor version values indicate additions that enrich JSContact data but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with a narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
         </section>
         <section anchor="current-version">
           <name>Current Version</name>
@@ -2388,7 +2389,7 @@ Perhaps:
    version. 
 -->
 	
-        <t>Registry assignments that introduce <xref target="versioning">backwards-incompatible</xref> changes require the JSContact major version to change; other changes only require a change to the minor version.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for other assignments is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>).</t>
+	<t>Registry assignments that introduce <xref target="versioning">backwards-incompatible</xref> changes require the JSContact major version to change; other changes only require a change to the minor version.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for other assignments is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>).</t>
         <t>The designated expert (DE) decides if a major or minor version change is required and assigns the new version to the <xref target="iana-version-registry">"JSContact Version" registry</xref>.  Version numbers increment by one, and a major version change resets the minor version to zero.  An assignment may apply multiple changes and to more than one registry at once, in which case a single version change is sufficient.  If the registry policy is Specification Required, then the DE may decide that it is enough to document the new assignment in the Description item of the respective registry.</t>
         <t>A registration <bcp14>MUST</bcp14> have an intended usage of <tt>common</tt>, <tt>reserved</tt>, or <tt>obsolete</tt>.</t>
         <ul>
