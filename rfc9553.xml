@@ -1575,7 +1575,7 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                phoneticSystem:</dt><dd> <tt>String</tt> (optional).
               The phonetic system used in the AddressComponent <tt>phonetic</tt> property.  Also      see <xref target="prop-phonetic"/>.</dd>
             </dl> 
-            <t>The following example illustrates the use of the address property.  Additional examples are shown in <xref target="address-examples"/>.</t>
+            <t>The following example illustrates the use of the address property for "54321 Oak St, Reston, CA 20190, USA".  Additional examples are shown in <xref target="address-examples"/>.</t>
             <figure anchor="example-address-us">
 
 
@@ -1630,7 +1630,7 @@ Current:
               in Japanese
 -->
       
-              <name>Example of the Address "54321 Oak St, Reston, VA 20190, USA"</name>
+              <name>Example of an Address in the USA</name>
               <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k23": {
@@ -1692,10 +1692,10 @@ The value of the address component.</dd>
             </dl>
           </section>
           <section anchor="address-examples">
-            <name>Address Examples</name>
-            <t>Examples of addresses are shown below; also see <xref target="example-address-us"/>.</t>
+            <name>Additional Address Examples</name>
+	    <t>The following example illustrates the use of the address property for "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand".</t>
             <figure anchor="example-address-th">
-              <name>Example of the Address "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"</name>
+              <name>Example of an Address in Thailand</name>
               <sourcecode name="" type="json"><![CDATA[
 "addresses": {
   "k25": {
@@ -1715,8 +1715,7 @@ The value of the address component.</dd>
 ]]></sourcecode>
             </figure>
 <t>
-The following example illustrates the use of an address in Tokyo and its localization (<xref target="localizations"/>) in Japanese.
-</t>
+The following example illustrates the use of the address property for "2-7-2 Marunouchi, Chiyoda-ku, Tokyo 100-8994" and its Japanese localization (<xref target="localizations"/>).</t>
             <figure anchor="example-address-jp">
               <name>Example of an Address in Tokyo and Its Localization in Japanese</name>
               <sourcecode name="" type="json"><![CDATA[
