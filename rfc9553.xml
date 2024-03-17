@@ -688,7 +688,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <section anchor="prop-version" numbered="true" toc="default">
           <name>version</name>
           <t>Type: <tt>String</tt> (mandatory)</t>
-          <t>This specifies the JSContact version used to define the Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Enum Values for the version property.  Also see <xref target="current-version"/>.</t>
+          <t>This specifies the JSContact version used to define the Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Version values for the version property.  Also see <xref target="current-version"/>.</t>
           <figure anchor="example-version">
             <name><tt>version</tt> Example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -2496,9 +2496,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Intended Usage:</dt>
             <dd>May be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which the property definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version on which the property definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the property was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the property was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
 	    <dt>Change Controller:</dt>
 	    <dd>Person or entity responsible for requesting a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
@@ -3103,9 +3103,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Intended Usage:</dt>
             <dd>May be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which this type definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version on which this type definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the type definition was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the type definition was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
 	    <dt>Change Controller:</dt>
 	    <dd>Person or entity responsible for requesting a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
@@ -3376,9 +3376,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Context:</dt>
             <dd>The list of allowed object types where the property or properties may appear, as registered in the "JSContact Properties" registry.  This disambiguates where there may be two distinct properties with the same name in different contexts.</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>	    
+            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the enum value definition was obsoleted; therefore, the enum value definition <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the enum value definition was obsoleted; therefore, the enum value definition <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
 	    <dt>Change Controller:</dt>
 	    <dd>Person or entity responsible for requesting a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
@@ -3392,9 +3392,9 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dt>Enum Value:</dt>
             <dd>The verbatim value of the enum.</dd>
             <dt>Since Version:</dt>
-            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
-            <dd>The JSContact version after which the enum value was obsoleted; therefore, the enum value <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
+            <dd>The JSContact version after which the enum value was obsoleted; therefore, the enum value <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
 	       <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference for the semantics of the value.</dd>
           </dl>
