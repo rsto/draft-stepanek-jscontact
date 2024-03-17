@@ -423,7 +423,7 @@ Perhaps:
    property MUST be ignored and not used with the phonetic property.
 -->
 
-	    Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored for use with the phonetic property.  If this property is set, then at least one of the <tt>phoneticScript</tt> or <tt>phoneticSystem</tt> properties that relate to this value <bcp14>MUST</bcp14> be set.</dd>
+	    Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored and not used with the phonetic property.  If this property is set, then at least one of the phoneticScript or phoneticSystem properties that relate to this value <bcp14>MUST</bcp14> be set.</dd>
             <dt>phoneticScript:</dt><dd> <tt>String</tt>.
             The script used in the value of the related <tt>phonetic</tt> property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>. </dd>	    
             <dt>phoneticSystem:</dt><dd><t> <tt>String</tt>.
@@ -1421,7 +1421,7 @@ The contexts in which to use the number.  Also see <xref target="prop-contexts"/
         <section anchor="preferredLanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
           <t>Type : <tt>Id[LanguagePref]</tt> (optional)</t>
-          <t>Defines the preferred languages for contacting the entity associated with the Card.</t>
+          <t>The preferredLanguages property defines the preferred languages for contacting the entity associated with the Card.</t>
           <t>A LanguagePref object has the following properties:</t>
           <dl spacing="normal">
             <dt>@type:</dt><dd> <tt>String</tt>.
@@ -1846,7 +1846,7 @@ Current:
         <section anchor="directories" numbered="true" toc="default">
           <name>directories</name>
           <t>Type: <tt>Id[Directory]</tt> (optional)</t>
-          <t>These are directory service resources such as entries in a directory or organizational directories for lookup.  A Directory object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+	  <t>>The directories property specifies directory service resources for lookup.  A Directory object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Directory</tt>, if set.</li>
             <li>
