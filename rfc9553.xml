@@ -540,7 +540,7 @@ Perhaps:
    character.  
 -->
 	
-            IANA-registered property names <bcp14>MUST NOT</bcp14> contain US-ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A), or the <tt>QUOTATION MARK</tt> (U+0022).  They <bcp14>MUST</bcp14> only contain US-ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/> or the <tt>COMMERCIAL AT</tt> (U+0040) character.  IANA-registered property names <bcp14>MUST</bcp14> be notated in lower camel case.
+            IANA-registered property names <bcp14>MUST NOT</bcp14> contain ASCII control characters (U+0000 to U+001F, U+007F), the <tt>COLON</tt> (U+003A), or the <tt>QUOTATION MARK</tt> (U+0022).  They <bcp14>MUST</bcp14> only contain ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/> or the <tt>COMMERCIAL AT</tt> (U+0040) character.  IANA-registered property names <bcp14>MUST</bcp14> be notated in lower camel case.
 </t>
         </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
