@@ -162,13 +162,13 @@ updates are needed for consistency.
           <ol>
             <li>A unique type name registered in the IANA  <xref target="iana-type-registry">"JSContact Types" registry</xref>.</li>
             <li>One or more object members for which the name and allowed value types are specified.  Such members are called "properties".</li>
-            <li>One property named <tt>@type</tt> with a string value that matches the type name of the JSContact object.  In general, this property does not need to be set explicitly as outlined in <xref target="prop-type"/>.</li>
+            <li>One property named @type with a string value that matches the type name of the JSContact object.  In general, this property does not need to be set explicitly as outlined in <xref target="prop-type"/>.</li>
           </ol>
           <t>The following sections specify how to define JSContact object types. Sections <xref target="validating-jscontact" format="counter"/> and <xref target="vendor-specific-extensions"  format="counter"/> then define the exact requirements for property names.</t>
           <t>Subsection <xref target="example-foo-object"/> illustrates the definition of a JSContact object type.  The names <em>Foo</em> and <em>baz</em> are only for demonstration and have no meaning outside the example.  The example illustrates the following:</t>
           <ul>
-            <li>It defines a JSContact object type named <tt>Foo</tt> having two properties, named <tt>@type</tt> and <tt>baz</tt>.</li>
-            <li>The <tt>@type</tt> property adheres to the rules outlined in <xref target="prop-type"/>.  Because of this, it is neither defined to be mandatory nor optional, as this depends on how the Foo object type is used.</li>
+            <li>It defines a JSContact object type named <tt>Foo</tt> having two properties, named @type and <tt>baz</tt>.</li>
+            <li>The @type property adheres to the rules outlined in <xref target="prop-type"/>.  Because of this, it is neither defined to be mandatory nor optional, as this depends on how the Foo object type is used.</li>
             <li>The baz property value <bcp14>MUST</bcp14> be valid according to the definition of the <tt>Number</tt> type.</li>
             <li>The property has one attribute, <tt>mandatory</tt>, which specifies that the property <bcp14>MUST</bcp14> be present for a value of the Foo object type to be valid.</li>
             <li>The free-text description of the baz property describes the semantics and further restrictions for its values.</li>
@@ -193,8 +193,8 @@ Original:
             <name>Example of a JSContact Object Definition</name>
             <t>A Foo object has the following properties:</t>
             <dl spacing="normal">
-              <dt><tt>@type</tt>:</dt><dd> String. This <bcp14>MUST</bcp14> be <tt>Foo</tt>, if set.</dd>
-              <dt><tt>baz</tt>:</dt><dd> Number (mandatory).  This is the baz of the contact.  The value <bcp14>MUST</bcp14> be an integer greater than 0 and less than 10.</dd>
+              <dt>@type:</dt><dd> String. This <bcp14>MUST</bcp14> be <tt>Foo</tt>, if set.</dd>
+              <dt>baz:</dt><dd> Number (mandatory).  This is the baz of the contact.  The value <bcp14>MUST</bcp14> be an integer greater than 0 and less than 10.</dd>
             </dl>
           </section>
         </section>
@@ -219,20 +219,20 @@ Original:
             <dt><tt>mandatory</tt>:</dt><dd> The property <bcp14>MUST</bcp14> be set for an instance of this object to be valid.</dd>
             <dt><tt>optional</tt>:</dt><dd> The property can, but need not, be set for an instance of this object to be valid.</dd>
             <dt><tt>default</tt>:</dt><dd> This is followed by a JSON value. That value will be used for this property if it is omitted.</dd>
-            <dt><tt>defaultType</tt>:</dt><dd> This is followed by the name of a JSContact object type.  A property value of JSContact object type is expected to be of this named type, in case it omits the <tt>@type</tt> property.</dd>
+            <dt><tt>defaultType</tt>:</dt><dd> This is followed by the name of a JSContact object type.  A property value of JSContact object type is expected to be of this named type, in case it omits the @type property.</dd>
           </dl>
         </section>
         <section anchor="prop-type" numbered="true" toc="default">
-          <name>The <tt>@type</tt> Property</name>
+          <name>The @type Property</name>
           <dl spacing="normal">
-            <dt><tt>@type</tt>:</dt><dd> String.  Specifies the type of the object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
+            <dt>@type:</dt><dd> <tt>String</tt>.  Specifies the type of the object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
           </dl>
-          <t>The purpose of the <tt>@type</tt> property is to help implementations identify which JSContact object type a given JSON object represents.  Implementations <bcp14>MUST</bcp14> validate that JSON objects with this property conform to the specification of the JSContact object type of that name.</t>
-          <t>In many cases, the <tt>@type</tt> property value is implied by where its object occurs in JSContact data. Assuming that both <tt>A</tt> and <tt>B</tt> are JSContact object types:</t>
+          <t>The purpose of the @type property is to help implementations identify which JSContact object type a given JSON object represents.  Implementations <bcp14>MUST</bcp14> validate that JSON objects with this property conform to the specification of the JSContact object type of that name.</t>
+          <t>In many cases, the @type property value is implied by where its object occurs in JSContact data. Assuming that both <tt>A</tt> and <tt>B</tt> are JSContact object types:</t>
           <ul>
-            <li>An object that is set as the value for a property with type signature <tt>A</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set.  If the <tt>@type</tt> property is not set, then its value is implied to be <tt>A</tt> by the property definition.</li>
-            <li>An object that is set as the value for a property with type signature <tt>A|B (defaultType: A)</tt> <bcp14>MAY</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>A</tt>.  It <bcp14>MUST</bcp14> have the <tt>@type</tt> property set if it is an instance of <tt>B</tt>.  If, instead, the <tt>defaultType</tt> attribute is not defined, then the <tt>@type</tt> property <bcp14>MUST</bcp14> also be set for <tt>A</tt>.</li>
-            <li>An object that is not the value of a property, such as the topmost object in JSON data (directly or as a member of an array), <bcp14>MUST</bcp14> have the <tt>@type</tt> property set.</li>
+            <li>An object that is set as the value for a property with type signature <tt>A</tt> <bcp14>MAY</bcp14> have the @type property set.  If the @type property is not set, then its value is implied to be <tt>A</tt> by the property definition.</li>
+            <li>An object that is set as the value for a property with type signature <tt>A|B (defaultType: A)</tt> <bcp14>MAY</bcp14> have the @type property set if it is an instance of <tt>A</tt>.  It <bcp14>MUST</bcp14> have the @type property set if it is an instance of <tt>B</tt>.  If, instead, the <tt>defaultType</tt> attribute is not defined, then the @type property <bcp14>MUST</bcp14> also be set for <tt>A</tt>.</li>
+            <li>An object that is not the value of a property, such as the topmost object in JSON data (directly or as a member of an array), <bcp14>MUST</bcp14> have the @type property set.</li>
           </ul>
         </section>
       </section>
@@ -266,7 +266,7 @@ Original:
             <li>If null, remove the property from the patched object.  If the key is not present in the parent, this is a no-op.</li>
             <li>If non-null, set the value given as the value for this property (this may be a replacement or addition to the object being patched).</li>
           </ul>
-          <t>A PatchObject does not define its own <xref target="prop-type"><tt>@type</tt></xref> property.  Instead, an <tt>@type</tt> property in a patch <bcp14>MUST</bcp14> be handled as any other patched property value.</t>
+          <t>A PatchObject does not define its own <xref target="prop-type">@type</xref> property.  Instead, the @type property in a patch <bcp14>MUST</bcp14> be handled as any other patched property value.</t>
           <t>Implementations <bcp14>MUST</bcp14> reject a PatchObject in its entirety if any of its patches are invalid.   Implementations <bcp14>MUST NOT</bcp14> apply partial patches.</t>
         </section>
         <section anchor="resource" numbered="true" toc="default">
@@ -290,7 +290,7 @@ Current:
 -->
  
           <t>The <tt>Resource</tt> data type defines a resource associated with the entity represented by the Card, identified by a URI <xref target="RFC3986" format="default"/>.  Later in this document, several property definitions refer to the Resource data type as the basis for their property-specific value types.  The Resource data type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
-          <t>The <tt>@type</tt> property value <bcp14>MUST NOT</bcp14> be <tt>Resource</tt>; instead, it <bcp14>MUST</bcp14> be the name of a concrete resource type (see <xref target="resource-properties"/>).  A Resource object has the following properties.</t>
+          <t>The @type property value <bcp14>MUST NOT</bcp14> be <tt>Resource</tt>; instead, it <bcp14>MUST</bcp14> be the name of a concrete resource type (see <xref target="resource-properties"/>).  A Resource object has the following properties.</t>
           <dl spacing="normal">
             <dt>@type:</dt><dd> <tt>String</tt>.  Specifies the type of this Resource object.  The allowed value is defined in later sections of this document for each concrete resource type (<xref target="resource-properties"/>).</dd>
             <dt>kind:</dt><dd> <tt>String</tt> (optional).
@@ -389,7 +389,7 @@ Perhaps:
         </section>
         <section anchor="prop-extra" numbered="true" toc="default">
           <name>extra</name>
-          <t>The extra property name is reserved.  Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.</t>
+          <t>The extra property is reserved.  Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.</t>
           <t>The purpose of this reserved property name is to provide implementors with a name that is certain to never occur as a property name in a JSContact object.  Implementations might want to map unknown or vendor-specific properties to a variable with this name, but this is implementation-specific.</t>
         </section>
         <section anchor="prop-label" numbered="true" toc="default">
@@ -659,7 +659,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
       <name>Card</name>
       <t>This section defines the JSContact object type Card. A Card stores contact information, typically that of a person, organization, or company.</t>
       <t>Its media type is defined in <xref target="iana-media-type"/>.</t>
-      <t><xref target="example-card"/> shows a basic Card for the person "John Doe".  As the object is the topmost object in the JSON data, it has the <tt>@type</tt> property set according to the rules defined in <xref target="prop-type"/>.</t>
+      <t><xref target="example-card"/> shows a basic Card for the person "John Doe".  As the object is the topmost object in the JSON data, it has the @type property set according to the rules defined in <xref target="prop-type"/>.</t>
       <figure anchor="example-card">
         <name>Example of a Basic <tt>Card</tt></name>
         <sourcecode name="" type="json"><![CDATA[
@@ -1472,7 +1472,7 @@ Defines the preference of the language in relation to other languages of the sam
           <t>Type: <tt>Id[Calendar]</tt> (optional)</t>
           <t>These are resources for calendaring such as to look up free-busy information for the entity represented by the Card.  A Calendar object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Calendar</tt>, if set.</li>
+            <li>The @type property value <bcp14>MUST</bcp14> be <tt>Calendar</tt>, if set.</li>
             <li><t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
                 <li>
@@ -1769,7 +1769,7 @@ The following example illustrates the use of the address property for "2-7-2 Mar
           <t>Type: <tt>Id[CryptoKey]</tt> (optional)</t>
           <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by the Card.  A CryptoKey object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definition:</t>
           <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>CryptoKey</tt>, if set.</li>
+            <li>The @type property value <bcp14>MUST</bcp14> be <tt>CryptoKey</tt>, if set.</li>
           </ul>
           <t>The following example shows how to refer to an external cryptographic resource.</t>
           <figure anchor="example-cryptoKeys-external">
@@ -1849,7 +1849,7 @@ Current:
           <t>Type: <tt>Id[Directory]</tt> (optional)</t>
 	  <t>>The directories property specifies directory service resources for lookup.  A Directory object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Directory</tt>, if set.</li>
+            <li>The @type property value <bcp14>MUST</bcp14> be <tt>Directory</tt>, if set.</li>
             <li>
               <t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
@@ -1886,7 +1886,7 @@ Current:
           <t>Type: <tt>Id[Link]</tt> (optional)</t>
           <t>These are links to resources that do not fit any of the other use-case-specific resource properties.  A Link object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Link</tt>, if set.</li>
+            <li>The @type property value <bcp14>MUST</bcp14> be <tt>Link</tt>, if set.</li>
             <li><t>The kind property is optional.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
                 <li><tt>contact</tt>: the resource is a URI by which the entity represented by the Card may be contacted; this includes web forms or other media that require user interaction.</li>
@@ -1911,7 +1911,7 @@ Current:
           <t>Type: <tt>Id[Media]</tt> (optional)</t>
           <t>These are media resources such as photographs, avatars, or sounds that are associated with the entity represented by the Card.  A Media object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
-            <li>The <tt>@type</tt> property value <bcp14>MUST</bcp14> be <tt>Media</tt>, if set.</li>
+            <li>The @type property value <bcp14>MUST</bcp14> be <tt>Media</tt>, if set.</li>
             <li>
               <t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
@@ -2062,7 +2062,7 @@ Original:
             <dt>utc:</dt><dd> <tt>UTCDateTime</tt> (mandatory).  Specifies the point in time in UTC time.
       </dd>
           </dl>
-          <t><xref target="example-anniversaries"/> illustrates anniversaries with partial dates and a timestamp.  Note how the <tt>@type</tt> property is set for the <tt>Timestamp</tt> object value according to the rules defined in <xref target="prop-type"/>.</t>
+          <t><xref target="example-anniversaries"/> illustrates anniversaries with partial dates and a timestamp.  Note how the @type property is set for the <tt>Timestamp</tt> object value according to the rules defined in <xref target="prop-type"/>.</t>
           <figure anchor="example-anniversaries">
             <name><tt>anniversaries</tt> Example</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -2121,7 +2121,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
              author:</dt><dd> <tt>Author</tt> (optional).  The author of this note.
             </dd>
           </dl>
-          <t>An Author object has the following properties, of which at least one property other than <tt>@type</tt> <bcp14>MUST</bcp14> be set:</t>
+          <t>An Author object has the following properties, of which at least one property other than @type <bcp14>MUST</bcp14> be set:</t>
           <dl spacing="normal">
             <dt>@type:</dt><dd> <tt>String</tt>.
               This <bcp14>MUST</bcp14> be <tt>Author</tt>, if set.
