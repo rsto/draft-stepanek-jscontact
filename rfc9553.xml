@@ -2499,8 +2499,8 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dd>The JSContact version on which the property definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the property was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
-            <dt>Change Controller:</dt>
-            <dd>This is who may request a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
+	    <dt>Change Controller:</dt>
+	    <dd>Person or entity responsible for requesting a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference where the property is specified. This must include references to all RFC documents where this property is introduced or updated. For reserved property names, the reference or description <bcp14>MAY</bcp14> be omitted.</dd>
           </dl>
@@ -3106,8 +3106,8 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dd>The JSContact version on which this type definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the type definition was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
-            <dt>Change Controller:</dt>
-            <dd>This is who may request a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
+	    <dt>Change Controller:</dt>
+	    <dd>Person or entity responsible for requesting a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference where the Type is specified. For reserved type names, the reference or description <bcp14>MAY</bcp14> be omitted.</dd>
           </dl>
@@ -3379,8 +3379,8 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>	    
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the enum value definition was obsoleted; therefore, the enum value definition <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Enum Values" registry (see <xref target="tab-iana-version-registry"/>).</dd>
-            <dt>Change Controller:</dt>
-            <dd>This is who may request a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
+	    <dt>Change Controller:</dt>
+	    <dd>Person or entity responsible for requesting a change to the entry's definition (<tt>IETF</tt> for RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
             <dd>The initial list of defined values for the enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>.  A subregistry will be created with these values for this property name/context tuple.</dd>
           </dl>
