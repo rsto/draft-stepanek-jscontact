@@ -82,7 +82,7 @@ be moved to AUTH48 shortly.
     <keyword>cards</keyword>
     <keyword>VCARD</keyword>
     <abstract>
-      <t>This specification defines a data model and JavaScript Object Notation (JSON) representation of contact card information that can be used for data storage and exchange in address book or directory applications.  It aims to be an alternative to the vCard data format and to be unambiguous, extendable, and simple to process.  In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.  Additionally to this specification, two additional documents define new vCard elements and how to convert between JSContact and vCard.</t>
+      <t>This specification defines a data model and JavaScript Object Notation (JSON) representation of contact card information that can be used for data storage and exchange in address book or directory applications.  It aims to be an alternative to the vCard data format and to be unambiguous, extendable, and simple to process.  In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate.  Two additional specifications define new vCard elements and how to convert between JSContact and vCard.</t>
     </abstract>
   </front>
   <middle>
