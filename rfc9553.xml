@@ -692,7 +692,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <t>Type: String (mandatory)</t>
           <t>This specifies the JSContact version used to define the Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Version values for the version property.  Also see <xref target="current-version"/>.</t>
           <figure anchor="example-version">
-            <name>Example for the version property</name>
+            <name>Example for the version Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "version": "1.0"
 ]]></sourcecode>
@@ -703,7 +703,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <t>Type: UTCDateTime (optional)</t>
           <t>The date and time when the Card was created.</t>
           <figure anchor="example-created">
-            <name>Example for the created property</name>
+            <name>Example for the created Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "created": "2022-09-30T14:35:10Z"
 ]]></sourcecode>
@@ -736,7 +736,7 @@ Current:
             <li>application: a software application</li>
           </ul>
           <figure anchor="example-kind">
-            <name>Example for the kind property</name>
+            <name>Example for the kind Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "kind": "individual"
 ]]></sourcecode>
@@ -747,7 +747,7 @@ Current:
           <t>Type: String (optional)</t>
           <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the language used for text in the Card, optionally including additional information such as the script.  Note that values <bcp14>MAY</bcp14> be localized in the  <xref target="localizations">localizations</xref> property.</t>
           <figure anchor="example-language">
-            <name>Example for the language property</name>
+            <name>Example for the language Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "language": "de-AT"
 ]]></sourcecode>
@@ -759,7 +759,7 @@ Current:
           <t>This identifies the set of Cards that are members of this group Card.  Each key in the set is the uid property value of the member, and each boolean value <bcp14>MUST</bcp14> be "true". If this property is set, then the value of the kind property <bcp14>MUST</bcp14> be "group".</t>
           <t>The opposite is not true.  A group Card will usually contain the members property to specify the members of the group, but it is not required to.  A group Card without the members property can be considered an abstract grouping or one whose members are known empirically (e.g.,  "IETF Participants").</t>
           <figure anchor="example-members">
-            <name>Example for the members property</name>
+            <name>Example for the members Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "kind": "group",
 "name": {
@@ -778,7 +778,7 @@ Current:
           <t>Type: String (optional)</t>
           <t>The identifier for the product that created the Card.  If set, the value <bcp14>MUST</bcp14> be at least one character long.</t>
           <figure anchor="example-prodId">
-            <name>Example for the prodId property</name>
+            <name>Example for the prodId Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "prodId": "ACME Contacts App version 1.23.5"
 ]]></sourcecode>
@@ -867,7 +867,7 @@ us know if any other terms should be placed in alphabetical order.
               </ul>
           </dd></dl>
           <figure anchor="example-relatedto">
-            <name>Example for the relatedTo property</name>
+            <name>Example for the relatedTo Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "relatedTo": {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6": {
@@ -905,7 +905,7 @@ Current:
 
 As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref> of the Universally Unique Identifier (UUID) Standards Track document <xref target="RFC4122" format="default"/> is in progress and will likely introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudorandom UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
           <figure anchor="example-uid">
-            <name>Example for the uid property</name>
+            <name>Example for the uid Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
 ]]></sourcecode>
@@ -916,7 +916,7 @@ As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref>
           <t>Type: UTCDateTime (optional)</t>
           <t>The date and time when the data in the Card was last modified.</t>
           <figure anchor="example-updated">
-            <name>Example for the updated property</name>
+            <name>Example for the updated Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "updated": "2021-10-31T22:27:10Z"
 ]]></sourcecode>
@@ -1007,7 +1007,7 @@ Current:
               <dt>full:</dt><dd><t>String (optional).
             The full name representation of the Name.  The full property <bcp14>MUST</bcp14> be set if the components property is not set.</t>
                 <figure anchor="example-full">
-                  <name>Example for the full property</name>
+                  <name>Example for the full Property</name>
                   <sourcecode name="" type="json"><![CDATA[
 "full": "Mr. John Q. Public, Esq."
 ]]></sourcecode>
@@ -1028,7 +1028,7 @@ Current:
             </dl>
 
                 <figure anchor="example-name-sortas">
-                  <name>Example for the sortAs property</name>
+                  <name>Example for the sortAs Property</name>
                   <sourcecode name="" type="json"><![CDATA[
 "name": {
   "components": [
@@ -1116,7 +1116,7 @@ The contexts in which to use the nickname.  Also see <xref target="prop-contexts
             The preference of the nickname in relation to other nicknames.  Also see <xref target="prop-pref"/>.</dd>
             </dl>
             <figure anchor="example-nicknames">
-              <name>Example for the nicknames property</name>
+              <name>Example for the nicknames Property</name>
               <sourcecode name="" type="json"><![CDATA[
 "nicknames": {
   "k391": {
@@ -1160,7 +1160,7 @@ The contexts in which association with the organization apply.  For example, mem
         </dd>
           </dl>
           <figure anchor="example-organizations">
-            <name>Example for the organizations property</name>
+            <name>Example for the organizations Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "organizations": {
   "o1": {
@@ -1227,7 +1227,7 @@ The contexts in which to use the pronouns.  Also see <xref target="prop-contexts
             The preference of the pronouns in relation to other pronouns in the same context.  Also see <xref target="prop-pref"/>.</dd>
           </dl>
           <figure anchor="example-speakToAs">
-            <name>Example for the speakToAs property</name>
+            <name>Example for the speakToAs Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "speakToAs": {
   "grammaticalGender": "neuter",
@@ -1269,7 +1269,7 @@ The contexts in which to use the pronouns.  Also see <xref target="prop-contexts
         </dd>
           </dl>
           <figure anchor="example-titles">
-            <name>Example for the titles property</name>
+            <name>Example for the titles Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "titles": {
   "le9": {
@@ -1312,7 +1312,7 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
             A custom label for the value. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-emails">
-            <name>Example for the emails property</name>
+            <name>Example for the emails Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "emails": {
   "e1": {
@@ -1351,7 +1351,7 @@ The contexts in which to use the service.  Also see <xref target="prop-contexts"
             A custom label for the value. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-onlineServices">
-            <name>Example for the onlineServices property</name>
+            <name>Example for the onlineServices Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "onlineServices": {
   "x1": {
@@ -1398,7 +1398,7 @@ The contexts in which to use the number.  Also see <xref target="prop-contexts"/
             A custom label for the value. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-phones">
-            <name>Example for the phones property</name>
+            <name>Example for the phones Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "phones": {
   "tel0": {
@@ -1437,7 +1437,7 @@ Defines the contexts in which to use the language.  Also see <xref target="prop-
 Defines the preference of the language in relation to other languages of the same contexts.  Also see <xref target="prop-pref"/>.</dd>
           </dl>
           <figure anchor="example-preferredLanguages">
-            <name>Example for the preferredLanguages property</name>
+            <name>Example for the preferredLanguages Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "preferredLanguages": {
   "l1": {
@@ -1484,7 +1484,7 @@ Defines the preference of the language in relation to other languages of the sam
             </li>
           </ul>
           <figure anchor="example-calendars">
-            <name>Example for the calendars property</name>
+            <name>Example for the calendars Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "calendars": {
   "calA": {
@@ -1517,7 +1517,7 @@ The contexts in which to use the scheduling address.  Also see <xref target="pro
             A custom label for the scheduling address. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-schedulingAddresses">
-            <name>Example for the schedulingAddresses property</name>
+            <name>Example for the schedulingAddresses Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "schedulingAddresses": {
   "sched1": {
@@ -1867,7 +1867,7 @@ Current:
         </dd>
           </dl>
           <figure anchor="example-directories">
-            <name>Example for the directories property</name>
+            <name>Example for the directories Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "directories": {
   "dir1": {
@@ -1895,7 +1895,7 @@ Current:
             </li>
           </ul>
           <figure anchor="example-links">
-            <name>Example for the links property</name>
+            <name>Example for the links Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "links": {
   "link3": {
@@ -1923,7 +1923,7 @@ Current:
             </li>
           </ul>
           <figure anchor="example-media">
-            <name>Example for the media property</name>
+            <name>Example for the media Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "media": {
   "res45": {
@@ -2064,7 +2064,7 @@ Original:
           </dl>
           <t><xref target="example-anniversaries"/> illustrates anniversaries with partial dates and a timestamp.  Note how the @type property is set for the Timestamp object value according to the rules defined in <xref target="prop-type"/>.</t>
           <figure anchor="example-anniversaries">
-            <name>Example for the anniversaries property</name>
+            <name>Example for the anniversaries Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "anniversaries": {
   "k8": {
@@ -2094,7 +2094,7 @@ Original:
           <t>Type: String[Boolean] (optional)</t><t>
 A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be "true".</t>
           <figure anchor="example-keywords">
-            <name>Example for the keywords property</name>
+            <name>Example for the keywords Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "keywords": {
   "internet": true,
@@ -2134,7 +2134,7 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
             </dd>
           </dl>
           <figure anchor="example-notes">
-            <name>Example for the notes property</name>
+            <name>Example for the notes Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "notes": {
   "n1": {
@@ -2192,7 +2192,7 @@ The actual information.</dd>
             A custom label.  See <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-personalInfo">
-            <name>Example for the personalInfo property</name>
+            <name>Example for the personalInfo Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "personalInfo": {
   "pi2": {
