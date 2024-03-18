@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE rfc [
- <!ENTITY nbsp    "&#160;">
- <!ENTITY zwsp   "&#8203;">
- <!ENTITY nbhy   "&#8209;">
- <!ENTITY wj     "&#8288;">
-]> 
-
+<!ENTITY nbsp "&#160;">
+<!ENTITY zwsp "&#8203;">
+<!ENTITY nbhy "&#8209;">
+<!ENTITY wj "&#8288;">
+]>
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-ietf-calext-jscontact-16" number="9553" submissionType="IETF" consensus="true" category="std" xml:lang="en" obsoletes="" updates="" tocInclude="true" symRefs="true" sortRefs="true" version="3">
-
   <!-- xml2rfc v2v3 conversion 3.6.0 -->
   <front>
-
 <!--[rfced] *AD, changes were submitted twice after the document
 was initially approved. Please review the updates from version 15
 to version 17 and let us know if you approve. The updates can
@@ -28,34 +24,32 @@ Original:
    The Until Version value either MUST NOT be set, or be one of the
    allowed values of the version property in the JSContact Enum Value
    registry (see Table 1).
-                                                                                         
+
 Current:
    The Until Version value either MUST NOT be set or MUST be one of
    the allowed values of the version property in the "JSContact Enum
-   Values" registry (see Table 1). 
--->  
-    
-<!--[rfced] This document is part of Cluster 481. As it does not 
+   Values" registry (see Table 1).
+-->
+<!--[rfced] This document is part of Cluster 481. As it does not
 reference the other cluster documents, we have moved it forward in
 AUTH48 on its own. However, would you like to hold publication
 of this document until the other two documents complete AUTH48 so
 that all three will be published together? The other documents will
 be moved to AUTH48 shortly.
 -->
-
     <title abbrev="JSContact">JSContact: A JSON Representation of Contact Data</title>
     <seriesInfo name="RFC" value="9553"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>Fastmail</organization>
       <address>
         <postal>
-	  <extaddr>PO Box 234</extaddr>
-	  <street>Collins St. West</street>
+          <extaddr>PO Box 234</extaddr>
+          <street>Collins St. West</street>
           <city>Melbourne</city>
-	  <region>VIC</region>
+          <region>VIC</region>
           <code>8007</code>
           <country>Australia</country>
-          <region></region>
+          <region/>
         </postal>
         <email>rsto@fastmailteam.com</email>
       </address>
@@ -68,7 +62,7 @@ be moved to AUTH48 shortly.
           <city>Pisa</city>
           <code>56124</code>
           <country>Italy</country>
-          <region></region>
+          <region/>
         </postal>
         <email>mario.loffredo@iit.cnr.it</email>
       </address>
@@ -92,10 +86,9 @@ be moved to AUTH48 shortly.
       <t>The key design considerations for this data model are as follows:</t>
       <ul spacing="normal">
         <li>The data model and set of attributes should be mostly compatible with the model defined for the vCard data format <xref target="RFC6350" format="default"/> and extensions <xref target="RFC6473" format="default"/> <xref target="RFC6474" format="default"/> <xref target="RFC6715" format="default"/> <xref target="RFC6869" format="default"/> <xref target="RFC8605" format="default"/>.  The specification should add new attributes or value types where appropriate. Not all existing vCard definitions need an equivalent in JSContact, especially if the vCard definition is considered to be obsolete or otherwise inappropriate.  Conversion between the data formats need not fully preserve semantic meaning.</li>
-
 <!--[rfced] Please clarify the meaning of "reducing complexity of
 their representation". Is the intended meaning that the
-attributes must be described as simple key-value pairs to 
+attributes must be described as simple key-value pairs to
 reduce complexity (option A) or to reduce complexity of the
 representation of the card data (option B)?
 
@@ -105,16 +98,15 @@ Original:
    representation.
 
 Perhaps:
-A) The attributes of the card data being represented must be 
+A) The attributes of the card data being represented must be
    described as simple key-value pairs to reduce complexity.
 
 or
 
-B) The attributes of the card data must be described as simple 
-   key-value pairs to reduce the complexity of the representation 
+B) The attributes of the card data must be described as simple
+   key-value pairs to reduce the complexity of the representation
    of the card data.
 -->
-	
         <li>The attributes of the card data must be described as simple key-value pairs to reduce the complexity of the representation of the card data.</li>
         <li>The data model should avoid all ambiguities and make it difficult to make mistakes during implementation.</li>
         <li>Extensions, such as new properties and components, <bcp14>MUST NOT</bcp14> lead to a required update of this document.</li>
@@ -124,8 +116,8 @@ B) The attributes of the card data must be described as simple
         <name>Motivation and Relation to vCard, jCard, and xCard</name>
         <t>The vCard data format <xref target="RFC6350"/> is an interchange format for contacts data between address book service providers and vendors.  However, this format has gone through multiple specification iterations with only a subset of its deprecated <xref target="RFC2426">version 3</xref> being widely in use.  Consequently, products and services use an internal contact data model that is richer than what they expose when serializing that information to vCard.  In addition, service providers often use a proprietary JSON representation of contact data in their APIs.</t>
         <t>JSContact provides a standard JSON-based data model and representation of contact data as an alternative to proprietary formats.</t>
-	<t>At the time of writing this document, several missing features in vCard were brought to the attention of the authors such as social media contacts, gender pronouns, and others.  This highlights how vCard is not perceived as an evolving format and, consequently, hasn't been updated for about ten years.  JSContact addresses these unmet demands and defines new vCard properties and parameters to allow interchanging them in both formats.</t>
-	<t>Two additional documents define the relation of JSContact and vCard: <xref target="I-D.ietf-calext-vcard-jscontact-extensions" format="default"/> defines new vCard properties and parameters.  <xref target="I-D.ietf-calext-jscontact-vcard" format="default"/> defines how to convert JSContact data from and to vCard.</t>
+        <t>At the time of writing this document, several missing features in vCard were brought to the attention of the authors such as social media contacts, gender pronouns, and others.  This highlights how vCard is not perceived as an evolving format and, consequently, hasn't been updated for about ten years.  JSContact addresses these unmet demands and defines new vCard properties and parameters to allow interchanging them in both formats.</t>
+        <t>Two additional documents define the relation of JSContact and vCard: <xref target="I-D.ietf-calext-vcard-jscontact-extensions" format="default"/> defines new vCard properties and parameters.  <xref target="I-D.ietf-calext-jscontact-vcard" format="default"/> defines how to convert JSContact data from and to vCard.</t>
         <t>The xCard <xref target="RFC6351" format="default"/> and jCard <xref target="RFC7095" format="default"/> specifications define alternative representations for vCard data in XML and JSON formats, respectively.  Both explicitly aim to not change the underlying data model.  Accordingly, they are regarded as equal to vCard in the context of this document.</t>
       </section>
       <section anchor="notational-conventions" numbered="true" toc="default">
@@ -140,32 +132,30 @@ B) The attributes of the card data must be described as simple
 Within the context of JSON objects, the term "key" is synonymous with "member name" as defined in <xref target="RFC8259" section="1"/>.</t>
         <section anchor="objects-and-properties" numbered="true" toc="default">
           <name>Objects and Properties</name>
-
-<!-- [rfced] The use of <tt> and <em>
+          <!-- [rfced] The use of <tt> and <em>
 
 a) In the html and pdf outputs, the text enclosed in <tt> is output in
 fixed-width font. In the txt output, there are no changes to the font,
-and the quotation marks have been removed. 
+and the quotation marks have been removed.
 
 In the html and pdf outputs, the text enclosed in <em> is output in
 italics. In the txt output, the text enclosed in <em> appears with an
 underscore before and after.
 
-Please review carefully and let us know if the output is acceptable or 
+Please review carefully and let us know if the output is acceptable or
 if any updates are needed.
 
-b) Some terms appear with and without the "<tt>" element, for example, 
-"@type", "Card", "version", etc. Please review and let us know if any 
+b) Some terms appear with and without the "<tt>" element, for example,
+"@type", "Card", "version", etc. Please review and let us know if any
 updates are needed for consistency.
 -->
-	  
           <t>JSContact defines data types for contact information such as addresses or names.  This information typically consists of multiple related elements; for example, a personal name and surname together form a name.  These related elements are organized in JSContact objects.  A JSContact object is a JSON object that has the following:</t>
           <ol>
             <li>A unique type name registered in the IANA  <xref target="iana-type-registry">"JSContact Types" registry</xref>.</li>
             <li>One or more object members for which the name and allowed value types are specified.  Such members are called "properties".</li>
             <li>One property named @type with a string value that matches the type name of the JSContact object.  In general, this property does not need to be set explicitly as outlined in <xref target="prop-type"/>.</li>
           </ol>
-          <t>The following sections specify how to define JSContact object types. Sections <xref target="validating-jscontact" format="counter"/> and <xref target="vendor-specific-extensions"  format="counter"/> then define the exact requirements for property names.</t>
+          <t>The following sections specify how to define JSContact object types. Sections <xref target="validating-jscontact" format="counter"/> and <xref target="vendor-specific-extensions" format="counter"/> then define the exact requirements for property names.</t>
           <t><xref target="example-foo-object"/> illustrates the definition of a JSContact object type.  The names "Foo" and "baz" are only for demonstration and have no meaning outside the example.  The example illustrates the following:</t>
           <ul>
             <li>It defines a JSContact object type named "Foo" having two properties, named "@type" and "baz".</li>
@@ -174,28 +164,28 @@ updates are needed for consistency.
             <li>The property has one attribute, "mandatory", which specifies that the property <bcp14>MUST</bcp14> be present for a value of the Foo object type to be valid.</li>
             <li>The free-text description of the baz property describes the semantics and further restrictions for its values.</li>
           </ul>
-
 <!--[rfced] Section 1.3.1. Please clarify the meaning of "qux-ishness"
 as no other RFCs contain this term. Is it a well-known term, or
 can it perhaps be rephrased for clarity?
 
 Also, we removed the blockquote element from this text
-because it is not a direct quote. Please let us know 
+because it is not a direct quote. Please let us know
 if any further updates are needed.
 
 Original:
    A Foo object has the following properties:
 
-      qux: Number (mandatory). Defines the qux-ishness of this contact. 
+      qux: Number (mandatory). Defines the qux-ishness of this contact.
       The value MUST be an integer greater than 0 and less than 10.
 -->
-
           <section anchor="example-foo-object">
             <name>Example of a JSContact Object Definition</name>
             <t>A Foo object has the following properties:</t>
             <dl spacing="normal">
-              <dt>@type:</dt><dd> String. This <bcp14>MUST</bcp14> be "Foo", if set.</dd>
-              <dt>baz:</dt><dd> Number (mandatory).  This is the baz of the contact.  The value <bcp14>MUST</bcp14> be an integer greater than 0 and less than 10.</dd>
+              <dt>@type: String.</dt>
+              <dd> This <bcp14>MUST</bcp14> be "Foo", if set.</dd>
+              <dt>baz: Number (mandatory).</dt>
+              <dd>  This is the baz of the contact.  The value <bcp14>MUST</bcp14> be an integer greater than 0 and less than 10.</dd>
             </dl>
           </section>
         </section>
@@ -203,13 +193,20 @@ Original:
           <name>Type Signatures</name>
           <t>Type signatures are given for all JSON values and JSContact definitions in this document.  The following conventions are used:</t>
           <dl spacing="normal">
-            <dt>String:</dt><dd> The JSON string type.</dd>
-            <dt>Number:</dt><dd> The JSON number type.</dd>
-            <dt>Boolean:</dt><dd> The JSON boolean type.</dd>
-            <dt>A[B]:</dt><dd> A JSON object where all keys are of type A and all values are of type B.</dd>
-            <dt>A[]:</dt><dd> A JSON array of values of type A.</dd>
-            <dt>A|B:</dt><dd> The value is either of type A or of type B.</dd>
-            <dt>*:</dt><dd> The type is undefined (the value could be any type, although permitted values may be constrained by the context of this value).</dd>
+            <dt>String:</dt>
+            <dd> The JSON string type.</dd>
+            <dt>Number:</dt>
+            <dd> The JSON number type.</dd>
+            <dt>Boolean:</dt>
+            <dd> The JSON boolean type.</dd>
+            <dt>A[B]:</dt>
+            <dd> A JSON object where all keys are of type A and all values are of type B.</dd>
+            <dt>A[]:</dt>
+            <dd> A JSON array of values of type A.</dd>
+            <dt>A|B:</dt>
+            <dd> The value is either of type A or of type B.</dd>
+            <dt>*:</dt>
+            <dd> The type is undefined (the value could be any type, although permitted values may be constrained by the context of this value).</dd>
           </dl>
           <t><xref target="common-data-types"/> defines common data types, including signed or unsigned integers and dates.</t>
         </section>
@@ -217,16 +214,21 @@ Original:
           <name>Property Attributes</name>
           <t>Object properties may also have a set of attributes defined along with the type signature. These have the following meanings:</t>
           <dl spacing="normal">
-            <dt>mandatory:</dt><dd> The property <bcp14>MUST</bcp14> be set for an instance of this object to be valid.</dd>
-            <dt>optional:</dt><dd> The property can, but need not, be set for an instance of this object to be valid.</dd>
-            <dt>default:</dt><dd> This is followed by a JSON value. That value will be used for this property if it is omitted.</dd>
-            <dt>defaultType:</dt><dd> This is followed by the name of a JSContact object type.  A property value of JSContact object type is expected to be of this named type, in case it omits the @type property.</dd>
+            <dt>mandatory:</dt>
+            <dd> The property <bcp14>MUST</bcp14> be set for an instance of this object to be valid.</dd>
+            <dt>optional:</dt>
+            <dd> The property can, but need not, be set for an instance of this object to be valid.</dd>
+            <dt>default:</dt>
+            <dd> This is followed by a JSON value. That value will be used for this property if it is omitted.</dd>
+            <dt>defaultType:</dt>
+            <dd> This is followed by the name of a JSContact object type.  A property value of JSContact object type is expected to be of this named type, in case it omits the @type property.</dd>
           </dl>
         </section>
         <section anchor="prop-type" numbered="true" toc="default">
           <name>The @type Property</name>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.  The @type property defines the JSContact object type of a JSON object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
+            <dt>@type: String.</dt>
+            <dd>  The @type property defines the JSContact object type of a JSON object.  It <bcp14>MUST</bcp14> match the type name of the JSContact object of which the JSON object is an instance of.</dd>
           </dl>
           <t>The purpose of the @type property is to help implementations identify which JSContact object type a given JSON object represents.  Implementations <bcp14>MUST</bcp14> validate that JSON objects with this property conform to the specification of the JSContact object type of that name.</t>
           <t>In many cases, the @type property value is implied by where its object occurs in JSContact data. Assuming that both A and B are JSContact object types:</t>
@@ -272,7 +274,6 @@ Original:
         </section>
         <section anchor="resource" numbered="true" toc="default">
           <name>Resource</name>
-
 <!--[rfced] When the term "Card" is referred to in the running text,
 there is a mix of "this Card" and "the Card". For consistency and
 clarity, we updated several instances of "this Card" to "the
@@ -289,22 +290,28 @@ Current:
    The date and time when the data in the Card was last
    modified.
 -->
- 
           <t>The Resource data type defines a resource associated with the entity represented by the Card, identified by a URI <xref target="RFC3986" format="default"/>.  Later in this document, several property definitions refer to the Resource type as the basis for their property-specific value types.  The Resource type defines the properties that are common to all of them.  Property definitions making use of Resource <bcp14>MAY</bcp14> define additional properties for their value types.</t>
           <t>The @type property value <bcp14>MUST NOT</bcp14> be "Resource"; instead, it <bcp14>MUST</bcp14> be the name of a concrete resource type (see <xref target="resource-properties"/>).  A Resource object has the following properties.</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.  Specifies the type of this Resource object.  The allowed value is defined in later sections of this document for each concrete resource type (<xref target="resource-properties"/>).</dd>
-            <dt>kind:</dt><dd> String (optional).
+            <dt>@type: String.</dt>
+            <dd>  Specifies the type of this Resource object.  The allowed value is defined in later sections of this document for each concrete resource type (<xref target="resource-properties"/>).</dd>
+            <dt>kind: String (optional).</dt>
+            <dd>
 The kind of the resource.  The allowed values are defined in the property definition that makes use of the Resource type.  Some property definitions may change this property from being optional to mandatory. </dd>
-            <dt>uri:</dt><dd> String (mandatory).
+            <dt>uri: String (mandatory).</dt>
+            <dd>
 The resource value.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in <xref target="RFC3986" sectionFormat="of" section="3"/>.</dd>
-            <dt>mediaType:</dt><dd> String (optional).
+            <dt>mediaType: String (optional).</dt>
+            <dd>
 Used for URI resource values.  Provides the media type <xref target="RFC2046" format="default"/> of the resource identified by the URI.</dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
+            <dt>contexts: String[Boolean] (optional).</dt>
+            <dd>
 The contexts in which to use this resource. Also see <xref target="prop-contexts"/>.</dd>
-            <dt>pref:</dt><dd> UnsignedInt (optional).
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
             The preference of the resource in relation to other resources. Also see <xref target="prop-pref"/>.</dd>
-            <dt>label:</dt><dd> String (optional).
+            <dt>label: String (optional).</dt>
+            <dd>
             A custom label for the value. Also see <xref target="prop-label"/>.</dd>
           </dl>
         </section>
@@ -317,12 +324,11 @@ The contexts in which to use this resource. Also see <xref target="prop-contexts
       <section anchor="common-properties">
         <name>Common Properties</name>
         <t>Most of the properties in this document are specific to a single JSContact object type.  Such properties are defined along with the respective object type.  The properties in this section are common to multiple data types and are defined here to avoid repetition.  Note that these properties <bcp14>MUST</bcp14> only be set for a JSContact object if they are explicitly mentioned as allowable for this object type.</t>
-
 <!--[rfced] Within Sections 1.5.1 to 2.8.4, there is inconsistency in
 the way the property names are introduced - some of the lead-in
 sentences are fragments and some work off of the property name in
 the title. May we make this consistent by including the property
-name (enclosed with <tt> in the XML file if preferred) in the lead-in 
+name (enclosed with <tt> in the XML file if preferred) in the lead-in
 sentence as shown in the examples below? Note that there are 25 instances.
 
 Some examples (see the text for more instances)
@@ -332,7 +338,7 @@ Original:
 
      Type: String[Boolean]
 
-     This property associates contact information with one or more contexts 
+     This property associates contact information with one or more contexts
      in which it should be used.
 
 Perhaps:
@@ -340,12 +346,12 @@ Perhaps:
 
      Type: String[Boolean]
 
-     The contexts property associates contact information with one or more 
+     The contexts property associates contact information with one or more
      contexts in which it should be used.
 
 ...
 Original:
-   2.3.4  preferredLanguages 
+   2.3.4  preferredLanguages
 
      Type: Id{LanguagePref] (optional).
 
@@ -353,11 +359,11 @@ Original:
      with this Card.
 
 Perhaps:
-   2.3.4  preferredLanguages 
+   2.3.4  preferredLanguages
 
      Type: Id{LanguagePref] (optional).
 
-     The preferredLanguages property defines the preferred languages for 
+     The preferredLanguages property defines the preferred languages for
      contacting the entity associated with the Card.
 
 ...
@@ -366,7 +372,7 @@ Original:
 
      Type: Id[Directory] (optional).
 
-     These are directory service resources, such as entries in a 
+     These are directory service resources, such as entries in a
      directory or organizational directories for lookup.
 
 Perhaps:
@@ -374,42 +380,72 @@ Perhaps:
 
      Type: Id[Directory] (optional)
 
-     The directories property specifies directory service resources 
-     such as entries in a directory or organizational directories 
-     for lookup. 
--->	
+     The directories property specifies directory service resources
+     such as entries in a directory or organizational directories
+     for lookup.
+-->
         <section anchor="prop-contexts" numbered="true" toc="default">
           <name>contexts</name>
-          <t>Type: String[Boolean]</t>
-          <t>The contexts property associates contact information with one or more contexts in which it should be used.  For example, someone might have distinct phone numbers for work and private contexts and may set the desired context on the respective phone number in the <xref target="phones">phones</xref> property.</t>
-          <t>This section defines common contexts.  Additional contexts may be defined in the properties or data types that make use of this property.  The <xref target="enumerated-values">enumerated</xref> common context values are:</t>
-          <ul spacing="normal">
-            <li>private: the contact information that may be used in a private context.</li>
-            <li>work: the contact information that may be used in a professional context.</li>
-          </ul>
+            <dl spacing="normal">
+                <dt>contexts: String[Boolean].</dt>
+                <dd>
+                    <t>The contexts property associates contact information with one or more contexts in which it should
+                        be used. For example, someone might have distinct phone numbers for work and private contexts
+                        and may set the desired context on the respective phone number in the <xref target="phones">
+                            phones
+                        </xref> property.
+                    </t>
+                    <t>This section defines common contexts. Additional contexts may be defined in the properties or
+                        data types that make use of this property. The <xref target="enumerated-values">enumerated
+                        </xref> common context values are:
+                    </t>
+                    <ul spacing="normal">
+                        <li>private: the contact information that may be used in a private context.</li>
+                        <li>work: the contact information that may be used in a professional context.</li>
+                    </ul>
+                </dd>
+            </dl>
         </section>
         <section anchor="prop-extra" numbered="true" toc="default">
           <name>extra</name>
           <t>The extra property is reserved.  Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact object.  Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.</t>
           <t>The purpose of this reserved property name is to provide implementors with a name that is certain to never occur as a property name in a JSContact object.  Implementations might want to map unknown or vendor-specific properties to a variable with this name, but this is implementation-specific.</t>
         </section>
-        <section anchor="prop-label" numbered="true" toc="default">
-          <name>label</name>
-          <t>Type: String</t>
-          <t>The label property allows associating contact data with user-defined labels.  Such labels may be set for phone numbers, email addresses, and resources.  Typically, these labels are displayed along with their associated contact data in graphical user interfaces. Note that succinct labels are best for proper display on small graphical interfaces and screens.</t>
-        </section>
+          <section anchor="prop-label" numbered="true" toc="default">
+              <name>label</name>
+              <dl spacing="normal">
+                  <dt>label: String.</dt>
+                  <dd>The label property allows associating contact data with user-defined labels. Such labels may be
+                      set for phone numbers, email addresses, and resources. Typically, these labels are displayed along
+                      with their associated contact data in graphical user interfaces. Note that succinct labels are
+                      best for proper display on small graphical interfaces and screens.
+                  </dd>
+              </dl>
+          </section>
         <section anchor="prop-pref" numbered="true" toc="default">
           <name>pref</name>
-          <t>Type: UnsignedInt</t>
-          <t>The pref property allows defining a preference order for contact information.  For example, a person may have two email addresses and prefer to be contacted with one of them.</t>
-          <t>Its value <bcp14>MUST</bcp14> be in the range of 1 to 100.  Lower values correspond to a higher level of preference, with 1 being most preferred.  If no preference is set, then the contact information <bcp14>MUST</bcp14> be interpreted as being least preferred.</t>
-          <t>Note that the preference is only defined in relation to contact information of the same type.  For example, the preference orders within emails and phone numbers are independent of each other.</t>
+            <dl spacing="normal">
+                <dt>pref: UnsignedInt.</dt>
+                <dd>
+                    <t>The pref property allows defining a preference order for contact information. For example, a
+                        person may have two email addresses and prefer to be contacted with one of them.
+                    </t>
+                    <t>Its value <bcp14>MUST</bcp14> be in the range of 1 to 100. Lower values correspond to a higher
+                        level of preference, with 1 being most preferred. If no preference is set, then the contact
+                        information <bcp14>MUST</bcp14> be interpreted as being least preferred.
+                    </t>
+                    <t>Note that the preference is only defined in relation to contact information of the same type. For
+                        example, the preference orders within emails and phone numbers are independent of each other.
+                    </t>
+                </dd>
+            </dl>
         </section>
         <section anchor="prop-phonetic" numbered="true" toc="default">
           <name>phonetic</name>
-          <t>The phonetic property defines how to pronounce a value in the language indicated in the Card <xref target="language">language</xref> property or the language tag of its <xref target="localizations">localizations</xref>.  Exemplary uses of this property are defining how to pronounce Japanese names and romanizing Mandarin or Cantonese name and address components.  The properties are defined as follows:</t>
+          <t>The following properties define how to pronounce a value in the language indicated in the Card <xref target="language">language</xref> property or the language tag of its <xref target="localizations">localizations</xref>.  Exemplary uses of these properties are defining how to pronounce Japanese names and romanizing Mandarin or Cantonese name and address components.  The properties are defined as follows:</t>
           <dl spacing="normal">
-            <dt>phonetic:</dt><dd> String.
+            <dt>phonetic: String.</dt>
+            <dd>
             Contains the phonetic representation of a value.
 
 <!--[rfced] Can "ignored for use with" be updated as "ignored and not
@@ -425,9 +461,12 @@ Perhaps:
 -->
 
 	    Any script language subtag in the Card <xref target="language">language</xref> property <bcp14>MUST</bcp14> be ignored and not used with the phonetic property.  If this property is set, then at least one of the phoneticScript or phoneticSystem properties that relate to this value <bcp14>MUST</bcp14> be set.</dd>
-            <dt>phoneticScript:</dt><dd> String.
-            The script used in the value of the related phonetic property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>. </dd>	    
-            <dt>phoneticSystem:</dt><dd><t> String.
+            <dt>phoneticScript: String.</dt>
+            <dd>
+            The script used in the value of the related phonetic property.  This <bcp14>MUST</bcp14> be a valid script subtag as defined in <xref target="RFC5646" section="2.2.3"/>. </dd>
+            <dt>phoneticSystem: String.</dt>
+            <dd>
+              <t>
               The phonetic system used in the related value of the phonetic property.  The <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
                 <li>ipa: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
@@ -474,10 +513,10 @@ W3C. We updated the running text and reference entry to reflect
 this as shown below. Please let us know if any further changes
 are needed.
 
-Original: 
+Original:
    JSContact makes no recommendation how to display URIs, but
-   section "4.8.3 Internationalization and special characters" 
-   of the W3C URL Standard [W3C-URL] provides guidance for URLs 
+   section "4.8.3 Internationalization and special characters"
+   of the W3C URL Standard [W3C-URL] provides guidance for URLs
    found in context of a web browser.
 
 
@@ -485,9 +524,9 @@ Original:
               2023", <https://url.spec.whatwg.org>.
 
 Current:
-   JSContact makes no recommendation on how to display URIs, but the 
-   WHATWG URL Living Standard (see "Internationalization and special characters" 
-   (Section 4.8.3) of [WHATWG-URL]) provides guidance for URLs found in 
+   JSContact makes no recommendation on how to display URIs, but the
+   WHATWG URL Living Standard (see "Internationalization and special characters"
+   (Section 4.8.3) of [WHATWG-URL]) provides guidance for URLs found in
    the context of a web browser.
 
 
@@ -497,8 +536,7 @@ Current:
 
 	  JSContact makes no recommendation on how to display URIs,
 	  but the WHATWG URL Living Standard (see "Internationalization and
-	  special characters" (Section 4.8.3) of <xref
-	  target="WHATWG-URL"/>) provides guidance for URLs found in
+	  special characters" (Section 4.8.3) of <xref target="WHATWG-URL"/>) provides guidance for URLs found in
 	  the context of a web browser.</t>
         </section>
       </section>
@@ -519,7 +557,6 @@ Current:
         Implementations <bcp14>MUST</bcp14> validate IANA-registered properties in JSContact data, unless they are unknown to the implementation (<xref target="unknown-properties"/>).  They <bcp14>MUST</bcp14> reject invalid IANA-registered properties.  A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSContact specification version defined in the Card <xref target="prop-version">version</xref> property.
       </t>
       <t>
-
 <!-- [rfced] The RFC Production Center has been advised that "ASCII"
 and not "US-ASCII" should be used.  May we change two instances
 of "US-ASCII" in this document to "ASCII"?
@@ -530,7 +567,7 @@ Original:
    QUOTATION MARK (U+0022) characters.  They MUST only contain US-ASCII
    alphanumeric characters that match the ALPHA and DIGIT rules defined
    in Appendix B.1 of [RFC5234]) or the COMMERCIAL AT (U+0040)
-   character.  
+   character.
 
 Perhaps:
    IANA-registered property names MUST NOT contain ASCII control
@@ -538,9 +575,9 @@ Perhaps:
    QUOTATION MARK (U+0022) characters.  They MUST only contain ASCII
    alphanumeric characters that match the ALPHA and DIGIT rules defined
    in Appendix B.1 of [RFC5234]) or the COMMERCIAL AT (U+0040)
-   character.  
+   character.
 -->
-	
+
             IANA-registered property names <bcp14>MUST NOT</bcp14> contain ASCII control characters (U+0000 to U+001F, U+007F), the COLON (U+003A), or the QUOTATION MARK (U+0022).  They <bcp14>MUST</bcp14> only contain ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <xref target="RFC5234" section="B.1"/> or the COMMERCIAL AT (U+0040) character.  IANA-registered property names <bcp14>MUST</bcp14> be notated in lower camel case.
 </t>
         </section>
@@ -567,7 +604,7 @@ Perhaps:
           <t>
         Vendor-specific properties <bcp14>MAY</bcp14> be set in any JSContact object.  Implementations <bcp14>MUST</bcp14> preserve vendor-specific properties in JSContact data, irrespective if they know their use.  They <bcp14>MUST NOT</bcp14> reject the property value as invalid, unless they are in control of the vendor-specific property as outlined in the above paragraph.
       </t>
-      <t>The ABNF rule "v-extension" formally defines valid vendor-specific property names. Note that the vendor prefix allows for more values than Internationalized Domain Names (IDNs) <xref target="RFC8499"/>; therefore, JSContact implementations can simply validate property names without implementing the full set of rules that apply to domain names.</t>
+          <t>The ABNF rule "v-extension" formally defines valid vendor-specific property names. Note that the vendor prefix allows for more values than Internationalized Domain Names (IDNs) <xref target="RFC8499"/>; therefore, JSContact implementations can simply validate property names without implementing the full set of rules that apply to domain names.</t>
           <figure anchor="vendor-property-abnf">
             <name>ABNF Rules for Vendor-Specific Property Names</name>
             <sourcecode name="" type="abnf"><![CDATA[
@@ -629,26 +666,24 @@ Perhaps:
    The version is indicated both in the version (Section 2.1.2)
    property within the Card and in the version (Section 3.1) parameter
    of the JSContact media type.
--->   
+-->
 
 		The version is indicated both in the <xref target="prop-version">version</xref> property within the Card and in the <xref target="iana-media-type">version</xref> parameter of the JSContact media type.  All IANA-registered elements indicate the version at which they were introduced or obsoleted.</t>
-	<t>A JSContact version consists of a major and minor version.</t>
-	<t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared for property definitions and other JSContact elements that differ in a backwards-incompatible manner.</t>
-	<t>Differing minor version values indicate additions that enrich JSContact data but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with a narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
+        <t>A JSContact version consists of a major and minor version.</t>
+        <t>Differing major version values indicate substantial differences in JSContact semantics and format.  Implementations <bcp14>MUST</bcp14> be prepared for property definitions and other JSContact elements that differ in a backwards-incompatible manner.</t>
+        <t>Differing minor version values indicate additions that enrich JSContact data but do not introduce backwards-incompatible changes.  Typically, these are new property enum values or properties with a narrow semantic scope.  A new minor version <bcp14>MUST NOT</bcp14> require implementations to change their processing of JSContact data.  Changing the major version number resets the minor version number to zero.</t>
         <section anchor="version-format-and-reqs">
           <name>Version Format and Requirements</name>
           <t>A version value starts with the numeric major version, followed by the FULL STOP character (U+002E), followed by the numeric minor version.  Later versions are numerically higher than former versions, with the major version being more significant than the minor version. A version value is produced by the following ABNF:</t>
-
 <!--[rfced] Should Figure 5 have a title? Please review, and provide
 a title if desired.
--->    
-
-	  <figure>
-	    <name>The ABNF for JSContact Version Values</name>
-          <sourcecode name="" type="abnf"><![CDATA[
+-->
+          <figure>
+            <name>The ABNF for JSContact Version Values</name>
+            <sourcecode name="" type="abnf"><![CDATA[
 jsversion = 1*DIGIT "." 1*DIGIT
 ]]></sourcecode>
-	  </figure>
+          </figure>
         </section>
         <section anchor="current-version">
           <name>Current Version</name>
@@ -684,14 +719,18 @@ jsversion = 1*DIGIT "." 1*DIGIT
         <t>This section defines properties about this instance of a Card such as its unique identifier, its creation date, and how it relates to other Cards and other metadata information.</t>
         <section anchor="cardtype" numbered="true" toc="default">
           <name>@type</name>
-          <t>Type: String (mandatory)</t>
-          <t>This <bcp14>MUST</bcp14> be "Card", if set.</t>
+<dl spacing="normal">
+            <dt>@type: String (mandatory).</dt>
+		<dd>This <bcp14>MUST</bcp14> be "Card", if set.</dd>
+</dl>
         </section>
         <section anchor="prop-version" numbered="true" toc="default">
           <name>version</name>
-          <t>Type: String (mandatory)</t>
-          <t>This specifies the JSContact version used to define the Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Version values for the version property.  Also see <xref target="current-version"/>.</t>
-          <figure anchor="example-version">
+            <dl spacing="normal">
+          <dt>version: String (mandatory).</dt>
+          <dd>This specifies the JSContact version used to define the Card.  The value <bcp14>MUST</bcp14> be one of the IANA-registered JSContact Version values for the version property.  Also see <xref target="current-version"/>.</dd>
+            </dl>
+            <figure anchor="example-version">
             <name>Example for the version Property</name>
             <sourcecode name="" type="json"><![CDATA[
 "version": "1.0"
@@ -699,9 +738,11 @@ jsversion = 1*DIGIT "." 1*DIGIT
           </figure>
         </section>
         <section anchor="created" numbered="true" toc="default">
-          <name>created</name>
-          <t>Type: UTCDateTime (optional)</t>
-          <t>The date and time when the Card was created.</t>
+		<name>created</name>
+		<dl spacing="normal">
+            <dt>created: UTCDateTime (optional).</dt>
+	    <dd>The date and time when the Card was created.</dd>
+    </dl>
           <figure anchor="example-created">
             <name>Example for the created Property</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -709,58 +750,82 @@ jsversion = 1*DIGIT "." 1*DIGIT
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="kind" numbered="true" toc="default">
-          <name>kind</name>
-          <t>Type: String (optional; default: "individual")</t>
-          <t>The kind of the entity the Card represents.</t>
-          <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
-          <ul spacing="normal">
+          <section anchor="kind" numbered="true" toc="default">
+              <name>kind</name>
+              <dl spacing="normal">
+                  <dt>kind: String (optional; default: "individual").</dt>
+                  <dd>
+                      <t>The kind of the entity the Card represents.</t>
+                      <t>The <xref target="enumerated-values">enumerated</xref> values are:
+                      </t>
+                      <ul spacing="normal">
+                          <!--[rfced] In Section 2.1.4 under the definition of "device", we made
+                          the examples singular since "device" is singular. If you prefer
+                          otherwise, please let us know.
 
-<!--[rfced] In Section 2.1.4 under the definition of "device", we made
-the examples singular since "device" is singular. If you prefer
-otherwise, please let us know.
+                          Original:
+                             *  device: a device, such as appliances, computers, or network
+                                elements
 
-Original:
-   *  device: a device, such as appliances, computers, or network
-      elements
-
-Current:
-   *  device: a device such as an appliance, a computer, or a network
-      element
--->    
-            <li>individual: a single person</li>
-            <li>group: a group of people or entities</li>
-            <li>org: an organization</li>
-            <li>location: a named location</li>
-            <li>device: a device such as an appliance, a computer, or a network element</li>
-            <li>application: a software application</li>
-          </ul>
-          <figure anchor="example-kind">
-            <name>Example for the kind Property</name>
-            <sourcecode name="" type="json"><![CDATA[
+                          Current:
+                             *  device: a device such as an appliance, a computer, or a network
+                                element
+                          -->
+                          <li>individual: a single person</li>
+                          <li>group: a group of people or entities</li>
+                          <li>org: an organization</li>
+                          <li>location: a named location</li>
+                          <li>device: a device such as an appliance, a computer, or a network element</li>
+                          <li>application: a software application</li>
+                      </ul>
+                  </dd>
+              </dl>
+              <figure anchor="example-kind">
+                  <name>Example for the kind Property</name>
+                  <sourcecode name="" type="json"><![CDATA[
 "kind": "individual"
 ]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="language" numbered="true" toc="default">
-          <name>language</name>
-          <t>Type: String (optional)</t>
-          <t>This is the language tag, as defined in <xref target="RFC5646"/>, that best describes the language used for text in the Card, optionally including additional information such as the script.  Note that values <bcp14>MAY</bcp14> be localized in the  <xref target="localizations">localizations</xref> property.</t>
-          <figure anchor="example-language">
-            <name>Example for the language Property</name>
-            <sourcecode name="" type="json"><![CDATA[
+              </figure>
+          </section>
+          <section anchor="language" numbered="true" toc="default">
+              <name>language</name>
+              <dl spacing="normal">
+                  <dt>language: String (optional).</dt>
+                  <dd>
+                      <t>This is the language tag, as defined in<xref target="RFC5646"/>, that best describes the
+                          language used for text in the Card, optionally including additional information such as the
+                          script. Note that values <bcp14>MAY</bcp14> be localized in the  <xref target="localizations">
+                              localizations
+                          </xref> property.
+                      </t>
+                  </dd>
+              </dl>
+              <figure anchor="example-language">
+                  <name>Example for the language Property</name>
+                  <sourcecode name="" type="json"><![CDATA[
 "language": "de-AT"
 ]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="members" numbered="true" toc="default">
-          <name>members</name>
-          <t>Type: String[Boolean] (optional)</t>
-          <t>This identifies the set of Cards that are members of this group Card.  Each key in the set is the uid property value of the member, and each boolean value <bcp14>MUST</bcp14> be "true". If this property is set, then the value of the kind property <bcp14>MUST</bcp14> be "group".</t>
-          <t>The opposite is not true.  A group Card will usually contain the members property to specify the members of the group, but it is not required to.  A group Card without the members property can be considered an abstract grouping or one whose members are known empirically (e.g.,  "IETF Participants").</t>
-          <figure anchor="example-members">
-            <name>Example for the members Property</name>
-            <sourcecode name="" type="json"><![CDATA[
+              </figure>
+          </section>
+          <section anchor="members" numbered="true" toc="default">
+              <name>members</name>
+              <dl spacing="normal">
+                  <dt>members: String[Boolean] (optional).</dt>
+                  <dd>
+                      <t>This identifies the set of Cards that are members of this group Card. Each key in the set is
+                          the uid property value of the member, and each boolean value <bcp14>MUST</bcp14> be "true". If
+                          this property is set, then the value of the kind property <bcp14>MUST</bcp14> be "group".
+                      </t>
+                      <t>The opposite is not true. A group Card will usually contain the members property to specify the
+                          members of the group, but it is not required to. A group Card without the members property can
+                          be considered an abstract grouping or one whose members are known empirically (e.g., "IETF
+                          Participants").
+                      </t>
+                  </dd>
+              </dl>
+              <figure anchor="example-members">
+                  <name>Example for the members Property</name>
+                  <sourcecode name="" type="json"><![CDATA[
 "kind": "group",
 "name": {
   "full": "The Doe family"
@@ -771,104 +836,126 @@ Current:
   "urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519": true
 }
 ]]></sourcecode>
-          </figure>
+              </figure>
         </section>
-        <section anchor="prodId" numbered="true" toc="default">
-          <name>prodId</name>
-          <t>Type: String (optional)</t>
-          <t>The identifier for the product that created the Card.  If set, the value <bcp14>MUST</bcp14> be at least one character long.</t>
-          <figure anchor="example-prodId">
-            <name>Example for the prodId Property</name>
-            <sourcecode name="" type="json"><![CDATA[
+          <section anchor="prodId" numbered="true" toc="default">
+              <name>prodId</name>
+              <dl spacing="normal">
+                  <dt>prodId: String (optional).</dt>
+                  <dd>
+                      <t>The identifier for the product that created the Card. If set, the value <bcp14>MUST</bcp14> be at least one character long.</t>
+                  </dd>
+              </dl>
+              <figure anchor="example-prodId">
+                  <name>Example for the prodId Property</name>
+                  <sourcecode name="" type="json"><![CDATA[
 "prodId": "ACME Contacts App version 1.23.5"
 ]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="relatedTo" numbered="true" toc="default">
-          <name>relatedTo</name>
-          <t>Type: String[Relation] (optional)</t>
-          <t>This relates the object to other Cards.  It is represented as a map, where each key is the uid property value of the related Card, and the value defines the relation.  The Relation object has the following properties:</t>
-          <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
-            This <bcp14>MUST</bcp14> be "Relation", if set.
-         </dd>
-            <dt>relation:</dt><dd><t> String[Boolean] (optional; default: empty Object). Describes how the linked object is related to the linking object.  The relation is defined as a set of relation types.  The key in the set defines the relation type; the value for each key in the set <bcp14>MUST</bcp14> be "true".  The relationship between the two objects is undefined if the set is empty.</t>
-            <t>The initial list of <xref target="enumerated-values">enumerated</xref> relation types matches the IANA-registered <xref target="IANA-vCard">TYPE</xref> parameter values of the vCard RELATED property (<xref target="RFC6350" section="6.6.6"/>):</t>
+              </figure>
+          </section>
+          <section anchor="relatedTo" numbered="true" toc="default">
+              <name>relatedTo</name>
+              <dl spacing="normal">
+                  <dt>relatedTo: String[Relation] (optional).</dt>
+                  <dd>
+                      <t>This relates the object to other Cards. It is represented as a map, where each key is the uid
+                          property value of the related Card, and the value defines the relation.
+                      </t>
 
-<!--[rfced] In Section 2.1.8, we updated the order of the enumerated
-relation types list by moving "co-resident" and "co-worker" above
-"colleague". The list is now in alphabetical order. Please let us
-know of any objections.
+                  </dd>
+              </dl>
+              <t>The Relation object has the following properties:</t>
+              <dl spacing="normal">
+                  <dt>@type: String.</dt>
+                  <dd>
+                      This <bcp14>MUST</bcp14> be "Relation", if set.
+                  </dd>
+                  <dt>relation: String[Boolean] (optional; default: empty Object).</dt>
+                  <dd>
+                      <t>Describes how the linked object is related to the linking object. The relation is
+                          defined as a set of relation types. The key in the set defines the relation type; the
+                          value for each key in the set <bcp14>MUST</bcp14> be "true". The relationship between
+                          the two objects is undefined if the set is empty.
+                      </t>
+                      <t>The initial list of <xref target="enumerated-values">enumerated</xref> relation types
+                          matches the IANA-registered <xref target="IANA-vCard">TYPE</xref> parameter values of
+                          the vCard RELATED property (<xref target="RFC6350" section="6.6.6"/>):
+                      </t>
+                      <!--[rfced] In Section 2.1.8, we updated the order of the enumerated
+                      relation types list by moving "co-resident" and "co-worker" above
+                      "colleague". The list is now in alphabetical order. Please let us
+                      know of any objections.
 
-There are several other lists in the document. Please review and let
-us know if any other terms should be placed in alphabetical order.
--->	    
-              <ul>
-                <li>
-                  acquaintance
-                </li>
-                <li>
-                  agent
-                </li>
-                <li>
-                  child
-                </li>
-		 <li>
-                  co-resident
-                </li>
-                <li>
-                  co-worker
-                </li>
-                <li>
-                  colleague
-                </li>
-                <li>
-                  contact
-                </li>
-                <li>
-                  crush
-                </li>
-                <li>
-                  date
-                </li>
-                <li>
-                  emergency
-                </li>
-                <li>
-                  friend
-                </li>
-                <li>
-                  kin
-                </li>
-                <li>
-                  me
-                </li>
-                <li>
-                  met
-                </li>
-                <li>
-                  muse
-                </li>
-                <li>
-                  neighbor
-                </li>
-                <li>
-                  parent
-                </li>
-                <li>
-                  sibling
-                </li>
-                <li>
-                  spouse
-                </li>
-                <li>
-                  sweetheart
-                </li>
-              </ul>
-          </dd></dl>
-          <figure anchor="example-relatedto">
-            <name>Example for the relatedTo Property</name>
-            <sourcecode name="" type="json"><![CDATA[
+                      There are several other lists in the document. Please review and let
+                      us know if any other terms should be placed in alphabetical order.
+                      -->
+                      <ul>
+                          <li>
+                              acquaintance
+                          </li>
+                          <li>
+                              agent
+                          </li>
+                          <li>
+                              child
+                          </li>
+                          <li>
+                              co-resident
+                          </li>
+                          <li>
+                              co-worker
+                          </li>
+                          <li>
+                              colleague
+                          </li>
+                          <li>
+                              contact
+                          </li>
+                          <li>
+                              crush
+                          </li>
+                          <li>
+                              date
+                          </li>
+                          <li>
+                              emergency
+                          </li>
+                          <li>
+                              friend
+                          </li>
+                          <li>
+                              kin
+                          </li>
+                          <li>
+                              me
+                          </li>
+                          <li>
+                              met
+                          </li>
+                          <li>
+                              muse
+                          </li>
+                          <li>
+                              neighbor
+                          </li>
+                          <li>
+                              parent
+                          </li>
+                          <li>
+                              sibling
+                          </li>
+                          <li>
+                              spouse
+                          </li>
+                          <li>
+                              sweetheart
+                          </li>
+                      </ul>
+                  </dd>
+              </dl>
+              <figure anchor="example-relatedto">
+                  <name>Example for the relatedTo Property</name>
+                  <sourcecode name="" type="json"><![CDATA[
 "relatedTo": {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6": {
     "relation": {
@@ -880,30 +967,46 @@ us know if any other terms should be placed in alphabetical order.
   }
 }
 ]]></sourcecode>
-          </figure>
-        </section>
+              </figure>
+          </section>
         <section anchor="uid" numbered="true" toc="default">
           <name>uid</name>
-          <t>Type: String (mandatory)</t>
-          <t>An identifier that is used to associate the object as the same across different systems, address books, and views.  The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/>, but for compatibility with <xref target="RFC6350"/>, it <bcp14>MAY</bcp14> also be a URI <xref target="RFC3986"/> or free-text value.  The value of the URN <bcp14>SHOULD</bcp14> be in the "uuid" namespace <xref target="RFC4122" format="default"/>.
+          <dl spacing="normal">
+            <dt>uid: String (mandatory).</dt>
+            <dd>
+              <t>An identifier that is used to associate the object as the same across different systems, address books,
+                and views. The value <bcp14>SHOULD</bcp14> be a URN<xref target="RFC8141"/>, but for compatibility with
+                <xref target="RFC6350"/>, it <bcp14>MAY</bcp14> also be a URI
+                <xref target="RFC3986"/>
+                or free-text value. The value of the URN <bcp14>SHOULD</bcp14> be in the "uuid" namespace<xref
+                        target="RFC4122" format="default"/>.</t>
 
-<!--[rfced] FYI: For clarity and ease of reading, we added a reference
-to RFC 4122 as shown below.
+                <!--[rfced] FYI: For clarity and ease of reading, we added a reference
+                to RFC 4122 as shown below.
 
-Original: 
-   As of this writing, a revision [I-D.ietf-uuidrev-rfc4122bis] of the
-   UUID standard document is being worked on and is likely to 
-   introduce new UUID versions and best practices to generate global
-   unique identifiers. 
+                Original:
+                   As of this writing, a revision [I-D.ietf-uuidrev-rfc4122bis] of the
+                   UUID standard document is being worked on and is likely to
+                   introduce new UUID versions and best practices to generate global
+                   unique identifiers.
 
-Current: 
-   As of this writing, a revision [UUID] of the Universally Unique 
-   Identifier (UUID) Standards Track document [RFC4122] is in
-   progress and will likely introduce new UUID versions and
-   best practices for generating global unique identifiers [UUID].
--->
+                Current:
+                   As of this writing, a revision [UUID] of the Universally Unique
+                   Identifier (UUID) Standards Track document [RFC4122] is in
+                   progress and will likely introduce new UUID versions and
+                   best practices for generating global unique identifiers [UUID].
+                -->
 
-As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref> of the Universally Unique Identifier (UUID) Standards Track document <xref target="RFC4122" format="default"/> is in progress and will likely introduce new UUID versions and best practices to generate global unique identifiers.  Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there.  Until then, implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudorandom UUID version described in <xref target="RFC4122" section="4.4"/>.</t>
+                <t>As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref> of the Universally
+                Unique Identifier (UUID) Standards Track document
+                <xref target="RFC4122" format="default"/>
+                is in progress and will likely introduce new UUID versions and best practices to generate global unique
+                identifiers. Implementors <bcp14>SHOULD</bcp14> follow any recommendations described there. Until then,
+                implementations <bcp14>SHOULD</bcp14> generate identifiers using the random or pseudorandom UUID version
+                described in<xref target="RFC4122" section="4.4"/>.
+              </t>
+            </dd>
+          </dl>
           <figure anchor="example-uid">
             <name>Example for the uid Property</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -913,8 +1016,10 @@ As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref>
         </section>
         <section anchor="updated" numbered="true" toc="default">
           <name>updated</name>
-          <t>Type: UTCDateTime (optional)</t>
-          <t>The date and time when the data in the Card was last modified.</t>
+          <dl spacing="normal">
+            <dt>updated: UTCDateTime (optional).</dt>
+            <dd>The date and time when the data in the Card was last modified.</dd>
+          </dl>
           <figure anchor="example-updated">
             <name>Example for the updated Property</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -928,20 +1033,25 @@ As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref>
         <t>This section defines properties that name the entity represented by the Card and its related organizations and roles. It also describes how to refer to the entity represented by the Card in spoken or written language.</t>
         <section anchor="name-prop" numbered="true" toc="default">
           <name>name</name>
-          <t>Type: Name (optional)</t>
-          <t>The name of the entity represented by the Card.  This can be any type of name, e.g., it can, but need not, be the legal name of a person.</t>
+          <dl spacing="normal">
+          <dt>name: Name (optional).</dt>
+          <dd>The name of the entity represented by the Card.  This can be any type of name, e.g., it can, but need not, be the legal name of a person.</dd>
+          </dl>
           <section anchor="name">
             <name>Name Object</name>
             <t>A Name object has the following properties:</t>
             <dl spacing="normal">
-              <dt>@type:</dt><dd> String.
+              <dt>@type: String.</dt>
+              <dd>
               This <bcp14>MUST</bcp14> be "Name", if set.
           </dd>
-              <dt>components:</dt><dd><t> NameComponent[] (optional).  The <xref target="namecomponent">components</xref> making up this name.  The components property <bcp14>MUST</bcp14> be set if the full property is not set; otherwise, it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different kind property value than "separator".</t>
+              <dt>components: NameComponent[] (optional).</dt>
+              <dd>
+                <t>The <xref target="namecomponent">components</xref> making up this name.  The components property <bcp14>MUST</bcp14> be set if the full property is not set; otherwise, it <bcp14>SHOULD</bcp14> be set.  The component list <bcp14>MUST</bcp14> have at least one entry having a different kind property value than "separator".</t>
                 <t>Name components <bcp14>SHOULD</bcp14> be ordered such that when their values are joined as a String, a valid full name of the entity is produced.  If so, implementations <bcp14>MUST</bcp14> set the isOrdered property value to "true".</t>
                 <t>If the name components are ordered, then the defaultSeparator property and name components with the kind property value set to "separator" give guidance on what characters to insert between components, but implementations are free to choose any others.  When lacking a separator, inserting a single space character  in between the name component values is a good choice.</t>
                 <t>If, instead, the name components follow no particular order, then the isOrdered property value <bcp14>MUST</bcp14> be "false", the components property <bcp14>MUST NOT</bcp14> contain a NameComponent with the kind property value set to "separator", and the defaultSeparator property <bcp14>MUST NOT</bcp14> be set.</t>
-                <t><xref target="example-name-twoword"/> shows an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.</t>  
+                <t><xref target="example-name-twoword"/> shows an example for the name "Vincent van Gogh".  Note how a single name component value may consist of multiple words.</t>
                 <figure anchor="example-name-twoword">
                   <name>Example of a Surname with Two Words</name>
                   <sourcecode name="" type="json"><![CDATA[
@@ -954,15 +1064,12 @@ As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref>
 }
 ]]></sourcecode>
                 </figure>
-
 <!--[rfced] FYI: The text that describes Figure 16 was located above
 Figure 15, so we placed it above Figure 16 instead. The update is
 shown in Section 2.2.1.1.
 -->
-		
-<t>
-<xref target="example-name-surname2"/> illustrates a name with a second surname such as a Spanish name.  Additional examples are shown in Figures <xref target="example-name-sortas" format="counter"/> and <xref target="example-localizations-replace" format="counter"/>.</t>		
-               <figure anchor="example-name-surname2">
+                <t><xref target="example-name-surname2"/> illustrates a name with a second surname such as a Spanish name.  Additional examples are shown in Figures <xref target="example-name-sortas" format="counter"/> and <xref target="example-localizations-replace" format="counter"/>.</t>
+                <figure anchor="example-name-surname2">
                   <name>Example of a Second Surname</name>
                   <sourcecode name="" type="json"><![CDATA[
 "name": {
@@ -976,8 +1083,10 @@ shown in Section 2.2.1.1.
 ]]></sourcecode>
                 </figure>
               </dd>
-              <dt>isOrdered:</dt><dd> Boolean (optional; default: "false").  Indicates if the name component sequence in the components property is ordered.</dd>
-              <dt>defaultSeparator:</dt><dd> String (optional).
+              <dt>isOrdered: Boolean (optional; default: "false").</dt>
+              <dd>  Indicates if the name component sequence in the components property is ordered.</dd>
+              <dt>defaultSeparator: String (optional).</dt>
+              <dd>
               The default separator to insert between name component values when concatenating all name component values to a single String.
 
 <!--[rfced] FYI: For ease, we added links to Sections 2.2.1.2
@@ -987,24 +1096,26 @@ know.
 
 Section 2.2.1.1
 Original:
-   Also see the definition of the separator kind for 
+   Also see the definition of the separator kind for
    the NameComponent object.
 
 Current:
-   Also see the definition of the separator kind for 
+   Also see the definition of the separator kind for
    the NameComponent (Section 2.2.1.2) object.
 ...
 Section 2.5.1.1
 Original:
-   Also see the definition of the separator kind 
+   Also see the definition of the separator kind
    for the AddressComponent object.
 
 Current:
-   Also see the definition of the separator kind 
+   Also see the definition of the separator kind
    for the AddressComponent (Section 2.5.1.2) object.
 -->
 	      Also see the definition of the kind property value "separator" for the <xref target="namecomponent">NameComponent</xref> object.  The defaultSeparator property <bcp14>MUST NOT</bcp14> be set if the Name isOrdered property value is "false" or if the components property is not set.</dd>
-              <dt>full:</dt><dd><t>String (optional).
+              <dt>full: String (optional).</dt>
+              <dd>
+                <t>
             The full name representation of the Name.  The full property <bcp14>MUST</bcp14> be set if the components property is not set.</t>
                 <figure anchor="example-full">
                   <name>Example for the full Property</name>
@@ -1014,22 +1125,26 @@ Current:
                 </figure>
               </dd>
               <dt>
-                sortAs:</dt><dd><t> String[String] (optional). Defines how the name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by the name component type.  Absence of a key indicates that the name component type <bcp14>SHOULD NOT</bcp14> be considered during sort.  Sorting by that missing name component type, or if the sortAs property is not set, is implementation-specific.  The sortAs property <bcp14>MUST NOT</bcp14> be set if the components property is not set.</t>
+                sortAs: String[String] (optional).</dt>
+              <dd>
+                <t>Defines how the name lexicographically sorts in relation to other names when compared by a name component type.  The key in the map defines the name component type.  The value for that key defines the verbatim string to compare when sorting by the name component type.  Absence of a key indicates that the name component type <bcp14>SHOULD NOT</bcp14> be considered during sort.  Sorting by that missing name component type, or if the sortAs property is not set, is implementation-specific.  The sortAs property <bcp14>MUST NOT</bcp14> be set if the components property is not set.</t>
                 <t>Each key in the map <bcp14>MUST</bcp14> be a valid name component type value as defined for the kind property of the NameComponent object (see below).  For each key in the map, there <bcp14>MUST</bcp14> exist at least one NameComponent object that has the type in the components property of the name.</t>
                 <t><xref target="example-name-sortas"/> illustrates the use of the sortAs property.  The property value indicates that the middle name followed by both surnames should be used when sorting the name by surname.  The absence of "middle" indicates that the middle name on its own should be disregarded during sort.  Even though the name only contains one name component for the given name, the sortAs property still explicitly defines how to sort by the given name; otherwise, sorting by it would be undefined.</t>
               </dd>
               <dt>
-                phoneticScript:</dt><dd> String (optional).
+                phoneticScript: String (optional).</dt>
+              <dd>
                 The script used in the value of the NameComponent phonetic property.  See <xref target="prop-phonetic"/> for more information and <xref target="example-name-phonetic"/> for an example.</dd>
               <dt>
-                phoneticSystem:</dt><dd><t> String (optional).
+                phoneticSystem: String (optional).</dt>
+              <dd>
+                <t>
               The phonetic system used in the NameComponent phonetic property.  See <xref target="prop-phonetic"/> for more information and <xref target="example-name-phonetic"/> for an example.</t>
               </dd>
             </dl>
-
-                <figure anchor="example-name-sortas">
-                  <name>Example for the sortAs Property</name>
-                  <sourcecode name="" type="json"><![CDATA[
+            <figure anchor="example-name-sortas">
+              <name>Example for the sortAs Property</name>
+              <sourcecode name="" type="json"><![CDATA[
 "name": {
   "components": [
     { "kind": "given", "value": "Robert" },
@@ -1043,11 +1158,10 @@ Current:
   "isOrdered": true
 }
 ]]></sourcecode>
-                </figure>
-
-          <figure anchor="example-name-phonetic">
-            <name>Example for the phonetic and localizations Properties</name>
-            <sourcecode type=""><![CDATA[
+            </figure>
+            <figure anchor="example-name-phonetic">
+              <name>Example for the phonetic and localizations Properties</name>
+              <sourcecode type=""><![CDATA[
 {
   "@type": "Card",
   "language": "zh-Hant",
@@ -1071,18 +1185,22 @@ Current:
   }
 }
 ]]></sourcecode>
-          </figure>
+            </figure>
           </section>
           <section anchor="namecomponent">
             <name>NameComponent</name>
             <t>A NameComponent object has the following properties:</t>
             <dl spacing="normal">
-              <dt>@type:</dt><dd> String.
+              <dt>@type: String.</dt>
+              <dd>
               This <bcp14>MUST</bcp14> be "NameComponent", if set.
           </dd>
-              <dt>value:</dt><dd> String (mandatory).
+              <dt>value: String (mandatory).</dt>
+              <dd>
 The value of the name component.  This can be composed of one or multiple words such as "Poe" or "van Gogh".</dd>
-              <dt>kind:</dt><dd><t> String (mandatory).
+              <dt>kind: String (mandatory).</dt>
+              <dd>
+                <t>
               The kind of the name component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
                 <ul spacing="normal">
@@ -1096,66 +1214,84 @@ The value of the name component.  This can be composed of one or multiple words 
                   <li>separator: a formatting separator between two ordered name non-separator components.  The value property of the component includes the verbatim separator, for example, a hyphen character or even an empty string.  This value has higher precedence than the defaultSeparator property of the Name.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components; instead, they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Name isOrdered property value is "false".</li>
                 </ul>
               </dd>
-              <dt>phonetic:</dt><dd> String (optional).  Defines how to pronounce the name component.  If this property is set, then at least one of the Name object properties, phoneticSystem or phoneticScript, <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</dd>
+              <dt>phonetic: String (optional).</dt>
+              <dd>  Defines how to pronounce the name component.  If this property is set, then at least one of the Name object properties, phoneticSystem or phoneticScript, <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</dd>
             </dl>
           </section>
-          <section anchor="nicknames" numbered="true" toc="default">
-            <name>nicknames</name>
-            <t>Type: Id[Nickname] (optional)</t>
-            <t>The nicknames of the entity represented by the Card.  A Nickname object has the following properties:</t>
-            <dl spacing="normal">
-              <dt>@type:</dt><dd> String.
+        </section>
+        <section anchor="nicknames" numbered="true" toc="default">
+          <name>nicknames</name>
+          <dl spacing="normal">
+            <dt>nicknames: Id[Nickname] (optional).</dt>
+            <dd>The nicknames of the entity represented by the Card.</dd>
+          </dl>
+          <t>A Nickname object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Nickname", if set.
-          </dd>
-              <dt>name:</dt><dd> String (mandatory).
-            The nickname.
-        </dd>
-              <dt>contexts:</dt><dd> String[Boolean] (optional).
-The contexts in which to use the nickname.  Also see <xref target="prop-contexts"/>.</dd>
-              <dt>pref:</dt><dd> UnsignedInt (optional).
-            The preference of the nickname in relation to other nicknames.  Also see <xref target="prop-pref"/>.</dd>
-            </dl>
-            <figure anchor="example-nicknames">
-              <name>Example for the nicknames Property</name>
-              <sourcecode name="" type="json"><![CDATA[
+            </dd>
+            <dt>name: String (mandatory).</dt>
+            <dd>
+              The nickname.
+            </dd>
+            <dt>contexts: String[Boolean] (optional).</dt>
+            <dd>The contexts in which to use the nickname. Also see<xref target="prop-contexts"/>.
+            </dd>
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
+              The preference of the nickname in relation to other nicknames. Also see<xref target="prop-pref"/>.
+            </dd>
+          </dl>
+          <figure anchor="example-nicknames">
+            <name>Example for the nicknames Property</name>
+            <sourcecode name="" type="json"><![CDATA[
 "nicknames": {
   "k391": {
     "name": "Johnny"
   }
 }
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="organizations" numbered="true" toc="default">
           <name>organizations</name>
-          <t>Type: Id[Organization] (optional)</t>
-          <t>The company or organization names and units associated with the Card.  An Organization object has the following properties, of which at least one of the name and units properties <bcp14>MUST</bcp14> be set:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>organizations: Id[Organization] (optional).</dt>
+          <dd>The company or organization names and units associated with the Card.</dd>
+          </dl>
+          <t>An Organization object has the following properties, of which at least one of the name and units properties <bcp14>MUST</bcp14> be set:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Organization", if set.
           </dd>
-            <dt>name:</dt><dd> String (optional).
+            <dt>name: String (optional).</dt>
+            <dd>
             The name of the organization.
         </dd>
-            <dt>units:</dt><dd> OrgUnit[] (optional).
-            A list of organizational units, ordered as descending by hierarchy (e.g., a geographic or functional division sorts before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
+	<dt>units: OrgUnit[] (optional).</dt>
+	<dd>A list of organizational units, ordered as descending by hierarchy (e.g., a geographic or functional division sorts before a department within that division).  If set, the list <bcp14>MUST</bcp14> contain at least one entry.
         </dd>
-            <dt>sortAs:</dt><dd> String (optional).
+            <dt>sortAs: String (optional).</dt>
+            <dd>
             Defines how the organization name lexicographically sorts in relation to other organizations when compared by the name.  The value defines the verbatim string value to compare.  In absence of this property, the name property value <bcp14>MAY</bcp14> be used for comparison.
         </dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
-The contexts in which association with the organization apply.  For example, membership in a choir may only apply in a private context.  Also see <xref target="prop-contexts"/>.</dd>
+	<dt>contexts: String[Boolean] (optional).</dt>
+	<dd>The contexts in which association with the organization apply.  For example, membership in a choir may only apply in a private context.  Also see <xref target="prop-contexts"/>.</dd>
           </dl>
           <t>An OrgUnit object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "OrgUnit", if set.
           </dd>
-            <dt>name:</dt><dd> String (mandatory).
+            <dt>name: String (mandatory).</dt>
+            <dd>
             The name of the organizational unit.
         </dd>
-            <dt>sortAs:</dt><dd> String (optional).
+            <dt>sortAs: String (optional).</dt>
+            <dd>
             Defines how the organization unit name lexicographically sorts in relation to other organizational units of the same level when compared by the name.  The level is defined by the array index of the organizational unit in the units property of the Organization object.  The property value defines the verbatim string value to compare.  In absence of this property, the name property value <bcp14>MAY</bcp14> be used for comparison.
         </dd>
           </dl>
@@ -1177,14 +1313,20 @@ The contexts in which association with the organization apply.  For example, mem
         </section>
         <section anchor="speakToAs" numbered="true" toc="default">
           <name>speakToAs</name>
-          <t>Type: SpeakToAs (optional)</t>
-          <t>Provides information on how to address, speak to, or refer to the entity that is represented by the Card.  A SpeakToAs object has the following properties, of which at least one of the grammaticalGender and pronouns properties <bcp14>MUST</bcp14> be set:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>speakToAs: SpeakToAs (optional).</dt>
+          <dd>Provides information on how to address, speak to, or refer to the entity that is represented by the Card.</dd>
+          </dl>
+          <t>A SpeakToAs object has the following properties, of which at least one of the grammaticalGender and pronouns properties <bcp14>MUST</bcp14> be set:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "SpeakToAs", if set.
           </dd>
             <dt>
-              grammaticalGender:</dt><dd><t> String (optional).
+              grammaticalGender: String (optional).</dt>
+            <dd>
+              <t>
               Defines which grammatical gender to use in salutations and other grammatical constructs.
               For example, the German language distinguishes by grammatical gender in salutations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
               The <xref target="enumerated-values">enumerated</xref> values are:</t>
@@ -1210,20 +1352,25 @@ The contexts in which association with the organization apply.  For example, mem
               </ul>
               <t>Note that the grammatical gender does not allow inferring the gender identities or assigned sex of the contact.</t>
             </dd>
-            <dt>pronouns:</dt><dd><t> Id[Pronouns] (optional).
+            <dt>pronouns: Id[Pronouns] (optional).</dt>
+            <dd>
+              <t>
              Defines the pronouns that the contact chooses to use for themselves.</t>
             </dd>
           </dl>
           <t>A Pronouns object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Pronouns", if set.
           </dd>
-            <dt>pronouns:</dt><dd> String (mandatory).
+            <dt>pronouns: String (mandatory).</dt>
+            <dd>
               Defines the pronouns.  Any value or form is allowed.  Examples in English include "she/her" and "they/them/theirs".  The value <bcp14>MAY</bcp14> be overridden in the <xref target="localizations">localizations</xref> property.</dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
-The contexts in which to use the pronouns.  Also see <xref target="prop-contexts"/>.</dd>
-            <dt>pref:</dt><dd> UnsignedInt (optional).
+      <dt>contexts: String[Boolean] (optional).</dt>
+      <dd>The contexts in which to use the pronouns.  Also see <xref target="prop-contexts"/>.</dd>
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
             The preference of the pronouns in relation to other pronouns in the same context.  Also see <xref target="prop-pref"/>.</dd>
           </dl>
           <figure anchor="example-speakToAs">
@@ -1247,24 +1394,32 @@ The contexts in which to use the pronouns.  Also see <xref target="prop-contexts
         </section>
         <section anchor="titles" numbered="true" toc="default">
           <name>titles</name>
-          <t>Type: Id[Title] (optional)</t>
-          <t>The job titles or functional positions of the entity represented by the Card.  A Title object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>titles: Id[Title] (optional).</dt>
+          <dd>The job titles or functional positions of the entity represented by the Card.</dd>
+          </dl>
+            <t>A Title object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Title", if set.
           </dd>
-            <dt>name:</dt><dd> String (mandatory).
+            <dt>name: String (mandatory).</dt>
+            <dd>
             The title or role name of the entity represented by the Card.
         </dd>
-            <dt>kind:</dt><dd><t> String (optional; default: "title").
+            <dt>kind: String (optional; default: "title").</dt>
+            <dd>
+              <t>
           Describes the organizational or situational kind of the title.  Some organizations and individuals distinguish between <em>titles</em> as organizational positions and <em>roles</em> as more temporary assignments such as in project management.</t>
               <t>The <xref target="enumerated-values">enumerated</xref> values are:</t>
-              <ul spacing ="compact">
+              <ul spacing="compact">
                 <li>title</li>
                 <li>role</li>
               </ul>
             </dd>
-            <dt>organizationId:</dt><dd> Id (optional).
+            <dt>organizationId: Id (optional).</dt>
+            <dd>
             The identifier of the organization in which this title is held.
         </dd>
           </dl>
@@ -1296,19 +1451,26 @@ The contexts in which to use the pronouns.  Also see <xref target="prop-contexts
         <t>This section defines how properties contact the entity represented by the Card.</t>
         <section anchor="emails" numbered="true" toc="default">
           <name>emails</name>
-          <t>Type: Id[EmailAddress] (optional)</t>
-          <t>The email addresses in which to contact the entity represented by the Card.  An EmailAddress object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>emails: Id[EmailAddress] (optional).</dt>
+          <dd>The email addresses in which to contact the entity represented by the Card.</dd>
+          </dl>
+            <t>An EmailAddress object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "EmailAddress", if set.
           </dd>
-            <dt>address:</dt><dd> String (mandatory).
+            <dt>address: String (mandatory).</dt>
+            <dd>
 The email address.  This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in <xref target="RFC5322" sectionFormat="of" section="3.4.1"/>.</dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
-The contexts in which to use this email address.  Also see <xref target="prop-contexts"/>.</dd>
-            <dt>pref:</dt><dd> UnsignedInt (optional).
+	    <dt>contexts: String[Boolean] (optional).</dt>
+	    <dd>The contexts in which to use this email address.  Also see <xref target="prop-contexts"/>.</dd>
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
             The preference of the email address in relation to other email addresses.  Also see <xref target="prop-pref"/>.</dd>
-            <dt>label:</dt><dd> String (optional).
+            <dt>label: String (optional).</dt>
+            <dd>
             A custom label for the value. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-emails">
@@ -1331,23 +1493,32 @@ The contexts in which to use this email address.  Also see <xref target="prop-co
         </section>
         <section anchor="onlineServices" numbered="true" toc="default">
           <name>onlineServices</name>
-          <t>Type: Id[OnlineService] (optional)</t>
-          <t>The online services that are associated with the entity represented by the Card.  This can be messaging services, social media profiles, and other.  An OnlineService object has the following properties, of which at least the uri or user property <bcp14>MUST</bcp14> be set:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>onlineServices: Id[OnlineService] (optional).</dt>
+          <dd>The online services that are associated with the entity represented by the Card.  This can be messaging services, social media profiles, and other.</dd>
+          </dl>
+            <t>An OnlineService object has the following properties, of which at least the uri or user property <bcp14>MUST</bcp14> be set:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "OnlineService", if set.
         </dd>
-            <dt>service:</dt><dd> String (optional).
+            <dt>service: String (optional).</dt>
+            <dd>
               The name of the online service or protocol.  The name <bcp14>MAY</bcp14> be capitalized the same as on the service's website, app, or publishing material, but names <bcp14>MUST</bcp14> be considered equal if they match case-insensitively.  Examples are "GitHub", "kakao", and "Mastodon".</dd>
-            <dt>uri:</dt><dd> String (optional).
+            <dt>uri: String (optional).</dt>
+            <dd>
 Identifies the entity represented by the Card at the online service.  This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in <xref target="RFC3986" sectionFormat="of" section="3"/>.</dd>
-            <dt>user:</dt><dd> String (optional).
+            <dt>user: String (optional).</dt>
+            <dd>
               Names the entity represented by the Card at the online service.  Any free-text value is allowed.  The service property <bcp14>SHOULD</bcp14> be set.</dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
-The contexts in which to use the service.  Also see <xref target="prop-contexts"/>.</dd>
-            <dt>pref:</dt><dd> UnsignedInt (optional).
+      <dt>contexts: String[Boolean] (optional).</dt>
+      <dd>The contexts in which to use the service.  Also see <xref target="prop-contexts"/>.</dd>
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
             The preference of the service in relation to other services.  Also see <xref target="prop-pref"/>.</dd>
-            <dt>label:</dt><dd> String (optional).
+            <dt>label: String (optional).</dt>
+            <dd>
             A custom label for the value. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-onlineServices">
@@ -1368,15 +1539,22 @@ The contexts in which to use the service.  Also see <xref target="prop-contexts"
         </section>
         <section anchor="phones" numbered="true" toc="default">
           <name>phones</name>
-          <t>Type: Id[Phone] (optional)</t>
-          <t>The phone numbers by which to contact the entity represented by the Card.  A Phone object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>phones: Id[Phone] (optional).</dt>
+          <dd>The phone numbers by which to contact the entity represented by the Card.</dd>
+          </dl>
+          <t>Phone object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Phone", if set.
           </dd>
-            <dt>number:</dt><dd> String (mandatory).
+            <dt>number: String (mandatory).</dt>
+            <dd>
 The phone number as either a URI or free text.  Typical URI schemes are "tel" <xref target="RFC3966" format="default"/> or "sip" <xref target="RFC3261" format="default"/>, but any URI scheme is allowed.</dd>
-            <dt>features:</dt><dd><t> String[Boolean] (optional).
+            <dt>features: String[Boolean] (optional).</dt>
+            <dd>
+              <t>
               The set of contact features that the phone number may be used for.  The set is represented as an object, with each key being a method type.  The boolean value <bcp14>MUST</bcp14> be "true".  The <xref target="enumerated-values">enumerated</xref> method type values are:
 </t>
               <ul spacing="compact">
@@ -1390,11 +1568,13 @@ The phone number as either a URI or free text.  Typical URI schemes are "tel" <x
                 <li>pager: this number is for a pager or beeper.</li>
               </ul>
             </dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
-The contexts in which to use the number.  Also see <xref target="prop-contexts"/>.</dd>
-            <dt>pref:</dt><dd> UnsignedInt (optional).
+	    <dt>contexts: String[Boolean] (optional).</dt>
+	    <dd>The contexts in which to use the number.  Also see <xref target="prop-contexts"/>.</dd>
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
             The preference of the number in relation to other numbers.  Also see <xref target="prop-pref"/>.</dd>
-            <dt>label:</dt><dd> String (optional).
+            <dt>label: String (optional).</dt>
+            <dd>
             A custom label for the value. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-phones">
@@ -1423,17 +1603,22 @@ The contexts in which to use the number.  Also see <xref target="prop-contexts"/
         </section>
         <section anchor="preferredLanguages" numbered="true" toc="default">
           <name>preferredLanguages</name>
-          <t>Type : Id[LanguagePref] (optional)</t>
-          <t>The preferredLanguages property defines the preferred languages for contacting the entity associated with the Card.</t>
+          <dl spacing="normal">
+          <dt>preferredLanguages : Id[LanguagePref] (optional).</dt>
+          <dd>The preferredLanguages property defines the preferred languages for contacting the entity associated with the Card.</dd>
+          </dl>
           <t>A LanguagePref object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "LanguagePref", if set.
           </dd>
-            <dt>language:</dt><dd> String (mandatory).  The preferred language.  This <bcp14>MUST</bcp14> be a language tag as defined in <xref target="RFC5646"/>.</dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
-Defines the contexts in which to use the language.  Also see <xref target="prop-contexts"/>.</dd>
-            <dt>pref:</dt><dd> UnsignedInt (optional).
+            <dt>language: String (mandatory).</dt>
+            <dd>  The preferred language.  This <bcp14>MUST</bcp14> be a language tag as defined in <xref target="RFC5646"/>.</dd>
+	    <dt>contexts: String[Boolean] (optional).</dt>
+	    <dd>Defines the contexts in which to use the language.  Also see <xref target="prop-contexts"/>.</dd>
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
 Defines the preference of the language in relation to other languages of the same contexts.  Also see <xref target="prop-pref"/>.</dd>
           </dl>
           <figure anchor="example-preferredLanguages">
@@ -1470,11 +1655,15 @@ Defines the preference of the language in relation to other languages of the sam
         <t>This section defines properties for scheduling calendar events with the entity represented by the Card.</t>
         <section anchor="calendars" numbered="true" toc="default">
           <name>calendars</name>
-          <t>Type: Id[Calendar] (optional)</t>
-          <t>These are resources for calendaring such as to look up free-busy information for the entity represented by the Card.  A Calendar object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <dl spacing="normal">
+          <dt>calendars: Id[Calendar] (optional).</dt>
+          <dd>These are resources for calendaring such as to look up free-busy information for the entity represented by the Card.</dd>
+          </dl>
+            <t>A Calendar object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The @type property value <bcp14>MUST</bcp14> be "Calendar", if set.</li>
-            <li><t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
+            <li>
+              <t>The kind property is mandatory.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
                 <li>
                   calendar: The resource is a calendar that contains entries such as calendar events or tasks.</li>
@@ -1501,19 +1690,26 @@ Defines the preference of the language in relation to other languages of the sam
         </section>
         <section anchor="schedulingAddresses" numbered="true" toc="default">
           <name>schedulingAddresses</name>
-          <t>Type: Id[SchedulingAddress] (optional)</t>
-          <t>The scheduling addresses by which the entity may receive calendar scheduling invitations.  A SchedulingAddress object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>schedulingAddresses: Id[SchedulingAddress] (optional).</dt>
+          <dd>The scheduling addresses by which the entity may receive calendar scheduling invitations.</dd>
+          </dl>
+          <t>A SchedulingAddress object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "SchedulingAddress", if set.
             </dd>
-            <dt>uri:</dt><dd> String (mandatory).
+            <dt>uri: String (mandatory).</dt>
+            <dd>
 The address to use for calendar scheduling with the contact.  This <bcp14>MUST</bcp14> be a URI as defined in <xref target="RFC3986" sectionFormat="of" section="3"/>.</dd>
-            <dt>contexts:</dt><dd> String[Boolean] (optional).
-The contexts in which to use the scheduling address.  Also see <xref target="prop-contexts"/>.</dd>
-            <dt>pref:</dt><dd> UnsignedInt (optional).
+	    <dt>contexts: String[Boolean] (optional).</dt>
+	    <dd>The contexts in which to use the scheduling address.  Also see <xref target="prop-contexts"/>.</dd>
+            <dt>pref: UnsignedInt (optional).</dt>
+            <dd>
             The preference of the scheduling address in relation to other scheduling addresses.  Also see <xref target="prop-pref"/>.</dd>
-            <dt>label:</dt><dd> String (optional).
+            <dt>label: String (optional).</dt>
+            <dd>
             A custom label for the scheduling address. Also see <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-schedulingAddresses">
@@ -1533,28 +1729,39 @@ The contexts in which to use the scheduling address.  Also see <xref target="pro
         <t>This section defines properties for postal addresses and geographical locations associated with the entity represented by the Card.</t>
         <section anchor="addresses-prop" numbered="true" toc="default">
           <name>addresses</name>
-          <t>Type: Id[Address] (optional)</t>
-          <t>A map of address identifiers to Address objects, containing physical locations.</t>
+          <dl spacing="normal">
+          <dt>addresses: Id[Address] (optional).</dt>
+          <dd>A map of address identifiers to Address objects, containing physical locations.</dd>
+          </dl>
           <section anchor="address">
             <name>Address Object</name>
             <t>An Address object has the following properties, of which at least one of components, coordinates, countryCode, full or timeZone <bcp14>MUST</bcp14> be set:</t>
             <dl spacing="normal">
-              <dt>@type:</dt><dd> String.
+              <dt>@type: String.</dt>
+              <dd>
               This <bcp14>MUST</bcp14> be "Address", if set.
           </dd>
               <dt>
-                components:</dt><dd><t> AddressComponent[] (optional).  The <xref target="addresscomponent">components</xref> that make up the address. The component list <bcp14>MUST</bcp14> have at least one entry that has a kind property value other than "separator".</t>
+                components: AddressComponent[] (optional).</dt>
+              <dd>
+                <t>The <xref target="addresscomponent">components</xref> that make up the address. The component list <bcp14>MUST</bcp14> have at least one entry that has a kind property value other than "separator".</t>
                 <t>Address components <bcp14>SHOULD</bcp14> be ordered such that when their values are joined as a String, a valid full address is produced.  If so, implementations <bcp14>MUST</bcp14> set the isOrdered property value to "true".</t>
                 <t>If the address components are ordered, then the defaultSeparator property and address components with the kind property value set to "separator" give guidance on what characters to insert between components, but implementations are free to choose any others.  When lacking a separator, inserting a single space character in between address component values is a good choice.</t>
                 <t>If, instead, the address components follow no particular order, then the isOrdered property value <bcp14>MUST</bcp14> be "false", the components property <bcp14>MUST NOT</bcp14> contain an AddressComponent with the kind property value set to "separator", and the defaultSeparator property <bcp14>MUST NOT</bcp14> be set.</t>
               </dd>
-              <dt>isOrdered:</dt><dd> Boolean (optional; default: "false").  Indicates if the address component sequence in the components property is ordered.</dd>
-              <dt>countryCode:</dt><dd> String (optional).
+              <dt>isOrdered: Boolean (optional; default: "false").</dt>
+              <dd>  Indicates if the address component sequence in the components property is ordered.</dd>
+              <dt>countryCode: String (optional).</dt>
+              <dd>
 The Alpha-2 country code <xref target="ISO.3166-1"/>.</dd>
-              <dt>coordinates:</dt><dd> String (optional).  A "geo:" URI  <xref target="RFC5870" format="default"/> for the address.</dd>
-              <dt>timeZone:</dt><dd> String (optional).  Identifies the time zone the address is located in. This <bcp14>MUST</bcp14> be a time zone name registered in IANA's <xref target="IANA-TZ">Time Zone Database</xref>.</dd>
+              <dt>coordinates: String (optional).</dt>
+              <dd>  A "geo:" URI  <xref target="RFC5870" format="default"/> for the address.</dd>
+              <dt>timeZone: String (optional).</dt>
+              <dd>  Identifies the time zone the address is located in. This <bcp14>MUST</bcp14> be a time zone name registered in IANA's <xref target="IANA-TZ">Time Zone Database</xref>.</dd>
               <dt>
-               contexts:</dt><dd><t> String[Boolean] (optional).
+               contexts: String[Boolean] (optional).</dt>
+              <dd>
+                <t>
 The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> be "true".  In addition to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
 </t>
                 <ul spacing="compact">
@@ -1562,25 +1769,28 @@ The contexts of the address information.  The boolean value <bcp14>MUST</bcp14> 
                   <li>delivery: an address to be used for delivering physical items.</li>
                 </ul>
               </dd>
-              <dt>full:</dt><dd> String (optional).
+              <dt>full: String (optional).</dt>
+              <dd>
               The full address, including street, region, or country.  The purpose of this property is to define an address, even if the individual address components are not known.
             </dd>
-              <dt>defaultSeparator:</dt><dd> String (optional).
+              <dt>defaultSeparator: String (optional).</dt>
+              <dd>
               The default separator to insert between address component values when concatenating all address component values to a single String. Also see the definition of the kind property value "separator" for the <xref target="addresscomponent">AddressComponent</xref> object.  The defaultSeparator property <bcp14>MUST NOT</bcp14> be set if the Address isOrdered property value is "false" or if the components property is not set.</dd>
-              <dt>pref:</dt><dd> UnsignedInt (optional).
+              <dt>pref: UnsignedInt (optional).</dt>
+              <dd>
             The preference of the address in relation to other addresses.  Also see <xref target="prop-pref"/>.</dd>
               <dt>
-                phoneticScript:</dt><dd> String (optional).
+                phoneticScript: String (optional).</dt>
+              <dd>
                 The script used in the value of the AddressComponent phonetic property.  Also see <xref target="prop-phonetic"/>.
               </dd>
               <dt>
-               phoneticSystem:</dt><dd> String (optional).
+               phoneticSystem: String (optional).</dt>
+              <dd>
               The phonetic system used in the AddressComponent phonetic property.  Also      see <xref target="prop-phonetic"/>.</dd>
-            </dl> 
+            </dl>
             <t>The following example illustrates the use of the address property for "54321 Oak St, Reston, CA 20190, USA".  Additional examples are shown in <xref target="address-examples"/>.</t>
             <figure anchor="example-address-us">
-
-
 <!--[rfced] Titles for Figures 30-32
 
 a) May we remove the postal addresses from the titles of
@@ -1593,7 +1803,7 @@ Section 2.5.1.1
    Additional examples are in Section 2.5.1.3.
 
    Figure 30: Example of the address "54321 Oak St, Reston, CA 20190, USA"
- 
+
 Section 2.5.1.3
    The following are examples of addresses, in addition to Figure 30.
 
@@ -1602,36 +1812,35 @@ Section 2.5.1.3
 
 Perhaps:
 Section 2.5.1.1
-   The following example illustrates the use of the address property for 
-   "54321 Oak St, Reston, CA 20190, USA". Additional examples are shown 
+   The following example illustrates the use of the address property for
+   "54321 Oak St, Reston, CA 20190, USA". Additional examples are shown
    in Section 2.5.1.3.
 
    Figure 30: Example of an Address in the USA
- 
+
 Section 2.5.1.3
-   The following example illustrates the use of the address property for 
-   "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, 
+   The following example illustrates the use of the address property for
+   "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110,
    Thailand". See Figure 30 for an additional example.
 
    Figure 31: Example of an Address in Thailand
 
-b) FYI: We removed the section mention (Section 2.7.1) from the title of 
-Figure 32 and placed it within the added text above the figure as shown 
+b) FYI: We removed the section mention (Section 2.7.1) from the title of
+Figure 32 and placed it within the added text above the figure as shown
 below. Please let us know of any concerns.
 
 Original:
 Section 2.5.1.3
    Figure 32: Example of an address in Tokyo and its localization
               Section 2.7.1 in Japanese.
-    
-Current: 
-   The following example illustrates the use of an address in Tokyo and 
+
+Current:
+   The following example illustrates the use of an address in Tokyo and
    its localization (Section 2.7.1) in Japanese.
-                          
+
    Figure 32: Example of an Address in Tokyo and Its Localization
               in Japanese
 -->
-      
               <name>Example of an Address in the USA</name>
               <sourcecode name="" type="json"><![CDATA[
 "addresses": {
@@ -1661,13 +1870,17 @@ Current:
             <name>AddressComponent Object</name>
             <t>An AddressComponent object has the following properties:</t>
             <dl spacing="normal">
-              <dt>@type:</dt><dd> String.
+              <dt>@type: String.</dt>
+              <dd>
               This <bcp14>MUST</bcp14> be "AddressComponent", if set.
             </dd>
-              <dt>value:</dt><dd> String (mandatory).
+              <dt>value: String (mandatory).</dt>
+              <dd>
 The value of the address component.</dd>
               <dt>
-                kind:</dt><dd><t> String (mandatory).
+                kind: String (mandatory).</dt>
+              <dd>
+                <t>
               The kind of the address component.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
                 <ul spacing="compact">
@@ -1690,12 +1903,13 @@ The value of the address component.</dd>
                   <li>separator: a formatting separator between two ordered address non-separator components.  The value property of the component includes the verbatim separator, for example, a hyphen character or even an empty string.  This value has higher precedence than the defaultSeparator property of the Address.  Implementations <bcp14>MUST NOT</bcp14> insert two consecutive separator components; instead, they <bcp14>SHOULD</bcp14> insert a single separator component with the combined value.  This component kind <bcp14>MUST NOT</bcp14> be set if the Address isOrdered property value is "false".</li>
                 </ul>
               </dd>
-              <dt>phonetic:</dt><dd> String (optional).  Defines how to pronounce the name component.  If this property is set, then at least one of the Address object phoneticSystem or phoneticScript properties <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</dd>
+              <dt>phonetic: String (optional).</dt>
+              <dd>  Defines how to pronounce the name component.  If this property is set, then at least one of the Address object phoneticSystem or phoneticScript properties <bcp14>MUST</bcp14> be set.  Also see <xref target="prop-phonetic"/>.</dd>
             </dl>
           </section>
           <section anchor="address-examples">
             <name>Additional Address Examples</name>
-	    <t>The following example illustrates the use of the address property for "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand".</t>
+            <t>The following example illustrates the use of the address property for "46, 1 Sukhumvit 51 Alley, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand".</t>
             <figure anchor="example-address-th">
               <name>Example of an Address in Thailand</name>
               <sourcecode name="" type="json"><![CDATA[
@@ -1716,7 +1930,7 @@ The value of the address component.</dd>
 }
 ]]></sourcecode>
             </figure>
-<t>
+            <t>
 The following example illustrates the use of the address property for "2-7-2 Marunouchi, Chiyoda-ku, Tokyo 100-8994" and its Japanese localization (<xref target="localizations"/>).</t>
             <figure anchor="example-address-jp">
               <name>Example of an Address in Tokyo and Its Localization in Japanese</name>
@@ -1767,8 +1981,11 @@ The following example illustrates the use of the address property for "2-7-2 Mar
         <t>This section defines properties for digital resources associated with the entity represented by the Card.</t>
         <section anchor="cryptoKeys" numbered="true" toc="default">
           <name>cryptoKeys</name>
-          <t>Type: Id[CryptoKey] (optional)</t>
-          <t>These are cryptographic resources such as public keys and certificates associated with the entity represented by the Card.  A CryptoKey object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definition:</t>
+          <dl spacing="normal">
+          <dt>cryptoKeys: Id[CryptoKey] (optional).</dt>
+          <dd>These are cryptographic resources such as public keys and certificates associated with the entity represented by the Card.</dd>
+          </dl>
+          <t>A CryptoKey object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definition:</t>
           <ul>
             <li>The @type property value <bcp14>MUST</bcp14> be "CryptoKey", if set.</li>
           </ul>
@@ -1786,7 +2003,6 @@ The following example illustrates the use of the address property for "2-7-2 Mar
           <t>The following example shows how to embed key data in the CryptoKey.  The key data is depicted in multiple lines only for demonstration purposes.</t>
           <figure anchor="example-cryptoKeys-embedded">
             <name>Example of cryptoKeys with Embedded Data</name>
-
 <!--[rfced] The sourcecode in Figure 34 (Section 2.6.1) was 8
 characters over the 72-character limit, so we adjusted the line
 breaks as shown below.  Please let us know if any further updates
@@ -1825,8 +2041,7 @@ Current:
   }
 }
 -->
-	    
-	      <sourcecode name="" type="json"><![CDATA[
+            <sourcecode name="" type="json"><![CDATA[
 "cryptoKeys": {
   "mykey2": {
     "uri": "data:application/pgp-keys;base64,LS0tLS1CRUdJTiBSU0EgUFVC
@@ -1847,8 +2062,11 @@ Current:
         </section>
         <section anchor="directories" numbered="true" toc="default">
           <name>directories</name>
-          <t>Type: Id[Directory] (optional)</t>
-	  <t>>The directories property specifies directory service resources for lookup.  A Directory object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <dl spacing="normal">
+          <dt>directories: Id[Directory] (optional).</dt>
+          <dd>The directories property specifies directory service resources for lookup.</dd>
+          </dl>
+          <t>A Directory object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The @type property value <bcp14>MUST</bcp14> be "Directory", if set.</li>
             <li>
@@ -1857,12 +2075,12 @@ Current:
                 <li>directory: the resource is a directory service that the entity represented by the Card is a part of.  This typically is an organizational directory that also contains associated entities, e.g., co-workers and management in a company directory.</li>
                 <li>entry: the resource is a directory entry of the entity represented by the Card.  In contrast to the "directory" type, this is the specific URI for the entity <em>within</em> a directory.</li>
               </ul>
-	    </li>
-            </ul>
-	    
+            </li>
+          </ul>
           <t>In addition, the Directory object has the following property:</t>
           <dl>
-            <dt>listAs:</dt><dd> UnsignedInt (optional).
+            <dt>listAs: UnsignedInt (optional).</dt>
+            <dd>
           Defines the position of the directory resource in the list of all Directory objects having the same kind property value in the Card.  If set, the listAs value <bcp14>MUST</bcp14> be higher than zero.  Multiple directory resources <bcp14>MAY</bcp14> have the same listAs property value or none.  Sorting such same-valued entries is implementation-specific.
         </dd>
           </dl>
@@ -1884,11 +2102,15 @@ Current:
         </section>
         <section anchor="links" numbered="true" toc="default">
           <name>links</name>
-          <t>Type: Id[Link] (optional)</t>
-          <t>These are links to resources that do not fit any of the other use-case-specific resource properties.  A Link object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <dl spacing="normal">
+          <dt>links: Id[Link] (optional).</dt>
+          <dd>These are links to resources that do not fit any of the other use-case-specific resource properties.</dd>
+          </dl>
+          <t>A Link object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The @type property value <bcp14>MUST</bcp14> be "Link", if set.</li>
-            <li><t>The kind property is optional.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
+            <li>
+              <t>The kind property is optional.  Its <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul>
                 <li>contact: the resource is a URI by which the entity represented by the Card may be contacted; this includes web forms or other media that require user interaction.</li>
               </ul>
@@ -1909,8 +2131,11 @@ Current:
         </section>
         <section anchor="media" numbered="true" toc="default">
           <name>media</name>
-          <t>Type: Id[Media] (optional)</t>
-          <t>These are media resources such as photographs, avatars, or sounds that are associated with the entity represented by the Card.  A Media object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
+          <dl spacing="normal">
+          <dt>media: Id[Media] (optional).</dt>
+          <dd>These are media resources such as photographs, avatars, or sounds that are associated with the entity represented by the Card.</dd>
+          </dl>
+          <t>A Media object has all properties of the <xref target="resource">Resource</xref> data type, with the following additional definitions:</t>
           <ul>
             <li>The @type property value <bcp14>MUST</bcp14> be "Media", if set.</li>
             <li>
@@ -1948,9 +2173,13 @@ Current:
         <t>This section defines properties for localizing the content of the Card in human languages.</t>
         <section anchor="localizations" numbered="true" toc="default">
           <name>localizations</name>
-          <t>Type: String[PatchObject] (optional)</t>
-          <t>This localizes property values to languages (other than the main language) in the Card.  Localizations provide language-specific alternatives for existing property values and <bcp14>SHOULD NOT</bcp14> add new properties.</t>
-          <t>The object keys in the localizations property value are language tags <xref target="RFC5646"/>. The object values are patch objects that localize the Card in the respective language tag.  The paths in the PatchObject are relative to the Card that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the localizations property.</t>
+          <dl spacing="normal">
+          <dt>localizations: String[PatchObject] (optional).</dt>
+            <dd>
+          <t>This localizes property values to languages other than the <xref target="language">main language</xref> of the Card. Localizations provide language-specific alternatives for existing property values and <bcp14>SHOULD NOT</bcp14> add new properties.
+            The keys in the localizations property value are language tags <xref target="RFC5646"/>, the values are of type PatchObject and localize the Card in that language tag.  The paths in the PatchObject are relative to the Card that includes the localizations property.  A patch <bcp14>MUST NOT</bcp14> target the localizations property.</t>
+            </dd>
+          </dl>
           <t>Conceptually, a Card is localized as follows:</t>
           <ul>
             <li>Determine the language tag in which the Card should be localized.</li>
@@ -1992,14 +2221,12 @@ Current:
           <t><xref target="example-localizations-patch"/> localizes the title name by patching <em>inside</em> the titles property.  All properties, except the name property in the Title object, are left as is.</t>
           <figure anchor="example-localizations-patch">
             <name>Example of Localizing a Nested Property</name>
-
 <!--[rfced] In Figure 39, is the term "autor" correct, or should it be
 "author"?
 
 Original:
     "titles/t1/name": "autor"
 -->
-	    
             <sourcecode type=""><![CDATA[
 "name": {
   "full": "Gabriel García Márquez"
@@ -2024,14 +2251,20 @@ Original:
         <t>This section defines properties for which none of the previous sections are appropriate.</t>
         <section anchor="anniversaries" numbered="true" toc="default">
           <name>anniversaries</name>
-          <t>Type: Id[Anniversary] (optional)</t>
-          <t>These are memorable dates and events for the entity represented by the Card.  An Anniversary object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>anniversaries: Id[Anniversary] (optional).</dt>
+          <dd>These are memorable dates and events for the entity represented by the Card.</dd>
+          </dl>
+          <t>An Anniversary object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Anniversary", if set.
           </dd>
             <dt>
-              kind:</dt><dd><t> String (mandatory).
+              kind: String (mandatory).</dt>
+            <dd>
+              <t>
               Specifies the kind of anniversary.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
               <ul spacing="compact">
@@ -2041,25 +2274,35 @@ Original:
               </ul>
             </dd>
             <dt>
-              date:</dt><dd><t> PartialDate|Timestamp (mandatory; defaultType: PartialDate).  The date of the anniversary in the Gregorian calendar.  This <bcp14>MUST</bcp14> be either a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
+              date: PartialDate|Timestamp (mandatory; defaultType: PartialDate).</dt>
+            <dd>
+              <t>  The date of the anniversary in the Gregorian calendar.  This <bcp14>MUST</bcp14> be either a whole or partial calendar date or a complete UTC timestamp (see the definition of the Timestamp and PartialDate object types below).</t>
             </dd>
-            <dt>place:</dt><dd> Address (optional). An address associated with this anniversary, e.g.,  the place of birth or death.</dd>
+            <dt>place: Address (optional).</dt>
+            <dd> An address associated with this anniversary, e.g.,  the place of birth or death.</dd>
           </dl>
           <t>A PartialDate object represents a complete or partial calendar date in the Gregorian calendar.  It represents a complete date, a year, a month in a year, or a day in a month.  It has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "PartialDate", if set.
           </dd>
-            <dt>year: </dt><dd>UnsignedInt (optional).  The calendar year.</dd>
-            <dt>month:</dt><dd> UnsignedInt (optional).  The calendar month, represented as the integers 1 &lt;= month &lt;= 12.  If this property is set, then either the year or day property <bcp14>MUST</bcp14> be set.</dd>
-            <dt>day:</dt><dd> UnsignedInt (optional).  The calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set, then the month property <bcp14>MUST</bcp14> be set.</dd>
-            <dt>calendarScale:</dt><dd> String (optional).  The calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a calendar system name registered as a Common Locale Data Repository (CLDR) <xref target="RFC7529" format="default"/> or a vendor-specific value.  The year, month, and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.  Note that the year property might be required to convert the date between the Gregorian calendar and the respective calendar system.</dd>
+            <dt>year: </dt>
+            <dd>UnsignedInt (optional).  The calendar year.</dd>
+            <dt>month: UnsignedInt (optional).</dt>
+            <dd>  The calendar month, represented as the integers 1 &lt;= month &lt;= 12.  If this property is set, then either the year or day property <bcp14>MUST</bcp14> be set.</dd>
+            <dt>day: UnsignedInt (optional).</dt>
+            <dd>  The calendar month day, represented as the integers 1 &lt;= day &lt;= 31, depending on the validity within the month and year.  If this property is set, then the month property <bcp14>MUST</bcp14> be set.</dd>
+            <dt>calendarScale: String (optional).</dt>
+            <dd>  The calendar system in which this date occurs, in lowercase.  This <bcp14>MUST</bcp14> be either a calendar system name registered as a Common Locale Data Repository (CLDR) <xref target="RFC7529" format="default"/> or a vendor-specific value.  The year, month, and day still <bcp14>MUST</bcp14> be represented in the Gregorian calendar.  Note that the year property might be required to convert the date between the Gregorian calendar and the respective calendar system.</dd>
           </dl>
           <t>A Timestamp object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String. This <bcp14>MUST</bcp14> be "Timestamp", if set.
+            <dt>@type: String.</dt>
+            <dd> This <bcp14>MUST</bcp14> be "Timestamp", if set.
           </dd>
-            <dt>utc:</dt><dd> UTCDateTime (mandatory).  Specifies the point in time in UTC time.
+            <dt>utc: UTCDateTime (mandatory).</dt>
+            <dd>  Specifies the point in time in UTC time.
       </dd>
           </dl>
           <t><xref target="example-anniversaries"/> illustrates anniversaries with partial dates and a timestamp.  Note how the @type property is set for the Timestamp object value according to the rules defined in <xref target="prop-type"/>.</t>
@@ -2091,8 +2334,12 @@ Original:
         </section>
         <section anchor="keywords" numbered="true" toc="default">
           <name>keywords</name>
-          <t>Type: String[Boolean] (optional)</t><t>
-A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be "true".</t>
+          <dl spacing="normal">
+          <dt>keywords: String[Boolean] (optional).</dt>
+          <dd>
+            <t>A set of free-text keywords, also known as <em>tags</em>.  The set is represented as an object, with each key being a keyword.  The boolean value <bcp14>MUST</bcp14> be "true".</t>
+          </dd>
+          </dl>
           <figure anchor="example-keywords">
             <name>Example for the keywords Property</name>
             <sourcecode name="" type="json"><![CDATA[
@@ -2105,32 +2352,43 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
         </section>
         <section anchor="notes" numbered="true" toc="default">
           <name>notes</name>
-          <t>Type: Id[Note] (optional)</t>
-          <t>Free-text notes that are associated with the Card.  A Note object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>notes: Id[Note] (optional).</dt>
+          <dd>Free-text notes that are associated with the Card.</dd>
+          </dl>
+          <t>A Note object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Note", if set.
         </dd>
             <dt>
-             note:</dt><dd> String (mandatory).  The free-text value of this note.
+             note: String (mandatory).</dt>
+            <dd>  The free-text value of this note.
             </dd>
             <dt>
-              created:</dt><dd> UTCDateTime (optional).  The date and time when this note was created.
+              created: UTCDateTime (optional).</dt>
+            <dd>  The date and time when this note was created.
             </dd>
             <dt>
-             author:</dt><dd> Author (optional).  The author of this note.
+             author: Author (optional).</dt>
+            <dd>  The author of this note.
             </dd>
           </dl>
           <t>An Author object has the following properties, of which at least one property other than @type <bcp14>MUST</bcp14> be set:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "Author", if set.
         </dd>
             <dt>
-             name:</dt><dd> String (optional).  The name of this author.
+             name: String (optional).</dt>
+            <dd>  The name of this author.
             </dd>
             <dt>
-             uri:</dt><dd><t>String (optional).  A URI value that identifies the author.</t>
+             uri: String (optional).</dt>
+            <dd>
+              <t>  A URI value that identifies the author.</t>
             </dd>
           </dl>
           <figure anchor="example-notes">
@@ -2150,15 +2408,20 @@ A set of free-text keywords, also known as <em>tags</em>.  The set is represente
         </section>
         <section anchor="personalInfo" numbered="true" toc="default">
           <name>personalInfo</name>
-          <t>Type: Id[PersonalInfo] (optional)</t>
-          <t>Defines personal information about the entity represented by the Card.
-A PersonalInfo object has the following properties:</t>
           <dl spacing="normal">
-            <dt>@type:</dt><dd> String.
+          <dt>personalInfo: Id[PersonalInfo] (optional).</dt>
+          <dd>Defines personal information about the entity represented by the Card.</dd>
+          </dl>
+<t>A PersonalInfo object has the following properties:</t>
+          <dl spacing="normal">
+            <dt>@type: String.</dt>
+            <dd>
               This <bcp14>MUST</bcp14> be "PersonalInfo", if set.
           </dd>
             <dt>
-              kind:</dt><dd><t> String (mandatory).
+              kind: String (mandatory).</dt>
+            <dd>
+              <t>
               Specifies the kind of personal information.  The <xref target="enumerated-values">enumerated</xref> values are:
 </t>
               <ul spacing="normal">
@@ -2167,10 +2430,13 @@ A PersonalInfo object has the following properties:</t>
                 <li>interest: an interest</li>
               </ul>
             </dd>
-            <dt>value:</dt><dd> String (mandatory).
+            <dt>value: String (mandatory).</dt>
+            <dd>
 The actual information.</dd>
             <dt>
-             level:</dt><dd><t> String (optional).
+             level: String (optional).</dt>
+            <dd>
+              <t>
               Indicates the level of expertise or engagement in hobby or interest.
                 The <xref target="enumerated-values">enumerated</xref> values are:</t>
               <ul spacing="normal">
@@ -2185,10 +2451,12 @@ The actual information.</dd>
                 </li>
               </ul>
             </dd>
-            <dt>listAs:</dt><dd> UnsignedInt (optional).
+            <dt>listAs: UnsignedInt (optional).</dt>
+            <dd>
             Defines the position of the personal information in the list of all PersonalInfo objects that have the same kind property value in the Card.  If set, the listAs value <bcp14>MUST</bcp14> be higher than zero.  Multiple personal information entries <bcp14>MAY</bcp14> have the same listAs property value or none.  Sorting such same-valued entries is implementation-specific.
         </dd>
-            <dt>label:</dt><dd> String (optional).
+            <dt>label: String (optional).</dt>
+            <dd>
             A custom label.  See <xref target="prop-label"/>.</dd>
           </dl>
           <figure anchor="example-personalInfo">
@@ -2220,8 +2488,7 @@ The actual information.</dd>
       <name>IANA Considerations</name>
       <section anchor="iana-media-type" numbered="true" toc="default">
         <name>Media Type Registration</name>
-
-<!-- [rfced] We have included some specific questions about the IANA
+        <!-- [rfced] We have included some specific questions about the IANA
 text below. In addition to responding to those questions, please
 review all of the IANA-related updates carefully and let us know
 if any further updates are needed.
@@ -2230,8 +2497,8 @@ a) FYI: In Section 3.5.1, we placed the "Reference or Description" entry
 below the "Change Controller" entry to match the order of the template
 at https://www.iana.org/assignments/jscontact/.
 
-b) In Sections 3.5.1, 3.6.1, and 3.7.1, may we update the definition of 
-"Change Controller" as shown below to make the text parallel with the 
+b) In Sections 3.5.1, 3.6.1, and 3.7.1, may we update the definition of
+"Change Controller" as shown below to make the text parallel with the
 other entries?
 
 Original:
@@ -2239,15 +2506,15 @@ Original:
       definition (IETF for RFCs from the IETF stream).
 
 Perhaps:
-   Change Controller:  Person or entity responsible for requesting a 
+   Change Controller:  Person or entity responsible for requesting a
    change to the entry's definition (IETF for RFCs from the IETF stream).
 
 c) In Sections 3.5.1, 3.6.1, 3.7.1, and 3.7.2:
 
-- Is "Table 1" the correct reference in the sentences below (note that 
-there are 4 instances of each sentence)? Table 1 displays values from 
-the "JSContact Version" registry, not the "JSContact Enum Value" registry. 
-Please let us know if an update is needed to the registry name and/or the 
+- Is "Table 1" the correct reference in the sentences below (note that
+there are 4 instances of each sentence)? Table 1 displays values from
+the "JSContact Version" registry, not the "JSContact Enum Value" registry.
+Please let us know if an update is needed to the registry name and/or the
 table number.
 
 Original:
@@ -2272,51 +2539,51 @@ see <https://www.rfc-editor.org/authors/rfc9553-table.pdf#table-2>.
 - FYI: We have moved the entry for the "version" property name to appear
 above "year" so that it appears in alphabetical order. Please let us know if
 you prefer the previous order.
-    
-- FYI: Under "contexts", "label", "pref", and "uri", we ordered 
+
+- FYI: Under "contexts", "label", "pref", and "uri", we ordered
 Section "1.4.4" first in the Reference column since this section
 corresponds to these terms. Please let us know if you prefer otherwise.
 
-- Under the "@type" property name in the "References" column, should 
-references to Sections "2.5.1.2" and "2.2.1.2" be added for 
-"AddressComponent" and "NameComponent", respectively, or does Sections 
+- Under the "@type" property name in the "References" column, should
+references to Sections "2.5.1.2" and "2.2.1.2" be added for
+"AddressComponent" and "NameComponent", respectively, or does Sections
 "2.5.1" and "2.2.1" serve as the references for these terms?
 
 If Sections "2.5.1.2" and "2.2.1.2" are used, should Sections "2.5.1"
-and "2.2.1" also be updated under the "AddressComponent" and 
-"NameComponent" entries, respectively, in Tables 2 and 4 for 
+and "2.2.1" also be updated under the "AddressComponent" and
+"NameComponent" entries, respectively, in Tables 2 and 4 for
 consistency?
 
-- Under "full" and "isOrdered", should "Section 2.5.1" be 
+- Under "full" and "isOrdered", should "Section 2.5.1" be
 "Section 2.5.1.1" instead for direct access to these terms?
 
 - Under "phoneticScript" and "phoneticSystem", should
-"Section 2.2.1" be "Section 2.2.1.1" instead for direct 
+"Section 2.2.1" be "Section 2.2.1.1" instead for direct
 access to these terms?
 
 e) In Section 3.7.1, should the definition of "Reference" be added
 after "Change Controller" to match the template at
 https://www.iana.org/assignments/jscontact? Also, since "Initial
-Contents" is not included in the template, should it be removed and 
+Contents" is not included in the template, should it be removed and
 made into a separate paragraph?
 
 f) In Section 3.7.2, should the definition of "Change Controller" be
 added after "Until Version" to match the template at
-https://www.iana.org/assignments/jscontact? 
+https://www.iana.org/assignments/jscontact?
 
 g) In Section 3.7.3:
 
 - FYI: We have moved the "phoneticSystem" entry and table above the
 "relation" entry and table so that it appears in alphabetical order.
-Please let us know if you prefer otherwise. 
+Please let us know if you prefer otherwise.
 
 
-- Should the following updates be made so that readers are taken directly 
+- Should the following updates be made so that readers are taken directly
 to the enum values?
     - In Table 6, should Section "2.5.1" be updated to "2.5.1.1"?
     - In Table 10, should Section "2.5.1" be updated to "2.5.1.2"?
     - In Table 17, should Section "2.2.1" be updated to "2.2.1.2"?
--->	
+-->
         <t>This document defines a media type for use with JSContact data formatted in JSON.</t>
         <dl newline="false" spacing="normal">
           <dt>Type name:</dt>
@@ -2328,7 +2595,9 @@ to the enum values?
             <t>None</t>
           </dd>
           <dt>Optional parameters:</dt>
-          <dd><t>version</t> <t>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version">version</xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</t>
+          <dd>
+            <t>version</t>
+            <t>This parameter conveys the version of the JSContact data in the body part.  It <bcp14>MUST NOT</bcp14> occur more than once.  If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version">version</xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.</t>
           </dd>
           <dt>Encoding considerations:</dt>
           <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.</dd>
@@ -2343,7 +2612,10 @@ to the enum values?
           <dt>Fragment identifier considerations:</dt>
           <dd>A JSON Pointer fragment identifier may be used, as defined in <xref target="RFC6901" sectionFormat="comma" section="6"/>.</dd>
           <dt>Additional information:</dt>
-          <dd><t><br/></t>
+          <dd>
+            <t>
+              <br/>
+            </t>
             <dl newline="false" spacing="compact">
               <dt>Magic number(s):</dt>
               <dd>N/A</dd>
@@ -2371,25 +2643,23 @@ to the enum values?
       </section>
       <section anchor="iana-registry-policy" numbered="true" toc="default">
         <name>Registry Policy and Change Procedures</name>
-
 <!--[rfced] Since "backwards-incompatibility" is mentioned in Section
 1.9.1, should the reference below be updated from Section 1.9 to
 Section 1.9.1?
 
 Original:
    Registry assignments that introduce backwards-incompatible
-   (Section 1.9) changes require the JSContact major version  
-   to change, other changes only require to change the minor 
-   version. 
+   (Section 1.9) changes require the JSContact major version
+   to change, other changes only require to change the minor
+   version.
 
 Perhaps:
    Registry assignments that introduce backwards-incompatible
-   (Section 1.9.1) changes require the JSContact major version 
-   to change; other changes only require a change to the minor 
-   version. 
+   (Section 1.9.1) changes require the JSContact major version
+   to change; other changes only require a change to the minor
+   version.
 -->
-	
-	<t>Registry assignments that introduce <xref target="versioning">backwards-incompatible</xref> changes require the JSContact major version to change; other changes only require a change to the minor version.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for other assignments is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>).</t>
+        <t>Registry assignments that introduce <xref target="versioning">backwards-incompatible</xref> changes require the JSContact major version to change; other changes only require a change to the minor version.  The registry policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>).  The registry policy for other assignments is Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>).</t>
         <t>The designated expert (DE) decides if a major or minor version change is required and assigns the new version to the <xref target="iana-version-registry">"JSContact Version" registry</xref>.  Version numbers increment by one, and a major version change resets the minor version to zero.  An assignment may apply multiple changes and to more than one registry at once, in which case a single version change is sufficient.  If the registry policy is Specification Required, then the DE may decide that it is enough to document the new assignment in the Description item of the respective registry.</t>
         <t>A registration <bcp14>MUST</bcp14> have an intended usage of "common", "reserved", or "obsolete".</t>
         <ul>
@@ -2397,8 +2667,8 @@ Perhaps:
           <li>A "reserved" usage reserves an item in the registry without assigning semantics to avoid name collisions with future extensions or protocol use. Implementations <bcp14>MUST NOT</bcp14> expect or add items with such names outside the protocols or extensions that use them; otherwise, any such JSContact data is invalid.</li>
           <li>An "obsolete" usage denotes an item that is no longer expected to be added by up-to-date systems.  A new assignment has probably been defined, covering the obsolete item's semantics. Implementations <bcp14>MUST</bcp14> expect such items to occur in JSContact data up to the "Until Version" registry field, inclusively.  They <bcp14>MUST NOT</bcp14> add such items for any version after which the item got obsolete; otherwise, any such JSContact data is invalid.</li>
         </ul>
-	<t>The intended usage of registry items may change between versions, but	
-	the designated expert must carefully consider the impact on existing	
+        <t>The intended usage of registry items may change between versions, but
+	the designated expert must carefully consider the impact on existing
 	implementations and standards before doing so.</t>
         <t>The registration procedure is not a formal standards process but rather an administrative procedure intended to allow community comments and to check whether it is coherent without excessive time delay.  It is designed to encourage vendors to document and register new items they add for use cases not covered by the original specification, leading to increased interoperability.</t>
         <section anchor="iana-registry-preliminary-community-review" numbered="true" toc="default">
@@ -2418,7 +2688,7 @@ Perhaps:
           <name>Designated Expert Review</name>
           <t>The primary concern of the DE is preventing name collisions and encouraging the submitter to document security and privacy considerations.</t>
           <t>A new type name, property name, or enumerated value <bcp14>MUST NOT</bcp14> differ only in case from an already-registered name or value.</t>
-        <t>For a common-use registration, the DE
+          <t>For a common-use registration, the DE
 	      is expected to confirm that suitable documentation is available to ensure interoperability.
 		  The DE should also verify that
             the new assignment does not conflict with work that is active or already published within the IETF.</t>
@@ -2462,14 +2732,14 @@ Perhaps:
               <tr>
                 <th align="left">Major Version</th>
                 <th align="left">Highest Minor Version</th>
-		 <th align="left">Reference</th>
+                <th align="left">Reference</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td align="left">1</td>
                 <td align="left">0</td>
-		<td align="left">RFC 9553</td>
+                <td align="left">RFC 9553</td>
               </tr>
             </tbody>
           </table>
@@ -2491,15 +2761,14 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dd>For properties with intended usage other than "reserved", this is the type of this property, using type signatures as specified in <xref target="type-signatures" format="default"/>. The property type <bcp14>MUST</bcp14> be registered in the "JSContact Types" registry. For reserved property names, the value MUST be the verbatim string "not applicable".</dd>
             <dt>Property Context:</dt>
             <dd>A comma-separated list of JSContact object types (<xref target="iana-type-registry-contents"/>) that contain the property. For reserved property names, the value MAY be the verbatim string "not applicable".</dd>
-          
             <dt>Intended Usage:</dt>
             <dd>May be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
             <dd>The JSContact version on which the property definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the property was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
-	    <dt>Change Controller:</dt>
-	    <dd>Person or entity responsible for requesting a change to the entry's definition ("IETF" for RFCs from the IETF stream).</dd>
+            <dt>Change Controller:</dt>
+            <dd>Person or entity responsible for requesting a change to the entry's definition ("IETF" for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference where the property is specified. This must include references to all RFC documents where this property is introduced or updated. For reserved property names, the reference or description <bcp14>MAY</bcp14> be omitted.</dd>
           </dl>
@@ -2507,7 +2776,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
         <section anchor="iana-property-registry-contents" numbered="true" toc="default">
           <name>Initial Contents of the JSContact Properties Registry</name>
           <t>The following table lists the initial "common" usage entries of the "JSContact Properties" registry.  For all properties, the Since Version is "1.0", the Until Version is not set, the Change Controller is "IETF", and RFC section references are for RFC 9553.</t>
-          <table anchor="tab-iana-property-registry" align="center">	    
+          <table anchor="tab-iana-property-registry" align="center">
             <name>JSContact Properties with "common" Usage</name>
             <thead>
               <tr>
@@ -2523,7 +2792,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">@type</td>
                 <td align="left">String</td>
                 <td align="left">Address, AddressComponent, Anniversary, Author, Card, Calendar,  CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media, Name, NameComponent, Nickname, Note, OnlineService, Organization, OrgUnit, PartialDate, PersonalInfo, Phone, Pronouns, Relation, SchedulingAddress, SpeakToAs, Timestamp, Title</td>
-		<td align="left">Sections <xref target="address" format="counter"/>, <xref target="addresscomponent" format="counter"/>, <xref target="anniversaries" format="counter"/>, <xref target="cardtype" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="name" format="counter"/>, <xref target="namecomponent" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="notes" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="organizations" format="counter"/>, <xref target="personalInfo" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="relatedTo" format="counter"/>, <xref target="schedulingAddresses" format="counter"/>, <xref target="titles" format="counter"/></td>
+                <td align="left">Sections <xref target="address" format="counter"/>, <xref target="addresscomponent" format="counter"/>, <xref target="anniversaries" format="counter"/>, <xref target="cardtype" format="counter"/>, <xref target="calendars" format="counter"/>, <xref target="cryptoKeys" format="counter"/>, <xref target="directories" format="counter"/>, <xref target="emails" format="counter"/>, <xref target="preferredLanguages" format="counter"/>, <xref target="links" format="counter"/>, <xref target="media" format="counter"/>, <xref target="name" format="counter"/>, <xref target="namecomponent" format="counter"/>, <xref target="nicknames" format="counter"/>, <xref target="notes" format="counter"/>, <xref target="onlineServices" format="counter"/>, <xref target="organizations" format="counter"/>, <xref target="personalInfo" format="counter"/>, <xref target="phones" format="counter"/>, <xref target="speakToAs" format="counter"/>, <xref target="relatedTo" format="counter"/>, <xref target="schedulingAddresses" format="counter"/>, <xref target="titles" format="counter"/></td>
               </tr>
               <tr>
                 <td align="left">address</td>
@@ -3051,7 +3320,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 <td align="left">
                   <xref target="prop-version" format="default"/>
                 </td>
-              </tr>	      
+              </tr>
               <tr>
                 <td align="left">year</td>
                 <td align="left">UnsignedInt</td>
@@ -3105,8 +3374,8 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dd>The JSContact version on which this type definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the type definition was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
-	    <dt>Change Controller:</dt>
-	    <dd>Person or entity responsible for requesting a change to the entry's definition ("IETF" for RFCs from the IETF stream).</dd>
+            <dt>Change Controller:</dt>
+            <dd>Person or entity responsible for requesting a change to the entry's definition ("IETF" for RFCs from the IETF stream).</dd>
             <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference where the Type is specified. For reserved type names, the reference or description <bcp14>MAY</bcp14> be omitted.</dd>
           </dl>
@@ -3378,8 +3647,8 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the enum value definition was obsoleted; therefore, the enum value definition <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
-	    <dt>Change Controller:</dt>
-	    <dd>Person or entity responsible for requesting a change to the entry's definition ("IETF" for RFCs from the IETF stream).</dd>
+            <dt>Change Controller:</dt>
+            <dd>Person or entity responsible for requesting a change to the entry's definition ("IETF" for RFCs from the IETF stream).</dd>
             <dt>Initial Contents:</dt>
             <dd>The initial list of defined values for the enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>.  A subregistry will be created with these values for this property name/context tuple.</dd>
           </dl>
@@ -3394,7 +3663,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
             <dd>The JSContact version on which the enum value definition is based.  The version <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the enum value was obsoleted; therefore, the enum value <bcp14>MUST NOT</bcp14> be used in later versions.  The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>MUST</bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).</dd>
-	       <dt>Reference or Description:</dt>
+            <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference for the semantics of the value.</dd>
           </dl>
         </section>
@@ -4158,7 +4427,7 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
                 </tbody>
               </table>
             </dd>
-          </dl>	  
+          </dl>
           <dl spacing="compact" newline="false" indent="20">
             <dt>Property Name:</dt>
             <dd>relation</dd>
@@ -4324,7 +4593,6 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
     </section>
   </middle>
   <back>
-    
     <displayreference target="I-D.ietf-uuidrev-rfc4122bis" to="UUID"/>
     <references>
       <name>References</name>
@@ -4350,7 +4618,6 @@ the same name <bcp14>MUST</bcp14> only be used when the semantics are analogous.
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8141.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
-
 <!--[rfced] The 2006 version of this reference has been withdrawn;
 therefore, we replaced it with the 2020 version. Please let us
 know if any further updates are needed.
@@ -4361,7 +4628,7 @@ Original:
         the representation of names of countries, 3rd edition",
         ISO Standard 3166-1, 2006.
 
-Current: 
+Current:
    [ISO.3166-1]
         International Organization for Standardization, "Codes for
         the representation of names of countries and their subdivisions -
@@ -4378,18 +4645,20 @@ Current:
           </front>
           <seriesInfo name="ISO" value="3166-1:2020"/>
         </reference>
-
         <reference anchor="IANA-TZ" target="https://www.iana.org/time-zones">
           <front>
             <title>Time Zone Database</title>
-            <author><organization>IANA</organization></author>
+            <author>
+              <organization>IANA</organization>
+            </author>
           </front>
         </reference>
-
         <reference anchor="IANA-vCard" target="https://www.iana.org/assignments/vcard-elements">
           <front>
             <title>vCard Elements</title>
-              <author><organization>IANA</organization></author>
+            <author>
+              <organization>IANA</organization>
+            </author>
           </front>
         </reference>
       </references>
@@ -4407,60 +4676,54 @@ Current:
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7095.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
-
-
-<!--[I-D.ietf-uuidrev-rfc4122bis] in EDIT state; entered the long way to include the correct initials-->
-<reference anchor="I-D.ietf-uuidrev-rfc4122bis" target="https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis-14">
-  <front>
-    <title>Universally Unique IDentifiers (UUID)</title>
-    <author fullname="Kyzer R. Davis" initials="K. R." surname="Davis">
-      <organization>Cisco Systems</organization>
-    </author>
-    <author fullname="Brad Peabody" initials="B. G." surname="Peabody">
-      <organization>Uncloud</organization>
-    </author>
-    <author fullname="P. Leach" initials="P." surname="Leach">
-      <organization>University of Washington</organization>
-    </author>
-    <date day="6" month="November" year="2023"/>
-  </front>
-  <seriesInfo name="Internet-Draft" value="draft-ietf-uuidrev-rfc4122bis-14"/>
-</reference>
-
-<!--[I-D.ietf-calext-vcard-jscontact-extensions] in AUTH48 state; entered the long way to include the correct initials-->
-<!-- This is going to be RFC 9554 -->
-<reference anchor="I-D.ietf-calext-vcard-jscontact-extensions" target="https://datatracker.ietf.org/doc/html/ietf-calext-vcard-jscontact-extensions-12">
-  <front>
-    <title>vCard Format Extension for JSContact</title>
-    <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
-      <organization>Fastmail</organization>
-    </author>
-    <author fullname="Mario Loffredo" initials="M. L." surname="Loffredo">
-      <organization>IIT-CNR</organization>
-    </author>
-    <date day="4" month="March" year="2024"/>
-  </front>
-  <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-12"/>
-</reference>
-
-<!--[I-D.ietf-calext-jscontact-vcard] in AUTH48 state; entered the long way to include the correct initials-->
-<!-- This is going to be RFC 9555 -->
-<reference anchor="I-D.ietf-calext-jscontact-vcard" target="https://datatracker.ietf.org/doc/html/ietf-calext-jscontact-vcard-15">
-  <front>
-    <title>vCard Format Extension for JSContact</title>
-    <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
-      <organization>Fastmail</organization>
-    </author>
-    <author fullname="Mario Loffredo" initials="M. L." surname="Loffredo">
-      <organization>IIT-CNR</organization>
-    </author>
-    <date day="4" month="March" year="2024"/>
-  </front>
-  <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-vcard-15"/>
-</reference>
-	
-
-<!-- [I-D.ietf-uuidrev-rfc4122bis] in EDIT state; companion document RFC YYY1
+        <!--[I-D.ietf-uuidrev-rfc4122bis] in EDIT state; entered the long way to include the correct initials-->
+        <reference anchor="I-D.ietf-uuidrev-rfc4122bis" target="https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis-14">
+          <front>
+            <title>Universally Unique IDentifiers (UUID)</title>
+            <author fullname="Kyzer R. Davis" initials="K. R." surname="Davis">
+              <organization>Cisco Systems</organization>
+            </author>
+            <author fullname="Brad Peabody" initials="B. G." surname="Peabody">
+              <organization>Uncloud</organization>
+            </author>
+            <author fullname="P. Leach" initials="P." surname="Leach">
+              <organization>University of Washington</organization>
+            </author>
+            <date day="6" month="November" year="2023"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-ietf-uuidrev-rfc4122bis-14"/>
+        </reference>
+        <!--[I-D.ietf-calext-vcard-jscontact-extensions] in AUTH48 state; entered the long way to include the correct initials-->
+        <!-- This is going to be RFC 9554 -->
+        <reference anchor="I-D.ietf-calext-vcard-jscontact-extensions" target="https://datatracker.ietf.org/doc/html/ietf-calext-vcard-jscontact-extensions-12">
+          <front>
+            <title>vCard Format Extension for JSContact</title>
+            <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
+              <organization>Fastmail</organization>
+            </author>
+            <author fullname="Mario Loffredo" initials="M. L." surname="Loffredo">
+              <organization>IIT-CNR</organization>
+            </author>
+            <date day="4" month="March" year="2024"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-12"/>
+        </reference>
+        <!--[I-D.ietf-calext-jscontact-vcard] in AUTH48 state; entered the long way to include the correct initials-->
+        <!-- This is going to be RFC 9555 -->
+        <reference anchor="I-D.ietf-calext-jscontact-vcard" target="https://datatracker.ietf.org/doc/html/ietf-calext-jscontact-vcard-15">
+          <front>
+            <title>vCard Format Extension for JSContact</title>
+            <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
+              <organization>Fastmail</organization>
+            </author>
+            <author fullname="Mario Loffredo" initials="M. L." surname="Loffredo">
+              <organization>IIT-CNR</organization>
+            </author>
+            <date day="4" month="March" year="2024"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscontact-vcard-15"/>
+        </reference>
+        <!-- [I-D.ietf-uuidrev-rfc4122bis] in EDIT state; companion document RFC YYY1
 <reference anchor="RFCYYY1" target="https://www.rfc-editor.org/info/rfcYYY1">
 <front>
 <title>Universally Unique IDentifiers (UUID)</title>
@@ -4479,33 +4742,32 @@ Current:
 <seriesInfo name="DOI" value="10.17487/RFCYYY1"/>
 </reference>
 -->
-
-
-<!-- Note: Removed [I-D.ietf-calext-jscontact] as it is a self-reference.
+        <!-- Note: Removed [I-D.ietf-calext-jscontact] as it is a self-reference.
      <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-calext-jscontact.xml"/>-->
-
-
         <reference anchor="IPA" target="https://www.internationalphoneticalphabet.org/">
           <front>
             <title>International Phonetic Alphabet</title>
-            <author><organization>IPA</organization></author>
+            <author>
+              <organization>IPA</organization>
+            </author>
           </front>
         </reference>
-
         <reference anchor="UBiDi" target="https://www.unicode.org/reports/tr9/">
           <front>
             <title>Unicode Standard Annex #9: Unicode Bidirectional Algorithm</title>
-            <author><organization>The Unicode Consortium</organization></author>
-	    <date month="August" year="2023"/>
+            <author>
+              <organization>The Unicode Consortium</organization>
+            </author>
+            <date month="August" year="2023"/>
           </front>
-	   <seriesInfo name="Unicode" value="15.1.0"/>
-	  <refcontent>Revision 48</refcontent>
+          <seriesInfo name="Unicode" value="15.1.0"/>
+          <refcontent>Revision 48</refcontent>
         </reference>
-
         <reference anchor="WHATWG-URL" target="https://url.spec.whatwg.org">
           <front>
-              <title>URL Living Standard</title>
-            <author><organization>WHATWG
+            <title>URL Living Standard</title>
+            <author>
+              <organization>WHATWG
             </organization>
             </author>
             <date month="January" year="2024"/>
@@ -4513,13 +4775,11 @@ Current:
         </reference>
       </references>
     </references>
+    <!-- [rfced] Terminology
 
-
-<!-- [rfced] Terminology
-
-a) Throughout the text, the following terminology appears to be used 
+a) Throughout the text, the following terminology appears to be used
 inconsistently. Please review these occurrences and let us know if/how they
-may be made consistent.  
+may be made consistent.
 
   kind separator vs. separator kind
 
@@ -4538,8 +4798,7 @@ let us know if any further updates are needed.
   Data Interchange Format -> data interchange format (per RFC 8259)
   JSON pointer -> JSON Pointer (but lowercase "pointer" when used in general) (per RFC 6901)
 -->
-
-<!-- [rfced] FYI: We have added expansions for the following abbreviations
+    <!-- [rfced] FYI: We have added expansions for the following abbreviations
 per Section 3.6 of RFC 7322 ("RFC Style Guide"). Please review each
 expansion in the document carefully to ensure correctness.
 
@@ -4547,14 +4806,12 @@ expansion in the document carefully to ensure correctness.
   Internet JSON (I-JSON)
   Universally Unique Identifier (UUID)
 -->
-
-<!-- [rfced] Please review the "Inclusive Language" portion of the online 
+    <!-- [rfced] Please review the "Inclusive Language" portion of the online
 Style Guide <https://www.rfc-editor.org/styleguide/part2/#inclusive_language>
 and let us know if any changes are needed.
 
-Note that our script did not flag any words in particular, but this should 
+Note that our script did not flag any words in particular, but this should
 still be reviewed as a best practice.
 -->
-
   </back>
 </rfc>
