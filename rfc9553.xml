@@ -337,7 +337,7 @@ updates are needed for consistency.
           <name>The @type Property</name>
           <dl spacing="normal">
             <dt>@type: String.</dt>
-            <dd>The @type property defines the JSContact object type of a JSON object. It <bcp14>MUST</bcp14> match the
+            <dd>The JSContact type of a JSON object. It <bcp14>MUST</bcp14> match the
               type name of the JSContact object of which the JSON object is an instance of.
             </dd>
           </dl>
@@ -585,12 +585,7 @@ updates are needed for consistency.
           <dl spacing="normal">
             <dt>contexts: String[Boolean].</dt>
             <dd>
-              <t>The contexts property associates contact information with one or more contexts in which it should be
-                used. For example, someone might have distinct phone numbers for work and private contexts and may set
-                the desired context on the respective phone number in the <xref target="phones">
-                  phones
-                </xref> property.
-              </t>
+              <t>The contexts in which the contact information should be used. For example, someone might have distinct phone numbers for work and private contexts and may set the desired context on the respective phone number in the <xref target="phones"> phones </xref> property. </t>
               <t>This section defines common contexts. Additional contexts may be defined in the properties or data
                 types that make use of this property. The <xref target="enumerated-values">enumerated
                 </xref> common context values are:
@@ -604,7 +599,7 @@ updates are needed for consistency.
         </section>
         <section anchor="prop-extra" numbered="true" toc="default">
           <name>extra</name>
-          <t>The extra property is reserved. Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact
+          <t>This property is reserved. Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact
             object. Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.
           </t>
           <t>The purpose of this reserved property name is to provide implementors with a name that is certain to never
