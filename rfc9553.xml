@@ -585,7 +585,7 @@ updates are needed for consistency.
           <dl spacing="normal">
             <dt>contexts: String[Boolean].</dt>
             <dd>
-              <t>The contexts in which the contact information should be used. For example, someone might have distinct phone numbers for work and private contexts and may set the desired context on the respective phone number in the <xref target="phones"> phones </xref> property. </t>
+              <t>The contexts in which to use the contact information. For example, someone might have distinct phone numbers for work and private contexts and may set the desired context on the respective phone number in the <xref target="phones"> phones </xref> property. </t>
               <t>This section defines common contexts. Additional contexts may be defined in the properties or data
                 types that make use of this property. The <xref target="enumerated-values">enumerated
                 </xref> common context values are:
@@ -597,22 +597,12 @@ updates are needed for consistency.
             </dd>
           </dl>
         </section>
-        <section anchor="prop-extra" numbered="true" toc="default">
-          <name>extra</name>
-          <t>This property is reserved. Implementations <bcp14>MUST NOT</bcp14> set this property in a JSContact
-            object. Any JSContact object including a property with this name <bcp14>MUST</bcp14> be considered invalid.
-          </t>
-          <t>The purpose of this reserved property name is to provide implementors with a name that is certain to never
-            occur as a property name in a JSContact object. Implementations might want to map unknown or vendor-specific
-            properties to a variable with this name, but this is implementation-specific.
-          </t>
-        </section>
         <section anchor="prop-label" numbered="true" toc="default">
           <name>label</name>
           <dl spacing="normal">
             <dt>label: String.</dt>
-            <dd>User-defined labels associated with the contact data. Such labels may be set for
-              phone numbers, email addresses, and resources. Typically, these labels are displayed along with their
+            <dd>The labels associated with the contact data. Such labels may be set for
+              phone numbers, email addresses, and other resources. Typically, these labels are displayed along with their
               associated contact data in graphical user interfaces. Note that succinct labels are best for proper
               display on small graphical interfaces and screens.
             </dd>
@@ -834,6 +824,23 @@ updates are needed for consistency.
             lower camel case.
           </t>
         </section>
+        <section anchor="reserved-properties">
+          <name>Reserved Properties</name>
+          <t>IANA-registered properties can be reserved (<xref target="iana-registry-policy"/>).  Implementations <bcp14>MUST NOT</bcp14> set properties having a reserved name in JSContact
+            objects for which this property is reserved, or all objects if the property context in the registry is "not applicable".
+            Reserved properties have no type and their type signature is "not applicable".  Any JSContact object including a property which is reserved in context of this object <bcp14>MUST</bcp14> be considered invalid.</t>
+          <t>This document reserves one property:</t>
+          <section anchor="prop-extra" numbered="true" toc="default">
+            <name>extra</name>
+            <dl spacing="normal">
+              <dt>extra: not applicable.</dt>
+              <dd>The reserved property "extra" provides implementors with a property name that is certain to never
+                occur as a property in any JSContact object. Implementations might want to map unknown or vendor-specific
+                properties to a variable with this name, but this is implementation-specific.
+              </dd>
+            </dl>
+          </section>
+        </section>
         <section anchor="unknown-properties" numbered="true" toc="default">
           <name>Unknown Properties</name>
           <t>
@@ -1041,7 +1048,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <name>@type</name>
           <dl spacing="normal">
             <dt>@type: String (mandatory).</dt>
-            <dd>The JSContact type of the object. The value <bcp14>MUST</bcp14> be "Card", if set.
+            <dd>The JSContact type of the Card object. The value <bcp14>MUST</bcp14> be "Card".
             </dd>
           </dl>
         </section>
@@ -1685,7 +1692,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
               property value <bcp14>MAY</bcp14> be used for comparison.
             </dd>
             <dt>contexts: String[Boolean] (optional).</dt>
-            <dd>The contexts in which association with the organization apply. For example, membership in a choir may
+            <dd>The contexts in which association with the organization applies. For example, membership in a choir may
               only apply in a private context. Also see <xref target="prop-contexts"/>.
             </dd>
           </dl>
@@ -2265,7 +2272,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
               </dt>
               <dd>
                 <t>
-                  The contexts of the address information. The boolean value <bcp14>MUST</bcp14> be "true". In addition
+                  The contexts in which to use this address. The boolean value <bcp14>MUST</bcp14> be "true". In addition
                   to the common contexts (<xref target="prop-contexts"/>), allowed key values are:
                 </t>
                 <ul spacing="compact">
