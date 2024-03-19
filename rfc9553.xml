@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE rfc [<!ENTITY nbsp "&#160;"><!ENTITY zwsp "&#8203;"><!ENTITY nbhy "&#8209;"><!ENTITY wj "&#8288;">]>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-ietf-calext-jscontact-16" number="9553"
-     submissionType="IETF" consensus="true" category="std" xml:lang="en" obsoletes="" updates="" tocInclude="true"
-     symRefs="true" sortRefs="true" version="3">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rfc [
+<!ENTITY nbsp "&#160;">
+<!ENTITY zwsp "&#8203;">
+<!ENTITY nbhy "&#8209;">
+<!ENTITY wj "&#8288;">
+]>
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-ietf-calext-jscontact-16" number="9553" submissionType="IETF" consensus="true" category="std" xml:lang="en" obsoletes="" updates="" tocInclude="true" symRefs="true" sortRefs="true" version="3">
   <!-- xml2rfc v2v3 conversion 3.6.0 -->
   <front>
     <!--[rfced] *AD, changes were submitted twice after the document
@@ -85,8 +89,7 @@
     <section anchor="introduction" numbered="true" toc="default">
       <name>Introduction</name>
       <t>This document defines a data model for contact card data normally used in address book or directory
-        applications and services. It aims to be an alternative to the vCard data format <xref target="RFC6350"
-                                                                                              format="default"/>.
+        applications and services. It aims to be an alternative to the vCard data format <xref target="RFC6350" format="default"/>.
       </t>
       <t>The key design considerations for this data model are as follows:</t>
       <ul spacing="normal">
@@ -133,8 +136,7 @@
           document.
         </li>
       </ul>
-      <t>The representation of this data model is defined in the Internet JSON (I-JSON) format <xref target="RFC7493"
-                                                                                                    format="default"/>,
+      <t>The representation of this data model is defined in the Internet JSON (I-JSON) format <xref target="RFC7493" format="default"/>,
         which is a strict subset of the JSON data interchange format <xref target="RFC8259" format="default"/>. Using
         JSON is mostly a pragmatic choice: its widespread use makes JSContact easier to adopt, and the availability of
         production-ready JSON implementations eliminates a whole category of parser-related interoperability issues.
@@ -144,8 +146,7 @@
         <t>The vCard data format
           <xref target="RFC6350"/>
           is an interchange format for contacts data between address book service providers and vendors. However, this
-          format has gone through multiple specification iterations with only a subset of its deprecated <xref
-                  target="RFC2426">version 3
+          format has gone through multiple specification iterations with only a subset of its deprecated <xref target="RFC2426">version 3
           </xref> being widely in use. Consequently, products and services use an internal contact data model that is
           richer than what they expose when serializing that information to vCard. In addition, service providers often
           use a proprietary JSON representation of contact data in their APIs.
@@ -240,8 +241,7 @@ updates are needed for consistency.
             <xref target="vendor-specific-extensions" format="counter"/>
             then define the exact requirements for property names.
           </t>
-          <t>
-            <xref target="example-foo-object"/>
+          <t><xref target="example-foo-object"/>
             illustrates the definition of a JSContact object type. The names "Foo" and "baz" are only for demonstration
             and have no meaning outside the example. The example illustrates the following:
           </t>
@@ -310,8 +310,7 @@ updates are needed for consistency.
               context of this value).
             </dd>
           </dl>
-          <t>
-            <xref target="common-data-types"/>
+          <t><xref target="common-data-types"/>
             defines common data types, including signed or unsigned integers and dates.
           </t>
         </section>
@@ -471,8 +470,8 @@ updates are needed for consistency.
           </t>
           <t>A Resource object has the following properties:</t>
           <dl spacing="normal">
-          <dt>@type: String.</dt>
-          <dd>The JSContact type of the object.  The value <bcp14>MUST NOT</bcp14> be "Resource"; instead, the value <bcp14>MUST</bcp14> be the name
+            <dt>@type: String.</dt>
+            <dd>The JSContact type of the object.  The value <bcp14>MUST NOT</bcp14> be "Resource"; instead, the value <bcp14>MUST</bcp14> be the name
             of a concrete resource type (see <xref target="resource-properties"/>).</dd>
             <dt>kind: String (optional).</dt>
             <dd>
@@ -481,9 +480,7 @@ updates are needed for consistency.
             </dd>
             <dt>uri: String (mandatory).</dt>
             <dd>
-              The resource value. This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in <xref target="RFC3986"
-                                                                                                sectionFormat="of"
-                                                                                                section="3"/>.
+              The resource value. This <bcp14>MUST</bcp14> be a <em>URI</em> as defined in <xref target="RFC3986" sectionFormat="of" section="3"/>.
             </dd>
             <dt>mediaType: String (optional).</dt>
             <dd>
@@ -647,8 +644,7 @@ updates are needed for consistency.
         </section>
         <section anchor="prop-phonetic" numbered="true" toc="default">
           <name>phonetic</name>
-          <t>The following properties define how to pronounce a value in the language indicated in the Card <xref
-                  target="language">language
+          <t>The following properties define how to pronounce a value in the language indicated in the Card <xref target="language">language
           </xref> property or the language tag of its <xref target="localizations">localizations</xref>. Exemplary uses
             of these properties are defining how to pronounce Japanese names and romanizing Mandarin or Cantonese name
             and address components. The properties are defined as follows:
@@ -682,8 +678,7 @@ updates are needed for consistency.
             <dt>phoneticSystem: String.</dt>
             <dd>
               <t>
-                The phonetic system used in the related value of the phonetic property. The <xref
-                      target="enumerated-values">enumerated
+                The phonetic system used in the related value of the phonetic property. The <xref target="enumerated-values">enumerated
               </xref> values are:
               </t>
               <ul>
@@ -730,8 +725,7 @@ updates are needed for consistency.
           <name>Free-Form Text</name>
           <t>Properties having free-form text values <bcp14>MAY</bcp14> contain any valid sequence of Unicode characters
             encoded as a JSON string. Such values can contain unidirectional left-to-right and right-to-left text, as
-            well as bidirectional text using Unicode Directional Formatting Characters as described in Section 2 of <xref
-                    target="UBiDi"/>. Implementations setting bidirectional text <bcp14>MUST</bcp14> make sure that each
+            well as bidirectional text using Unicode Directional Formatting Characters as described in Section 2 of <xref target="UBiDi"/>. Implementations setting bidirectional text <bcp14>MUST</bcp14> make sure that each
             property value complies with the requirements of the Unicode Bidirectional Algorithm. Implementations <bcp14>
               MUST NOT
             </bcp14> assume that text values of adjacent properties are processed or displayed as a combined string; for
@@ -816,8 +810,7 @@ updates are needed for consistency.
             property but the value violates its definition according to the JSContact specification version defined in
             the Card <xref target="prop-version">version</xref> property.
           </t>
-          <t>
-            <!-- [rfced] The RFC Production Center has been advised that "ASCII"
+          <t><!-- [rfced] The RFC Production Center has been advised that "ASCII"
             and not "US-ASCII" should be used.  May we change two instances
             of "US-ASCII" in this document to "ASCII"?
 
@@ -851,8 +844,7 @@ updates are needed for consistency.
           <t>
             Implementations may encounter JSContact data where a property name is unknown to that implementation but the
             name adheres to the syntactic restrictions of IANA-registered property names. Implementations <bcp14>MUST
-          </bcp14> make sure that such a name does not violate the case-sensitivity rules defined in <xref
-                  target="case-sensitivity"/>. If the property name is valid, then implementations <bcp14>MUST NOT
+          </bcp14> make sure that such a name does not violate the case-sensitivity rules defined in <xref target="case-sensitivity"/>. If the property name is valid, then implementations <bcp14>MUST NOT
           </bcp14> treat such properties as invalid. Instead, they <bcp14>MUST</bcp14> preserve them in the JSContact
             object.
           </t>
@@ -867,8 +859,7 @@ updates are needed for consistency.
           <t>Several properties in this document restrict their allowed values to a list of String values. These values
             are case-sensitive. If not noted otherwise for a specific property, the initial list of values for such
             properties is registered at IANA in the <xref target="iana-enum-registry">"JSContact Enum Values"
-              registry</xref>. Implementations <bcp14>MUST</bcp14> only set IANA-registered or <xref
-                    target="vendor-specific-values">vendor-specific
+              registry</xref>. Implementations <bcp14>MUST</bcp14> only set IANA-registered or <xref target="vendor-specific-values">vendor-specific
             </xref> values for such properties.
           </t>
         </section>
@@ -942,11 +933,9 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
         <section anchor="vendor-specific-values" numbered="true" toc="default">
           <name>Vendor-Specific Values</name>
           <t>
-            Some JSContact IANA-registered properties allow their values to be vendor-specific. One such example is the  <xref
-                  target="kind">"kind"
+            Some JSContact IANA-registered properties allow their values to be vendor-specific. One such example is the  <xref target="kind">"kind"
           </xref> property, which enumerates its standard values but also allows for arbitrary vendor-specific values.
-            Such vendor-specific values <bcp14>MUST</bcp14> be valid "v-extension" values as defined in <xref
-                  target="vendor-specific-properties"/>. The example in
+            Such vendor-specific values <bcp14>MUST</bcp14> be valid "v-extension" values as defined in <xref target="vendor-specific-properties"/>. The example in
             <xref target="vendor-value-example"/>
             illustrates this:
           </t>
@@ -1026,8 +1015,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
       </t>
       <t>Its media type is defined in <xref target="iana-media-type"/>.
       </t>
-      <t>
-        <xref target="example-card"/>
+      <t><xref target="example-card"/>
         shows a basic Card for the person "John Doe". As the object is the topmost object in the JSON data, it has the
         @type property set according to the rules defined in <xref target="prop-type"/>.
       </t>
@@ -1067,8 +1055,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <dl spacing="normal">
             <dt>version: String (mandatory).</dt>
             <dd>The JSContact version of this Card. The value <bcp14>MUST</bcp14> be one of
-              the IANA-registered JSContact Version values for the version property. Also see <xref
-                      target="current-version"/>.
+              the IANA-registered JSContact Version values for the version property. Also see <xref target="current-version"/>.
             </dd>
           </dl>
           <figure anchor="example-version">
@@ -1204,7 +1191,6 @@ jsversion = 1*DIGIT "." 1*DIGIT
               <t>The set of Card objects that relate to the Card. The value is a map, where each key is the uid property
                 value of the related Card, and the value defines the relation.
               </t>
-
             </dd>
           </dl>
           <t>The Relation object has the following properties:</t>
@@ -1320,10 +1306,8 @@ jsversion = 1*DIGIT "." 1*DIGIT
                 and views. The value <bcp14>SHOULD</bcp14> be a URN <xref target="RFC8141"/>, but for compatibility with
                 <xref target="RFC6350"/>, it <bcp14>MAY</bcp14> also be a URI
                 <xref target="RFC3986"/>
-                or free-text value. The value of the URN <bcp14>SHOULD</bcp14> be in the "uuid" namespace <xref
-                        target="RFC4122" format="default"/>.
+                or free-text value. The value of the URN <bcp14>SHOULD</bcp14> be in the "uuid" namespace <xref target="RFC4122" format="default"/>.
               </t>
-
               <!--[rfced] FYI: For clarity and ease of reading, we added a reference
               to RFC 4122 as shown below.
 
@@ -1339,7 +1323,6 @@ jsversion = 1*DIGIT "." 1*DIGIT
                  progress and will likely introduce new UUID versions and
                  best practices for generating global unique identifiers [UUID].
               -->
-
               <t>As of this writing, a <xref target="I-D.ietf-uuidrev-rfc4122bis">revision</xref> of the Universally
                 Unique Identifier (UUID) Standards Track document
                 <xref target="RFC4122" format="default"/>
@@ -1415,8 +1398,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
                   kind property value set to "separator", and the defaultSeparator property <bcp14>MUST NOT</bcp14> be
                   set.
                 </t>
-                <t>
-                  <xref target="example-name-twoword"/>
+                <t><xref target="example-name-twoword"/>
                   shows an example for the name "Vincent van Gogh". Note how a single name component value may consist
                   of multiple words.
                 </t>
@@ -1436,8 +1418,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
                 Figure 15, so we placed it above Figure 16 instead. The update is
                 shown in Section 2.2.1.1.
                 -->
-                <t>
-                  <xref target="example-name-surname2"/>
+                <t><xref target="example-name-surname2"/>
                   illustrates a name with a second surname such as a Spanish name. Additional examples are shown in
                   Figures
                   <xref target="example-name-sortas" format="counter"/>
@@ -1519,8 +1500,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
                   property of the NameComponent object (see below). For each key in the map, there <bcp14>MUST</bcp14> exist
                   at least one NameComponent object that has the type in the components property of the name.
                 </t>
-                <t>
-                  <xref target="example-name-sortas"/>
+                <t><xref target="example-name-sortas"/>
                   illustrates the use of the sortAs property. The property value indicates that the middle name followed
                   by both surnames should be used when sorting the name by surname. The absence of "middle" indicates
                   that the middle name on its own should be disregarded during sort. Even though the name only contains
@@ -1639,8 +1619,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
               </dd>
               <dt>phonetic: String (optional).</dt>
               <dd>The pronounciation of the name component. If this property is set, then at least one of the Name
-                object properties, phoneticSystem or phoneticScript, <bcp14>MUST</bcp14> be set. Also see <xref
-                        target="prop-phonetic"/>.
+                object properties, phoneticSystem or phoneticScript, <bcp14>MUST</bcp14> be set. Also see <xref target="prop-phonetic"/>.
               </dd>
             </dl>
           </section>
@@ -1824,8 +1803,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
             </dd>
             <dt>pref: UnsignedInt (optional).</dt>
             <dd>
-              The preference of the pronouns in relation to other pronouns in the same context. Also see <xref
-                    target="prop-pref"/>.
+              The preference of the pronouns in relation to other pronouns in the same context. Also see <xref target="prop-pref"/>.
             </dd>
           </dl>
           <figure anchor="example-speakToAs">
@@ -1922,16 +1900,14 @@ jsversion = 1*DIGIT "." 1*DIGIT
             </dd>
             <dt>address: String (mandatory).</dt>
             <dd>
-              The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in <xref
-                    target="RFC5322" sectionFormat="of" section="3.4.1"/>.
+              The email address. This <bcp14>MUST</bcp14> be an <em>addr-spec</em> value as defined in <xref target="RFC5322" sectionFormat="of" section="3.4.1"/>.
             </dd>
             <dt>contexts: String[Boolean] (optional).</dt>
             <dd>The contexts in which to use this email address. Also see <xref target="prop-contexts"/>.
             </dd>
             <dt>pref: UnsignedInt (optional).</dt>
             <dd>
-              The preference of the email address in relation to other email addresses. Also see <xref
-                    target="prop-pref"/>.
+              The preference of the email address in relation to other email addresses. Also see <xref target="prop-pref"/>.
             </dd>
             <dt>label: String (optional).</dt>
             <dd>
@@ -2040,8 +2016,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
             <dd>
               <t>
                 The set of contact features that the phone number may be used for. The set is represented as an object,
-                with each key being a method type. The boolean value <bcp14>MUST</bcp14> be "true". The <xref
-                      target="enumerated-values">enumerated
+                with each key being a method type. The boolean value <bcp14>MUST</bcp14> be "true". The <xref target="enumerated-values">enumerated
               </xref> method type values are:
               </t>
               <ul spacing="compact">
@@ -2152,7 +2127,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <name>calendars</name>
           <dl spacing="normal">
             <dt>calendars: Id[Calendar] (optional).</dt>
-	    <dd>The calendaring resources of the entity represented by the Card, such as to look up free-busy information.</dd>
+            <dd>The calendaring resources of the entity represented by the Card, such as to look up free-busy information.</dd>
           </dl>
           <t>A Calendar object has all properties of the <xref target="resource">Resource</xref> data type, with the
             following additional definitions:
@@ -2211,8 +2186,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
             </dd>
             <dt>pref: UnsignedInt (optional).</dt>
             <dd>
-              The preference of the scheduling address in relation to other scheduling addresses. Also see <xref
-                    target="prop-pref"/>.
+              The preference of the scheduling address in relation to other scheduling addresses. Also see <xref target="prop-pref"/>.
             </dd>
             <dt>label: String (optional).</dt>
             <dd>
@@ -2326,15 +2300,13 @@ jsversion = 1*DIGIT "." 1*DIGIT
                 phoneticScript: String (optional).
               </dt>
               <dd>
-                The script used in the value of the AddressComponent phonetic property. Also see <xref
-                      target="prop-phonetic"/>.
+                The script used in the value of the AddressComponent phonetic property. Also see <xref target="prop-phonetic"/>.
               </dd>
               <dt>
                 phoneticSystem: String (optional).
               </dt>
               <dd>
-                The phonetic system used in the AddressComponent phonetic property. Also see <xref
-                      target="prop-phonetic"/>.
+                The phonetic system used in the AddressComponent phonetic property. Also see <xref target="prop-phonetic"/>.
               </dd>
             </dl>
             <t>The following example illustrates the use of the address property for "54321 Oak St, Reston, CA 20190,
@@ -2472,8 +2444,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
               </dd>
               <dt>phonetic: String (optional).</dt>
               <dd>The pronounciation of the name component. If this property is set, then at least one of the Address
-                object phoneticSystem or phoneticScript properties <bcp14>MUST</bcp14> be set. Also see <xref
-                        target="prop-phonetic"/>.
+                object phoneticSystem or phoneticScript properties <bcp14>MUST</bcp14> be set. Also see <xref target="prop-phonetic"/>.
               </dd>
             </dl>
           </section>
@@ -2788,8 +2759,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
               <t>The property values localized to languages other than the <xref target="language">main language</xref> of
                 the Card. Localizations provide language-specific alternatives for existing property values and <bcp14>
                   SHOULD NOT
-                </bcp14> add new properties. The keys in the localizations property value are language tags <xref
-                        target="RFC5646"/>, the values are of type PatchObject and localize the Card in that language
+                </bcp14> add new properties. The keys in the localizations property value are language tags <xref target="RFC5646"/>, the values are of type PatchObject and localize the Card in that language
                 tag. The paths in the PatchObject are relative to the Card that includes the localizations property. A
                 patch <bcp14>MUST NOT</bcp14> target the localizations property.
               </t>
@@ -2809,8 +2779,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
           <t>A patch in the PatchObject may contain any value type. Its value <bcp14>MUST</bcp14> be a valid value
             according to the definition of the patched property.
           </t>
-          <t>
-            <xref target="example-localizations-replace"/>
+          <t><xref target="example-localizations-replace"/>
             localizes the name property by completely replacing its contents in Ukrainian language with Cyrillic script.
           </t>
           <figure anchor="example-localizations-replace">
@@ -2840,8 +2809,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
 }
 ]]></sourcecode>
           </figure>
-          <t>
-            <xref target="example-localizations-patch"/>
+          <t><xref target="example-localizations-patch"/>
             localizes the title name by patching <em>inside</em> the titles property. All properties, except the name
             property in the Title object, are left as is.
           </t>
@@ -2948,8 +2916,7 @@ jsversion = 1*DIGIT "." 1*DIGIT
             <dd>The point in time in UTC time.
             </dd>
           </dl>
-          <t>
-            <xref target="example-anniversaries"/>
+          <t><xref target="example-anniversaries"/>
             illustrates anniversaries with partial dates and a timestamp. Note how the @type property is set for the
             Timestamp object value according to the rules defined in <xref target="prop-type"/>.
           </t>
@@ -3261,15 +3228,12 @@ to the enum values?
           <dd>
             <t>version</t>
             <t>This parameter conveys the version of the JSContact data in the body part. It <bcp14>MUST NOT</bcp14> occur
-              more than once. If this parameter is set, then the values of all JSContact <xref
-                      target="iana-property-registry-version">version
+              more than once. If this parameter is set, then the values of all JSContact <xref target="iana-property-registry-version">version
               </xref> properties in the body part <bcp14>MUST</bcp14> match the parameter value.
             </t>
           </dd>
           <dt>Encoding considerations:</dt>
-          <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259"
-                                                                                                        sectionFormat="of"
-                                                                                                        section="11"/>.
+          <dd>This is the same as the encoding considerations of application/json, as specified in <xref target="RFC8259" sectionFormat="of" section="11"/>.
           </dd>
           <dt>Security considerations:</dt>
           <dd>See
@@ -3288,8 +3252,7 @@ to the enum values?
           <dt>Applications that use this media type:</dt>
           <dd>Applications that currently make use of the text/vCard media type can use this as an alternative.</dd>
           <dt>Fragment identifier considerations:</dt>
-          <dd>A JSON Pointer fragment identifier may be used, as defined in <xref target="RFC6901" sectionFormat="comma"
-                                                                                 section="6"/>.
+          <dd>A JSON Pointer fragment identifier may be used, as defined in <xref target="RFC6901" sectionFormat="comma" section="6"/>.
           </dd>
           <dt>Additional information:</dt>
           <dd>
@@ -3343,8 +3306,7 @@ to the enum values?
         -->
         <t>Registry assignments that introduce <xref target="versioning">backwards-incompatible</xref> changes require
           the JSContact major version to change; other changes only require a change to the minor version. The registry
-          policy for assignments that require the JSContact major version to change is Standards Action (<xref
-                  target="RFC8126" sectionFormat="comma" section="4.9"/>). The registry policy for other assignments is
+          policy for assignments that require the JSContact major version to change is Standards Action (<xref target="RFC8126" sectionFormat="comma" section="4.9"/>). The registry policy for other assignments is
           Specification Required (<xref target="RFC8126" sectionFormat="comma" section="4.6"/>).
         </t>
         <t>The designated expert (DE) decides if a major or minor version change is required and assigns the new version
@@ -3509,8 +3471,7 @@ to the enum values?
             <dd>May be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
             <dd>The JSContact version on which the property definition is based. The version <bcp14>MUST</bcp14> be one
-              of the allowed values of the version property in the "JSContact Version" registry (see <xref
-                      target="tab-iana-version-registry"/>).
+              of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).
             </dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the property was obsoleted; therefore, it <bcp14>MUST NOT</bcp14> be
@@ -3555,18 +3516,7 @@ to the enum values?
                   Organization, OrgUnit, PartialDate, PersonalInfo, Phone, Pronouns, Relation, SchedulingAddress,
                   SpeakToAs, Timestamp, Title
                 </td>
-                <td align="left">Sections <xref target="address" format="counter"/>,<xref target="addresscomponent"
-                                                                                         format="counter"/>,<xref
-                        target="anniversaries" format="counter"/>,<xref target="cardtype" format="counter"/>,<xref
-                        target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref
-                        target="directories" format="counter"/>,<xref target="emails" format="counter"/>,<xref
-                        target="preferredLanguages" format="counter"/>,<xref target="links" format="counter"/>,<xref
-                        target="media" format="counter"/>,<xref target="name" format="counter"/>,<xref
-                        target="namecomponent" format="counter"/>,<xref target="nicknames" format="counter"/>,<xref
-                        target="notes" format="counter"/>,<xref target="onlineServices" format="counter"/>,<xref
-                        target="organizations" format="counter"/>,<xref target="personalInfo" format="counter"/>,<xref
-                        target="phones" format="counter"/>,<xref target="speakToAs" format="counter"/>,<xref
-                        target="relatedTo" format="counter"/>,<xref target="schedulingAddresses" format="counter"/>,
+                <td align="left">Sections <xref target="address" format="counter"/>,<xref target="addresscomponent" format="counter"/>,<xref target="anniversaries" format="counter"/>,<xref target="cardtype" format="counter"/>,<xref target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref target="emails" format="counter"/>,<xref target="preferredLanguages" format="counter"/>,<xref target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref target="name" format="counter"/>,<xref target="namecomponent" format="counter"/>,<xref target="nicknames" format="counter"/>,<xref target="notes" format="counter"/>,<xref target="onlineServices" format="counter"/>,<xref target="organizations" format="counter"/>,<xref target="personalInfo" format="counter"/>,<xref target="phones" format="counter"/>,<xref target="speakToAs" format="counter"/>,<xref target="relatedTo" format="counter"/>,<xref target="schedulingAddresses" format="counter"/>,
                   <xref target="titles" format="counter"/>
                 </td>
               </tr>
@@ -3640,15 +3590,7 @@ to the enum values?
                 <td align="left">Address, Calendar, CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media,
                   Nickname, OnlineService, Organization, Phone, Pronouns, SchedulingAddress
                 </td>
-                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="prop-contexts"
-                                                                                          format="counter"/>,<xref
-                        target="address" format="counter"/>,<xref target="calendars" format="counter"/>,<xref
-                        target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref
-                        target="emails" format="counter"/>,<xref target="preferredLanguages" format="counter"/>,<xref
-                        target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref
-                        target="nicknames" format="counter"/>,<xref target="onlineServices" format="counter"/>,<xref
-                        target="organizations" format="counter"/>,<xref target="phones" format="counter"/>,<xref
-                        target="speakToAs" format="counter"/>,
+                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="prop-contexts" format="counter"/>,<xref target="address" format="counter"/>,<xref target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref target="emails" format="counter"/>,<xref target="preferredLanguages" format="counter"/>,<xref target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref target="nicknames" format="counter"/>,<xref target="onlineServices" format="counter"/>,<xref target="organizations" format="counter"/>,<xref target="phones" format="counter"/>,<xref target="speakToAs" format="counter"/>,
                   <xref target="schedulingAddresses" format="counter"/>
                 </td>
               </tr>
@@ -3762,12 +3704,8 @@ to the enum values?
                 <td align="left">AddressComponent, Anniversary, Calendar, Card, CryptoKey, Directory, Link, Media,
                   NameComponent, PersonalInfo, Title
                 </td>
-                <td align="left">Sections <xref target="addresscomponent" format="counter"/>,<xref target="anniversaries"
-                                                                                                  format="counter"/>,
-                  <xref target="calendars" format="counter"/>,<xref target="kind" format="counter"/>,<xref
-                          target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref
-                          target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref
-                          target="namecomponent" format="counter"/>,<xref target="personalInfo" format="counter"/>,
+                <td align="left">Sections <xref target="addresscomponent" format="counter"/>,<xref target="anniversaries" format="counter"/>,
+                  <xref target="calendars" format="counter"/>,<xref target="kind" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref target="namecomponent" format="counter"/>,<xref target="personalInfo" format="counter"/>,
                   <xref target="titles" format="counter"/>
                 </td>
               </tr>
@@ -3777,13 +3715,7 @@ to the enum values?
                 <td align="left">Calendar, CryptoKey, Directory, EmailAddress, Link, Media, OnlineService, PersonalInfo,
                   Phone, SchedulingAddress
                 </td>
-                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="prop-label"
-                                                                                          format="counter"/>,<xref
-                        target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref
-                        target="directories" format="counter"/>,<xref target="emails" format="counter"/>,<xref
-                        target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref
-                        target="onlineServices" format="counter"/>,<xref target="personalInfo" format="counter"/>,<xref
-                        target="phones" format="counter"/>,
+                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="prop-label" format="counter"/>,<xref target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref target="emails" format="counter"/>,<xref target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref target="onlineServices" format="counter"/>,<xref target="personalInfo" format="counter"/>,<xref target="phones" format="counter"/>,
                   <xref target="schedulingAddresses" format="counter"/>
                 </td>
               </tr>
@@ -3839,10 +3771,7 @@ to the enum values?
                 <td align="left">mediaType</td>
                 <td align="left">String</td>
                 <td align="left">Calendar, CryptoKey, Directory, Link, Media</td>
-                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="calendars"
-                                                                                          format="counter"/>,<xref
-                        target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref
-                        target="links" format="counter"/>,
+                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref target="links" format="counter"/>,
                   <xref target="media" format="counter"/>
                 </td>
               </tr>
@@ -3874,9 +3803,7 @@ to the enum values?
                 <td align="left">name</td>
                 <td align="left">String</td>
                 <td align="left">Author, Nickname, Organization, OrgUnit, Title</td>
-                <td align="left">Sections <xref target="notes" format="counter"/>,<xref target="nicknames"
-                                                                                       format="counter"/>,<xref
-                        target="organizations" format="counter"/>,
+                <td align="left">Sections <xref target="notes" format="counter"/>,<xref target="nicknames" format="counter"/>,<xref target="organizations" format="counter"/>,
                   <xref target="titles" format="counter"/>
                 </td>
               </tr>
@@ -3990,14 +3917,7 @@ to the enum values?
                 <td align="left">Address, Calendar, CryptoKey, Directory, EmailAddress, LanguagePref, Link, Media,
                   Nickname, OnlineService, Phone, Pronouns, SchedulingAddress
                 </td>
-                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="prop-pref"
-                                                                                          format="counter"/>,<xref
-                        target="address" format="counter"/>,<xref target="calendars" format="counter"/>,<xref
-                        target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref
-                        target="emails" format="counter"/>,<xref target="preferredLanguages" format="counter"/>,<xref
-                        target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref
-                        target="nicknames" format="counter"/>,<xref target="onlineServices" format="counter"/>,<xref
-                        target="phones" format="counter"/>,<xref target="speakToAs" format="counter"/>,
+                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="prop-pref" format="counter"/>,<xref target="address" format="counter"/>,<xref target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref target="emails" format="counter"/>,<xref target="preferredLanguages" format="counter"/>,<xref target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref target="nicknames" format="counter"/>,<xref target="onlineServices" format="counter"/>,<xref target="phones" format="counter"/>,<xref target="speakToAs" format="counter"/>,
                   <xref target="schedulingAddresses" format="counter"/>
                 </td>
               </tr>
@@ -4126,11 +4046,7 @@ to the enum values?
                 <td align="left">String</td>
                 <td align="left">Author, Calendar, CryptoKey, Directory, Link, Media, OnlineService, SchedulingAddress
                 </td>
-                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="notes"
-                                                                                          format="counter"/>,<xref
-                        target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref
-                        target="directories" format="counter"/>,<xref target="links" format="counter"/>,<xref
-                        target="media" format="counter"/>,<xref target="onlineServices" format="counter"/>,
+                <td align="left">Sections <xref target="resource" format="counter"/>,<xref target="notes" format="counter"/>,<xref target="calendars" format="counter"/>,<xref target="cryptoKeys" format="counter"/>,<xref target="directories" format="counter"/>,<xref target="links" format="counter"/>,<xref target="media" format="counter"/>,<xref target="onlineServices" format="counter"/>,
                   <xref target="schedulingAddresses" format="counter"/>
                 </td>
               </tr>
@@ -4226,15 +4142,13 @@ to the enum values?
             <dd>May be "common", "reserved", or "obsolete".</dd>
             <dt>Since Version:</dt>
             <dd>The JSContact version on which this type definition is based. The version <bcp14>MUST</bcp14> be one of
-              the allowed values of the version property in the "JSContact Version" registry (see <xref
-                      target="tab-iana-version-registry"/>).
+              the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).
             </dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the type definition was obsoleted; therefore, it <bcp14>MUST NOT
             </bcp14> be used in later versions. The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>
               MUST
-            </bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref
-                    target="tab-iana-version-registry"/>).
+            </bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).
             </dd>
             <dt>Change Controller:</dt>
             <dd>Person or entity responsible for requesting a change to the entry's definition ("IETF" for RFCs from the
@@ -4511,8 +4425,7 @@ to the enum values?
           "Property Context" second, and "Since Version" third. The enum values sort alphabetically in ascending order.
           Equal entries sort in any order.
         </t>
-        <t>The registry process for a new enum value or adding a new enumerable property is outlined in <xref
-                target="iana-registry-policy" format="default"/>.
+        <t>The registry process for a new enum value or adding a new enumerable property is outlined in <xref target="iana-registry-policy" format="default"/>.
         </t>
         <section anchor="iana-enum-registry-registry-template" numbered="true" toc="default">
           <name>JSContact Enum Values Registry Property Template</name>
@@ -4531,8 +4444,7 @@ to the enum values?
             </dd>
             <dt>Since Version:</dt>
             <dd>The JSContact version on which the enum value definition is based. The version <bcp14>MUST</bcp14> be
-              one of the allowed values of the version property in the "JSContact Version" registry (see <xref
-                      target="tab-iana-version-registry"/>).
+              one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).
             </dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the enum value definition was obsoleted; therefore, the enum value
@@ -4546,8 +4458,7 @@ to the enum values?
               IETF stream).
             </dd>
             <dt>Initial Contents:</dt>
-            <dd>The initial list of defined values for the enum, using the template defined in <xref
-                    target="iana-enum-registry-value-template" format="default"/>. A subregistry will be created with
+            <dd>The initial list of defined values for the enum, using the template defined in <xref target="iana-enum-registry-value-template" format="default"/>. A subregistry will be created with
               these values for this property name/context tuple.
             </dd>
           </dl>
@@ -4560,16 +4471,14 @@ to the enum values?
             <dd>The verbatim value of the enum.</dd>
             <dt>Since Version:</dt>
             <dd>The JSContact version on which the enum value definition is based. The version <bcp14>MUST</bcp14> be
-              one of the allowed values of the version property in the "JSContact Version" registry (see <xref
-                      target="tab-iana-version-registry"/>).
+              one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).
             </dd>
             <dt>Until Version:</dt>
             <dd>The JSContact version after which the enum value was obsoleted; therefore, the enum value <bcp14>MUST
               NOT
             </bcp14> be used in later versions. The Until Version value either <bcp14>MUST NOT</bcp14> be set or <bcp14>
               MUST
-            </bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref
-                    target="tab-iana-version-registry"/>).
+            </bcp14> be one of the allowed values of the version property in the "JSContact Version" registry (see <xref target="tab-iana-version-registry"/>).
             </dd>
             <dt>Reference or Description:</dt>
             <dd>A brief description or RFC number and section reference for the semantics of the value.</dd>
@@ -5626,8 +5535,7 @@ to the enum values?
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8605.xml"/>
         <!--[I-D.ietf-uuidrev-rfc4122bis] in EDIT state; entered the long way to include the correct initials-->
-        <reference anchor="I-D.ietf-uuidrev-rfc4122bis"
-                   target="https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis-14">
+        <reference anchor="I-D.ietf-uuidrev-rfc4122bis" target="https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis-14">
           <front>
             <title>Universally Unique IDentifiers (UUID)</title>
             <author fullname="Kyzer R. Davis" initials="K. R." surname="Davis">
@@ -5645,8 +5553,7 @@ to the enum values?
         </reference>
         <!--[I-D.ietf-calext-vcard-jscontact-extensions] in AUTH48 state; entered the long way to include the correct initials-->
         <!-- This is going to be RFC 9554 -->
-        <reference anchor="I-D.ietf-calext-vcard-jscontact-extensions"
-                   target="https://datatracker.ietf.org/doc/html/ietf-calext-vcard-jscontact-extensions-12">
+        <reference anchor="I-D.ietf-calext-vcard-jscontact-extensions" target="https://datatracker.ietf.org/doc/html/ietf-calext-vcard-jscontact-extensions-12">
           <front>
             <title>vCard Format Extension for JSContact</title>
             <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
@@ -5661,8 +5568,7 @@ to the enum values?
         </reference>
         <!--[I-D.ietf-calext-jscontact-vcard] in AUTH48 state; entered the long way to include the correct initials-->
         <!-- This is going to be RFC 9555 -->
-        <reference anchor="I-D.ietf-calext-jscontact-vcard"
-                   target="https://datatracker.ietf.org/doc/html/ietf-calext-jscontact-vcard-15">
+        <reference anchor="I-D.ietf-calext-jscontact-vcard" target="https://datatracker.ietf.org/doc/html/ietf-calext-jscontact-vcard-15">
           <front>
             <title>vCard Format Extension for JSContact</title>
             <author fullname="Robert Stepanek" initials="R. S." surname="Stepanek">
