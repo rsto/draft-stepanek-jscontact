@@ -241,10 +241,22 @@ updates are needed for consistency.
             <xref target="vendor-specific-extensions" format="counter"/>
             then define the exact requirements for property names.
           </t>
-          <t><xref target="example-foo-object"/>
-            illustrates the definition of a JSContact object type. The names "Foo" and "baz" are only for demonstration
-            and have no meaning outside the example. The example illustrates the following:
-          </t>
+          <t>The next paragraph illustrates how a JSContact object is defined.  The names "Foo" and "baz" are only for demonstration and have no meaning outside the example.</t>
+          <ul empty="true" anchor="example-foo-object">
+            <li>
+            <t>A Foo object has the following properties:</t>
+            <dl spacing="normal">
+              <dt>@type: String.</dt>
+              <dd>The JSContact type of the object. The value <bcp14>MUST</bcp14> be "Foo", if set.
+              </dd>
+              <dt>baz: Number (mandatory).</dt>
+              <dd>The baz level of the contact. The value <bcp14>MUST</bcp14> be an integer greater than 0 and less
+                than 10.
+              </dd>
+            </dl>
+            </li>
+          </ul>
+	  <t>The above paragraph illustrates the following:</t>
           <ul>
             <li>It defines a JSContact object type named "Foo" having two properties, named "@type" and "baz".</li>
             <li>The @type property adheres to the rules outlined in <xref target="prop-type"/>. Because of this, it is
@@ -273,19 +285,6 @@ updates are needed for consistency.
                 qux: Number (mandatory). Defines the qux-ishness of this contact.
                 The value MUST be an integer greater than 0 and less than 10.
           -->
-          <section anchor="example-foo-object">
-            <name>Example of a JSContact Object Definition</name>
-            <t>A Foo object has the following properties:</t>
-            <dl spacing="normal">
-              <dt>@type: String.</dt>
-              <dd>The JSContact type of the object. The value <bcp14>MUST</bcp14> be "Foo", if set.
-              </dd>
-              <dt>baz: Number (mandatory).</dt>
-              <dd>The baz level of the contact. The value <bcp14>MUST</bcp14> be an integer greater than 0 and less
-                than 10.
-              </dd>
-            </dl>
-          </section>
         </section>
         <section anchor="type-signatures" numbered="true" toc="default">
           <name>Type Signatures</name>
