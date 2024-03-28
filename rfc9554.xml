@@ -573,7 +573,7 @@ SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=text:peter94
           <dd>Identifies the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows naming an author as a free-text value (see <xref target="param-author-name"/>).</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  As an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows naming an author as a free-text value (see <xref target="param-author-name"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -617,7 +617,7 @@ Perhaps:
    param-value (see Section 3.3 of [RFC6350]).
 -->
 
-	    Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" sectionFormat="of" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows identifying an author by URI (see <xref target="param-author"/>).</t>
+	    Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" sectionFormat="of" section="3.3"/>).  As an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows identifying an author by URI (see <xref target="param-author"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
