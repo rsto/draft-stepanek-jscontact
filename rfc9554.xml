@@ -251,7 +251,8 @@ Current:
           <t>Example: In this example, the post office box and the extended address components are absent.  The street number and name are both added as separate components and are combined in the street component for backwards compatibility.</t>
             <sourcecode name=""><![CDATA[
 ADR;GEO="geo:12.3457,78.910":
-  ;;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;123;Main Street;;;;;;;
+  ;;123 Main Street;Any Town;CA;91921-1234;U.S.A
+  ;;;;123;Main Street;;;;;;
 ]]></sourcecode>
  
       </section>
