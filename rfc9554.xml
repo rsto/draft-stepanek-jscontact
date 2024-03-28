@@ -793,7 +793,8 @@ If more than one same-named property has both the PHONETIC parameter set and an 
             <sourcecode name="" type="abnf"><![CDATA[
 phonetic-param = "PHONETIC=" phonetic-value
 
-phonetic-value = "ipa" / "piny" / "jyut" / "script" / iana-token / x-name
+phonetic-value = "ipa" / "piny" / "jyut" / "script" /
+                 iana-token / x-name
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
