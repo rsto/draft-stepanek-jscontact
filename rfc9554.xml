@@ -694,7 +694,7 @@ derived-param    = "DERIVED" "=" ("true" / "false")
           <dd>
             <sourcecode name=""><![CDATA[
 N:;John;Quinlan;Mr.;
-FN;DERIVED=TRUE:Mr.  John Quinlan
+FN;DERIVED=TRUE:Mr. John Quinlan
 ]]></sourcecode>
           </dd>
         </dl>
