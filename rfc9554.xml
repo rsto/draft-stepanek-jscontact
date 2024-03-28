@@ -1,18 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE rfc>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="pre5378Trust200902" submissionType="IETF" category="std" xml:lang="en" consensus="true" docName="draft-ietf-calext-vcard-jscontact-extensions-12" obsoletes="" updates="6350" tocInclude="true" symRefs="true" sortRefs="true" version="3">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rfc [
+ <!ENTITY nbsp    "&#160;">
+ <!ENTITY zwsp   "&#8203;">
+ <!ENTITY nbhy   "&#8209;">
+ <!ENTITY wj     "&#8288;">
+]> 
+
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="pre5378Trust200902" submissionType="IETF" category="std" consensus="true" xml:lang="en" docName="draft-ietf-calext-vcard-jscontact-extensions-11" number="9554" obsoletes="" updates="6350" tocInclude="true" symRefs="true" sortRefs="true" version="3">
+  
   <front>
+<!--[rfced] *AD, changes were submitted twice after the document was
+initially approved. Please review the updates from version 10 to
+version 12 and let us know if you approve. The updates can be
+viewed in this diff file:
+https://www.rfc-editor.org/authors/rfc9554-ad-diff.html
+-->			
+    
+<!--[rfced] Would it be correct to make "Extension" plural in the
+document title since the document discusses several extensions?
+If not, should "Extensions" be made singular in the short title
+for consistency? Please review.
+
+Document Title
+Original:
+   vCard Format Extension for JSContact
+
+Perhaps:
+   vCard Format Extensions for JSContact
+
+...
+Short Title
+Original:
+   vCard JSContact Extensions
+-->
+    
     <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-vcard-jscontact-extensions-12"/>
+    <seriesInfo name="RFC" value="9554"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>Fastmail</organization>
       <address>
         <postal>
-          <street>PO Box 234, Collins St West</street>
+	  <extaddr>PO Box 234</extaddr>
+	  <street>Collins St. West</street>
           <city>Melbourne</city>
-          <code>VIC 8007</code>
+	  <region>VIC</region>
+          <code>8007</code>
           <country>Australia</country>
-          <region> </region>
         </postal>
         <email>rsto@fastmailteam.com</email>
       </address>
@@ -21,18 +55,19 @@
       <organization>IIT-CNR</organization>
       <address>
         <postal>
-          <street>Via Moruzzi,1</street>
+          <street>Via Moruzzi, 1</street>
           <city>Pisa</city>
           <code>56124</code>
           <country>Italy</country>
-          <region> </region>
+          <region></region>
         </postal>
         <email>mario.loffredo@iit.cnr.it</email>
       </address>
     </author>
-    <date year="2024" month="March" day="4"/>
-    <area>Applications</area>
-    <workgroup>Calendaring Extensions</workgroup>
+    <date year="2024" month="March"/>
+    <area>art</area>
+    <workgroup>calext</workgroup>
+
     <keyword>addressbook</keyword>
     <keyword>contacts</keyword>
     <keyword>cards</keyword>
@@ -40,10 +75,7 @@
     <keyword>JSContact</keyword>
     <abstract>
       <t>
-        This document defines a set of new properties for vCard and extends the use of existing ones.
-        Their primary purpose is to align the same set of features between the JSContact and vCard formats,
-        but the new definitions also aim to be useful within just the vCard format.  This document updates
-        RFC 6350 (vCard).
+        This document defines a set of new properties for vCard and extends the use of existing ones. Their primary purpose is to align the same set of features between the JSContact and vCard formats, but the new definitions also aim to be useful within just the vCard format.  This document updates RFC 6350 ("vCard Format Specification").
       </t>
     </abstract>
   </front>
@@ -51,21 +83,21 @@
     <section>
       <name>Introduction</name>
       <t>
-        The JSContact <xref target="I-D.ietf-calext-jscontact"/> format aims to be an alternative to the
+        The JSContact <xref target="RFC9553"/> format aims to be an alternative to the
         vCard <xref target="RFC6350"/> format for representation of contact and address book
         data.  As such, it introduces new semantics that are not covered in the current
         definition of vCard and its various extensions.  Converting contact data between
-        the two formats is defined in <xref target="I-D.ietf-calext-jscontact-vcard"/> with the goal of
-        not losing any semantics during conversion.  To do so, this document
+        the two formats is defined in <xref target="RFC9555"/> with the goal of
+        not losing any semantics during conversion. To achieve this, this document
         defines a new set of properties for vCard and extends existing definitions.
       </t>
       <section anchor="notational-conventions" numbered="true" toc="default">
         <name>Notational Conventions</name>
-        <t>The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>", "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default" sectionFormat="of" derivedContent="RFC2119"/> <xref target="RFC8174" format="default" sectionFormat="of" derivedContent="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
+        <t>The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>", "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default" sectionFormat="of" derivedContent="RFC2119"/> <xref target="RFC8174" format="default" sectionFormat="of" derivedContent="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
       </section>
       <section anchor="abnf-notations">
         <name>ABNF Notations</name>
-        <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document either are defined in <xref target="RFC5234"/> (such as the ABNF for CRLF, WSP, DQUOTE, VCHAR, ALPHA, and DIGIT) or <xref target="RFC6350"/>.
+        <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document are defined in either <xref target="RFC5234"/> (such as the ABNF for CRLF, WSP, DQUOTE, VCHAR, ALPHA, and DIGIT) or <xref target="RFC6350"/>.
         </t>
       </section>
     </section>
@@ -73,46 +105,87 @@
       <name>Updated Properties</name>
       <section anchor="prop-adr">
         <name>ADR</name>
-        <t>This specification modifies the definition of the "ADR" property.  It extends its structured value with additional address components to better support the variety of international addresses.  It separates the address parts that currently typically are combined in street address component values into distinct components.</t>
-				<t>Implementations <bcp14>SHOULD</bcp14> write a combined value of these components in the street address component for backwards compatibility, but <bcp14>SHOULD</bcp14> ignore the street component during read if the ADR property value contains any of the new components.</t>
-        <t>The following change is made to the first paragraph in the "Special Notes" section, originally specified in <xref target="RFC6350" section="6.3.1"/>.  All remaining paragraphs of that section in the original specification still apply.</t>
-        <dl>
-          <dt>Special notes:</dt>
-          <dd>The structured type value consists of a sequence of
-             address components.  The component values MUST be specified in
-             their corresponding position.  The structured type value
-             corresponds, in sequence, to<br/>
-                the post office box;<br/>
-                the extended address (e.g., apartment or suite number);<br/>
-                the street address;<br/>
-                the locality (e.g., city);<br/>
-                the region (e.g., state or province);<br/>
-                the postal code;<br/>
-                the country name (full name in the language specified in
-                <xref target="RFC6350" section="5.1"/>);<br/>
-                the room or suite number or identifier;<br/>
-                the apartment number, extension designation or box number;<br/>
-                the building floor or level;<br/>
-                the street number;<br/>
-                the street name;<br/>
-                the building, tower, condominium;<br/>
-                the block name or number;<br/>
-                the subdistrict;<br/>
-                the district;<br/>
-                the landmark or another publicly known prominent feature that can substitute the street name and number, e.g., "White House"", "Taj Mahal"";<br/>
-                the cardinal direction or quadrant, e.g., "North".<br/>
-            </dd>
-        </dl>
-        <t>The following change is made to the definition of "ADR-value" in the "ABNF" section, originally specified in <xref target="RFC6350" section="6.3.1"/>.</t>
-        <dl>
-          <dt>ABNF</dt>
-          <dd>
+
+<!--[rfced] For consistency and to match the companion documents, we
+removed the quote marks from the "ADR" property, "N" property,
+and "TYPE" parameter.  Please let us know of any objections.
+-->
+	
+        <t>This specification modifies the definition of the ADR property.  It extends its structured value with additional address components to better support the variety of international addresses.  It separates the address parts, which currently are typically combined in street address component values, into distinct components.</t>
+	
+<t>Implementations <bcp14>SHOULD</bcp14> write a combined value of these components in the street address component for backwards compatibility, but they <bcp14>SHOULD</bcp14> ignore the street component during reads if the ADR property value contains any of the new components.</t>
+<t>The following change is made to the first paragraph under "Special notes", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.3.1"/>.  The remaining paragraphs of that section in the original specification still apply.</t>
+<t>
+
+<!-- [rfced] Please review whether any of the notes in this document
+should be in the <aside> element. It is defined as "a container for 
+content that is semantically less important or tangential to the 
+content that surrounds it" (https://authors.ietf.org/en/rfcxml-vocabulary#aside).
+-->
+
+             Special notes: The structured type value consists of a sequence of
+             address components. The component values <bcp14>MUST</bcp14> be specified in
+             their corresponding position. The structured type value
+             corresponds, in sequence, to the</t>
+	       <ul spacing="compact" empty="true">
+               <li> post office box;</li>
+               <li> extended address (e.g., apartment or suite number);</li>
+               <li> street address;</li>
+               <li> locality (e.g., city);</li>
+               <li> region (e.g., state or province);</li>
+               <li> postal code;</li>
+               <li> country name (full name in the language specified in
+                    <xref target="RFC6350" sectionFormat="of" section="5.1"/>);</li>
+               <li> room, suite number, or identifier;</li>
+               <li> apartment number, extension designation, or box number;</li>
+               <li> building floor or level;</li>
+               <li> street number;</li>
+               <li> street name;</li>
+               <li> building, tower, or condominium;</li>
+               <li> block name or number;</li>
+               <li> subdistrict;</li>
+               <li> district;</li>
+               <li> landmark or another publicly known prominent feature that can substitute the street name and number (e.g., "White House" and "Taj Mahal"); and </li>
+               <li> the cardinal direction or quadrant (e.g., "north").</li>
+            </ul>
+       
+        <t>The following change is made to the definition of "ADR-value" under "ABNF", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.3.1"/>.</t>
+
+<!-- [rfced] Please review whether the "type" attribute should be set for
+all sourcecode elements in the XML file. If the current list of preferred
+values for "type"
+(https://www.rfc-editor.org/materials/sourcecode-types.txt) does not
+contain an applicable type, then feel free to suggest a new one.
+Also, it is acceptable to leave the "type" attribute not set.  -->
+
+<!--[rfced] When we attempted to validate the ABNF using <https://author-tools.ietf.org/abnf>, we received the following error.
+Please review and let us know how we may fix this.
+
+
+(130:0): error: Rule SCRIPT was already defined on line 123 of 
+parsing failed: 1 errors encountered
+-->
+
+<!--[rfced] The following three lines exceed the 72-character limit
+within the sourcecode. Please review and let us know where you
+prefer to place the line breaks.
+
+Original
+  Section 2.1:
+    ADR-component-streetnumber ";" ADR-component-streetname ";" (2 characters over)
+    ;;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;123;Main Street;;;;;;;  (4 over)
+
+  Section 4.6:
+    phonetic-value = "ipa" / "piny" / "jyut" / "script" / iana-token / x-name (7 over)
+-->
+
+          <t>ABNF</t>
             <sourcecode name="" type="abnf"><![CDATA[
 ADR-value = ADR-component-pobox ";" ADR-component-ext ";"
             ADR-component-street ";" ADR-component-locality ";"
             ADR-component-region ";" ADR-component-code ";"
             ADR-component-country ";"
-            ; above components are defined in RFC 6350, section 6.3.1
+            ; above components are defined in RFC 6350, Section 6.3.1
             ADR-component-room ";" ADR-component-apartment ";"
             ADR-component-floor ";"
             ADR-component-streetnumber ";" ADR-component-streetname ";"
@@ -138,63 +211,86 @@ ADR-component-district = list-component
 ADR-component-landmark = list-component
 ADR-component-direction = list-component
 ]]></sourcecode>
-          </dd>
-        </dl>
-        <t>The following change is made to the "Example" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
-        <dl>
 
 
-          <dt>Example: In this example, the post office box and the extended address components are absent.  The street number and name are added both as separate components, as well as combined in the street component for backwards-compatibility.</dt>
-          <dd>
+<!--[rfced] We updated Section "6.2.2" to "6.3.1" in the following
+text as Section "6.2.2" is not the correct section reference
+(note that the second paragraph is included for context). Please
+let us know of any objections.
+
+Original:
+   The following change is made to the "Example" section, originally 
+   specified in Section 6.2.2 of [RFC6350].
+
+   Example: In this example, the post office box and the extended address 
+   components are absent. The street number and name are both added as 
+   separate components and are combined in the street component for backwards
+   compatibility.
+
+Current:
+   The following change is made under "Example", as originally 
+   specified in Section 6.3.1 of [RFC6350].
+
+   Example: In this example, the post office box and the extended address 
+   components are absent. The street number and name are both added as 
+   separate components and are combined in the street component for 
+   backwards compatibility.
+-->
+	    
+        <t>The following change is made under "Example", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.3.1"/>.</t>
+          <t>Example: In this example, the post office box and the extended address components are absent.  The street number and name are both added as separate components and are combined in the street component for backwards compatibility.</t>
             <sourcecode name="" type="abnf"><![CDATA[
 ADR;GEO="geo:12.3457,78.910":
   ;;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;123;Main Street;;;;;;;
 ]]></sourcecode>
-          </dd>
-        </dl>
+ 
       </section>
       <section anchor="prop-n">
         <name>N</name>
-        <t>This specification modifies the definition of the "N" property.  It extends its structured value with additional name components to better support international names and generation markers.  Doing so, this also facilitates formatting N property values using the <xref target="CLDRPersonName">Unicode CLDR Person Name</xref> formatting standard.</t>
-        <t>One new component is for secondary surnames, as in some cultures, such secondary surname kinds are used to indicate the paternal and maternal family names or generational names indicating father, grandfather.  Another new component indicates a generation ("II", "XVI") or parental relation ("Jr.", "Sr.").</t>
-        <t>Currently, implementations typically place secondary surnames in the family name components, and generational markers in the honorific suffixes component.  For backwards compatibility, implementations <bcp14>SHOULD</bcp14> add such values to both the newly defined components and their backwards-compatible counterpart.  Reading N property values, implementations <bcp14>SHOULD</bcp14> ignore any value in the backward-compatible component if an equal value is set in the according new component.  For example, a "Jr." that occurs in both honorific suffixes and generation should only be handled as a generational marker.</t>
-        <t>The following change is made to the first paragraph in the "Special Notes" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.  All remaining text of this and the following paragraphs of that section in the original specification still apply.</t>
-        <dl>
-          <dt>Special notes:</dt>
-          <dd>
-      The structured property value corresponds, in
-      sequence, to the<br/>
-      family names (also known as surnames),<br/>
-      given names,<br/>
-      additional names,<br/>
-      honorific prefixes,<br/>
-      honorific suffixes,<br/>
-      secondary surname,<br/>
-      and generation.<br/>
-          </dd>
-        </dl>
-        <t>The following change is made to the "ABNF" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
-        <dl>
-          <dt>ABNF</dt>
-          <dd>
+        <t>This specification modifies the definition of the N property.  It extends its structured value with additional name components to better support international names and generation markers.  In doing so, this also facilitates formatting N property values using the Unicode Common Locale Data Repository (CLDR) Person Name <xref target="CLDRPersonName"/> formatting standard.</t>
+        <t>One new component is for secondary surnames, because in some cultures, such secondary surname kinds are used to indicate the paternal and maternal family names or generational names indicating father or grandfather.  Another new component indicates a generation ("II", "XVI") or parental relation ("Jr.", "Sr.").</t>
+        <t>Currently, implementations typically place secondary surnames in the family name component and generational markers in the honorific suffixes component.  For backwards compatibility, implementations <bcp14>SHOULD</bcp14> add such values to both the newly defined components and their backwards-compatible counterpart.  Reading N property values, implementations <bcp14>SHOULD</bcp14> ignore any value in the backwards-compatible component if an equal value is set in the new component accordingly.  For example, a "Jr." that occurs in both honorific suffixes and generation should only be handled as a generational marker.</t>
+        <t>The following change is made to the first paragraph under "Special note", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.2.2"/>. The remaining paragraphs of that section in the original specification still apply.</t>
+
+<!--[rfced] In Section 6.2.2 of RFC 6350, "Special note" is singular,
+but Section 2.2 of this document uses the plural form.  Should
+"notes" be updated to "note" to match RFC 6350 as shown below, or
+do you prefer the plural form?
+
+Original:
+   Special notes: The structured property value corresponds, in
+   sequence, to the
+
+Perhaps:
+   Special note: The structured property value corresponds, in
+   sequence, to the
+-->	
+          <t>Special notes: The structured property value corresponds, in
+	  sequence, to the</t>
+	  <ul spacing="compact" empty="true">
+      <li>family names (also known as surnames);</li>
+      <li>given names;</li>
+      <li>additional names;</li>
+      <li>honorific prefixes;</li>
+      <li>honorific suffixes;</li>
+      <li>secondary surname; and</li>
+      <li>generation.</li>
+        </ul>
+        <t>The following change is made under "ABNF", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.2.2"/>.</t>
+          <t>ABNF</t> 
             <sourcecode name="" type="abnf"><![CDATA[
 N-param = "VALUE=text" / sort-as-param / language-param
              / altid-param / any-param
 N-value = list-component 6(";" list-component)
 ]]></sourcecode>
-          </dd>
-        </dl>
-        <t>The following change is made to the "Example" section, originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
-        <dl>
-          <dt>Example</dt>
-          <dd>
+        <t>The following change is made under "Examples", as originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
+          <t>Examples</t>
             <sourcecode name="" type="abnf"><![CDATA[
 N:Public;John;Quinlan;Mr.;Esq.
 
 N:Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.
 ]]></sourcecode>
-          </dd>
-        </dl>
+     
         <t>No change is required for the definition of the SORT-AS parameter, but the new components also apply for use with this parameter.</t>
       </section>
     </section>
@@ -206,7 +302,7 @@ N:Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.
           <dt>Property name:</dt>
           <dd>CREATED</dd>
           <dt>Purpose:</dt>
-          <dd>This property defines the date and time when the vCard was created</dd>
+          <dd>Defines the date and time when the vCard was created.</dd>
           <dt>Value type:</dt>
           <dd>A single timestamp value.</dd>
           <dt>Cardinality:</dt>
@@ -215,40 +311,40 @@ N:Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.
           <dd>VALUE</dd>
           <dt>Description:</dt>
           <dd>
-            This is the time stamp when the vCard was created.  Copying the
-            vCard across systems does not count as a new creation, nor does
-            a new revision.  Instead, the time stamp value typically
+            This is the timestamp when the vCard was created.  Copying the
+            vCard across systems does not count as a new creation nor
+            a new revision.  Instead, the timestamp value typically
             stays unchanged for the existence of the vCard.
           </dd>
           <dt>Format definition:</dt>
           <dd>
-            <t>This property is defined by the following notation:</t>
+	  <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
 created       = "CREATED" createdparam ":" timestamp
 
 createdparam  = *(
                  ;
-                 ; The following are OPTIONAL,
+                 ; The following are OPTIONAL
                  ; but MUST NOT occur more than once.
                  ;
                  (";" "VALUE" "=" "timestamp") /
                  ;
-                 ; The following are OPTIONAL,
+                 ; The following are OPTIONAL
                  ; and MAY occur more than once.
                  ;
                  (";" any-param)
                  ;
                  )
 ]]></sourcecode>
-          </dd>
+	  </dd>
           <dt>Example(s):</dt>
-          <dd>
+	<dd>
             <sourcecode name=""><![CDATA[
 CREATED:20220705T093412Z
 CREATED;VALUE=TIMESTAMP:20211022T140000-05
 ]]></sourcecode>
-          </dd>
-        </dl>
+	</dd>
+	</dl>
       </section>
       <section anchor="prop-gramgender">
         <name>GRAMGENDER</name>
@@ -256,11 +352,10 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dt>Property name:</dt>
           <dd>GRAMGENDER</dd>
           <dt>Purpose:</dt>
-          <dd>
-            This property defines which grammatical gender to use in salutations and other grammatical constructs.
+          <dd>Defines which grammatical gender to use in salutations and other grammatical constructs.
           </dd>
           <dt>Value type:</dt>
-          <dd>A single text value, restricted to an enumerated list of allowed values.</dd>
+          <dd>A single text value that is restricted to an enumerated list of allowed values.</dd>
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
@@ -269,15 +364,15 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dd>
             <t>
               This property defines the grammatical gender that the contact prefers
-              to be addressed by or referred at in written or spoken form.
+              to be addressed by or referred to as in written or spoken form.
               For example, the German language distinguishes by grammatical gender in salutations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
               Multiple occurrences of this property
               <bcp14>MUST</bcp14> be distinguished by the LANG parameter.
             </t>
           </dd>
           <dt>Format definition:</dt>
-          <dd>
-            <t>This property is defined by the following notation:</t>
+          <dd><t>This property is defined by the following notation:</t>
+	  
             <sourcecode name="" type="abnf"><![CDATA[
 gramgender       = "GRAMGENDER" gramgender-param
                       ":" gramgender-value
@@ -285,13 +380,13 @@ gramgender       = "GRAMGENDER" gramgender-param
 gramgender-param =
                 *(
                  ;
-                 ; The following are OPTIONAL,
+                 ; The following are OPTIONAL
                  ; but MUST NOT occur more than once.
                  ;
                  (";" language-param) /
                  (";" altid-param) /
                  ;
-                 ; The following are OPTIONAL,
+                 ; The following are OPTIONAL
                  ; and MAY occur more than once.
                  ;
                  (";" any-param)
@@ -307,14 +402,14 @@ gramgender-value = "animate" /
                    iana-token /
                    x-name
 ]]></sourcecode>
-          </dd>
-          <dt>Example(s):</dt>
-          <dd>
+           </dd>
+            <dt>Example(s):</dt>
+	    <dd>
             <sourcecode name=""><![CDATA[
 GRAMGENDER:neuter
 ]]></sourcecode>
-          </dd>
-        </dl>
+	    </dd>
+	  </dl>
       </section>
       <section anchor="prop-language">
         <name>LANGUAGE</name>
@@ -322,17 +417,30 @@ GRAMGENDER:neuter
           <dt>Property name:</dt>
           <dd>LANGUAGE</dd>
           <dt>Purpose:</dt>
-          <dd>This property defines the default language that human-readable text values in this vCard should be assumed written in.</dd>
+          <dd>Defines the default language that human-readable text values in this vCard are assumed to be written in.</dd>
           <dt>Value type:</dt>
-          <dd>A single Language-Tag value as defined in <xref target="RFC6350" section="4"/>.</dd>
+          <dd>A single Language-Tag value as defined in <xref target="RFC6350" sectionFormat="of" section="4"/>.</dd>
           <dt>Cardinality:</dt>
           <dd>*1</dd>
           <dt>Property parameters:</dt>
           <dd>The LANGUAGE parameter <bcp14>MUST NOT</bcp14> be assigned to this property.</dd>
           <dt>Description:</dt>
-          <dd>
-            This property defines the language in which property values of type
-            <tt>TEXT</tt> shall be assumed to be written for this vCard.
+
+<!-- [rfced] In the html and pdf outputs, the text enclosed in <tt> is output in
+fixed-width font. In the txt output, there are no changes to the font,
+and the quotation marks have been removed. 
+
+Please review carefully and let us know if the output is acceptable or if any
+updates are needed.
+
+Additionally, note that <tt> appears to be used inconsistently. For example, 
+some instances of "LANGUAGE" are enclosed with <tt> and some are not. 
+Please review the terms and let us know if any further updates are needed
+for consistency.
+--> 
+<dd>
+            This property defines the language that property values of type
+            <tt>TEXT</tt> are assumed to be written in for this vCard.
             If a vCard property includes the <tt>LANGUAGE</tt> parameter, then the
             parameter value has higher precedence than the <tt>LANGUAGE</tt>
             property value.
@@ -342,7 +450,7 @@ GRAMGENDER:neuter
             <t>This property is defined by the following notation:</t>
             <sourcecode name="" type="abnf"><![CDATA[
 language-prop       = "LANGUAGE" any-param ":" Language-Tag
-               ; Language-Tag is defined in RFC6350, Section 4.
+               ; Language-Tag is defined in RFC 6350, Section 4.
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
@@ -360,7 +468,7 @@ LANGUAGE:de-AT
           <dd>PRONOUNS</dd>
           <dt>Purpose:</dt>
           <dd>
-            This property defines the pronouns that shall be used
+            Defines the pronouns that shall be used
             to refer to the entity represented by this vCard.
           </dd>
           <dt>Value type:</dt>
@@ -375,8 +483,8 @@ LANGUAGE:de-AT
             The value is free-form text.  These pronouns shall be used
             when addressing or referring to the contact.  Multiple occurrences of
             this property <bcp14>MAY</bcp14> define pronouns for multiple languages,
-            preferences and contexts.  Multiple pronouns in the same language
-            <bcp14>SHOULD</bcp14> use the PREF parameter, otherwise, the order of
+            preferences, and contexts.  Multiple pronouns in the same language
+            <bcp14>SHOULD</bcp14> use the PREF parameter; otherwise, the order of
             preference is implementation-specific.
           </dd>
           <dt>Format definition:</dt>
@@ -388,7 +496,7 @@ pronouns       = "PRONOUNS" pronouns-param ":" text
 pronouns-param =
                 *(
                  ;
-                 ; The following are OPTIONAL,
+                 ; The following are OPTIONAL
                  ; but MUST NOT occur more than once.
                  ;
                  (";" language-param) /
@@ -396,7 +504,7 @@ pronouns-param =
                  (";" type-param) /
                  (";" altid-param) /
                  ;
-                 ; The following are OPTIONAL,
+                 ; The following are OPTIONAL
                  ; and MAY occur more than once.
                  ;
                  (";" any-param)
@@ -419,13 +527,13 @@ PRONOUNS;LANG=en;PREF=2:they/them
           <dt>Property name:</dt>
           <dd>SOCIALPROFILE</dd>
           <dt>Purpose:</dt>
-          <dd>To specify the URI or username for social media profiles associated with the object the vCard represents.</dd>
+          <dd>Specifies the URI or username for social media profiles associated with the object the vCard represents.</dd>
           <dt>Value type:</dt>
           <dd>A single URI or TEXT value.  The default value type is URI.</dd>
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>The SERVICE-TYPE parameter <bcp14>MUST</bcp14> be assigned to this property if the value type is TEXT, it <bcp14>MAY</bcp14> be assigned if the value type is URI.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
+          <dd>The SERVICE-TYPE parameter <bcp14>MUST</bcp14> be assigned to this property if the value type is TEXT, and it <bcp14>MAY</bcp14> be assigned if the value type is URI.  In either case, it <bcp14>MUST NOT</bcp14> be assigned more than once.</dd>
           <dt>Description:</dt>
           <dd>
             Several vCard address book implementations currently use an experimental X-SOCIALPROFILE property to store social media profiles for contacts.  This specification provides an IANA-registered property for the same purpose.  In addition to the typical use of this property with URI values, it also allows setting usernames for social media services as free-text TEXT values, in which case the service name <bcp14>MUST</bcp14> be provided as a parameter.  Names <bcp14>MUST</bcp14> be considered equal if they match case-insensitively.
@@ -462,10 +570,10 @@ SOCIALPROFILE;SERVICE-TYPE=SomeSite;VALUE=text:peter94
           <dt>Parameter name:</dt>
           <dd>AUTHOR</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter identifies the author of the associated property value.</dd>
+          <dd>Identifies the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows naming an author as free-text value (see <xref target="param-author-name"/>).</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It identifies the author as a URI <xref target="RFC3986"/>.  Since every valid URI includes the COLON (U+003A) character, the parameter value <bcp14>MUST</bcp14> be quoted.  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR-NAME</tt> parameter allows naming an author as a free-text value (see <xref target="param-author-name"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -487,10 +595,29 @@ NOTE;AUTHOR="mailto:john@example.com":This is some note.
           <dt>Parameter name:</dt>
           <dd>AUTHOR-NAME</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter names the author of the associated property value.</dd>
+          <dd>Names the author of the associated property value.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It names the author as a free-text value.  The parameter value <bcp14>MUST NOT</bcp14> be empty.  Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows identifying an author by URI (see <xref target="param-author"/>).</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property where conveying authorship is desired.  It names the author as a free-text value.  The parameter value <bcp14>MUST NOT</bcp14> be empty.
+
+
+<!--rfced] In the following, do implementations need to quote the name
+part in order for the param-value to be valid, as shown below?
+Also, is "name part" referring to the parameter? Please let us
+know how we may update this sentence for clarity.
+
+Original: 
+   Implementations MUST take care to quote the name part, 
+   if otherwise the part would not be a valid param-value 
+   (see Section 3.3 of [RFC6350]).
+
+Perhaps:
+   Implementations MUST take care to quote the name part 
+   of the parameter; otherwise, it will not be a valid 
+   param-value (see Section 3.3 of [RFC6350]).
+-->
+
+	    Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" sectionFormat="of" section="3.3"/>).  Note that as an alternative or in addition to this parameter, the <tt>AUTHOR</tt> parameter allows identifying an author by URI (see <xref target="param-author"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -513,16 +640,16 @@ NOTE;AUTHOR-NAME="_:l33tHckr:_":A note by an unusual author name.
           <dt>Parameter name:</dt>
           <dd>CREATED</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter defines the date and time when a property was created in a vCard.</dd>
+          <dd>Defines the date and time when a property was created in a vCard.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created.  The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" section="4.3.5"/>.  Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp.</t>
+            <t>This parameter <bcp14>MAY</bcp14> be set on any property to define the point in time when the property was created.  The value <bcp14>MUST</bcp14> be a valid TIMESTAMP value as defined in <xref target="RFC6350" sectionFormat="of" section="4.3.5"/>.  Generally, updating a property value <bcp14>SHOULD NOT</bcp14> change the creation timestamp.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
             <sourcecode name="" type="abnf"><![CDATA[
 created-param = "CREATED" "=" param-value ;
-             ; a valid TIMESTAMP of Section 4.3.5 of [RFC6350]
+             ; a valid TIMESTAMP of Section 4.3.5 of RFC 6350
 ]]></sourcecode>
           </dd>
           <dt>Example(s):</dt>
@@ -539,11 +666,11 @@ NOTE;CREATED=20221122T151823Z:This is some note.
           <dt>Parameter name:</dt>
           <dd>DERIVED</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter specifies that the value of the associated property is derived from some other property values in the same vCard.</dd>
+          <dd>Specifies that the value of the associated property is derived from some other property values in the same vCard.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>SHOULD</bcp14> be specified on an property if the property value is derived from some other properties in the same vCard.  When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
-            <t>For an example, an implementation may derive the value of the FN property from the name components of the N property.  It indicates this fact by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
+            <t>This property parameter <bcp14>SHOULD</bcp14> be specified on a property if the property value is derived from some other properties in the same vCard.  When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
+            <t>As an example, an implementation may derive the value of the FN property from the name components of the N property.  It indicates this fact by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -567,10 +694,10 @@ FN;DERIVED=TRUE:Mr.  John Quinlan
           <dt>Parameter name:</dt>
           <dd>LABEL</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter is used with the ADR property.  Its value contains a formatted text representation of that address, e.g. for delivery.</dd>
+          <dd>Used with the ADR property.  Its value contains a formatted text representation of that address, e.g., for delivery.</dd>
           <dt>Description:</dt>
           <dd>
-            <t><xref target="RFC6350" section="6.3.1"/> defines the ADR property, noting that the property can also include a LABEL parameter to present a delivery address label for the address.  But this parameter was not included in the IANA Parameters Registry <xref target="RFC6350" section="10.3.2"/> and accordingly is not a registered standard vCard element.  This specification defines and registers the LABEL parameter for use with the ADR property as originally intended.</t>
+            <t><xref target="RFC6350" sectionFormat="of" section="6.3.1"/> defines the ADR property, noting that the property can also include a LABEL parameter to present a delivery address label for the address.  But this parameter was not included in the IANA "vCard Parameters" registry (<xref target="RFC6350" sectionFormat="of" section="10.3.2"/>) and, accordingly, is not a registered standard vCard element.  This specification defines and registers the LABEL parameter for use with the ADR property as originally intended.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -580,7 +707,7 @@ label-param    = "LABEL" "=" param-value
           </dd>
           <dt>Example(s):</dt>
           <dd>
-            <t>The LABEL parameter as illustrated the ADR property example in <xref target="RFC6350" section="6.3.1"/>.</t>
+            <t>The LABEL parameter as illustrated in the ADR property example in <xref target="RFC6350" sectionFormat="of" section="6.3.1"/>.</t>
             <sourcecode name=""><![CDATA[
 ADR;LABEL="Mr. John Q. Public, Esq.\nMail Drop: TNE QB\n123
   Main Street\nAny Town, CA  91921-1234\nU.S.A.":
@@ -595,19 +722,59 @@ ADR;LABEL="Mr. John Q. Public, Esq.\nMail Drop: TNE QB\n123
           <dt>Parameter name:</dt>
           <dd>PHONETIC</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter defines how to pronounce the value of another property in the same vCard.</dd>
+          <dd>Defines how to pronounce the value of another property in the same vCard.</dd>
           <dt>Description:</dt>
           <dd>
-              <t>This property parameter indicates that the value of its property contains the phonetic representation of a same-named other property in the same vCard.  Exemplary uses are to define how pronounce a Japanese name, or for romanization of Mandarin or Cantonese name and address components.</t>
-              <t>The parameter value indicates the phonetic system and <bcp14>MUST</bcp14> be one of the values enumerated in the IANA <xref target="iana-vcard-param-values">vCard Parameter Values</xref> registry.  This specification defines the following values:</t>
-              <ul>
-                <li><tt>ipa</tt>: denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</li>
-                <li><tt>piny</tt>: denotes the Standard Mandarin romanization system "Hanyu Pinyin".</li>
-                <li><tt>jyut</tt>: denotes the Cantonese romanization system "Jyutping".</li>
-                <li><tt>script</tt>: denotes the unknown phonetic system.  The <xref target="param-script">SCRIPT</xref> parameter <bcp14>MUST</bcp14> be set in addition to the PHONETIC parameter.</li>
-              </ul>
+              <t>This property parameter indicates that the value of its property contains the phonetic representation of another same-named property in the same vCard.  Exemplary uses are defining how to pronounce Japanese names and romanizing Mandarin or Cantonese names and address components.</t>
+              <t>The parameter value indicates the phonetic system and <bcp14>MUST</bcp14> be one of the values enumerated in the IANA <xref target="iana-vcard-param-values">"vCard Parameter Values" registry</xref>.  This specification defines the following values:</t>
+
+<!--[rfced] FYI: We listed the following terms in alphabetical order
+to match how they are listed in Table 4 (Section 7.4) and the
+"vCard Parameter Values" registry
+<https://www.iana.org/assignments/vcard-elements/>. 
+
+Original:
+   ipa: denotes the International Phonetic Alphabet [IPA].
+   piny: denotes the Standard Mandarin romanization system "Hanyu Pinyin".
+   jyut: denotes the Cantonese romanization system "Jyutping".
+   script: denotes the unknown phonetic system. The SCRIPT (Section 4.8) 
+      parameter MUST be set in addition to the PHONETIC parameter.
+
+Current:
+   ipa: denotes the International Phonetic Alphabet [IPA].
+   jyut: denotes the Cantonese romanization system "Jyutping".
+   piny: denotes the Standard Mandarin romanization system "Hanyu Pinyin".
+   script: denotes the unknown phonetic system. The SCRIPT (Section 4.8) 
+      parameter MUST be set in addition to the PHONETIC parameter.
+-->
+              <dl>
+                <dt><tt>ipa</tt>:</dt><dd> denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</dd>
+		<dt><tt>jyut</tt>:</dt><dd> denotes the Cantonese romanization system "Jyutping".</dd>
+                <dt><tt>piny</tt>:</dt><dd> denotes the Standard Mandarin romanization system "Hanyu Pinyin".</dd>
+                <dt><tt>script</tt>:</dt><dd> denotes the unknown phonetic system.  The <xref target="param-script">SCRIPT</xref> parameter <bcp14>MUST</bcp14> be set in addition to the PHONETIC parameter.</dd>
+              </dl>
               <t>The value type of the property on which the PHONETIC parameter is set <bcp14>MUST</bcp14> be of the same type as its related property.  If a component value is set in the property on which the PHONETIC parameter is set, then a component value also <bcp14>MUST</bcp14> be set at that same position in the related property.  On the other hand, not every component value in the related property needs to have a phonetic representation.</t>
-              <t>The ALTID parameter (<xref target="RFC6350" section="5.4"/>) <bcp14>MUST</bcp14> be set with equal values on both the related property and the property having the PHONETIC parameter set.  If more than one same-named property has both the PHONETIC parameter set and an equal ALTID parameter value, then at most one of these properties <bcp14>MAY</bcp14> not have the LANGUAGE parameter set and all others <bcp14>MUST</bcp14> have the LANGUAGE parameter set.  The LANGUAGE parameters <bcp14>MUST NOT</bcp14> have equal values.  The LANGUAGE parameter value <bcp14>SHOULD NOT</bcp14> contain a script subtag in its Language-Tag value and any such subtag <bcp14>MUST</bcp14> be ignored in favor of the <xref target="param-script">SCRIPT</xref> parameter value.</t>
+              <t>The ALTID (<xref target="RFC6350" sectionFormat="of" section="5.4"/>) parameter <bcp14>MUST</bcp14> be set with equal values on both the related property and the property having the PHONETIC parameter set.
+
+<!--[rfced] Should "MAY not" be updated as "MUST NOT" in the
+following? Please review.
+
+Original:
+   If more than one same-named property
+   has both the PHONETIC parameter set and an equal ALTID parameter
+   value, then at most one of these properties MAY not have the
+   LANGUAGE parameter set and all others MUST have the LANGUAGE
+   parameter set. 
+
+Perhaps:
+   If more than one same-named property
+   has both the PHONETIC parameter set and an equal ALTID parameter
+   value, then at most, one of these properties MUST NOT have the
+   LANGUAGE parameter set, and all others MUST have the LANGUAGE
+   parameter set. 
+-->
+
+If more than one same-named property has both the PHONETIC parameter set and an equal ALTID parameter value, then at most, one of these properties <bcp14>MAY</bcp14> not have the LANGUAGE parameter set, and all others <bcp14>MUST</bcp14> have the LANGUAGE parameter set.  The LANGUAGE parameters <bcp14>MUST NOT</bcp14> have equal values.  The LANGUAGE parameter value <bcp14>SHOULD NOT</bcp14> contain a script subtag in its Language-Tag value, and any such subtag <bcp14>MUST</bcp14> be ignored in favor of the <xref target="param-script">SCRIPT</xref> parameter value.</t>
               <t>This specification defines the PHONETIC parameter for use with the ADR and N properties.</t>
           </dd>
           <dt>Format definition:</dt>
@@ -634,14 +801,14 @@ N;ALTID=1;PHONETIC=jyut;
           <dt>Parameter name:</dt>
           <dd>PROP-ID</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter identifies a property among all its siblings of the same property name.</dd>
+          <dd>Identifies a property among all its siblings of the same property name.</dd>
           <dt>Description:</dt>
           <dd>
             <t>
-              This parameter uniquely identifies a property among all of its siblings with the same name within a vCard.  A valid PROP-ID value must be of 1 and a maximum of 255 octets in size, and it MUST only contain the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (<tt>-</tt>), and underscore (<tt>_</tt>).  The identifier only has the purpose to uniquely identify siblings, its value has no other meaning.  If an application makes use of PROP-ID it <bcp14>SHOULD</bcp14> assign a unique identifier to each sibling property of the same name within their embedding component.  The same identifier <bcp14>MAY</bcp14> be used for properties of a different name, and it <bcp14>MAY</bcp14> also be assigned to a same-named property that is not a sibling.
+              This parameter uniquely identifies a property among all of its siblings with the same name within a vCard.  A valid PROP-ID value must be of 1 and a maximum of 255 octets in size, and it <bcp14>MUST</bcp14> only contain the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (<tt>-</tt>), and underscore (<tt>_</tt>).  The identifier's only purpose is to uniquely identify siblings; its value has no other meaning.  If an application makes use of PROP-ID, it <bcp14>SHOULD</bcp14> assign a unique identifier to each sibling property of the same name within their embedding component.  The same identifier <bcp14>MAY</bcp14> be used for properties of a different name, and it <bcp14>MAY</bcp14> also be assigned to a same-named property that is not a sibling.
             </t>
             <t>
-              Resolving duplicate identifier conflicts is specific to the application.  Similarly, handling properties where some but not all siblings have a PROP-ID is assigned, is application-specific.
+              Resolving duplicate identifier conflicts is specific to the application.  Similarly, handling properties where some but not all siblings have a PROP-ID assigned is application-specific.
             </t>
           </dd>
           <dt>Format definition:</dt>
@@ -665,10 +832,10 @@ PHOTO;PROP-ID=p827:data:image/jpeg;base64,MIICajCCAdOgAwIBAg
           <dt>Parameter name:</dt>
           <dd>SCRIPT</dd>
           <dt>Purpose:</dt>
-          <dd>This parameter defines the script in which a property value is written in.</dd>
+          <dd>Defines the script that a property value is written in.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter allows defining a script for a property value without also defining a language as the LANGUAGE parameter would.  The value <bcp14>MUST</bcp14> be a Script Subtag as defined in <xref target="RFC5646" section="2.2.3"/>.  This specification makes use of the SCRIPT parameter in combination with the <xref target="param-phonetic">PHONETIC</xref> parameter. </t>
+            <t>This parameter allows defining a script for a property value without also defining a language as the LANGUAGE parameter would.  The value <bcp14>MUST</bcp14> be a script subtag as defined in <xref target="RFC5646" sectionFormat="of" section="2.2.3"/>.  This specification makes use of the SCRIPT parameter in combination with the <xref target="param-phonetic">PHONETIC</xref> parameter. </t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -690,10 +857,10 @@ SCRIPT=Latn
           <dt>Parameter name:</dt>
           <dd>SERVICE-TYPE</dd>
           <dt>Purpose:</dt>
-          <dd>To define the online service name associated with a messaging or social media profile.</dd>
+          <dd>Defines the online service name associated with a messaging or social media profile.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the online service associated with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.</t>
+            <t>This parameter <bcp14>MAY</bcp14> be specified on an IMPP or a SOCIALPROFILE property to name the online service associated with that property value.  Its value is case-sensitive; its letter cases <bcp14>MUST</bcp14> be preserved.</t>
             <t>Several vCard address book implementations currently use an experimental X-SERVICE-TYPE parameter.  This specification provides an IANA-registered parameter for the same purpose.</t>
           </dd>
           <dt>Format definition:</dt>
@@ -716,10 +883,10 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
           <dt>Parameter name:</dt>
           <dd>USERNAME</dd>
           <dt>Purpose:</dt>
-          <dd>To define a username, such as the user of a messaging or social media service.</dd>
+          <dd>Defines a username such as the user of a messaging or social media service.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This parameter <bcp14>MAY</bcp14> be specified on a IMPP or SOCIALPROFILE property to name the user with that property value.  Its value is case-sensitive, its letter cases <bcp14>MUST</bcp14> be preserved.  The IMPP or SOCIALPROFILE value type <bcp14>MUST</bcp14> be URI.</t>
+            <t>This parameter <bcp14>MAY</bcp14> be specified on an IMPP or a SOCIALPROFILE property to name the user with that property value.  Its value is case-sensitive; its letter cases <bcp14>MUST</bcp14> be preserved.  The IMPP or SOCIALPROFILE value type <bcp14>MUST</bcp14> be URI.</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -744,10 +911,10 @@ SOCIALPROFILE;USERNAME="The Foo":https://example.com/@foo
           <dt>Value:</dt>
           <dd>billing</dd>
           <dt>Purpose:</dt>
-          <dd>This indicates to use this address for billing, e.g., to send invoices to.</dd>
+          <dd>Indicates using this address for billing, e.g., to send invoices to.</dd>
           <dt>Conformance:</dt>
           <dd>
-            <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>
+            <t>This value can be used with the TYPE parameter applied on the ADR property.</t>
           </dd>
           <dt>Example(s):</dt>
           <dd>
@@ -763,10 +930,10 @@ ADR;TYPE=billing:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
           <dt>Value:</dt>
           <dd>delivery</dd>
           <dt>Purpose:</dt>
-          <dd>This indicates to use this address for delivery, e.g., to send packages to.</dd>
+          <dd>Indicates using this address for delivery, e.g., to send packages to.</dd>
           <dt>Conformance:</dt>
           <dd>
-            <t>This value can be used with the "TYPE" parameter applied on the "ADR" property.</t>
+            <t>This value can be used with the TYPE parameter applied on the ADR property.</t>
           </dd>
           <dt>Example(s):</dt>
           <dd>
@@ -779,16 +946,15 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
     </section>
     <section anchor="security-considerations" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>This specification extends the vCard Format Specification.  The same security considerations as outlined in <xref target="RFC6350" section="9"/> apply.</t>
+      <t>This specification extends "vCard Format Specification" <xref target="RFC6350"/>.  The same security considerations as outlined in <xref target="RFC6350" sectionFormat="of" section="9"/> apply.</t>
     </section>
     <section anchor="IANA">
-      <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
       <name>IANA Considerations</name>
       <section>
-        <name>Changes to the "vCard Properties" registry</name>
+        <name>Changes to the vCard Properties Registry</name>
         <section>
-          <name>New property definitions</name>
-          <t>IANA is requested to add the following entries to the "vCard Properties" registry, defined in Section 10.3.1. of <xref target="RFC6350"/>.</t>
+          <name>New vCard Property Definitions</name>
+          <t>IANA has added the following entries to the "vCard Properties" registry, as defined in <xref target="RFC6350" sectionFormat="of" section="10.3.1"/>.</t>
           <table anchor="new_properties">
             <name>New vCard Properties</name>
             <thead>
@@ -802,40 +968,43 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
               <tr>
                 <td/>
                 <td align="left">CREATED</td>
-                <td align="left">This document, <xref target="prop-created"/></td>
+                <td align="left">RFC 9554, <xref target="prop-created"/></td>
               </tr>
               <tr>
                 <td/>
                 <td align="left">GRAMGENDER</td>
-                <td align="left">This document, <xref target="prop-gramgender"/></td>
+                <td align="left">RFC 9554, <xref target="prop-gramgender"/></td>
               </tr>
               <tr>
                 <td/>
                 <td align="left">LANGUAGE</td>
-                <td align="left">This document, <xref target="prop-language"/></td>
+                <td align="left">RFC 9554, <xref target="prop-language"/></td>
               </tr>
               <tr>
                 <td/>
                 <td align="left">PRONOUNS</td>
-                <td align="left">This document, <xref target="prop-pronouns"/></td>
+                <td align="left">RFC 9554, <xref target="prop-pronouns"/></td>
               </tr>
               <tr>
                 <td/>
                 <td align="left">SOCIALPROFILE</td>
-                <td align="left">This document, <xref target="prop-socialprofile"/></td>
+                <td align="left">RFC 9554, <xref target="prop-socialprofile"/></td>
               </tr>
             </tbody>
           </table>
-        </section>
-        <section>
-          <name>Updated vCard properties</name>
-          <t>IANA is requested to add <xref target="prop-adr"/> of this document as reference for the ADR property.</t>
-          <t>IANA is requested to add <xref target="prop-n"/> of this document as reference for the N property.</t>
-        </section>
-      </section>
+	</section>
       <section>
-        <name>Changes to the "vCard Parameters" registry</name>
-        <t>IANA is requested to add the following entries to the "vCard Parameters" registry, defined in Section 10.3.2. of <xref target="RFC6350"/>.</t>
+ <name>Updated vCard Properties </name>
+ <t>
+   IANA has added <xref target="prop-adr"/> of this document as a reference for the ADR
+   property and <xref target="prop-n"/> of this document as a reference for the N
+   property in the "vCard Properties" registry.
+   </t>
+      </section>
+     </section>
+      <section>
+        <name>Changes to the vCard Parameters Registry</name>
+        <t>IANA has added the following entries to the "vCard Parameters" registry, as defined in <xref target="RFC6350" sectionFormat="of" section="10.3.2"/>.</t>
         <table anchor="new_parameters">
           <name>New vCard Parameters</name>
           <thead>
@@ -849,62 +1018,62 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
             <tr>
               <td/>
               <td align="left">AUTHOR</td>
-              <td align="left">This document, <xref target="param-author"/></td>
+              <td align="left">RFC 9554, <xref target="param-author"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">AUTHOR-NAME</td>
-              <td align="left">This document, <xref target="param-author-name"/></td>
+              <td align="left">RFC 9554, <xref target="param-author-name"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">CREATED</td>
-              <td align="left">This document, <xref target="param-created"/></td>
+              <td align="left">RFC 9554, <xref target="param-created"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">DERIVED</td>
-              <td align="left">This document, <xref target="param-derived"/></td>
+              <td align="left">RFC 9554, <xref target="param-derived"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">LABEL</td>
               <td align="left">
-                  <xref target="RFC6350" section="6.3.1"/> and
-                  this document, <xref target="param-label"/>
+                  <xref target="RFC6350" sectionFormat="comma" section="6.3.1"/> and
+                  RFC 9554, <xref target="param-label"/>
               </td>
             </tr>
             <tr>
               <td/>
               <td align="left">PHONETIC</td>
-              <td align="left">This document, <xref target="param-phonetic"/></td>
+              <td align="left">RFC 9554, <xref target="param-phonetic"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">PROP-ID</td>
-              <td align="left">This document, <xref target="param-propid"/></td>
+              <td align="left">RFC 9554, <xref target="param-propid"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">SCRIPT</td>
-              <td align="left">This document, <xref target="param-script"/></td>
+              <td align="left">RFC 9554, <xref target="param-script"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">SERVICE-TYPE</td>
-              <td align="left">This document, <xref target="param-service-type"/></td>
+              <td align="left">RFC 9554, <xref target="param-service-type"/></td>
             </tr>
             <tr>
               <td/>
               <td align="left">USERNAME</td>
-              <td align="left">This document, <xref target="param-username"/></td>
+              <td align="left">RFC 9554, <xref target="param-username"/></td>
             </tr>
           </tbody>
         </table>
       </section>
       <section>
-        <name>Changes to the "vCard Property Values" registry</name>
-        <t>IANA is requested to add the following entries to the "vCard Property Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
+        <name>Changes to the vCard Property Values Registry</name>
+        <t>IANA has added the following entries to the "vCard Property Values" registry, as defined in <xref target="RFC6350" sectionFormat="of" section="10.3.4"/>.</t>
         <table anchor="new_values">
           <name>New vCard Property Values</name>
           <thead>
@@ -918,41 +1087,41 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
             <tr>
               <td align="left">GRAMGENDER</td>
               <td align="left">animate</td>
-              <td align="left">This document, <xref target="prop-gramgender"/></td>
+              <td align="left">RFC 9554, <xref target="prop-gramgender"/></td>
             </tr>
             <tr>
               <td align="left">GRAMGENDER</td>
               <td align="left">common</td>
-              <td align="left">This document, <xref target="prop-gramgender"/></td>
+              <td align="left">RFC 9554, <xref target="prop-gramgender"/></td>
             </tr>
             <tr>
               <td align="left">GRAMGENDER</td>
               <td align="left">feminine</td>
-              <td align="left">This document, <xref target="prop-gramgender"/></td>
+              <td align="left">RFC 9554, <xref target="prop-gramgender"/></td>
             </tr>
             <tr>
               <td align="left">GRAMGENDER</td>
               <td align="left">inanimate</td>
-              <td align="left">This document, <xref target="prop-gramgender"/></td>
+              <td align="left">RFC 9554, <xref target="prop-gramgender"/></td>
             </tr>
             <tr>
               <td align="left">GRAMGENDER</td>
               <td align="left">masculine</td>
-              <td align="left">This document, <xref target="prop-gramgender"/></td>
+              <td align="left">RFC 9554, <xref target="prop-gramgender"/></td>
             </tr>
             <tr>
               <td align="left">GRAMGENDER</td>
               <td align="left">neuter</td>
-              <td align="left">This document, <xref target="prop-gramgender"/></td>
+              <td align="left">RFC 9554, <xref target="prop-gramgender"/></td>
             </tr>
           </tbody>
         </table>
       </section>
       <section anchor="iana-vcard-param-values">
-        <name>Changes to the "vCard Parameter Values" registry</name>
-        <t>IANA is requested to add the following entries to the "vCard Parameter Values" registry, defined in Section 10.3.4. of <xref target="RFC6350"/>.</t>
+        <name>Changes to the vCard Parameter Values Registry</name>
+        <t>IANA has added the following entries to the "vCard Parameter Values" registry, as defined in <xref target="RFC6350" sectionFormat="of" section="10.3.4"/>.</t>
         <table anchor="new_param_values">
-          <name>New vCard Property Values</name>
+          <name>New vCard Property and Parameter Values</name>
           <thead>
             <tr>
               <th align="left">Property</th>
@@ -966,48 +1135,47 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
               <td align="left">ADR</td>
               <td align="left">TYPE</td>
               <td align="left">billing</td>
-              <td align="left">This document, <xref target="value-adr-type-billing"/></td>
+              <td align="left">RFC 9554, <xref target="value-adr-type-billing"/></td>
             </tr>
             <tr>
               <td align="left">ADR</td>
               <td align="left">TYPE</td>
               <td align="left">delivery</td>
-              <td align="left">This document, <xref target="value-adr-type-delivery"/></td>
+              <td align="left">RFC 9554, <xref target="value-adr-type-delivery"/></td>
             </tr>
             <tr>
               <td align="left">ADR, N</td>
               <td align="left">PHONETIC</td>
               <td align="left">ipa</td>
-              <td align="left">This document, <xref target="param-phonetic"/></td>
+              <td align="left">RFC 9554, <xref target="param-phonetic"/></td>
             </tr>
             <tr>
               <td align="left">ADR, N</td>
               <td align="left">PHONETIC</td>
               <td align="left">jyut</td>
-              <td align="left">This document, <xref target="param-phonetic"/></td>
+              <td align="left">RFC 9554, <xref target="param-phonetic"/></td>
             </tr>
             <tr>
               <td align="left">ADR, N</td>
               <td align="left">PHONETIC</td>
               <td align="left">piny</td>
-              <td align="left">This document, <xref target="param-phonetic"/></td>
+              <td align="left">RFC 9554, <xref target="param-phonetic"/></td>
             </tr>
             <tr>
               <td align="left">ADR, N</td>
               <td align="left">PHONETIC</td>
               <td align="left">script</td>
-              <td align="left">This document, <xref target="param-phonetic"/></td>
+              <td align="left">RFC 9554, <xref target="param-phonetic"/></td>
             </tr>
           </tbody>
         </table>
       </section>
     </section>
-    <section>
-      <name>Acknowledgements</name>
-      <t>The definition and examples of the <xref target="param-phonetic">PHONETIC</xref> and <xref target="param-script">SCRIPT</xref> parameters are based on the initial version of <xref target="I-D.calconnect-vobject-i18n"/>.</t>
-    </section>
   </middle>
   <back>
+
+<displayreference target="I-D.calconnect-vobject" to="CALCONNECT-VOBJECT"/>
+
     <references>
       <name>References</name>
       <references>
@@ -1018,16 +1186,65 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.5646.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.6350.xml"/>
         <xi:include href="https://www.rfc-editor.org/refs/bibxml/reference.RFC.8174.xml"/>
-        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact.xml"/>
-        <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-ietf-calext-jscontact-vcard.xml"/>
+
+<!-- [I-D.ietf-calext-jscontact] in AUTH48 state; companion document RFC 9553 -->
+<reference anchor="RFC9553" target="https://www.rfc-editor.org/info/rfc9553">
+<front>
+<title>JSContact: A JSON Representation of Contact Data</title>
+<author initials='R' surname='Stepanek' fullname='Robert Stepanek'>
+    <organization />
+</author>
+<author initials='M' surname='Loffredo' fullname='Mario Loffredo'>
+    <organization />
+</author>
+<date month='March' year='2024' />
+</front>
+<seriesInfo name="RFC" value="9553"/>
+<seriesInfo name="DOI" value="10.17487/RFC9553"/>
+</reference>
+
+<!--[I-D.ietf-calext-jscontact-vcard] in AUTH48 state; companion document RFC 9555 -->
+<reference anchor="RFC9555" target="https://www.rfc-editor.org/info/rfc9555">
+<front>
+<title>JSContact: Converting from and to vCard</title>
+<author initials="M." surname="Loffredo" fullname="Mario Loffredo">
+<organization>IIT-CNR/Registro.it</organization>
+</author>
+<author initials="R." surname="Stepanek" fullname="Robert Stepanek">
+<organization>Fastmail</organization>
+</author>
+<date month="March" year="2024"/>
+</front>
+<seriesInfo name="RFC" value="9555"/>
+<seriesInfo name="DOI" value="10.17487/RFC9555"/>
+</reference>
+
       </references>
     </references>
     <references>
       <name>Informative References</name>
-      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-calconnect-vobject-i18n.xml"/>
+
+<!--[I-D.calconnect-vobject-i18n] IESG state Expired. Entered the long way to get the correct initials-->
+<reference anchor="I-D.calconnect-vobject" target="https://datatracker.ietf.org/doc/html/draft-calconnect-vobject-i18n-00">
+  <front>
+    <title>vObject Internationalization</title>
+    <author fullname="Ronald Henry Tse" initials="R." surname="Tse">
+      <organization>Ribose</organization>
+    </author>
+    <author fullname="Peter Tam" initials="P." surname="Tam">
+      <organization>Ribose</organization>
+    </author>
+    <author fullname="Michael Douglass" initials="M." surname="Douglass">
+      <organization>Spherical Cow Group</organization>
+    </author>
+    <date day="7" month="June" year="2018"/>
+  </front>
+  <seriesInfo name="Internet-Draft" value="draft-calconnect-vobject-i18n-00"/>
+</reference>
+
       <reference anchor="CLDRPersonName" target="https://www.unicode.org/reports/tr35/tr35-personNames.html">
         <front>
-          <title>Technical Standard #35: Unicode Locale Data Markup Language (LDML) Part 8: Person Names, Version 43.1</title>
+          <title>Unicode Locale Data Markup Language (LDML) Part 8: Person Names</title>
           <author fullname="M. Davis">
             <organization/>
           </author>
@@ -1043,18 +1260,42 @@ ADR;TYPE=delivery:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
           <author fullname="M. McKenna">
             <organization/>
           </author>
-          <author fullname="others">
-            <organization/>
-          </author>
+	  <author>
+	    <organization>other CLDR committee members</organization>
+	  </author>
           <date year="2023" month="July"/>
         </front>
+	<seriesInfo name="Unicode Technical Standard" value="#35"/>
+	<seriesInfo name="Version" value="44.1"/>
       </reference>
+
         <reference anchor="IPA" target="https://www.internationalphoneticalphabet.org/">
           <front>
             <title>International Phonetic Alphabet</title>
-            <author/>
+            <author><organization>IPA</organization></author>
           </front>
         </reference>
     </references>
+ <section anchor="Acknowledgements" numbered="false">
+      <name>Acknowledgements</name>
+      <t>The definition and examples of the <xref target="param-phonetic">PHONETIC</xref> and <xref target="param-script">SCRIPT</xref> parameters are based on the early draft version of <xref target="I-D.calconnect-vobject"/>.</t>
+    </section>
+
+<!-- [rfced] FYI: We have added an expansion for the following
+abbreviation per Section 3.6 of RFC 7322 ("RFC Style
+Guide"). Please review this as well as each expansion in the
+document to ensure correctness.
+
+  Common Locale Data Repository (CLDR) (per RFC 7529)
+-->
+
+<!-- [rfced] Please review the "Inclusive Language" portion of the online 
+Style Guide <https://www.rfc-editor.org/styleguide/part2/#inclusive_language>
+and let us know if any changes are needed.
+
+Note that our script did not flag any words in particular, but this should 
+still be reviewed as a best practice.
+-->
+
   </back>
 </rfc>
