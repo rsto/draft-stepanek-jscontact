@@ -239,7 +239,7 @@ Current:
 	    
         <t>The following change is made under "Example", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.3.1"/>.</t>
           <t>Example: In this example, the post office box and the extended address components are absent.  The street number and name are both added as separate components and are combined in the street component for backwards compatibility.</t>
-            <sourcecode name="" type="abnf"><![CDATA[
+            <sourcecode name=""><![CDATA[
 ADR;GEO="geo:12.3457,78.910":
   ;;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;123;Main Street;;;;;;;
 ]]></sourcecode>
@@ -285,7 +285,7 @@ N-value = list-component 6(";" list-component)
 ]]></sourcecode>
         <t>The following change is made under "Examples", as originally specified in <xref target="RFC6350" section="6.2.2"/>.</t>
           <t>Examples</t>
-            <sourcecode name="" type="abnf"><![CDATA[
+            <sourcecode name=""><![CDATA[
 N:Public;John;Quinlan;Mr.;Esq.
 
 N:Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.
