@@ -181,17 +181,27 @@ Original
 
           <t>ABNF</t>
             <sourcecode name="" type="abnf"><![CDATA[
-ADR-value = ADR-component-pobox ";" ADR-component-ext ";"
-            ADR-component-street ";" ADR-component-locality ";"
-            ADR-component-region ";" ADR-component-code ";"
+ADR-value = ; defined in RFC 6350, Section 6.3.1
+            ADR-component-pobox ";"
+            ADR-component-ext ";"
+            ADR-component-street ";"
+            ADR-component-locality ";"
+            ADR-component-region ";"
+            ADR-component-code ";"
             ADR-component-country ";"
-            ; above components are defined in RFC 6350, Section 6.3.1
-            ADR-component-room ";" ADR-component-apartment ";"
+            ; defined in this document
+            ADR-component-room ";"
+            ADR-component-apartment ";"
             ADR-component-floor ";"
-            ADR-component-streetnumber ";" ADR-component-streetname ";"
-            ADR-component-building ";" ADR-component-block ";"
-            ADR-component-subdistrict ";" ADR-component-district ";"
-            ADR-component-landmark ";" ADR-component-direction
+            ADR-component-streetnumber ";"
+            ADR-component-streetname ";"
+            ADR-component-building ";"
+            ADR-component-block ";"
+            ADR-component-subdistrict ";"
+            ADR-component-district ";"
+            ADR-component-landmark ";"
+            ADR-component-direction
+
 ADR-component-pobox    = list-component
 ADR-component-ext      = list-component
 ADR-component-street   = list-component
