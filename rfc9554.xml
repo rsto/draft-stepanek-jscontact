@@ -35,7 +35,7 @@ Original:
    vCard JSContact Extensions
 -->
     
-    <title abbrev="vCard JSContact Extensions">vCard Format Extension for JSContact</title>
+    <title abbrev="vCard JSContact Extensions">vCard Format Extensions for JSContact</title>
     <seriesInfo name="RFC" value="9554"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>Fastmail</organization>
