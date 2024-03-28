@@ -114,7 +114,7 @@ and "TYPE" parameter.  Please let us know of any objections.
         <t>This specification modifies the definition of the ADR property.  It extends its structured value with additional address components to better support the variety of international addresses.  It separates the address parts, which currently are typically combined in street address component values, into distinct components.</t>
 	
 <t>Implementations <bcp14>SHOULD</bcp14> write a combined value of these components in the street address component for backwards compatibility, but they <bcp14>SHOULD</bcp14> ignore the street component during reads if the ADR property value contains any of the new components.</t>
-<t>The following change is made to the first paragraph under "Special notes", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.3.1"/>.  The remaining paragraphs of that section in the original specification still apply.</t>
+<t>The following change is made to the first paragraph under "Special note", as originally specified in <xref target="RFC6350" sectionFormat="of" section="6.3.1"/>.  The remaining paragraphs of that section in the original specification still apply.</t>
 <t>
 
 <!-- [rfced] Please review whether any of the notes in this document
@@ -123,7 +123,7 @@ content that is semantically less important or tangential to the
 content that surrounds it" (https://authors.ietf.org/en/rfcxml-vocabulary#aside).
 -->
 
-             Special notes: The structured type value consists of a sequence of
+             Special note: The structured type value consists of a sequence of
              address components. The component values <bcp14>MUST</bcp14> be specified in
              their corresponding position. The structured type value
              corresponds, in sequence, to the</t>
@@ -276,7 +276,7 @@ Perhaps:
    Special note: The structured property value corresponds, in
    sequence, to the
 -->	
-          <t>Special notes: The structured property value corresponds, in
+          <t>Special note: The structured property value corresponds, in
 	  sequence, to the</t>
 	  <ul spacing="compact" empty="true">
       <li>family names (also known as surnames);</li>
