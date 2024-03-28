@@ -181,7 +181,7 @@ Original
 
           <t>ABNF</t>
             <sourcecode name="" type="abnf"><![CDATA[
-ADR-value = ; defined in RFC 6350, Section 6.3.1
+ADR-value = ; defined in RFC 6350, Section 6.3.1.:
             ADR-component-pobox ";"
             ADR-component-ext ";"
             ADR-component-street ";"
@@ -189,7 +189,7 @@ ADR-value = ; defined in RFC 6350, Section 6.3.1
             ADR-component-region ";"
             ADR-component-code ";"
             ADR-component-country ";"
-            ; defined in this document
+            ; defined in this document:
             ADR-component-room ";"
             ADR-component-apartment ";"
             ADR-component-floor ";"
