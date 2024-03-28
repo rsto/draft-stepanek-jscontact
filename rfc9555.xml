@@ -47,7 +47,7 @@ Perhaps:
 
   <!-- xml2rfc v2v3 conversion 3.12.10 -->
   <front>
-    <title abbrev="JSContact-vCard">JSContact: Converting from and to vCard</title>
+    <title abbrev="JSContact: Converting from and to vCard">JSContact: Converting from and to vCard</title>
     <seriesInfo name="RFC" value="9555"/>
     <author fullname="Mario Loffredo" initials="M." surname="Loffredo">
       <organization>IIT-CNR/Registro.it</organization>
