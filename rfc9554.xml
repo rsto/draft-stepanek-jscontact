@@ -628,7 +628,7 @@ Perhaps:
    param-value (see Section 3.3 of [RFC6350]).
 -->
 
-	    Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid <tt>param-value</tt> (see <xref target="RFC6350" sectionFormat="of" section="3.3"/>).  As an alternative or in addition to this parameter, the AUTHOR parameter allows identifying an author by URI (see <xref target="param-author"/>).</t>
+	    Implementations <bcp14>MUST</bcp14> take care to quote the name part, if otherwise the part would not be a valid "param-value" (see <xref target="RFC6350" sectionFormat="of" section="3.3"/>).  As an alternative or in addition to this parameter, the AUTHOR parameter allows identifying an author by URI (see <xref target="param-author"/>).</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -680,8 +680,8 @@ NOTE;CREATED=20221122T151823Z:This is some note.
           <dd>Specifies that the value of the associated property is derived from some other property values in the same vCard.</dd>
           <dt>Description:</dt>
           <dd>
-            <t>This property parameter <bcp14>SHOULD</bcp14> be specified on a property if the property value is derived from some other properties in the same vCard.  When present with a value of <tt>true</tt>, clients <bcp14>MUST NOT</bcp14> update the property.</t>
-            <t>As an example, an implementation may derive the value of the FN property from the name components of the N property.  It indicates this fact by setting the DERIVED parameter on the FN property to <tt>true</tt>.</t>
+            <t>This property parameter <bcp14>SHOULD</bcp14> be specified on a property if the property value is derived from some other properties in the same vCard.  When present with a value of "true", clients <bcp14>MUST NOT</bcp14> update the property.</t>
+            <t>As an example, an implementation may derive the value of the FN property from the name components of the N property.  It indicates this fact by setting the DERIVED parameter on the FN property to "true".</t>
           </dd>
           <dt>Format definition:</dt>
           <dd>
@@ -759,10 +759,10 @@ Current:
       parameter MUST be set in addition to the PHONETIC parameter.
 -->
               <dl>
-                <dt><tt>ipa</tt>:</dt><dd> denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</dd>
-		<dt><tt>jyut</tt>:</dt><dd> denotes the Cantonese romanization system "Jyutping".</dd>
-                <dt><tt>piny</tt>:</dt><dd> denotes the Standard Mandarin romanization system "Hanyu Pinyin".</dd>
-                <dt><tt>script</tt>:</dt><dd> denotes the unknown phonetic system.  The <xref target="param-script">SCRIPT</xref> parameter <bcp14>MUST</bcp14> be set in addition to the PHONETIC parameter.</dd>
+                <dt>"ipa":</dt><dd> denotes the <xref target="IPA">International Phonetic Alphabet</xref>.</dd>
+		<dt>"jyut":</dt><dd> denotes the Cantonese romanization system "Jyutping".</dd>
+                <dt>"piny":</dt><dd> denotes the Standard Mandarin romanization system "Hanyu Pinyin".</dd>
+                <dt>"script":</dt><dd> denotes the unknown phonetic system.  The <xref target="param-script">SCRIPT</xref> parameter <bcp14>MUST</bcp14> be set in addition to the PHONETIC parameter.</dd>
               </dl>
               <t>The value type of the property on which the PHONETIC parameter is set <bcp14>MUST</bcp14> be of the same type as its related property.  If a component value is set in the property on which the PHONETIC parameter is set, then a component value also <bcp14>MUST</bcp14> be set at that same position in the related property.  On the other hand, not every component value in the related property needs to have a phonetic representation.</t>
               <t>The ALTID (<xref target="RFC6350" sectionFormat="of" section="5.4"/>) parameter <bcp14>MUST</bcp14> be set with equal values on both the related property and the property having the PHONETIC parameter set.
@@ -817,7 +817,7 @@ N;ALTID=1;PHONETIC=jyut;
           <dt>Description:</dt>
           <dd>
             <t>
-              This parameter uniquely identifies a property among all of its siblings with the same name within a vCard.  A valid PROP-ID value must be of 1 and a maximum of 255 octets in size, and it <bcp14>MUST</bcp14> only contain the ASCII alphanumeric characters (<tt>A-Za-z0-9</tt>), hyphen (-), and underscore (<tt>_</tt>).  The identifier's only purpose is to uniquely identify siblings; its value has no other meaning.  If an application makes use of PROP-ID, it <bcp14>SHOULD</bcp14> assign a unique identifier to each sibling property of the same name within their embedding component.  The same identifier <bcp14>MAY</bcp14> be used for properties of a different name, and it <bcp14>MAY</bcp14> also be assigned to a same-named property that is not a sibling.
+              This parameter uniquely identifies a property among all of its siblings with the same name within a vCard.  A valid PROP-ID value must be of 1 and a maximum of 255 octets in size, and it <bcp14>MUST</bcp14> only contain the ASCII alphanumeric characters ("A-Za-z0-9"), hyphen (-), and underscore ("_").  The identifier's only purpose is to uniquely identify siblings; its value has no other meaning.  If an application makes use of PROP-ID, it <bcp14>SHOULD</bcp14> assign a unique identifier to each sibling property of the same name within their embedding component.  The same identifier <bcp14>MAY</bcp14> be used for properties of a different name, and it <bcp14>MAY</bcp14> also be assigned to a same-named property that is not a sibling.
             </t>
             <t>
               Resolving duplicate identifier conflicts is specific to the application.  Similarly, handling properties where some but not all siblings have a PROP-ID assigned is application-specific.
