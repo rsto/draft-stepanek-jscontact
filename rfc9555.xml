@@ -155,7 +155,7 @@ In the XML file (Sections 2.4.3, 2.10.3, and 2.10.4, respectively):
    The kind property is set to directory. 
 -->	  
           <name>The Card uid Property</name>
-          <t>The UID property in vCard is optional, but the Card object's uid property in JSContact is mandatory.  Implementations that convert a vCard without a UID property <bcp14>MUST</bcp14> generate a unique identifier as value for the uid property.  This value <bcp14>SHOULD</bcp14> be the same when converting the same vCard multiple times, but how to achieve this is implementation-specific.</t>
+          <t>The UID property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.6" sectionFormat="of"/>) in vCard is optional, but the Card object's uid property in JSContact is mandatory.  Implementations that convert a vCard without a UID property <bcp14>MUST</bcp14> generate a unique identifier as value for the uid property.  This value <bcp14>SHOULD</bcp14> be the same when converting the same vCard multiple times, but how to achieve this is implementation-specific.</t>
         </section>
         <section>
           <name>Choosing Identifiers</name>
@@ -182,37 +182,43 @@ Current:
         <name>vCard Value Data Types</name>
         <section>
           <name>BOOLEAN</name>
-          <t>The BOOLEAN type converts to the JSContact Boolean type.</t>
+          <t>The BOOLEAN type (<xref target="RFC6350" derivedContent="RFC6350" section="4.4" sectionFormat="of"/>) converts to the JSContact Boolean type.</t>
         </section>
         <section anchor="vcard-type-datetime">
           <name>DATE, TIME, DATE-TIME, DATE-AND-OR-TIME, and TIMESTAMP</name>
-          <t>The TIMESTAMP type generally converts to the UTCDateTime type. It converts to the Timestamp type for anniversaries.</t>
-          <t>The DATE type converts to the PartialDate object, which is only relevant for anniversaries.  This does not apply to DATE values that only define a month or a day; instead, vCard properties or parameters having such a value convert as defined in <xref target="new-jscontact"/>.</t>
-          <t>The TIME, DATE-TIME, and DATE-AND-OR-TIME types and DATE type values that only define a month or day do not convert to a JSContact datetime type.  Instead, vCard properties or parameters having such values convert as defined in <xref target="new-jscontact"/>.</t>
+          <t>The TIMESTAMP type (<xref target="RFC6350" derivedContent="RFC6350" section="4.3.5" sectionFormat="of"/>) converts to the UTCDateTime type, unless for anniversaries. For anniversaries, it converts to the Timestamp type.</t>
+	  <t>The DATE type (<xref target="RFC6350" derivedContent="RFC6350" section="4.3.1" sectionFormat="of"/>) converts to a PartialDate object when used for an anniversary, unless the DATE value only contains a month or a day (but not both).</t>
+	  <t>The following temporal types do not convert to a JSContact datetime type.  Instead, vCard properties or parameters having such value types convert as defined in <xref target="new-jscontact"/>.</t>
+	  <ul>
+		  <li>TIME (<xref target="RFC6350" derivedContent="RFC6350" section="4.3.2" sectionFormat="of"/>)</li>
+		  <li>DATE-TIME (<xref target="RFC6350" derivedContent="RFC6350" section="4.3.3" sectionFormat="of"/>)</li>
+		  <li>DATE-AND-OR-TIME (<xref target="RFC6350" derivedContent="RFC6350" section="4.3.4" sectionFormat="of"/>)</li>
+		  <li>DATE type values that only define a month or day (but not both)</li>
+  </ul>
         </section>
         <section>
           <name>INTEGER</name>
-          <t>The INTEGER type converts to the JSContact Int and UnsignedInt types.</t>
+          <t>The INTEGER type (<xref target="RFC6350" derivedContent="RFC6350" section="4.5" sectionFormat="of"/>) converts to the JSContact Int and UnsignedInt types.</t>
         </section>
         <section>
           <name>FLOAT</name>
-          <t>The FLOAT type converts to the JSContact Number type.</t>
+          <t>The FLOAT type (<xref target="RFC6350" derivedContent="RFC6350" section="4.6" sectionFormat="of"/>) converts to the JSContact Number type.</t>
         </section>
         <section>
           <name>LANGUAGE-TAG</name>
-          <t>The LANGUAGE-TAG type converts to the JSContact String type.</t>
+          <t>The LANGUAGE-TAG type (<xref target="RFC6350" derivedContent="RFC6350" section="4.8" sectionFormat="of"/>) converts to the JSContact String type.</t>
         </section>
         <section>
           <name>TEXT</name>
-          <t>The TEXT type converts to the JSContact String type.</t>
+          <t>The TEXT type (<xref target="RFC6350" derivedContent="RFC6350" section="4.1" sectionFormat="of"/>) converts to the JSContact String type.</t>
         </section>
         <section>
           <name>URI</name>
-          <t>The URI type converts to the JSContact String type.</t>
+          <t>The URI type (<xref target="RFC6350" derivedContent="RFC6350" section="4.2" sectionFormat="of"/>) converts to the JSContact String type.</t>
         </section>
         <section>
           <name>UTC-OFFSET</name>
-          <t>The UTC-OFFSET type either converts to a String value containing an IANA Time Zone Database entry name (see <xref target="vcard-prop-tz"/>) or does not convert to any JSContact type.  For the latter, vCard properties or parameters having such values convert as defined in <xref target="new-jscontact"/>. </t>
+          <t>The UTC-OFFSET type (<xref target="RFC6350" derivedContent="RFC6350" section="4.7" sectionFormat="of"/>) either converts to a String value containing an IANA Time Zone Database entry name (see <xref target="vcard-prop-tz"/>) or does not convert to any JSContact type.  For the latter, vCard properties or parameters having such values convert as defined in <xref target="new-jscontact"/>. </t>
         </section>
       </section>
       <section anchor="vcard-parameters">
@@ -220,11 +226,11 @@ Current:
         <t>This section contains the conversion rules for vCard parameters.  A rule typically applies only for specific vCard properties.  To convert a vCard parameter on an arbitrary vCard property, see <xref target="jscontact-prop-vcardparams"/>.</t>
         <section anchor="vcard-param-altid">
           <name>ALTID</name>
-          <t>The ALTID parameter does not convert to an IANA-registered property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this, see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact properties defined in <xref target="new-jscontact"/>.</t>
+          <t>The ALTID parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.4" sectionFormat="of"/>) does not convert to an IANA-registered property in JSContact, but several conversion rules make use of this parameter to combine multiple vCard properties into a single JSContact object instance.  For an example of this, see <xref target="vcard-prop-adr"/>.  To preserve the verbatim value of the ALTID parameter, set the JSContact properties defined in <xref target="new-jscontact"/>.</t>
         </section>
         <section anchor="vcard-param-author">
           <name>AUTHOR</name>
-	  <t>The AUTHOR parameter on a NOTE property converts to the Author object's uri property.  That Author object is set as the value of the Note object's author property. The AUTHOR parameter is defined in <xref target="RFC9554"/>.</t>
+	  <t>The AUTHOR parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.1" sectionFormat="of"/>) on a NOTE property converts to the Author object's uri property.  That Author object is set as the value of the Note object's author property.</t>
 
 <!-- [rfced] Please review whether any of the notes in this document
 should be in the <aside> element. It is defined as "a container for 
@@ -238,7 +244,7 @@ Original:
    The AUTHOR parameter value of a vCard NOTE property converts 
    to the uri property of the Author object for this note.
 
-   Note: This parameter is defined in [RFCYYY2].
+   Note: This parameter is defined in [RFC9554].
 
 Perhaps:
 A) The AUTHOR parameter value [RFC9554] of a vCard NOTE property 
@@ -253,27 +259,28 @@ B) The AUTHOR parameter value of a vCard NOTE property converts
         </section>
         <section anchor="vcard-param-author-name">
           <name>AUTHOR-NAME</name>
-          <t>The AUTHOR-NAME parameter on a NOTE property converts to the Author object's name property.  That Author object is set as the value of the Note object's author property. The AUTHOR-NAME parameter is defined in <xref target="RFC9554"/>.</t>
+          <t>The AUTHOR-NAME parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.2" sectionFormat="of"/>) on a NOTE property converts to the Author object's name property.  That Author object is set as the value of the Note object's author property. The AUTHOR-NAME parameter is defined in <xref target="RFC9554"/>.</t>
         </section>
         <section anchor="vcard-param-calscale">
           <name>CALSCALE</name>
-          <t>The CALSCALE parameter set on a BDAY, DEATHDATE, or ANNIVERSARY property converts to the PartialDate object's calendarScale property.</t>
+          <t>The CALSCALE parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.8" sectionFormat="of"/>) set on a BDAY, DEATHDATE, or ANNIVERSARY property converts to the PartialDate object's calendarScale property.</t>
         </section>
         <section anchor="vcard-param-created">
           <name>CREATED</name>
-          <t>The CREATED parameter on a vCard NOTE property converts to the Note object's created property.  The CREATED parameter is defined in <xref target="RFC9554"/>.</t>
+          <t>The CREATED parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.3" sectionFormat="of"/>) on a vCard NOTE property converts to the Note object's created property.</t>
         </section>
         <section anchor="vcard-param-derived">
           <name>DERIVED</name>
-          <t>If the DERIVED parameter is set to "true" on a vCard property, then implementations <bcp14>MAY</bcp14> choose not to convert that property. The DERIVED parameter is defined in <xref target="RFC9554"/>.</t>
+          <t>The DERIVED parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.4" sectionFormat="of"/>) does not convert to JSContact.  Instead, if the DERIVED parameter is set to "true" on a vCard property, then implementations <bcp14>MAY</bcp14> choose not to convert that property.</t>
         </section>
         <section anchor="vcard-param-geo">
           <name>GEO</name>
-          <t>The GEO parameter set on an ADR property converts to the Address object's coordinates property.</t>
+          <t>The GEO parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.10" sectionFormat="of"/>) set on an ADR property converts to the Address object's coordinates property.</t>
         </section>
         <section anchor="vcard-param-group">
           <name>GROUP</name>
-          <t>The GROUP parameter is exclusively for use in jCard (see <xref target="RFC7095" sectionFormat="of" section="7.1"/>).  It <bcp14>MUST NOT</bcp14> be set in a vCard.  Preserving the exact group name when converting from vCard to JSContact and back to vCard is not necessary.  Any group identifiers will do, as long as the resulting vCard groups its properties equally to the original vCard.  Implementations that still wish to preserve the exact property group name of a vCard property <bcp14>MAY</bcp14> set the jCard "group" parameter in the JSContact properties vCardProps or vCardParams as defined in <xref target="new-jscontact"/>.</t>
+          <t>The GROUP parameter (<xref target="RFC7095" derivedContent="RFC7095" section="7.1" sectionFormat="of"/>) does not convert to JSContact.  It exclusively is for use in jCard and <bcp14>MUST NOT</bcp14> be set in a vCard.</t>
+<t>Preserving the exact group name when converting from vCard to JSContact and back to vCard is not necessary.  Any group identifiers will do, as long as the resulting vCard groups its properties equally to the original vCard.  Implementations that still wish to preserve the exact property group name of a vCard property <bcp14>MAY</bcp14> set the jCard "group" parameter in the JSContact properties vCardProps or vCardParams as defined in <xref target="new-jscontact"/>.</t>
           <figure anchor="group_conversion_params">
             <name>Example of How to Preserve the Group Name in vCardParams during Conversion</name>
 
@@ -319,11 +326,11 @@ item2.X-FOO:bar
         </section>
         <section anchor="vcard-param-index">
           <name>INDEX</name>
-          <t>The INDEX parameter set on the EXPERTISE, HOBBY, INTEREST, and ORG-DIRECTORY properties defined in <xref target="RFC6715"/> converts to the PersonalInfo and Directory objects' listAs property.</t>
+          <t>The INDEX parameter (<xref target="RFC6715" derivedContent="RFC6715" section="3.1" sectionFormat="of"/>) set on the EXPERTISE, HOBBY, INTEREST, and ORG-DIRECTORY properties converts to the PersonalInfo and Directory objects' listAs property.</t>
         </section>
         <section anchor="vcard-param-language">
           <name>LANGUAGE</name>
-          <t>The LANGUAGE parameter converts to an entry in the Card object's localizations property for that vCard property on which this parameter is set on.  The value of the LANGUAGE parameter defines the language tag key in the localizations property.</t>
+          <t>The LANGUAGE parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.1" sectionFormat="of"/>) converts to an entry in the Card object's localizations property for that vCard property on which this parameter is set on.  The value of the LANGUAGE parameter defines the language tag key in the localizations property.</t>
           <t>This specification does not define a single standard conversion rule for how to convert the property values.  Instead, building the localizations value is implementation-specific.</t>
           <t>Two options to populate the localizations property are:</t>
           <ul>
@@ -447,7 +454,7 @@ TITLE;LANGUAGE=fr:Écrivain
         </section>
         <section anchor="vcard-param-level">
           <name>LEVEL</name>
-          <t>The LEVEL parameter <xref target="RFC6715"/> converts to the PersonalInfo object's level property.  If this parameter is set on the EXPERTISE property, then its values convert as follows:
+          <t>The LEVEL parameter (<xref target="RFC6715" derivedContent="RFC6715" section="3.2" sectionFormat="of"/>) <xref target="RFC6715"/> converts to the PersonalInfo object's level property.  If this parameter is set on the EXPERTISE property, then its values convert as follows:
       </t>
           <ul spacing="compact">
             <li>"beginner" converts to "low";</li>
@@ -458,7 +465,7 @@ TITLE;LANGUAGE=fr:Écrivain
         </section>
         <section anchor="vcard-param-mediatype">
           <name>MEDIATYPE</name>
-          <t>The MEDIATYPE parameter converts to the Resource object's mediaType property.</t>
+          <t>The MEDIATYPE parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.7" sectionFormat="of"/>) converts to the Resource object's mediaType property.</t>
         </section>
         <section anchor="vcard-param-phonetic">
           <name>PHONETIC</name>
@@ -484,11 +491,10 @@ Perhaps:
    convert to values in the NameComponent, Name or AddressComponent, and 
    Address object types, respectively.
 -->
-	  <t>When the PHONETIC or <xref target="vcard-param-script">SCRIPT</xref> parameters are set on an N or ADR property, they convert to JSContact as described below:</t>
-	  <t>The values of the phonetic, phoneticScript, and phoneticSystem properties convert to values in the NameComponent and Name or AddressComponent and Address objects, respectively.</t>
+	  <t>The PHONETIC parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.6" sectionFormat="of"/>) converts to the Name and Address objects' phoneticSystem property unless the parameter value is "script", in which case the phoneticSystem property is not set.</t>
+	  <t>The value of the SCRIPT parameter converts to the phoneticScript property.</t>
           <t>The related N or ADR property is defined by the vCard ALTID parameter. The conversion rules for the <xref target="vcard-prop-n">N</xref> and <xref target="vcard-prop-adr">ADR</xref> properties define how the vCard components convert to JSContact.</t>
-          <t>The value of the PHONETIC parameter converts to the phoneticSystem property unless it is "script", in which case the phoneticSystem property is not set.  The value of the SCRIPT parameter converts to the phoneticScript property.</t>
-          <t>The values of the components in the property value convert to values in the respective NameComponent or AddressComponent objects' phonetic properties.</t>
+          <t>The component values of the property on which the PHONETIC parameter is set, convert to the respective NameComponent or AddressComponent objects' phonetic properties.</t>
           <t>If more than one property has the PHONETIC parameter set and relates to the same property, then they convert to the Card object's localizations property according to their LANGUAGE parameter values as outlined in <xref target="vcard-param-language"/>.</t>
           <figure anchor="phonetic_conversion">
             <name>PHONETIC Conversion Example</name>
@@ -523,15 +529,15 @@ N;ALTID=1;PHONETIC=jyut;
         </section>
         <section anchor="vcard-param-pid">
           <name>PID</name>
-          <t>The PID parameter converts to the vCardParams property; see <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>The PID parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.5" sectionFormat="of"/>) converts to the vCardParams property; see <xref target="jscontact-prop-vcardparams"/>.</t>
         </section>
         <section anchor="vcard-param-pref">
           <name>PREF</name>
-          <t>The PREF parameter converts to the pref property of that JSContact object, to which the vCard property having this parameter converts.</t>
+          <t>The PREF parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.3" sectionFormat="of"/>) converts to the pref property of that JSContact object, to which the vCard property having this parameter converts.</t>
         </section>
         <section anchor="vcard-param-propid">
           <name>PROP-ID</name>
-	  <t>The PROP-ID parameter converts to the Id-typed key of the JSContact object to which the vCard property having this parameter converts. The PROP-ID parameter is defined in <xref target="RFC9554"/>.</t>
+	  <t>The PROP-ID parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.7" sectionFormat="of"/>) converts to the Id-typed key of the JSContact object to which the vCard property having this parameter converts.</t>
           <figure anchor="propid_conversion">
             <name>PROP-ID Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -558,15 +564,16 @@ TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
         </section>
         <section anchor="vcard-param-script">	  
           <name>SCRIPT</name>
-          <t>For the SCRIPT parameter, see <xref target="vcard-param-phonetic"/>.</t>
+          <t>The SCRIPT parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.8" sectionFormat="of"/>) converts to the Name or Address objects' phoneticScript property.</t>
+          <t>Also see <xref target="vcard-param-phonetic"/>.</t>
         </section>
         <section anchor="vcard-param-service-type">
           <name>SERVICE-TYPE</name>
-          <t>The SERVICE-TYPE parameter converts to the OnlineService object's service property.  The SERVICE-TYPE parameter is defined in <xref target="RFC9554"/>.</t>
+	  <t>The SERVICE-TYPE parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.9" sectionFormat="of"/>) converts to the OnlineService object's service property.</t>
         </section>
         <section anchor="vcard-param-sortas">
           <name>SORT-AS</name>
-          <t>The SORT-AS parameter converts to the Name, Organization, and OrgUnit objects' sortAs properties.</t>
+          <t>The SORT-AS parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.9" sectionFormat="of"/>) converts to the Name, Organization, and OrgUnit objects' sortAs properties.</t>
         </section>
         <section anchor="vcard-param-type">
           <name>TYPE</name>
@@ -584,19 +591,19 @@ Perhaps:
    property-specific kind values defined in later sections.  
 -->
 	  
-          <t>The TYPE parameter either converts to the contexts property or the kind property, as defined in later sections. If not specified otherwise, the vCard "home" and "work" parameter values convert to the JSContact "private" and "work" contexts, respectively.</t>
+          <t>The TYPE parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.6" sectionFormat="of"/>) either converts to the contexts property or the kind property, as defined in later sections. If not specified otherwise, the vCard "home" and "work" parameter values convert to the JSContact "private" and "work" contexts, respectively.</t>
         </section>
         <section anchor="vcard-param-tz">
           <name>TZ</name>
-          <t>The TZ parameter on an ADR property converts to the Address object's timeZone property.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.</t>
+          <t>The TZ parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.11" sectionFormat="of"/>) on an ADR property converts to the Address object's timeZone property.  Also see the conversion of the TZ property in <xref target="vcard-prop-tz"/>.</t>
         </section>
         <section anchor="vcard-param-username">
           <name>USERNAME</name>
-          <t>The USERNAME parameter converts to the OnlineService object's user property.  The USERNAME parameter is defined in <xref target="RFC9554"/>.</t>
+	  <t>The USERNAME parameter (<xref target="RFC9554" derivedContent="RFC9554" section="4.10" sectionFormat="of"/>) converts to the OnlineService object's user property.</t>
         </section>
         <section anchor="vcard-param-value">
           <name>VALUE</name>
-          <t>The VALUE parameter does not convert to an IANA-registered property in JSContact.  To preserve properties with experimental values, see Sections <xref target="jscontact-prop-vcardprops" format="counter"/> and <xref target="jscontact-prop-vcardparams" format="counter"/>.</t>
+          <t>The VALUE parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.2" sectionFormat="of"/>) does not convert to an IANA-registered property in JSContact.  To preserve properties with experimental values, see Sections <xref target="jscontact-prop-vcardprops" format="counter"/> and <xref target="jscontact-prop-vcardparams" format="counter"/>.</t>
         </section>
       </section>
       <section>
@@ -607,7 +614,7 @@ Perhaps:
         </section>
         <section anchor="vcard-prop-kind">
           <name>KIND</name>
-          <t>The KIND property converts to the kind property (<xref target="kind_conversion"/>).  Allowed values are those described in <xref target="RFC6350" sectionFormat="of" section="6.1.4"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.</t>
+          <t>The KIND property (<xref target="RFC6350" derivedContent="RFC6350" section="6.1.4" sectionFormat="of"/>) converts to the kind property (<xref target="kind_conversion"/>).  Allowed values are those described in <xref target="RFC6350" sectionFormat="of" section="6.1.4"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.</t>
           <figure anchor="kind_conversion">
             <name>KIND Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -620,7 +627,7 @@ KIND:individual
         </section>
         <section anchor="vcard-prop-source">
           <name>SOURCE</name>
-          <t>The SOURCE property converts to a Directory object in the Card object's directories property (<xref target="source_conversion"/>).  The Directory object's kind property is set to "entry".  The uri property is set to the SOURCE property value.</t>
+          <t>The SOURCE property (<xref target="RFC6350" derivedContent="RFC6350" section="6.1.3" sectionFormat="of"/>) converts to a Directory object in the Card object's directories property (<xref target="source_conversion"/>).  The Directory object's kind property is set to "entry".  The uri property is set to the SOURCE property value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="source_conversion">
             <name>SOURCE Conversion Example</name>
@@ -639,22 +646,27 @@ SOURCE:https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
         </section>
         <section anchor="vcard-prop-xml">
           <name>XML</name>
-          <t>The XML property converts to the vCardProps property; see <xref target="jscontact-prop-vcardprops"/>.</t>
+          <t>The XML property (<xref target="RFC6350" derivedContent="RFC6350" section="6.1.5" sectionFormat="of"/>) converts to the vCardProps property; see <xref target="jscontact-prop-vcardprops"/>.</t>
         </section>
       </section>
       <section>
         <name>Identification Properties</name>
         <section anchor="vcard-prop-anniversary">
-          <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, and ANNIVERSARY</name>
-          <t>The BDAY and ANNIVERSARY properties and the extensions BIRTHPLACE, DEATHDATE, and DEATHPLACE described in <xref target="RFC6474"/> convert to Anniversary objects in the Card object's anniversaries property (<xref target="anniversary_conversion"/>):</t>
-          <ul spacing="compact">
-            <li>BDAY and BIRTHPLACE convert to an Anniversary object having the date and place properties set.  The kind poperty is set to "birth".
-            </li>
-            <li>DEATHDATE and DEATHPLACE convert to an Anniversary object having the date and place properties set.  The Anniversary object's kind property is set to "death".
-            </li>
-            <li>ANNIVERSARY converts to the Anniversary object's date property.  The Anniversary object's kind property is set to "wedding".</li>
-          </ul>
-          <t>Birth and death places convert to Address objects.</t>
+	<name>ANNIVERSARY, BDAY, BIRTHPLACE, DEATHDATE, and DEATHPLACE</name>
+	<t>The following properties all convert to Anniversary objects in the Card object's anniversaries property (<xref target="anniversary_conversion"/>):</t>
+		<ul spacing="compact">
+			<li>ANNIVERSARY (<xref target="RFC6350" derivedContent="RFC6350" section="6.2.6" sectionFormat="of"/>)</li>
+			<li>BDAY (<xref target="RFC6350" derivedContent="RFC6350" section="6.2.5" sectionFormat="of"/>)</li>
+			<li>BIRTHPLACE (<xref target="RFC6474" derivedContent="RFC6474" section="2.1" sectionFormat="of"/>)</li>
+			<li>DEATHDATE (<xref target="RFC6474" derivedContent="RFC6474" section="2.3" sectionFormat="of"/>)</li>
+			<li>DEATHPLACE (<xref target="RFC6474" derivedContent="RFC6474" section="2.2" sectionFormat="of"/>)</li>
+	</ul>
+
+            <t>BDAY and BIRTHPLACE convert to an Anniversary object having the date and place properties set.  The kind poperty is set to "birth".
+            </t>
+            <t>DEATHDATE and DEATHPLACE convert to an Anniversary object having the date and place properties set.  The Anniversary object's kind property is set to "death".
+            </t>
+            <t>ANNIVERSARY converts to the Anniversary object's date property.  The Anniversary object's kind property is set to "wedding".</t>
           <t>If the BIRTHPLACE or DEATHPLACE property value is of type URI using the "geo:" URI scheme, then it converts to the Address object's coordinates property.  If the value type is TEXT then it converts to the Address object's full property.  Otherwise it converts to the vCardProps property; see <xref target="jscontact-prop-vcardprops"/>.</t>
           <t>The ALTID and LANGUAGE parameters of both the BIRTHPLACE and DEATHPLACE properties convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="anniversary_conversion">
@@ -706,7 +718,7 @@ ANNIVERSARY:19860201
         </section>
         <section anchor="vcard-prop-fn">
           <name>FN</name>
-          <t>The FN property converts to converts to the Name object's full property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case where the vCard contains more than one FN property without the LANGUAGE parameter, convert the FN property that has the least parameters.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops">vCardProps</xref> property.</t>
+          <t>The FN property (<xref target="RFC6350" derivedContent="RFC6350" section="6.2.1" sectionFormat="of"/>) converts to converts to the Name object's full property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case where the vCard contains more than one FN property without the LANGUAGE parameter, convert the FN property that has the least parameters.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops">vCardProps</xref> property.</t>
           <figure anchor="fn_conversion">
             <name>FN Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -721,12 +733,12 @@ FN:John Q. Public, Esq.
         </section>
         <section anchor="vcard-prop-gender">
           <name>GENDER</name>
-          <t>The GENDER property does not convert to an IANA-registered property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Alternatively, the Card object's speakToAs property defines how to address and refer to an individual represented by the Card, as do the newly defined vCard GRAMGENDER and PRONOUNS properties of <xref target="RFC9554"/>.</t>
+          <t>The GENDER property (<xref target="RFC6350" derivedContent="RFC6350" section="6.2.7" sectionFormat="of"/>) does not convert to an IANA-registered property in JSContact.  To convert this property, see <xref target="jscontact-prop-vcardprops"/>.  Alternatively, the Card object's speakToAs property defines how to address and refer to an individual represented by the Card, as do the newly defined vCard GRAMGENDER and PRONOUNS properties of <xref target="RFC9554"/>.</t>
         </section>
         <section anchor="vcard-prop-gramgender">
           <name>GRAMGENDER and PRONOUNS</name>
-          <t>The GRAMGENDER property converts to the SpeakToAs object's grammaticalGender property (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
-          <t>The PRONOUNS property converts to the SpeakToAs object's pronouns property (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <t>The GRAMGENDER property (<xref target="RFC9554" derivedContent="RFC9554" section="3.2" sectionFormat="of"/>) converts to the SpeakToAs object's grammaticalGender property (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
+          <t>The PRONOUNS property (<xref target="RFC9554" derivedContent="RFC9554" section="3.4" sectionFormat="of"/>) converts to the SpeakToAs object's pronouns property (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
           <figure anchor="grammatical_gender_pronouns_conversion">
             <name>GRAMGENDER and PRONOUNS Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -753,7 +765,7 @@ PRONOUNS;PREF=1:xe/xir
         </section>
         <section anchor="vcard-prop-n">
           <name>N</name>
-          <t>The N property converts to a Name object in the Card object's name property.
+          <t>The N property (<xref target="RFC6350" derivedContent="RFC6350" section="6.2.2" sectionFormat="of"/>) converts to a Name object in the Card object's name property.
 	  Each component in the N property structured value converts to a NameComponent in the Name object's components property.  The following table shows this relation:</t>
 
 <!--[rfced] In Table 1, does "in here" mean "listed in this table" as
@@ -873,7 +885,7 @@ N;SORT-AS="Stevenson,John Philip":Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.
         </section>
         <section anchor="vcard-prop-nickname">
           <name>NICKNAME</name>
-          <t>The NICKNAME property converts to a Nickname object in the Card object's nicknames property (<xref target="nickname_conversion"/>).  The name property is set to the NICKNAME property value.</t>
+          <t>The NICKNAME property (<xref target="RFC6350" derivedContent="RFC6350" section="6.2.3" sectionFormat="of"/>) converts to a Nickname object in the Card object's nicknames property (<xref target="nickname_conversion"/>).  The name property is set to the NICKNAME property value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="nickname_conversion">
             <name>NICKNAME Conversion Example</name>
@@ -891,7 +903,7 @@ NICKNAME:Johnny
         </section>
         <section anchor="vcard-prop-photo">
           <name>PHOTO</name>
-          <t>The PHOTO property converts to a Media object in the Card object's media property (<xref target="photo_conversion"/>).  The Media object's kind property is set to "photo" and the uri property is set to the PHOTO value.</t>
+          <t>The PHOTO property (<xref target="RFC6350" derivedContent="RFC6350" section="6.2.4" sectionFormat="of"/>) converts to a Media object in the Card object's media property (<xref target="photo_conversion"/>).  The Media object's kind property is set to "photo" and the uri property is set to the PHOTO value.</t>
           <t>The PREF and MEDIATYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="photo_conversion">
             <name>PHOTO Conversion Example</name>
@@ -913,7 +925,7 @@ PHOTO:https://www.example.com/pub/photos/jqpublic.gif
         <name>Delivery Addressing Properties</name>
         <section anchor="vcard-prop-adr">
           <name>ADR</name>
-          <t>The ADR property converts to an Address object in the Card object's addresses property.  Each component in the ADR-structured property value converts to an AddressComponent in the Address object's components property.</t>
+          <t>The ADR property (<xref target="RFC6350" derivedContent="RFC6350" section="6.3.1" sectionFormat="of"/>) converts to an Address object in the Card object's addresses property.  Each component in the ADR-structured property value converts to an AddressComponent in the Address object's components property.</t>
           <t><xref target="RFC9554"/> defines new components for the ADR property.  Implementations <bcp14>SHOULD</bcp14> set these new components, even if all their values are the empty string.</t>
           <t>The following table shows how the ADR component and AddressComponent kind relate:</t>
 
@@ -1045,10 +1057,10 @@ Perhaps:
           <t>If the <xref target="vcard-param-jscomps">JSCOMPS</xref> parameter is set, then the Address object's isOrdered property value is "true", and the defaultSeparator property and any separator name components are set according to the parameter value.  The order in the components property <bcp14>MUST</bcp14> adhere to the order of the JSCOMPS parameter value.</t>
           <t>If the JSCOMPS parameter is not set, then the Address object's isOrdered property value is "false", and the defaultSeparator property <bcp14>MUST NOT</bcp14> be set.  The order in the components property <bcp14>MUST</bcp14> follow the order of values in the ADR structured value when read from left to right.</t>
 	  <ul empty="true">
-          <li>The LABEL parameter converts to the Address object's full property.</li>
-          <li>The GEO parameter converts to the Address object's coordinates property.</li>
-          <li>The TZ parameter converts to the Address object's timeZone property.</li>
-          <li>The CC parameter, as defined in <xref target="RFC8605"/>, converts to the Address object's countryCode property.</li>
+          <li>The LABEL parameter (<xref target="RFC6350" derivedContent="RFC6350" section="6.3.1" sectionFormat="of"/>) converts to the Address object's full property.</li>
+          <li>The GEO parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.10" sectionFormat="of"/>) converts to the Address object's coordinates property.</li>
+          <li>The TZ parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.11" sectionFormat="of"/>) converts to the Address object's timeZone property.</li>
+          <li>The CC parameter (<xref target="RFC8605" derivedContent="RFC8605" section="3.1" sectionFormat="of"/>) converts to the Address object's countryCode property.</li>
 	  </ul>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.  The ADR-specific values of the TYPE parameter defined in Sections <xref target="RFC9554" sectionFormat="bare" section="5.1"/> and <xref target="RFC9554" sectionFormat="bare" section="5.2"/> of <xref target="RFC9554"/> convert to the corresponding entries of the contexts property as defined in <xref target="RFC9553" sectionFormat="of" section="2.5.1"/>.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.  Each possible language-dependent alternative converts to an entry of the PatchObject where the key references the full property.</t>
@@ -1081,7 +1093,7 @@ ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA;;;;Oak St;54321;;;;;
         <name>Communications Properties</name>
         <section anchor="vcard-prop-email">
           <name>EMAIL</name>
-          <t>The EMAIL property converts to an EmailAddress object in the Card object's emails property (<xref target="email_conversion"/>).  The EmailAddress object's address property is set to the EMAIL value.</t>
+          <t>The EMAIL property (<xref target="RFC6350" derivedContent="RFC6350" section="6.4.2" sectionFormat="of"/>) converts to an EmailAddress object in the Card object's emails property (<xref target="email_conversion"/>).  The EmailAddress object's address property is set to the EMAIL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="email_conversion">
             <name>EMAIL Conversion Example</name>
@@ -1105,7 +1117,7 @@ EMAIL;PREF=1:jane_doe@example.com
         </section>
         <section anchor="vcard-prop-impp">
           <name>IMPP</name>
-          <t>The IMPP property converts to an OnlineService object in the Card object's onlineServices property (<xref target="impp_conversion"/>).  The vCardName property is set to "impp", and the uri property is set to the IMPP value.</t>
+          <t>The IMPP property (<xref target="RFC6350" derivedContent="RFC6350" section="6.4.3" sectionFormat="of"/>) converts to an OnlineService object in the Card object's onlineServices property (<xref target="impp_conversion"/>).  The vCardName property is set to "impp", and the uri property is set to the IMPP value.</t>
           <t>The SERVICE-TYPE, USERNAME, PREF, and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP Conversion Example</name>
@@ -1125,7 +1137,7 @@ IMPP;PREF=1:xmpp:alice@example.com
         </section>
         <section anchor="vcard-prop-lang">
           <name>LANG</name>
-          <t>The LANG property converts to a LanguagePref object in the Card object's preferredLanguages property (<xref target="lang_conversion"/>).  The LANG property value converts to the LanguagePref object's language property value.</t>
+          <t>The LANG property (<xref target="RFC6350" derivedContent="RFC6350" section="6.4.4" sectionFormat="of"/>) converts to a LanguagePref object in the Card object's preferredLanguages property (<xref target="lang_conversion"/>).  The LANG property value converts to the LanguagePref object's language property value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="lang_conversion">
             <name>LANG Conversion Example</name>
@@ -1156,7 +1168,7 @@ LANG;TYPE=home:fr
         </section>
         <section anchor="vcard-prop-language">
           <name>LANGUAGE</name>
-	  <t>The LANGUAGE property converts to the Card object's language property (<xref target="languageprop_conversion"/>).  The LANGUAGE property is defined in <xref target="RFC9554"/>.</t>
+	  <t>The LANGUAGE property (<xref target="RFC9554" derivedContent="RFC9554" section="3.3" sectionFormat="of"/>) converts to the Card object's language property (<xref target="languageprop_conversion"/>).</t>
           <figure anchor="languageprop_conversion">
             <name>LANGUAGE Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1169,7 +1181,7 @@ LANGUAGE:de-AT
         </section>
         <section anchor="vcard-prop-socialprofile">
           <name>SOCIALPROFILE</name>
-	  <t>The SOCIALPROFILE property converts to an OnlineService object in the Card object's onlineServices property (<xref target="socialprofile_conversion"/>).  The vCardName property is set to "socialprofile", or it can be omitted.  If the SOCIALPROFILE property value is of type URI, then the OnlineService object's uri property is set, otherwise, the user property is set.  The SOCIALPROFILE property is defined in <xref target="RFC9554"/>.</t>
+	  <t>The SOCIALPROFILE property (<xref target="RFC9554" derivedContent="RFC9554" section="3.5" sectionFormat="of"/>) converts to an OnlineService object in the Card object's onlineServices property (<xref target="socialprofile_conversion"/>).  The vCardName property is set to "socialprofile", or it can be omitted.  If the SOCIALPROFILE property value is of type URI, then the OnlineService object's uri property is set, otherwise, the user property is set.</t>
           <t>The SERVICE-TYPE, USERNAME, PREF, and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="socialprofile_conversion">
             <name>SOCIALPROFILE Conversion Example</name>
@@ -1189,7 +1201,7 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
         </section>
         <section anchor="vcard-prop-tel">
           <name>TEL</name>
-          <t>The TEL property converts to a Phone object in the Card object's phones property (<xref target="tel_conversion"/>).</t>
+          <t>The TEL property (<xref target="RFC6350" derivedContent="RFC6350" section="6.4.1" sectionFormat="of"/>) converts to a Phone object in the Card object's phones property (<xref target="tel_conversion"/>).</t>
           <t>The TEL-specific values of the TYPE parameter convert to the features property keys as outlined in <xref target="tel_type_conversion"/>.  Note that <xref target="RFC6350" sectionFormat="of" section="6.4.1"/> defines the default TYPE of TEL to be "voice", but the default Phone features property is absent by default.  Accordingly, an implementation <bcp14>SHOULD</bcp14> only set the Phone object's features property if the TEL property actually has a TEL-specific TYPE parameter set.</t>
           <table anchor="tel_type_conversion">
             <name>TEL TYPE Conversion</name>
@@ -1264,10 +1276,11 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
         <name>Geographical Properties</name>
         <section anchor="vcard-prop-geo">
           <name>GEO</name>
-          <t>The GEO property converts to the Address object's coordinates property.  Also see <xref target="combine-geo-props"/> to determine which Address object instance to convert to.</t>
+          <t>The GEO property (<xref target="RFC6350" derivedContent="RFC6350" section="6.5.2" sectionFormat="of"/>) converts to the Address object's coordinates property.  Also see <xref target="combine-geo-props"/> to determine which Address object instance to convert to.</t>
         </section>
         <section anchor="vcard-prop-tz">
           <name>TZ</name>
+          <t>The TZ property (<xref target="RFC6350" derivedContent="RFC6350" section="6.5.1" sectionFormat="of"/>) converts an Address object in the Card object's addresses property.</t>
           <t>A value of type TEXT converts to the Address object's timeZone property.</t>
           <t>A value of type UTC-OFFSET converts to the Address object's timeZone property if the offset has zero minutes and the hour offset is in the range -12 &lt;= 14. Note that:</t>
           <ul>
@@ -1290,7 +1303,7 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
         <name>Organizational Properties</name>
         <section anchor="vcard-prop-contact-uri">
           <name>CONTACT-URI</name>
-          <t>The CONTACT-URI property, as defined in <xref target="RFC8605"/>, converts to a Link object in the Card object's links property (<xref target="contact_uri_conversion"/>).  The Link object's kind property is set to "contact" and the uri property is set to the CONTACT-URI property value.</t>
+          <t>The CONTACT-URI property (<xref target="RFC8605" derivedContent="RFC8605" section="2.1" sectionFormat="of"/>) converts to a Link object in the Card object's links property (<xref target="contact_uri_conversion"/>).  The Link object's kind property is set to "contact" and the uri property is set to the CONTACT-URI property value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="contact_uri_conversion">
             <name>CONTACT-URI Conversion Example</name>
@@ -1310,7 +1323,7 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
         </section>
         <section anchor="vcard-prop-logo">
           <name>LOGO</name>
-          <t>The LOGO property converts to a Media object in the Card object's media property (<xref target="logo_conversion"/>).  The Media object's kind property is set to "logo" and the uri property is set to the LOGO property value.</t>
+          <t>The LOGO property (<xref target="RFC6350" derivedContent="RFC6350" section="6.6.3" sectionFormat="of"/>) converts to a Media object in the Card object's media property (<xref target="logo_conversion"/>).  The Media object's kind property is set to "logo" and the uri property is set to the LOGO property value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="logo_conversion">
             <name>LOGO Conversion Example</name>
@@ -1329,7 +1342,7 @@ LOGO:https://www.example.com/pub/logos/abccorp.jpg
         </section>
         <section anchor="vcard-prop-member">
           <name>MEMBER</name>
-	  <t>The MEMBER property converts to the Card object's members property (<xref target="group_example"/>).  Each MEMBER property value is a key in the members property.  The PREF parameter parameter does not convert to JSContact.</t>
+	  <t>The MEMBER property (<xref target="RFC6350" derivedContent="RFC6350" section="6.6.5" sectionFormat="of"/>) converts to the Card object's members property (<xref target="group_example"/>).  Each MEMBER property value is a key in the members property.  The PREF parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.3" sectionFormat="of"/>) parameter does not convert to JSContact.</t>
           <figure anchor="group_example">
             <name>Group Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1353,7 +1366,7 @@ MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
         </section>
         <section anchor="vcard-prop-org">
           <name>ORG</name>
-          <t>The ORG property converts to an Organization object in the Card object's organizations property (<xref target="org_conversion"/>).  The Organization object's name property is set to the ORG property organizational name component.  The Organization object's units property is an array of OrgUnit objects that each contain an organizational unit name component value of the ORG property value.</t>
+          <t>The ORG property (<xref target="RFC6350" derivedContent="RFC6350" section="6.6.4" sectionFormat="of"/>) converts to an Organization object in the Card object's organizations property (<xref target="org_conversion"/>).  The Organization object's name property is set to the ORG property organizational name component.  The Organization object's units property is an array of OrgUnit objects that each contain an organizational unit name component value of the ORG property value.</t>
           <t>Implementations <bcp14>MAY</bcp14> allow representation of organizational units without the organizational name.  In this case, the first component of the ORG value <bcp14>MUST</bcp14> be an empty string (e.g.,  ORG:;DepartmentA).</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <t>The first item of the comma-separated SORT-AS parameter value converts to the sortAs property of the Organization object.  The subsequent items convert to the sortAs property of the corresponding OrgUnit object.</t>
@@ -1379,7 +1392,7 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
         </section>
         <section anchor="vcard-prop-related">
           <name>RELATED</name>
-          <t>The RELATED property converts to the Card object's relatedTo property (<xref target="related_conversion"/>).  The property value converts to the key in the relatedTo property.  The TYPE parameters convert to the Relation object's relation property.  Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
+          <t>The RELATED property (<xref target="RFC6350" derivedContent="RFC6350" section="6.6.6" sectionFormat="of"/>) converts to the Card object's relatedTo property (<xref target="related_conversion"/>).  The property value converts to the key in the relatedTo property.  The TYPE parameters convert to the Relation object's relation property.  Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
           <figure anchor="related_conversion">
             <name>RELATED Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1408,7 +1421,7 @@ RELATED;VALUE=text:Please contact my deputy John for any inquiries.
         </section>
         <section anchor="vcard-prop-title">
           <name>TITLE and ROLE</name>
-          <t>Both TITLE and ROLE properties convert to a Title object in the Card object's titles property (<xref target="title_role_conversion"/>).  The Title object's kind property is set to "title" or "role" for the TITLE and ROLE vCard properties, respectively.  The name property is set to the vCard property value.</t>
+          <t>The TITLE (<xref target="RFC6350" derivedContent="RFC6350" section="6.6.1" sectionFormat="of"/>) and ROLE (<xref target="RFC6350" derivedContent="RFC6350" section="6.6.2" sectionFormat="of"/> properties convert to a Title object in the Card object's titles property (<xref target="title_role_conversion"/>).  The Title object's kind property is set to "title" or "role" for the TITLE and ROLE vCard properties, respectively.  The name property is set to the vCard property value.</t>
           <t>The value of the organizationId property can be derived if the TITLE or ROLE property is a member of a vCard property group and if exactly one other ORG property is also a part of that group.</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="title_role_conversion">
@@ -1443,8 +1456,8 @@ group1.ORG:ABC, Inc.
         <name>Personal Information Properties</name>
         <section anchor="vcard-prop-expertise">
           <name>EXPERTISE</name>
-          <t>The EXPERTISE property, as defined in <xref target="RFC6715"/>, converts to a PersonalInfo object in the Card object's personalInfo property (<xref target="expertise_conversion"/>).  The PersonalInfo object's kind property is set to "expertise".</t>
-          <t>The INDEX parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
+          <t>The EXPERTISE property (<xref target="RFC6715" derivedContent="RFC6715" section="2.1" sectionFormat="of"/>) converts to a PersonalInfo object in the Card object's personalInfo property (<xref target="expertise_conversion"/>).  The PersonalInfo object's kind property is set to "expertise".</t>
+          <t>The INDEX parameter (<xref target="RFC6715" derivedContent="RFC6715" section="3.1" sectionFormat="of"/>) converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="expertise_conversion">
             <name>EXPERTISE Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1471,8 +1484,8 @@ EXPERTISE;INDEX=1;LEVEL=expert:chemistry
         </section>
         <section anchor="vcard-prop-hobby">
           <name>HOBBY</name>
-          <t>The HOBBY property, as defined in <xref target="RFC6715"/>, converts to a PersonalInfo object in the Card object's personalInfo property (<xref target="hobby_conversion"/>).  The PersonalInfo object's kind property is set to "hobby".</t>
-          <t>The INDEX parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
+          <t>The HOBBY property (<xref target="RFC6715" derivedContent="RFC6715" section="2.2" sectionFormat="of"/>) converts to a PersonalInfo object in the Card object's personalInfo property (<xref target="hobby_conversion"/>).  The PersonalInfo object's kind property is set to "hobby".</t>
+          <t>The INDEX parameter (<xref target="RFC6715" derivedContent="RFC6715" section="3.1" sectionFormat="of"/>) converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="hobby_conversion">
             <name>HOBBY Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1499,8 +1512,8 @@ HOBBY;INDEX=2;LEVEL=high:sewing
         </section>
         <section anchor="vcard-prop-interest">
           <name>INTEREST</name>
-          <t>The INTEREST property, as defined in <xref target="RFC6715"/>, converts to a PersonalInfo object in the Card object's personalInfo property (<xref target="interest_conversion"/>).  The PersonalInfo object's kind property is set to "interest".</t>
-          <t>The INDEX parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
+          <t>The INTEREST property (<xref target="RFC6715" derivedContent="RFC6715" section="2.3" sectionFormat="of"/>) converts to a PersonalInfo object in the Card object's personalInfo property (<xref target="interest_conversion"/>).  The PersonalInfo object's kind property is set to "interest".</t>
+          <t>The INDEX parameter (<xref target="RFC6715" derivedContent="RFC6715" section="3.1" sectionFormat="of"/>) converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="interest_conversion">
             <name>INTEREST Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1527,7 +1540,7 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
         </section>
         <section anchor="vcard-prop-org-directory">
           <name>ORG-DIRECTORY</name>
-          <t>The ORG-DIRECTORY property <xref target="RFC6715"/> converts to a Directory object in the Card object's directories property (<xref target="org_directory_conversion"/>).  The Directory object's kind property is set to "directory".  The uri property is set to the ORG-DIRECTORY property value.</t>
+          <t>The ORG-DIRECTORY property (<xref target="RFC6715" derivedContent="RFC6715" section="2.4" sectionFormat="of"/>) <xref target="RFC6715"/> converts to a Directory object in the Card object's directories property (<xref target="org_directory_conversion"/>).  The Directory object's kind property is set to "directory".  The uri property is set to the ORG-DIRECTORY property value.</t>
           <t>The INDEX, PREF, and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY Conversion Example</name>
@@ -1592,7 +1605,7 @@ Perhaps:
         <name>Explanatory Properties</name>
         <section anchor="vcard-prop-categories">
           <name>CATEGORIES</name>
-          <t>The CATEGORIES property converts to a set of entries of the Card object's keywords property (<xref target="categories_conversion"/>).  The keys are the comma-separated text values of the CATEGORIES property.</t>
+          <t>The CATEGORIES property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.1" sectionFormat="of"/>) converts to a set of entries of the Card object's keywords property (<xref target="categories_conversion"/>).  The keys are the comma-separated text values of the CATEGORIES property.</t>
           <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementors <bcp14>MAY</bcp14> insert the entries by order of preference.</t>
           <figure anchor="categories_conversion">
             <name>CATEGORIES Conversion Example</name>
@@ -1611,11 +1624,11 @@ CATEGORIES:internet,IETF,Industry,Information Technology
         </section>
         <section anchor="vcard-prop-clientpidmap">
           <name>CLIENTPIDMAP</name>
-          <t>The CLIENTPIDMAP property converts to the <xref target="jscontact-prop-vcardprops">vCardProps</xref> property.</t>
+          <t>The CLIENTPIDMAP property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.7" sectionFormat="of"/>) converts to the <xref target="jscontact-prop-vcardprops">vCardProps</xref> property.</t>
         </section>
         <section anchor="vcard-prop-created">
           <name>CREATED</name>
-	  <t>The CREATED property converts to the Card object's created property (<xref target="created_conversion"/>).  The CREATED property is defined in <xref target="RFC9554"/>.</t>
+	  <t>The CREATED property (<xref target="RFC9554" derivedContent="RFC9554" section="3.1" sectionFormat="of"/>) converts to the Card object's created property (<xref target="created_conversion"/>).</t>
           <figure anchor="created_conversion">
             <name>CREATED Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1628,7 +1641,7 @@ CREATED:19940930T143510Z
         </section>
         <section anchor="vcard-prop-note">
           <name>NOTE</name>
-          <t>The NOTE property converts to a Note object in the Card object's notes property (<xref target="notes_conversion"/>).</t>
+          <t>The NOTE property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.2" sectionFormat="of"/>) converts to a Note object in the Card object's notes property (<xref target="notes_conversion"/>).</t>
           <t>The ALTID and LANGUAGE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="notes_conversion">
             <name>NOTE Conversion Example</name>
@@ -1651,7 +1664,7 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
         </section>
         <section anchor="vcard-prop-prodid">
           <name>PRODID</name>
-          <t>The PRODID property converts to the Card object's prodId property (<xref target="prodid_conversion"/>).</t>
+          <t>The PRODID property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.3" sectionFormat="of"/>) converts to the Card object's prodId property (<xref target="prodid_conversion"/>).</t>
           <figure anchor="prodid_conversion">
             <name>PRODID Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1664,7 +1677,7 @@ PRODID:ACME Contacts App version 1.23.5
         </section>
         <section anchor="vcard-prop-rev">
           <name>REV</name>
-          <t>The REV property converts to the Card object's updated property (<xref target="rev_conversion"/>).</t>
+          <t>The REV property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.4" sectionFormat="of"/>) converts to the Card object's updated property (<xref target="rev_conversion"/>).</t>
           <figure anchor="rev_conversion">
             <name>REV Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1677,7 +1690,7 @@ REV:19951031T222710Z
         </section>
         <section anchor="vcard-prop-sound">
           <name>SOUND</name>
-          <t>The SOUND property converts to a Media object in the Card object's media property (<xref target="sound_conversion"/>).  The Media object's kind property is set to "sound" and the uri property is set to the SOUND value.</t>
+          <t>The SOUND property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.5" sectionFormat="of"/>) converts to a Media object in the Card object's media property (<xref target="sound_conversion"/>).  The Media object's kind property is set to "sound" and the uri property is set to the SOUND value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="sound_conversion">
             <name>SOUND Conversion Example</name>
@@ -1708,7 +1721,7 @@ Perhaps:
 	
         <section anchor="vcard-prop-uid">
           <name>UID</name>
-          <t>The UID property converts to the Card object's uid property (<xref target="uid_conversion"/>).</t>
+          <t>The UID property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.6" sectionFormat="of"/>) converts to the Card object's uid property (<xref target="uid_conversion"/>).</t>
           <figure anchor="uid_conversion">
             <name>UID Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1721,7 +1734,7 @@ UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
         </section>
         <section anchor="vcard-prop-url">
           <name>URL</name>
-          <t>The URL property converts to a Link object in the Card object's links property (<xref target="url_conversion"/>).  The Link object's uri property is set to the URL value.</t>
+          <t>The URL property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.8" sectionFormat="of"/>) converts to a Link object in the Card object's links property (<xref target="url_conversion"/>).  The Link object's uri property is set to the URL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="url_conversion">
             <name>URL Conversion Example</name>
@@ -1739,7 +1752,7 @@ URL:https://example.org/restaurant.french/~chezchic.html
         </section>
         <section anchor="vcard-prop-version">
           <name>VERSION</name>
-          <t>The VERSION property converts to the <xref target="jscontact-prop-vcardprops">vCardProps</xref> property.</t>
+          <t>The VERSION property (<xref target="RFC6350" derivedContent="RFC6350" section="6.7.9" sectionFormat="of"/>) converts to the <xref target="jscontact-prop-vcardprops">vCardProps</xref> property.</t>
         </section>
         <section anchor="vcard-prop-xablabel">
           <name>X-ABLabel</name>
@@ -1783,7 +1796,7 @@ item1.X-ABLabel:foo
         <name>Security Properties</name>
         <section anchor="vcard-prop-key">
           <name>KEY</name>
-          <t>The KEY property converts to a CryptoKey object in the Card object's cryptoKeys property (<xref target="key_conversion"/>).  The CryptoKey object's uri property is set to the KEY property value.</t>
+          <t>The KEY property (<xref target="RFC6350" derivedContent="RFC6350" section="6.8.1" sectionFormat="of"/>) converts to a CryptoKey object in the Card object's cryptoKeys property (<xref target="key_conversion"/>).  The CryptoKey object's uri property is set to the KEY property value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="key_conversion">
             <name>KEY Conversion Example</name>
@@ -1804,8 +1817,8 @@ KEY:https://www.example.com/keys/jdoe.cer
         <name>Calendar Properties</name>
         <section anchor="vcard-prop-caladruri">
           <name>CALADRURI</name>
-          <t>The CALADRURI property converts to a SchedulingAddress object in the Card object's schedulingAddresses property (<xref target="caladruri_conversion"/>).  The SchedulingAddress object's uri property is set to the CALADRURI value.</t>
-          <t>The PREF parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
+          <t>The CALADRURI property (<xref target="RFC6350" derivedContent="RFC6350" section="6.9.2" sectionFormat="of"/>) converts to a SchedulingAddress object in the Card object's schedulingAddresses property (<xref target="caladruri_conversion"/>).  The SchedulingAddress object's uri property is set to the CALADRURI value.</t>
+          <t>The PREF parameter (<xref target="RFC6350" derivedContent="RFC6350" section="5.3" sectionFormat="of"/>) converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caladruri_conversion">
             <name>CALADRURI Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
@@ -1827,7 +1840,7 @@ CALADRURI:https://example.com/calendar/jdoe
         </section>
         <section anchor="vcard-prop-caluri">
           <name>CALURI</name>
-          <t>The CALURI property converts to a Calendar object in the Card object's calendars property (<xref target="caluri_conversion"/>).  The Calendar object's kind property is set to "calendar" and the uri property is set to the CALURI value.</t>
+          <t>The CALURI property (<xref target="RFC6350" derivedContent="RFC6350" section="6.9.3" sectionFormat="of"/>) converts to a Calendar object in the Card object's calendars property (<xref target="caluri_conversion"/>).  The Calendar object's kind property is set to "calendar" and the uri property is set to the CALURI value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caluri_conversion">
             <name>CALURI Conversion Example</name>
@@ -1853,7 +1866,7 @@ CALURI;MEDIATYPE=text/calendar:https://ftp.example.com/calA.ics
         </section>
         <section anchor="vcard-prop-fburl">
           <name>FBURL</name>
-          <t>The FBURL property converts to a Calendar object in the Card object's calendars property (<xref target="fburl_conversion"/>).  The Calendar object's kind property is set to "freeBusy" and the uri property is set to the FBURL value.</t>
+          <t>The FBURL property (<xref target="RFC6350" derivedContent="RFC6350" section="6.9.1" sectionFormat="of"/>) converts to a Calendar object in the Card object's calendars property (<xref target="fburl_conversion"/>).  The Calendar object's kind property is set to "freeBusy" and the uri property is set to the FBURL value.</t>
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="fburl_conversion">
             <name>FBURL Conversion Example</name>
