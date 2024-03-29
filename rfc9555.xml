@@ -289,9 +289,10 @@ for consideration. Note that it is also acceptable to leave the "type"
 attribute not set.
 -->
 	    
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 item1.TEL;VALUE=uri:tel:+1-555-555-5555
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "phones": {
   "p1": {
     "number": "tel:+1-555-555-5555",
@@ -306,7 +307,8 @@ item1.TEL;VALUE=uri:tel:+1-555-555-5555
             <name>Example of How to Preserve the Group Name in vCardProps during Conversion</name>
             <sourcecode><![CDATA[
 item2.X-FOO:bar
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "vCardProps": [
   ["x-foo", {
     "group": "item2"
@@ -331,11 +333,12 @@ item2.X-FOO:bar
           <t>Generally, localizations only localize properties that are present in the non-localized version of this Card.  <xref target="language-patch-dominant-language"/> illustrates this.</t>
           <figure anchor="language-patch-dominant-language">
             <name>LANGUAGE Conversion Example: One Dominant Language</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 FN;LANGUAGE=EN:John Doe
 TITLE;LANGUAGE=EN:Boss
 TITLE;LANGUAGE=fr:Patron
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "language": "en",
 "name": {
   "full": "John Doe"
@@ -371,11 +374,12 @@ Perhaps:
           <t>As a special case, if one or more vCard properties of the same type do not have the LANGUAGE parameter set, add them to the non-localized Card.  Convert any with LANGUAGE parameters to the localizations property.  <xref target="language-patch-no-language"/> illustrates this.</t>
           <figure anchor="language-patch-no-language">
             <name>LANGUAGE Conversion Example: Property without Language</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 FN:John Doe
 TITLE:Boss
 TITLE;LANGUAGE=fr:Patron
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "name": {
   "full": "John Doe"
 },
@@ -413,12 +417,13 @@ Current:
           <t>The following example uses non-ASCII characters to demonstrate multilingual content.</t>
           <figure anchor="language-patch-no-dominant">
             <name>LANGUAGE Conversion Example: Conflicting LANGUAGE Property and Parameter Values</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 LANGUAGE:es
 FN:Gabriel García Márquez
 TITLE;LANGUAGE=en:Novelist
 TITLE;LANGUAGE=fr:Écrivain
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "language": "es",
 "name" {
   "full": "Gabriel García Márquez"
@@ -487,12 +492,13 @@ Perhaps:
           <t>If more than one property has the PHONETIC parameter set and relates to the same property, then they convert to the Card object's localizations property according to their LANGUAGE parameter values as outlined in <xref target="vcard-param-language"/>.</t>
           <figure anchor="phonetic_conversion">
             <name>PHONETIC Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 LANGUAGE=zh-Hant
 N;ALTID=1;LANGUAGE=zh-Hant:孫;中山;文,逸仙;;
 N;ALTID=1;PHONETIC=jyut;
   SCRIPT=Latn;LANGUAGE=yue:syun1;zung1saan1;man4,jat6sin1;;
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "language": "zh-Hant",
 "name": {
   "components": [
@@ -528,12 +534,13 @@ N;ALTID=1;PHONETIC=jyut;
 	  <t>The PROP-ID parameter converts to the Id-typed key of the JSContact object to which the vCard property having this parameter converts. The PROP-ID parameter is defined in <xref target="RFC9554"/>.</t>
           <figure anchor="propid_conversion">
             <name>PROP-ID Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 TEL;PROP-ID=PHONE-A;VALUE=uri;PREF=1;TYPE="voice,home"
   :tel:+1-555-555-5555;ext=5555
 TEL;PROP-ID=PHONE-B;VALUE=uri;TYPE=home
   :tel:+33-01-23-45-67
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "phones": {
   "PHONE-A": {
     "contexts": { "private": true },
@@ -603,9 +610,10 @@ Perhaps:
           <t>The KIND property converts to the kind property (<xref target="kind_conversion"/>).  Allowed values are those described in <xref target="RFC6350" sectionFormat="of" section="6.1.4"/> and extended with the values declared in <xref target="RFC6473"/> and <xref target="RFC6869"/>.</t>
           <figure anchor="kind_conversion">
             <name>KIND Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 KIND:individual
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "kind": "individual"
 ]]></sourcecode>
           </figure>
@@ -616,9 +624,10 @@ KIND:individual
           <t>The PREF and MEDIATYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="source_conversion">
             <name>SOURCE Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 SOURCE:https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "directories": {
    "ENTRY-1": {
      "kind": "entry",
@@ -650,7 +659,7 @@ SOURCE:https://dir.example.com/addrbook/jdoe/Jean%20Dupont.vcf
           <t>The ALTID and LANGUAGE parameters of both the BIRTHPLACE and DEATHPLACE properties convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="anniversary_conversion">
             <name>BDAY, BIRTHPLACE, DEATHDATE, DEATHPLACE, and ANNIVERSARY Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 BDAY:19531015T231000Z
 BIRTHPLACE:
  123 Main Street\nAny Town, CA 91921-1234\nU.S.A.
@@ -658,7 +667,8 @@ DEATHDATE:19960415
 DEATHPLACE:
  5 Court Street\nNew England, ND 58647\nU.S.A.
 ANNIVERSARY:19860201
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "anniversaries": {
   "ANNIVERSARY-1" : {
     "kind": "birth",
@@ -699,9 +709,10 @@ ANNIVERSARY:19860201
           <t>The FN property converts to converts to the Name object's full property (<xref target="fn_conversion"/>).  If the LANGUAGE parameter is set, then the FN property converts as outlined in <xref target="vcard-param-language"/>.  In the unexpected case where the vCard contains more than one FN property without the LANGUAGE parameter, convert the FN property that has the least parameters.  If multiple such FN properties are present, choose any of them.  All other FN properties convert to the <xref target="jscontact-prop-vcardprops">vCardProps</xref> property.</t>
           <figure anchor="fn_conversion">
             <name>FN Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 FN:John Q. Public, Esq.
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "name": {
   "full": "John Q. Public, Esq."
 }
@@ -718,11 +729,12 @@ FN:John Q. Public, Esq.
           <t>The PRONOUNS property converts to the SpeakToAs object's pronouns property (<xref target="grammatical_gender_pronouns_conversion"/>).</t>
           <figure anchor="grammatical_gender_pronouns_conversion">
             <name>GRAMGENDER and PRONOUNS Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 GRAMGENDER:NEUTER
 PRONOUNS;PREF=2:they/them
 PRONOUNS;PREF=1:xe/xir
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "speakToAs": {
   "grammaticalGender": "neuter",
   "pronouns": {
@@ -835,9 +847,10 @@ Original:
 	  
           <figure anchor="n_conversion">
             <name>N Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 N;SORT-AS="Stevenson,John Philip":Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "name": {
   "components":[
     { "kind": "surname", "value": "Stevenson" },
@@ -864,9 +877,10 @@ N;SORT-AS="Stevenson,John Philip":Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="nickname_conversion">
             <name>NICKNAME Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 NICKNAME:Johnny
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "nicknames": {
    "NICK-1": {
     "name": "Johnny"
@@ -881,9 +895,10 @@ NICKNAME:Johnny
           <t>The PREF and MEDIATYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="photo_conversion">
             <name>PHOTO Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 PHOTO:https://www.example.com/pub/photos/jqpublic.gif
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "media": {
    "PHOTO-1": {
      "kind": "photo",
@@ -1039,9 +1054,10 @@ Perhaps:
           <t>The ALTID and LANGUAGE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.  Each possible language-dependent alternative converts to an entry of the PatchObject where the key references the full property.</t>
           <figure anchor="adr_conversion">
             <name>ADR Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA;;;;Oak St;54321;;;;;
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "addresses": {
   "ADDR-1" : {
     "contexts": { "work": true },
@@ -1069,10 +1085,11 @@ ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA;;;;Oak St;54321;;;;;
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="email_conversion">
             <name>EMAIL Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 EMAIL;TYPE=work:jqpublic@xyz.example.com
 EMAIL;PREF=1:jane_doe@example.com
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "emails": {
   "EMAIL-1": {
     "contexts": { "work": true },
@@ -1092,9 +1109,10 @@ EMAIL;PREF=1:jane_doe@example.com
           <t>The SERVICE-TYPE, USERNAME, PREF, and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="impp_conversion">
             <name>IMPP Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 IMPP;PREF=1:xmpp:alice@example.com
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "onlineServices": {
   "OS-1": {
     "uri": "xmpp:alice@example.com",
@@ -1111,11 +1129,12 @@ IMPP;PREF=1:xmpp:alice@example.com
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="lang_conversion">
             <name>LANG Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 LANG;TYPE=work;PREF=1:en
 LANG;TYPE=work;PREF=2:fr
 LANG;TYPE=home:fr
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "preferredLanguages": {
   "LANG-1": {
     "language": "en",
@@ -1140,9 +1159,10 @@ LANG;TYPE=home:fr
 	  <t>The LANGUAGE property converts to the Card object's language property (<xref target="languageprop_conversion"/>).  The LANGUAGE property is defined in <xref target="RFC9554"/>.</t>
           <figure anchor="languageprop_conversion">
             <name>LANGUAGE Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 LANGUAGE:de-AT
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "language": "de-AT"
 ]]></sourcecode>
           </figure>
@@ -1153,9 +1173,10 @@ LANGUAGE:de-AT
           <t>The SERVICE-TYPE, USERNAME, PREF, and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="socialprofile_conversion">
             <name>SOCIALPROFILE Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "onlineServices": {
   ...
   "OS-1": {
@@ -1218,10 +1239,11 @@ SOCIALPROFILE;SERVICE-TYPE=Mastodon:https://example.com/@foo
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="tel_conversion">
             <name>TEL Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
 TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "phones": {
   "PHONE-1": {
     "contexts": { "private": true },
@@ -1272,9 +1294,10 @@ TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="contact_uri_conversion">
             <name>CONTACT-URI Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 CONTACT-URI;PREF=1:mailto:contact@example.com
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "links": {
   "CONTACT-1": {
     "kind": "contact",
@@ -1291,9 +1314,10 @@ CONTACT-URI;PREF=1:mailto:contact@example.com
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="logo_conversion">
             <name>LOGO Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 LOGO:https://www.example.com/pub/logos/abccorp.jpg
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "media": {
   "LOGO-1": {
     "kind": "logo",
@@ -1308,12 +1332,13 @@ LOGO:https://www.example.com/pub/logos/abccorp.jpg
 	  <t>The MEMBER property converts to the Card object's members property (<xref target="group_example"/>).  Each MEMBER property value is a key in the members property.  The PREF parameter parameter does not convert to JSContact.</t>
           <figure anchor="group_example">
             <name>Group Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 KIND:group
 FN:The Doe family
 MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af
 MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "kind": "group",
 "name": {
   "full": "The Doe family"
@@ -1335,9 +1360,10 @@ MEMBER:urn:uuid:b8767877-b4a1-4c70-9acc-505d3819e519
           <t>The TYPE parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_conversion">
             <name>ORG Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "organizations": {
   "ORG-1": {
     "name": "ABC, Inc.",
@@ -1356,11 +1382,12 @@ ORG;SORT-AS="ABC":ABC\, Inc.;North American Division;Marketing
           <t>The RELATED property converts to the Card object's relatedTo property (<xref target="related_conversion"/>).  The property value converts to the key in the relatedTo property.  The TYPE parameters convert to the Relation object's relation property.  Any other parameters convert as defined in <xref target="jscontact-prop-vcardparams"/>.</t>
           <figure anchor="related_conversion">
             <name>RELATED Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 RELATED;TYPE=friend:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 RELATED;TYPE=contact:https://example.com/directory/john.vcf
 RELATED;VALUE=text:Please contact my deputy John for any inquiries.
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "relatedTo" : {
   "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" : {
     "relation" : {
@@ -1386,11 +1413,12 @@ RELATED;VALUE=text:Please contact my deputy John for any inquiries.
           <t>The ALTID and LANGUAGE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="title_role_conversion">
             <name>TITLE and ROLE Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 TITLE:Research Scientist
 group1.ROLE:Project Leader
 group1.ORG:ABC, Inc.
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "titles": {
   "TITLE-1": {
     "kind": "title",
@@ -1419,10 +1447,11 @@ group1.ORG:ABC, Inc.
           <t>The INDEX parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="expertise_conversion">
             <name>EXPERTISE Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 EXPERTISE;LEVEL=beginner;INDEX=2:Chinese literature
 EXPERTISE;INDEX=1;LEVEL=expert:chemistry
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "personalInfo": {
   "PERSINFO-1" : {
     "kind": "expertise",
@@ -1446,10 +1475,11 @@ EXPERTISE;INDEX=1;LEVEL=expert:chemistry
           <t>The INDEX parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="hobby_conversion">
             <name>HOBBY Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 HOBBY;INDEX=1;LEVEL=high:reading
 HOBBY;INDEX=2;LEVEL=high:sewing
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "personalInfo": {
   "PERSINFO-1" : {
     "kind": "hobby",
@@ -1473,10 +1503,11 @@ HOBBY;INDEX=2;LEVEL=high:sewing
           <t>The INDEX parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="interest_conversion">
             <name>INTEREST Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 INTEREST;INDEX=1;LEVEL=medium:r&b music
 INTEREST;INDEX=2;LEVEL=high:rock&roll music
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "personalInfo": {
   "PERSINFO-1" : {
     "kind": "interest",
@@ -1500,10 +1531,11 @@ INTEREST;INDEX=2;LEVEL=high:rock&roll music
           <t>The INDEX, PREF, and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="org_directory_conversion">
             <name>ORG-DIRECTORY Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 ORG-DIRECTORY;INDEX=1:https://directory.mycompany.example.com
 ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/o=Tech,ou=Engineering
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "directories": {
   "DIRECTORY-1": {
     "kind": "directory",
@@ -1564,9 +1596,10 @@ Perhaps:
           <t>In this case, the PREF parameter does not have a JSContact counterpart; however, the implementors <bcp14>MAY</bcp14> insert the entries by order of preference.</t>
           <figure anchor="categories_conversion">
             <name>CATEGORIES Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 CATEGORIES:internet,IETF,Industry,Information Technology
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "keywords": {
   "internet": true,
   "IETF": true,
@@ -1585,9 +1618,10 @@ CATEGORIES:internet,IETF,Industry,Information Technology
 	  <t>The CREATED property converts to the Card object's created property (<xref target="created_conversion"/>).  The CREATED property is defined in <xref target="RFC9554"/>.</t>
           <figure anchor="created_conversion">
             <name>CREATED Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 CREATED:19940930T143510Z
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "created": "1994-09-30T14:35:10Z"
 ]]></sourcecode>
           </figure>
@@ -1598,10 +1632,11 @@ CREATED:19940930T143510Z
           <t>The ALTID and LANGUAGE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="notes_conversion">
             <name>NOTE Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
   Office hours are from 0800 to 1715 EST\, Mon-Fri.
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "notes": {
   "NOTE-1" : {
      "note": "Office hours are from 0800 to 1715 EST, Mon-Fri.",
@@ -1619,9 +1654,10 @@ NOTE;CREATED=20221123T150132Z;AUTHOR-NAME="John":
           <t>The PRODID property converts to the Card object's prodId property (<xref target="prodid_conversion"/>).</t>
           <figure anchor="prodid_conversion">
             <name>PRODID Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 PRODID:ACME Contacts App version 1.23.5
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "prodId": "ACME Contacts App version 1.23.5"
 ]]></sourcecode>
           </figure>
@@ -1631,9 +1667,10 @@ PRODID:ACME Contacts App version 1.23.5
           <t>The REV property converts to the Card object's updated property (<xref target="rev_conversion"/>).</t>
           <figure anchor="rev_conversion">
             <name>REV Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 REV:19951031T222710Z
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "updated": "1995-10-31T22:27:10Z"
 ]]></sourcecode>
           </figure>
@@ -1644,9 +1681,10 @@ REV:19951031T222710Z
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="sound_conversion">
             <name>SOUND Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 SOUND:CID:JOHNQPUBLIC.19960229T080000.xyzMail@example.com
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "media": {
   ...
   "SOUND-1": {
@@ -1673,9 +1711,10 @@ Perhaps:
           <t>The UID property converts to the Card object's uid property (<xref target="uid_conversion"/>).</t>
           <figure anchor="uid_conversion">
             <name>UID Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "uid": "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
 ]]></sourcecode>
           </figure>
@@ -1686,9 +1725,10 @@ UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="url_conversion">
             <name>URL Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 URL:https://example.org/restaurant.french/~chezchic.html
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "links": {
   "LINK-1": {
     "uri": "https://example.org/restaurant.french/~chezchic.html"
@@ -1724,10 +1764,11 @@ Perhaps:
           <t>The group name is not preserved; implementations are free to choose any unique group name when converting back to vCard.  For an example on how to preserve the group name, see <xref target="vcard-param-group"/>.</t>
           <figure anchor="xablabel_conversion">
             <name>X-ABLabel Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 item1.TEL;VALUE=uri:tel:+1-555-555-5555
 item1.X-ABLabel:foo
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "phones": {
   "p1": {
     "number": "tel:+1-555-555-5555",
@@ -1746,9 +1787,10 @@ item1.X-ABLabel:foo
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="key_conversion">
             <name>KEY Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 KEY:https://www.example.com/keys/jdoe.cer
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "cryptoKeys": {
   "KEY-1": {
     "uri": "https://www.example.com/keys/jdoe.cer"
@@ -1766,10 +1808,11 @@ KEY:https://www.example.com/keys/jdoe.cer
           <t>The PREF parameter converts according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caladruri_conversion">
             <name>CALADRURI Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 CALADRURI;PREF=1:mailto:janedoe@example.com
 CALADRURI:https://example.com/calendar/jdoe
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "schedulingAddresses": {
   "SCHEDULING-1": {
     "uri": "mailto:janedoe@example.com",
@@ -1788,10 +1831,11 @@ CALADRURI:https://example.com/calendar/jdoe
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="caluri_conversion">
             <name>CALURI Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 CALURI;PREF=1:https://cal.example.com/calA
 CALURI;MEDIATYPE=text/calendar:https://ftp.example.com/calA.ics
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "calendars": {
   "CAL-1": {
     "kind": "calendar",
@@ -1813,10 +1857,11 @@ CALURI;MEDIATYPE=text/calendar:https://ftp.example.com/calA.ics
           <t>The PREF and TYPE parameters convert according to the rules defined in <xref target="vcard-parameters"/>.</t>
           <figure anchor="fburl_conversion">
             <name>FBURL Conversion Example</name>
-            <sourcecode type=""><![CDATA[
+            <sourcecode type="vcard"><![CDATA[
 FBURL;PREF=1:https://www.example.com/busy/janedoe
 FBURL;MEDIATYPE=text/calendar:https://example.com/busy/project-a.ifb
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "calendars": {
   "FBURL-1": {
     "kind": "freeBusy",
@@ -1851,9 +1896,10 @@ FBURL;MEDIATYPE=text/calendar:https://example.com/busy/project-a.ifb
               <t>This illustrates how to convert a vCard extension property:</t>
               <figure anchor="props_conversion">
                 <name>JSContact vCardProps Example</name>
-                <sourcecode type=""><![CDATA[
+                <sourcecode type="vcard"><![CDATA[
 item1.X-FOO;X-BAR=Hello:World!
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "vCardProps": [
   ["x-foo", {
     "x-bar": "Hello",
@@ -1888,9 +1934,10 @@ Original:
               <t>This illustrates how to convert a vCard extension parameter:</t>
               <figure anchor="params_conversion">
                 <name>JSContact vCardParams Example</name>
-                <sourcecode type=""><![CDATA[
+                <sourcecode type="vcard"><![CDATA[
 EMAIL;X-FOO=Bar:jane_doe@example.com
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "emails": {
   "email1": {
     "address": "jane_doe@example.com",
@@ -1928,9 +1975,10 @@ Perhaps:
               <t>Both vCard IMPP and SOCIALPROFILE convert to an OnlineService object in JSContact.  The vCardName property value indicates that the vCard source element was IMPP as follows:</t>
               <figure anchor="example-vcardname">
                 <name>JSContact vCardName Example</name>
-                <sourcecode type=""><![CDATA[
+                <sourcecode type="vcard"><![CDATA[
 IMPP:xmpp:alice@example.com
-
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
 "onlineServices": {
   "os1": {
     "uri": "xmpp:alice@example.com",
@@ -2024,34 +2072,37 @@ jsprop-param  = *(
               <t>This illustrates how to convert a property at the top level in a Card object that is unknown to the implementation.</t>
               <figure anchor="jscontact-prop-unknown">
                 <name>Unknown Property Example</name>
-                <sourcecode type=""><![CDATA[
+                <sourcecode type="json"><![CDATA[
 "someUnknownProperty": true
-
+]]></sourcecode>
+            <sourcecode type="vcard"><![CDATA[
 JSPROP;JSPTR="someUnknownProperty":true
 ]]></sourcecode>
               </figure>
               <t>This illustrates how to convert a vendor-specific property at the top level of a Card object.  Note the required use of quoted string for the JSPTR value, which allows the path to include the COLON (U+003A) character.</t>
               <figure anchor="jscontact-prop-vendor-specific">
                 <name>Vendor-Specific Property Conversion Example</name>
-                <sourcecode type=""><![CDATA[
+                <sourcecode type="json"><![CDATA[
 "example.com:foo": {
   "bar": 1234
 }
-
+]]></sourcecode>
+            <sourcecode type="vcard"><![CDATA[
 JSPROP;JSPTR="example.com:foo":{"bar":1234}
 ]]></sourcecode>
               </figure>
               <t>This illustrates how to convert a vendor-specific property at a nested level in a Card object using a path relative to the Card object.  Although not recommended, the property name includes the SOLIDUS (U+002F) character, which requires escaping in the JSON pointer.</t>
               <figure anchor="jscontact-prop-nested">
                 <name>Nested Vendor-Specific Property Example with a Path Relative to Card</name>
-                <sourcecode type=""><![CDATA[
+                <sourcecode type="json"><![CDATA[
 "phones": {
   "phone1": {
     "number": "tel:+33-01-23-45-67",
     "example.com:foo/bar": "tux hux"
   }
 }
-
+]]></sourcecode>
+            <sourcecode type="vcard"><![CDATA[
 TEL:tel:+33-01-23-45-67
 JSPROP;JSPTR="phones/phone1/example.com:foo~1bar":
  "tux hux"
@@ -2119,7 +2170,7 @@ jscomps-entry-verb = *QSAFE-CHAR ; encode special characters according to RFC 68
               <t>The following example demonstrates the use of positional entries for the name "Jane Doe".  The given name is ordered before the surname.  No secondary index is required for either positional because both are zero.</t>
               <figure anchor="vcard-param-jscomps-example-positional">
                 <name>Example of a Secondary Positional Index</name>
-                <sourcecode name=""><![CDATA[
+                <sourcecode name="json"><![CDATA[
 "name": {
   "components": [
     { "kind": "given", "value": "Jane" },
@@ -2127,7 +2178,8 @@ jscomps-entry-verb = *QSAFE-CHAR ; encode special characters according to RFC 68
   ],
   "isOrdered": true
 }
-
+]]></sourcecode>
+            <sourcecode type="vcard"><![CDATA[
 N;JSCOMPS=";1;0":Doe;Jane;;;;;;
 FN;DERIVED=TRUE:Jane Doe
 ]]></sourcecode>
@@ -2146,7 +2198,7 @@ Perhaps:
 -->	      
               <figure anchor="vcard-param-jscomps-example-n-secondary-index">
                 <name>Example of Positional Entries</name>
-                <sourcecode name=""><![CDATA[
+                <sourcecode name="json"><![CDATA[
 "name": {
   "components": [
     { "kind": "given", "value": "John" },
@@ -2158,14 +2210,15 @@ Perhaps:
   ],
   "isOrdered": true
 }
-
+]]></sourcecode>
+            <sourcecode type="vcard"><![CDATA[
 N;JSCOMPS=";1;2;2,1;0;6;4,1":Stevenson;John;Philip,Paul;;Jr.,M.D.;;Jr.
 ]]></sourcecode>
               </figure>
               <t>The following example demonstrates the use of separator entries for the (shortened for brevity) address "54321 Oak St, Reston". The first entry defines the default separator to be ", ".  The second and fourth positional entries are separated with the separator value " ".  For backwards compatibility, the street address component of the ADR property contains both the street number and name, but it is not referred to in the JSCOMPS parameter and does not contribute to the count of values.</t>
               <figure anchor="vcard-param-jscomps-example-separator">
                 <name>Example of Separator Entries</name>
-                <sourcecode name=""><![CDATA[
+                <sourcecode name="json"><![CDATA[
 "addresses": {
   "a1": {
     "components": [
@@ -2178,7 +2231,8 @@ N;JSCOMPS=";1;2;2,1;0;6;4,1":Stevenson;John;Philip,Paul;;Jr.,M.D.;;Jr.
     "isOrdered": true
   }
 }
-
+]]></sourcecode>
+            <sourcecode type="vcard"><![CDATA[
 ADR;JSCOMPS="s,\, ;11;s, ;10;3":;;54321 Oak St;Reston;;;;;;;Oak St;54321;;;;;;
 ]]></sourcecode>
               </figure>
@@ -2226,7 +2280,7 @@ jsptr-param  = "JSPTR" "=" param-value
             <dt>Example(s):</dt>
             <dd>
               <t>This illustrates a simple example.  For further examples, see <xref target="vcard-prop-jsprop-examples"/>.</t>
-              <sourcecode name=""><![CDATA[
+              <sourcecode name="" type="vcard"><![CDATA[
 JSPROP;JSPTR="example.com:foo":"bar"
 ]]></sourcecode>
             </dd>
