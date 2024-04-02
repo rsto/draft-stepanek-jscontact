@@ -370,7 +370,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>LANG, ALTID</dd>
+          <dd>LANG</dd>
           <dt>Description:</dt>
           <dd>
             <t>
@@ -395,7 +395,6 @@ gramgender-param =
                  ; but MUST NOT occur more than once.
                  ;
                  (";" language-param) /
-                 (";" altid-param) /
                  ;
                  ; The following are OPTIONAL
                  ; and MAY occur more than once.
@@ -417,7 +416,8 @@ gramgender-value = "animate" /
             <dt>Example(s):</dt>
 	    <dd>
             <sourcecode name=""><![CDATA[
-GRAMGENDER:neuter
+GRAMGENDER;LANG=de:masculine
+GRAMGENDER:LANG=en:neuter
 ]]></sourcecode>
 	    </dd>
 	  </dl>
