@@ -1075,7 +1075,7 @@ Perhaps:
           <figure anchor="adr_conversion">
             <name>ADR Conversion Example</name>
             <sourcecode type="vcard"><![CDATA[
-ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA;;;;Oak St;54321;;;;;
+ADR;TYPE=work;CC=US:;;54321 Oak St;Reston;VA;20190;USA;;;;54321;Oak St;;;;;;
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "addresses": {
