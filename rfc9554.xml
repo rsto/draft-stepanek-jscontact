@@ -370,7 +370,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>LANG</dd>
+          <dd>LANGUAGE</dd>
           <dt>Description:</dt>
           <dd>
             <t>
@@ -378,7 +378,7 @@ CREATED;VALUE=TIMESTAMP:20211022T140000-05
               to be addressed by or referred to as in written or spoken form.
               For example, the German language distinguishes by grammatical gender in salutations such as "Sehr geehrte" (feminine) and "Sehr geehrter" (masculine).
               Multiple occurrences of this property
-              <bcp14>MUST</bcp14> be distinguished by the LANG parameter.
+              <bcp14>MUST</bcp14> be distinguished by the LANGUAGE parameter.
             </t>
           </dd>
           <dt>Format definition:</dt>
@@ -416,8 +416,8 @@ gramgender-value = "animate" /
             <dt>Example(s):</dt>
 	    <dd>
             <sourcecode name=""><![CDATA[
-GRAMGENDER;LANG=de:masculine
-GRAMGENDER:LANG=en:neuter
+GRAMGENDER;LANGUAGE=de:masculine
+GRAMGENDER:LANGUAGE=en:neuter
 ]]></sourcecode>
 	    </dd>
 	  </dl>
@@ -487,7 +487,7 @@ LANGUAGE:de-AT
           <dt>Cardinality:</dt>
           <dd>*</dd>
           <dt>Property parameters:</dt>
-          <dd>LANG, PREF, TYPE, ALTID</dd>
+          <dd>LANGUAGE, PREF, TYPE, ALTID</dd>
           <dt>Description:</dt>
           <dd>
             This property contains the pronouns that the contact chooses to use for themselves.
@@ -526,8 +526,8 @@ pronouns-param =
           <dt>Example(s):</dt>
           <dd>
             <sourcecode name=""><![CDATA[
-PRONOUNS;LANG=en;PREF=1:xe/xir
-PRONOUNS;LANG=en;PREF=2:they/them
+PRONOUNS;LANGUAGE=en;PREF=1:xe/xir
+PRONOUNS;LANGUAGE=en;PREF=2:they/them
 ]]></sourcecode>
           </dd>
         </dl>
