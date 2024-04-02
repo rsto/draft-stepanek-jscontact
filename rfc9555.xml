@@ -346,8 +346,8 @@ item2.X-FOO:bar
             <name>LANGUAGE Conversion Example: One Dominant Language</name>
             <sourcecode type="vcard"><![CDATA[
 FN;LANGUAGE=EN:John Doe
-TITLE;LANGUAGE=EN:Boss
-TITLE;LANGUAGE=fr:Patron
+TITLE;ALTID=1;LANGUAGE=EN:Boss
+TITLE;ALTID=1;LANGUAGE=fr:Patron
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "language": "en",
@@ -387,8 +387,8 @@ Perhaps:
             <name>LANGUAGE Conversion Example: Property without Language</name>
             <sourcecode type="vcard"><![CDATA[
 FN:John Doe
-TITLE:Boss
-TITLE;LANGUAGE=fr:Patron
+TITLE;ALTID=1:Boss
+TITLE;ALTID=1;LANGUAGE=fr:Patron
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "name": {
@@ -406,8 +406,6 @@ TITLE;LANGUAGE=fr:Patron
 }
 ]]></sourcecode>
           </figure>
-          <t>As the least-preferred option, <xref target="language-patch-no-dominant"/> illustrates how all vCard properties of the same type have the LANGUAGE parameter set, but none of their language tags match the language of the main Card.  In this case, implementations <bcp14>MAY</bcp14> choose to add the localized vCard properties only to the localizations object.</t>
-
 
 <!--[rfced] We updated the following text as shown below since the
 non-ASCII characters (in Figures 5 and 6) display in the .txt
@@ -424,37 +422,6 @@ Current:
    The following example uses non-ASCII characters to demonstrate
    multilingual content.
 -->
-	  
-          <t>The following example uses non-ASCII characters to demonstrate multilingual content.</t>
-          <figure anchor="language-patch-no-dominant">
-            <name>LANGUAGE Conversion Example: Conflicting LANGUAGE Property and Parameter Values</name>
-            <sourcecode type="vcard"><![CDATA[
-LANGUAGE:es
-FN:Gabriel García Márquez
-TITLE;LANGUAGE=en:Novelist
-TITLE;LANGUAGE=fr:Écrivain
-]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"language": "es",
-"name" {
-  "full": "Gabriel García Márquez"
-},
-"localizations": {
-  "en": {
-    "titles": {
-      "t1": {
-        "name": "Novelist"
-      }
-  },
-  "fr": {
-    "titles": {
-      "t1": {
-        "name": "Écrivain"
-      }
-  }
-}
-]]></sourcecode>
-          </figure>
         </section>
         <section anchor="vcard-param-label">
           <name>LABEL</name>
