@@ -2142,9 +2142,7 @@ JSPROP;JSPTR="phones/phone1/example.com:foo~1bar":
             <dd>
               <sourcecode name="" type="abnf"><![CDATA[
 jscomps-param     = "JSCOMPS" "="
-                      DQUOTE (
-                        (jscomps-entry-sep / "") ";" jscomps-entrylist
-                      ) DQUOTE
+                      DQUOTE [jscomps-entry-sep ] ";" jscomps-entrylist DQUOTE
 
 jscomps-entrylist  = jscomps-entry *(";" jscomps-entry)
 jscomps-entry      = jscomps-entry-pos / jscomps-entry-sep
